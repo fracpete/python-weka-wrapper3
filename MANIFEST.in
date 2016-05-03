@@ -1,0 +1,6 @@
+recursive-include python *.arff
+recursive-include python *.jar
+recursive-exclude python weka-src.jar
+recursive-exclude python weka.jar
+include DESCRIPTION.rst
+include CHANGES.rst

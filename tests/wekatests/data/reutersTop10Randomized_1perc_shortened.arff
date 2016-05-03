@@ -1,0 +1,102 @@
+@relation reutersTop10Randomized_1perc_shortened
+
+@attribute contents string
+@attribute class {acq,corn,crude,earn,grain,interest,money-fx,ship,trade,wheat}
+
+@data
+
+' SHAD FAVORS SHORTENING DISCLOSURE PERIOD Securities and Exchange',acq
+' FIRST MICHIGAN BANCORP <FMBC.O> 3RD QTR NET Shr 55 cts vs 48 cts Net',earn
+' BEGHIN-SAY INCREASES CAPITAL TO FINANCE EXPANSION French sugar group',grain
+' CCR VIDEO CORP <CCCR> 1ST QTR NOV 30 NET Shr profit two cts vs loss ',earn
+' U.K. MONEY MARKET GIVEN 728 MLN STG EARLY HELP The Bank of England ',interest
+' BURNHAM AMERICAN PROPOERTIES <BAPYZ.O> 2ND QTR Qtr ended March 31 Net',earn
+' TDK GROUP NET UP 0.5 PCT IN THREE MONTHS TO AUGUST Third quarter ended',earn
+' FERRO CORP <FOE> SETS JOINT VENTURE Ferro Corp said it has formed a',acq
+' MANUFACTURERS <MHC> PUTS BRAZIL ON NON-ACCRUAL Manufacturers Hanover',earn
+' SANTA FE ENERGY PARTNERS LP <SFP> QTLY PAYOUT Qtly cash distribution',earn
+' HUDSON VALLEY PATROL AGREES TO BUY GUARD FIRM Hudson Valley Patrol Inc',acq
+' TRANZONIC COS <TNZ> SETS QUARTERLY Qtly div 11 cts vs 11 cts prior Pay',earn
+' MINNTECH CORP <MNTX.O> 4TH QTR MAR 31 NET Opr shr nil vs seven cts Opr',earn
+' INITIALS PLUS <IINC> SEES SHARP SALES INCREASE Initials Plus said it',earn
+' TARO VIT INDUSTRIES LTD <TAROF> YEAR LOSS Shr loss eight cts vs profit',earn
+' U.K. TO SUPPLY WHEAT TO CHINA UNDER AID PROGRAM The U.K. Will ship',grain
+' ARMTEK <ARM> SELLS TIRE, TRUCK TIRE BUSINESS Armtek Corp, formerly',acq
+' COLONIAL BANCGROUP <CLBGA> BUYS FARMERS Colonial BancGroup said it',acq
+' GORDON JEWELRY <GOR> COMPLETES SALE OF UNIT Gordon Jewelry Corp said',acq
+' ATLAS YELLOWKNIFE <AY.TO> SIX MTHS LOSS Period ended March 31 Shr',earn
+' PHILIP CROSBY ASSOCIATES INC <PCRO> 4TH QTR NET Shr three cts vs 18',earn
+' AFG INDUSTRIES INC <AFG> 1ST QTR NET Shr primary 54 cts vs 41 cts',earn
+' <NEWSCOPE RESOURCES LTD> YEAR LOSS Shr loss 94 cts vs profit 28',earn
+' CONTINENTAL <GIC> SEES 1987 NET UP FROM TAX LAW Continental Corp',earn
+' ENTERTAINMENT PUBLICATIONS <EPUB> SEES LOSS Entertainment',earn
+' HANSON <HAN> TO SELL BOND\'S DELIVERY SERVICE Hanson Industries',acq
+' NATIONAL DATA <NDAC> IN PACT WITH SIGNATURE National Data',acq
+' CADNETIX CORP <CADX.O> 3RD QTR MARCH 31 NET Oper shr 12 cts vs',earn
+' EC TO RELEASE MORE UK INTERVENTION FEED WHEAT The European Community',wheat
+' ROBERTSON UPS CAPITAL WIRE<CWCC> STAKE TO 12 PCT New York investor',acq
+' LEIGH-PEMBERTON OPPOSES TAKEOVER PROTECTION RULES The Bank of ',acq
+' N. AMERICAN COMMUNICATIONS <NACS.O> WEIGHS SALE North American',acq
+' U.K. TRADE FIGURES BUOY HOPES OF INTEREST RATE CUT The release',money-fx
+' CANADIAN BASHAW, ERSKINE RESOURCES TO MERGE Canadian Bashaw Leduc',acq
+' <ACC CORP> 3RD QTR NET Shr profit three cts vs profit nine cts Net',earn
+' CHRYSLER <C> IN DEAL TO BUY AMC <AMO> Chrysler Corp said it agreed',acq
+' U.S. HOUSE PASSES MIDEAST GULF BILL The House today approved a bill',ship
+' FED EXPECTED TO ADD RESERVES VIA CUSTOMER RPS The Federal Reserve',interest
+' JAPAN ECONOMY MAY START BOTTOMING OUT SOON -AGENCY Japan\'s economy',trade
+' ADVANCED TELECOMMUNICATIONS <ATEL.O> TO BUY CO Advanced',acq
+' WISCONSIN POWER AND LIGHT CO <WPL>VOTES PAYOUT Qtly div 76 cts vs 76',earn
+' AMBASSADOR FINANCIAL <AFGI> UNIT TO BUY BUILDER Ambassador Financial',acq
+' U.S. ACREAGE CUTS SEEN LIMITING STOCK BUILD Sharp cuts this year in',grain
+' WILLIAMS DETAILS ACCEPTANCES OF NORCROS OFFER <Williams Holdings Plc>',acq
+' DART GROUP RAISES SUPERMARKETS GENERAL <SGL> BID <Dart Group Corp>',acq
+' KANSAS GAS AND ELECTRIC CO <KGE> FEBRUARY NET Shr 13 cts vs 5 cts',earn
+' DONALD TRUMP TO BUY CROSBY RESORTS <RTB> STOCK Casino hotel',acq
+' SAN PAOLO DI TORINO TO ACQUIRE CALIFORNIAN BANK Italian state',acq
+' VERMONT FINANCIAL SERVICES <VFSC> SETS PAYOUT Vermont Financial',earn
+' MAJOR U.S. FARM GROUPS OPPOSE POLICY CHANGES Seven major U.S. farm',grain
+' LOWER TAX OFFSETS LOWER SHELL U.K. UPSTREAM PROFIT <Shell U.K.',crude
+' ROSS STORES INC <ROST> 4TH QTR JAN 31 LOSS Shr loss 1.30 dlrs vs',earn
+' MUTUAL OF OMAHA INTEREST SHARES <MUO> QTLY DIV Qtly div 36 cts vs',earn
+' MOUNTAIN VIEW ACQUIRES MARATECH COMMUNICATIONS (Mountain View',acq
+' AUSTRALIAN CURRENT ACCOUNT DEFICIT SEEN NARROWING Australia\'s',trade
+' CTS CORP <CTS> 3RD QTR OPER NET Oper shr profit 62 cts vs profit',earn
+' ROTTERDAM\'S MAIN GRAIN TERMINAL CLOSED BY STRIKE Grain handling',ship
+' (CRIME CONTROL INC) 4TH QTR NET LOSS Shr loss 2.03 dlrs vs loss',earn
+' <ALOHA INC> BUYOUT COMPLETED Aloha Inc said its leveraged buyout',acq
+' MARION LABS <MKC> VOTES SPLIT, DIVIDEND HIKE Marion Laboratories',earn
+' NATIONAL HERITAGE <NHER> BUYS MANAGEMENT FIRM National Heritage',acq
+' ROWAN <RDC> SEES SUBSTANTIAL LOSSES FOR YEAR Rowan Cos Inc said',earn
+' CANADA BANKS COULD SEE PRESSURE ON BRAZIL LOANS Canada\'s major banks',earn
+' YEUTTER SAYS BUDGET CUT KEY TO BETTER U.S. TRADE A reduction of the ',trade
+' SANTOS TO ACQUIRE TOTAL EXPLORATION AUSTRALIA Santos Ltd <STOS.S> said',acq
+' FISONS PLC <FISN.L> YEAR TO END-1986 Shr 27.5p vs 24.3p Div 3.95p vs',earn
+' WEEKS PETROLEUM LTD <WPMA.MEL> CALENDAR 1986 Shr 16.7 cents vs 29.4',earn
+' ALLIED-SIGNAL <ALD> SELLS TO SCHLUMBERGER <SLB> Allied-Signal Inc ',acq
+' THE BROKEN HILL PTY CO LTD <BRKN.S> NINE MONTHS First nine months ',earn
+' BECOR <BCW> TO ADJOURN DELAYED HOLDERS MEETING Becor Western Inc ',acq
+' BMC INDUSTRIES INC <BMC> 4TH QTR LOSS Shr loss 1.20 dlrs vs loss ',earn
+' EXPORTS OTHER THAN COFFEE RISE SHARPLY IN COLOMBIA Colombian exports',trade
+' HARCOURT BRACE <HBJ> CALLS SPECIAL MEETING Harcourt Brace Jovanovich ',acq
+' U S WEST <USW> 3RD QTR NET Shr 1.46 dlrs vs 1.41 dlrs Net 277.5 mln ',earn
+' STANWOOD CORP <SNW> 4TH QTR JAN 3 Shr loss 1.12 dlrs vs profit one ',earn
+' SALEM CORP <SBS> 4TH QTR LOSS Shr loss 1.82 dlrs vs loss 16 cts Net',earn
+' INDIA DETAILS RAIN/FLOOD DAMAGE TO GRAIN IN 1986 Rain and floods in',grain
+' INDIA STEPS UP COUNTERTRADE DEALS India is searching for non-communist',wheat
+' MANITOBA SEEDINGS PROGRESS WELL IN DRY WEATHER The Manitoba Agriculture',wheat
+' EC FREES MORE U.K. INTERVENTION WHEAT FOR SALE The EC Cereals Management',grain
+' INTELLIGENT SYSTEMS MLP <INP> 3RD QTR DEC 31 NET Shr profit 20 cts vs',earn
+' FRANKLIN MASSACHUSETTS INSURED CUTS PAYOUT Mthly div 6.5 cts vs 6.8',earn
+' UNIVERSAL MEDICAL <UMBIZ> DISTRIBUTION SET Qtly distribution 7-1/2 ',earn
+' MEMORY PROTECTION <MPDI> SEES BOGEN CLOSING Memory Protection Devices',acq
+' ZAYRE CORP <ZY> 4TH QTR JAN 31 NET Shr 73 cts vs 60 cts Net 43,792,000',earn
+' MELLON <MEL>, REPUBLIC <RPT> LIFT PRIME RATES Mellon Bank NA of Pittsburgh',interest
+' ICN <ICN> BUYS STAKE FROM EASTMAN KODAK <EK> ICN Pharmaceuticals Inc said',acq
+' IEA SEES ONE PCT GROWTH IN 1987 OECD OIL DEMAND Growth in oil consumption',crude
+' FED SEEN ADDING RESERVES VIA SYSTEM REPOS The Federal Reserve is expected',money-fx
+' ARMOR ALL PRODUCTS CORP <ARMR.O> 2ND QTR SEPT 30 Shr 14 cts vs 13 cts Net',earn
+' SUN STATE SAVINGS <SSSL> SEES HIGHER EARINGS Sun State Savings and Loan',earn
+' SOUTH KOREA TO RESIST CURRENCY REVALUATION South Korean Finance Minister',money-fx
+' FURNITURE (UFURF) UPS BENCH CRAFT (SOFA) STAKE Universal Furniture Ltd',acq
+' FLORIDA PROGRESS CORP <FPC> 1ST QTR NET Shr 83 cts vs 94 cts Net 41.2',earn
+' MONTEDISON, OTHER REFINERIES TO SHUT FOR WORK Selm-Societa Energia',crude
