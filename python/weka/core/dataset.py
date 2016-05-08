@@ -1429,7 +1429,7 @@ class InstanceValueIterator(object):
         """
         return self
 
-    def next(self):
+    def __next__(self):
         """
         Returns the next value from the Instance object.
         
