@@ -363,8 +363,7 @@ class Configurable(JSONObject):
         result.append(self.description())
         result.append("")
         result.append("OPTIONS")
-        opts = self.config.keys()
-        opts.sort()
+        opts = sorted(self.config.keys())
         for opt in opts:
             result.append(opt)
             helpstr = self.help[opt]
