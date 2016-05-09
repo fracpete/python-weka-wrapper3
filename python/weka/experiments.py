@@ -281,7 +281,7 @@ class SimpleCrossValidationExperiment(SimpleExperiment):
             "java/beans/PropertyDescriptor", "(Ljava/lang/String;Ljava/lang/Class;)V", "classifier", cls)
         node = javabridge.make_instance(
             "weka/experiment/PropertyNode", "(Ljava/lang/Object;Ljava/beans/PropertyDescriptor;Ljava/lang/Class;)V",
-            javabridge.get_env().get_object_class(speval), desc, cls)
+            javabridge.call(speval, "getClass", "()Ljava/lang/Class;"), desc, cls)
         javabridge.get_env().set_object_array_element(prop_path, 1, node)
 
         return rproducer, prop_path
@@ -359,7 +359,7 @@ class SimpleRandomSplitExperiment(SimpleExperiment):
             "java/beans/PropertyDescriptor", "(Ljava/lang/String;Ljava/lang/Class;)V", "classifier", cls)
         node = javabridge.make_instance(
             "weka/experiment/PropertyNode", "(Ljava/lang/Object;Ljava/beans/PropertyDescriptor;Ljava/lang/Class;)V",
-            javabridge.get_env().get_object_class(speval), desc, cls)
+            javabridge.call(speval, "getClass", "()Ljava/lang/Class;"), desc, cls)
         javabridge.get_env().set_object_array_element(prop_path, 1, node)
 
         return rproducer, prop_path
