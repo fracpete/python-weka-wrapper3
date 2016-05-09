@@ -25,14 +25,9 @@ Commands for releasing on pypi.org:
   find -name "*~" -delete
   python3 setup.py clean
   python3 setup.py sdist upload
-  python3 setup.py build_sphinx
-  python3 setup.py upload_sphinx
+  make -C doc html
+  ??? upload ???
 ```
-
-Requirements:
-
-* before Sphinx 1.3: sudo pip install sphinxcontrib-napoleon
-* Sphinx-PyPI-upload: `easy_install sphinx-pypi-upload`
 
 
 Github
