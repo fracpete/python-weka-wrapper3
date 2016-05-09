@@ -80,7 +80,7 @@ def _read(f):
 
 setup(
     name="python-weka-wrapper3",
-    description="Python wrapper for the Weka Machine Learning Workbench",
+    description="Python3 wrapper for the Weka Machine Learning Workbench",
     long_description=(
         _read('DESCRIPTION.rst') + b'\n' +
         _read('CHANGES.rst')).decode('utf-8'),
