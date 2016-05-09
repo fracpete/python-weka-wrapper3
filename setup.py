@@ -16,7 +16,7 @@
 
 import os
 from setuptools import setup
-from urllib2 import urlopen, URLError, HTTPError
+from urllib.request import urlopen, URLError, HTTPError
 
 
 def download_file(url, outfile):
