@@ -53,6 +53,17 @@ Ubuntu
   `sudo apt-get install gsettings-desktop-schemas`
 
 
+Linux
+-----
+
+* **Q:** I installed *pygraphviz* but I keep getting `Pygraphviz is not installed, cannot generate graph plot!`. How to fix?
+
+  **A:** : Open up an interactive Python3 shell and type:
+  `import pygraphviz`
+  If you get `undefined symbol: Agundirected`, then follow the steps outlined [here](http://stackoverflow.com/a/33508561/4698227),
+  but use `pip3`.
+
+
 Mac OSX
 -------
 
