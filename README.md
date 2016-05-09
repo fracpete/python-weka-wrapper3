@@ -29,7 +29,7 @@ You can post questions, patches or enhancement requests in the following Google 
 https://groups.google.com/forum/#!forum/python-weka-wrapper
 
 ## Examples
-See [python-weka-wrapper-examples3](https://github.com/fracpete/python-weka-wrapper-examples3)
+See [python-weka-wrapper-examples3](https://github.com/fracpete/python-weka-wrapper3-examples)
 repository for example code on the various APIs. Also, check out the sphinx
 documentation in the **doc** directory. You can generate HTML documentation
 using the `make html` command in the **doc** directory.
