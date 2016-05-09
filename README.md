@@ -34,10 +34,5 @@ repository for example code on the various APIs. Also, check out the sphinx
 documentation in the **doc** directory. You can generate HTML documentation
 using the `make html` command in the **doc** directory.
 
-Available online documentation:
-* [Full documentation](http://pythonhosted.org/python-weka-wrapper3/)
-* Shortcuts
- * [Command-line](http://pythonhosted.org/python-weka-wrapper3/commandline.html)
- * [API](http://pythonhosted.org/python-weka-wrapper3/api.html)
- * [Examples](http://pythonhosted.org/python-weka-wrapper3/examples.html)
+Available online documentation is not available at this stage, unfortunately.
 
