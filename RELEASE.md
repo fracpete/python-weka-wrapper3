@@ -25,8 +25,6 @@ Commands for releasing on pypi.org:
   find -name "*~" -delete
   python3 setup.py clean
   python3 setup.py sdist upload
-  make -C doc html
-  ??? upload ???
 ```
 
 
