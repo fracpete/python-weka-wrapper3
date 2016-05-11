@@ -27,7 +27,7 @@ You can find videos on `YouTube <https://www.youtube.com/channel/UCYkzno8dbnAasW
 Prerequisites for all plaforms
 ------------------------------
 
-You need an `Oracle JDK (1.6+)
+You need an `Oracle JDK (1.7+)
 <http://www.oracle.com/technetwork/java/javase/downloads/>`__ installed and
 the ``JAVA_HOME`` `environment variable
 <http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`__
