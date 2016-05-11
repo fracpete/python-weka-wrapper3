@@ -39,6 +39,13 @@ Steps:
 * publish
 
 
+ReadTheDocs
+===========
+
+Make documentation for new version public on
+[readthedocs.org](https://readthedocs.org/projects/python-weka-wrapper3/).
+
+
 MLOSS
 =====
 
