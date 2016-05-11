@@ -256,7 +256,7 @@ Github repository.
 Archive
 +++++++
 
-Go to the `releases <https://github.com/fracpete/python-weka-wrapper/releases>`__ 
+Go to the `releases <https://github.com/fracpete/python-weka-wrapper3/releases>`__ 
 page on Github and download the *Source code* archive (zip or tar.gz) of the 
 release that you want to install. After the download finishes, decompress the
 archive. Open a terminal/command prompt and execute the following command
@@ -277,7 +277,7 @@ Clone the Github repository as follows:
 
 .. code-block:: bash
 
-   git clone https://github.com/fracpete/python-weka-wrapper.git
+   git clone https://github.com/fracpete/python-weka-wrapper3.git
 
 Change into the newly created directory and install the library using the
 following command:

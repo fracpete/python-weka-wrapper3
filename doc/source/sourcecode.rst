@@ -9,11 +9,11 @@ Download
 --------
 
 You can clone the *python-weka-wrapper* repository on
-`github <https://github.com/fracpete/python-weka-wrapper>`_ as follows:
+`github <https://github.com/fracpete/python-weka-wrapper3>`_ as follows:
 
 .. code-block:: bash
 
-   $ git clone https://github.com/fracpete/python-weka-wrapper.git
+   $ git clone https://github.com/fracpete/python-weka-wrapper3.git
 
 
 Documentation
