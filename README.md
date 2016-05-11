@@ -18,7 +18,7 @@ Uses:
 ## Installation
 
 Detailed instructions and links to videos on installing the library are located
-[here](http://pythonhosted.org/python-weka-wrapper3/install.html).
+[here](http://python-weka-wrapper3.readthedocs.io/en/latest/install.html).
 
 Please note, that you need a build environment to compile some libraries from source.
 
@@ -34,5 +34,10 @@ repository for example code on the various APIs. Also, check out the sphinx
 documentation in the **doc** directory. You can generate HTML documentation
 using the `make html` command in the **doc** directory.
 
-Available online documentation is not available at this stage, unfortunately.
+Available online documentation:
+* [Full documentation](http://python-weka-wrapper3.readthedocs.io/en/latest/)
+* Shortcuts
+ * [Command-line](http://python-weka-wrapper3.readthedocs.io/en/latest/commandline.html)
+ * [API](http://python-weka-wrapper3.readthedocs.io/en/latest/api.html)
+ * [Examples](http://python-weka-wrapper3.readthedocs.io/en/latest/examples.html)
 
