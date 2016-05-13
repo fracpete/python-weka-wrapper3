@@ -8,21 +8,6 @@ General
 
   **A:** `.whl` are *Python Wheels* archives, which you can install using pip (>= 1.4). See also `this website <http://pythonwheels.com/>`_.
 
-* **Q:** Packages don't get loaded and/or you see exceptions of the type 
-  ``java.lang.ClassNotFoundException: org.pentaho.packageManagement.DefaultPackage``
-  output in the terminal. What is the cause?
-
-  **A:** Weka 3.7.13 contained some severe bugs (filtering data, extremely slow option
-  handling), which prompted me to include a Weka jar built from sources after the
-  3.7.13 release. Unfortunately, the Weka package manager changed during this period
-  as well and the serialized cache file is not compatible between these versions. 
-  Running Weka 3.7.13 and python-weka-wrapper 0.3.5 in parallel can therefore render
-  package handling inoperable. However, you can simply delete the cache file
-  (``installedPackageCache.ser``) and restart either application. This file is
-  located here:
-
-  * Linux/Mac: ``$HOME/wekafiles/packages/installedPackageCache.ser``
-  * Windows: ``%USERPROFILE%\wekafiles\packages\installedPackageCache.ser``
 
 
 Debian

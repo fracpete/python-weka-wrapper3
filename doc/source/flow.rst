@@ -1,7 +1,7 @@
 Flow
 ====
 
-The flow components of *python-weka-wrapper* are not related to Weka's KnowledgeFlow. Instead, they were
+The flow components of *python-weka-wrapper3* are not related to Weka's KnowledgeFlow. Instead, they were
 inspired by the `ADAMS workflow engine <https://adams.cms.waikato.ac.nz/>`_. It is a very simple workflow,
 aimed at automating tasks and easy to extend as well. Instead of linking operators with explicit
 connections, this flow uses a tree structure for implicitly defining how the data is processed.
@@ -139,9 +139,9 @@ The following *conversion* schemes can be used in conjunction with the *Convert*
 Examples
 --------
 
-Check out the examples available through the *python-weka-wrapper-examples* project on Github:
+Check out the examples available through the *python-weka-wrapper3-examples* project on Github:
 
-  https://github.com/fracpete/python-weka-wrapper-examples
+  https://github.com/fracpete/python-weka-wrapper3-examples
 
 The example scripts are located in the `src/wekaexamples/flow` sub-directory.
 

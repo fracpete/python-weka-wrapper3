@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# python-weka-wrapper documentation build configuration file, created by
+# python-weka-wrapper3 documentation build configuration file, created by
 # sphinx-quickstart on Sat Apr 12 11:51:06 2014.
 #
 # This file is execfile()d with the current directory set to its

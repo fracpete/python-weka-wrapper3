@@ -1,14 +1,14 @@
 Source code
 ===========
 
-The following sections explain how to obtain the source code of *python-weka-wrapper*,
+The following sections explain how to obtain the source code of *python-weka-wrapper3*,
 generate the documentation and create an installer. See also the *Troubleshooting* section.
 
 
 Download
 --------
 
-You can clone the *python-weka-wrapper* repository on
+You can clone the *python-weka-wrapper3* repository on
 `github <https://github.com/fracpete/python-weka-wrapper3>`_ as follows:
 
 .. code-block:: bash
@@ -24,7 +24,7 @@ Change into the directory that you created when cloning the repository and use
 
 .. code-block:: bash
 
-   $ cd python-weka-wrapper/doc
+   $ cd python-weka-wrapper3/doc
    $ make html
 
 Use the `make` command without any parameters to check what output formats are support.

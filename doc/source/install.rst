@@ -13,17 +13,6 @@ on the instructions below, please use the following mailing list:
 https://groups.google.com/forum/#!forum/python-weka-wrapper
 
 
-Videos
-------
-
-You can find videos on `YouTube <https://www.youtube.com/channel/UCYkzno8dbnAasWakSXVsuPA>`__ that show the installation process:
-
-* `Ubuntu 14.04 (64-bit) <https://www.youtube.com/watch?v=8d0PVBlttM4>`__
-* `Windows 7 (32-bit) <https://www.youtube.com/watch?v=KdDt9rT5wTo>`__
-* `Windows 8.1 (64-bit) <https://www.youtube.com/watch?v=PeUfDVOA_1Y>`__
-* `Mac OSX 10.9.5 (Mavericks) <https://www.youtube.com/watch?v=CORXWYam36E>`__
-
-
 Prerequisites for all plaforms
 ------------------------------
 
@@ -31,7 +20,7 @@ You need an `Oracle JDK (1.7+)
 <http://www.oracle.com/technetwork/java/javase/downloads/>`__ installed and
 the ``JAVA_HOME`` `environment variable
 <http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`__
-pointing to the installation directory in order to use *python-weka-wrapper*
+pointing to the installation directory in order to use *python-weka-wrapper3*
 library.
 
 *Why not OpenJDK?* Weka is developed and tested with Oracle's JDK/JRE. There is
@@ -45,21 +34,21 @@ First, you need to be able to compile C/C++ code and Python modules:
 
 .. code-block:: bash
 
-   $ sudo apt-get install build-essential python-dev
+   $ sudo apt-get install build-essential python3-dev
 
 Now, you can install the various packages that we require for installing
-*python-weka-wrapper*:
+*python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   $ sudo apt-get install python-pip python-numpy
+   $ sudo apt-get install python3-pip python3-numpy
 
 The following packages are optional, but necessary if you also want some
 graphical output:
 
 .. code-block:: bash
 
-   $ sudo apt-get install python-imaging python-matplotlib python-pygraphviz
+   $ sudo apt-get install python3-imaging python3-matplotlib python-pygraphviz
 
 Install OpenJDK as well, in order to get all the header files that *javabridge*
 compiles against (but don't use it for starting up JVMs):
@@ -68,13 +57,13 @@ compiles against (but don't use it for starting up JVMs):
 
    $ sudo apt-get install default-jdk
 
-Finally, you can use ``pip`` to install the Python packages that are not
+Finally, you can use ``pip3`` to install the Python packages that are not
 available in the repositories:
 
 .. code-block:: bash
 
-   $ sudo pip install javabridge
-   $ sudo pip install python-weka-wrapper
+   $ sudo pip3 install javabridge
+   $ sudo pip3 install python-weka-wrapper3
 
 
 Debian
@@ -90,21 +79,21 @@ You need to be able to compile C/C++ code and Python modules:
 
 .. code-block:: bash
 
-   $ apt-get install build-essential python-dev
+   $ apt-get install build-essential python3-dev
 
 Now, you can install the various packages that we require for installing
-*`python-weka-wrapper*:
+*`python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   $ apt-get install python-pip python-numpy
+   $ apt-get install python3-pip python3-numpy
 
 The following packages are optional, but necessary if you also want some
 graphical output:
 
 .. code-block:: bash
 
-   $ apt-get install python-imaging python-matplotlib python-pygraphviz
+   $ apt-get install python3-imaging python3-matplotlib python-pygraphviz
 
 Download an Oracle JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk1.7.0_75/``).
 Export the Java home directory as follows (required for the *javabridge*
@@ -114,15 +103,15 @@ installation):
 
    $ export JAVA_HOME=/opt/jdk1.7.0_75/
 
-Finally, you can use ``pip`` to install the Python packages that are not
+Finally, you can use ``pip3`` to install the Python packages that are not
 available in the repositories:
 
 .. code-block:: bash
 
-   $ pip install javabridge
-   $ pip install python-weka-wrapper
+   $ pip3 install javabridge
+   $ pip3 install python-weka-wrapper3
 
-Please note, when using *python-weka-wrapper* as a *normal* user, don't forget
+Please note, when using *python-weka-wrapper3* as a *normal* user, don't forget
 to export the ``JAVA_HOME`` environment variable as described above (e.g., add it
 to your ``.profile``).
 
@@ -140,7 +129,7 @@ Here are some rough instructions (as superuser):
 * install numpy package
 * install python-imaging package (shouldn't be necessary)
 * install javabridge using ``pip javabridge``
-* install python-weka-wrapper using ``pip python-weka-wrapper``
+* install python-weka-wrapper3 using ``pip python-weka-wrapper3``
 
 
 Other Linux distributions
@@ -157,19 +146,19 @@ package manager (e.g., ``yum``).  Please note that on a *headless* machine, you
 can omit the packages marked as *optional*, as they are only required for
 graphical output and plots:
 
-* pip
+* pip3
 * numpy
 * PIL (optional)
 * matplotlib (optional)
 * pygraphviz (optional)
 
-Once these libraries are installed, you can use ``pip`` to install the remaining
+Once these libraries are installed, you can use ``pip3`` to install the remaining
 Python packages:
 
 .. code-block:: bash
 
-   $ sudo pip install javabridge
-   $ sudo pip install python-weka-wrapper
+   $ sudo pip3 install javabridge
+   $ sudo pip3 install python-weka-wrapper3
 
 
 Mac OSX
@@ -197,8 +186,8 @@ Python packages:
 
 .. code-block:: bash
 
-   $ pip install javabridge
-   $ pip install python-weka-wrapper
+   $ pip3 install javabridge
+   $ pip3 install python-weka-wrapper3
 
 
 Windows
@@ -220,28 +209,28 @@ Perform the following steps:
 * install numpy
 
  * download `numpy 1.9.x MKL <http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy>`__
-   (or later) for Python 2.7 (*cp27*) and your *bitness* (32 or 64 bit)
+   (or later) for Python 3.4 (*cp34*) and your *bitness* (32 or 64 bit)
  * install the *.whl* file using pip: ``pip install numpy-X.Y.Z.whl``
 
 * install `.Net 4.0 <http://go.microsoft.com/fwlink/?LinkID=187668>`__ (if not
   already installed)
 * install `Windows SDK 7.1 <http://www.microsoft.com/download/details.aspx?id=8279>`__
 
-* open Windows SDK command prompt (**not** the regular command prompt!) and install *javabridge* and *python-weka-wrapper*
+* open Windows SDK command prompt (**not** the regular command prompt!) and install *javabridge* and *python-weka-wrapper3*
 
   .. code-block:: bat
 
      set MSSdk=1
      set DISTUTILS_USE_SDK=1
      pip install javabridge
-     pip install python-weka-wrapper
+     pip install python-weka-wrapper3
 
-Now you can run *python-weka-wrapper* using the regular command-prompt as well.
+Now you can run *python-weka-wrapper3* using the regular command-prompt as well.
 
 If you want to use the plotting functionality, you need to install *matplotlib* as well:
 
 * download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
-  for Python 2.7 (*cp27*) and your bitness (32 or 64 bit)
+  for Python 3.4 (*cp34*) and your bitness (32 or 64 bit)
 * install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
 
 
@@ -264,7 +253,7 @@ from within the directory with the `setup.py` file:
 
 .. code-block:: bash
 
-   $ python setup.py install
+   $ python3 setup.py install
 
 Check out the section on *virtualenv* as well, if you would rather install it
 in a *disposable* location.
@@ -284,7 +273,7 @@ following command:
 
 .. code-block:: bash
 
-   $ python setup.py install
+   $ python3 setup.py install
 
 Check out the section on *virtualenv* as well, if you would rather install it
 in a *disposable* location.

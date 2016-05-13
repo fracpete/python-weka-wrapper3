@@ -224,7 +224,7 @@ The following code optimizes the `C` parameter of `SMOreg` and the `gamma` param
    print("\nBest setup:\n" + grid.best.to_commandline())
 
 **NB:** Make sure that the `GridSearch` package is not installed, as the `GridSearch` meta-classifier is already
-part of the monolithic `weka.jar` that comes with *python-weka-wrapper*.
+part of the monolithic `weka.jar` that comes with *python-weka-wrapper3*.
 
 
 Parameter optimization - MultiSearch
