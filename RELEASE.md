@@ -25,6 +25,9 @@ Commands for releasing on pypi.org:
   find -name "*~" -delete
   python3 setup.py clean
   python3 setup.py sdist upload
+  cd doc
+  make html
+  create zip of doc/buid/html, replace html/pypi/sphinx.zip and upload on pypi.org
 ```
 
 
