@@ -209,7 +209,7 @@ Perform the following steps:
 * install numpy
 
  * download `numpy 1.9.x MKL <http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy>`__
-   (or later) for Python 3.4 (*cp34*) and your *bitness* (32 or 64 bit)
+   (or later) for Python 3.4/3.5 (*cp34/cp35*) and your *bitness* (32 or 64 bit)
  * install the *.whl* file using pip: ``pip install numpy-X.Y.Z.whl``
 
 * install javabridge
@@ -221,7 +221,7 @@ Perform the following steps:
 If you want to use the plotting functionality, you need to install *matplotlib* as well:
 
 * download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
-  for Python 3.4 (*cp34*) and your bitness (32 or 64 bit)
+  for Python 3.4/3.5 (*cp34/cp34*) and your bitness (32 or 64 bit)
 * install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
 
 For being able to compile libraries on Windows, you need the
