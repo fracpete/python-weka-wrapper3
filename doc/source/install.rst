@@ -212,26 +212,21 @@ Perform the following steps:
    (or later) for Python 3.4 (*cp34*) and your *bitness* (32 or 64 bit)
  * install the *.whl* file using pip: ``pip install numpy-X.Y.Z.whl``
 
-* install `.Net 4.0 <http://go.microsoft.com/fwlink/?LinkID=187668>`__ (if not
-  already installed)
-* install `Windows SDK 7.1 <http://www.microsoft.com/download/details.aspx?id=8279>`__
+* install javabridge
 
-* open Windows SDK command prompt (**not** the regular command prompt!) and install *javabridge* and *python-weka-wrapper3*
-
-  .. code-block:: bat
-
-     set MSSdk=1
-     set DISTUTILS_USE_SDK=1
-     pip install javabridge
-     pip install python-weka-wrapper3
-
-Now you can run *python-weka-wrapper3* using the regular command-prompt as well.
+ * download `javabridge <http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge>`__
+   (or later) for Python 3.4/3.5 (*cp34/cp35*) and your *bitness* (32 or 64 bit)
+ * install the *.whl* file using pip: ``pip install javabridge-X.Y.Z.whl``
 
 If you want to use the plotting functionality, you need to install *matplotlib* as well:
 
 * download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
   for Python 3.4 (*cp34*) and your bitness (32 or 64 bit)
 * install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
+
+For being able to compile libraries on Windows, you need the
+`Microsoft Build Tools 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48159>`_
+installed.
 
 
 From source
