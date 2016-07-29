@@ -5,7 +5,7 @@ using the [javabridge](https://pypi.python.org/pypi/javabridge) library.
 
 Requirements:
 
-* Python 3
+* Python 3 (for Python 2.7 version see [here](https://github.com/fracpete/python-weka-wrapper))
  * javabridge (>= 1.0.14)
  * matplotlib (optional)
  * pygraphviz (optional)
