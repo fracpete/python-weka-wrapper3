@@ -13,6 +13,14 @@ on the instructions below, please use the following mailing list:
 https://groups.google.com/forum/#!forum/python-weka-wrapper
 
 
+Videos
+------
+
+You can find videos on `YouTube <https://www.youtube.com/channel/UCYkzno8dbnAasWakSXVsuPA>`__ that show the installation process:
+
+* `Windows 8.1 (64-bit) <https://www.youtube.com/watch?v=RnH7r-M5zjM>`__
+
+
 Prerequisites for all plaforms
 ------------------------------
 
@@ -223,6 +231,10 @@ If you want to use the plotting functionality, you need to install *matplotlib* 
 * download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
   for Python 3.4/3.5 (*cp34/cp34*) and your bitness (32 or 64 bit)
 * install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
+
+.. code-block:: bash
+
+   > pip install python-weka-wrapper
 
 For being able to compile libraries on Windows, you need the
 `Microsoft Build Tools 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48159>`_
