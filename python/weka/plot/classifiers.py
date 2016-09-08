@@ -281,8 +281,8 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     :type classifiers: list of Classifier
     :param train: dataset to use for the building the classifier, used for evaluating it test set None
     :type train: Instances
-    :param test: optional dataset to use for the testing the built classifiers
-    :type test: Instances
+    :param test: optional dataset (or list of datasets) to use for the testing the built classifiers
+    :type test: list or Instances
     :param increments: the increments (>= 1: # of instances, <1: percentage of dataset)
     :type increments: float
     :param metric: the name of the numeric metric to plot (Evaluation.<metric>)
@@ -290,7 +290,8 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     :param title: the title for the plot
     :type title: str
     :param label_template: the template for the label in the plot
-                           (#: 1-based index, @: full classname, !: simple classname, $: options)
+                           (#: 1-based index of classifier, @: full classname, !: simple classname,
+                           $: options, *: 1-based index of test set)
     :type label_template: str
     :param key_loc: the location string for the key
     :type key_loc: str
@@ -306,14 +307,25 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     if not train.has_class():
         logger.error("Training set has no class attribute set!")
         return
-    if (test is not None) and (train.equal_headers(test) is not None):
-        logger.error("Training and test set are not compatible: " + train.equal_headers(test))
-        return
 
     if increments >= 1:
         inc = increments
     else:
         inc = round(train.num_instances * increments)
+
+    if test is None:
+        tst = [train]
+    elif isinstance(test, list):
+        tst = test
+    elif isinstance(test, Instances):
+        tst = [test]
+    else:
+        logger.error("Expected list or Instances object, instead: " + type(test))
+        return
+    for t in tst:
+        if train.equal_headers(t) is not None:
+            logger.error("Training and test set are not compatible: " + train.equal_headers(t))
+            return
 
     steps = []
     cls = []
@@ -321,11 +333,9 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     for classifier in classifiers:
         cl = Classifier.make_copy(classifier)
         cls.append(cl)
-        evls[cl] = []
-    if test is None:
-        tst = train
-    else:
-        tst = test
+        evls[cl] = {}
+        for t in tst:
+            evls[cl][t] = []
 
     for i in range(train.num_instances):
         if (i > 0) and (i % inc == 0):
@@ -344,9 +354,10 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
                     cl.build_classifier(tr)
             # evaluate
             if (i > 0) and (i % inc == 0):
-                evl = Evaluation(tst)
-                evl.test_model(cl, tst)
-                evls[cl].append(getattr(evl, metric))
+                for t in tst:
+                    evl = Evaluation(t)
+                    evl.test_model(cl, t)
+                    evls[cl][t].append(getattr(evl, metric))
 
     fig, ax = plt.subplots()
     ax.set_xlabel("# of instances")
@@ -356,14 +367,19 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     ax.grid(True)
     i = 0
     for cl in cls:
-        evl = evls[cl]
+        evlpertest = evls[cl]
         i += 1
-        plot_label = label_template.\
-            replace("#", str(i)).\
-            replace("@", cl.classname).\
-            replace("!", cl.classname[cl.classname.rfind(".") + 1:]).\
-            replace("$", join_options(cl.config))
-        ax.plot(steps, evl, label=plot_label)
+        n = 0
+        for t in tst:
+            evl = evlpertest[t]
+            n += 1
+            plot_label = label_template.\
+                replace("#", str(i)).\
+                replace("*", str(n)).\
+                replace("@", cl.classname).\
+                replace("!", cl.classname[cl.classname.rfind(".") + 1:]).\
+                replace("$", join_options(cl.config))
+            ax.plot(steps, evl, label=plot_label)
     plt.draw()
     plt.legend(loc=key_loc, shadow=True)
     if outfile is not None:
