@@ -792,6 +792,16 @@ class Instance(JavaObject):
                 weight, javabridge.get_env().make_double_array(vals),
                 javabridge.get_env().make_int_array(indices), max_values))
 
+    @classmethod
+    def missing_value(cls):
+        """
+        Returns the numeric value that represents a missing value in Weka (NaN).
+
+        :return: missing value
+        :rtype: float
+        """
+        return missing_value()
+
 
 class Attribute(JavaObject):
     """
@@ -1476,3 +1486,12 @@ def create_instances_from_lists(x, y, name="data"):
         values.append(y[i])
         result.add_instance(Instance.create_instance(values))
     return result
+
+def missing_value():
+    """
+    Returns the value that represents missing values in Weka (NaN).
+
+    :return: missing value
+    :rtype: float
+    """
+    return float("NaN")
