@@ -9,6 +9,8 @@ Changelog
 - added `missing_value()` methods to `weka.core.dataset` module and `Instance` class
 - output variable `y` for convenience method `create_instances_from_lists` in module
   `weka.core.dataset` is now optional
+- added convenience method `create_instances_from_matrices` to `weka.core.dataset` module to easily create
+  an `Instances` object from numpy matrices (x and y)
 - ...
 
 

@@ -1490,6 +1490,42 @@ def create_instances_from_lists(x, y=None, name="data"):
         result.add_instance(Instance.create_instance(values))
     return result
 
+
+def create_instances_from_matrices(x, y=None, name="data"):
+    """
+    Allows the generation of an Instances object from a 2-dimensional matrix for X and a
+    1-dimensional matrix for Y (optional).
+    All data must be numerical. Attributes can be converted to nominal with the
+    weka.filters.unsupervised.attribute.NumericToNominal filter.
+
+    :param x: the input variables
+    :type x: ndarray
+    :param y: the output variable (optional)
+    :type y: ndarray
+    :param name: the name of the dataset
+    :type name: str
+    :return: the generated dataset
+    :rtype: Instances
+    """
+    if y is not None:
+        if len(x) != len(y):
+            raise Exception("Dimensions of x and y differ: " + str(len(x)) + " != " + str(len(y)))
+    # create header
+    atts = []
+    for i in range(len(x[0])):
+        atts.append(Attribute.create_numeric("x" + str(i+1)))
+    if y is not None:
+        atts.append(Attribute.create_numeric("y"))
+    result = Instances.create_instances(name, atts, len(x))
+    # add data
+    for i in range(len(x)):
+        values = list(x[i])
+        if y is not None:
+            values.append(y[i])
+        result.add_instance(Instance.create_instance(values))
+    return result
+
+
 def missing_value():
     """
     Returns the value that represents missing values in Weka (NaN).
