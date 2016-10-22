@@ -64,8 +64,9 @@ def double_matrix_to_ndarray(m):
     :rtype: numpy.darray
     """
     rows = javabridge.get_env().get_object_array_elements(m)
-    num = javabridge.get_env().get_array_length(m)
-    result = numpy.zeros(num * num).reshape((num, num))
+    num_rows = len(rows)
+    num_cols = javabridge.get_env().get_array_length(rows[0])
+    result = numpy.zeros(num_rows * num_cols).reshape((num_rows, num_cols))
     i = 0
     for row in rows:
         elements = javabridge.get_env().get_double_array_elements(row)

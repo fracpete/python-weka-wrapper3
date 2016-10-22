@@ -177,7 +177,10 @@ class TestClassifiers(weka_test.WekaTest):
 
         # distributions_for_instances
         cls.build_classifier(data)
-        self.assertIsNotNone(cls.distributions_for_instances(data), msg="no distributions generated")
+        dists = cls.distributions_for_instances(data)
+        self.assertIsNotNone(dists, msg="no distributions generated")
+        self.assertEqual(len(dists), len(data), msg="number of predictions differ")
+        self.assertEqual(len(dists[0]), data.class_attribute.num_values, msg="size of distribution array does not match number of classes")
 
     def test_classify_instance(self):
         """
