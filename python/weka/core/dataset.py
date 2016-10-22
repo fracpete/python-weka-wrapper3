@@ -59,6 +59,15 @@ class Instances(JavaObject):
         """
         return InstanceIterator(self)
 
+    def __len__(self):
+        """
+        Returns the number of rows in the dataset.
+
+        :return: the number of Instance objects
+        :rtype: int
+        """
+        return self.num_instances
+
     @property
     def relationname(self):
         """
