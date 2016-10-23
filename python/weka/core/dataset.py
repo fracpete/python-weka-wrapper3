@@ -311,6 +311,17 @@ class Instances(JavaObject):
         """
         javabridge.call(self.jobject, "deleteWithMissing", "(I)V", index)
 
+    def insert_attribute(self, att, index):
+        """
+        Inserts the attribute at the specified location.
+
+        :param att: the attribute to insert
+        :type att: Attribute
+        :param index: the index to insert the attribute at
+        :type index: int
+        """
+        javabridge.call(self.jobject, "insertAttributeAt", "(Lweka/core/Attribute;I)V", att.jobject, index)
+
     def compactify(self):
         """
         Compactifies the set of instances.
@@ -1172,6 +1183,20 @@ class Attribute(JavaObject):
         return Attribute(
             javabridge.make_instance(
                 "weka/core/Attribute", "(Ljava/lang/String;Ljava/util/List;)V", name, None))
+
+    @classmethod
+    def create_relational(cls, name, inst):
+        """
+        Creates a relational attribute.
+
+        :param name: the name of the attribute
+        :type name: str
+        :param inst: the structure of the relational attribute
+        :type inst: Instances
+        """
+        return Attribute(
+            javabridge.make_instance(
+                "weka/core/Attribute", "(Ljava/lang/String;Lweka/core/Instances;)V", name, inst.jobject))
 
 
 class AttributeStats(JavaObject):
