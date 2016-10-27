@@ -55,7 +55,7 @@ MLOSS
 Steps:
 
 * login
-* goto project page https://mloss.org/software/view/???/
+* goto project page https://mloss.org/software/view/660/
 * click on `Update project`
 * update `Version` and `Download URL`
 * re-use release notes from Github release in `Changes since last revision`

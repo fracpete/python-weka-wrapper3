@@ -23,6 +23,7 @@ Links:
   * `Example code <https://github.com/fracpete/python-weka-wrapper3-examples>`_
 
 * Questions? You can post them in the project's `Google Group <https://groups.google.com/forum/#!forum/python-weka-wrapper>`_
+* `MLOSS project <https://mloss.org/software/view/660/>`_
 
 
 Requirements
