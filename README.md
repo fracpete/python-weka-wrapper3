@@ -13,7 +13,7 @@ Requirements:
 * Oracle JDK 1.7+
 
 Uses:
-* Weka (3.9.0)
+* Weka (3.9.1)
 
 ## Installation
 

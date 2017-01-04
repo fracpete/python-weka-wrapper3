@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.2 (????-??-??)
+0.1.2 (2017-01-04)
 ------------------
 
 - `typeconv.double_matrix_to_ndarray` no longer assumes a square matrix
@@ -9,7 +9,7 @@ Changelog
 - `len(Instances)` now returns the number of rows in the dataset (module `weka.core.dataset`)
 - added method `insert_attribute` to the `Instances` class
 - added class method `create_relational` to the `Attribute` class
-- ...
+- upgraded Weka to 3.9.1
 
 
 0.1.1 (2016-10-19)
