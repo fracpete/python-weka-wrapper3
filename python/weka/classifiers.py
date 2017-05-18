@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2017 Fracpete (pythonwekawrapper at gmail dot com)
 
 import sys
 import os
@@ -290,6 +290,15 @@ class FilteredClassifier(SingleClassifierEnhancer):
         :type filtr: Filter
         """
         javabridge.call(self.jobject, "setFilter", "(Lweka/filters/Filter;)V", filtr.jobject)
+
+    def check_for_modified_class_attribute(self, check):
+        """
+        Sets whether to check for class attribute modifications.
+
+        :param check: True if checking for modifications
+        :type check: bool
+        """
+        javabridge.call(self.jobject, "setDoNotCheckForModifiedClassAttribute", "(Z)V", not check)
 
 
 class GridSearch(SingleClassifierEnhancer):

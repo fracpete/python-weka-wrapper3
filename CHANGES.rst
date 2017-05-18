@@ -4,6 +4,7 @@ Changelog
 0.1.3 (????-??-??)
 ------------------
 
+- added `check_for_modified_class_attribute` method to `FilterClassifier` class
 - ...
 
 
