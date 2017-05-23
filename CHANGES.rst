@@ -5,6 +5,11 @@ Changelog
 ------------------
 
 - added `check_for_modified_class_attribute` method to `FilterClassifier` class
+- added `complete_classname` method to `weka.core.classes` module, which allows
+  completion of partial classnames like `.J48` to `weka.classifiers.trees.J48`
+  if there is a unique match; `JavaObject.new_instance` and `JavaObject.check_type`
+  now make use of this functionality, allowing for instantiations like
+  `Classifier(cls=".J48")`
 - ...
 
 

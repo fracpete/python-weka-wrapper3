@@ -395,6 +395,37 @@ Filters
    print(filtered)
 
 
+Partial classnames
+------------------
+
+All classes derived from `weka.core.classes.JavaObject` like `Classifier`, `Filter`, etc.,
+allow the use of partial classnames. So instead of instantiating a classifier like this:
+
+.. code-block:: python
+
+   cls = Classifier(classname="weka.classifiers.trees.J48", options=["-C", "0.3"])
+
+You can instantiate it with a shortened classname (must start with a `.`):
+
+.. code-block:: python
+
+   cls = Classifier(classname=".J48", options=["-C", "0.3"])
+
+**NB:** This will fail with an exception if there are no or multiple matches.
+For instance, the following will result in an error, as there are two `Discretize`
+filters, supervised and unsupervised:
+
+.. code-block:: python
+
+   cls = Filter(classname=".Discretize")
+
+.. code-block::
+
+   Exception: Found multiple matches for '.Discretize':
+   weka.filters.supervised.attribute.Discretize
+   weka.filters.unsupervised.attribute.Discretize
+
+
 Packages
 --------
 

@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2017 Fracpete (pythonwekawrapper at gmail dot com)
 
 import os
 import inspect
@@ -550,6 +550,8 @@ class JavaObject(JSONObject):
         :rtype: bool
         """
         if jni_intf_or_class is None:
+            if intf_or_class.startswith("."):
+                intf_or_class = complete_classname(intf_or_class)
             jni_intf_or_class = "L" + intf_or_class.replace(".", "/") + ";"
         return javabridge.is_instance_of(jobject, jni_intf_or_class)
         
@@ -583,6 +585,8 @@ class JavaObject(JSONObject):
         :rtype: JB_Object
         """
         if jni_classname is None:
+            if classname.startswith("."):
+                classname = complete_classname(classname)
             jni_classname = classname.replace(".", "/")
         try:
             return javabridge.make_instance(jni_classname, "()V")
@@ -1552,6 +1556,33 @@ def from_commandline(cmdline, classname=None):
     else:
         c = get_class(classname)
         return c(jobject=handler.jobject)
+
+
+def complete_classname(classname):
+    """
+    Attempts to complete a partial classname like '.J48' and returns the full
+    classname if a single match was found, otherwise an exception is raised.
+
+    :param classname: the partial classname to expand
+    :type classname: str
+    :return: the full classname
+    :rtype: str
+    """
+
+    result = javabridge.get_collection_wrapper(
+        javabridge.static_call(
+            "Lweka/Run;", "findSchemeMatch",
+            "(Ljava/lang/String;Z)Ljava/util/List;",
+            classname, True))
+    if len(result) == 1:
+        return str(result[0])
+    elif len(result) == 0:
+        raise Exception("No classname matches found for: " + classname)
+    else:
+        matches = []
+        for i in range(len(result)):
+            matches.append(str(result[i]))
+        raise Exception("Found multiple matches for '" + classname + "':\n" + '\n'.join(matches))
 
 
 class AbstractParameter(OptionHandler):
