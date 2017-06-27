@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # jvm.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2017 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import os
@@ -76,7 +76,7 @@ def add_system_classpath():
     """
     Adds the system's classpath to the JVM's classpath.
     """
-    if os.environ['CLASSPATH'] is not None:
+    if 'CLASSPATH' in os.environ:
         parts = os.environ['CLASSPATH'].split(os.pathsep)
         for part in parts:
             javabridge.JARS.append(part)

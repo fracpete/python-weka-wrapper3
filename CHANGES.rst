@@ -10,6 +10,8 @@ Changelog
   if there is a unique match; `JavaObject.new_instance` and `JavaObject.check_type`
   now make use of this functionality, allowing for instantiations like
   `Classifier(cls=".J48")`
+- `jvm.start(system_cp=True)` no longer fails with a `KeyError: 'CLASSPATH'` if
+  there is no `CLASSPATH` environment variable defined
 - ...
 
 
