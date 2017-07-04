@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="#" />
+    <link rel="next" title="Installation" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><em>python-weka-wrapper3</em> allows you to use <a class="reference external" href="http://www.cs.waikato.ac.nz/~ml/weka/">Weka</a> from within Python3.</p>
+<p>The library uses the <a class="reference external" href="https://pypi.python.org/pypi/javabridge">javabridge</a> library for starting up,
+communicating with and shutting down the Java Virtual Machine in which the Weka processes get executed.</p>
+<p><em>python-weka-wrapper3</em> provides a thin wrapper around the basic (non-GUI) functionality of Weka (some plots are
+available using Python functionality). You can automatically add all your Weka packages to the classpath.
+Additional jars can be added as well.</p>
+<p>Links:</p>
+<ul class="simple">
+<li>Looking for code?<ul>
+<li><a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3">Project homepage</a></li>
+<li><a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3-examples">Example code</a></li>
+</ul>
+</li>
+<li>Questions? You can post them in the project&#8217;s <a class="reference external" href="https://groups.google.com/forum/#!forum/python-weka-wrapper">Google Group</a></li>
+<li><a class="reference external" href="https://mloss.org/software/view/660/">MLOSS project</a></li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<p>The library has the following requirements:</p>
+<ul class="simple">
+<li>Python 3 (does not work with Python 2)</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>javabridge (&gt;=1.0.14, required)</li>
+<li>pygraphviz (optional)</li>
+<li>PIL (optional)</li>
+<li>matplotlib (optional)</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Oracle JDK 1.7+</li>
+</ul>
+<p>Uses:</p>
+<ul class="simple">
+<li>Weka (3.9.1)</li>
+</ul>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#videos">Videos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#prerequisites-for-all-plaforms">Prerequisites for all plaforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#ubuntu">Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#debian">Debian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#fedora-centos-redhat">Fedora/CentOS/Redhat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#other-linux-distributions">Other Linux distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#mac-osx">Mac OSX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#from-source">From source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#debian">Debian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#ubuntu">Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#mac-osx">Mac OSX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#windows">Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commandline.html">Command-line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#data-generators">Data generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#classifiers">Classifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#clusterers">Clusterers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#attribute-selection">Attribute selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#associators">Associators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#java-virtual-machine">Java Virtual Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#option-handling">Option handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#data-generators">Data generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#loaders-and-savers">Loaders and Savers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#classifiers">Classifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#clusterers">Clusterers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#attribute-selection">Attribute selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#associators">Associators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#serialization">Serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#packages">Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optionhandling.html">Option handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="optionhandling.html#splitting">Splitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionhandling.html#joining">Joining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionhandling.html#code">Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virtualenv.html">virtualenv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="virtualenv.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtualenv.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sourcecode.html">Source code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourcecode.html#install">Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#start-up-jvm">Start up JVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#location-of-the-datasets">Location of the datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#load-dataset-and-print-it">Load dataset and print it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#output-help-from-underlying-optionhandler">Output help from underlying OptionHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#option-handling">Option handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#build-classifier-on-dataset-output-predictions">Build classifier on dataset, output predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#build-classifier-on-dataset-print-model-and-draw-graph">Build classifier on dataset, print model and draw graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#build-classifier-incrementally-with-data-and-print-model">Build classifier incrementally with data and print model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#cross-validate-filtered-classifier-and-print-evaluation-and-display-roc">Cross-validate filtered classifier and print evaluation and display ROC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#cross-validate-regressor-display-classifier-errors-and-predictions">Cross-validate regressor, display classifier errors and predictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#parameter-optimization-gridsearch">Parameter optimization - GridSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#parameter-optimization-multisearch">Parameter optimization - MultiSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#clustering">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#associations">Associations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#attribute-selection">Attribute selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#data-generators">Data generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#packages">Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#stop-jvm">Stop JVM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#database-access">Database access</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flow.html">Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#life-cycle">Life cycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#sources">Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#transformers">Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#sinks">Sinks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#control-actors">Control actors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#conversions">Conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html#extending">Extending</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="weka.html">weka package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.core.html">weka.core package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.capabilities">weka.core.capabilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.classes">weka.core.classes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.converters">weka.core.converters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.database">weka.core.database module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.dataset">weka.core.dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.jvm">weka.core.jvm module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.packages">weka.core.packages module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.serialization">weka.core.serialization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.stemmers">weka.core.stemmers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.stopwords">weka.core.stopwords module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.tokenizers">weka.core.tokenizers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#weka-core-types-module">weka.core.types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core.version">weka.core.version module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.core.html#module-weka.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.flow.html">weka.flow package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.base">weka.flow.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.container">weka.flow.container module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.control">weka.flow.control module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.conversion">weka.flow.conversion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.sink">weka.flow.sink module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.source">weka.flow.source module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow.transformer">weka.flow.transformer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.flow.html#module-weka.flow">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.plot.html">weka.plot package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#module-weka.plot.classifiers">weka.plot.classifiers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#module-weka.plot.clusterers">weka.plot.clusterers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#module-weka.plot.dataset">weka.plot.dataset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#module-weka.plot.experiments">weka.plot.experiments module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#module-weka.plot.graph">weka.plot.graph module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.plot.html#module-weka.plot">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.associations">weka.associations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.attribute_selection">weka.attribute_selection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.classifiers">weka.classifiers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.clusterers">weka.clusterers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.datagenerators">weka.datagenerators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.experiments">weka.experiments module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.filters">weka.filters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="next chapter">Installation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             >next</a> |</li>
+        <li><a href="#">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

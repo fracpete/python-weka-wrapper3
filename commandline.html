@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Command-line &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="Troubleshooting"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="command-line">
+<h1>Command-line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h1>
+<p>From command-line, <em>python-weka-wrapper</em> behaves similar to Weka itself, i.e., the command-line.
+Most of the general options are available, as well as the following:</p>
+<ul class="simple">
+<li><cite>-j</cite> for adding additional jars, in the same format as the classpath for the platform.
+E.g., for Linux, <cite>-j /some/where/a.jar:/other/place/b.jar</cite></li>
+<li><cite>-X</cite> for defining the maximum heap size.
+E.g., <cite>-X 512m</cite> for 512 MB of heap size.</li>
+</ul>
+<p>The following examples are all for a Linux bash environment. Windows users have to replace
+forwarding slashes <cite>/</cite> with backslashes <cite>\</cite> and place the command on a single line with the
+backslashes <cite>\</cite> at the end of the lines removed.</p>
+<div class="section" id="data-generators">
+<h2>Data generators<a class="headerlink" href="#data-generators" title="Permalink to this headline">¶</a></h2>
+<p>Artifical data can be generated using one of Weka&#8217;s data generators, e.g., the
+<cite>Agrawal</cite> classification generator:</p>
+<div class="highlight-bash"><div class="highlight"><pre>python weka/datagenerators.py <span class="se">\</span>
+    -o /tmp/out.arff <span class="se">\</span>
+    weka.datagenerators.classifiers.classification.Agrawal
+</pre></div>
+</div>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>Filtering a single ARFF dataset, removing the last attribute using the <cite>Remove</cite> filter:</p>
+<div class="highlight-bash"><div class="highlight"><pre>python weka/filters.py <span class="se">\</span>
+    -i /my/datasets/iris.arff <span class="se">\</span>
+    -o /tmp/out.arff <span class="se">\</span>
+    -c last <span class="se">\</span>
+    weka.filters.unsupervised.attribute.Remove <span class="se">\</span>
+    -R last
+</pre></div>
+</div>
+<p>For batch filtering, you can use the <cite>-r</cite> and <cite>-s</cite> options for the input and output
+for the second file.</p>
+</div>
+<div class="section" id="classifiers">
+<h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this headline">¶</a></h2>
+<p>Example on how to cross-validate a <cite>J48</cite> classifier (with confidence factor 0.3)
+on the iris UCI dataset:</p>
+<div class="highlight-bash"><div class="highlight"><pre>python weka/classifiers.py <span class="se">\</span>
+     -t /my/datasets/iris.arff <span class="se">\</span>
+     -c last <span class="se">\</span>
+     weka.classifiers.trees.J48
+     -C 0.3
+</pre></div>
+</div>
+</div>
+<div class="section" id="clusterers">
+<h2>Clusterers<a class="headerlink" href="#clusterers" title="Permalink to this headline">¶</a></h2>
+<p>Example on how to perform classes-to-clusters evaluation for <cite>SimpleKMeans</cite>
+(with 3 clusters) using the iris UCI dataset:</p>
+<div class="highlight-bash"><div class="highlight"><pre>pythonn weka/clusterers.py <span class="se">\</span>
+    -t /my/datasets/iris.arff <span class="se">\</span>
+    -c last <span class="se">\</span>
+    weka.clusterers.SimpleKMeans
+    -N 3
+</pre></div>
+</div>
+</div>
+<div class="section" id="attribute-selection">
+<h2>Attribute selection<a class="headerlink" href="#attribute-selection" title="Permalink to this headline">¶</a></h2>
+<p>You can perform attribute selection using <cite>BestFirst</cite> as search algorithm and
+<cite>CfsSubsetEval</cite> as evaluator as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre>python weka/attribute_selection.py <span class="se">\</span>
+    -i /my/datasets/iris.arff <span class="se">\</span>
+    -x 5 <span class="se">\</span>
+    -n 42 <span class="se">\</span>
+    -s <span class="s2">&quot;weka.attributeSelection.BestFirst -D 1 -N 5&quot;</span>
+    weka.attributeSelection.CfsSubsetEval <span class="se">\</span>
+    -P 1 <span class="se">\</span>
+    -E 1
+</pre></div>
+</div>
+</div>
+<div class="section" id="associators">
+<h2>Associators<a class="headerlink" href="#associators" title="Permalink to this headline">¶</a></h2>
+<p>Associators, like <cite>Apriori</cite>, can be run like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre>python weka/associators.py <span class="se">\</span>
+    -t /my/datasets/iris.arff <span class="se">\</span>
+    weka.associations.Apriori <span class="se">\</span>
+    -N 9 -I
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Command-line</a><ul>
+<li><a class="reference internal" href="#data-generators">Data generators</a></li>
+<li><a class="reference internal" href="#filters">Filters</a></li>
+<li><a class="reference internal" href="#classifiers">Classifiers</a></li>
+<li><a class="reference internal" href="#clusterers">Clusterers</a></li>
+<li><a class="reference internal" href="#attribute-selection">Attribute selection</a></li>
+<li><a class="reference internal" href="#associators">Associators</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="troubleshooting.html"
+                        title="previous chapter">Troubleshooting</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/commandline.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="troubleshooting.html" title="Troubleshooting"
+             >previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

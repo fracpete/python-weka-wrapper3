@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Troubleshooting &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="next" title="Command-line" href="commandline.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="commandline.html" title="Command-line"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Q:</strong> How do I install <cite>.whl</cite> files?</p>
+<p><strong>A:</strong> <cite>.whl</cite> are <em>Python Wheels</em> archives, which you can install using pip (&gt;= 1.4). See also <a class="reference external" href="http://pythonwheels.com/">this website</a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="debian">
+<h2>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Q:</strong> On a headless Debian server, building a classifier can result in Python exiting, printing the error message
+<cite>GConf Error: Failed to contact configuration server; some possible causes are that you need to enable TCP/IP
+networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/
+for information. (Details -  1: Not running within active session)</cite>. How to fix?</p>
+<p><strong>A:</strong> According to <a class="reference external" href="http://stackoverflow.com/questions/1421498/linux-gedit-i-always-get-gconf-error-failed-to-contact-configuration-server">this</a>
+post, set the following environment variable:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">DBUS_SESSION_BUS_ADDRESS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>And make sure that the <cite>~/.dbus</cite> directory has 0700 as permission mask.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="ubuntu">
+<h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Q:</strong> On a headless Ubuntu server, building a classifier can result in Python exiting, printing the error message
+<cite>GLib-GIO-ERROR **: Settings schema &#8216;org.gnome.system.proxy&#8217; is not installed</cite>. How to fix?</p>
+<p><strong>A:</strong> Simply run the following command to fix this:
+<cite>sudo apt-get install gsettings-desktop-schemas</cite></p>
+</li>
+</ul>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Q:</strong> I installed <em>pygraphviz</em> but I keep getting <cite>Pygraphviz is not installed, cannot generate graph plot!</cite>. How to fix?</p>
+<p><strong>A:</strong> : Open up an interactive Python3 shell and type:
+<cite>import pygraphviz</cite>
+If you get <cite>undefined symbol: Agundirected</cite>, then follow the steps outlined [here](<a class="reference external" href="http://stackoverflow.com/a/33508561/4698227">http://stackoverflow.com/a/33508561/4698227</a>),
+but use <cite>pip3</cite>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="mac-osx">
+<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Q:</strong> Why does javabridge fail with compiler error <cite>clang: error: unknown argument: &#8216;-mno-fused-madd&#8217;</cite>?</p>
+<p><strong>A:</strong> XCode 5.1 changed how unknown arguments are handled and now treats them  as error (<a class="reference external" href="http://bruteforce.gr/bypassing-clang-error-unknown-argument.html">source</a>). You can precede the <cite>pip install javabridge</cite> command with the following environment variable:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wno-error=unused-command-line-argument-hard-error-in-future&quot;</span> pip install javabridge
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Q:</strong> Compiling javabridge fails with missing <cite>jni.h</cite> header file - what now?</p>
+<p><strong>A:</strong> You will need an Oracle JDK installed for this. <a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/">Download</a> and install one. Below is a command-line that uses the <cite>jni.h</cite> header file that comes with <cite>1.7.0_45</cite>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/ -I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/darwin&quot;</span> pip install --user javabridge
+</pre></div>
+</div>
+<p><em>PS:</em> You may need to combine the <cite>ARCHFLAGS</cite> setting with the one from the previous Q&amp;A.</p>
+</li>
+<li><p class="first"><strong>Q:</strong> When I use <cite>import javabridge</cite> in my Python shell, a
+dialog pops up, telling me that I don&#8217;t have Java installed. However, I have
+an Oracle JDK installed. What&#8217;s wrong?</p>
+<p><strong>A:</strong> Java environments that are not from Apple don&#8217;t seem to get picked up
+by Python correctly. Simply install the Java 1.6 that Apple supplies on your
+system as well.</p>
+</li>
+<li><p class="first"><strong>Q:</strong> Installing <cite>pygraphviz</cite> fails, because it cannot find the library or
+its includes. What now?</p>
+<dl class="docutils">
+<dt><strong>A:</strong> Here is what to do:</dt>
+<dd><ul class="first last simple">
+<li>Make sure that you have the <a class="reference external" href="http://graphviz.org/Download_macos.php">GraphViz</a>
+package installed.</li>
+<li>If the installer is still not finding the libraries, download the
+<a class="reference external" href="https://pypi.python.org/pypi/pygraphviz">pygraphviz</a> sources from PyPi and
+extract them.</li>
+<li>Open the <cite>setup.py</cite> file in a text editor and set the <cite>library_path</cite> and
+<cite>include_path</cite> variables to the correct paths on your machine, e.g.,
+<cite>library_path=/usr/local/lib/graphviz</cite> and
+<cite>include_path=/usr/local/include/graphviz</cite> and save the file.</li>
+<li>Open a terminal and navigate to the directory where the <cite>setup.py</cite> file
+is located that you just edited.</li>
+<li>Install the package using <cite>python setup.py install &#8211;user</cite></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>Q:</strong> Installing <cite>pygraphviz</cite> fails with error message
+<cite>ld: library not found for -lcgraph</cite>. What is wrong?</p>
+<p><strong>A:</strong> Apparently, the XCode command-line are not installed. You can install
+them by opening a terminal and running the following command:
+<cite>xcode-select &#8211;install</cite></p>
+</li>
+</ul>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>Q:</strong> The Windows SDK 7.1 installer fails (eg when behind a proxy). What now?</p>
+<p><strong>A:</strong> You can download an ISO image of the SDK from
+<a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=8442">here</a>
+(<cite>GRMSDK_EN_DVD.iso</cite> is the 32-bit version and <cite>GRMSDKX_EN_DVD.iso</cite> is the 64-bit version).
+See <a class="reference external" href="http://www.howtogeek.com/howto/windows-vista/mount-an-iso-image-in-windows-vista/">this HOWTO</a>
+for mounting the ISO image once downloaded.</p>
+</li>
+<li><p class="first"><strong>Q:</strong> I cannot display graphs, e.g., generated by J48, as I keep getting the error message <cite>ValueError: Program dot not found in path.</cite> - what can I do?</p>
+<p><strong>A:</strong> PyGraphviz is just a wrapper for <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> which you
+you need to install separately. Also, you need to add the directory containing the GraphViz binaries, like <cite>dot.exe</cite>, to the <cite>PATH</cite> environment variable, e.g., <cite>C:\Program Files (x86)\Graphviz2.38\bin</cite> (you may have to log out and back in again for these changes to take effect).</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#general">General</a></li>
+<li><a class="reference internal" href="#debian">Debian</a></li>
+<li><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#mac-osx">Mac OSX</a></li>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="commandline.html"
+                        title="next chapter">Command-line</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/troubleshooting.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="commandline.html" title="Command-line"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             >previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

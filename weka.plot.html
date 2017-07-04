@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>weka.plot package &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="up" title="weka package" href="weka.html" />
+    <link rel="prev" title="weka.flow package" href="weka.flow.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="weka.flow.html" title="weka.flow package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li>
+          <li><a href="weka.html" accesskey="U">weka package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="weka-plot-package">
+<h1>weka.plot package<a class="headerlink" href="#weka-plot-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-weka.plot.classifiers">
+<span id="weka-plot-classifiers-module"></span><h2>weka.plot.classifiers module<a class="headerlink" href="#module-weka.plot.classifiers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="weka.plot.classifiers.generate_thresholdcurve_data">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">generate_thresholdcurve_data</tt><big>(</big><em>evaluation</em>, <em>class_index</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.generate_thresholdcurve_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the threshold curve data from the evaluation object&#8217;s predictions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>evaluation</strong> (<em>Evaluation</em>) &#8211; the evaluation to obtain the predictions from</li>
+<li><strong>class_index</strong> (<em>int</em>) &#8211; the 0-based index of the class-label to create the plot for</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the generated threshold curve data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Instances</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.get_auc">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">get_auc</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.get_auc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the area under the ROC curve (AUC).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>Instances</em>) &#8211; the threshold curve data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the area</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.get_prc">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">get_prc</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.get_prc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the area under the precision recall curve (PRC).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>Instances</em>) &#8211; the threshold curve data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the area</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.get_thresholdcurve_data">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">get_thresholdcurve_data</tt><big>(</big><em>data</em>, <em>xname</em>, <em>yname</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.get_thresholdcurve_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves x and y columns from  of the data generated by the weka.classifiers.evaluation.ThresholdCurve
+class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>Instances</em>) &#8211; the threshold curve data</li>
+<li><strong>xname</strong> (<em>str</em>) &#8211; the name of the X column</li>
+<li><strong>yname</strong> (<em>str</em>) &#8211; the name of the Y column</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of x and y arrays</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.plot_classifier_errors">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">plot_classifier_errors</tt><big>(</big><em>predictions</em>, <em>absolute=True</em>, <em>max_relative_size=50</em>, <em>absolute_size=50</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.plot_classifier_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the classifers for the given list of predictions.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>predictions</strong> (<em>list</em>) &#8211; the predictions to plot</li>
+<li><strong>absolute</strong> (<em>bool</em>) &#8211; whether to use absolute errors as size or relative ones</li>
+<li><strong>max_relative_size</strong> (<em>int</em>) &#8211; the maximum size in point in case of relative mode</li>
+<li><strong>absolute_size</strong> (<em>int</em>) &#8211; the size in point in case of absolute mode</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.plot_learning_curve">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">plot_learning_curve</tt><big>(</big><em>classifiers</em>, <em>train</em>, <em>test=None</em>, <em>increments=100</em>, <em>metric='percent_correct'</em>, <em>title='Learning curve'</em>, <em>label_template='[#] &#64; $'</em>, <em>key_loc='lower right'</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.plot_learning_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a learning curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>classifiers</strong> (<em>list of Classifier</em>) &#8211; list of Classifier template objects</li>
+<li><strong>train</strong> (<em>Instances</em>) &#8211; dataset to use for the building the classifier, used for evaluating it test set None</li>
+<li><strong>test</strong> (<em>list or Instances</em>) &#8211; optional dataset (or list of datasets) to use for the testing the built classifiers</li>
+<li><strong>increments</strong> (<em>float</em>) &#8211; the increments (&gt;= 1: # of instances, &lt;1: percentage of dataset)</li>
+<li><strong>metric</strong> (<em>str</em>) &#8211; the name of the numeric metric to plot (Evaluation.&lt;metric&gt;)</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; the title for the plot</li>
+<li><strong>label_template</strong> (<em>str</em>) &#8211; the template for the label in the plot
+(#: 1-based index of classifier, &#64;: full classname, !: simple classname,
+$: options, <a href="#id1"><span class="problematic" id="id2">*</span></a>: 1-based index of test set)</li>
+<li><strong>key_loc</strong> (<em>str</em>) &#8211; the location string for the key</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.plot_prc">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">plot_prc</tt><big>(</big><em>evaluation</em>, <em>class_index=None</em>, <em>title=None</em>, <em>key_loc='lower center'</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.plot_prc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the PRC (precision recall) curve for the given predictions.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>evaluation</strong> (<em>Evaluation</em>) &#8211; the evaluation to obtain the predictions from</li>
+<li><strong>class_index</strong> (<em>list</em>) &#8211; the list of 0-based indices of the class-labels to create the plot for</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>key_loc</strong> (<em>str</em>) &#8211; the location string for the key</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.plot_roc">
+<tt class="descclassname">weka.plot.classifiers.</tt><tt class="descname">plot_roc</tt><big>(</big><em>evaluation</em>, <em>class_index=None</em>, <em>title=None</em>, <em>key_loc='lower right'</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.classifiers.plot_roc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the ROC (receiver operator characteristics) curve for the given predictions.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>evaluation</strong> (<em>Evaluation</em>) &#8211; the evaluation to obtain the predictions from</li>
+<li><strong>class_index</strong> (<em>list</em>) &#8211; the list of 0-based indices of the class-labels to create the plot for</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>key_loc</strong> (<em>str</em>) &#8211; the position string for the key</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-weka.plot.clusterers">
+<span id="weka-plot-clusterers-module"></span><h2>weka.plot.clusterers module<a class="headerlink" href="#module-weka.plot.clusterers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="weka.plot.clusterers.plot_cluster_assignments">
+<tt class="descclassname">weka.plot.clusterers.</tt><tt class="descname">plot_cluster_assignments</tt><big>(</big><em>evl</em>, <em>data</em>, <em>atts=None</em>, <em>inst_no=False</em>, <em>size=10</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.clusterers.plot_cluster_assignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the cluster assignments against the specified attributes.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>evl</strong> (<em>ClusterEvaluation</em>) &#8211; the cluster evaluation to obtain the cluster assignments from</li>
+<li><strong>data</strong> (<em>Instances</em>) &#8211; the dataset the clusterer was evaluated against</li>
+<li><strong>atts</strong> (<em>list</em>) &#8211; the list of attribute indices to plot, None for all</li>
+<li><strong>inst_no</strong> (<em>bool</em>) &#8211; whether to include a fake attribute with the instance number</li>
+<li><strong>size</strong> (<em>int</em>) &#8211; the size of the circles in point</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the (optional) file to save the generated plot to. The extension determines the file format.</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-weka.plot.dataset">
+<span id="weka-plot-dataset-module"></span><h2>weka.plot.dataset module<a class="headerlink" href="#module-weka.plot.dataset" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="weka.plot.dataset.line_plot">
+<tt class="descclassname">weka.plot.dataset.</tt><tt class="descname">line_plot</tt><big>(</big><em>data</em>, <em>atts=None</em>, <em>percent=100.0</em>, <em>seed=1</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.dataset.line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses the internal format to plot the dataset, one line per instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Instances</em>) &#8211; the dataset</li>
+<li><strong>atts</strong> (<em>list</em>) &#8211; the list of 0-based attribute indices of attributes to plot</li>
+<li><strong>percent</strong> (<em>float</em>) &#8211; the percentage of the dataset to use for plotting</li>
+<li><strong>seed</strong> (<em>int</em>) &#8211; the seed value to use for subsampling</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the (optional) file to save the generated plot to. The extension determines the file format.</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.dataset.matrix_plot">
+<tt class="descclassname">weka.plot.dataset.</tt><tt class="descname">matrix_plot</tt><big>(</big><em>data</em>, <em>percent=100.0</em>, <em>seed=1</em>, <em>size=10</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.dataset.matrix_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots all attributes against each other.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Instances</em>) &#8211; the dataset</li>
+<li><strong>percent</strong> (<em>float</em>) &#8211; the percentage of the dataset to use for plotting</li>
+<li><strong>seed</strong> (<em>int</em>) &#8211; the seed value to use for subsampling</li>
+<li><strong>size</strong> (<em>int</em>) &#8211; the size of the circles in point</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the (optional) file to save the generated plot to. The extension determines the file format.</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.dataset.scatter_plot">
+<tt class="descclassname">weka.plot.dataset.</tt><tt class="descname">scatter_plot</tt><big>(</big><em>data</em>, <em>index_x</em>, <em>index_y</em>, <em>percent=100.0</em>, <em>seed=1</em>, <em>size=50</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.dataset.scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots two attributes against each other.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>Instances</em>) &#8211; the dataset</li>
+<li><strong>index_x</strong> (<em>int</em>) &#8211; the 0-based index of the attribute on the x axis</li>
+<li><strong>index_y</strong> (<em>int</em>) &#8211; the 0-based index of the attribute on the y axis</li>
+<li><strong>percent</strong> (<em>float</em>) &#8211; the percentage of the dataset to use for plotting</li>
+<li><strong>seed</strong> (<em>int</em>) &#8211; the seed value to use for subsampling</li>
+<li><strong>size</strong> (<em>int</em>) &#8211; the size of the circles in point</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; an optional title</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the (optional) file to save the generated plot to. The extension determines the file format.</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-weka.plot.experiments">
+<span id="weka-plot-experiments-module"></span><h2>weka.plot.experiments module<a class="headerlink" href="#module-weka.plot.experiments" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="weka.plot.experiments.plot_experiment">
+<tt class="descclassname">weka.plot.experiments.</tt><tt class="descname">plot_experiment</tt><big>(</big><em>mat</em>, <em>title='Experiment'</em>, <em>axes_swapped=False</em>, <em>measure='Statistic'</em>, <em>show_stdev=False</em>, <em>key_loc='lower right'</em>, <em>outfile=None</em>, <em>wait=True</em><big>)</big><a class="headerlink" href="#weka.plot.experiments.plot_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the results from an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mat</strong> (<em>ResultMatrix</em>) &#8211; the result matrix to plot</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; the title for the experiment</li>
+<li><strong>axes_swapped</strong> (<em>bool</em>) &#8211; whether the axes whether swapped (&#8220;sets x cls&#8221; or &#8220;cls x sets&#8221;)</li>
+<li><strong>measure</strong> (<em>str</em>) &#8211; the measure that is being displayed</li>
+<li><strong>show_stdev</strong> (<em>bool</em>) &#8211; whether to show the standard deviation as error bar</li>
+<li><strong>key_loc</strong> (<em>str</em>) &#8211; the location string for the key</li>
+<li><strong>outfile</strong> (<em>str</em>) &#8211; the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) &#8211; whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-weka.plot.graph">
+<span id="weka-plot-graph-module"></span><h2>weka.plot.graph module<a class="headerlink" href="#module-weka.plot.graph" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="weka.plot.graph.plot_dot_graph">
+<tt class="descclassname">weka.plot.graph.</tt><tt class="descname">plot_dot_graph</tt><big>(</big><em>graph</em>, <em>filename=None</em><big>)</big><a class="headerlink" href="#weka.plot.graph.plot_dot_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a graph in graphviz dot notation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>graph</strong> (<em>str</em>) &#8211; the dot notation graph</li>
+<li><strong>filename</strong> (<em>str</em>) &#8211; the (optional) file to save the generated plot to. The extension determines the file format.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-weka.plot">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weka.plot" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="weka.plot.create_subsample">
+<tt class="descclassname">weka.plot.</tt><tt class="descname">create_subsample</tt><big>(</big><em>data</em>, <em>percent</em>, <em>seed=1</em><big>)</big><a class="headerlink" href="#weka.plot.create_subsample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a subsample of the dataset.
+:param data: the data to create the subsample from
+:type data: Instances
+:param percent: the percentage (0-100)
+:type percent: float
+:param seed: the seed value to use
+:type seed: int</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">weka.plot package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-weka.plot.classifiers">weka.plot.classifiers module</a></li>
+<li><a class="reference internal" href="#module-weka.plot.clusterers">weka.plot.clusterers module</a></li>
+<li><a class="reference internal" href="#module-weka.plot.dataset">weka.plot.dataset module</a></li>
+<li><a class="reference internal" href="#module-weka.plot.experiments">weka.plot.experiments module</a></li>
+<li><a class="reference internal" href="#module-weka.plot.graph">weka.plot.graph module</a></li>
+<li><a class="reference internal" href="#module-weka.plot">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="weka.flow.html"
+                        title="previous chapter">weka.flow package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/weka.plot.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="weka.flow.html" title="weka.flow package"
+             >previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li>
+          <li><a href="weka.html" >weka package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

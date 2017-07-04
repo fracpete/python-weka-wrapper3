@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>virtualenv &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="next" title="Source code" href="sourcecode.html" />
+    <link rel="prev" title="Option handling" href="optionhandling.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sourcecode.html" title="Source code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="optionhandling.html" title="Option handling"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="virtualenv">
+<h1>virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h1>
+<p>If you want to merely test out the library, you can do that easily in a <em>virtual python environment</em>
+created with <cite>virtualenv</cite>.</p>
+<p><strong>NB:*</strong> You need a build environment for your platform set up as described in the <strong>Installation</strong> section.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>The following steps set up an evironment:</p>
+<ul>
+<li><p class="first">create a directory and initialize the environment</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mkdir pwwtest
+<span class="nv">$ </span>virtualenv pwwtest
+</pre></div>
+</div>
+</li>
+<li><p class="first">install the required packages</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pwwtest/bin/pip install numpy
+<span class="nv">$ </span>pwwtest/bin/pip install PIL
+<span class="nv">$ </span>pwwtest/bin/pip install matplotlib
+<span class="nv">$ </span>pwwtest/bin/pip install pygraphviz
+<span class="nv">$ </span>pwwtest/bin/pip install javabridge
+</pre></div>
+</div>
+</li>
+<li><p class="first">as an alternative, you can also use all currently installed packages on your
+host system in the virtual environment. For this, you have to have to all the required
+packages installed on your host already (see <strong>Installation</strong> section).
+You can create the virtual environment as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>virtualenv --system-site-packages pwwtest
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">You may need to install the header files for the following libraries for the compilations to succeed:</p>
+<ul class="simple">
+<li>freetype</li>
+<li>graphviz</li>
+<li>png</li>
+</ul>
+</li>
+<li><p class="first">Before you can install <cite>matplotlib</cite>, you may have to upgrade your <cite>distribute</cite> library as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span> bin/easy_install -U distribute
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Ubuntu, follow <a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>
+to install all the required dependencies for PIL:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get build-dep python-imaging
+</pre></div>
+</div>
+</li>
+<li><p class="first">To enable support for PIL on Ubuntu, see
+<a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libfreetype.so /usr/lib/
+<span class="nv">$ </span>sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libjpeg.so /usr/lib/
+<span class="nv">$ </span>sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libz.so /usr/lib/
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">virtualenv</a><ul>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optionhandling.html"
+                        title="previous chapter">Option handling</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sourcecode.html"
+                        title="next chapter">Source code</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/virtualenv.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sourcecode.html" title="Source code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="optionhandling.html" title="Option handling"
+             >previous</a> |</li>
+        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
