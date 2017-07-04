@@ -18,7 +18,7 @@ Uses:
 ## Installation
 
 Detailed instructions and links to videos on installing the library are located
-[here](http://pythonhosted.org/python-weka-wrapper3/install.html).
+[here](http://fracpete.github.io/python-weka-wrapper3/install.html).
 
 Please note, that you need a build environment to compile some libraries from source.
 
@@ -35,9 +35,9 @@ documentation in the **doc** directory. You can generate HTML documentation
 using the `make html` command in the **doc** directory.
 
 Available online documentation:
-* [Full documentation](http://pythonhosted.org/python-weka-wrapper3/)
+* [Full documentation](http://fracpete.github.io/python-weka-wrapper3/)
 * Shortcuts
- * [Command-line](http://pythonhosted.org/python-weka-wrapper3/commandline.html)
- * [API](http://pythonhosted.org/python-weka-wrapper3/api.html)
- * [Examples](http://pythonhosted.org/python-weka-wrapper3/examples.html)
+ * [Command-line](http://fracpete.github.io/python-weka-wrapper3/commandline.html)
+ * [API](http://fracpete.github.io/python-weka-wrapper3/api.html)
+ * [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
 
