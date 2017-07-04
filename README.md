@@ -6,10 +6,10 @@ using the [javabridge](https://pypi.python.org/pypi/javabridge) library.
 Requirements:
 
 * Python 3 (for Python 2.7 version see [here](https://github.com/fracpete/python-weka-wrapper))
- * javabridge (>= 1.0.14)
- * matplotlib (optional)
- * pygraphviz (optional)
- * PIL (optional)
+  * javabridge (>= 1.0.14)
+  * matplotlib (optional)
+  * pygraphviz (optional)
+  * PIL (optional)
 * Oracle JDK 1.7+
 
 Uses:
@@ -37,7 +37,7 @@ using the `make html` command in the **doc** directory.
 Available online documentation:
 * [Full documentation](http://fracpete.github.io/python-weka-wrapper3/)
 * Shortcuts
- * [Command-line](http://fracpete.github.io/python-weka-wrapper3/commandline.html)
- * [API](http://fracpete.github.io/python-weka-wrapper3/api.html)
- * [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
+  * [Command-line](http://fracpete.github.io/python-weka-wrapper3/commandline.html)
+  * [API](http://fracpete.github.io/python-weka-wrapper3/api.html)
+  * [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
 
