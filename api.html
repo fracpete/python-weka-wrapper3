@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    <title>API &mdash; python-weka-wrapper3 0.1.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.2',
+        VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="top" title="python-weka-wrapper3 0.1.3 documentation" href="index.html" />
     <link rel="next" title="Option handling" href="optionhandling.html" />
     <link rel="prev" title="Command-line" href="commandline.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,14 +43,14 @@
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
@@ -72,12 +72,12 @@ use the following call:</p>
 <p>In case your Weka home directory is not located in <cite>wekafiles</cite> in your user&#8217;s home directory,
 then you have two options for specifying the alternative location: use the <cite>WEKA_HOME</cite> environment
 variable or the <cite>packages</cite> parameter, supplying a directory. The latter is shown below:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="s">&quot;/my/packages/are/somwhere/else&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="s2">&quot;/my/packages/are/somwhere/else&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Most of the times, you will want to increase the maximum heap size available to the JVM.
 The following example reserves 512 MB:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">max_heap_size</span><span class="o">=</span><span class="s">&quot;512m&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">max_heap_size</span><span class="o">=</span><span class="s2">&quot;512m&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And, finally, in order to stop the JVM again, use the following call:</p>
@@ -87,23 +87,23 @@ The following example reserves 512 MB:</p>
 </div>
 <div class="section" id="option-handling">
 <h2>Option handling<a class="headerlink" href="#option-handling" title="Permalink to this headline">¶</a></h2>
-<p>Any class derived from <tt class="docutils literal"><span class="pre">OptionHandler</span></tt> (module <tt class="docutils literal"><span class="pre">weka.core.classes</span></tt>) allows
-getting and setting of the options via the property <tt class="docutils literal"><span class="pre">options</span></tt>. Depending on
+<p>Any class derived from <code class="docutils literal"><span class="pre">OptionHandler</span></code> (module <code class="docutils literal"><span class="pre">weka.core.classes</span></code>) allows
+getting and setting of the options via the property <code class="docutils literal"><span class="pre">options</span></code>. Depending on
 the sub-class, you may also provide the options already when instantiating the
 class. The following two examples instantiate a J48 classifier, one using
-the <tt class="docutils literal"><span class="pre">options</span></tt> property and the other using the shortcut through the constructor:</p>
+the <code class="docutils literal"><span class="pre">options</span></code> property and the other using the shortcut through the constructor:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;-C&quot;</span><span class="p">,</span> <span class="s">&quot;0.3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-C&quot;</span><span class="p">,</span> <span class="s">&quot;0.3&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>You can use the <tt class="docutils literal"><span class="pre">options</span></tt> property also to retrieve the currently set options:</p>
+<p>You can use the <code class="docutils literal"><span class="pre">options</span></code> property also to retrieve the currently set options:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-C&quot;</span><span class="p">,</span> <span class="s">&quot;0.3&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -113,12 +113,12 @@ the <tt class="docutils literal"><span class="pre">options</span></tt> property 
 <p>Artifical data can be generated using one of Weka&#8217;s data generators, e.g., the
 <cite>Agrawal</cite> classification generator:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.datagenerators</span> <span class="kn">import</span> <span class="n">DataGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.datagenerators.classifiers.classification.Agrawal&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-B&quot;</span><span class="p">,</span> <span class="s">&quot;-P&quot;</span><span class="p">,</span> <span class="s">&quot;0.05&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">DataGenerator</span><span class="o">.</span><span class="n">make_data</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;/some/where/outputfile.arff&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.datagenerators.classifiers.classification.Agrawal&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-B&quot;</span><span class="p">,</span> <span class="s2">&quot;-P&quot;</span><span class="p">,</span> <span class="s2">&quot;0.05&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DataGenerator</span><span class="o">.</span><span class="n">make_data</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;/some/where/outputfile.arff&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Or using the low-level API (outputting data to stdout):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.datagenerators.classifiers.classification.Agrawal&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-n&quot;</span><span class="p">,</span> <span class="s">&quot;10&quot;</span><span class="p">,</span> <span class="s">&quot;-r&quot;</span><span class="p">,</span> <span class="s">&quot;agrawal&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">DataGenerator</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.datagenerators.classifiers.classification.Agrawal&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;agrawal&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span><span class="o">.</span><span class="n">dataset_format</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">define_data_format</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">generator</span><span class="o">.</span><span class="n">dataset_format</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">generator</span><span class="o">.</span><span class="n">single_mode_flag</span><span class="p">:</span>
@@ -134,19 +134,19 @@ the <tt class="docutils literal"><span class="pre">options</span></tt> property 
 <p>You can load and save datasets of various data formats using the <cite>Loader</cite> and <cite>Saver</cite> classes.</p>
 <p>The following example loads an ARFF file and saves it as CSV:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.core.converters</span> <span class="kn">import</span> <span class="n">Loader</span><span class="p">,</span> <span class="n">Saver</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.core.converters.ArffLoader&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s">&quot;/some/where/iris.arff&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.core.converters.ArffLoader&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;/some/where/iris.arff&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">saver</span> <span class="o">=</span> <span class="n">Saver</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.core.converters.CSVSaver&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">saver</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">&quot;/some/where/iris.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">saver</span> <span class="o">=</span> <span class="n">Saver</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.core.converters.CSVSaver&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">saver</span><span class="o">.</span><span class="n">save_file</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;/some/where/iris.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <cite>weka.core.converters</cite> module has convenience method for loading and saving
 datasets called <cite>load_any_file</cite> and <cite>save_any_file</cite>. These methods determine
 the loader/saver based on the file extension:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.converters</span> <span class="kn">as</span> <span class="nn">converters</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">converters</span><span class="o">.</span><span class="n">load_any_file</span><span class="p">(</span><span class="s">&quot;/some/where/iris.arff&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">converters</span><span class="o">.</span><span class="n">save_any_file</span><span class="p">(</span><span class="s">&quot;/some/where/else/iris.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">converters</span><span class="o">.</span><span class="n">load_any_file</span><span class="p">(</span><span class="s2">&quot;/some/where/iris.arff&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converters</span><span class="o">.</span><span class="n">save_any_file</span><span class="p">(</span><span class="s2">&quot;/some/where/else/iris.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -155,11 +155,11 @@ the loader/saver based on the file extension:</p>
 <p>The <cite>Filter</cite> class from the <cite>weka.filters</cite> module allows you to filter datasets, e.g.,
 removing the last attribute using the <cite>Remove</cite> filter:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.filters</span> <span class="kn">import</span> <span class="n">Filter</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>                       <span class="c"># previously loaded data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">remove</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.filters.unsupervised.attribute.Remove&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-R&quot;</span><span class="p">,</span> <span class="s">&quot;last&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">remove</span><span class="o">.</span><span class="n">inputformat</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>     <span class="c"># let the filter know about the type of data to filter</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered</span> <span class="o">=</span> <span class="n">remove</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>   <span class="c"># filter the data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>                  <span class="c"># output the filtered data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>                       <span class="c1"># previously loaded data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.filters.unsupervised.attribute.Remove&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-R&quot;</span><span class="p">,</span> <span class="s2">&quot;last&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove</span><span class="o">.</span><span class="n">inputformat</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>     <span class="c1"># let the filter know about the type of data to filter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filtered</span> <span class="o">=</span> <span class="n">remove</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>   <span class="c1"># filter the data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>                  <span class="c1"># output the filtered data</span>
 </pre></div>
 </div>
 </div>
@@ -169,26 +169,26 @@ removing the last attribute using the <cite>Remove</cite> filter:</p>
 on a dataset and output the summary and some specific statistics:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span><span class="p">,</span> <span class="n">Evaluation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.core.classes</span> <span class="kn">import</span> <span class="n">Random</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>             <span class="c"># previously loaded data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">class_is_last</span><span class="p">()</span>   <span class="c"># set class attribute</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-C&quot;</span><span class="p">,</span> <span class="s">&quot;0.3&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">Evaluation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>                     <span class="c"># initialize with priors</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluation</span><span class="o">.</span><span class="n">crossvalidate_model</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">iris_data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">Random</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>  <span class="c"># 10-fold CV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>             <span class="c1"># previously loaded data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">class_is_last</span><span class="p">()</span>   <span class="c1"># set class attribute</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">Evaluation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>                     <span class="c1"># initialize with priors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluation</span><span class="o">.</span><span class="n">crossvalidate_model</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">iris_data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">Random</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>  <span class="c1"># 10-fold CV</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;pctCorrect: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">percent_correct</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;incorrect: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">incorrect</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;pctCorrect: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">percent_correct</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;incorrect: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">incorrect</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Here we train a classifier and output predictions:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>             <span class="c"># previously loaded data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">class_is_last</span><span class="p">()</span>   <span class="c"># set class attribute</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-C&quot;</span><span class="p">,</span> <span class="s">&quot;0.3&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>             <span class="c1"># previously loaded data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">class_is_last</span><span class="p">()</span>   <span class="c1"># set class attribute</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cls</span><span class="o">.</span><span class="n">build_classifier</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">inst</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">pred</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">classify_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">dist</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">distribution_for_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;: label index=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;, class distribution=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: label index=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, class distribution=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -197,17 +197,17 @@ on a dataset and output the summary and some specific statistics:</p>
 <p>In the following an example on how to build a <cite>SimpleKMeans</cite> (with 3 clusters)
 using a previously loaded dataset without a class attribute:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.clusterers</span> <span class="kn">import</span> <span class="n">Clusterer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span> <span class="c"># previously loaded dataset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clusterer</span> <span class="o">=</span> <span class="n">Clusterer</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.clusterers.SimpleKMeans&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-N&quot;</span><span class="p">,</span> <span class="s">&quot;3&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># previously loaded dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clusterer</span> <span class="o">=</span> <span class="n">Clusterer</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.clusterers.SimpleKMeans&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-N&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clusterer</span><span class="o">.</span><span class="n">build_clusterer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">clusterer</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Once a clusterer is built, it can be used to cluster Instance objects:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">cl</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">cluster_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>  <span class="c"># 0-based cluster index</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dist</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">distribution_for_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>   <span class="c"># cluster membership distribution</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;cluster=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;, distribution=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">cl</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">cluster_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>  <span class="c1"># 0-based cluster index</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">dist</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">distribution_for_instance</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>   <span class="c1"># cluster membership distribution</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;cluster=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, distribution=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -216,16 +216,16 @@ using a previously loaded dataset without a class attribute:</p>
 <p>You can perform attribute selection using <cite>BestFirst</cite> as search algorithm and
 <cite>CfsSubsetEval</cite> as evaluator as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.attribute_selection</span> <span class="kn">import</span> <span class="n">ASSearch</span><span class="p">,</span> <span class="n">ASEvaluation</span><span class="p">,</span> <span class="n">AttributeSelection</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>   <span class="c"># previously loaded dataset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span> <span class="o">=</span> <span class="n">ASSearch</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.attributeSelection.BestFirst&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-D&quot;</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;-N&quot;</span><span class="p">,</span> <span class="s">&quot;5&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">ASEvaluation</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.attributeSelection.CfsSubsetEval&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-P&quot;</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;-E&quot;</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># previously loaded dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span> <span class="o">=</span> <span class="n">ASSearch</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.attributeSelection.BestFirst&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-D&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;-N&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">ASEvaluation</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.attributeSelection.CfsSubsetEval&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-P&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;-E&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attsel</span> <span class="o">=</span> <span class="n">AttributeSelection</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attsel</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attsel</span><span class="o">.</span><span class="n">evaluator</span><span class="p">(</span><span class="n">evaluator</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attsel</span><span class="o">.</span><span class="n">select_attributes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;# attributes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">attsel</span><span class="o">.</span><span class="n">number_attributes_selected</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;attributes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">attsel</span><span class="o">.</span><span class="n">selected_attributes</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;result string:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">attsel</span><span class="o">.</span><span class="n">results_string</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;# attributes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">attsel</span><span class="o">.</span><span class="n">number_attributes_selected</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;attributes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">attsel</span><span class="o">.</span><span class="n">selected_attributes</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;result string:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">attsel</span><span class="o">.</span><span class="n">results_string</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -233,8 +233,8 @@ using a previously loaded dataset without a class attribute:</p>
 <h2>Associators<a class="headerlink" href="#associators" title="Permalink to this headline">¶</a></h2>
 <p>Associators, like <cite>Apriori</cite>, can be built and output like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.associations</span> <span class="kn">import</span> <span class="n">Associator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>   <span class="c"># previously loaded dataset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">associator</span> <span class="o">=</span> <span class="n">Associator</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.associations.Apriori&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;-N&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">,</span> <span class="s">&quot;-I&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># previously loaded dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">associator</span> <span class="o">=</span> <span class="n">Associator</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.associations.Apriori&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-N&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="s2">&quot;-I&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">associator</span><span class="o">.</span><span class="n">build_associations</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">associator</span><span class="p">)</span>
 </pre></div>
@@ -246,10 +246,10 @@ using a previously loaded dataset without a class attribute:</p>
 <p>Here we just save a trained classifier to a file, load it again from disk and output the model:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.serialization</span> <span class="kn">as</span> <span class="nn">serialization</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="o">...</span>  <span class="c"># previously built classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">serialization</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="n">classifier</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># previously built classifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">serialization</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="n">classifier</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&quot;/some/where/out.model&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">classifier2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -258,11 +258,11 @@ whether test data is compatible). This is done as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.serialization</span> <span class="kn">as</span> <span class="nn">serialization</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.core.dataset</span> <span class="kn">import</span> <span class="n">Instances</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="o">...</span>  <span class="c"># previously built Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span> <span class="c"># previously loaded/generated Instances</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">serialization</span><span class="o">.</span><span class="n">write_all</span><span class="p">(</span><span class="s">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">classifier</span><span class="p">,</span> <span class="n">Instances</span><span class="o">.</span><span class="n">template_instances</span><span class="p">(</span><span class="n">data</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># previously built Classifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># previously loaded/generated Instances</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">serialization</span><span class="o">.</span><span class="n">write_all</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">classifier</span><span class="p">,</span> <span class="n">Instances</span><span class="o">.</span><span class="n">template_instances</span><span class="p">(</span><span class="n">data</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">objects</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">read_all</span><span class="p">(</span><span class="s">&quot;/some/where/out.model&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">objects</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">read_all</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">objects</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data2</span> <span class="o">=</span> <span class="n">Instances</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">objects</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">classifier2</span><span class="p">)</span>
@@ -277,10 +277,10 @@ whether test data is compatible). This is done as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.experiments</span> <span class="kn">import</span> <span class="n">SimpleCrossValidationExperiment</span><span class="p">,</span> <span class="n">SimpleRandomSplitExperiment</span><span class="p">,</span> <span class="n">Tester</span><span class="p">,</span> <span class="n">ResultMatrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.converters</span> <span class="kn">as</span> <span class="nn">converters</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># configure experiment</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;iris.arff&quot;</span><span class="p">,</span> <span class="s">&quot;anneal.arff&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifiers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.rules.ZeroR&quot;</span><span class="p">),</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="s">&quot;results-cv.arff&quot;</span>   <span class="c"># store results for later analysis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># configure experiment</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;iris.arff&quot;</span><span class="p">,</span> <span class="s2">&quot;anneal.arff&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifiers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.rules.ZeroR&quot;</span><span class="p">),</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="s2">&quot;results-cv.arff&quot;</span>   <span class="c1"># store results for later analysis</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">SimpleCrossValidationExperiment</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">classification</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">runs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -290,13 +290,13 @@ whether test data is compatible). This is done as follows:</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">result</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># evaluate previous run</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># evaluate previous run</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">converters</span><span class="o">.</span><span class="n">loader_for_file</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>   <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix</span> <span class="o">=</span> <span class="n">ResultMatrix</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.experiment.ResultMatrixPlainText&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.experiment.PairedCorrectedTTester&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix</span> <span class="o">=</span> <span class="n">ResultMatrix</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.experiment.ResultMatrixPlainText&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.experiment.PairedCorrectedTTester&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span><span class="o">.</span><span class="n">resultmatrix</span> <span class="o">=</span> <span class="n">matrix</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">comparison_col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">attribute_by_name</span><span class="p">(</span><span class="s">&quot;Percent_correct&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">comparison_col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">attribute_by_name</span><span class="p">(</span><span class="s2">&quot;Percent_correct&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span><span class="o">.</span><span class="n">instances</span> <span class="o">=</span> <span class="n">data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">comparison_col</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">multi_resultset_full</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">comparison_col</span><span class="p">))</span>
@@ -306,10 +306,10 @@ whether test data is compatible). This is done as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.experiments</span> <span class="kn">import</span> <span class="n">SimpleCrossValidationExperiment</span><span class="p">,</span> <span class="n">SimpleRandomSplitExperiment</span><span class="p">,</span> <span class="n">Tester</span><span class="p">,</span> <span class="n">ResultMatrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.converters</span> <span class="kn">as</span> <span class="nn">converters</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># configure experiment</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;bolts.arff&quot;</span><span class="p">,</span> <span class="s">&quot;bodyfat.arff&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifiers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.rules.ZeroR&quot;</span><span class="p">),</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.functions.LinearRegression&quot;</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="s">&quot;results-rs.arff&quot;</span>   <span class="c"># store results for later analysis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># configure experiment</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bolts.arff&quot;</span><span class="p">,</span> <span class="s2">&quot;bodyfat.arff&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifiers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.rules.ZeroR&quot;</span><span class="p">),</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.functions.LinearRegression&quot;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="s2">&quot;results-rs.arff&quot;</span>   <span class="c1"># store results for later analysis</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">SimpleRandomSplitExperiment</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">classification</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">runs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -320,13 +320,13 @@ whether test data is compatible). This is done as follows:</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">result</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># evaluate previous run</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># evaluate previous run</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">converters</span><span class="o">.</span><span class="n">loader_for_file</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>   <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix</span> <span class="o">=</span> <span class="n">ResultMatrix</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.experiment.ResultMatrixPlainText&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.experiment.PairedCorrectedTTester&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix</span> <span class="o">=</span> <span class="n">ResultMatrix</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.experiment.ResultMatrixPlainText&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.experiment.PairedCorrectedTTester&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span><span class="o">.</span><span class="n">resultmatrix</span> <span class="o">=</span> <span class="n">matrix</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">comparison_col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">attribute_by_name</span><span class="p">(</span><span class="s">&quot;Correlation_coefficient&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">comparison_col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">attribute_by_name</span><span class="p">(</span><span class="s2">&quot;Correlation_coefficient&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tester</span><span class="o">.</span><span class="n">instances</span> <span class="o">=</span> <span class="n">data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">comparison_col</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">multi_resultset_full</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">comparison_col</span><span class="p">))</span>
@@ -336,26 +336,26 @@ whether test data is compatible). This is done as follows:</p>
 <div class="section" id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
 <p>Packages can be listed, installed and uninstalled using the <cite>weka.core.packages</cite> module:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># refresh package cache</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># refresh package cache</span>
 <span class="kn">import</span> <span class="nn">weka.core.packages</span> <span class="kn">as</span> <span class="nn">packages</span>
 <span class="n">packages</span><span class="o">.</span><span class="n">refresh_cache</span><span class="p">()</span>
 
-<span class="c"># list all packages (name and URL)</span>
+<span class="c1"># list all packages (name and URL)</span>
 <span class="n">items</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">all_packages</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 
-<span class="c"># install CLOPE package</span>
-<span class="n">packages</span><span class="o">.</span><span class="n">install_package</span><span class="p">(</span><span class="s">&quot;CLOPE&quot;</span><span class="p">)</span>
+<span class="c1"># install CLOPE package</span>
+<span class="n">packages</span><span class="o">.</span><span class="n">install_package</span><span class="p">(</span><span class="s2">&quot;CLOPE&quot;</span><span class="p">)</span>
 <span class="n">items</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">installed_packages</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 
-<span class="c"># uninstall CLOPE package</span>
-<span class="n">packages</span><span class="o">.</span><span class="n">uninstall_package</span><span class="p">(</span><span class="s">&quot;CLOPE&quot;</span><span class="p">)</span>
+<span class="c1"># uninstall CLOPE package</span>
+<span class="n">packages</span><span class="o">.</span><span class="n">uninstall_package</span><span class="p">(</span><span class="s2">&quot;CLOPE&quot;</span><span class="p">)</span>
 <span class="n">items</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">installed_packages</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -365,7 +365,7 @@ whether test data is compatible). This is done as follows:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
@@ -395,12 +395,14 @@ whether test data is compatible). This is done as follows:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="optionhandling.html"
                         title="next chapter">Option handling</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/api.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -417,7 +419,7 @@ whether test data is compatible). This is done as follows:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -432,12 +434,12 @@ whether test data is compatible). This is done as follows:</p>
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              >previous</a> |</li>
-        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

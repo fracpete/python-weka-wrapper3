@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Flow &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    <title>Flow &mdash; python-weka-wrapper3 0.1.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.2',
+        VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="top" title="python-weka-wrapper3 0.1.3 documentation" href="index.html" />
     <link rel="next" title="weka package" href="weka.html" />
     <link rel="prev" title="Examples" href="examples.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,14 +43,14 @@
         <li class="right" >
           <a href="examples.html" title="Examples"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="flow">
 <h1>Flow<a class="headerlink" href="#flow" title="Permalink to this headline">¶</a></h1>
@@ -190,73 +190,73 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 <span class="kn">from</span> <span class="nn">weka.flow.transformer</span> <span class="kn">import</span> <span class="n">LoadDataset</span><span class="p">,</span> <span class="n">ClassSelector</span><span class="p">,</span> <span class="n">CrossValidate</span><span class="p">,</span> <span class="n">EvaluationSummary</span>
 <span class="kn">from</span> <span class="nn">weka.flow.sink</span> <span class="kn">import</span> <span class="n">Console</span><span class="p">,</span> <span class="n">ClassifierErrors</span><span class="p">,</span> <span class="n">ROC</span><span class="p">,</span> <span class="n">PRC</span>
 
-<span class="n">flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;cross-validate classifier&quot;</span><span class="p">)</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;cross-validate classifier&quot;</span><span class="p">)</span>
 
 <span class="n">filesupplier</span> <span class="o">=</span> <span class="n">FileSupplier</span><span class="p">()</span>
-<span class="n">filesupplier</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;files&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;/some/where/iris.arff&quot;</span><span class="p">]</span>
+<span class="n">filesupplier</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/some/where/iris.arff&quot;</span><span class="p">]</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filesupplier</span><span class="p">)</span>
 
 <span class="n">loaddataset</span> <span class="o">=</span> <span class="n">LoadDataset</span><span class="p">()</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loaddataset</span><span class="p">)</span>
 
 <span class="n">select</span> <span class="o">=</span> <span class="n">ClassSelector</span><span class="p">()</span>
-<span class="n">select</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;last&quot;</span>
+<span class="n">select</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;last&quot;</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
 
 <span class="n">cv</span> <span class="o">=</span> <span class="n">CrossValidate</span><span class="p">()</span>
-<span class="n">cv</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;setup&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;setup&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv</span><span class="p">)</span>
 
 <span class="n">branch</span> <span class="o">=</span> <span class="n">Branch</span><span class="p">()</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">branch</span><span class="p">)</span>
 
 <span class="n">seqsum</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">()</span>
-<span class="n">seqsum</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;summary&quot;</span>
+<span class="n">seqsum</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;summary&quot;</span>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqsum</span><span class="p">)</span>
 
 <span class="n">summary</span> <span class="o">=</span> <span class="n">EvaluationSummary</span><span class="p">()</span>
-<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;=== J48/iris ===&quot;</span>
-<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;complexity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;=== J48/iris ===&quot;</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;complexity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">seqsum</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
 
 <span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
 <span class="n">seqsum</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
 
 <span class="n">seqerr</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">()</span>
-<span class="n">seqerr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;errors&quot;</span>
+<span class="n">seqerr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;errors&quot;</span>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqerr</span><span class="p">)</span>
 
 <span class="n">errors</span> <span class="o">=</span> <span class="n">ClassifierErrors</span><span class="p">()</span>
-<span class="n">errors</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">errors</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="n">seqerr</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
 
 <span class="n">seqroc</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">()</span>
-<span class="n">seqroc</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;roc&quot;</span>
+<span class="n">seqroc</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;roc&quot;</span>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqroc</span><span class="p">)</span>
 
 <span class="n">roc</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">()</span>
-<span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;class_index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;class_index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">seqroc</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc</span><span class="p">)</span>
 
 <span class="n">seqprc</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">()</span>
-<span class="n">seqprc</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;prc&quot;</span>
+<span class="n">seqprc</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;prc&quot;</span>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqprc</span><span class="p">)</span>
 
 <span class="n">prc</span> <span class="o">=</span> <span class="n">PRC</span><span class="p">()</span>
-<span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;class_index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;class_index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">seqprc</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prc</span><span class="p">)</span>
 
-<span class="c"># run the flow</span>
+<span class="c1"># run the flow</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error executing flow:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error executing flow:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error setting up flow:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error setting up flow:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">wrapup</span><span class="p">()</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
 </pre></div>
@@ -319,7 +319,7 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
@@ -346,12 +346,14 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
   <h4>Next topic</h4>
   <p class="topless"><a href="weka.html"
                         title="next chapter">weka package</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/flow.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/flow.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -368,7 +370,7 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -383,12 +385,12 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
         <li class="right" >
           <a href="examples.html" title="Examples"
              >previous</a> |</li>
-        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

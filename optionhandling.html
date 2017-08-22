@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Option handling &mdash; python-weka-wrapper3 0.1.2 documentation</title>
+    <title>Option handling &mdash; python-weka-wrapper3 0.1.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.2',
+        VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="python-weka-wrapper3 0.1.2 documentation" href="index.html" />
+    <link rel="top" title="python-weka-wrapper3 0.1.3 documentation" href="index.html" />
     <link rel="next" title="virtualenv" href="virtualenv.html" />
     <link rel="prev" title="API" href="api.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,14 +43,14 @@
         <li class="right" >
           <a href="api.html" title="API"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="option-handling">
 <h1>Option handling<a class="headerlink" href="#option-handling" title="Permalink to this headline">¶</a></h1>
@@ -70,26 +70,26 @@ in double quotes:</p>
 </div>
 <p>It generates Python code that initializes a list of strings:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">options</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">&quot;weka.classifiers.meta.FilteredClassifier&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-F&quot;</span><span class="p">,</span>
-    <span class="s">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-W&quot;</span><span class="p">,</span>
-    <span class="s">&quot;weka.classifiers.functions.SMO&quot;</span><span class="p">,</span>
-    <span class="s">&quot;--&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-C&quot;</span><span class="p">,</span>
-    <span class="s">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-L&quot;</span><span class="p">,</span>
-    <span class="s">&quot;0.001&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-P&quot;</span><span class="p">,</span>
-    <span class="s">&quot;1.0E-12&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-N&quot;</span><span class="p">,</span>
-    <span class="s">&quot;0&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-V&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-1&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-W&quot;</span><span class="p">,</span>
-    <span class="s">&quot;1&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-K&quot;</span><span class="p">,</span>
-    <span class="s">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span><span class="p">]</span>
+    <span class="s2">&quot;weka.classifiers.meta.FilteredClassifier&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-F&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-W&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weka.classifiers.functions.SMO&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-L&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;0.001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-P&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1.0E-12&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-N&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-V&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-W&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-K&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -97,11 +97,11 @@ in double quotes:</p>
 <h2>Joining<a class="headerlink" href="#joining" title="Permalink to this headline">¶</a></h2>
 <p>In order to generate a correctly double-quoted command-line string from a configuration
 obtained, e.g., from the Weka Explorer, you can use the <cite>-action join</cite> option:</p>
-<div class="highlight-bash"><div class="highlight"><pre>weka.core.class -action join weka.classifiers.meta.FilteredClassifier -F <span class="s2">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span> -W weka.classifiers.functions.SMO -- -C 1.0 -L 0.001 -P 1.0E-12 -N 0 -V -1 -W 1 -K <span class="s2">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span>
+<div class="highlight-bash"><div class="highlight"><pre>weka.core.class -action join weka.classifiers.meta.FilteredClassifier -F <span class="s2">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span> -W weka.classifiers.functions.SMO -- -C 1.0 -L 0.001 -P 1.0E-12 -N <span class="m">0</span> -V -1 -W <span class="m">1</span> -K <span class="s2">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span>
 </pre></div>
 </div>
 <p>This generates the following Python code:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cmdline</span> <span class="o">=</span> <span class="s">&quot;weka.classifiers.meta.FilteredClassifier -F </span><span class="se">\&quot;</span><span class="s">weka.filters.unsupervised.attribute.RemoveType -T string</span><span class="se">\&quot;</span><span class="s"> -W weka.classifiers.functions.SMO -- -C 1.0 -L 0.001 -P 1.0E-12 -N 0 -V -1 -W 1 -K </span><span class="se">\&quot;</span><span class="s">weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007</span><span class="se">\&quot;</span><span class="s">&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cmdline</span> <span class="o">=</span> <span class="s2">&quot;weka.classifiers.meta.FilteredClassifier -F </span><span class="se">\&quot;</span><span class="s2">weka.filters.unsupervised.attribute.RemoveType -T string</span><span class="se">\&quot;</span><span class="s2"> -W weka.classifiers.functions.SMO -- -C 1.0 -L 0.001 -P 1.0E-12 -N 0 -V -1 -W 1 -K </span><span class="se">\&quot;</span><span class="s2">weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -109,32 +109,32 @@ obtained, e.g., from the Weka Explorer, you can use the <cite>-action join</cite
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
 <p>If you want to create Python code that instantiates the class and sets its options, then
 you can use the <cite>-action code</cite> option:</p>
-<div class="highlight-bash"><div class="highlight"><pre>weka.core.class -action code weka.classifiers.meta.FilteredClassifier -F <span class="s2">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span> -W weka.classifiers.functions.SMO -- -C 1.0 -L 0.001 -P 1.0E-12 -N 0 -V -1 -W 1 -K <span class="s2">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span>
+<div class="highlight-bash"><div class="highlight"><pre>weka.core.class -action code weka.classifiers.meta.FilteredClassifier -F <span class="s2">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span> -W weka.classifiers.functions.SMO -- -C 1.0 -L 0.001 -P 1.0E-12 -N <span class="m">0</span> -V -1 -W <span class="m">1</span> -K <span class="s2">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span>
 </pre></div>
 </div>
 <p>This generates the following code, instantiating an <cite>OptionHandler</cite> object
 and setting its options:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">options</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">&quot;-F&quot;</span><span class="p">,</span>
-    <span class="s">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-W&quot;</span><span class="p">,</span>
-    <span class="s">&quot;weka.classifiers.functions.SMO&quot;</span><span class="p">,</span>
-    <span class="s">&quot;--&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-C&quot;</span><span class="p">,</span>
-    <span class="s">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-L&quot;</span><span class="p">,</span>
-    <span class="s">&quot;0.001&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-P&quot;</span><span class="p">,</span>
-    <span class="s">&quot;1.0E-12&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-N&quot;</span><span class="p">,</span>
-    <span class="s">&quot;0&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-V&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-1&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-W&quot;</span><span class="p">,</span>
-    <span class="s">&quot;1&quot;</span><span class="p">,</span>
-    <span class="s">&quot;-K&quot;</span><span class="p">,</span>
-    <span class="s">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span><span class="p">]</span>
-<span class="n">handler</span> <span class="o">=</span> <span class="n">OptionHandler</span><span class="p">(</span><span class="n">JavaObject</span><span class="o">.</span><span class="n">new_instance</span><span class="p">(</span><span class="s">&quot;weka.classifiers.meta.FilteredClassifier&quot;</span><span class="p">))</span>
+    <span class="s2">&quot;-F&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weka.filters.unsupervised.attribute.RemoveType -T string&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-W&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weka.classifiers.functions.SMO&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-L&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;0.001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-P&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1.0E-12&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-N&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-V&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-W&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;-K&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007&quot;</span><span class="p">]</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">OptionHandler</span><span class="p">(</span><span class="n">JavaObject</span><span class="o">.</span><span class="n">new_instance</span><span class="p">(</span><span class="s2">&quot;weka.classifiers.meta.FilteredClassifier&quot;</span><span class="p">))</span>
 <span class="n">handler</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
 </pre></div>
 </div>
@@ -145,7 +145,7 @@ and setting its options:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
@@ -166,12 +166,14 @@ and setting its options:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="virtualenv.html"
                         title="next chapter">virtualenv</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/optionhandling.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/optionhandling.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -188,7 +190,7 @@ and setting its options:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -203,12 +205,12 @@ and setting its options:</p>
         <li class="right" >
           <a href="api.html" title="API"
              >previous</a> |</li>
-        <li><a href="index.html">python-weka-wrapper3 0.1.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

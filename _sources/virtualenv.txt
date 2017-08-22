@@ -70,3 +70,10 @@ Troubleshooting
      $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/
      $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/
 
+* Based on `this post https://askubuntu.com/a/785506`_ do the following to install
+  matplotlib with tkinter support:
+
+  .. code-block:: bash
+
+     sudo apt install tk-dev
+     /my/virtualenv/dir/bin/pip3 --no-cache-dir install -U --force-reinstall matplotlib
