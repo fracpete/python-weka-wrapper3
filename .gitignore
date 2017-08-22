@@ -67,3 +67,6 @@ docs/_build/
 build
 dist
 
+# virtualenv
+venv
+
