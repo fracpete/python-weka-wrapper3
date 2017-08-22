@@ -51,7 +51,7 @@ def download_weka():
     """
     Downloads the Weka jar from github associated with this release if nececssary.
     """
-    url = "https://github.com/fracpete/python-weka-wrapper3/raw/dc784ac41e1ff666010df8a2ce7bc9800948ef26/python/weka/lib/weka.jar"
+    url = "https://github.com/fracpete/python-weka-wrapper3/raw/a3f24d02205168ac12de9ec14be3465cd4882006/python/weka/lib/weka.jar"
     outfile = os.path.join(os.path.dirname(__file__), "python", "weka", "lib", "weka.jar")
     if not os.path.exists(outfile):
         if not download_file(url, outfile):
