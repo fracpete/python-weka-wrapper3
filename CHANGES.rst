@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.3 (????-??-??)
+0.1.3 (2017-08-23)
 ------------------
 
 - added `check_for_modified_class_attribute` method to `FilterClassifier` class
@@ -12,7 +12,9 @@ Changelog
   `Classifier(cls=".J48")`
 - `jvm.start(system_cp=True)` no longer fails with a `KeyError: 'CLASSPATH'` if
   there is no `CLASSPATH` environment variable defined
-- ...
+- Libraries `mtl.jar`, `core.jar` and `arpack_combined_all.jar` were added as is
+  to the `weka.jar` in the 3.9.1 release instead of adding their content to it.
+  Repackaged `weka.jar` to fix this issue (https://github.com/fracpete/python-weka-wrapper3/issues/5)
 
 
 0.1.2 (2017-01-04)
