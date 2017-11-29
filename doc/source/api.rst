@@ -158,7 +158,7 @@ on a dataset and output the summary and some specific statistics:
    >>> data.class_is_last()   # set class attribute
    >>> classifier = Classifier(classname="weka.classifiers.trees.J48", options=["-C", "0.3"])
    >>> evaluation = Evaluation(data)                     # initialize with priors
-   >>> evaluation.crossvalidate_model(classifier, iris_data, 10, Random(42))  # 10-fold CV
+   >>> evaluation.crossvalidate_model(classifier, data, 10, Random(42))  # 10-fold CV
    >>> print(evaluation.summary())
    >>> print("pctCorrect: " + str(evaluation.percent_correct))
    >>> print("incorrect: " + str(evaluation.incorrect))
