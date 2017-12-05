@@ -1,33 +1,32 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Flow &mdash; python-weka-wrapper3 0.1.3 documentation</title>
-    
+    <title>Flow &#8212; python-weka-wrapper3 0.1.3 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="python-weka-wrapper3 0.1.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="weka package" href="weka.html" />
     <link rel="prev" title="Examples" href="examples.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,7 +42,7 @@
         <li class="right" >
           <a href="examples.html" title="Examples"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -54,7 +53,7 @@
             
   <div class="section" id="flow">
 <h1>Flow<a class="headerlink" href="#flow" title="Permalink to this headline">¶</a></h1>
-<p>The flow components of <em>python-weka-wrapper3</em> are not related to Weka&#8217;s KnowledgeFlow. Instead, they were
+<p>The flow components of <em>python-weka-wrapper3</em> are not related to Weka’s KnowledgeFlow. Instead, they were
 inspired by the <a class="reference external" href="https://adams.cms.waikato.ac.nz/">ADAMS workflow engine</a>. It is a very simple workflow,
 aimed at automating tasks and easy to extend as well. Instead of linking operators with explicit
 connections, this flow uses a tree structure for implicitly defining how the data is processed.</p>
@@ -63,7 +62,7 @@ connections, this flow uses a tree structure for implicitly defining how the dat
 <p>A workflow component is called an <em>actor</em>. All actors are derived from the <cite>Actor</cite> class,
 but there are four different kinds of actors present:</p>
 <ul class="simple">
-<li><strong>source</strong> actors generate data, but don&#8217;t consume any</li>
+<li><strong>source</strong> actors generate data, but don’t consume any</li>
 <li><strong>transformer</strong> actors consume and generate data, similar to a filter</li>
 <li><strong>sink</strong> actors only consume data, e.g., displaying data or writing to file</li>
 <li><strong>control</strong> actors define how the data is passed around in a flow, e.g., branching</li>
@@ -75,8 +74,8 @@ update and delete these objects.</p>
 <p>For finding out more about a specific actor, and what parameters it offers (via the <cite>config</cite> dictionary
 property), you use one of the following actor methods:</p>
 <ul class="simple">
-<li><strong>print_help()</strong> &#8211; outputs a description of actor and its options on stdout</li>
-<li><strong>generate_help()</strong> &#8211; generates the help string output by <cite>print_help()</cite></li>
+<li><strong>print_help()</strong> – outputs a description of actor and its options on stdout</li>
+<li><strong>generate_help()</strong> – generates the help string output by <cite>print_help()</cite></li>
 </ul>
 <p>Printing the layout of a flow is very simple. Assuming you have a flow variable called <cite>myflow</cite>, you simply
 use the <cite>tree</cite> method to output the structure: <cite>print(myflow.tree)</cite></p>
@@ -163,7 +162,7 @@ incrementing a counter</li>
 for the next one</li>
 <li><strong>Stop</strong> stops the execution of the flow</li>
 <li><strong>Tee</strong> allows to <em>tee</em> off the current token and process it separately in a sub-flow before continuing with
-the processing; optional condition available that determines when a token gets tee&#8217;d off</li>
+the processing; optional condition available that determines when a token gets tee’d off</li>
 <li><strong>Trigger</strong> executes its sub-actors whenever a token passes through (i.e., when the condition evaluates to True)</li>
 </ul>
 </div>
@@ -184,7 +183,7 @@ the processing; optional condition available that determines when a token gets t
 <p>The example scripts are located in the <cite>src/wekaexamples/flow</cite> sub-directory.</p>
 <p>Below is a code snippet for building a flow that cross-validates a classifier on a dataset
 and outputs the evaluation summary and the ROC and PRC curves:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="kn">from</span> <span class="nn">weka.flow.control</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Branch</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="kn">from</span> <span class="nn">weka.flow.source</span> <span class="kn">import</span> <span class="n">FileSupplier</span>
 <span class="kn">from</span> <span class="nn">weka.flow.transformer</span> <span class="kn">import</span> <span class="n">LoadDataset</span><span class="p">,</span> <span class="n">ClassSelector</span><span class="p">,</span> <span class="n">CrossValidate</span><span class="p">,</span> <span class="n">EvaluationSummary</span>
@@ -262,11 +261,11 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 </pre></div>
 </div>
 <p>With the following command you can output the built flow tree:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The above example gets printed like this:</p>
-<div class="highlight-none"><div class="highlight"><pre>Flow &#39;cross-validate classifier&#39;
+<div class="highlight-none"><div class="highlight"><pre><span></span>Flow &#39;cross-validate classifier&#39;
 |-FileSupplier [files: 1]
 |-LoadDataset [incremental: False, custom: False, loader: weka.core.converters.ArffLoader]
 |-ClassSelector [index: last]
@@ -292,9 +291,9 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li><strong>source</strong> &#8211; <cite>weka.flow.source.Source</cite></li>
-<li><strong>transformer</strong> &#8211; <cite>weka.flow.transformer.Transformer</cite></li>
-<li><strong>sink</strong> &#8211; <cite>weka.flow.sink.Sink</cite></li>
+<li><strong>source</strong> – <cite>weka.flow.source.Source</cite></li>
+<li><strong>transformer</strong> – <cite>weka.flow.transformer.Transformer</cite></li>
+<li><strong>sink</strong> – <cite>weka.flow.sink.Sink</cite></li>
 </ul>
 </div></blockquote>
 <ul class="simple">
@@ -306,7 +305,7 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 (see, e.g., <cite>transformer.ClassSelector</cite>)</li>
 <li>override the <cite>setup</cite> method if you require some additional checks (e.g., file actually exists)
 or setup steps (e.g., loading of model from disk); return None if everything OK, otherwise
-the error; don&#8217;t forget to call the super-method.</li>
+the error; don’t forget to call the super-method.</li>
 <li>transformers or sink can check the input data by overriding the <cite>check_input</cite> method</li>
 <li>the actual execution or processing of input data happens in the <cite>do_execute</cite> method;
 return an error string if something failed, otherwise None; sources and transformers
@@ -349,21 +348,18 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/flow.txt"
+      <li><a href="_sources/flow.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -385,12 +381,12 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
         <li class="right" >
           <a href="examples.html" title="Examples"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

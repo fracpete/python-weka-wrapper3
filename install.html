@@ -1,33 +1,32 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Installation &mdash; python-weka-wrapper3 0.1.3 documentation</title>
-    
+    <title>Installation &#8212; python-weka-wrapper3 0.1.3 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="python-weka-wrapper3 0.1.3 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
     <link rel="prev" title="Introduction" href="index.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -43,7 +42,7 @@
         <li class="right" >
           <a href="index.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -74,33 +73,33 @@ on the instructions below, please use the following mailing list:</p>
 the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> <a class="reference external" href="http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html">environment variable</a>
 pointing to the installation directory in order to use <em>python-weka-wrapper3</em>
 library.</p>
-<p><em>Why not OpenJDK?</em> Weka is developed and tested with Oracle&#8217;s JDK/JRE. There is
+<p><em>Why not OpenJDK?</em> Weka is developed and tested with Oracle’s JDK/JRE. There is
 no guarantee that it will work with OpenJDK.</p>
 </div>
 <div class="section" id="ubuntu">
 <h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
 <p>First, you need to be able to compile C/C++ code and Python modules:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ sudo apt-get install build-essential python3-dev
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install build-essential python3-dev
 </pre></div>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>python-weka-wrapper3</em>:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ sudo apt-get install python3-pip python3-numpy
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install python3-pip python3-numpy
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
 graphical output:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ sudo apt-get install python3-pil python3-matplotlib python-pygraphviz
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install python3-pil python3-matplotlib python-pygraphviz
 </pre></div>
 </div>
 <p>Install OpenJDK as well, in order to get all the header files that <em>javabridge</em>
-compiles against (but don&#8217;t use it for starting up JVMs):</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ sudo apt-get install default-jdk
+compiles against (but don’t use it for starting up JVMs):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install default-jdk
 </pre></div>
 </div>
 <p>Finally, you can use <code class="docutils literal"><span class="pre">pip3</span></code> to install the Python packages that are not
 available in the repositories:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ sudo pip3 install javabridge
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo pip3 install javabridge
 $ sudo pip3 install python-weka-wrapper3
 </pre></div>
 </div>
@@ -108,36 +107,36 @@ $ sudo pip3 install python-weka-wrapper3
 <div class="section" id="debian">
 <h2>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h2>
 <p>First, become the superuser:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ su
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ su
 </pre></div>
 </div>
 <p>You need to be able to compile C/C++ code and Python modules:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ apt-get install build-essential python3-dev
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install build-essential python3-dev
 </pre></div>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>`python-weka-wrapper3</em>:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ apt-get install python3-pip python3-numpy
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install python3-pip python3-numpy
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
 graphical output:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ apt-get install python3-imaging python3-matplotlib python-pygraphviz
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install python3-imaging python3-matplotlib python-pygraphviz
 </pre></div>
 </div>
 <p>Download an Oracle JDK and un-tar it in <code class="docutils literal"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal"><span class="pre">/opt/jdk1.7.0_75/</span></code>).
 Export the Java home directory as follows (required for the <em>javabridge</em>
 installation):</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk1.7.0_75/
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk1.7.0_75/
 </pre></div>
 </div>
 <p>Finally, you can use <code class="docutils literal"><span class="pre">pip3</span></code> to install the Python packages that are not
 available in the repositories:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ pip3 install javabridge
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip3 install javabridge
 $ pip3 install python-weka-wrapper3
 </pre></div>
 </div>
-<p>Please note, when using <em>python-weka-wrapper3</em> as a <em>normal</em> user, don&#8217;t forget
+<p>Please note, when using <em>python-weka-wrapper3</em> as a <em>normal</em> user, don’t forget
 to export the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> environment variable as described above (e.g., add it
 to your <code class="docutils literal"><span class="pre">.profile</span></code>).</p>
 </div>
@@ -151,7 +150,7 @@ to your <code class="docutils literal"><span class="pre">.profile</span></code>)
 <li>install pip using <code class="docutils literal"><span class="pre">python</span> <span class="pre">get-pip.py</span></code></li>
 <li>install dev tools using <code class="docutils literal"><span class="pre">yum</span> <span class="pre">groupinstall</span> <span class="pre">&quot;Development</span> <span class="pre">tools&quot;</span></code></li>
 <li>install numpy package</li>
-<li>install python-imaging package (shouldn&#8217;t be necessary)</li>
+<li>install python-imaging package (shouldn’t be necessary)</li>
 <li>install javabridge using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">javabridge</span></code></li>
 <li>install python-weka-wrapper3 using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">python-weka-wrapper3</span></code></li>
 </ul>
@@ -176,7 +175,7 @@ graphical output and plots:</p>
 </ul>
 <p>Once these libraries are installed, you can use <code class="docutils literal"><span class="pre">pip3</span></code> to install the remaining
 Python packages:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ sudo pip3 install javabridge
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo pip3 install javabridge
 $ sudo pip3 install python-weka-wrapper3
 </pre></div>
 </div>
@@ -185,7 +184,7 @@ $ sudo pip3 install python-weka-wrapper3
 <h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a></h2>
 <p>Please follow <a class="reference external" href="http://docs.python-guide.org/en/latest/starting/install/osx/">these</a>
 general instructions for installing Python.</p>
-<p>In order to compile C/C++ code, you need to install <em>Xcode</em> through Apple&#8217;s App
+<p>In order to compile C/C++ code, you need to install <em>Xcode</em> through Apple’s App
 Store. Once installed you can install the <em>XCode command-line tools</em> by issuing
 the command <code class="docutils literal"><span class="pre">xcode-select</span> <span class="pre">--install</span></code> in a terminal.</p>
 <p>Also, install <em>graphviz</em> using homebrew (<code class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">pkg-config</span></code> and
@@ -199,7 +198,7 @@ the command <code class="docutils literal"><span class="pre">xcode-select</span>
 </ul>
 <p>Once these libraries are installed, you can use <code class="docutils literal"><span class="pre">pip</span></code> to install the remaining
 Python packages:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ pip3 install javabridge
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip3 install javabridge
 $ pip3 install python-weka-wrapper3
 </pre></div>
 </div>
@@ -247,7 +246,7 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 for Python 3.4/3.5 (<em>cp34/cp34</em>) and your bitness (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">matplotlib-X.Y.Z.whl</span></code></li>
 </ul>
-<div class="highlight-bash"><div class="highlight"><pre>&gt; pip install python-weka-wrapper
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; pip install python-weka-wrapper
 </pre></div>
 </div>
 <p>For being able to compile libraries on Windows, you need the
@@ -266,7 +265,7 @@ page on Github and download the <em>Source code</em> archive (zip or tar.gz) of 
 release that you want to install. After the download finishes, decompress the
 archive. Open a terminal/command prompt and execute the following command
 from within the directory with the <cite>setup.py</cite> file:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ python3 setup.py install
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 setup.py install
 </pre></div>
 </div>
 <p>Check out the section on <em>virtualenv</em> as well, if you would rather install it
@@ -275,12 +274,12 @@ in a <em>disposable</em> location.</p>
 <div class="section" id="gtihub">
 <h3>Gtihub<a class="headerlink" href="#gtihub" title="Permalink to this headline">¶</a></h3>
 <p>Clone the Github repository as follows:</p>
-<div class="highlight-bash"><div class="highlight"><pre>git clone https://github.com/fracpete/python-weka-wrapper3.git
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/fracpete/python-weka-wrapper3.git
 </pre></div>
 </div>
 <p>Change into the newly created directory and install the library using the
 following command:</p>
-<div class="highlight-bash"><div class="highlight"><pre>$ python3 setup.py install
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 setup.py install
 </pre></div>
 </div>
 <p>Check out the section on <em>virtualenv</em> as well, if you would rather install it
@@ -327,21 +326,18 @@ in a <em>disposable</em> location.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/install.txt"
+      <li><a href="_sources/install.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -363,12 +359,12 @@ in a <em>disposable</em> location.</p>
         <li class="right" >
           <a href="index.html" title="Introduction"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+        &#169; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>
