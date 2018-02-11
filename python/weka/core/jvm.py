@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # jvm.py
-# Copyright (C) 2014-2017 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import os
@@ -39,37 +39,6 @@ def add_bundled_jars():
     for l in glob.glob(libdir + os.sep + "*.jar"):
         if l.lower().find("-src.") == -1:
             javabridge.JARS.append(str(l))
-
-
-def add_weka_packages(alt_path = None):
-    """
-    Adds the jars from all Weka packages to the JVM's classpath.
-
-    :param alt_path: an alternative weka home path
-    :type alt_path: str
-    """
-    if alt_path is None:
-        prefix = os.getenv("WEKA_HOME", "~" + os.sep + "wekafiles")
-    else:
-        prefix = alt_path
-    package_dir = os.path.expanduser(prefix + os.sep + "packages")
-    if not os.path.exists(package_dir):
-        logger.error("package_dir not found: " + package_dir)
-        return
-    else:
-        logger.debug("package_dir=" + package_dir)
-    # traverse packages
-    for p in os.listdir(package_dir):
-        if os.path.isdir(package_dir + os.sep + p):
-            directory = package_dir + os.sep + p
-            logger.debug("  directory=" + directory)
-            # inspect package directory
-            for l in os.listdir(directory):
-                if l.lower().endswith(".jar"):
-                    javabridge.JARS.append(directory + os.sep + l)
-                if l == "lib":
-                    for m in glob.glob(directory + os.sep + "lib" + os.sep + "*.jar"):
-                        javabridge.JARS.append(m)
 
 
 def add_system_classpath():
@@ -113,15 +82,6 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
         logger.debug("Adding bundled jars")
         add_bundled_jars()
 
-    if packages is not None:
-        if isinstance(packages, bool):
-            if packages:
-                logger.debug("Adding Weka packages")
-                add_weka_packages()
-        else:
-            logger.debug("Adding Weka packages, using: " + packages)
-            add_weka_packages(packages)
-
     if system_cp:
         logger.debug("Adding system classpath")
         add_system_classpath()
@@ -129,9 +89,37 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
     logger.debug("Classpath=" + str(javabridge.JARS))
     logger.debug("MaxHeapSize=" + ("default" if (max_heap_size is None) else max_heap_size))
 
-    javabridge.start_vm(run_headless=True, max_heap_size=max_heap_size)
+    args = []
+    weka_home = None
+    if packages is not None:
+        if isinstance(packages, bool):
+            if packages:
+                logger.debug("Package support enabled")
+            else:
+                logger.debug("Package support disabled")
+                args.append("-Dweka.packageManager.loadPackages=false")
+        if isinstance(packages, str):
+            if os.path.exists(packages) and os.path.isdir(packages):
+                logger.debug("Using alternative Weka home directory: " + packages)
+                weka_home = packages
+            else:
+                logger.warning("Invalid Weka home: " + packages)
+
+    javabridge.start_vm(args=args, run_headless=True, max_heap_size=max_heap_size)
     javabridge.attach()
     started = True
+
+    if weka_home is not None:
+        from weka.core.classes import Environment
+        env = Environment.system_wide()
+        logger.debug("Using alternative Weka home directory: " + packages)
+        env.add_variable("WEKA_HOME", weka_home)
+
+    # initialize package manager
+    javabridge.static_call(
+        "Lweka/core/WekaPackageManager;", "loadPackages",
+        "(Z)V",
+        False)
 
 
 def stop():
