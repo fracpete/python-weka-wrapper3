@@ -92,10 +92,10 @@ weka.core.tokenizers module
     :undoc-members:
     :show-inheritance:
 
-weka.core.types module
-----------------------
+weka.core.typeconv module
+-------------------------
 
-.. automodule:: weka.core.types
+.. automodule:: weka.core.typeconv
     :members:
     :undoc-members:
     :show-inheritance:
