@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2017 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
 
 import os
 import inspect
@@ -593,6 +593,85 @@ class JavaObject(JSONObject):
         except JavaException as e:
             print("Failed to instantiate " + classname + "/" + jni_classname + ": " + str(e))
             return None
+
+
+class Environment(JavaObject):
+    """
+    Wraps around weka.core.Environment
+    """
+
+    def __init__(self, jobject=None):
+        """
+        Initializes the object.
+
+        :param jobject: the environment java object to use
+        :type jobject: JB_Object
+        """
+        if jobject is None:
+            jobject = javabridge.make_instance("Lweka/core/Environment;", "()V")
+        else:
+            Environment.enforce_type(jobject, "weka.core.Environment")
+        super(Environment, self).__init__(jobject)
+
+    def add_variable(self, key, value, system_wide=False):
+        """
+        Adds the environment variable.
+
+        :param key: the name of the variable
+        :type key: str
+        :param value: the value
+        :type value: str
+        :param system_wide: whether to add the variable system wide
+        :type system_wide: bool
+        """
+        if system_wide:
+            javabridge.call(self.jobject, "addVariableSystemWide", "(Ljava/lang/String;Ljava/lang/String;)V", key, value)
+        else:
+            javabridge.call(self.jobject, "addVariable", "(Ljava/lang/String;Ljava/lang/String;)V", key, value)
+
+    def remove_variable(self, key):
+        """
+        Adds the environment variable.
+
+        :param key: the name of the variable
+        :type key: str
+        """
+        javabridge.call(self.jobject, "removeVariable", "(Ljava/lang/String;)V", key)
+
+    def variable_value(self, key):
+        """
+        Returns the value of the environment variable.
+
+        :param key: the name of the variable
+        :type key: str
+        :return: the variable value
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getVariableValue", "(Ljava/lang/String;)Ljava/lang/String;", key)
+
+    def variable_names(self):
+        """
+        Returns the names of all environment variables.
+
+        :return: the names of the variables
+        :rtype: list
+        """
+        result = []
+        names = javabridge.call(self.jobject, "getVariableNames", "()Ljava/util/Set;")
+        for name in javabridge.iterate_collection(names):
+            result.append(javabridge.to_string(name))
+        return result
+
+    @classmethod
+    def system_wide(cls):
+        """
+        Returns the system-wide environment.
+
+        ;return: the environment
+        :rtype: Environment
+        """
+        return Environment(jobject=javabridge.static_call(
+            "Lweka/core/Environment;", "getSystemWide", "()Lweka/core/Environment;"))
 
 
 class JavaArrayIterator(object):
