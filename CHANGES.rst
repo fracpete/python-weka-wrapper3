@@ -6,6 +6,8 @@ Changelog
 
 - upgraded to Weka 3.9.2
 - properly initializing package support now, rather than adding package jars to classpath
+- added `weka.core.ClassHelper` Java class for obtaining classes and static fields, as
+  javabridge only uses the system class loader
 
 
 0.1.3 (2017-08-23)

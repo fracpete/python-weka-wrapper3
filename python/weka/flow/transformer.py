@@ -31,7 +31,7 @@ import weka.core.converters as converters
 from weka.core.dataset import Instances, Instance
 from weka.classifiers import Classifier, Evaluation
 from weka.clusterers import Clusterer, ClusterEvaluation
-from weka.core.classes import Random
+from weka.core.classes import Random, is_instance_of
 import weka.flow.conversion as conversion
 
 
@@ -1407,16 +1407,16 @@ class ModelReader(Transformer):
         fname = self.input.payload
         data = serialization.read_all(fname)
         if len(data) == 1:
-            if javabridge.is_instance_of(data[0], "weka/classifiers/Classifier"):
+            if is_instance_of(data[0], "weka.classifiers.Classifier"):
                 cont = ModelContainer(model=Classifier(jobject=data[0]))
-            elif javabridge.is_instance_of(data[0], "weka/clusterers/Clusterer"):
+            elif is_instance_of(data[0], "weka.clusterers.Clusterer"):
                 cont = ModelContainer(model=Clusterer(jobject=data[0]))
             else:
                 return "Unhandled class: " + classes.get_classname(data[0])
         elif len(data) == 2:
-            if javabridge.is_instance_of(data[0], "weka/classifiers/Classifier"):
+            if is_instance_of(data[0], "weka.classifiers.Classifier"):
                 cont = ModelContainer(model=Classifier(jobject=data[0]), header=Instances(data[1]))
-            elif javabridge.is_instance_of(data[0], "weka/clusterers/Clusterer"):
+            elif is_instance_of(data[0], "weka.clusterers.Clusterer"):
                 cont = ModelContainer(model=Clusterer(jobject=data[0]), header=Instances(data[1]))
             else:
                 return "Unhandled class: " + classes.get_classname(data[0])
@@ -1832,7 +1832,7 @@ class Predict(Transformer):
                         model = model.get("Model").jobject
             if model is None:
                 return "No model available from storage or serialized file!"
-            self._is_classifier = javabridge.is_instance_of(model, "weka/classifiers/Classifier")
+            self._is_classifier = is_instance_of(model, "weka.classifiers.Classifier")
             if self._is_classifier:
                 self._model = Classifier(jobject=model)
             else:

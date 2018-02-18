@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2017 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
 
 import sys
 import os
@@ -23,7 +23,8 @@ import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
 import weka.core.classes as classes
 from numpy import *
-from weka.core.classes import JavaObject, join_options, OptionHandler, Random, SelectedTag, Tags, Tag, JavaArray
+from weka.core.classes import JavaObject, join_options, OptionHandler, Random, SelectedTag, Tags, Tag, JavaArray, \
+    is_instance_of
 from weka.core.classes import AbstractParameter
 from weka.core.capabilities import Capabilities
 from weka.core.dataset import Instances, Instance, Attribute
@@ -1873,9 +1874,9 @@ class Evaluation(JavaObject):
         else:
             result = []
             for pred in preds:
-                if javabridge.is_instance_of(pred, "weka/classifiers/evaluation/NominalPrediction"):
+                if is_instance_of(pred, "weka.classifiers.evaluation.NominalPrediction"):
                     result.append(NominalPrediction(pred))
-                elif javabridge.is_instance_of(pred, "weka/classifiers/evaluation/NumericPrediction"):
+                elif is_instance_of(pred, "weka.classifiers.evaluation.NumericPrediction"):
                     result.append(NumericPrediction(pred))
                 else:
                     result.append(Prediction(pred))

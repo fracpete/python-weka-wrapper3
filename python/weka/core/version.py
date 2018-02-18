@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # version.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
 
 from weka.core.classes import JavaObject
 
@@ -24,5 +24,5 @@ def weka_version():
     :return: the version
     :rtype: str
     """
-    jobj = JavaObject(JavaObject.new_instance(classname="weka.core.Version"))
+    jobj = JavaObject(JavaObject.new_instance("weka.core.Version"))
     return str(jobj)

@@ -58,7 +58,33 @@ def get_jclass(classname):
     :return: the class object
     :rtype: JB_Object
     """
-    return javabridge.class_for_name(classname=classname)
+    try:
+        return javabridge.class_for_name(classname)
+    except:
+        return javabridge.static_call(
+            "Lweka/core/ClassHelper;", "forName",
+            "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Class;",
+            javabridge.class_for_name("java.lang.Object"), classname)
+
+
+def get_static_field(classname, fieldname, signature):
+    """
+    Returns the Java object associated with the static field of the specified class.
+
+    :param classname: the classname of the class to get the field from
+    :type classname: str
+    :param fieldname: the name of the field to retriev
+    :type fieldname: str
+    :return: the object
+    :rtype: JB_Object
+    """
+    try:
+        return javabridge.get_static_field(classname, fieldname, signature)
+    except:
+        return javabridge.static_call(
+            "Lweka/core/ClassHelper;", "getStaticField",
+            "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
+            classname, fieldname)
 
 
 def get_classname(obj):
@@ -77,6 +103,48 @@ def get_classname(obj):
         return obj.__module__ + "." + obj.__name__
     else:
         return get_classname(obj.__class__)
+
+
+def is_instance_of(obj, class_or_intf_name):
+    """
+    Checks whether the Java object implements the specified interface or is a subclass of the superclass.
+
+    :param obj: the Java object to check
+    :type obj: JB_Object
+    :param class_or_intf_name: the superclass or interface to check, dot notation or with forward slashes
+    :type class_or_intf_name: str
+    :return: true if either implements interface or subclass of superclass
+    :rtype: bool
+    """
+    class_or_intf_name = class_or_intf_name.replace("/", ".")
+    classname = get_classname(obj)
+    # array? retrieve component type and check that
+    if is_array(obj):
+        jarray = JavaArray(jobject=obj)
+        classname = jarray.component_type()
+    result = javabridge.static_call(
+        "Lweka/core/InheritanceUtils;", "isSubclass",
+        "(Ljava/lang/String;Ljava/lang/String;)Z",
+        class_or_intf_name, classname)
+    if result:
+        return True
+    return javabridge.static_call(
+        "Lweka/core/InheritanceUtils;", "hasInterface",
+        "(Ljava/lang/String;Ljava/lang/String;)Z",
+        class_or_intf_name, classname)
+
+
+def is_array(obj):
+    """
+    Checks whether the Java object is an array.
+
+    :param obj: the Java object to check
+    :type obj: JB_Object
+    :return: whether the object is an array
+    :rtype: bool
+    """
+    cls = javabridge.call(obj, "getClass", "()Ljava/lang/Class;")
+    return javabridge.call(cls, "isArray", "()Z")
 
 
 class Stoppable(object):
@@ -536,62 +604,49 @@ class JavaObject(JSONObject):
         return JavaObject(cls.new_instance(d["class"]))
 
     @classmethod
-    def check_type(cls, jobject, intf_or_class, jni_intf_or_class=None):
+    def check_type(cls, jobject, intf_or_class):
         """
         Returns whether the object implements the specified interface or is a subclass.
-        E.g.: self._check_type('weka.core.OptionHandler', 'Lweka/core/OptionHandler;') 
-        or self._check_type('weka.core.converters.AbstractFileLoader')
 
         :param jobject: the Java object to check
         :type jobject: JB_Object
         :param intf_or_class: the classname in Java notation (eg "weka.core.DenseInstance;")
-        :type jni_intf_or_class: str
+        :type intf_or_class: str
         :return: whether object implements interface or is subclass
         :rtype: bool
         """
-        if jni_intf_or_class is None:
-            if intf_or_class.startswith("."):
-                intf_or_class = complete_classname(intf_or_class)
-            jni_intf_or_class = "L" + intf_or_class.replace(".", "/") + ";"
-        return javabridge.is_instance_of(jobject, jni_intf_or_class)
+        return is_instance_of(jobject, intf_or_class)
         
     @classmethod
-    def enforce_type(cls, jobject, intf_or_class, jni_intf_or_class=None):
+    def enforce_type(cls, jobject, intf_or_class):
         """
         Raises an exception if the object does not implement the specified interface or is not a subclass. 
-        E.g.: self._enforce_type('weka.core.OptionHandler', 'Lweka/core/OptionHandler;') 
-        or self._enforce_type('weka.core.converters.AbstractFileLoader')
 
         :param jobject: the Java object to check
         :type jobject: JB_Object
         :param intf_or_class: the classname in Java notation (eg "weka.core.DenseInstance")
         :type intf_or_class: str
-        :param jni_intf_or_class: the classname in JNI notation (eg "Lweka/core/DenseInstance;")
-        :type jni_intf_or_class: str
         """
-        if not cls.check_type(jobject, intf_or_class, jni_intf_or_class):
+        if not cls.check_type(jobject, intf_or_class):
             raise TypeError("Object does not implement or subclass " + intf_or_class + ": " + get_classname(jobject))
 
     @classmethod
-    def new_instance(cls, classname, jni_classname=None):
+    def new_instance(cls, classname):
         """
         Creates a new object from the given classname using the default constructor, None in case of error.
 
         :param classname: the classname in Java notation (eg "weka.core.DenseInstance")
         :type classname: str
-        :param jni_classname: the classname in JNI notation (eg "Lweka/core/DenseInstance;")
-        :type jni_classname: str
         :return: the Java object
         :rtype: JB_Object
         """
-        if jni_classname is None:
-            if classname.startswith("."):
-                classname = complete_classname(classname)
-            jni_classname = classname.replace(".", "/")
         try:
-            return javabridge.make_instance(jni_classname, "()V")
+            return javabridge.static_call(
+                "Lweka/core/Utils;", "forName",
+                "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;",
+                javabridge.class_for_name("java.lang.Object"), classname, [])
         except JavaException as e:
-            print("Failed to instantiate " + classname + "/" + jni_classname + ": " + str(e))
+            print("Failed to instantiate " + classname + ": " + str(e))
             return None
 
 
@@ -785,6 +840,17 @@ class JavaArray(JavaObject):
         """
         return JavaArrayIterator(self)
 
+    def component_type(self):
+        """
+        Returns the classname of the elements.
+
+        :return: the class of the elements
+        :rtype: str
+        """
+        cls = javabridge.call(self.jobject, "getClass", "()Ljava/lang/Class;")
+        comptype = javabridge.call(cls, "getComponentType", "()Ljava/lang/Class;")
+        return javabridge.call(comptype, "getName", "()Ljava/lang/String;")
+
     @classmethod
     def new_instance(cls, classname, length):
         """
@@ -801,7 +867,7 @@ class JavaArray(JavaObject):
             "Ljava/lang/reflect/Array;",
             "newInstance",
             "(Ljava/lang/Class;I)Ljava/lang/Object;",
-            javabridge.class_for_name(classname=classname), length)
+            get_jclass(classname=classname), length)
 
 
 class Enum(JavaObject):
@@ -821,7 +887,7 @@ class Enum(JavaObject):
         :type member: str
         """
         if jobject is None:
-            enumclass = javabridge.class_for_name(classname=enum)
+            enumclass = get_jclass(classname=enum)
             jobject = javabridge.static_call(
                 "java/lang/Enum", "valueOf",
                 "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;",
@@ -1353,7 +1419,7 @@ class Tags(JavaObject):
             for i in range(len(tags)):
                 jarray[i] = tags[i]
             jobject = jarray.jobject
-        self.enforce_type(jobject, "weka.core.Tag", jni_intf_or_class="[Lweka/core/Tag;")
+        self.enforce_type(jobject, "weka.core.Tag")
         super(Tags, self).__init__(jobject)
         self.array = JavaArray(self.jobject)
 
@@ -1433,8 +1499,7 @@ class Tags(JavaObject):
         :return: the Tags objects
         :rtype: Tags
         """
-        classname = "L" + classname.replace(".", "/") + ";"
-        return Tags(jobject=javabridge.get_static_field(classname, field, "[Lweka/core/Tag;"))
+        return Tags(jobject=get_static_field(classname, field, "[Lweka/core/Tag;"))
 
     @classmethod
     def get_object_tags(cls, javaobject, methodname):
@@ -1629,7 +1694,10 @@ def from_commandline(cmdline, classname=None):
     params = split_options(cmdline)
     cls = params[0]
     params = params[1:]
-    handler = OptionHandler(jobject=javabridge.make_instance(cls.replace(".", "/"), "()V"), options=params)
+    handler = OptionHandler(javabridge.static_call(
+        "Lweka/core/Utils;", "forName",
+        "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;",
+        javabridge.class_for_name("java.lang.Object"), cls, params))
     if classname is None:
         return handler
     else:
