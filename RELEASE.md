@@ -24,8 +24,8 @@ Commands for releasing on pypi.org (requires twine >= 1.8.0):
 ```
   find -name "*~" -delete
   rm dist/*
-  python3 setup.py clean
-  python3 setup.py sdist
+  ./venv/bin/python setup.py clean
+  ./venv/bin/python setup.py sdist
   ./venv/bin/twine upload dist/*
   cd doc
   make html
