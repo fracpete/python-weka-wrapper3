@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.1.3 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.1.4 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.3',
+        VERSION:     '0.1.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -787,6 +787,88 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="weka.core.classes.Environment">
+<em class="property">class </em><code class="descclassname">weka.core.classes.</code><code class="descname">Environment</code><span class="sig-paren">(</span><em>jobject=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
+<p>Wraps around weka.core.Environment</p>
+<dl class="method">
+<dt id="weka.core.classes.Environment.add_variable">
+<code class="descname">add_variable</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>system_wide=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Environment.add_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the environment variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>str</em>) – the name of the variable</li>
+<li><strong>value</strong> (<em>str</em>) – the value</li>
+<li><strong>system_wide</strong> (<em>bool</em>) – whether to add the variable system wide</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.core.classes.Environment.remove_variable">
+<code class="descname">remove_variable</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Environment.remove_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the environment variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>str</em>) – the name of the variable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="weka.core.classes.Environment.system_wide">
+<em class="property">classmethod </em><code class="descname">system_wide</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Environment.system_wide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the system-wide environment.</p>
+<p>;return: the environment
+:rtype: Environment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.core.classes.Environment.variable_names">
+<code class="descname">variable_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Environment.variable_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the names of all environment variables.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the names of the variables</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.core.classes.Environment.variable_value">
+<code class="descname">variable_value</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Environment.variable_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of the environment variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>str</em>) – the name of the variable</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the variable value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="weka.core.classes.JSONObject">
 <em class="property">class </em><code class="descclassname">weka.core.classes.</code><code class="descname">JSONObject</code><a class="headerlink" href="#weka.core.classes.JSONObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
@@ -880,6 +962,22 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 <em class="property">class </em><code class="descclassname">weka.core.classes.</code><code class="descname">JavaArray</code><span class="sig-paren">(</span><em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
 <p>Convenience wrapper around Java arrays.</p>
+<dl class="method">
+<dt id="weka.core.classes.JavaArray.component_type">
+<code class="descname">component_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaArray.component_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the classname of the elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the class of the elements</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="weka.core.classes.JavaArray.new_instance">
 <em class="property">classmethod </em><code class="descname">new_instance</code><span class="sig-paren">(</span><em>classname</em>, <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaArray.new_instance" title="Permalink to this definition">¶</a></dt>
@@ -920,17 +1018,15 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 <p>Basic Java object.</p>
 <dl class="classmethod">
 <dt id="weka.core.classes.JavaObject.check_type">
-<em class="property">classmethod </em><code class="descname">check_type</code><span class="sig-paren">(</span><em>jobject</em>, <em>intf_or_class</em>, <em>jni_intf_or_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.check_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns whether the object implements the specified interface or is a subclass.
-E.g.: self._check_type(‘weka.core.OptionHandler’, ‘Lweka/core/OptionHandler;’) 
-or self._check_type(‘weka.core.converters.AbstractFileLoader’)</p>
+<em class="property">classmethod </em><code class="descname">check_type</code><span class="sig-paren">(</span><em>jobject</em>, <em>intf_or_class</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.check_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the object implements the specified interface or is a subclass.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>jobject</strong> (<em>JB_Object</em>) – the Java object to check</li>
-<li><strong>intf_or_class</strong> – the classname in Java notation (eg “weka.core.DenseInstance;”)</li>
+<li><strong>intf_or_class</strong> (<em>str</em>) – the classname in Java notation (eg “weka.core.DenseInstance;”)</li>
 </ul>
 </td>
 </tr>
@@ -962,10 +1058,8 @@ or self._check_type(‘weka.core.converters.AbstractFileLoader’)</p>
 
 <dl class="classmethod">
 <dt id="weka.core.classes.JavaObject.enforce_type">
-<em class="property">classmethod </em><code class="descname">enforce_type</code><span class="sig-paren">(</span><em>jobject</em>, <em>intf_or_class</em>, <em>jni_intf_or_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.enforce_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Raises an exception if the object does not implement the specified interface or is not a subclass. 
-E.g.: self._enforce_type(‘weka.core.OptionHandler’, ‘Lweka/core/OptionHandler;’) 
-or self._enforce_type(‘weka.core.converters.AbstractFileLoader’)</p>
+<em class="property">classmethod </em><code class="descname">enforce_type</code><span class="sig-paren">(</span><em>jobject</em>, <em>intf_or_class</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.enforce_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises an exception if the object does not implement the specified interface or is not a subclass.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -973,7 +1067,6 @@ or self._enforce_type(‘weka.core.converters.AbstractFileLoader’)</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>jobject</strong> (<em>JB_Object</em>) – the Java object to check</li>
 <li><strong>intf_or_class</strong> (<em>str</em>) – the classname in Java notation (eg “weka.core.DenseInstance”)</li>
-<li><strong>jni_intf_or_class</strong> (<em>str</em>) – the classname in JNI notation (eg “Lweka/core/DenseInstance;”)</li>
 </ul>
 </td>
 </tr>
@@ -1087,23 +1180,17 @@ using dot notation.</p>
 
 <dl class="classmethod">
 <dt id="weka.core.classes.JavaObject.new_instance">
-<em class="property">classmethod </em><code class="descname">new_instance</code><span class="sig-paren">(</span><em>classname</em>, <em>jni_classname=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.new_instance" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">new_instance</code><span class="sig-paren">(</span><em>classname</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.new_instance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new object from the given classname using the default constructor, None in case of error.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>classname</strong> (<em>str</em>) – the classname in Java notation (eg “weka.core.DenseInstance”)</li>
-<li><strong>jni_classname</strong> (<em>str</em>) – the classname in JNI notation (eg “Lweka/core/DenseInstance;”)</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classname</strong> (<em>str</em>) – the classname in Java notation (eg “weka.core.DenseInstance”)</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the Java object</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the Java object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JB_Object</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
 </tr>
 </tbody>
 </table>
@@ -2018,6 +2105,30 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.classes.get_static_field">
+<code class="descclassname">weka.core.classes.</code><code class="descname">get_static_field</code><span class="sig-paren">(</span><em>classname</em>, <em>fieldname</em>, <em>signature</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_static_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Java object associated with the static field of the specified class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>classname</strong> (<em>str</em>) – the classname of the class to get the field from</li>
+<li><strong>fieldname</strong> (<em>str</em>) – the name of the field to retriev</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JB_Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.classes.has_dict_handler">
 <code class="descclassname">weka.core.classes.</code><code class="descname">has_dict_handler</code><span class="sig-paren">(</span><em>typestr</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.has_dict_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the handler for restoring an object from a JSON dictionary.</p>
@@ -2028,6 +2139,48 @@ classname if a single match was found, otherwise an exception is raised.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>typestr</strong> (<em>str</em>) – the type of the object</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the handler, None if not available</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.is_array">
+<code class="descclassname">weka.core.classes.</code><code class="descname">is_array</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.is_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the Java object is an array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>JB_Object</em>) – the Java object to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether the object is an array</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.is_instance_of">
+<code class="descclassname">weka.core.classes.</code><code class="descname">is_instance_of</code><span class="sig-paren">(</span><em>obj</em>, <em>class_or_intf_name</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.is_instance_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the Java object implements the specified interface or is a subclass of the superclass.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<em>JB_Object</em>) – the Java object to check</li>
+<li><strong>class_or_intf_name</strong> (<em>str</em>) – the superclass or interface to check, dot notation or with forward slashes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">true if either implements interface or subclass of superclass</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -4379,20 +4532,6 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="weka.core.jvm.add_weka_packages">
-<code class="descclassname">weka.core.jvm.</code><code class="descname">add_weka_packages</code><span class="sig-paren">(</span><em>alt_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.add_weka_packages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds the jars from all Weka packages to the JVM’s classpath.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>alt_path</strong> (<em>str</em>) – an alternative weka home path</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="weka.core.jvm.start">
 <code class="descclassname">weka.core.jvm.</code><code class="descname">start</code><span class="sig-paren">(</span><em>class_path=None</em>, <em>bundled=True</em>, <em>packages=False</em>, <em>system_cp=False</em>, <em>max_heap_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the javabridge connection (starts up the JVM).</p>
@@ -5108,12 +5247,12 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2017, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2018, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
