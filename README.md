@@ -10,10 +10,10 @@ Requirements:
   * matplotlib (optional)
   * pygraphviz (optional)
   * PIL (optional)
-* Oracle JDK 1.7+
+* Oracle JDK 1.8+
 
 Uses:
-* Weka (3.9.1)
+* Weka (3.9.2)
 
 ## Installation
 
