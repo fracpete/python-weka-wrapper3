@@ -24,7 +24,7 @@ You can find videos on `YouTube <https://www.youtube.com/channel/UCYkzno8dbnAasW
 Prerequisites for all plaforms
 ------------------------------
 
-You need an `Oracle JDK (1.7+)
+You need an `Oracle JDK (1.8+)
 <http://www.oracle.com/technetwork/java/javase/downloads/>`__ installed and
 the ``JAVA_HOME`` `environment variable
 <http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`__
@@ -103,13 +103,13 @@ graphical output:
 
    $ apt-get install python3-imaging python3-matplotlib python-pygraphviz
 
-Download an Oracle JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk1.7.0_75/``).
+Download an Oracle JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk1.8.0_162/``).
 Export the Java home directory as follows (required for the *javabridge*
 installation):
 
 .. code-block:: bash
 
-   $ export JAVA_HOME=/opt/jdk1.7.0_75/
+   $ export JAVA_HOME=/opt/jdk1.8.0_162/
 
 Finally, you can use ``pip3`` to install the Python packages that are not
 available in the repositories:

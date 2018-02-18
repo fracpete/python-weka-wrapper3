@@ -38,11 +38,11 @@ The library has the following requirements:
  * PIL (optional)
  * matplotlib (optional)
 
-* Oracle JDK 1.7+
+* Oracle JDK 1.8+
 
 Uses:
 
-* Weka (3.9.1)
+* Weka (3.9.2)
 
 Contents
 ========
