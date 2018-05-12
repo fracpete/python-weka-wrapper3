@@ -3,7 +3,8 @@ API
 
 The following sections explain in more detail of how to use *python-weka-wrapper* from Python using the API.
 
-A lot more examples you will find in the (aptly named) `examples` module.
+A lot more examples you will find in the (aptly named) `examples <https://github.com/fracpete/python-weka-wrapper3-examples>`_
+repository.
 
 
 Java Virtual Machine
