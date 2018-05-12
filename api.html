@@ -54,7 +54,8 @@
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>The following sections explain in more detail of how to use <em>python-weka-wrapper</em> from Python using the API.</p>
-<p>A lot more examples you will find in the (aptly named) <cite>examples</cite> module.</p>
+<p>A lot more examples you will find in the (aptly named) <a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3-examples">examples</a>
+repository.</p>
 <div class="section" id="java-virtual-machine">
 <h2>Java Virtual Machine<a class="headerlink" href="#java-virtual-machine" title="Permalink to this headline">¶</a></h2>
 <p>In order to use the library, you need to manage the Java Virtual Machine (JVM).</p>
@@ -145,7 +146,7 @@ datasets called <cite>load_any_file</cite> and <cite>save_any_file</cite>. These
 the loader/saver based on the file extension:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.converters</span> <span class="kn">as</span> <span class="nn">converters</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">converters</span><span class="o">.</span><span class="n">load_any_file</span><span class="p">(</span><span class="s2">&quot;/some/where/iris.arff&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">converters</span><span class="o">.</span><span class="n">save_any_file</span><span class="p">(</span><span class="s2">&quot;/some/where/else/iris.csv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converters</span><span class="o">.</span><span class="n">save_any_file</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;/some/where/else/iris.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
