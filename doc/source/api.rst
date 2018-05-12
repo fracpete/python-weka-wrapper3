@@ -127,7 +127,7 @@ the loader/saver based on the file extension:
 
    >>> import weka.core.converters as converters
    >>> data = converters.load_any_file("/some/where/iris.arff")
-   >>> converters.save_any_file("/some/where/else/iris.csv")
+   >>> converters.save_any_file(data, "/some/where/else/iris.csv")
 
 
 Filters
