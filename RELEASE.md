@@ -35,8 +35,9 @@ Commands for updating github pages:
   find -name "*~" -delete
   cd doc
   make html
-  copy build/html content to python-weka-wrapper3.gh-pages
-  cd into python-weka-wrapper3.gh-pages
+  cd build/html
+  cp -R * ../../../../python-weka-wrapper3.gh-pages/
+  cd ../../../../python-weka-wrapper3.gh-pages/
   git pull origin gh-pages
   git add -A
   git commit -a -m "updated documentation"
