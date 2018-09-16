@@ -107,6 +107,14 @@ Mac OSX
   them by opening a terminal and running the following command: 
   `xcode-select --install`
 
+* **Q:** Installing `javabridge` fails with the error message `Exception: JVM not found`,
+  but I have Java installed?
+
+  **A:** Set the `JAVA_HOME` environment variable, by pointing it to your JDK installation
+  (should be the directory above the `bin` directory containing the `java` executable).
+
+
+
 
 Windows
 -------
