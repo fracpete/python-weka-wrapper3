@@ -1,4 +1,4 @@
-Pypi
+PyPi
 ====
 
 Preparation:
@@ -14,10 +14,6 @@ Preparation:
 
 * add new changelog section in `CHANGES.rst`
 * commit/push all changes
-
-When upgrading Weka version:
-
-* change download URL in method `download_weka()` in `setup.py`
 
 Commands for releasing on pypi.org (requires twine >= 1.8.0):
 
