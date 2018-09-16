@@ -26,7 +26,7 @@ class TestVersion(weka_test.WekaTest):
         """
         Tests the version.weka_version() method
         """
-        self.assertEqual("3.9.2", version.weka_version())
+        self.assertEqual("3.9.3", version.weka_version())
 
 
 def suite():

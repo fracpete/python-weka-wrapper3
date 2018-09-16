@@ -279,7 +279,7 @@ class TestClassifiers(weka_test.WekaTest):
         self.assertAlmostEqual(0.961, evl.kappa, places=3, msg="kappa differs")
         self.assertAlmostEqual(1017.196, evl.kb_information, places=3, msg="kb_information differs")
         self.assertAlmostEqual(1.133, evl.kb_mean_information, places=3, msg="kb_mean_information differs")
-        self.assertAlmostEqual(83300.253, evl.kb_relative_information, places=3, msg="kb_relative_information differs")
+        self.assertAlmostEqual(95.017, evl.kb_relative_information, places=3, msg="kb_relative_information differs")
         self.assertAlmostEqual(0.789, evl.matthews_correlation_coefficient(0), places=3, msg="matthews_correlation_coefficient(0) differs")
         self.assertAlmostEqual(0.006, evl.mean_absolute_error, places=3, msg="mean_absolute_error differs")
         self.assertAlmostEqual(0.134, evl.mean_prior_absolute_error, places=3, msg="mean_prior_absolute_error differs")
