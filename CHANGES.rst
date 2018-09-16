@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.6 (????-??-??)
+------------------
+
+- ...
+
+
 0.1.5 (2018-09-16)
 ------------------
 
@@ -8,7 +14,6 @@ Changelog
 - `weka.jar` now included in PyPi package
 - exposed the following methods in `weka.classifiers.Evaluation`:
   `cumulative_margin_distribution`, `sf_prior_entropy`, `sf_scheme_entropy`
-
 
 
 0.1.4 (2018-02-18)
