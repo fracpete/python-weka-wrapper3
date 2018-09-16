@@ -14,57 +14,7 @@
 # setup.py
 # Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
 
-import os
 from setuptools import setup
-from urllib.request import urlopen, URLError, HTTPError
-
-
-def download_file(url, outfile):
-    """
-    Downloads the file associated with the URL and saves it to the specified output file.
-    Taken from here: http://stackoverflow.com/a/4028894
-    :param url: the URL to download
-    :type url: str
-    :param outfile: the name of the output file
-    :type outfile: str
-    :returns: whether the download was successful
-    :rtype: bool
-    """
-    try:
-        # Open the url
-        f = urlopen(url)
-        print("Downloading '" + url + "' to '" + outfile + "'")
-        # Open our local file for writing
-        with open(outfile, "wb") as local_file:
-            local_file.write(f.read())
-    # handle errors
-    except HTTPError as e:
-        print("HTTP Error: " + str(e.code) + " " + url)
-        return False
-    except URLError as e:
-        print("URL Error: " + str(e.reason) + " " + url)
-        return False
-    return True
-
-
-def download_weka():
-    """
-    Downloads the Weka jar from github associated with this release if nececssary.
-    """
-    url = "https://github.com/fracpete/python-weka-wrapper3/raw/a6158f1310c5059e7031f3314525c510cb46d598/python/weka/lib/weka.jar"
-    outfile = os.path.join(os.path.dirname(__file__), "python", "weka", "lib", "weka.jar")
-    if not os.path.exists(outfile):
-        if not download_file(url, outfile):
-            print("Failed to download Weka jar '" + url + "' to '" + outfile + "'!")
-        else:
-            print("Download of Weka jar successful!")
-
-
-def ext_modules():
-    """
-    Initiates Weka jar download.
-    """
-    download_weka()
 
 
 def _read(f):
@@ -105,16 +55,15 @@ setup(
         "weka": ["lib/*.jar"],
     },
     include_package_data=True,
-    version="0.1.4",
+    version="0.1.5",
     author='Peter "fracpete" Reutemann',
     author_email='pythonwekawrapper@gmail.com',
     install_requires=[
         "javabridge>=1.0.14",
-        "numpy"
+        "numpy",
     ],
     extras_require={
         'plots': ["matplotlib"],
         'graphs': ["pygraphviz", "PIL"],
     },
-    ext_modules=ext_modules(),
 )
