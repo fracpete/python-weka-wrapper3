@@ -1253,6 +1253,15 @@ class Evaluation(JavaObject):
         else:
             return javabridge.call(self.jobject, "toMatrixString", "(Ljava/lang/String;)Ljava/lang/String;", title)
 
+    def cumulative_margin_distribution(self):
+        """
+        Output the cumulative margin distribution as a string suitable for input for gnuplot or similar package.
+
+        :return: the cumulative margin distribution
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "toCumulativeMarginDistributionString", "()Ljava/lang/String;")
+
     def area_under_prc(self, class_index):
         """
         Returns the area under precision recall curve.
@@ -1808,6 +1817,26 @@ class Evaluation(JavaObject):
         :rtype: float
         """
         return javabridge.call(self.jobject, "SFMeanSchemeEntropy", "()D")
+
+    @property
+    def sf_prior_entropy(self):
+        """
+        Returns the total entropy for the null model.
+
+        :return: the entropy
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "SFPriorEntropy", "()D")
+
+    @property
+    def sf_scheme_entropy(self):
+        """
+        Returns the total entropy for the scheme.
+
+        :return: the entropy
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "SFchemeEntropy", "()D")
 
     @property
     def class_priors(self):
