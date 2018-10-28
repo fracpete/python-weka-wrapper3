@@ -23,8 +23,9 @@ import logging
 started = None
 
 # logging setup
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 
 def add_bundled_jars():

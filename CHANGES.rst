@@ -4,6 +4,8 @@ Changelog
 0.1.6 (????-??-??)
 ------------------
 
+- fixed logging setup in `weka.core.jvm` to avoid global setting global logging
+  setup to `DEBUG` (thanks to [Arnie97](https://github.com/Arnie97))
 - ...
 
 
