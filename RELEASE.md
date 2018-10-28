@@ -25,7 +25,7 @@ rm dist/*
 ./venv/bin/twine upload dist/*
 ```
 
-Commands for updating github pages:
+Commands for updating github pages (requires Java 8!):
 
 ```
 find -name "*~" -delete
