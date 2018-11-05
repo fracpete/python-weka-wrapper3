@@ -54,7 +54,7 @@ Troubleshooting
 
      $  bin/easy_install -U distribute
 
-* On Ubuntu, follow `this post <http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/>`_
+* On Ubuntu, follow `this post <http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/>`__
   to install all the required dependencies for PIL:
 
   .. code-block:: bash
@@ -62,7 +62,7 @@ Troubleshooting
      $ sudo apt-get build-dep python-imaging
 
 * To enable support for PIL on Ubuntu, see
-  `this post <http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/>`_:
+  `this post <http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/>`__:
 
   .. code-block:: bash
 
@@ -70,7 +70,7 @@ Troubleshooting
      $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/
      $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/
 
-* Based on `this post https://askubuntu.com/a/785506`_ do the following to install
+* Based on `this post <https://askubuntu.com/a/785506>`__ do the following to install
   matplotlib with tkinter support:
 
   .. code-block:: bash

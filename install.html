@@ -203,6 +203,32 @@ $ pip3 install python-weka-wrapper3
 </pre></div>
 </div>
 </div>
+<div class="section" id="windows-using-anaconda">
+<h2>Windows using Anaconda<a class="headerlink" href="#windows-using-anaconda" title="Permalink to this headline">¶</a></h2>
+<p><strong>Please note:</strong> You need to make sure that the <em>bitness</em> of your environment
+is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
+install a 32-bit JDK (or all of them are 64-bit).</p>
+<ul>
+<li><p class="first">download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge">javabridge</a>
+for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp34/cp36/cp37</em>) and your bitness (32 or 64 bit)</p>
+</li>
+<li><p class="first">the following sets up an environment with Python 3.6</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; conda create --name pww3 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
+&gt; activate pww3
+&gt; pip install numpy
+&gt; pip install C:<span class="se">\w</span>here<span class="se">\y</span>ou<span class="se">\d</span>ownloaded<span class="se">\i</span>t<span class="se">\j</span>avabridge-X.Y.Z.whl
+&gt; pip install python-weka-wrapper3
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If you want plotting support, then install also <em>graphviz</em> and <em>matplotlib</em>:</p>
+<ul class="simple">
+<li>download <a class="reference external" href="https://graphviz.gitlab.io/_pages/Download/Download_windows.html">graphviz</a>
+and add the path to its installed binaries to your <code class="docutils literal"><span class="pre">PATH</span></code> environment variable.</li>
+<li>install matplotlib using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">matplotlib</span></code></li>
+</ul>
+</div>
 <div class="section" id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
 <p><strong>Please note:</strong> You need to make sure that the <em>bitness</em> of your environment
@@ -211,7 +237,7 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <p>Perform the following steps:</p>
 <ul class="simple">
 <li>install <a class="reference external" href="http://www.python.org/downloads">Python</a>, make sure you check <em>Add python.exe to path</em> during the installation</li>
-<li>add the Python scripts directory to your <code class="docutils literal"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal"><span class="pre">C:\\Python27\\Scripts</span></code></li>
+<li>add the Python scripts directory to your <code class="docutils literal"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal"><span class="pre">C:\\Python35\\Scripts</span></code></li>
 <li>install <code class="docutils literal"><span class="pre">pip</span></code> with these steps:</li>
 </ul>
 <blockquote>
@@ -226,7 +252,7 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <blockquote>
 <div><ul class="simple">
 <li>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">numpy 1.9.x MKL</a>
-(or later) for Python 3.4/3.5 (<em>cp34/cp35</em>) and your <em>bitness</em> (32 or 64 bit)</li>
+(or later) for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp35/cp36/cp37</em>) and your <em>bitness</em> (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy-X.Y.Z.whl</span></code></li>
 </ul>
 </div></blockquote>
@@ -236,17 +262,19 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <blockquote>
 <div><ul class="simple">
 <li>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge">javabridge</a>
-(or later) for Python 3.4/3.5 (<em>cp34/cp35</em>) and your <em>bitness</em> (32 or 64 bit)</li>
+(or later) for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp35/cp36/cp37</em>) and your <em>bitness</em> (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">javabridge-X.Y.Z.whl</span></code></li>
 </ul>
 </div></blockquote>
-<p>If you want to use the plotting functionality, you need to install <em>matplotlib</em> as well:</p>
+<p>If you want to use the plotting functionality, you need to install <em>graphviz</em> and <em>matplotlib</em> as well:</p>
 <ul class="simple">
+<li>download <a class="reference external" href="https://graphviz.gitlab.io/_pages/Download/Download_windows.html">graphviz</a>
+and add the path to its installed binaries to your <code class="docutils literal"><span class="pre">PATH</span></code> enrivornment variable.</li>
 <li>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib">matplotlib</a>
-for Python 3.4/3.5 (<em>cp34/cp34</em>) and your bitness (32 or 64 bit)</li>
+for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp34/cp36/cp37</em>) and your bitness (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">matplotlib-X.Y.Z.whl</span></code></li>
 </ul>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; pip install python-weka-wrapper
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; pip install python-weka-wrapper3
 </pre></div>
 </div>
 <p>For being able to compile libraries on Windows, you need the
@@ -307,6 +335,7 @@ in a <em>disposable</em> location.</p>
 <li><a class="reference internal" href="#fedora-centos-redhat">Fedora/CentOS/Redhat</a></li>
 <li><a class="reference internal" href="#other-linux-distributions">Other Linux distributions</a></li>
 <li><a class="reference internal" href="#mac-osx">Mac OSX</a></li>
+<li><a class="reference internal" href="#windows-using-anaconda">Windows using Anaconda</a></li>
 <li><a class="reference internal" href="#windows">Windows</a></li>
 <li><a class="reference internal" href="#from-source">From source</a><ul>
 <li><a class="reference internal" href="#archive">Archive</a></li>
