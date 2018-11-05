@@ -198,6 +198,33 @@ Python packages:
    $ pip3 install python-weka-wrapper3
 
 
+Windows using Anaconda
+----------------------
+
+**Please note:** You need to make sure that the *bitness* of your environment
+is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
+install a 32-bit JDK (or all of them are 64-bit).
+
+* download `javabridge <http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge>`__
+  for Python 3.4/3.5/3.6/3.7 (*cp34/cp34/cp36/cp37*) and your bitness (32 or 64 bit)
+
+* the following sets up an environment with Python 3.6
+
+  .. code-block:: bash
+
+     > conda create --name pww3 python=3.6
+     > activate pww3
+     > pip install numpy
+     > pip install C:\where\you\downloaded\it\javabridge-X.Y.Z.whl
+     > pip install python-weka-wrapper3
+
+If you want plotting support, then install also *graphviz* and *matplotlib*:
+
+* download `graphviz <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>`__
+  and add the path to its installed binaries to your ``PATH`` environment variable.
+* install matplotlib using ``pip install matplotlib``
+
+
 Windows
 -------
 
@@ -208,7 +235,7 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).
 Perform the following steps:
 
 * install `Python <http://www.python.org/downloads>`__, make sure you check *Add python.exe to path* during the installation
-* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python27\\Scripts``
+* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python35\\Scripts``
 * install ``pip`` with these steps:
 
  * download from `here <https://bootstrap.pypa.io/get-pip.py>`__
@@ -217,24 +244,26 @@ Perform the following steps:
 * install numpy
 
  * download `numpy 1.9.x MKL <http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy>`__
-   (or later) for Python 3.4/3.5 (*cp34/cp35*) and your *bitness* (32 or 64 bit)
+   (or later) for Python 3.4/3.5/3.6/3.7 (*cp34/cp35/cp36/cp37*) and your *bitness* (32 or 64 bit)
  * install the *.whl* file using pip: ``pip install numpy-X.Y.Z.whl``
 
 * install javabridge
 
  * download `javabridge <http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge>`__
-   (or later) for Python 3.4/3.5 (*cp34/cp35*) and your *bitness* (32 or 64 bit)
+   (or later) for Python 3.4/3.5/3.6/3.7 (*cp34/cp35/cp36/cp37*) and your *bitness* (32 or 64 bit)
  * install the *.whl* file using pip: ``pip install javabridge-X.Y.Z.whl``
 
-If you want to use the plotting functionality, you need to install *matplotlib* as well:
+If you want to use the plotting functionality, you need to install *graphviz* and *matplotlib* as well:
 
+* download `graphviz <https://graphviz.gitlab.io/_pages/Download/Download_windows.html>`__
+  and add the path to its installed binaries to your ``PATH`` enrivornment variable.
 * download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
-  for Python 3.4/3.5 (*cp34/cp34*) and your bitness (32 or 64 bit)
+  for Python 3.4/3.5/3.6/3.7 (*cp34/cp34/cp36/cp37*) and your bitness (32 or 64 bit)
 * install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
 
 .. code-block:: bash
 
-   > pip install python-weka-wrapper
+   > pip install python-weka-wrapper3
 
 For being able to compile libraries on Windows, you need the
 `Microsoft Build Tools 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48159>`_

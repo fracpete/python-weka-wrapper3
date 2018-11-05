@@ -6,7 +6,7 @@ General
 
 * **Q:** How do I install `.whl` files?
 
-  **A:** `.whl` are *Python Wheels* archives, which you can install using pip (>= 1.4). See also `this website <http://pythonwheels.com/>`_.
+  **A:** `.whl` are *Python Wheels* archives, which you can install using pip (>= 1.4). See also `this website <http://pythonwheels.com/>`__.
 
 
 
@@ -18,7 +18,7 @@ Debian
   networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/
   for information. (Details -  1: Not running within active session)`. How to fix?
 
-  **A:** According to `this <http://stackoverflow.com/questions/1421498/linux-gedit-i-always-get-gconf-error-failed-to-contact-configuration-server>`_
+  **A:** According to `this <http://stackoverflow.com/questions/1421498/linux-gedit-i-always-get-gconf-error-failed-to-contact-configuration-server>`__
   post, set the following environment variable:
 
   .. code-block:: bash
@@ -45,7 +45,7 @@ Linux
 
   **A:** : Open up an interactive Python3 shell and type:
   `import pygraphviz`
-  If you get `undefined symbol: Agundirected`, then follow the steps outlined [here](http://stackoverflow.com/a/33508561/4698227),
+  If you get `undefined symbol: Agundirected`, then follow the steps outlined `here <http://stackoverflow.com/a/33508561/4698227>`__,
   but use `pip3`.
 
 
@@ -54,7 +54,7 @@ Mac OSX
 
 * **Q:** Why does javabridge fail with compiler error `clang: error: unknown argument: '-mno-fused-madd'`?
 
-  **A:** XCode 5.1 changed how unknown arguments are handled and now treats them  as error (`source <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`_). You can precede the `pip install javabridge` command with the following environment variable:
+  **A:** XCode 5.1 changed how unknown arguments are handled and now treats them  as error (`source <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`__). You can precede the `pip install javabridge` command with the following environment variable:
 
   .. code-block:: bash
 
@@ -62,7 +62,7 @@ Mac OSX
 
 * **Q:** Compiling javabridge fails with missing `jni.h` header file - what now?
 
-  **A:** You will need an Oracle JDK installed for this. `Download <http://www.oracle.com/technetwork/java/javase/downloads/>`_ and install one. Below is a command-line that uses the `jni.h` header file that comes with `1.7.0_45`:
+  **A:** You will need an Oracle JDK installed for this. `Download <http://www.oracle.com/technetwork/java/javase/downloads/>`__ and install one. Below is a command-line that uses the `jni.h` header file that comes with `1.7.0_45`:
 
   .. code-block:: bash
 
@@ -82,11 +82,11 @@ Mac OSX
   its includes. What now?
 
   **A:** Here is what to do:
-    * Make sure that you have the `GraphViz <http://graphviz.org/Download_macos.php>`_ 
+    * Make sure that you have the `GraphViz <http://graphviz.org/Download_macos.php>`__ 
       package installed.
 
     * If the installer is still not finding the libraries, download the 
-      `pygraphviz <https://pypi.python.org/pypi/pygraphviz>`_ sources from PyPi and 
+      `pygraphviz <https://pypi.python.org/pypi/pygraphviz>`__ sources from PyPi and 
       extract them.
 
     * Open the `setup.py` file in a text editor and set the `library_path` and

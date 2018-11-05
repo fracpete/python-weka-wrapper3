@@ -419,7 +419,7 @@ filters, supervised and unsupervised:
 
    cls = Filter(classname=".Discretize")
 
-.. code-block::
+.. code-block:: bash
 
    Exception: Found multiple matches for '.Discretize':
    weka.filters.supervised.attribute.Discretize
