@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # filters.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -145,6 +145,21 @@ class Filter(OptionHandler):
                 "Lweka/filters/Filter;", "useFilter",
                 "(Lweka/core/Instances;Lweka/filters/Filter;)Lweka/core/Instances;",
                 data.jobject, self.jobject))
+
+    def to_source(self, classname, data):
+        """
+        Returns the model as Java source code if the classifier implements weka.filters.Sourcable.
+
+        :param classname: the classname for the generated Java code
+        :type classname: str
+        :param data: the dataset used for initializing the filter
+        :type data: Instances
+        :return: the model as source code string
+        :rtype: str
+        """
+        if not self.check_type(self.jobject, "weka.filters.Sourcable"):
+            return None
+        return javabridge.call(self.jobject, "toSource", "(Ljava/lang/String;Lweka/core/Instances;)Ljava/lang/String;", classname, data.jobject)
 
     @classmethod
     def make_copy(cls, flter):

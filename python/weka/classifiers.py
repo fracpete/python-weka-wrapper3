@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import sys
 import os
@@ -192,6 +192,19 @@ class Classifier(OptionHandler):
             return javabridge.call(self.jobject, "graph", "()Ljava/lang/String;")
         else:
             return None
+
+    def to_source(self, classname):
+        """
+        Returns the model as Java source code if the classifier implements weka.classifiers.Sourcable.
+
+        :param classname: the classname for the generated Java code
+        :type classname: str
+        :return: the model as source code string
+        :rtype: str
+        """
+        if not self.check_type(self.jobject, "weka.classifiers.Sourcable"):
+            return None
+        return javabridge.call(self.jobject, "toSource", "(Ljava/lang/String;)Ljava/lang/String;", classname)
 
     @classmethod
     def make_copy(cls, classifier):
