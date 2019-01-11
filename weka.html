@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka package &#8212; python-weka-wrapper3 0.1.6 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.6',
+        VERSION:     '0.1.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="flow.html" title="Flow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -106,10 +106,241 @@
 <div class="section" id="module-weka.associations">
 <span id="weka-associations-module"></span><h2>weka.associations module<a class="headerlink" href="#module-weka.associations" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="weka.associations.AssociationRule">
+<em class="property">class </em><code class="descclassname">weka.associations.</code><code class="descname">AssociationRule</code><span class="sig-paren">(</span><em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.AssociationRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="weka.core.html#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
+<p>Wrapper for weka.associations.AssociationRule class.</p>
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.consequence">
+<code class="descname">consequence</code><a class="headerlink" href="#weka.associations.AssociationRule.consequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the the consequence.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the consequence, list of Item objects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.consequence_support">
+<code class="descname">consequence_support</code><a class="headerlink" href="#weka.associations.AssociationRule.consequence_support" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the support for the consequence.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the support</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.metric_names">
+<code class="descname">metric_names</code><a class="headerlink" href="#weka.associations.AssociationRule.metric_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the metric names for the rule.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the metric names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.associations.AssociationRule.metric_value">
+<code class="descname">metric_value</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.AssociationRule.metric_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the named metric value for the rule.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the metric</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the metric value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.metric_values">
+<code class="descname">metric_values</code><a class="headerlink" href="#weka.associations.AssociationRule.metric_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the metric values for the rule.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the metric values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.premise">
+<code class="descname">premise</code><a class="headerlink" href="#weka.associations.AssociationRule.premise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the the premise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the premise, list of Item objects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.premise_support">
+<code class="descname">premise_support</code><a class="headerlink" href="#weka.associations.AssociationRule.premise_support" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the support for the premise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the support</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.primary_metric_name">
+<code class="descname">primary_metric_name</code><a class="headerlink" href="#weka.associations.AssociationRule.primary_metric_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the primary metric name for the rule.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the metric name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.primary_metric_value">
+<code class="descname">primary_metric_value</code><a class="headerlink" href="#weka.associations.AssociationRule.primary_metric_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the primary metric value for the rule.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the metric value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.total_support">
+<code class="descname">total_support</code><a class="headerlink" href="#weka.associations.AssociationRule.total_support" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the total support.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the support</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.AssociationRule.total_transactions">
+<code class="descname">total_transactions</code><a class="headerlink" href="#weka.associations.AssociationRule.total_transactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the total transactions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the transactions</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="weka.associations.AssociationRules">
+<em class="property">class </em><code class="descclassname">weka.associations.</code><code class="descname">AssociationRules</code><span class="sig-paren">(</span><em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.AssociationRules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="weka.core.html#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
+<p>Wrapper for weka.associations.AssociationRules class.</p>
+<dl class="attribute">
+<dt id="weka.associations.AssociationRules.producer">
+<code class="descname">producer</code><a class="headerlink" href="#weka.associations.AssociationRules.producer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string describing the producer that generated these rules.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the producer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="weka.associations.AssociationRulesIterator">
+<em class="property">class </em><code class="descclassname">weka.associations.</code><code class="descname">AssociationRulesIterator</code><span class="sig-paren">(</span><em>rules</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.AssociationRulesIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Iterator for weka.associations.AssociationRules class.</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="weka.associations.Associator">
 <em class="property">class </em><code class="descclassname">weka.associations.</code><code class="descname">Associator</code><span class="sig-paren">(</span><em>classname=None</em>, <em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Associator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="weka.core.html#weka.core.classes.OptionHandler" title="weka.core.classes.OptionHandler"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.OptionHandler</span></code></a></p>
 <p>Wrapper class for associators.</p>
+<dl class="method">
+<dt id="weka.associations.Associator.association_rules">
+<code class="descname">association_rules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Associator.association_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns association rules that were generated. Only if implements AssociationRulesProducer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the association rules that were generated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.associations.AssociationRules" title="weka.associations.AssociationRules">AssociationRules</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="weka.associations.Associator.build_associations">
 <code class="descname">build_associations</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Associator.build_associations" title="Permalink to this definition">¶</a></dt>
@@ -122,6 +353,22 @@
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.associations.Associator.can_produce_rules">
+<code class="descname">can_produce_rules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Associator.can_produce_rules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether association rules can be generated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">whether scheme implements AssociationRulesProducer interface and</td>
+</tr>
+</tbody>
+</table>
+<p>association rules can be generated
+:rtype: bool</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -153,6 +400,121 @@
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the associator</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.associations.Associator" title="weka.associations.Associator">Associator</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.Associator.rule_metric_names">
+<code class="descname">rule_metric_names</code><a class="headerlink" href="#weka.associations.Associator.rule_metric_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the rule metric names of the association rules. Only if implements AssociationRulesProducer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the metric names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="weka.associations.Item">
+<em class="property">class </em><code class="descclassname">weka.associations.</code><code class="descname">Item</code><span class="sig-paren">(</span><em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="weka.core.html#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
+<p>Wrapper for weka.associations.Item class.</p>
+<dl class="attribute">
+<dt id="weka.associations.Item.attribute">
+<code class="descname">attribute</code><a class="headerlink" href="#weka.associations.Item.attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the attribute</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.core.html#weka.core.dataset.Attribute" title="weka.core.dataset.Attribute">Attribute</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.Item.comparison">
+<code class="descname">comparison</code><a class="headerlink" href="#weka.associations.Item.comparison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the comparison operator as string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the comparison iterator</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.associations.Item.decrease_frequency">
+<code class="descname">decrease_frequency</code><span class="sig-paren">(</span><em>frequency=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Item.decrease_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decreases the frequency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frequency</strong> (<em>int</em>) – the frequency to decrease by, 1 if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.Item.frequency">
+<code class="descname">frequency</code><a class="headerlink" href="#weka.associations.Item.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the frequency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the frequency</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.associations.Item.increase_frequency">
+<code class="descname">increase_frequency</code><span class="sig-paren">(</span><em>frequency=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.Item.increase_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increases the frequency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frequency</strong> (<em>int</em>) – the frequency to increase by, 1 if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.associations.Item.item_value">
+<code class="descname">item_value</code><a class="headerlink" href="#weka.associations.Item.item_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the item value as string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the item value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
@@ -673,6 +1035,24 @@ Use -h to see all options.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the classifier</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.classifiers.Classifier" title="weka.classifiers.Classifier">Classifier</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.classifiers.Classifier.to_source">
+<code class="descname">to_source</code><span class="sig-paren">(</span><em>classname</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Classifier.to_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the model as Java source code if the classifier implements weka.classifiers.Sourcable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classname</strong> (<em>str</em>) – the classname for the generated Java code</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the model as source code string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
 </tbody>
 </table>
@@ -2156,7 +2536,7 @@ training data, at the confidence level specified when evaluation was performed.<
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter in use</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3067,7 +3447,7 @@ Use -h to see all options.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4123,11 +4503,11 @@ using the same setup.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter"><em>Filter</em></a>) – the filter to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the filter</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4160,6 +4540,30 @@ using the same setup.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the output format</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.filters.Filter.to_source">
+<code class="descname">to_source</code><span class="sig-paren">(</span><em>classname</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.Filter.to_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the model as Java source code if the classifier implements weka.filters.Sourcable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>classname</strong> (<em>str</em>) – the classname for the generated Java code</li>
+<li><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the dataset used for initializing the filter</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the model as source code string</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -4326,11 +4730,11 @@ Use -h to see all options.</p>
         <li class="right" >
           <a href="flow.html" title="Flow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2018, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2019, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
