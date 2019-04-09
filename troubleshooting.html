@@ -169,6 +169,17 @@ for mounting the ISO image once downloaded.</p>
 <p><strong>A:</strong> PyGraphviz is just a wrapper for <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> which you
 you need to install separately. Also, you need to add the directory containing the GraphViz binaries, like <cite>dot.exe</cite>, to the <cite>PATH</cite> environment variable, e.g., <cite>C:\Program Files (x86)\Graphviz2.38\bin</cite> (you may have to log out and back in again for these changes to take effect).</p>
 </li>
+<li><p class="first"><strong>Q:</strong> I cannot use datasets that are in UTF-8 - but it works in the Weka GUI when I change the file encoding parameter in <cite>RunWeka.ini</cite>!</p>
+<p><strong>A:</strong> The JVM will pick up options via the <cite>_JAVA_OPTIONS</cite> environment variable. You can set an environment variables in your Python code with <cite>os.environ</cite>, e.g., the file encoding:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="kn">as</span> <span class="nn">jvm</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;_JAVA_OPTIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-Dfile.encoding=UTF-8&quot;</span>
+<span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">jvm</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -242,7 +253,7 @@ you need to install separately. Also, you need to add the directory containing t
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2019, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>

@@ -132,4 +132,15 @@ Windows
   **A:** PyGraphviz is just a wrapper for `GraphViz <http://www.graphviz.org/>`_ which you
   you need to install separately. Also, you need to add the directory containing the GraphViz binaries, like `dot.exe`, to the `PATH` environment variable, e.g., `C:\\Program Files (x86)\\Graphviz2.38\\bin` (you may have to log out and back in again for these changes to take effect).
 
+* **Q:** I cannot use datasets that are in UTF-8 - but it works in the Weka GUI when I change the file encoding parameter in `RunWeka.ini`!
 
+  **A:** The JVM will pick up options via the `_JAVA_OPTIONS` environment variable. You can set an environment variables in your Python code with `os.environ`, e.g., the file encoding:
+
+  .. code-block:: python
+
+     import weka.core.jvm as jvm
+     import os
+     os.environ["_JAVA_OPTIONS"] = "-Dfile.encoding=UTF-8"
+     jvm.start(packages=True)
+     ...
+     jvm.stop()
