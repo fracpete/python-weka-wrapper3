@@ -70,3 +70,7 @@ dist
 # virtualenv
 venv
 
+# other
+blah*
+*.bak
+update_gh.sh
