@@ -1,59 +1,59 @@
-weka.flow package
-=================
+weka\.flow package
+==================
 
 Submodules
 ----------
 
-weka.flow.base module
----------------------
+weka\.flow\.base module
+-----------------------
 
 .. automodule:: weka.flow.base
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.flow.container module
---------------------------
+weka\.flow\.container module
+----------------------------
 
 .. automodule:: weka.flow.container
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.flow.control module
-------------------------
+weka\.flow\.control module
+--------------------------
 
 .. automodule:: weka.flow.control
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.flow.conversion module
----------------------------
+weka\.flow\.conversion module
+-----------------------------
 
 .. automodule:: weka.flow.conversion
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.flow.sink module
----------------------
+weka\.flow\.sink module
+-----------------------
 
 .. automodule:: weka.flow.sink
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.flow.source module
------------------------
+weka\.flow\.source module
+-------------------------
 
 .. automodule:: weka.flow.source
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.flow.transformer module
-----------------------------
+weka\.flow\.transformer module
+------------------------------
 
 .. automodule:: weka.flow.transformer
     :members:
