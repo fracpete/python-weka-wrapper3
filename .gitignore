@@ -69,6 +69,7 @@ dist
 
 # virtualenv
 venv
+venv.*
 
 # other
 blah*

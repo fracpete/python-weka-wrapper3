@@ -553,8 +553,7 @@ class Associator(OptionHandler):
         """
         Checks whether association rules can be generated.
 
-        :return: whether scheme implements AssociationRulesProducer interface and
-        association rules can be generated
+        :return: whether scheme implements AssociationRulesProducer interface and association rules can be generated
         :rtype: bool
         """
         if not self.check_type(self.jobject, "weka.associations.AssociationRulesProducer"):

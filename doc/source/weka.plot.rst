@@ -1,43 +1,43 @@
-weka.plot package
-=================
+weka\.plot package
+==================
 
 Submodules
 ----------
 
-weka.plot.classifiers module
-----------------------------
+weka\.plot\.classifiers module
+------------------------------
 
 .. automodule:: weka.plot.classifiers
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.plot.clusterers module
----------------------------
+weka\.plot\.clusterers module
+-----------------------------
 
 .. automodule:: weka.plot.clusterers
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.plot.dataset module
-------------------------
+weka\.plot\.dataset module
+--------------------------
 
 .. automodule:: weka.plot.dataset
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.plot.experiments module
-----------------------------
+weka\.plot\.experiments module
+------------------------------
 
 .. automodule:: weka.plot.experiments
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.plot.graph module
-----------------------
+weka\.plot\.graph module
+------------------------
 
 .. automodule:: weka.plot.graph
     :members:

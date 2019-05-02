@@ -13,56 +13,56 @@ Subpackages
 Submodules
 ----------
 
-weka.associations module
-------------------------
+weka\.associations module
+-------------------------
 
 .. automodule:: weka.associations
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.attribute_selection module
--------------------------------
+weka\.attribute\_selection module
+---------------------------------
 
 .. automodule:: weka.attribute_selection
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.classifiers module
------------------------
+weka\.classifiers module
+------------------------
 
 .. automodule:: weka.classifiers
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.clusterers module
-----------------------
+weka\.clusterers module
+-----------------------
 
 .. automodule:: weka.clusterers
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.datagenerators module
---------------------------
+weka\.datagenerators module
+---------------------------
 
 .. automodule:: weka.datagenerators
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.experiments module
------------------------
+weka\.experiments module
+------------------------
 
 .. automodule:: weka.experiments
     :members:
     :undoc-members:
     :show-inheritance:
 
-weka.filters module
--------------------
+weka\.filters module
+--------------------
 
 .. automodule:: weka.filters
     :members:
