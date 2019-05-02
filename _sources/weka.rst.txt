@@ -29,14 +29,6 @@ weka\.attribute\_selection module
     :undoc-members:
     :show-inheritance:
 
-weka\.blah module
------------------
-
-.. automodule:: weka.blah
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 weka\.classifiers module
 ------------------------
 
