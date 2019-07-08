@@ -56,7 +56,7 @@ graphical output:
 
 .. code-block:: bash
 
-   $ sudo apt-get install python3-pil python3-matplotlib python-pygraphviz
+   $ sudo apt-get install python3-pil python3-matplotlib python3-pygraphviz
 
 Install OpenJDK as well, in order to get all the header files that *javabridge*
 compiles against (but don't use it for starting up JVMs):
