@@ -59,6 +59,12 @@
 <li><p class="first"><strong>Q:</strong> How do I install <cite>.whl</cite> files?</p>
 <p><strong>A:</strong> <cite>.whl</cite> are <em>Python Wheels</em> archives, which you can install using pip (&gt;= 1.4). See also <a class="reference external" href="http://pythonwheels.com/">this website</a>.</p>
 </li>
+<li><p class="first"><strong>Q:</strong> Why does javabridge not compile?</p>
+<p><strong>A:</strong> Ensure that you have an actual JDK installed (test it by issuing the <code class="docutils literal"><span class="pre">javac</span></code> command), as
+javabridge requires header files to present that won’t be present if you only have a runtime
+environment (JRE). You also may have to set the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> environment variable pointing
+to your JDK installation (above the <code class="docutils literal"><span class="pre">bin</span></code> directory).</p>
+</li>
 </ul>
 </div>
 <div class="section" id="debian">
