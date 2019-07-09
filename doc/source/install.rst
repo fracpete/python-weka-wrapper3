@@ -101,7 +101,7 @@ graphical output:
 
 .. code-block:: bash
 
-   $ apt-get install python3-imaging python3-matplotlib python-pygraphviz
+   $ apt-get install python3-imaging python3-matplotlib python3-pygraphviz
 
 Download an Oracle JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk1.8.0_162/``).
 Export the Java home directory as follows (required for the *javabridge*
