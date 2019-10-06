@@ -24,15 +24,15 @@ You can find videos on `YouTube <https://www.youtube.com/channel/UCYkzno8dbnAasW
 Prerequisites for all plaforms
 ------------------------------
 
-You need an `Oracle JDK (1.8+)
-<http://www.oracle.com/technetwork/java/javase/downloads/>`__ installed and
+You need a Java Development Kit (JDK) 1.8/8 (e.g., `OpenJDK <https://adoptopenjdk.net/>`__) installed and
 the ``JAVA_HOME`` `environment variable
 <http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`__
 pointing to the installation directory in order to use *python-weka-wrapper3*
 library.
 
-*Why not OpenJDK?* Weka is developed and tested with Oracle's JDK/JRE. There is
-no guarantee that it will work with OpenJDK.
+**Note:** In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle's
+version. However, Oracle's JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
+recommended Java version to use.
 
 
 Ubuntu
@@ -103,7 +103,7 @@ graphical output:
 
    $ apt-get install python3-imaging python3-matplotlib python3-pygraphviz
 
-Download an Oracle JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk1.8.0_162/``).
+Download a JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk1.8.0_162/``).
 Export the Java home directory as follows (required for the *javabridge*
 installation):
 

@@ -69,12 +69,13 @@ on the instructions below, please use the following mailing list:</p>
 </div>
 <div class="section" id="prerequisites-for-all-plaforms">
 <h2>Prerequisites for all plaforms<a class="headerlink" href="#prerequisites-for-all-plaforms" title="Permalink to this headline">¶</a></h2>
-<p>You need an <a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/">Oracle JDK (1.8+)</a> installed and
+<p>You need a Java Development Kit (JDK) 1.8/8 (e.g., <a class="reference external" href="https://adoptopenjdk.net/">OpenJDK</a>) installed and
 the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> <a class="reference external" href="http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html">environment variable</a>
 pointing to the installation directory in order to use <em>python-weka-wrapper3</em>
 library.</p>
-<p><em>Why not OpenJDK?</em> Weka is developed and tested with Oracle’s JDK/JRE. There is
-no guarantee that it will work with OpenJDK.</p>
+<p><strong>Note:</strong> In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle’s
+version. However, Oracle’s JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
+recommended Java version to use.</p>
 </div>
 <div class="section" id="ubuntu">
 <h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
@@ -124,7 +125,7 @@ graphical output:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install python3-imaging python3-matplotlib python3-pygraphviz
 </pre></div>
 </div>
-<p>Download an Oracle JDK and un-tar it in <code class="docutils literal"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal"><span class="pre">/opt/jdk1.8.0_162/</span></code>).
+<p>Download a JDK and un-tar it in <code class="docutils literal"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal"><span class="pre">/opt/jdk1.8.0_162/</span></code>).
 Export the Java home directory as follows (required for the <em>javabridge</em>
 installation):</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk1.8.0_162/
