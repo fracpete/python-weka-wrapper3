@@ -11,6 +11,7 @@ Changelog
 - added methods `plot_rocs` and `plot_prcs` to `weka.plot.classifiers` module to plot ROC/PRC curve on same dataset
   for multiple classifiers
 - method `create_instances_from_matrices` from module `weka.core.dataset` now allows string and bytes as well
+- method `create_instances_from_lists` from module `weka.core.dataset` now allows string and bytes as well
 - ...
 
 
