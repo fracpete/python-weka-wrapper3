@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.8 (????-??-??)
+0.1.8 (2019-11-11)
 ------------------
 
 - added console scripts: `pww-associator`, `pww-attsel`, `pww-classifier`, `pww-clusterer`, `pww-datagenerator`, `pww-filter`
@@ -14,7 +14,6 @@ Changelog
   classifiers by providing a dictionary
 - method `create_instances_from_matrices` from module `weka.core.dataset` now allows string and bytes as well
 - method `create_instances_from_lists` from module `weka.core.dataset` now allows string and bytes as well
-- ...
 
 
 0.1.7 (2019-01-11)
