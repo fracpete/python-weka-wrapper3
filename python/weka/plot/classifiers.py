@@ -28,14 +28,15 @@ logger = logging.getLogger(__name__)
 
 
 def plot_classifier_errors(predictions, absolute=True, max_relative_size=50, absolute_size=50, title=None,
-                           outfile=None, wait=True):
+                           outfile=None, wait=True, key_loc="lower center"):
     """
     Plots the classifers for the given list of predictions.
 
     TODO: click events http://matplotlib.org/examples/event_handling/data_browser.html
 
-    :param predictions: the predictions to plot
-    :type predictions: list
+    :param predictions: the predictions to plot, use a dict to plot predictions of multiple classifiers
+                        (keys are used as prefixes for plots)
+    :type predictions: list or dict
     :param absolute: whether to use absolute errors as size or relative ones
     :type absolute: bool
     :param max_relative_size: the maximum size in point in case of relative mode
@@ -48,50 +49,66 @@ def plot_classifier_errors(predictions, absolute=True, max_relative_size=50, abs
     :type outfile: str
     :param wait: whether to wait for the user to close the plot
     :type wait: bool
+    :param key_loc: the location string for the key
+    :type key_loc: str
     """
     if not plot.matplotlib_available:
         logger.error("Matplotlib is not installed, plotting unavailable!")
         return
+
+    if isinstance(predictions, list):
+        multiple = {"": predictions}
+    else:
+        multiple = predictions
+
     actual = []
     predicted = []
     error = None
     cls = None
-    for pred in predictions:
-        actual.append(pred.actual)
-        predicted.append(pred.predicted)
-        if isinstance(pred, NumericPrediction):
-            if error is None:
-                error = []
-            error.append(abs(pred.error))
-        elif isinstance(pred, NominalPrediction):
-            if cls is None:
-                cls = []
-            if pred.actual != pred.predicted:
-                cls.append(1)
-            else:
-                cls.append(0)
-    fig, ax = plt.subplots()
-    if error is None and cls is None:
-        ax.scatter(actual, predicted, s=absolute_size, alpha=0.5)
-    elif cls is not None:
-        ax.scatter(actual, predicted, c=cls, s=absolute_size, alpha=0.5)
-    elif error is not None:
-        if not absolute:
-            min_err = min(error)
-            max_err = max(error)
-            factor = (max_err - min_err) / max_relative_size
-            for i in range(len(error)):
-                error[i] = error[i] / factor * max_relative_size
-        ax.scatter(actual, predicted, s=error, alpha=0.5)
-    ax.set_xlabel("actual")
-    ax.set_ylabel("predicted")
-    if title is None:
-        title = "Classifier errors"
-    ax.set_title(title)
-    ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
-    ax.grid(True)
-    fig.canvas.set_window_title(title)
+    ax = None
+    for prefix in multiple:
+        predictions = multiple[prefix]
+        if prefix == "":
+            prefix = None
+        for pred in predictions:
+            actual.append(pred.actual)
+            predicted.append(pred.predicted)
+            if isinstance(pred, NumericPrediction):
+                if error is None:
+                    error = []
+                error.append(abs(pred.error))
+            elif isinstance(pred, NominalPrediction):
+                if cls is None:
+                    cls = []
+                if pred.actual != pred.predicted:
+                    cls.append(1)
+                else:
+                    cls.append(0)
+        if ax is None:
+            fig, ax = plt.subplots()
+            ax.set_xlabel("actual")
+            ax.set_ylabel("predicted")
+            if title is None:
+                title = "Classifier errors"
+            ax.set_title(title)
+            ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
+            ax.grid(True)
+            fig.canvas.set_window_title(title)
+        if error is None and cls is None:
+            ax.scatter(actual, predicted, s=absolute_size, alpha=0.5, label=prefix)
+        elif cls is not None:
+            ax.scatter(actual, predicted, c=cls, s=absolute_size, alpha=0.5, label=prefix)
+        elif error is not None:
+            if not absolute:
+                min_err = min(error)
+                max_err = max(error)
+                factor = (max_err - min_err) / max_relative_size
+                for i in range(len(error)):
+                    error[i] = error[i] / factor * max_relative_size
+            ax.scatter(actual, predicted, s=error, alpha=0.5, label=prefix)
     plt.draw()
+    if len(multiple) > 1:
+        plt.legend(loc=key_loc, shadow=True)
     if outfile is not None:
         plt.savefig(outfile)
     if wait:

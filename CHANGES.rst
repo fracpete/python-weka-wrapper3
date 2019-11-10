@@ -10,6 +10,8 @@ Changelog
 - added `serialize`, `deserialize` methods to `weka.filters.Filter` to simplify loading/saving filter
 - added methods `plot_rocs` and `plot_prcs` to `weka.plot.classifiers` module to plot ROC/PRC curve on same dataset
   for multiple classifiers
+- method `plot_classifier_errors` of `weka.plot.classifiers` module now allows plotting predictions of multiple
+  classifiers by providing a dictionary
 - method `create_instances_from_matrices` from module `weka.core.dataset` now allows string and bytes as well
 - method `create_instances_from_lists` from module `weka.core.dataset` now allows string and bytes as well
 - ...
