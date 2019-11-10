@@ -12,11 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
-import numpy
+import numpy as np
 from weka.core.classes import JavaObject
 import weka.core.typeconv as typeconv
 
@@ -152,7 +152,7 @@ class Instances(JavaObject):
         for i in range(self.num_instances):
             inst = self.get_instance(i)
             values.append(inst.get_value(index))
-        return numpy.array(values)
+        return np.array(values)
 
     @property
     def num_instances(self):
@@ -776,7 +776,7 @@ class Instance(JavaObject):
         if type(values) is list:
             for i in range(len(values)):
                 values[i] = float(values[i])
-            values = numpy.array(values)
+            values = np.array(values)
         return Instance(
             javabridge.make_instance(
                 jni_classname, "(D[D)V",
@@ -804,8 +804,8 @@ class Instance(JavaObject):
         for (i, v) in values:
             indices.append(i)
             vals.append(float(v))
-        indices = numpy.array(indices, dtype=numpy.int32)
-        vals = numpy.array(vals)
+        indices = np.array(indices, dtype=np.int32)
+        vals = np.array(vals)
         return Instance(
             javabridge.make_instance(
                 jni_classname, "(D[D[II)V",
@@ -1529,7 +1529,7 @@ def create_instances_from_matrices(x, y=None, name="data"):
     """
     Allows the generation of an Instances object from a 2-dimensional matrix for X and a
     1-dimensional matrix for Y (optional).
-    All data must be numerical. Attributes can be converted to nominal with the
+    Data can be numeric, string or bytes. Attributes can be converted to nominal with the
     weka.filters.unsupervised.attribute.NumericToNominal filter.
 
     :param x: the input variables
@@ -1544,19 +1544,53 @@ def create_instances_from_matrices(x, y=None, name="data"):
     if y is not None:
         if len(x) != len(y):
             raise Exception("Dimensions of x and y differ: " + str(len(x)) + " != " + str(len(y)))
+
     # create header
     atts = []
+    type_x = []
     for i in range(len(x[0])):
-        atts.append(Attribute.create_numeric("x" + str(i+1)))
+        if np.issubdtype(x.dtype[i], np.number):
+            type_x.append("N")  # number
+            atts.append(Attribute.create_numeric("x" + str(i+1)))
+        elif np.issubdtype(x.dtype[i], np.str_):
+            type_x.append("S")  # string
+            atts.append(Attribute.create_string("x" + str(i+1)))
+        else:
+            type_x.append("B")  # bytes
+            atts.append(Attribute.create_string("x" + str(i+1)))
+    type_y = ""
     if y is not None:
-        atts.append(Attribute.create_numeric("y"))
+        if np.issubdtype(y.dtype, np.number):
+            type_y = "N"  # number
+            atts.append(Attribute.create_numeric("y"))
+        elif np.issubdtype(y.dtype, np.str_):
+            type_y = "S"  # string
+            atts.append(Attribute.create_string("y"))
+        else:
+            type_y = "B"  # bytes
+            atts.append(Attribute.create_string("y"))
+
     result = Instances.create_instances(name, atts, len(x))
+
     # add data
     for i in range(len(x)):
-        values = list(x[i])
+        values = []
+        for n in range(len(x[i])):
+            if type_x[n] == "N":
+                values.append(x[i][n])
+            elif type_x[n] == "S":
+                values.append(result.attribute(n).add_string_value(x[i][n]))
+            else:
+                values.append(result.attribute(n).add_string_value(x[i][n].decode("utf-8")))
         if y is not None:
-            values.append(y[i])
+            if type_y == "N":
+                values.append(y[i])
+            elif type_y == "S":
+                values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i]))
+            else:
+                values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i].decode("utf-8")))
         result.add_instance(Instance.create_instance(values))
+
     return result
 
 
