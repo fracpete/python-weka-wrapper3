@@ -66,4 +66,14 @@ setup(
         'plots': ["matplotlib"],
         'graphs': ["pygraphviz", "PIL"],
     },
+    entry_points={
+        "console_scripts": [
+            "pww-associator=weka.associations:sys_main",
+            "pww-attsel=weka.attribute_selection:sys_main",
+            "pww-classifier=weka.classifiers:sys_main",
+            "pww-clusterer=weka.clusterers:sys_main",
+            "pww-datagenerator=weka.datagenerators:sys_main",
+            "pww-filter=weka.filters:sys_main",
+        ]
+    }
 )

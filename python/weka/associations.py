@@ -12,13 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # associations.py
-# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
 import os
 import sys
 import argparse
+import traceback
 import weka.core.jvm as jvm
 import weka.core.converters as converters
 from weka.core.classes import OptionHandler, JavaObject, join_options
@@ -601,10 +602,13 @@ class Associator(OptionHandler):
                 "(Lweka/associations/Associator;)Lweka/associations/Associator;", associator.jobject))
 
 
-def main():
+def main(args=None):
     """
     Runs a associator from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
+
+    :param args: the command-line arguments to use, uses sys.argv if None
+    :type args: list
     """
 
     parser = argparse.ArgumentParser(
@@ -614,7 +618,7 @@ def main():
     parser.add_argument("-t", metavar="train", dest="train", required=True, help="training set file")
     parser.add_argument("associator", help="associator classname, e.g., weka.associations.Apriori")
     parser.add_argument("option", nargs=argparse.REMAINDER, help="additional associator options")
-    parsed = parser.parse_args()
+    parsed = parser.parse_args(args=args)
     jars = []
     if parsed.classpath is not None:
         jars = parsed.classpath.split(os.pathsep)
@@ -631,13 +635,31 @@ def main():
         data = loader.load_file(parsed.train)
         associator.build_associations(data)
         print(str(associator))
-    except Exception as e:
-        print(e)
+    except Exception:
+        print(traceback.format_exc())
     finally:
         jvm.stop()
+
+
+def sys_main():
+    """
+    Runs the main function using the system cli arguments, and
+    returns a system error code.
+
+    :return: 0 for success, 1 for failure.
+    :rtype: int
+    """
+
+    try:
+        main()
+        return 0
+    except Exception:
+        print(traceback.format_exc())
+        return 1
+
 
 if __name__ == "__main__":
     try:
         main()
-    except Exception as ex:
-        print(ex)
+    except Exception:
+        print(traceback.format_exc())

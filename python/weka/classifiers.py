@@ -19,6 +19,7 @@ import os
 import javabridge
 import logging
 import argparse
+import traceback
 import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
 import weka.core.classes as classes
@@ -2114,11 +2115,15 @@ def predictions_to_instances(data, preds):
     return result
 
 
-def main():
+def main(args=None):
     """
     Runs a classifier from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
+
+    :param args: the command-line arguments to use, uses sys.argv if None
+    :type args: list
     """
+
     parser = argparse.ArgumentParser(
         description='Performs classification/regression from the command-line. Calls JVM start/stop automatically.')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
@@ -2138,7 +2143,7 @@ def main():
     parser.add_argument("-g", metavar="graph", dest="graph", help="output file for graph (if supported)")
     parser.add_argument("classifier", help="classifier classname, e.g., weka.classifiers.trees.J48")
     parser.add_argument("option", nargs=argparse.REMAINDER, help="additional classifier options")
-    parsed = parser.parse_args()
+    parsed = parser.parse_args(args=args)
     jars = []
     if parsed.classpath is not None:
         jars = parsed.classpath.split(os.pathsep)
@@ -2179,13 +2184,31 @@ def main():
         if len(parsed.option) > 0:
             classifier.options = parsed.option
         print(Evaluation.evaluate_model(classifier, params))
-    except Exception as e:
-        print(e)
+    except Exception:
+        print(traceback.format_exc())
     finally:
         jvm.stop()
+
+
+def sys_main():
+    """
+    Runs the main function using the system cli arguments, and
+    returns a system error code.
+
+    :return: 0 for success, 1 for failure.
+    :rtype: int
+    """
+
+    try:
+        main()
+        return 0
+    except Exception:
+        print(traceback.format_exc())
+        return 1
+
 
 if __name__ == "__main__":
     try:
         main()
-    except Exception as ex:
-        print(ex)
+    except Exception:
+        print(traceback.format_exc())

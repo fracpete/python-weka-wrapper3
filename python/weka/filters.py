@@ -19,6 +19,7 @@ import logging
 import os
 import sys
 import argparse
+import traceback
 import weka.core.jvm as jvm
 from weka.core.classes import OptionHandler, join_options
 from weka.core.capabilities import Capabilities
@@ -313,11 +314,15 @@ class StringToWordVector(Filter):
             self.jobject, "setTokenizer", "(Lweka/core/tokenizers/Tokenizer;)V", tokenizer.jobject)
 
 
-def main():
+def main(args=None):
     """
     Runs a filter from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
+
+    :param args: the command-line arguments to use, uses sys.argv if None
+    :type args: list
     """
+
     parser = argparse.ArgumentParser(
         description='Executes a filter from the command-line. Calls JVM start/stop automatically.')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
@@ -330,7 +335,7 @@ def main():
                         help="1-based class attribute index")
     parser.add_argument("filter", help="filter classname, e.g., weka.filters.AllFilter")
     parser.add_argument("option", nargs=argparse.REMAINDER, help="additional filter options")
-    parsed = parser.parse_args()
+    parsed = parser.parse_args(args=args)
     if parsed.input2 is None and parsed.output2 is not None:
         raise Exception("No second input file provided ('-r ...')!")
 
@@ -374,13 +379,31 @@ def main():
             in2.class_index = int(cls)
             out2 = flter.filter(in2)
             saver.save_file(out2, parsed.output2)
-    except Exception as e:
-        print(e)
+    except Exception:
+        print(traceback.format_exc())
     finally:
         jvm.stop()
+
+
+def sys_main():
+    """
+    Runs the main function using the system cli arguments, and
+    returns a system error code.
+
+    :return: 0 for success, 1 for failure.
+    :rtype: int
+    """
+
+    try:
+        main()
+        return 0
+    except Exception:
+        print(traceback.format_exc())
+        return 1
+
 
 if __name__ == "__main__":
     try:
         main()
-    except Exception as ex:
-        print(ex)
+    except Exception:
+        print(traceback.format_exc())

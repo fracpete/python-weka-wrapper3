@@ -12,13 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # clusterers.py
-# Copyright (C) 2014-201 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
 import os
 import sys
 import argparse
+import traceback
 import weka.core.jvm as jvm
 import weka.core.classes as classes
 from weka.core.classes import JavaObject, join_options
@@ -380,11 +381,15 @@ class ClusterEvaluation(JavaObject):
             clusterer.jobject, data.jobject, num_folds, rnd.jobject)
 
 
-def main():
+def main(args=None):
     """
     Runs a clusterer from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
+
+    :param args: the command-line arguments to use, uses sys.argv if None
+    :type args: list
     """
+
     parser = argparse.ArgumentParser(
         description='Performs clustering from the command-line. Calls JVM start/stop automatically.')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
@@ -400,7 +405,7 @@ def main():
     parser.add_argument("-g", metavar="graph", dest="graph", help="graph output file (if supported)")
     parser.add_argument("clusterer", help="clusterer classname, e.g., weka.clusterers.SimpleKMeans")
     parser.add_argument("option", nargs=argparse.REMAINDER, help="additional clusterer options")
-    parsed = parser.parse_args()
+    parsed = parser.parse_args(args=args)
     jars = []
     if parsed.classpath is not None:
         jars = parsed.classpath.split(os.pathsep)
@@ -433,13 +438,31 @@ def main():
         if len(parsed.option) > 0:
             clusterer.options = parsed.option
         print(ClusterEvaluation.evaluate_clusterer(clusterer, params))
-    except Exception as e:
-        print(e)
+    except Exception:
+        print(traceback.format_exc())
     finally:
         jvm.stop()
+
+
+def sys_main():
+    """
+    Runs the main function using the system cli arguments, and
+    returns a system error code.
+
+    :return: 0 for success, 1 for failure.
+    :rtype: int
+    """
+
+    try:
+        main()
+        return 0
+    except Exception:
+        print(traceback.format_exc())
+        return 1
+
 
 if __name__ == "__main__":
     try:
         main()
-    except Exception as ex:
-        print(ex)
+    except Exception:
+        print(traceback.format_exc())

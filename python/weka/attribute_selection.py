@@ -12,13 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # attribute_selection.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
 import argparse
 import os
 import sys
+import traceback
 import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
 from weka.core.classes import JavaObject, join_options
@@ -307,11 +308,15 @@ class AttributeSelection(JavaObject):
             evaluator.jobject, args)
 
 
-def main():
+def main(args=None):
     """
     Runs attribute selection from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
+
+    :param args: the command-line arguments to use, uses sys.argv if None
+    :type args: list
     """
+
     parser = argparse.ArgumentParser(
         description='Performs attribute selection from the command-line. Calls JVM start/stop automatically.')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
@@ -323,7 +328,7 @@ def main():
     parser.add_argument("-n", metavar="seed", dest="seed", help="the seed value for randomization")
     parser.add_argument("evaluator", help="evaluator classname, e.g., weka.attributeSelection.CfsSubsetEval")
     parser.add_argument("option", nargs=argparse.REMAINDER, help="additional evaluator options")
-    parsed = parser.parse_args()
+    parsed = parser.parse_args(args=args)
     jars = []
     if parsed.classpath is not None:
         jars = parsed.classpath.split(os.pathsep)
@@ -349,12 +354,30 @@ def main():
             evaluation.options = parsed.option
         print(AttributeSelection.attribute_selection(evaluation, params))
     except Exception as e:
-        print(e)
+        print(traceback.format_exc())
     finally:
         jvm.stop()
+
+
+def sys_main():
+    """
+    Runs the main function using the system cli arguments, and
+    returns a system error code.
+
+    :return: 0 for success, 1 for failure.
+    :rtype: int
+    """
+
+    try:
+        main()
+        return 0
+    except Exception:
+        print(traceback.format_exc())
+        return 1
+
 
 if __name__ == "__main__":
     try:
         main()
     except Exception as ex:
-        print(ex)
+        print(traceback.format_exc())

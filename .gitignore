@@ -68,8 +68,8 @@ build
 dist
 
 # virtualenv
-venv
-venv.*
+venv/
+venv*/
 
 # other
 blah*
