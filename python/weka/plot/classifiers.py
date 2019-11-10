@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -219,6 +219,76 @@ def plot_roc(evaluation, class_index=None, title=None, key_loc="lower right", ou
         plt.show()
 
 
+def plot_rocs(evaluations, class_index=0, title=None, key_loc="lower right", outfile=None, wait=True):
+    """
+    Plots the ROC (receiver operator characteristics) curve for the predictions of multiple classifiers
+    on the same dataset.
+
+    TODO: click events http://matplotlib.org/examples/event_handling/data_browser.html
+
+    :param evaluations: the dictionary of Evaluation objects to obtain the predictions from, the key is used
+                        in the plot key as prefix
+    :type evaluations: dict
+    :param class_index: the 0-based index of the class-label to create the plot for
+    :type class_index: int
+    :param title: an optional title
+    :type title: str
+    :param key_loc: the position string for the key
+    :type key_loc: str
+    :param outfile: the output file, ignored if None
+    :type outfile: str
+    :param wait: whether to wait for the user to close the plot
+    :type wait: bool
+    """
+    if not plot.matplotlib_available:
+        logger.error("Matplotlib is not installed, plotting unavailable!")
+        return
+
+    if len(evaluations) < 1:
+        raise Exception("At least one Evaluation object required!")
+
+    # check if datasets compatible
+    if len(evaluations) > 1:
+        evaluation = None
+        eval_key = None
+        for key in evaluations:
+            if evaluation is None:
+                eval_key = key
+                evaluation = evaluations[key]
+            else:
+                msg = evaluation.header.equal_headers(evaluations[key].header)
+                if msg is not None:
+                    raise Exception("Evaluation '%s' and '%s' are not compatible: %s" % (eval_key, key, msg))
+
+    ax = None
+    for prefix in evaluations:
+        evaluation = evaluations[prefix]
+        data = generate_thresholdcurve_data(evaluation, class_index)
+        head = evaluation.header
+        area = get_auc(data)
+        x, y = get_thresholdcurve_data(data, "False Positive Rate", "True Positive Rate")
+        if ax is None:
+            fig, ax = plt.subplots()
+            ax.set_xlabel("False Positive Rate")
+            ax.set_ylabel("True Positive Rate")
+            if title is None:
+                title = "ROC"
+            ax.set_title(title)
+            ax.grid(True)
+            fig.canvas.set_window_title(title)
+            plt.xlim([-0.05, 1.05])
+            plt.ylim([-0.05, 1.05])
+        plot_label = prefix + " " + head.class_attribute.value(class_index) + " (AUC: %0.4f)" % area
+        ax.plot(x, y, label=plot_label)
+        ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
+    plt.draw()
+    plt.legend(loc=key_loc, shadow=True)
+    if outfile is not None:
+        plt.savefig(outfile)
+    if wait:
+        plt.show()
+
+
 def plot_prc(evaluation, class_index=None, title=None, key_loc="lower center", outfile=None, wait=True):
     """
     Plots the PRC (precision recall) curve for the given predictions.
@@ -261,6 +331,76 @@ def plot_prc(evaluation, class_index=None, title=None, key_loc="lower center", o
             plt.ylim([-0.05, 1.05])
             ax.grid(True)
         plot_label = head.class_attribute.value(cindex) + " (PRC: %0.4f)" % area
+        ax.plot(x, y, label=plot_label)
+        ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
+    plt.draw()
+    plt.legend(loc=key_loc, shadow=True)
+    if outfile is not None:
+        plt.savefig(outfile)
+    if wait:
+        plt.show()
+
+
+def plot_prcs(evaluations, class_index=0, title=None, key_loc="lower center", outfile=None, wait=True):
+    """
+    Plots the PRC (precision recall) curve for the predictions of multiple classifiers
+    on the same dataset.
+
+    TODO: click events http://matplotlib.org/examples/event_handling/data_browser.html
+
+    :param evaluations: the dictionary of Evaluation objects to obtain the predictions from, the key is used
+                        in the plot key as prefix
+    :type evaluations: dict
+    :param class_index: the 0-based index of the class-label to create the plot for
+    :type class_index: int
+    :param title: an optional title
+    :type title: str
+    :param key_loc: the location string for the key
+    :type key_loc: str
+    :param outfile: the output file, ignored if None
+    :type outfile: str
+    :param wait: whether to wait for the user to close the plot
+    :type wait: bool
+    """
+    if not plot.matplotlib_available:
+        logger.error("Matplotlib is not installed, plotting unavailable!")
+        return
+
+    if len(evaluations) < 1:
+        raise Exception("At least one Evaluation object required!")
+
+    # check if datasets compatible
+    if len(evaluations) > 1:
+        evaluation = None
+        eval_key = None
+        for key in evaluations:
+            if evaluation is None:
+                eval_key = key
+                evaluation = evaluations[key]
+            else:
+                msg = evaluation.header.equal_headers(evaluations[key].header)
+                if msg is not None:
+                    raise Exception("Evaluation '%s' and '%s' are not compatible: %s" % (eval_key, key, msg))
+
+    ax = None
+    for prefix in evaluations:
+        evaluation = evaluations[prefix]
+        data = generate_thresholdcurve_data(evaluation, class_index)
+        head = evaluation.header
+        area = get_prc(data)
+        x, y = get_thresholdcurve_data(data, "Recall", "Precision")
+        if ax is None:
+            fig, ax = plt.subplots()
+            ax.set_xlabel("Recall")
+            ax.set_ylabel("Precision")
+            if title is None:
+                title = "PRC"
+            ax.set_title(title)
+            fig.canvas.set_window_title(title)
+            plt.xlim([-0.05, 1.05])
+            plt.ylim([-0.05, 1.05])
+            ax.grid(True)
+        plot_label = prefix + " " + head.class_attribute.value(class_index) + " (PRC: %0.4f)" % area
         ax.plot(x, y, label=plot_label)
         ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
     plt.draw()
