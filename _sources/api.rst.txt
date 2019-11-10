@@ -246,12 +246,11 @@ Here we just save a trained classifier to a file, load it again from disk and ou
 
 .. code-block:: python
 
-   >>> import weka.core.serialization as serialization
    >>> from weka.classifiers import Classifier
    >>> classifier = ...  # previously built classifier
-   >>> serialization.write("/some/where/out.model", classifier)
+   >>> classifier.serialize("/some/where/out.model")
    >>> ...
-   >>> classifier2 = Classifier(jobject=serialization.read("/some/where/out.model"))
+   >>> classifier2, _ = Classifier.deserialize("/some/where/out.model")
    >>> print(classifier2)
 
 Weka usually saves the header of the dataset that was used for training as well (e.g., in order to determine
@@ -259,18 +258,22 @@ whether test data is compatible). This is done as follows:
 
 .. code-block:: python
 
-   >>> import weka.core.serialization as serialization
    >>> from weka.classifiers import Classifier
-   >>> from weka.core.dataset import Instances
    >>> classifier = ...  # previously built Classifier
    >>> data = ... # previously loaded/generated Instances
-   >>> serialization.write_all("/some/where/out.model", [classifier, Instances.template_instances(data)])
+   >>> classifier.serialize("/some/where/out.model", header=data)
    >>> ...
-   >>> objects = serialization.read_all("/some/where/out.model")
-   >>> classifier2 = Classifier(jobject=objects[0])
-   >>> data2 = Instances(jobject=objects[1])
+   >>> classifier2, data2 = Classifier.deserialize("/some/where/out.model")
    >>> print(classifier2)
    >>> print(data2)
+
+Clusterers and filters offer the `serialize` and `deserialize` methods as well. For all other
+serialization/deserialiation tasks, use the methods offered by the `weka.core.serialization` module:
+
+* `write(file, object)`
+* `write_all(file, [obj1, obj2, ...])`
+* `read(file)`
+* `read_all(file)`
 
 
 Experiments

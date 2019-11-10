@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka package &#8212; python-weka-wrapper3 0.1.7 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.1.8 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.7',
+        VERSION:     '0.1.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="flow.html" title="Flow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.8 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -524,9 +524,34 @@
 
 <dl class="function">
 <dt id="weka.associations.main">
-<code class="descclassname">weka.associations.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.main" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.associations.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a associator from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<em>list</em>) – the command-line arguments to use, uses sys.argv if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.associations.sys_main">
+<code class="descclassname">weka.associations.</code><code class="descname">sys_main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.sys_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the main function using the system cli arguments, and
+returns a system error code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 for success, 1 for failure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -861,9 +886,34 @@ Use -h to see all options.</p>
 
 <dl class="function">
 <dt id="weka.attribute_selection.main">
-<code class="descclassname">weka.attribute_selection.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.main" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.attribute_selection.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs attribute selection from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<em>list</em>) – the command-line arguments to use, uses sys.argv if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.attribute_selection.sys_main">
+<code class="descclassname">weka.attribute_selection.</code><code class="descname">sys_main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.sys_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the main function using the system cli arguments, and
+returns a system error code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 for success, 1 for failure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -933,6 +983,24 @@ Use -h to see all options.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the classification (either regression value or 0-based label index)</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="weka.classifiers.Classifier.deserialize">
+<em class="property">classmethod </em><code class="descname">deserialize</code><span class="sig-paren">(</span><em>ser_file</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Classifier.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes a classifier from a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ser_file</strong> (<em>str</em>) – the model file to deserialize</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">model and, if available, the dataset header</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
 </tr>
 </tbody>
 </table>
@@ -1035,6 +1103,24 @@ Use -h to see all options.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the classifier</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.classifiers.Classifier" title="weka.classifiers.Classifier">Classifier</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.classifiers.Classifier.serialize">
+<code class="descname">serialize</code><span class="sig-paren">(</span><em>ser_file</em>, <em>header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Classifier.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the classifier to the specified file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ser_file</strong> (<em>str</em>) – the file to save the model to</li>
+<li><strong>header</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the (optional) dataset header to store alongside; recommended</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2536,7 +2622,7 @@ training data, at the confidence level specified when evaluation was performed.<
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter in use</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3076,9 +3162,17 @@ Must be derived from weka.classifiers.evaluation.output.prediction.AbstractOutpu
 
 <dl class="function">
 <dt id="weka.classifiers.main">
-<code class="descclassname">weka.classifiers.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.main" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.classifiers.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a classifier from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<em>list</em>) – the command-line arguments to use, uses sys.argv if None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -3100,6 +3194,23 @@ Use -h to see all options.</p>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.classifiers.sys_main">
+<code class="descclassname">weka.classifiers.</code><code class="descname">sys_main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.sys_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the main function using the system cli arguments, and
+returns a system error code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 for success, 1 for failure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
 </tr>
 </tbody>
 </table>
@@ -3326,6 +3437,24 @@ Use -h to see all options.</p>
 </table>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="weka.clusterers.Clusterer.deserialize">
+<em class="property">classmethod </em><code class="descname">deserialize</code><span class="sig-paren">(</span><em>ser_file</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.Clusterer.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes a clusterer from a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ser_file</strong> (<em>str</em>) – the model file to deserialize</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">model and, if available, the dataset header</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="weka.clusterers.Clusterer.distribution_for_instance">
 <code class="descname">distribution_for_instance</code><span class="sig-paren">(</span><em>inst</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.Clusterer.distribution_for_instance" title="Permalink to this definition">¶</a></dt>
@@ -3411,6 +3540,24 @@ Use -h to see all options.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="weka.clusterers.Clusterer.serialize">
+<code class="descname">serialize</code><span class="sig-paren">(</span><em>ser_file</em>, <em>header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.Clusterer.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the clusterer to the specified file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ser_file</strong> (<em>str</em>) – the file to save the model to</li>
+<li><strong>header</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the (optional) dataset header to store alongside; recommended</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="weka.clusterers.Clusterer.update_clusterer">
 <code class="descname">update_clusterer</code><span class="sig-paren">(</span><em>inst</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.Clusterer.update_clusterer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the clusterer with the instance.</p>
@@ -3447,7 +3594,7 @@ Use -h to see all options.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3480,9 +3627,34 @@ Use -h to see all options.</p>
 
 <dl class="function">
 <dt id="weka.clusterers.main">
-<code class="descclassname">weka.clusterers.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.main" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.clusterers.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a clusterer from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<em>list</em>) – the command-line arguments to use, uses sys.argv if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.clusterers.sys_main">
+<code class="descclassname">weka.clusterers.</code><code class="descname">sys_main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.sys_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the main function using the system cli arguments, and
+returns a system error code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 for success, 1 for failure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -3597,11 +3769,11 @@ Use -h to see all options.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator"><em>DataGenerator</em></a>) – the generator to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator"><em>DataGenerator</em></a>) – the generator to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the generator</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator">DataGenerator</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator">DataGenerator</a></td>
 </tr>
 </tbody>
 </table>
@@ -3616,7 +3788,7 @@ Use -h to see all options.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>generator</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator"><em>DataGenerator</em></a>) – the generator instance to use</li>
+<li><strong>generator</strong> (<a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator"><em>DataGenerator</em></a>) – the generator instance to use</li>
 <li><strong>args</strong> (<em>list</em>) – the command-line arguments</li>
 </ul>
 </td>
@@ -3661,9 +3833,34 @@ Use -h to see all options.</p>
 
 <dl class="function">
 <dt id="weka.datagenerators.main">
-<code class="descclassname">weka.datagenerators.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.datagenerators.main" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.datagenerators.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.datagenerators.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a datagenerator from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<em>list</em>) – the command-line arguments to use, uses sys.argv if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.datagenerators.sys_main">
+<code class="descclassname">weka.datagenerators.</code><code class="descname">sys_main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.datagenerators.sys_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the main function using the system cli arguments, and
+returns a system error code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 for success, 1 for failure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -4442,6 +4639,24 @@ outperforms the other.</p>
 </table>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="weka.filters.Filter.deserialize">
+<em class="property">classmethod </em><code class="descname">deserialize</code><span class="sig-paren">(</span><em>ser_file</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.Filter.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes a filter from a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ser_file</strong> (<em>str</em>) – the file to deserialize from</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">model</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="weka.filters.Filter.filter">
 <code class="descname">filter</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.Filter.filter" title="Permalink to this definition">¶</a></dt>
@@ -4503,11 +4718,11 @@ using the same setup.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter"><em>Filter</em></a>) – the filter to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the filter</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4540,6 +4755,20 @@ using the same setup.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the output format</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.filters.Filter.serialize">
+<code class="descname">serialize</code><span class="sig-paren">(</span><em>ser_file</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.Filter.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the filter to the specified file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ser_file</strong> (<em>str</em>) – the file to save the filter to</td>
 </tr>
 </tbody>
 </table>
@@ -4651,9 +4880,34 @@ using the same setup.</p>
 
 <dl class="function">
 <dt id="weka.filters.main">
-<code class="descclassname">weka.filters.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.main" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.filters.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a filter from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<em>list</em>) – the command-line arguments to use, uses sys.argv if None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.filters.sys_main">
+<code class="descclassname">weka.filters.</code><code class="descname">sys_main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.sys_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the main function using the system cli arguments, and
+returns a system error code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 for success, 1 for failure.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -4730,7 +4984,7 @@ Use -h to see all options.</p>
         <li class="right" >
           <a href="flow.html" title="Flow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.8 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

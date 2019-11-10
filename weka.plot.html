@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.plot package &#8212; python-weka-wrapper3 0.1.7 documentation</title>
+    <title>weka.plot package &#8212; python-weka-wrapper3 0.1.8 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.7',
+        VERSION:     '0.1.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="weka.flow.html" title="weka.flow package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -143,7 +143,7 @@ class.</p>
 
 <dl class="function">
 <dt id="weka.plot.classifiers.plot_classifier_errors">
-<code class="descclassname">weka.plot.classifiers.</code><code class="descname">plot_classifier_errors</code><span class="sig-paren">(</span><em>predictions</em>, <em>absolute=True</em>, <em>max_relative_size=50</em>, <em>absolute_size=50</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.plot_classifier_errors" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.plot.classifiers.</code><code class="descname">plot_classifier_errors</code><span class="sig-paren">(</span><em>predictions</em>, <em>absolute=True</em>, <em>max_relative_size=50</em>, <em>absolute_size=50</em>, <em>title=None</em>, <em>outfile=None</em>, <em>wait=True</em>, <em>key_loc='lower center'</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.plot_classifier_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the classifers for the given list of predictions.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -151,13 +151,15 @@ class.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>predictions</strong> (<em>list</em>) – the predictions to plot</li>
+<li><strong>predictions</strong> (<em>list</em><em> or </em><em>dict</em>) – the predictions to plot, use a dict to plot predictions of multiple classifiers
+(keys are used as prefixes for plots)</li>
 <li><strong>absolute</strong> (<em>bool</em>) – whether to use absolute errors as size or relative ones</li>
 <li><strong>max_relative_size</strong> (<em>int</em>) – the maximum size in point in case of relative mode</li>
 <li><strong>absolute_size</strong> (<em>int</em>) – the size in point in case of absolute mode</li>
 <li><strong>title</strong> (<em>str</em>) – an optional title</li>
 <li><strong>outfile</strong> (<em>str</em>) – the output file, ignored if None</li>
 <li><strong>wait</strong> (<em>bool</em>) – whether to wait for the user to close the plot</li>
+<li><strong>key_loc</strong> (<em>str</em>) – the location string for the key</li>
 </ul>
 </td>
 </tr>
@@ -217,6 +219,31 @@ $: options, <a href="#id1"><span class="problematic" id="id2">*</span></a>: 1-ba
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.plot.classifiers.plot_prcs">
+<code class="descclassname">weka.plot.classifiers.</code><code class="descname">plot_prcs</code><span class="sig-paren">(</span><em>evaluations</em>, <em>class_index=0</em>, <em>title=None</em>, <em>key_loc='lower center'</em>, <em>outfile=None</em>, <em>wait=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.plot_prcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the PRC (precision recall) curve for the predictions of multiple classifiers
+on the same dataset.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>evaluations</strong> (<em>dict</em>) – the dictionary of Evaluation objects to obtain the predictions from, the key is used
+in the plot key as prefix</li>
+<li><strong>class_index</strong> (<em>int</em>) – the 0-based index of the class-label to create the plot for</li>
+<li><strong>title</strong> (<em>str</em>) – an optional title</li>
+<li><strong>key_loc</strong> (<em>str</em>) – the location string for the key</li>
+<li><strong>outfile</strong> (<em>str</em>) – the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) – whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.plot.classifiers.plot_roc">
 <code class="descclassname">weka.plot.classifiers.</code><code class="descname">plot_roc</code><span class="sig-paren">(</span><em>evaluation</em>, <em>class_index=None</em>, <em>title=None</em>, <em>key_loc='lower right'</em>, <em>outfile=None</em>, <em>wait=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.plot_roc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the ROC (receiver operator characteristics) curve for the given predictions.</p>
@@ -228,6 +255,31 @@ $: options, <a href="#id1"><span class="problematic" id="id2">*</span></a>: 1-ba
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>evaluation</strong> (<a class="reference internal" href="weka.html#weka.classifiers.Evaluation" title="weka.classifiers.Evaluation"><em>Evaluation</em></a>) – the evaluation to obtain the predictions from</li>
 <li><strong>class_index</strong> (<em>list</em>) – the list of 0-based indices of the class-labels to create the plot for</li>
+<li><strong>title</strong> (<em>str</em>) – an optional title</li>
+<li><strong>key_loc</strong> (<em>str</em>) – the position string for the key</li>
+<li><strong>outfile</strong> (<em>str</em>) – the output file, ignored if None</li>
+<li><strong>wait</strong> (<em>bool</em>) – whether to wait for the user to close the plot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.plot.classifiers.plot_rocs">
+<code class="descclassname">weka.plot.classifiers.</code><code class="descname">plot_rocs</code><span class="sig-paren">(</span><em>evaluations</em>, <em>class_index=0</em>, <em>title=None</em>, <em>key_loc='lower right'</em>, <em>outfile=None</em>, <em>wait=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.plot_rocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the ROC (receiver operator characteristics) curve for the predictions of multiple classifiers
+on the same dataset.</p>
+<p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>evaluations</strong> (<em>dict</em>) – the dictionary of Evaluation objects to obtain the predictions from, the key is used
+in the plot key as prefix</li>
+<li><strong>class_index</strong> (<em>int</em>) – the 0-based index of the class-label to create the plot for</li>
 <li><strong>title</strong> (<em>str</em>) – an optional title</li>
 <li><strong>key_loc</strong> (<em>str</em>) – the position string for the key</li>
 <li><strong>outfile</strong> (<em>str</em>) – the output file, ignored if None</li>
@@ -468,7 +520,7 @@ $: options, <a href="#id1"><span class="problematic" id="id2">*</span></a>: 1-ba
         <li class="right" >
           <a href="weka.flow.html" title="weka.flow package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>

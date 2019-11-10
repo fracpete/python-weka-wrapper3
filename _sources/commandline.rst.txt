@@ -22,7 +22,7 @@ Artifical data can be generated using one of Weka's data generators, e.g., the
 
 .. code-block:: bash
 
-   python weka/datagenerators.py \
+   pww-datagenerator \
        -o /tmp/out.arff \
        weka.datagenerators.classifiers.classification.Agrawal
 
@@ -34,7 +34,7 @@ Filtering a single ARFF dataset, removing the last attribute using the `Remove` 
 
 .. code-block:: bash
 
-   python weka/filters.py \
+   pww-filter \
        -i /my/datasets/iris.arff \
        -o /tmp/out.arff \
        -c last \
@@ -53,7 +53,7 @@ on the iris UCI dataset:
 
 .. code-block:: bash
 
-   python weka/classifiers.py \
+   pww-classifier \
         -t /my/datasets/iris.arff \
         -c last \
         weka.classifiers.trees.J48
@@ -68,7 +68,7 @@ Example on how to perform classes-to-clusters evaluation for `SimpleKMeans`
 
 .. code-block:: bash
 
-   pythonn weka/clusterers.py \
+   pww-clusterer \
        -t /my/datasets/iris.arff \
        -c last \
        weka.clusterers.SimpleKMeans
@@ -83,7 +83,7 @@ You can perform attribute selection using `BestFirst` as search algorithm and
 
 .. code-block:: bash
 
-   python weka/attribute_selection.py \
+   pww-attsel \
        -i /my/datasets/iris.arff \
        -x 5 \
        -n 42 \
@@ -100,7 +100,7 @@ Associators, like `Apriori`, can be run like this:
 
 .. code-block:: bash
 
-   python weka/associators.py \
+   pww-associator \
        -t /my/datasets/iris.arff \
        weka.associations.Apriori \
        -N 9 -I

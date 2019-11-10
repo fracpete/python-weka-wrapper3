@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API &#8212; python-weka-wrapper3 0.1.7 documentation</title>
+    <title>API &#8212; python-weka-wrapper3 0.1.8 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.7',
+        VERSION:     '0.1.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.8 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -244,31 +244,34 @@ using a previously loaded dataset without a class attribute:</p>
 <h2>Serialization<a class="headerlink" href="#serialization" title="Permalink to this headline">¶</a></h2>
 <p>You can easily serialize and de-serialize as well.</p>
 <p>Here we just save a trained classifier to a file, load it again from disk and output the model:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.serialization</span> <span class="kn">as</span> <span class="nn">serialization</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># previously built classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">serialization</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="n">classifier</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Classifier</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">classifier2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Weka usually saves the header of the dataset that was used for training as well (e.g., in order to determine
 whether test data is compatible). This is done as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">weka.core.serialization</span> <span class="kn">as</span> <span class="nn">serialization</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.core.dataset</span> <span class="kn">import</span> <span class="n">Instances</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># previously built Classifier</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># previously loaded/generated Instances</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">serialization</span><span class="o">.</span><span class="n">write_all</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">classifier</span><span class="p">,</span> <span class="n">Instances</span><span class="o">.</span><span class="n">template_instances</span><span class="p">(</span><span class="n">data</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">objects</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">read_all</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">objects</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data2</span> <span class="o">=</span> <span class="n">Instances</span><span class="p">(</span><span class="n">jobject</span><span class="o">=</span><span class="n">objects</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classifier2</span><span class="p">,</span> <span class="n">data2</span> <span class="o">=</span> <span class="n">Classifier</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="s2">&quot;/some/where/out.model&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">classifier2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Clusterers and filters offer the <cite>serialize</cite> and <cite>deserialize</cite> methods as well. For all other
+serialization/deserialiation tasks, use the methods offered by the <cite>weka.core.serialization</cite> module:</p>
+<ul class="simple">
+<li><cite>write(file, object)</cite></li>
+<li><cite>write_all(file, [obj1, obj2, …])</cite></li>
+<li><cite>read(file)</cite></li>
+<li><cite>read_all(file)</cite></li>
+</ul>
 </div>
 <div class="section" id="experiments">
 <h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
@@ -431,7 +434,7 @@ whether test data is compatible). This is done as follows:</p>
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.7 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.8 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
