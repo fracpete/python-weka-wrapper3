@@ -22,10 +22,12 @@ import argparse
 import traceback
 import weka.core.jvm as jvm
 import weka.core.classes as classes
+import weka.core.serialization as serialization
 from weka.core.classes import JavaObject, join_options
 from weka.core.classes import OptionHandler
 from weka.core.classes import Random
 from weka.core.capabilities import Capabilities
+from weka.core.dataset import Instances
 from weka.filters import Filter
 
 # logging setup
@@ -170,6 +172,44 @@ class Clusterer(OptionHandler):
             jobject=javabridge.static_call(
                 "weka/clusterers/AbstractClusterer", "makeCopy",
                 "(Lweka/clusterers/Clusterer;)Lweka/clusterers/Clusterer;", clusterer.jobject))
+
+    @classmethod
+    def deserialize(cls, ser_file):
+        """
+        Deserializes a clusterer from a file.
+
+        :param ser_file: the model file to deserialize
+        :type ser_file: str
+        :return: model and, if available, the dataset header
+        :rtype: tuple
+        """
+
+        objs = serialization.read_all(ser_file)
+        if len(objs) == 1:
+            return Clusterer(jobject=objs[0]), None
+        elif len(objs) == 2:
+            return Clusterer(jobject=objs[0]), Instances(jobject=objs[1])
+        else:
+            raise Exception(
+                "Excepted one or two objects in the model file (%s), but encountered: %d" % (ser_file, len(objs)))
+
+    def serialize(self, ser_file, header=None):
+        """
+        Serializes the clusterer to the specified file.
+
+        :param ser_file: the file to save the model to
+        :type ser_file: str
+        :param header: the (optional) dataset header to store alongside; recommended
+        :type header: Instances
+        """
+
+        if (header is not None) and header.num_instances > 0:
+            header = Instances.template_instances(header)
+
+        if header is not None:
+            serialization.write_all(ser_file, [self, header])
+        else:
+            serialization.write(ser_file, self)
 
 
 class SingleClustererEnhancer(Clusterer):

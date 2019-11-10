@@ -21,6 +21,7 @@ import sys
 import argparse
 import traceback
 import weka.core.jvm as jvm
+import weka.core.serialization as serialization
 from weka.core.classes import OptionHandler, join_options
 from weka.core.capabilities import Capabilities
 from weka.core.converters import Loader
@@ -176,6 +177,34 @@ class Filter(OptionHandler):
             jobject=javabridge.static_call(
                 "weka/filters/Filter", "makeCopy",
                 "(Lweka/filters/Filter;)Lweka/filters/Filter;", flter.jobject))
+
+    @classmethod
+    def deserialize(cls, ser_file):
+        """
+        Deserializes a filter from a file.
+
+        :param ser_file: the file to deserialize from
+        :type ser_file: str
+        :return: model
+        :rtype: Filter
+        """
+
+        objs = serialization.read_all(ser_file)
+        if len(objs) == 1:
+            return Filter(jobject=objs[0])
+        else:
+            raise Exception(
+                "Excepted one object in the model file (%s), but encountered: %d" % (ser_file, len(objs)))
+
+    def serialize(self, ser_file):
+        """
+        Serializes the filter to the specified file.
+
+        :param ser_file: the file to save the filter to
+        :type ser_file: str
+        """
+
+        serialization.write(ser_file, self)
 
 
 class MultiFilter(Filter):

@@ -4,7 +4,10 @@ Changelog
 0.1.8 (????-??-??)
 ------------------
 
-- added console scripts: pww-associator, pww-attsel, pww-classifier, pww-clusterer, pww-datagenerator, pww-filter
+- added console scripts: `pww-associator`, `pww-attsel`, `pww-classifier`, `pww-clusterer`, `pww-datagenerator`, `pww-filter`
+- added `serialize`, `deserialize` methods to `weka.classifiers.Classifier` to simplify loading/saving model
+- added `serialize`, `deserialize` methods to `weka.clusterers.Clusterer` to simplify loading/saving model
+- added `serialize`, `deserialize` methods to `weka.filters.Filter` to simplify loading/saving filter
 - ...
 
 
