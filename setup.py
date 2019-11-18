@@ -55,7 +55,7 @@ setup(
         "weka": ["lib/*.jar"],
     },
     include_package_data=True,
-    version="0.1.8",
+    version="0.1.9",
     author='Peter "fracpete" Reutemann',
     author_email='pythonwekawrapper@gmail.com',
     install_requires=[
