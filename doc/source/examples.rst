@@ -61,6 +61,89 @@ and then loads the full dataset:
    print(data)
 
 
+Create dataset manually
+-----------------------
+
+The following code snippet defines the dataset structure by creating its attributes and then the
+dataset itself. Once the `weka.core.dataset.Instances` object is available, rows (i.e., `weka.core.dataset.Instance`
+objects) can be added.
+
+.. code-block:: python
+
+   from weka.core.dataset import Attribute, Instance, Instances
+
+   # create attributes
+   num_att = Attribute.create_numeric("num")
+   date_att = Attribute.create_date("dat", "yyyy-MM-dd")
+   nom_att = Attribute.create_nominal("nom", ["label1", "label2"])
+
+   # create dataset
+   dataset = Instances.create_instances("helloworld", [num_att, date_att, nom_att], 0)
+
+   # add rows
+   values = [3.1415926, date_att.parse_date("2014-04-10"), 1.0]
+   inst = Instance.create_instance(values)
+   dataset.add_instance(inst)
+
+   values = [2.71828, date_att.parse_date("2014-08-09"), Instance.missing_value()]
+   inst = Instance.create_instance(values)
+   dataset.add_instance(inst)
+
+   print(dataset)
+
+
+Create dataset from lists
+-------------------------
+
+If your data is easily available as lists, you can also construct datasets using this approach:
+
+.. code-block:: python
+
+   from weka.core.dataset import create_instances_from_lists
+   from random import randint
+
+   # pure numeric
+   x = [[randint(1, 10) for _ in range(5)] for _ in range(10)]
+   y = [randint(0, 1) for _ in range(10)]
+   dataset = create_instances_from_lists(x, y, name="generated from lists")
+   print(dataset)
+
+   dataset = create_instances_from_lists(x, name="generated from lists (no y)")
+   print(dataset)
+
+   # mixed data types
+   x = [["TEXT", 1, 1.1], ["XXX", 2, 2.2]]
+   y = ["A", "B"]
+   dataset = create_instances_from_lists(x, y, name="generated from mixed lists")
+   print(dataset)
+
+
+Create dataset from matrices
+----------------------------
+
+Another way of constructing a dataset is to use numpy matrices/arrays (e.g., obtained from a Panda data frame):
+
+.. code-block:: python
+
+   from weka.core.dataset import create_instances_from_matrices
+   import numpy as np
+
+   # pure numeric
+   x = np.random.randn(10, 5)
+   y = np.random.randn(10)
+   dataset = create_instances_from_matrices(x, y, name="generated from matrices")
+   print(dataset)
+
+   dataset = create_instances_from_matrices(x, name="generated from matrix (no y)")
+   print(dataset)
+
+   # mixed data types
+   x = np.array([("TEXT", 1, 1.1), ("XXX", 2, 2.2)], dtype='S20, i4, f8')
+   y = np.array(["A", "B"], dtype='S20')
+   dataset = create_instances_from_matrices(x, y, name="generated from mixed matrices")
+   print(dataset)
+
+
 Output help from underlying OptionHandler
 -----------------------------------------
 

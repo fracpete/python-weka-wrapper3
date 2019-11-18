@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.9 (2019-11-19)
+------------------
+
+- method `create_instances_from_matrices` from module `weka.core.dataset` now works with pure numeric data again
+- added sections for creating datasets (manual, lists, matrices) to examples documentation
+
+
 0.1.8 (2019-11-11)
 ------------------
 

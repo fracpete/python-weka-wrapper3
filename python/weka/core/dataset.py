@@ -1588,15 +1588,20 @@ def create_instances_from_matrices(x, y=None, name="data"):
     atts = []
     type_x = []
     for i in range(len(x[0])):
-        if np.issubdtype(x.dtype[i], np.number):
+        try:
+            len(x.dtype)
+            if np.issubdtype(x.dtype[i], np.number):
+                type_x.append("N")  # number
+                atts.append(Attribute.create_numeric("x" + str(i+1)))
+            elif np.issubdtype(x.dtype[i], np.str_):
+                type_x.append("S")  # string
+                atts.append(Attribute.create_string("x" + str(i+1)))
+            else:
+                type_x.append("B")  # bytes
+                atts.append(Attribute.create_string("x" + str(i+1)))
+        except:
             type_x.append("N")  # number
             atts.append(Attribute.create_numeric("x" + str(i+1)))
-        elif np.issubdtype(x.dtype[i], np.str_):
-            type_x.append("S")  # string
-            atts.append(Attribute.create_string("x" + str(i+1)))
-        else:
-            type_x.append("B")  # bytes
-            atts.append(Attribute.create_string("x" + str(i+1)))
     type_y = ""
     if y is not None:
         if np.issubdtype(y.dtype, np.number):

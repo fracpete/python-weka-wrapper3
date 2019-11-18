@@ -12,13 +12,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
 import weka.core.dataset as dataset
 import weka.core.converters as converters
 import wekatests.tests.weka_test as weka_test
+from weka.core.dataset import create_instances_from_lists, create_instances_from_matrices
+from random import randint
+import numpy as np
 
 
 class TestDataset(weka_test.WekaTest):
@@ -317,6 +320,56 @@ class TestDataset(weka_test.WekaTest):
             self.fail(msg="Should not accept split percentage of " + str(perc))
         except Exception as e:
             pass
+
+    def test_create_instances_from_lists(self):
+        """
+        Tests the create_instances_from_lists method.
+        """
+
+        # numeric
+        x = [[randint(1, 10) for _ in range(5)] for _ in range(10)]
+        y = [randint(0, 1) for _ in range(10)]
+        self.assertEqual(len(x), 10)
+        self.assertEqual(len(y), 10)
+        dataset = create_instances_from_lists(x, name="generated from lists (no y)")
+        self.assertEqual(len(dataset), 10)
+        dataset = create_instances_from_lists(x, y, name="generated from lists")
+        self.assertEqual(len(dataset), 10)
+
+        # mixed
+        x = [["TEXT", 1, 1.1], ["XXX", 2, 2.2]]
+        y = ["A", "B"]
+        self.assertEqual(len(x), 2)
+        self.assertEqual(len(y), 2)
+        dataset = create_instances_from_lists(x, name="generated from mixed lists (no y)")
+        self.assertEqual(len(dataset), 2)
+        dataset = create_instances_from_lists(x, y, name="generated from mixed lists")
+        self.assertEqual(len(dataset), 2)
+
+    def test_create_instances_from_matrices(self):
+        """
+        Tests the create_instances_from_matrices method.
+        """
+
+        # numeric
+        x = np.random.randn(10, 5)
+        y = np.random.randn(10)
+        self.assertEqual(len(x), 10)
+        self.assertEqual(len(y), 10)
+        dataset = create_instances_from_lists(x, name="generated from lists (no y)")
+        self.assertEqual(len(dataset), 10)
+        dataset = create_instances_from_lists(x, y, name="generated from lists")
+        self.assertEqual(len(dataset), 10)
+
+        # mixed
+        x = np.array([("TEXT", 1, 1.1), ("XXX", 2, 2.2)], dtype='S20, i4, f8')
+        y = np.array(["A", "B"], dtype='S20')
+        self.assertEqual(len(x), 2)
+        self.assertEqual(len(y), 2)
+        dataset = create_instances_from_matrices(x, name="generated from mixed lists (no y)")
+        self.assertEqual(len(dataset), 2)
+        dataset = create_instances_from_matrices(x, y, name="generated from mixed lists")
+        self.assertEqual(len(dataset), 2)
 
 
 def suite():
