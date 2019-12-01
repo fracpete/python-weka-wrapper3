@@ -507,7 +507,7 @@ class Instances(JavaObject):
 
     def train_test_split(self, percentage, rnd=None):
         """
-        Generates a train/test split.
+        Generates a train/test split. Creates a copy of the dataset first before applying randomization.
 
         :param percentage: the percentage split to use (amount to use for training; 0-100)
         :type percentage: double
@@ -520,12 +520,14 @@ class Instances(JavaObject):
             raise Exception("Split percentage must be > 0, provided: " + str(percentage))
         if percentage >= 100:
             raise Exception("Split percentage must be < 100, provided: " + str(percentage))
+        data = self
         if rnd is not None:
-            self.randomize(rnd)
-        train_size = int(round(self.num_instances * percentage / 100))
-        test_size = self.num_instances - train_size
-        train_inst = Instances.copy_instances(self, 0, train_size)
-        test_inst = Instances.copy_instances(self, train_size, test_size)
+            data = Instances.copy_instances(data)
+            data.randomize(rnd)
+        train_size = int(round(data.num_instances * percentage / 100))
+        test_size = data.num_instances - train_size
+        train_inst = Instances.copy_instances(data, 0, train_size)
+        test_inst = Instances.copy_instances(data, train_size, test_size)
         return train_inst, test_inst
 
     @classmethod
