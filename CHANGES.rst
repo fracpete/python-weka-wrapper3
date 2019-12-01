@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.10 (2019-12-02)
+-------------------
+
+- method `train_test_split` of the `weka.dataset.Instances` class now creates a copy of itself before
+  applying randomization, to avoid changing the order of data for subsequent calls.
+
+
 0.1.9 (2019-11-19)
 ------------------
 
