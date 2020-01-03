@@ -1,5 +1,6 @@
 recursive-include python *.arff
 recursive-include python *.jar
 recursive-exclude python weka-src.jar
+recursive-include python pkg_suggestions.csv
 include DESCRIPTION.rst
 include CHANGES.rst

@@ -20,6 +20,7 @@ import argparse
 import json
 import logging
 import re
+import csv
 import weka.core.typeconv as typeconv
 import javabridge
 from javabridge import JWrapper, JClassWrapper
@@ -28,6 +29,9 @@ import weka.core.jvm as jvm
 
 # logging setup
 logger = logging.getLogger("weka.core.classes")
+
+suggestions = None
+""" dictionary for class -> package relation """
 
 
 def get_class(classname):
@@ -647,6 +651,13 @@ class JavaObject(JSONObject):
                 javabridge.class_for_name("java.lang.Object"), classname, [])
         except JavaException as e:
             print("Failed to instantiate " + classname + ": " + str(e))
+            suggestions = suggest_package(classname, exact=True)
+            if len(suggestions) > 0:
+                print("Class '" + classname + "' is available from package: " + ", ".join(suggestions))
+                if not jvm.with_package_support:
+                    print("You need to start up the JVM with package support:\njvm.start(packages=True)")
+            else:
+                print("If this class is from a Weka package, then you need to start up the JVM with package support:\njvm.start(packages=True)")
             return None
 
 
@@ -2026,6 +2037,56 @@ class SetupGenerator(OptionHandler):
             else:
                 result.append(JavaObject(enm.nextElement()))
         return result
+
+
+def load_suggestions():
+    """
+    Loads the class/package suggestions, if necessary.
+    """
+    global suggestions
+    if suggestions is not None:
+        return
+    filename = jvm.lib_dir() + os.sep + "pkg_suggestions.csv"
+    suggestions = {}
+    with open(filename) as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            if len(row[1]) > 0:
+                suggestions[row[1]] = row[0]
+
+
+def suggest_package(name, exact=False):
+    """
+    Suggests package(s) for the given name (classname, package name). Matching can be either exact or just a substring.
+
+    :param name: the name to look for
+    :type name: str
+    :param exact: whether to perform exact matching or substring matching
+    :type exact: bool
+    :return: list of matching package names
+    :rtype: list
+    """
+
+    global suggestions
+
+    result = []
+
+    load_suggestions()
+
+    for cname in suggestions:
+        add = False
+        if exact:
+            if name == cname:
+                add = True
+        else:
+            if name in cname:
+                add = True
+        if add:
+            pkg = suggestions[cname]
+            if pkg not in result:
+                result.append(pkg)
+
+    return result
 
 
 def main():

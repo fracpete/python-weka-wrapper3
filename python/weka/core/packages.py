@@ -17,6 +17,7 @@
 import javabridge
 import weka.core.jvm as jvm
 from weka.core.classes import JavaObject
+import weka.core.classes as classes
 
 
 class Package(JavaObject):
@@ -333,6 +334,22 @@ def is_installed(name):
         if pkge.name == name:
             return True
     return False
+
+
+def suggest_package(name, exact=False):
+    """
+    Suggests package(s) for the given name (classname, package name). Matching can be either exact or just a substring.
+
+    :param name: the name to look for
+    :type name: str
+    :param exact: whether to perform exact matching or substring matching
+    :type exact: bool
+    :return: list of matching package names
+    :rtype: list
+    """
+
+    return classes.suggest_package(name, exact)
+
 
 if __name__ == "__main__":
     jvm.start()

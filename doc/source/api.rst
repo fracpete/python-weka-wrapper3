@@ -372,3 +372,23 @@ Packages can be listed, installed and uninstalled using the `weka.core.packages`
    items = packages.installed_packages()
    for item in items:
        print(item.name + " " + item.url)
+
+You can also output suggested Weka packages for partial class/package names or exact class names (default is partial
+string matching):
+
+.. code-block:: python
+
+   # suggest package for classifier 'RBFClassifier'
+   search = "RBFClassifier"
+   suggestions = packages.suggest_package(search)
+   print("suggested packages for " + search + ":", suggestions)
+
+   # suggest package for package '.ft.'
+   search = ".ft."
+   suggestions = packages.suggest_package(search)
+   print("suggested packages for " + search + ":", suggestions)
+
+   # suggest package for classifier 'weka.classifiers.trees.J48graft'
+   search = "weka.classifiers.trees.J48graft"
+   suggestions = packages.suggest_package(search, exact=True)
+   print("suggested packages for " + search + ":", suggestions)

@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.1.11 (????-??-??)
+-------------------
+
+- method `suggest_package` of the `weka.core.packages` module suggests packages for exact class names or
+  partial class names/package names (`NNge` or `.ft.`)
+- the `JavaObject.new_instance` method now suggests packages (if possible) in case the instantiation fails
+  due to package not installed or JVM not started with package support
+
+
 0.1.10 (2019-12-02)
 -------------------
 

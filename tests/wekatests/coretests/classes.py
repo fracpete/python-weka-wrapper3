@@ -269,6 +269,15 @@ class TestClasses(weka_test.WekaTest):
         self.assertIsNotNone(cls)
         self.assertEqual(cmdline, cls.to_commandline())
 
+    def test_suggestsions(self):
+        """
+        Tests suggesting packages.
+        """
+        suggestions = classes.suggest_package("weka.classifiers.meta.GridSearch")
+        self.assertEqual(len(suggestions), 1, msg="Should have found exactly one package")
+        suggestions = classes.suggest_package(".associations.", exact=False)
+        self.assertGreaterEqual(len(suggestions), 1, msg="Should have found several packages")
+
 
 def suite():
     """

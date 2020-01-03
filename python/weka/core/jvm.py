@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # jvm.py
-# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import os
@@ -21,6 +21,10 @@ import logging
 
 
 started = None
+""" whether the JVM has been started """
+
+with_package_support = None
+""" whether JVM was started with package support """
 
 # logging setup
 logging.basicConfig()
@@ -28,13 +32,24 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
+def lib_dir():
+    """
+    Returns the "lib" directory path.
+
+    :return: the path to the "lib" directory
+    :rtype: str
+    """
+
+    rootdir = os.path.split(os.path.dirname(__file__))[0]
+    return rootdir + os.sep + "lib"
+
+
 def add_bundled_jars():
     """
     Adds the bundled jars to the JVM's classpath.
     """
     # determine lib directory with jars
-    rootdir = os.path.split(os.path.dirname(__file__))[0]
-    libdir = rootdir + os.sep + "lib"
+    libdir = lib_dir()
 
     # add jars from lib directory
     for l in glob.glob(libdir + os.sep + "*.jar"):
@@ -68,6 +83,7 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
     :type max_heap_size: str
     """
     global started
+    global with_package_support
 
     if started is not None:
         logger.info("JVM already running, call jvm.stop() first")
@@ -95,6 +111,7 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
     if packages is not None:
         if isinstance(packages, bool):
             if packages:
+                with_package_support = True
                 logger.debug("Package support enabled")
             else:
                 logger.debug("Package support disabled")
@@ -103,6 +120,7 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
             if os.path.exists(packages) and os.path.isdir(packages):
                 logger.debug("Using alternative Weka home directory: " + packages)
                 weka_home = packages
+                with_package_support = True
             else:
                 logger.warning("Invalid Weka home: " + packages)
 
