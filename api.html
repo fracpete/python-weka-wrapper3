@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API &#8212; python-weka-wrapper3 0.1.10 documentation</title>
+    <title>API &#8212; python-weka-wrapper3 0.1.11 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.10',
+        VERSION:     '0.1.11',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.10 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.11 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -361,6 +361,24 @@ serialization/deserialiation tasks, use the methods offered by the <cite>weka.co
     <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>You can also output suggested Weka packages for partial class/package names or exact class names (default is partial
+string matching):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># suggest package for classifier &#39;RBFClassifier&#39;</span>
+<span class="n">search</span> <span class="o">=</span> <span class="s2">&quot;RBFClassifier&quot;</span>
+<span class="n">suggestions</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">suggest_package</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;suggested packages for &quot;</span> <span class="o">+</span> <span class="n">search</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">suggestions</span><span class="p">)</span>
+
+<span class="c1"># suggest package for package &#39;.ft.&#39;</span>
+<span class="n">search</span> <span class="o">=</span> <span class="s2">&quot;.ft.&quot;</span>
+<span class="n">suggestions</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">suggest_package</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;suggested packages for &quot;</span> <span class="o">+</span> <span class="n">search</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">suggestions</span><span class="p">)</span>
+
+<span class="c1"># suggest package for classifier &#39;weka.classifiers.trees.J48graft&#39;</span>
+<span class="n">search</span> <span class="o">=</span> <span class="s2">&quot;weka.classifiers.trees.J48graft&quot;</span>
+<span class="n">suggestions</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">suggest_package</span><span class="p">(</span><span class="n">search</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;suggested packages for &quot;</span> <span class="o">+</span> <span class="n">search</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">suggestions</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -434,11 +452,11 @@ serialization/deserialiation tasks, use the methods offered by the <cite>weka.co
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.10 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.11 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2019, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2020, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

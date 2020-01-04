@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.1.10 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.1.11 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.10',
+        VERSION:     '0.1.11',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.11 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -2205,6 +2205,12 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.classes.load_suggestions">
+<code class="descclassname">weka.core.classes.</code><code class="descname">load_suggestions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.load_suggestions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the class/package suggestions, if necessary.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.classes.main">
 <code class="descclassname">weka.core.classes.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a classifier from the command-line. Calls JVM start/stop automatically.
@@ -2263,6 +2269,36 @@ Use -h to see all options.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.suggest_package">
+<code class="descclassname">weka.core.classes.</code><code class="descname">suggest_package</code><span class="sig-paren">(</span><em>name</em>, <em>exact=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.suggest_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suggests package(s) for the given name (classname, package name). Matching can be either exact or just a substring.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – the name to look for</li>
+<li><strong>exact</strong> (<em>bool</em>) – whether to perform exact matching or substring matching</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of matching package names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="data">
+<dt id="weka.core.classes.suggestions">
+<code class="descclassname">weka.core.classes.</code><code class="descname">suggestions</code><em class="property"> = None</em><a class="headerlink" href="#weka.core.classes.suggestions" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary for class -&gt; package relation</p>
 </dd></dl>
 
 <dl class="function">
@@ -4532,6 +4568,22 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.jvm.lib_dir">
+<code class="descclassname">weka.core.jvm.</code><code class="descname">lib_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.lib_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the “lib” directory path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the path to the “lib” directory</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.jvm.start">
 <code class="descclassname">weka.core.jvm.</code><code class="descname">start</code><span class="sig-paren">(</span><em>class_path=None</em>, <em>bundled=True</em>, <em>packages=False</em>, <em>system_cp=False</em>, <em>max_heap_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the javabridge connection (starts up the JVM).</p>
@@ -4552,10 +4604,22 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </table>
 </dd></dl>
 
+<dl class="data">
+<dt id="weka.core.jvm.started">
+<code class="descclassname">weka.core.jvm.</code><code class="descname">started</code><em class="property"> = None</em><a class="headerlink" href="#weka.core.jvm.started" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether the JVM has been started</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="weka.core.jvm.stop">
 <code class="descclassname">weka.core.jvm.</code><code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kills the JVM.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="weka.core.jvm.with_package_support">
+<code class="descclassname">weka.core.jvm.</code><code class="descname">with_package_support</code><em class="property"> = None</em><a class="headerlink" href="#weka.core.jvm.with_package_support" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether JVM was started with package support</p>
 </dd></dl>
 
 </div>
@@ -4848,6 +4912,30 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <dt id="weka.core.packages.refresh_cache">
 <code class="descclassname">weka.core.packages.</code><code class="descname">refresh_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.refresh_cache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refreshes the cache.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.packages.suggest_package">
+<code class="descclassname">weka.core.packages.</code><code class="descname">suggest_package</code><span class="sig-paren">(</span><em>name</em>, <em>exact=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.suggest_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suggests package(s) for the given name (classname, package name). Matching can be either exact or just a substring.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – the name to look for</li>
+<li><strong>exact</strong> (<em>bool</em>) – whether to perform exact matching or substring matching</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of matching package names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -5247,12 +5335,12 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.11 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2019, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2020, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
