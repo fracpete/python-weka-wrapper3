@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.1.11 (????-??-??)
+0.1.11 (2020-01-04)
 -------------------
 
-- method `suggest_package` of the `weka.core.packages` module suggests packages for exact class names or
-  partial class names/package names (`NNge` or `.ft.`)
+- Upgraded Weka to 3.9.4
+- added method `suggest_package` to the `weka.core.packages` module for suggesting packages for partial class
+  names/package names (`NNge` or `.ft.`) or exact class names (`weka.classifiers.meta.StackingC`)
 - the `JavaObject.new_instance` method now suggests packages (if possible) in case the instantiation fails
   due to package not installed or JVM not started with package support
 
