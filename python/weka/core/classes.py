@@ -655,9 +655,10 @@ class JavaObject(JSONObject):
             if len(suggestions) > 0:
                 print("Class '" + classname + "' is available from package: " + ", ".join(suggestions))
                 if not jvm.with_package_support:
-                    print("You need to start up the JVM with package support:\njvm.start(packages=True)")
+                    print("Also, you need to start up the JVM with package support:\njvm.start(packages=True)")
             else:
-                print("If this class is from a Weka package, then you need to start up the JVM with package support:\njvm.start(packages=True)")
+                if not jvm.with_package_support:
+                    print("If this class is from a Weka package, then you need to start up the JVM with package support:\njvm.start(packages=True)")
             return None
 
 
