@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
 
 import os
 import inspect
@@ -150,6 +150,24 @@ def is_array(obj):
     cls = javabridge.call(obj, "getClass", "()Ljava/lang/Class;")
     return javabridge.call(cls, "isArray", "()Z")
 
+
+def list_property_names(obj):
+    """
+    Lists the property names (Bean properties, ie read/write method pair) of the Java object.
+
+    :param obj: the object to inspect
+    :type obj: JB_Object or JavaObject
+    :return: the list of property names
+    :rtype: list
+    """
+    if isinstance(obj, JavaObject):
+        obj = obj.jobject
+
+    return typeconv.string_array_to_list(
+        javabridge.static_call(
+            "Lweka/core/ClassHelper;", "listPropertyNames",
+            "(Ljava/lang/Object;)[Ljava/lang/String;",
+            obj))
 
 class Stoppable(object):
     """

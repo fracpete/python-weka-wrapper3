@@ -15,14 +15,18 @@
 
 /*
  * ClassHelper.java
- * Copyright (C) 2018 Fracpete (fracpete at gmail dot com)
+ * Copyright (C) 2018-2020 Fracpete (fracpete at gmail dot com)
  */
 
 package weka.core;
 
 import weka.Run;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,5 +87,43 @@ public class ClassHelper {
     if (field != null)
       return field.get(cls);
     throw new Exception("Failed to obtain static field '" + fieldname + "' from class '" + classname + "'!");
+  }
+
+  /**
+   * Returns the names of the Bean properties of the object.
+   * Eg used by GridSearch or MultiSearch.
+   *
+   * @param obj 	the object to get the property names from
+   * @return 		the property names
+   * @throws Exception	if failed to retrieve properties
+   */
+  public static String[] listPropertyNames(Object obj) throws Exception {
+    return listPropertyNames(obj.getClass());
+  }
+
+  /**
+   * Returns the names of the Bean properties of the class.
+   * Eg used by GridSearch or MultiSearch.
+   *
+   * @param cls 	the class to get the property names from
+   * @return 		the property names
+   * @throws Exception	if failed to retrieve properties
+   */
+  public static String[] listPropertyNames(Class cls) throws Exception {
+    List<String>			result;
+    BeanInfo 				bi;
+    PropertyDescriptor[] 	properties;
+
+    result     = new ArrayList<String>();
+    bi         = Introspector.getBeanInfo(cls);
+    properties = bi.getPropertyDescriptors();
+
+    for (PropertyDescriptor desc: properties) {
+      if ((desc == null) || (desc.getReadMethod() == null) || (desc.getWriteMethod() == null))
+        continue;
+      result.add(desc.getName());
+    }
+
+    return result.toArray(new String[0]);
   }
 }
