@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.12 (2020-01-10)
+-------------------
+
+- added method `list_property_names` to `weka.core.classes` module to allow listing of Bean property names
+  (which are used by `GridSearch` and `MultiSearch`) for a Java object.
+
+
 0.1.11 (2020-01-04)
 -------------------
 
