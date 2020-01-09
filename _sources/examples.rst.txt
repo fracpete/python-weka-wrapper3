@@ -290,10 +290,26 @@ Cross-validate regressor, display classifier errors and predictions
    plcls.plot_classifier_errors(evl.predictions, wait=True)
 
 
+Parameter optimization - property names
+---------------------------------------
+
+Both, `GridSearch` and `MultiSearch`, use Java Bean property names (and paths consisting of these),
+not command-line options in order to get/set the parameters under optimization.
+Using the `list_property_names` method of the `weka.core.classes` module, you can list the
+properties from a Java object:
+
+.. code-block:: python
+
+   from weka.core.classes import list_property_names
+   cls = Classifier(classname= "weka.classifiers.trees.J48")
+   for p in list_property_names(cls):
+       print(p)
+
+
 Parameter optimization - GridSearch
 -----------------------------------
 
-The following code optimizes the `C` parameter of `SMOreg` and the `gamma` parameter of its `RBFKernel`:
+The following code optimizes the `C` property of `SMOreg` and the `gamma` property of its `RBFKernel`:
 
 .. code-block:: python
 
@@ -310,14 +326,13 @@ The following code optimizes the `C` parameter of `SMOreg` and the `gamma` param
    print("Model:\n" + str(grid))
    print("\nBest setup:\n" + grid.best.to_commandline())
 
-**NB:** Make sure that the `GridSearch` package is not installed, as the `GridSearch` meta-classifier is already
-part of the monolithic `weka.jar` that comes with *python-weka-wrapper3*.
+**NB:** The `gridSearch` package must be installed for this to work.
 
 
 Parameter optimization - MultiSearch
 ------------------------------------
 
-The following code optimizes the `C` parameter of `SMOreg` and the `gamma` parameter of its `RBFKernel`:
+The following code optimizes the `C` property of `SMOreg` and the `gamma` property of its `RBFKernel`:
 
 .. code-block:: python
 
@@ -345,8 +360,8 @@ The following code optimizes the `C` parameter of `SMOreg` and the `gamma` param
    print("Model:\n" + str(multi))
    print("\nBest setup:\n" + multi.best.to_commandline())
 
-**NB:** `multisearch-weka-package <https://github.com/fracpete/multisearch-weka-package>`_ must be installed for
-this to work.
+**NB:** The `multisearch-weka-package <https://github.com/fracpete/multisearch-weka-package>`_ package must
+be installed for this to work.
 
 
 Experiments

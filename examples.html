@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Examples &#8212; python-weka-wrapper3 0.1.11 documentation</title>
+    <title>Examples &#8212; python-weka-wrapper3 0.1.12 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.11',
+        VERSION:     '0.1.12',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="sourcecode.html" title="Source code"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.11 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.12 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -299,9 +299,22 @@ the <code class="docutils literal"><span class="pre">options</span></code> prope
 </pre></div>
 </div>
 </div>
+<div class="section" id="parameter-optimization-property-names">
+<h2>Parameter optimization - property names<a class="headerlink" href="#parameter-optimization-property-names" title="Permalink to this headline">¶</a></h2>
+<p>Both, <cite>GridSearch</cite> and <cite>MultiSearch</cite>, use Java Bean property names (and paths consisting of these),
+not command-line options in order to get/set the parameters under optimization.
+Using the <cite>list_property_names</cite> method of the <cite>weka.core.classes</cite> module, you can list the
+properties from a Java object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.core.classes</span> <span class="kn">import</span> <span class="n">list_property_names</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span> <span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">list_property_names</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="parameter-optimization-gridsearch">
 <h2>Parameter optimization - GridSearch<a class="headerlink" href="#parameter-optimization-gridsearch" title="Permalink to this headline">¶</a></h2>
-<p>The following code optimizes the <cite>C</cite> parameter of <cite>SMOreg</cite> and the <cite>gamma</cite> parameter of its <cite>RBFKernel</cite>:</p>
+<p>The following code optimizes the <cite>C</cite> property of <cite>SMOreg</cite> and the <cite>gamma</cite> property of its <cite>RBFKernel</cite>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">GridSearch</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearch</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-sample-size&quot;</span><span class="p">,</span> <span class="s2">&quot;100.0&quot;</span><span class="p">,</span> <span class="s2">&quot;-traversal&quot;</span><span class="p">,</span> <span class="s2">&quot;ROW-WISE&quot;</span><span class="p">,</span> <span class="s2">&quot;-num-slots&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;-S&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">])</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="s2">&quot;CC&quot;</span>
@@ -316,12 +329,11 @@ the <code class="docutils literal"><span class="pre">options</span></code> prope
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best setup:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">grid</span><span class="o">.</span><span class="n">best</span><span class="o">.</span><span class="n">to_commandline</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><strong>NB:</strong> Make sure that the <cite>GridSearch</cite> package is not installed, as the <cite>GridSearch</cite> meta-classifier is already
-part of the monolithic <cite>weka.jar</cite> that comes with <em>python-weka-wrapper3</em>.</p>
+<p><strong>NB:</strong> The <cite>gridSearch</cite> package must be installed for this to work.</p>
 </div>
 <div class="section" id="parameter-optimization-multisearch">
 <h2>Parameter optimization - MultiSearch<a class="headerlink" href="#parameter-optimization-multisearch" title="Permalink to this headline">¶</a></h2>
-<p>The following code optimizes the <cite>C</cite> parameter of <cite>SMOreg</cite> and the <cite>gamma</cite> parameter of its <cite>RBFKernel</cite>:</p>
+<p>The following code optimizes the <cite>C</cite> property of <cite>SMOreg</cite> and the <cite>gamma</cite> property of its <cite>RBFKernel</cite>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.core.classes</span> <span class="kn">import</span> <span class="n">ListParameter</span><span class="p">,</span> <span class="n">MathParameter</span>
 <span class="n">multi</span> <span class="o">=</span> <span class="n">MultiSearch</span><span class="p">(</span>
     <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-sample-size&quot;</span><span class="p">,</span> <span class="s2">&quot;100.0&quot;</span><span class="p">,</span> <span class="s2">&quot;-initial-folds&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;-subsequent-folds&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
@@ -347,8 +359,8 @@ part of the monolithic <cite>weka.jar</cite> that comes with <em>python-weka-wra
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best setup:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">multi</span><span class="o">.</span><span class="n">best</span><span class="o">.</span><span class="n">to_commandline</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><strong>NB:</strong> <a class="reference external" href="https://github.com/fracpete/multisearch-weka-package">multisearch-weka-package</a> must be installed for
-this to work.</p>
+<p><strong>NB:</strong> The <a class="reference external" href="https://github.com/fracpete/multisearch-weka-package">multisearch-weka-package</a> package must
+be installed for this to work.</p>
 </div>
 <div class="section" id="experiments">
 <h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
@@ -587,6 +599,7 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
 <li><a class="reference internal" href="#build-classifier-incrementally-with-data-and-print-model">Build classifier incrementally with data and print model</a></li>
 <li><a class="reference internal" href="#cross-validate-filtered-classifier-and-print-evaluation-and-display-roc">Cross-validate filtered classifier and print evaluation and display ROC</a></li>
 <li><a class="reference internal" href="#cross-validate-regressor-display-classifier-errors-and-predictions">Cross-validate regressor, display classifier errors and predictions</a></li>
+<li><a class="reference internal" href="#parameter-optimization-property-names">Parameter optimization - property names</a></li>
 <li><a class="reference internal" href="#parameter-optimization-gridsearch">Parameter optimization - GridSearch</a></li>
 <li><a class="reference internal" href="#parameter-optimization-multisearch">Parameter optimization - MultiSearch</a></li>
 <li><a class="reference internal" href="#experiments">Experiments</a></li>
@@ -645,7 +658,7 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
         <li class="right" >
           <a href="sourcecode.html" title="Source code"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.11 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.12 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
