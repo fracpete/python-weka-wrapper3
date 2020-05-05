@@ -4,6 +4,10 @@ Changelog
 0.1.13 (????-??-??)
 -------------------
 
+- added `class_index` parameter to `weka.core.converters.load_any_file`
+  and `weka.core.converters.Loader.load_file`, which allows specifying of
+  index while loading it (`first`, `second`, `third`, `last-2`, `last-1`,
+  `last` or 1-based index).
 - ...
 
 

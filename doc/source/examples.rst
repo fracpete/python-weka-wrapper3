@@ -60,6 +60,23 @@ and then loads the full dataset:
 
    print(data)
 
+It is also possible to define the class attribute when loading:
+
+.. code-block:: python
+
+   data = loader.load_file(data_dir + "iris.arff", class_index="last")
+   data = converters.load_any_file(data_dir + "iris.arff", class_index="last")
+
+The following strings are supported:
+
+* `first`
+* `second`
+* `third`
+* `last-2` (third to last)
+* `last-1` (second to last)
+* `last`
+* any other string gets interpreted as 1-based index
+
 
 Create dataset manually
 -----------------------

@@ -57,7 +57,7 @@ class Loader(OptionHandler):
             raise Exception("Not in incremental mode, cannot iterate!")
         return IncrementalLoaderIterator(self, self.structure)
 
-    def load_file(self, dfile, incremental=False):
+    def load_file(self, dfile, incremental=False, class_index=None):
         """
         Loads the specified file and returns the Instances object.
         In case of incremental loading, only the structure.
@@ -66,6 +66,8 @@ class Loader(OptionHandler):
         :type dfile: str
         :param incremental: whether to load the dataset incrementally
         :type incremental: bool
+        :param class_index: the class index string to use ('first', 'second', 'third', 'last-2', 'last-1', 'last' or 1-based index)
+        :type class_index: str
         :return: the full dataset or the header (if incremental)
         :rtype: Instances
         :raises Exception: if the file does not exist
@@ -83,9 +85,25 @@ class Loader(OptionHandler):
         javabridge.call(self.jobject, "setFile", "(Ljava/io/File;)V", dfile)
         if incremental:
             self.structure = Instances(javabridge.call(self.jobject, "getStructure", "()Lweka/core/Instances;"))
-            return self.structure
+            result = self.structure
         else:
-            return Instances(javabridge.call(self.jobject, "getDataSet", "()Lweka/core/Instances;"))
+            result = Instances(javabridge.call(self.jobject, "getDataSet", "()Lweka/core/Instances;"))
+        if class_index is not None:
+            if class_index == 'first':
+                result.class_index = 0
+            elif class_index == 'second':
+                result.class_index = 1
+            elif class_index == 'third':
+                result.class_index = 2
+            elif class_index == 'last-2':
+                result.class_index = result.num_attributes - 3
+            elif class_index == 'last-1':
+                result.class_index = result.num_attributes - 2
+            elif class_index == 'last':
+                result.class_index = result.num_attributes - 1
+            else:
+                result.class_index = int(class_index)
+        return result
         
     def load_url(self, url, incremental=False):
         """
@@ -243,12 +261,14 @@ def loader_for_file(filename):
         return Loader(jobject=loader)
 
 
-def load_any_file(filename):
+def load_any_file(filename, class_index=None):
     """
     Determines a Loader based on the the file extension. If successful, loads the full dataset and returns it.
 
     :param filename: the name of the file to load
     :type filename: str
+    :param class_index: the class index string to use ('first', 'second', 'third', 'last-2', 'last-1', 'last' or 1-based index)
+    :type class_index: str
     :return: the
     :rtype: Instances
     """
@@ -256,7 +276,7 @@ def load_any_file(filename):
     if loader is None:
         return None
     else:
-        return loader.load_file(filename)
+        return loader.load_file(filename, class_index=class_index)
 
 
 def saver_for_file(filename):
