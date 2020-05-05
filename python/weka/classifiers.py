@@ -637,6 +637,23 @@ class MultipleClassifiersCombiner(Classifier):
             obj.append(classifier.jobject)
         javabridge.call(self.jobject, "setClassifiers", "([Lweka/classifiers/Classifier;)V", obj)
 
+    def clear(self):
+        """
+        Removes all classifiers.
+        """
+        self.classifiers = []
+
+    def append(self, classifier):
+        """
+        Appends the classifier to the current list of classifiers.
+
+        :param classifier: the classifier to add
+        :type classifier: Classifier
+        """
+        l = self.classifiers
+        l.append(classifier)
+        self.classifiers = l
+
 
 class Kernel(OptionHandler):
     """

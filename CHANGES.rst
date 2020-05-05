@@ -8,6 +8,9 @@ Changelog
   and `weka.core.converters.Loader.load_file`, which allows specifying of
   index while loading it (`first`, `second`, `third`, `last-2`, `last-1`,
   `last` or 1-based index).
+- added `append` and `clear` methods to `weka.filters.MultiFilter` and
+  `weka.classifiers.MultipleClassifiersCombiner` to make adding of
+  filters/classifiers easier.
 - ...
 
 

@@ -255,6 +255,23 @@ class MultiFilter(Filter):
             obj.append(fltr.jobject)
         javabridge.call(self.jobject, "setFilters", "([Lweka/filters/Filter;)V", obj)
 
+    def clear(self):
+        """
+        Removes all filters.
+        """
+        self.filters = []
+
+    def append(self, filter):
+        """
+        Appends the filter to the current list of filters.
+
+        :param filter: the filter to add
+        :type filter: Filter
+        """
+        l = self.filters
+        l.append(filter)
+        self.filters = l
+
 
 class StringToWordVector(Filter):
     """
