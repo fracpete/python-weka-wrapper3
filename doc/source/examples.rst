@@ -161,6 +161,39 @@ Another way of constructing a dataset is to use numpy matrices/arrays (e.g., obt
    print(dataset)
 
 
+Dataset subsets
+---------------
+
+Transformations in Weka usually occur by applying filters (see section *Filters* below).
+However, quite often one only wants to quickly create a subset (of colunms or rows) from a dataset.
+For this purpose, the `subset` method of the `weka.core.dataset.Instances` method can be used
+(it uses filters under the hood to generate the actual subset):
+
+.. code-block:: python
+
+   from weka.core.converters import load_any_file
+
+   data = load_any_file("/some/where/iris.arff")
+   print(data.attribute_names(), data.num_instances)
+
+   # select columns by name
+   subset = data.subset(col_names=['sepallength', 'sepalwidth', 'petallength', 'petalwidth'])
+   print(subset.attribute_names(), subset.num_instances)
+
+   # select columns by range (1-based indices)
+   subset = data.subset(col_range='1-3,5')
+   print(subset.attribute_names(), subset.num_instances)
+
+   # select rows by range (1-based indices)
+   subset = data.subset(row_range='51-150')
+   print(subset.attribute_names(), subset.num_instances)
+
+   # invert selection of cols/rows and keep original relation name
+   subset = data.subset(col_range='5', invert_cols=True, row_range='51-150', invert_rows=True, keep_relationame=True)
+   print(subset.attribute_names(), subset.num_instances)
+
+
+
 Output help from underlying OptionHandler
 -----------------------------------------
 
