@@ -554,7 +554,8 @@ class Instances(JavaObject):
         """
         return javabridge.call(inst.jobject, "toSummaryString", "()Ljava/lang/String;")
 
-    def subset(self, col_range=None, col_names=None, invert_cols=False, row_range=None, invert_rows=False):
+    def subset(self, col_range=None, col_names=None, invert_cols=False, row_range=None, invert_rows=False,
+               keep_relationame=False):
         """
         Returns a subset of attributes/rows of the Instances object.
         If neither attributes nor rows have been specified a copy of the dataset
@@ -574,11 +575,15 @@ class Instances(JavaObject):
         :type row_range: str
         :param invert_rows: whether to invert the returned rows
         :type invert_rows: bool
+        :param keep_relationame: whether to keep the original relation name
+        :type keep_relationame: bool
         :return: the subset
         :rtype: Instances
         """
 
         from weka.filters import Filter, MultiFilter
+
+        old_relationname = self.relationname
 
         # turn column names into 1-based indices
         if col_names is not None:
@@ -605,7 +610,12 @@ class Instances(JavaObject):
                             options=["-R", row_range, ("-V" if not invert_rows else "")])
             multi.append(remove)
         multi.inputformat(self)
-        return multi.filter(self)
+        result = multi.filter(self)
+
+        if keep_relationame:
+            result.relationname = old_relationname
+
+        return result
 
 
 class Instance(JavaObject):
