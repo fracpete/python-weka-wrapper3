@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.13 (????-??-??)
+0.1.13 (2020-05-06)
 -------------------
 
 - added `class_index` parameter to `weka.core.converters.load_any_file`
@@ -14,7 +14,6 @@ Changelog
 - added `attribute_names()` method to `weka.core.dataset.Instances` class
 - added `subset` method to `weka.core.dataset.Instances` class, which returns
   a subset of columns and/or rows.
-- ...
 
 
 0.1.12 (2020-01-10)
