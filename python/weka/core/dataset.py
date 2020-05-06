@@ -115,6 +115,18 @@ class Instances(JavaObject):
         """
         return Attribute(self.__attribute(index))
 
+    def attribute_names(self):
+        """
+        Returns a list of all the attribute names.
+
+        :return: list of attribute names
+        :rtype: list
+        """
+        result = []
+        for i in range(self.num_attributes):
+            result.append(self.attribute(i).name)
+        return result
+
     def attribute_by_name(self, name):
         """
         Returns the specified attribute, None if not found.
@@ -541,6 +553,59 @@ class Instances(JavaObject):
         :rtype: str
         """
         return javabridge.call(inst.jobject, "toSummaryString", "()Ljava/lang/String;")
+
+    def subset(self, col_range=None, col_names=None, invert_cols=False, row_range=None, invert_rows=False):
+        """
+        Returns a subset of attributes/rows of the Instances object.
+        If neither attributes nor rows have been specified a copy of the dataset
+        gets returned. The invers of the specified cols/rows can be returned by setting invert_cols
+        and/or invert_rows to True.
+        The method uses the weka.filters.unsupervised.attribute.Remove and
+        weka.filters.unsupervised.instance.RemoveRange filters under the hood.
+
+        :param col_range: the subset of attributes to return (eg '1-3,7-12,67-last'), None for all
+        :type col_range: str
+        :param col_names: the list of attributes to return (list of names; case-sensitive),
+                         takes precedence over col_range
+        :type col_names: list
+        :param invert_cols: whether to invert the returned attributes
+        :type invert_cols: bool
+        :param row_range: the subset of rows to return (eg '1-3,7-12,67-last'), None for all
+        :type row_range: str
+        :param invert_rows: whether to invert the returned rows
+        :type invert_rows: bool
+        :return: the subset
+        :rtype: Instances
+        """
+
+        from weka.filters import Filter, MultiFilter
+
+        # turn column names into 1-based indices
+        if col_names is not None:
+            cols = []
+            for col_name in col_names:
+                att = self.attribute_by_name(col_name)
+                if att is None:
+                    raise Exception("Invalid attribute name: %s" % col_name)
+                cols.append(str(att.index + 1))
+            col_range = ",".join(cols)
+
+        # nothing selected -> return copy
+        if (col_range is None) and (row_range is None):
+            return Instances.copy_instances(self)
+
+        multi = MultiFilter()
+        multi.clear()
+        if col_range is not None:
+            remove = Filter(classname="weka.filters.unsupervised.attribute.Remove",
+                            options=["-R", col_range, ("-V" if not invert_cols else "")])
+            multi.append(remove)
+        if row_range is not None:
+            remove = Filter(classname="weka.filters.unsupervised.instance.RemoveRange",
+                            options=["-R", row_range, ("-V" if not invert_rows else "")])
+            multi.append(remove)
+        multi.inputformat(self)
+        return multi.filter(self)
 
 
 class Instance(JavaObject):

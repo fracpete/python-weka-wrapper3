@@ -11,6 +11,9 @@ Changelog
 - added `append` and `clear` methods to `weka.filters.MultiFilter` and
   `weka.classifiers.MultipleClassifiersCombiner` to make adding of
   filters/classifiers easier.
+- added `attribute_names()` method to `weka.core.dataset.Instances` class
+- added `subset` method to `weka.core.dataset.Instances` class, which returns
+  a subset of columns and/or rows.
 - ...
 
 
