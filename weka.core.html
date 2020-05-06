@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.1.12 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.1.13 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.12',
+        VERSION:     '0.1.13',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -2390,7 +2390,7 @@ Use -h to see all options.</p>
 <p>Wrapper class for Loaders.</p>
 <dl class="method">
 <dt id="weka.core.converters.Loader.load_file">
-<code class="descname">load_file</code><span class="sig-paren">(</span><em>dfile</em>, <em>incremental=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.converters.Loader.load_file" title="Permalink to this definition">¶</a></dt>
+<code class="descname">load_file</code><span class="sig-paren">(</span><em>dfile</em>, <em>incremental=False</em>, <em>class_index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.converters.Loader.load_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the specified file and returns the Instances object.
 In case of incremental loading, only the structure.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2400,6 +2400,7 @@ In case of incremental loading, only the structure.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>dfile</strong> (<em>str</em>) – the file to load</li>
 <li><strong>incremental</strong> (<em>bool</em>) – whether to load the dataset incrementally</li>
+<li><strong>class_index</strong> (<em>str</em>) – the class index string to use (‘first’, ‘second’, ‘third’, ‘last-2’, ‘last-1’, ‘last’ or 1-based index)</li>
 </ul>
 </td>
 </tr>
@@ -2510,17 +2511,23 @@ In case of incremental loading, only the structure.</p>
 
 <dl class="function">
 <dt id="weka.core.converters.load_any_file">
-<code class="descclassname">weka.core.converters.</code><code class="descname">load_any_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.converters.load_any_file" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">weka.core.converters.</code><code class="descname">load_any_file</code><span class="sig-paren">(</span><em>filename</em>, <em>class_index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.converters.load_any_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determines a Loader based on the the file extension. If successful, loads the full dataset and returns it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – the name of the file to load</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – the name of the file to load</li>
+<li><strong>class_index</strong> (<em>str</em>) – the class index string to use (‘first’, ‘second’, ‘third’, ‘last-2’, ‘last-1’, ‘last’ or 1-based index)</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -3841,6 +3848,22 @@ number of attributes in the dataset.</li>
 </dd></dl>
 
 <dl class="method">
+<dt id="weka.core.dataset.Instances.attribute_names">
+<code class="descname">attribute_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.attribute_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all the attribute names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of attribute names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="weka.core.dataset.Instances.attribute_stats">
 <code class="descname">attribute_stats</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.attribute_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the specified attribute statistics.</p>
@@ -4242,6 +4265,40 @@ the data is being copied.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folds</strong> (<em>int</em>) – the number of folds to perform the stratification for</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.core.dataset.Instances.subset">
+<code class="descname">subset</code><span class="sig-paren">(</span><em>col_range=None</em>, <em>col_names=None</em>, <em>invert_cols=False</em>, <em>row_range=None</em>, <em>invert_rows=False</em>, <em>keep_relationame=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a subset of attributes/rows of the Instances object.
+If neither attributes nor rows have been specified a copy of the dataset
+gets returned. The invers of the specified cols/rows can be returned by setting invert_cols
+and/or invert_rows to True.
+The method uses the weka.filters.unsupervised.attribute.Remove and
+weka.filters.unsupervised.instance.RemoveRange filters under the hood.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>col_range</strong> (<em>str</em>) – the subset of attributes to return (eg ‘1-3,7-12,67-last’), None for all</li>
+<li><strong>col_names</strong> (<em>list</em>) – the list of attributes to return (list of names; case-sensitive),
+takes precedence over col_range</li>
+<li><strong>invert_cols</strong> (<em>bool</em>) – whether to invert the returned attributes</li>
+<li><strong>row_range</strong> (<em>str</em>) – the subset of rows to return (eg ‘1-3,7-12,67-last’), None for all</li>
+<li><strong>invert_rows</strong> (<em>bool</em>) – whether to invert the returned rows</li>
+<li><strong>keep_relationame</strong> (<em>bool</em>) – whether to keep the original relation name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the subset</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -5353,7 +5410,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>

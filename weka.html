@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka package &#8212; python-weka-wrapper3 0.1.12 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.1.13 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.12',
+        VERSION:     '0.1.13',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="flow.html" title="Flow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.12 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.13 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -2887,6 +2887,20 @@ version 2016.1.15 or later.</p>
 <em class="property">class </em><code class="descclassname">weka.classifiers.</code><code class="descname">MultipleClassifiersCombiner</code><span class="sig-paren">(</span><em>classname=None</em>, <em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.MultipleClassifiersCombiner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weka.classifiers.Classifier" title="weka.classifiers.Classifier"><code class="xref py py-class docutils literal"><span class="pre">weka.classifiers.Classifier</span></code></a></p>
 <p>Wrapper class for classifiers that use a multiple base classifiers.</p>
+<dl class="method">
+<dt id="weka.classifiers.MultipleClassifiersCombiner.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>classifier</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.MultipleClassifiersCombiner.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends the classifier to the current list of classifiers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classifier</strong> (<a class="reference internal" href="#weka.classifiers.Classifier" title="weka.classifiers.Classifier"><em>Classifier</em></a>) – the classifier to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="weka.classifiers.MultipleClassifiersCombiner.classifiers">
 <code class="descname">classifiers</code><a class="headerlink" href="#weka.classifiers.MultipleClassifiersCombiner.classifiers" title="Permalink to this definition">¶</a></dt>
@@ -2901,6 +2915,12 @@ version 2016.1.15 or later.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.classifiers.MultipleClassifiersCombiner.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.MultipleClassifiersCombiner.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all classifiers.</p>
 </dd></dl>
 
 </dd></dl>
@@ -4805,6 +4825,26 @@ using the same setup.</p>
 <em class="property">class </em><code class="descclassname">weka.filters.</code><code class="descname">MultiFilter</code><span class="sig-paren">(</span><em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.MultiFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><code class="xref py py-class docutils literal"><span class="pre">weka.filters.Filter</span></code></a></p>
 <p>Wrapper class for weka.filters.MultiFilter.</p>
+<dl class="method">
+<dt id="weka.filters.MultiFilter.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>filter</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.MultiFilter.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends the filter to the current list of filters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.filters.MultiFilter.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.MultiFilter.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all filters.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="weka.filters.MultiFilter.filters">
 <code class="descname">filters</code><a class="headerlink" href="#weka.filters.MultiFilter.filters" title="Permalink to this definition">¶</a></dt>
@@ -4984,7 +5024,7 @@ returns a system error code.</p>
         <li class="right" >
           <a href="flow.html" title="Flow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.12 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.13 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
