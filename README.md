@@ -41,3 +41,5 @@ Available online documentation:
   * [API](http://fracpete.github.io/python-weka-wrapper3/api.html)
   * [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
 
+## Download statistics
+For viewing recent download statistics, go to [pypistats](https://pypistats.org//api/packages/python-weka-wrapper3/recent).
