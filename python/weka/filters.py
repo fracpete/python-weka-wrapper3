@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # filters.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -31,6 +31,7 @@ from weka.core.dataset import Instance
 from weka.core.stemmers import Stemmer
 from weka.core.stopwords import Stopwords
 from weka.core.tokenizers import Tokenizer
+from weka.attribute_selection import ASEvaluation, ASSearch
 
 # logging setup
 logger = logging.getLogger("weka.filters")
@@ -358,6 +359,67 @@ class StringToWordVector(Filter):
         """
         javabridge.call(
             self.jobject, "setTokenizer", "(Lweka/core/tokenizers/Tokenizer;)V", tokenizer.jobject)
+
+
+class AttributeSelection(Filter):
+    """
+    Wrapper class for weka.filters.supervised.attribute.AttributeSelection.
+    """
+
+    def __init__(self, jobject=None, options=None):
+        """
+        Initializes the AttributeSelection instance using either creating new instance or using the supplied JB_Object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        :param options: list of commandline options
+        :type options: list
+        """
+        if jobject is None:
+            classname = "weka.filters.supervised.attribute.AttributeSelection"
+            jobject = AttributeSelection.new_instance(classname)
+        self.enforce_type(jobject, "weka.filters.supervised.attribute.AttributeSelection")
+        super(AttributeSelection, self).__init__(jobject=jobject, options=options)
+
+    @property
+    def evaluator(self):
+        """
+        Returns the evaluator.
+
+        :return: the evaluator in use
+        :rtype: ASEvaluation
+        """
+        return ASEvaluation(jobject=javabridge.call(self.jobject, "getEvaluator", "()Lweka/attributeSelection/ASEvaluation;"))
+
+    @evaluator.setter
+    def evaluator(self, evl):
+        """
+        Sets the evaluator.
+
+        :param evl: the evaluator to use
+        :type evl: ASEvaluation
+        """
+        javabridge.call(self.jobject, "setEvaluator", "(Lweka/attributeSelection/ASEvaluation;)V", evl.jobject)
+
+    @property
+    def search(self):
+        """
+        Returns the search.
+
+        :return: the search in use
+        :rtype: ASSearch
+        """
+        return ASSearch(jobject=javabridge.call(self.jobject, "getSearch", "()Lweka/attributeSelection/ASSearch;"))
+
+    @search.setter
+    def search(self, search):
+        """
+        Sets the search.
+
+        :param search: the search to use
+        :type search: ASSearch
+        """
+        javabridge.call(self.jobject, "setSearch", "(Lweka/attributeSelection/ASSearch;)V", search.jobject)
 
 
 def main(args=None):

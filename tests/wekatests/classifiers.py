@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
@@ -21,6 +21,7 @@ import weka.core.converters as converters
 import weka.classifiers as classifiers
 import weka.filters as filters
 import wekatests.tests.weka_test as weka_test
+import weka.attribute_selection as attsel
 
 
 class TestClassifiers(weka_test.WekaTest):
@@ -435,6 +436,16 @@ class TestClassifiers(weka_test.WekaTest):
         self.assertEqual("ACC", str(ms.evaluation), "evaluation differs: " + str(ms.evaluation))
         cls = classifiers.Classifier(classname="weka.classifiers.trees.J48")
         ms.classifier = cls
+
+    def test_attributeselectedclassifier(self):
+        """
+        Tests the AttributeSelectedClassifier class.
+        """
+        asc = classifiers.AttributeSelectedClassifier()
+        asc.evaluator = attsel.ASEvaluation(classname="weka.attributeSelection.CfsSubsetEval", options=["-P", "1", "-E", "1"])
+        asc.search = attsel.ASSearch(classname="weka.attributeSelection.GreedyStepwise", options=["-B", "-T", "-1.7E308", "-N", "-1", "-num-slots", "1"])
+        self.assertEqual("weka.attributeSelection.CfsSubsetEval -P 1 -E 1", asc.evaluator.to_commandline(), msg="evaluator command-lines differs")
+        self.assertEqual("weka.attributeSelection.GreedyStepwise -B -T -1.7E308 -N -1 -num-slots 1", asc.search.to_commandline(), msg="search command-lines differs")
 
 
 def suite():

@@ -222,6 +222,11 @@ You can perform attribute selection using `BestFirst` as search algorithm and
    >>> print("attributes: " + str(attsel.selected_attributes))
    >>> print("result string:\n" + attsel.results_string)
 
+Attribute selection is also available through meta-schemes:
+
+* classifier: `weka.classifiers.AttributeSelectedClassifier`
+* filter: `weka.filters.AttributeSelection`
+
 
 Associators
 -----------

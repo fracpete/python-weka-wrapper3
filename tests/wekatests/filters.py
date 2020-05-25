@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # filters.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
@@ -20,6 +20,7 @@ import weka.core.converters as converters
 import weka.core.dataset as dataset
 import weka.filters as filters
 import wekatests.tests.weka_test as weka_test
+import weka.attribute_selection as attsel
 
 
 class TestFilters(weka_test.WekaTest):
@@ -106,6 +107,16 @@ class TestFilters(weka_test.WekaTest):
 
         self.assertEqual(data.num_attributes - 2, filtered.num_attributes, msg="Number of attributes differ")
         self.assertEqual(data.num_instances, filtered.num_instances, msg="Number of instances differ")
+
+    def test_attributeselectionfilter(self):
+        """
+        Tests the AttributeSelection filter class.
+        """
+        fas = filters.AttributeSelection()
+        fas.evaluator = attsel.ASEvaluation(classname="weka.attributeSelection.CfsSubsetEval", options=["-P", "1", "-E", "1"])
+        fas.search = attsel.ASSearch(classname="weka.attributeSelection.GreedyStepwise", options=["-B", "-T", "-1.7E308", "-N", "-1", "-num-slots", "1"])
+        self.assertEqual("weka.attributeSelection.CfsSubsetEval -P 1 -E 1", fas.evaluator.to_commandline(), msg="evaluator command-lines differs")
+        self.assertEqual("weka.attributeSelection.GreedyStepwise -B -T -1.7E308 -N -1 -num-slots 1", fas.search.to_commandline(), msg="search command-lines differs")
 
 def suite():
     """

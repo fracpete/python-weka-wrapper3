@@ -1,10 +1,11 @@
 Changelog
 =========
 
-0.1.14 (????-??-??)
+0.1.14 (2020-05-26)
 -------------------
 
-- ...
+- added `AttributeSelectedClassifier` meta-classifier to module `weka.classifiers`
+- added `AttributeSelection` meta-filter to module `weka.filters`
 
 
 0.1.13 (2020-05-06)
