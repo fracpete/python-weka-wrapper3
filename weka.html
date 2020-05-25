@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka package &#8212; python-weka-wrapper3 0.1.13 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.1.14 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.13',
+        VERSION:     '0.1.14',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="flow.html" title="Flow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.13 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.14 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -919,6 +919,45 @@ returns a system error code.</p>
 </div>
 <div class="section" id="module-weka.classifiers">
 <span id="weka-classifiers-module"></span><h2>weka.classifiers module<a class="headerlink" href="#module-weka.classifiers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="weka.classifiers.AttributeSelectedClassifier">
+<em class="property">class </em><code class="descclassname">weka.classifiers.</code><code class="descname">AttributeSelectedClassifier</code><span class="sig-paren">(</span><em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.AttributeSelectedClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weka.classifiers.SingleClassifierEnhancer" title="weka.classifiers.SingleClassifierEnhancer"><code class="xref py py-class docutils literal"><span class="pre">weka.classifiers.SingleClassifierEnhancer</span></code></a></p>
+<p>Wrapper class for the AttributeSelectedClassifier.</p>
+<dl class="attribute">
+<dt id="weka.classifiers.AttributeSelectedClassifier.evaluator">
+<code class="descname">evaluator</code><a class="headerlink" href="#weka.classifiers.AttributeSelectedClassifier.evaluator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the evaluator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the evaluator in use</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.attribute_selection.ASEvaluation" title="weka.attribute_selection.ASEvaluation">ASEvaluation</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.classifiers.AttributeSelectedClassifier.search">
+<code class="descname">search</code><a class="headerlink" href="#weka.classifiers.AttributeSelectedClassifier.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the search.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the search in use</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.attribute_selection.ASSearch" title="weka.attribute_selection.ASSearch">ASSearch</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="weka.classifiers.Classifier">
 <em class="property">class </em><code class="descclassname">weka.classifiers.</code><code class="descname">Classifier</code><span class="sig-paren">(</span><em>classname='weka.classifiers.rules.ZeroR'</em>, <em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Classifier" title="Permalink to this definition">¶</a></dt>
@@ -4623,6 +4662,45 @@ outperforms the other.</p>
 <div class="section" id="module-weka.filters">
 <span id="weka-filters-module"></span><h2>weka.filters module<a class="headerlink" href="#module-weka.filters" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="weka.filters.AttributeSelection">
+<em class="property">class </em><code class="descclassname">weka.filters.</code><code class="descname">AttributeSelection</code><span class="sig-paren">(</span><em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.AttributeSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><code class="xref py py-class docutils literal"><span class="pre">weka.filters.Filter</span></code></a></p>
+<p>Wrapper class for weka.filters.supervised.attribute.AttributeSelection.</p>
+<dl class="attribute">
+<dt id="weka.filters.AttributeSelection.evaluator">
+<code class="descname">evaluator</code><a class="headerlink" href="#weka.filters.AttributeSelection.evaluator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the evaluator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the evaluator in use</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.attribute_selection.ASEvaluation" title="weka.attribute_selection.ASEvaluation">ASEvaluation</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.filters.AttributeSelection.search">
+<code class="descname">search</code><a class="headerlink" href="#weka.filters.AttributeSelection.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the search.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the search in use</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.attribute_selection.ASSearch" title="weka.attribute_selection.ASSearch">ASSearch</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="weka.filters.Filter">
 <em class="property">class </em><code class="descclassname">weka.filters.</code><code class="descname">Filter</code><span class="sig-paren">(</span><em>classname='weka.filters.AllFilter'</em>, <em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.filters.Filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="weka.core.html#weka.core.classes.OptionHandler" title="weka.core.classes.OptionHandler"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.OptionHandler</span></code></a></p>
@@ -5024,7 +5102,7 @@ returns a system error code.</p>
         <li class="right" >
           <a href="flow.html" title="Flow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.13 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.14 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
