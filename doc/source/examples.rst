@@ -512,6 +512,11 @@ Attribute selection
    print("attributes: " + str(attsel.selected_attributes))
    print("result string:\n" + attsel.results_string)
 
+Attribute selection is also available through meta-schemes:
+
+* classifier: `weka.classifiers.AttributeSelectedClassifier`
+* filter: `weka.filters.AttributeSelection`
+
 
 Data generators
 ---------------
