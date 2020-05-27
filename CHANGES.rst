@@ -4,6 +4,8 @@ Changelog
 0.1.15 (????-??-??)
 -------------------
 
+- added `weka.core.systeminfo` module for obtaining output from `weka.core.SystemInfo`
+- added `system_info` parameter to `weka.core.jvm.start()` method
 - ...
 
 
