@@ -393,6 +393,25 @@ class AssociationRule(JavaObject):
         :rtype: float
         """
         return javabridge.call(self.jobject, "getPrimaryMetricValue", "()D")
+    
+    def to_dict(self):
+        """
+        Builds a dictionary with the properties of the AssociationRule object.
+
+        :return: the AssociationRule dictionary
+        :rtype: dict
+        """
+        rule = {
+            'premise': self.premise,
+            'premise_support': self.premise_support,
+            'consequence': self.consequence,
+            'consequence_support': self.consequence_support,
+            'total_support': self.total_support
+        }
+        index_names = [x.lower() for x in self.metric_names]
+        metrics = dict(zip(index_names, self.metric_values))
+        rule.update(metrics)
+        return rule
 
 
 class AssociationRulesIterator(object):
@@ -508,6 +527,18 @@ class AssociationRules(JavaObject):
         :type producer: str
         """
         javabridge.call(self.jobject, "setProducer", "(Ljava/lang/String;)V", producer)
+    
+    def to_dict(self):
+        """
+        Returns a list of association rules in dict format
+
+        :return: the association rules
+        :rtype: list
+        """
+        rules = []
+        for rule in self:
+            rules.append(rule.to_dict())
+        return rules
 
 
 class Associator(OptionHandler):
