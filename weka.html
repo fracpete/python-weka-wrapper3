@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka package &#8212; python-weka-wrapper3 0.1.14 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.1.15 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.14',
+        VERSION:     '0.1.15',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="flow.html" title="Flow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.14 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.15 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -256,6 +256,22 @@
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="weka.associations.AssociationRule.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.AssociationRule.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a dictionary with the properties of the AssociationRule object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the AssociationRule dictionary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="weka.associations.AssociationRule.total_support">
 <code class="descname">total_support</code><a class="headerlink" href="#weka.associations.AssociationRule.total_support" title="Permalink to this definition">¶</a></dt>
@@ -306,6 +322,22 @@
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the producer</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.associations.AssociationRules.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.associations.AssociationRules.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of association rules in dict format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the association rules</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -2661,7 +2693,7 @@ training data, at the confidence level specified when evaluation was performed.<
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter in use</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3653,7 +3685,7 @@ returns a system error code.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3828,11 +3860,11 @@ returns a system error code.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator"><em>DataGenerator</em></a>) – the generator to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator"><em>DataGenerator</em></a>) – the generator to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the generator</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator">DataGenerator</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator">DataGenerator</a></td>
 </tr>
 </tbody>
 </table>
@@ -3847,7 +3879,7 @@ returns a system error code.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>generator</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator"><em>DataGenerator</em></a>) – the generator instance to use</li>
+<li><strong>generator</strong> (<a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator"><em>DataGenerator</em></a>) – the generator instance to use</li>
 <li><strong>args</strong> (<em>list</em>) – the command-line arguments</li>
 </ul>
 </td>
@@ -4749,7 +4781,7 @@ outperforms the other.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">model</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4816,11 +4848,11 @@ using the same setup.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter"><em>Filter</em></a>) – the filter to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the filter</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4911,7 +4943,7 @@ using the same setup.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter"><em>Filter</em></a>) – the filter to add</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to add</td>
 </tr>
 </tbody>
 </table>
@@ -5102,7 +5134,7 @@ returns a system error code.</p>
         <li class="right" >
           <a href="flow.html" title="Flow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.14 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.15 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
