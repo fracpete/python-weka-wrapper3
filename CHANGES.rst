@@ -1,12 +1,13 @@
 Changelog
 =========
 
-0.1.15 (????-??-??)
+0.1.15 (2020-10-25)
 -------------------
 
 - added `weka.core.systeminfo` module for obtaining output from `weka.core.SystemInfo`
 - added `system_info` parameter to `weka.core.jvm.start()` method
-- ...
+- merged PR #33 (https://github.com/fracpete/python-weka-wrapper3/pull/33) to better handle
+  associator output
 
 
 0.1.14 (2020-05-26)
