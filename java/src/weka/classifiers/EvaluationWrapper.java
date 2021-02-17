@@ -15,7 +15,7 @@
 
 /*
  * EvaluationWrapper.java
- * Copyright (C) 2014 Fracpete (fracpete at gmail dot com)
+ * Copyright (C) 2014 Fracpete (pythonwekawrapper at gmail dot com)
  */
 
 package weka.classifiers;

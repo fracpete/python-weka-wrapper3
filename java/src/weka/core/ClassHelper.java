@@ -15,7 +15,7 @@
 
 /*
  * ClassHelper.java
- * Copyright (C) 2018-2020 Fracpete (fracpete at gmail dot com)
+ * Copyright (C) 2018-2020 Fracpete (pythonwekawrapper at gmail dot com)
  */
 
 package weka.core;
