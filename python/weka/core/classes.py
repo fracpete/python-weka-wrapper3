@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import os
 import inspect
@@ -653,20 +653,24 @@ class JavaObject(JSONObject):
             raise TypeError("Object does not implement or subclass " + intf_or_class + ": " + get_classname(jobject))
 
     @classmethod
-    def new_instance(cls, classname):
+    def new_instance(cls, classname, options=None):
         """
         Creates a new object from the given classname using the default constructor, None in case of error.
 
         :param classname: the classname in Java notation (eg "weka.core.DenseInstance")
         :type classname: str
+        :param options: the list of options to use, ignored if None
+        :type options: list
         :return: the Java object
         :rtype: JB_Object
         """
         try:
+            if options is None:
+                options = []
             return javabridge.static_call(
                 "Lweka/core/Utils;", "forName",
                 "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;",
-                javabridge.class_for_name("java.lang.Object"), classname, [])
+                javabridge.class_for_name("java.lang.Object"), classname, options)
         except JavaException as e:
             print("Failed to instantiate " + classname + ": " + str(e))
             suggestions = suggest_package(classname, exact=True)

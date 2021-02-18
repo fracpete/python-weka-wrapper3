@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.17 (????-??-??)
+-------------------
+
+- `classes.new_instance` method can take an options list now as well
+
+
 0.1.16 (2020-12-26)
 -------------------
 
