@@ -191,14 +191,10 @@ class TSEvalModule(JavaObject):
     @classmethod
     def module_list(cls):
         """
-        Evaluates the classifier with the given options.
+        Returns list of available modules.
 
-        :param classifier: the classifier instance to use
-        :type classifier: Classifier
-        :param args: the command-line arguments to use
-        :type args: list
-        :return: the evaluation string
-        :rtype: str
+        :return: the list of modules (TSEvalModule objects)
+        :rtype: list
         """
         result = []
         objs = javabridge.get_collection_wrapper(javabridge.static_call(
