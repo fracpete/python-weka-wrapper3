@@ -18,7 +18,7 @@ import javabridge
 import logging
 from weka.core.classes import JavaObject, OptionHandler
 from weka.core.dataset import Instances
-from weka.classifiers import Classifier
+from weka.classifiers import Classifier, NumericPrediction
 
 
 # logging setup
@@ -51,6 +51,107 @@ class TSForecaster(OptionHandler):
         #self.__forecast = javabridge.make_call(self.jobject, "forecast", "(I[Ljava/lang/Object;)Ljava/util/List;")
 
     @property
+    def base_model_has_serializer(self):
+        """
+        Check whether the base learner requires special serialization.
+
+        :return: True if base learner requires special serialization, false otherwise
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "baseModelHasSerializer", "()Z")
+
+    def save_base_model(self, fname):
+        """
+        Saves the base model under the given filename.
+
+        :param fname: the file to save the base model under
+        :type fname: str
+        """
+        javabridge.call(self.jobject, "saveBaseModel", "(Ljava/lang/String;)V", fname)
+
+    def load_base_model(self, fname):
+        """
+        Loads the base model from the given filename.
+
+        :param fname: the file to load the base model from
+        :type fname: str
+        """
+        javabridge.call(self.jobject, "loadBaseModel", "(Ljava/lang/String;)V", fname)
+
+    @property
+    def uses_state(self):
+        """
+        Check whether the base learner requires operations regarding state.
+
+        :return: True if base learner uses state-based predictions, false otherwise
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "usesState", "()Z")
+
+    def clear_previous_state(self):
+        """
+        Reset model state.
+        """
+        javabridge.call(self.jobject, "clearPreviousState", "()V")
+
+    @property
+    def previous_state(self):
+        """
+        Returns the previous state.
+
+        :return: the state as list of JB_Object objects
+        :rtype: list
+        """
+        return list(javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getPreviousState", "()Ljava/util/List;")))
+
+    @previous_state.setter
+    def previous_state(self, state):
+        """
+        Sets the previous state.
+
+        :param state: the state to set
+        :type state: list
+        """
+        l = javabridge.JClassWrapper('java.util.ArrayList')()
+        for obj in state:
+            l.add(obj)
+        javabridge.call(self.jobject, "setPreviousState", "(Ljava/util/List;)V")
+
+    def serialize_state(self, fname):
+        """
+        Serializes the state under the given filename.
+
+        :param fname: the file to serialize the state under
+        :type fname: str
+        """
+        javabridge.call(self.jobject, "serializeState", "(Ljava/lang/String;)V", fname)
+
+    def load_serialized_state(self, fname):
+        """
+        Loads the serialized state from the given filename.
+
+        :param fname: the file to deserialize the state from
+        :type fname: str
+        """
+        javabridge.call(self.jobject, "loadSerializedState", "(Ljava/lang/String;)V", fname)
+
+    @property
+    def algorithm_name(self):
+        """
+        Returns the name of the algorithm.
+
+        :return: the name
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getAlgorithmName", "()Ljava/lang/String;")
+
+    def reset(self):
+        """
+        Resets the algorithm.
+        """
+        javabridge.call(self.jobject, "reset", "()V")
+
+    @property
     def fields_to_forecast(self):
         """
         Returns the fields to forecast.
@@ -71,6 +172,50 @@ class TSForecaster(OptionHandler):
         if isinstance(fields, list):
             fields = ",".join(fields)
         javabridge.call(self.jobject, "setFieldsToForecast", "(Ljava/lang/String;)V", fields)
+
+    def build_forecaster(self, data):
+        """
+        Builds the forecaster using the provided data.
+
+        :param data: the data to train with
+        :type data: Instances
+        """
+        javabridge.call(self.jobject, "buildForecaster", "(Lweka/core/Instances;[Ljava/io/PrintStream;)V", data.jobject, [])
+
+    def prime_forecaster(self, data):
+        """
+        Primes the forecaster using the provided data.
+
+        :param data: the data to prime with
+        :type data: Instances
+        """
+        javabridge.call(self.jobject, "primeForecaster", "(Lweka/core/Instances;)V", data.jobject)
+
+    def forecast(self, steps):
+        """
+        Produce a forecast for the target field(s).
+        Assumes that the model has been built and/or primed so that a forecast can be generated.
+
+        :param steps: number of forecasted values to produce for each target. E.g. a value of 5 would produce a prediction for t+1, t+2, ..., t+5.
+        :type steps: int
+        :return: a List of Lists (one for each step) of forecasted values for each target (NumericPrediction objects)
+        :rtype: list
+        """
+        objs1 = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "forecast", "(I[Ljava/io/PrintStream;)Ljava/util/List;", steps, []))
+        list1 = []
+        for obj1 in objs1:
+            list2 = []
+            objs2 = javabridge.get_collection_wrapper(obj1)
+            for obj2 in objs2:
+                list2.append(NumericPrediction(obj2))
+            list1.append(list2)
+        return list1
+
+    def run_forecaster(self, forecaster, options):
+        """
+        Builds the forecaster using the provided data.
+        """
+        javabridge.call(self.jobject, "runForecaster", "(Lweka/classifiers/timeseries/TSForecaster;[Ljava/lang/String;)V", forecaster.jobject, options)
 
 
 class WekaForecaster(TSForecaster):
