@@ -20,9 +20,8 @@
 
 package weka.classifiers.timeseries.eval;
 
-import java.lang.reflect.Method;
 import java.util.List;
-import weka.core.WekaPackageClassLoaderManager;
+import weka.core.ClassHelper;
 
 public class TSEvalModuleHelper {
 
@@ -32,16 +31,7 @@ public class TSEvalModuleHelper {
    * @return the list of TSEvalModule objects
    */
   public static List getModuleList() {
-    try {
-      Class cls = WekaPackageClassLoaderManager.forName("weka.classifiers.timeseries.eval.TSEvalModule");
-      Method method = cls.getMethod("getModuleList");
-      return (List) method.invoke(null);
-    }
-    catch (Exception e) {
-      System.err.println("Failed to query TSEvalModule object:");
-      e.printStackTrace();
-      return null;
-    }
+    return (List) ClassHelper.invokeStaticMethod("weka.classifiers.timeseries.eval.TSEvalModule", "getModuleList", new Class[0], new Object[0]);
   }
 
   /**
@@ -51,15 +41,6 @@ public class TSEvalModuleHelper {
    * @return the TSEvalModule instance
    */
   public static Object getModule(String name) {
-    try {
-      Class cls = WekaPackageClassLoaderManager.forName("weka.classifiers.timeseries.eval.TSEvalModule");
-      Method method = cls.getMethod("getModule", String.class);
-      return method.invoke(null, name);
-    }
-    catch (Exception e) {
-      System.err.println("Failed to get TSEvalModule object with name: " + name);
-      e.printStackTrace();
-      return null;
-    }
+    return ClassHelper.invokeStaticMethod("weka.classifiers.timeseries.eval.TSEvalModule", "getModule", new Class[]{String.class}, new Object[]{name});
   }
 }

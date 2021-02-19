@@ -20,9 +20,8 @@
 
 package weka.classifiers.timeseries.eval;
 
-import java.lang.reflect.Constructor;
 import weka.core.Instances;
-import weka.core.WekaPackageClassLoaderManager;
+import weka.core.ClassHelper;
 
 public class TSEvaluationHelper {
 
@@ -34,16 +33,7 @@ public class TSEvaluationHelper {
    * @return the TSEvaluation instance
    */
   public static Object newInstance(Instances trainingData, double testSplitSize) {
-    try {
-      Class cls = WekaPackageClassLoaderManager.forName("weka.classifiers.timeseries.eval.TSEvaluation");
-      Constructor constr = cls.getConstructor(Instances.class, Double.TYPE);
-      return constr.newInstance(trainingData, testSplitSize);
-    }
-    catch (Exception e) {
-      System.err.println("Failed to initialize TSEvaluation object:");
-      e.printStackTrace();
-      return null;
-    }
+    return ClassHelper.newInstance("weka.classifiers.timeseries.eval.TSEvaluation", new Class[]{Instances.class, Double.TYPE}, new Object[]{trainingData, testSplitSize});
   }
 
   /**
@@ -54,15 +44,6 @@ public class TSEvaluationHelper {
    * @return the TSEvaluation instance
    */
   public static Object newInstance(Instances trainingData, Instances testData) {
-    try {
-      Class cls = WekaPackageClassLoaderManager.forName("weka.classifiers.timeseries.eval.TSEvaluation");
-      Constructor constr = cls.getConstructor(Instances.class, Instances.class);
-      return constr.newInstance(trainingData, testData);
-    }
-    catch (Exception e) {
-      System.err.println("Failed to initialize TSEvaluation object:");
-      e.printStackTrace();
-      return null;
-    }
+    return ClassHelper.newInstance("weka.classifiers.timeseries.eval.TSEvaluation", new Class[]{Instances.class, Instances.class}, new Object[]{trainingData, testData});
   }
 }

@@ -15,7 +15,7 @@
 
 /*
  * ClassHelper.java
- * Copyright (C) 2018-2020 Fracpete (pythonwekawrapper at gmail dot com)
+ * Copyright (C) 2018-2021 Fracpete (pythonwekawrapper at gmail dot com)
  */
 
 package weka.core;
@@ -25,7 +25,9 @@ import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,49 @@ public class ClassHelper {
     }
     catch (Exception ex) {
       throw new Exception("Can't find a permissible class called: " + className);
+    }
+  }
+
+  /**
+   * Creates a new instance of a class.
+   *
+   * @param classname the name of the class to instantiate
+   * @param signature the classes of the constructor
+   * @param values the values for the constructor
+   * @return the instance, null if failed to instantiate
+   */
+  public static Object newInstance(String classname, Class[] signature, Object[] values) {
+    try {
+      Class cls = WekaPackageClassLoaderManager.forName(classname);
+      Constructor constr = cls.getConstructor(signature);
+      return constr.newInstance(values);
+    }
+    catch (Exception e) {
+      System.err.println("Failed to initialize " + classname + ":");
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * Calls a static method.
+   *
+   * @param classname the name of the class
+   * @param methodname the name of the method
+   * @param signature the classes of the method
+   * @param values the values for the method
+   * @return the return value, null if failed to invoke
+   */
+  public static Object invokeStaticMethod(String classname, String methodname, Class[] signature, Object[] values) {
+    try {
+      Class cls = WekaPackageClassLoaderManager.forName(classname);
+      Method method = cls.getMethod(methodname, signature);
+      return method.invoke(null, values);
+    }
+    catch (Exception e) {
+      System.err.println("Failed to get invoke static method " + methodname + " of class " + classname + "!");
+      e.printStackTrace();
+      return null;
     }
   }
 
