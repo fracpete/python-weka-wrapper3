@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # typeconv.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -48,9 +48,27 @@ def string_list_to_array(l):
     :rtype: java string array
     :return: JB_Object
     """
+    if l is None:
+        return []
     result = javabridge.get_env().make_object_array(len(l), javabridge.get_env().find_class("java/lang/String"))
     for i in range(len(l)):
         javabridge.get_env().set_object_array_element(result, i, javabridge.get_env().new_string_utf(l[i]))
+    return result
+
+
+def string_list_to_python(l):
+    """
+    Converts a Java java.util.List containing strings into a Python list.
+
+    :param l: the list to convert
+    :type l: JB_Object
+    :return: the list with UTF strings
+    :rtype: list
+    """
+    result = []
+    objs = javabridge.get_collection_wrapper(l)
+    for obj in objs:
+        result.append(javabridge.get_env().get_string_utf(obj))
     return result
 
 
