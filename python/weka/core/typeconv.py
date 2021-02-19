@@ -48,8 +48,6 @@ def string_list_to_array(l):
     :rtype: java string array
     :return: JB_Object
     """
-    if l is None:
-        return []
     result = javabridge.get_env().make_object_array(len(l), javabridge.get_env().find_class("java/lang/String"))
     for i in range(len(l)):
         javabridge.get_env().set_object_array_element(result, i, javabridge.get_env().new_string_utf(l[i]))
@@ -66,6 +64,8 @@ def string_list_to_python(l):
     :rtype: list
     """
     result = []
+    if l is None:
+        return []
     objs = javabridge.get_collection_wrapper(l)
     for obj in objs:
         result.append(javabridge.get_env().get_string_utf(obj))
