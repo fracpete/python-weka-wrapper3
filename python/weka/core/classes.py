@@ -65,10 +65,33 @@ def get_jclass(classname):
     try:
         return javabridge.class_for_name(classname)
     except:
-        return javabridge.static_call(
-            "Lweka/core/ClassHelper;", "forName",
-            "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Class;",
-            javabridge.class_for_name("java.lang.Object"), classname)
+        try:
+            return javabridge.static_call(
+                "Lweka/core/ClassHelper;", "forName",
+                "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Class;",
+                javabridge.class_for_name("java.lang.Object"), classname)
+        except:
+            return javabridge.static_call(
+                "Lweka/core/ClassHelper;", "newInstance",
+                "(Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
+                classname, None, None)
+
+
+def get_enum(classname, enm):
+    """
+    Returns the instance of the enum.
+
+    :param classname: the classname of the enum
+    :type classname: str
+    :param enm: the name of the enum element to return
+    :type enm: str
+    :return: the enum instance
+    :rtype: JB_Object
+    """
+    return javabridge.static_call(
+        "Lweka/core/ClassHelper;", "getEnum",
+        "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
+        classname, enm)
 
 
 def get_static_field(classname, fieldname, signature):
