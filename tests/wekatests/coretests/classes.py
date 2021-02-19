@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import javabridge
@@ -269,7 +269,7 @@ class TestClasses(weka_test.WekaTest):
         self.assertIsNotNone(cls)
         self.assertEqual(cmdline, cls.to_commandline())
 
-    def test_suggestsions(self):
+    def test_suggestions(self):
         """
         Tests suggesting packages.
         """
@@ -277,6 +277,15 @@ class TestClasses(weka_test.WekaTest):
         self.assertEqual(len(suggestions), 1, msg="Should have found exactly one package")
         suggestions = classes.suggest_package(".associations.", exact=False)
         self.assertGreaterEqual(len(suggestions), 1, msg="Should have found several packages")
+
+    def test_date(self):
+        """
+        Tests the Date wrapper.
+        """
+        wrapper = classes.Date(msecs=1)
+        self.assertEquals(wrapper.time, 1, msg="Should have been 1 msec")
+        wrapper.time = 2
+        self.assertEquals(wrapper.time, 2, msg="Should have been 2 msec")
 
 
 def suite():

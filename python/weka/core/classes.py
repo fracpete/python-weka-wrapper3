@@ -1977,7 +1977,7 @@ class SetupGenerator(OptionHandler):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the specified classifier using its classname or the supplied JB_Object.
+        Initializes the specified setup generator.
 
         :param jobject: the JB_Object to use
         :type jobject: JB_Object
@@ -2060,6 +2060,50 @@ class SetupGenerator(OptionHandler):
             else:
                 result.append(JavaObject(enm.nextElement()))
         return result
+
+
+class Date(JavaObject):
+    """
+    Wraps a java.util.Date object.
+    """
+
+    def __init__(self, jobject=None, msecs=None):
+        """
+        Initializes the specified Date. Uses the current timestamp if no jobject or msecs provided.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        :param msecs: the milli-seconds since 1970
+        :type msecs: long
+        """
+        if jobject is None:
+            if msecs is None:
+                jobject = javabridge.make_instance("java/util/Date", "()V")
+            else:
+                jobject = javabridge.make_instance("java/util/Date", "(J)V", msecs)
+        else:
+            self.enforce_type(jobject, "java.util.Date")
+        super(Date, self).__init__(jobject=jobject)
+
+    @property
+    def time(self):
+        """
+        Returns the stored milli-seconds.
+
+        :return: the milli-seconds
+        :rtype: long
+        """
+        return javabridge.call(self.jobject, "getTime", "()J")
+
+    @time.setter
+    def time(self, msecs):
+        """
+        Sets the milli-seconds.
+
+        :param msecs: the milli-seconds to use
+        :return:
+        """
+        javabridge.call(self.jobject, "setTime", "(J)V", msecs)
 
 
 def load_suggestions():
