@@ -192,6 +192,21 @@ def list_property_names(obj):
             "(Ljava/lang/Object;)[Ljava/lang/String;",
             obj))
 
+
+def new_instance(classname):
+    """
+    Instantiates an object of the specified class.
+
+    :param classname: the name of the class to instantiate
+    :type classname: str
+    :return: the object
+    :rtype: JB_Object
+    """
+    return javabridge.static_call(
+        "Lweka/core/ClassHelper;", "newInstance",
+        "(Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
+        classname, None, None)
+
 class Stoppable(object):
     """
     Classes that can be stopped.

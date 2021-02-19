@@ -6,6 +6,7 @@ Changelog
 
 - `classes.new_instance` method can take an options list now as well
 - `classes.get_enum` method returns the instance of an enum item
+- `classes.new_instance` method creates new instance of object
 - `typeconv.string_list_to_python` method converts a `java.util.List` containing strings into a Python list
 
 
