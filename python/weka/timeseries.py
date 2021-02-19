@@ -16,7 +16,7 @@
 
 import javabridge
 import logging
-from weka.core.classes import JavaObject, OptionHandler, Date, get_enum
+from weka.core.classes import JavaObject, OptionHandler, Date, get_enum, new_instance
 from weka.core.dataset import Instances, Instance
 from weka.core.typeconv import string_list_to_python
 from weka.classifiers import Classifier, NumericPrediction
@@ -1240,7 +1240,9 @@ class WekaForecaster(TSForecaster):
         :param options: the list of commandline options to set
         :type options: list
         """
-        super(WekaForecaster, self).__init__(classname="weka.classifiers.timeseries.WekaForecaster", jobject=jobject, options=options)
+        if jobject is None:
+            jobject = new_instance("weka.classifiers.timeseries.WekaForecaster")
+        super(WekaForecaster, self).__init__(jobject=jobject, options=options)
 
     @property
     def tslag_maker(self):
