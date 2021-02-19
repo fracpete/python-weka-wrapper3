@@ -16,13 +16,1022 @@
 
 import javabridge
 import logging
-from weka.core.classes import JavaObject, OptionHandler
+from weka.core.classes import JavaObject, OptionHandler, Date, get_enum
 from weka.core.dataset import Instances, Instance
+from weka.core.typeconv import string_list_to_python
 from weka.classifiers import Classifier, NumericPrediction
+from weka.filters import Filter
 
 
 # logging setup
 logger = logging.getLogger("weka.timeseries")
+
+
+class TestPart(JavaObject):
+    """
+    Inner class defining one boundary of an interval.
+    """
+
+    def __init__(self, jobject):
+        """
+        Initializes the TestPart object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        """
+        self.enforce_type(jobject, "weka.classifiers.timeseries.core.CustomPeriodicTest.TestPart")
+        super(TestPart, self).__init__(jobject=jobject)
+
+    @property
+    def is_upper(self):
+        """
+        Returns true if this is the upper bound.
+
+        :return: true if upper bound
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "isUpper", "()Z")
+
+    @is_upper.setter
+    def is_upper(self, upper):
+        """
+        Sets whether this is the upper bound.
+
+        :param upper: true if upper bound
+        :type upper: bool
+        """
+        javabridge.call(self.jobject, "setIsUpper", "(Z)V")
+
+    def eval(self, date, other):
+        """
+        Evaluate the supplied date against this bound. Handles
+        date fields that are cyclic (such as month, day of week etc.)
+        so that intervals such as oct < date < mar evaluate correctly.
+
+        :param date: the date to test
+        :type date: Date
+        :param other: the other bound
+        :type other: TestPart
+        :return: true if the supplied date is within this bound
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "eval", "(Ljava/util/Date;Lweka/classifiers/timeseries/core/CustomPeriodicTest$TestPart;)Z", date.jobject, other.jobject)
+
+    def operator(self, s):
+        """
+        Sets the operator.
+
+        :param s: the operator to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setOperator", "(Ljava/lang/String;)V", s)
+
+    def year(self, s):
+        """
+        Sets the year.
+
+        :param s: the year to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setYear", "(Ljava/lang/String;)V", s)
+
+    def week_of_year(self, s):
+        """
+        Sets the week of the year.
+
+        :param s: the woy to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setWeekOfYear", "(Ljava/lang/String;)V", s)
+
+    def week_of_month(self, s):
+        """
+        Sets the week of the month.
+
+        :param s: the wom to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setWeekOfMonth", "(Ljava/lang/String;)V", s)
+
+    def day_of_year(self, s):
+        """
+        Sets the day of year.
+
+        :param s: the doy to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setDayOfYear", "(Ljava/lang/String;)V", s)
+
+    def day_of_month(self, s):
+        """
+        Sets the day of the month.
+
+        :param s: the dom to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setDayOfMonth", "(Ljava/lang/String;)V", s)
+
+    @property
+    def month(self):
+        """
+        Returns the month string.
+
+        :return: the month string
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getMonthString", "()Ljava/lang/String;")
+
+    @month.setter
+    def month(self, s):
+        """
+        Sets the month.
+
+        :param s: the month to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setMonth", "(Ljava/lang/String;)V", s)
+
+    def day_of_week(self, s):
+        """
+        Sets the day of the week.
+
+        :param s: the dow to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setDayOfWeek", "(Ljava/lang/String;)V", s)
+
+    def hour_of_day(self, s):
+        """
+        Sets the hour of the day.
+
+        :param s: the hod to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setHourOfDay", "(Ljava/lang/String;)V", s)
+
+    def minute_of_hour(self, s):
+        """
+        Sets the minute of the hour.
+
+        :param s: the moh to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setMinuteOfHour", "(Ljava/lang/String;)V", s)
+
+    def second(self, s):
+        """
+        Sets the second.
+
+        :param s: the second to use
+        :type s: str
+        """
+        javabridge.call(self.jobject, "setSecond", "(Ljava/lang/String;)V", s)
+
+    def day(self):
+        """
+        Returns the day string.
+
+        :return: the day string
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getDayString", "()Ljava/lang/String;")
+
+
+class CustomPeriodicTest(JavaObject):
+    """
+    Class that evaluates a supplied date against user-specified
+    date constant fields. Fields that can be tested against include
+    year, month, week of year, week of month, day of year, day of month,
+    day of week, hour of day, minute of hour and second. Wildcard "*"
+    matches any value for a particular field. Each CustomPeriodicTest
+    is made up of one or two test parts. If the first test part's operator
+    is "=", then no second part is necessary. Otherwise the first test part
+    may use > or >= operators and the second test part < or <= operators.
+    Taken together, the two parts define an interval. An optional label
+    may be associated with the interval.
+    """
+
+    def __init__(self, jobject=None, test=None):
+        """
+        Initializes the CustomPeriodicTest object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        :param test: the test string to use
+        :type test: str
+        """
+        if jobject is None:
+            if test is None:
+                raise Exception("Either jobject or test string must be provided!")
+            else:
+                jobject = javabridge.make_instance("weka.classifiers.timeseries.core.CustomPeriodicTest", "(Ljava/lang/String;)V", test)
+        self.enforce_type(jobject, "weka.classifiers.timeseries.core.CustomPeriodicTest")
+        super(CustomPeriodicTest, self).__init__(jobject=jobject)
+
+    def lower_test(self):
+        """
+        Returns the lower bound test.
+
+        :return: the test
+        :rtype: TestPart
+        """
+        obj = javabridge.call(self.jobject, "getLowerTest", "()Lweka/classifiers/timeseries/core/CustomPeriodicTest$TestPart;")
+        return TestPart(jobject=obj)
+
+    def upper_test(self):
+        """
+        Returns the upper bound test.
+
+        :return: the test
+        :rtype: TestPart
+        """
+        obj = javabridge.call(self.jobject, "getUpperTest", "()Lweka/classifiers/timeseries/core/CustomPeriodicTest$TestPart;")
+        return TestPart(jobject=obj)
+
+    @property
+    def label(self):
+        """
+        Returns the label.
+
+        :return: the label
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getLabel", "()Ljava/lang/String;")
+
+    @label.setter
+    def label(self, l):
+        """
+        Sets the label.
+
+        :param l: the label to use
+        :type l: str
+        """
+        javabridge.call(self.jobject, "setLabel", "(Ljava/lang/String;)V", l)
+
+    def test(self, test):
+        """
+        Sets the test as string.
+
+        :param test: the test to use
+        :type test: str
+        """
+        javabridge.call(self.jobject, "setTest", "(Ljava/lang/String;)V", test)
+
+    def evaluate(self, date):
+        """
+        Evaluate the supplied date with respect to this custom periodic test interval.
+
+        :param date: the date to test
+        :type date: Date
+        :return: true if the date lies within the interval.
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "evaluate", "(Ljava/util/Date;)Z", date.jobject)
+
+
+class Periodicity(JavaObject):
+    """
+    Defines periodicity.
+    """
+
+    def __init__(self, jobject=None, periodicity=None):
+        """
+        Initializes the Periodicity object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        :param periodicity: the string representation of the enum
+        :type periodicity: str
+        """
+        if jobject is None:
+            if periodicity is None:
+                raise Exception("Either jobject or periodicity string have to be provided!")
+            else:
+                jobject = get_enum("weka.filters.supervised.attribute.TSLagMaker$Periodicity", periodicity)
+        super(Periodicity, self).__init__(jobject=jobject)
+
+
+class PeriodicityHandler(JavaObject):
+    """
+    Helper class to manage time stamp manipulation with respect to various
+    periodicities. Has a routine to remap the time stamp, which is useful for
+    date time stamps. Since dates are just manipulated internally as the number
+    of milliseconds elapsed since the epoch, and any global trend modelling in
+    regression functions results in enormous coefficients for this variable -
+    remapping to a more reasonable scale prevents this. It also makes it easier
+    to handle the case where there are time periods that shouldn't be
+    considered as a time unit increment, e.g. weekends and public holidays for
+    financial trading data. These "holes" in the data can be accomodated by
+    accumulating a negative offset for the remapped date when a particular
+    data/time occurs in a user-specified "skip" list.
+    """
+
+    def __init__(self, jobject):
+        """
+        Initializes the CustomPeriodicTest object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        """
+        self.enforce_type(jobject, "weka.filters.supervised.attribute.TSLagMaker.PeriodicityHandler")
+        super(PeriodicityHandler, self).__init__(jobject=jobject)
+
+    @property
+    def delta_time(self):
+        """
+        Returns the delta time.
+
+        :return: the delta time
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "deltaTime", "()D")
+
+    @delta_time.setter
+    def delta_time(self, value):
+        """
+        Sets the delta time.
+
+        :param value: the delta time
+        :type value: float
+        """
+        javabridge.call(self.jobject, "setDeltaTime", "(D)V")
+
+
+class TSLagMaker(Filter):
+    """
+    A class for creating lagged versions of target variable(s) for use in time
+    series forecasting. Uses the TimeseriesTranslate filter. Has options for
+    creating averages of consecutive lagged variables (which can be useful for
+    long lagged variables). Some polynomials of time are also created (if there
+    is a time stamp), such as time^2 and time^3. Also creates cross products
+    between time and the lagged and averaged lagged variables. If there is no
+    date time stamp in the data then the user has the option of having an
+    artificial time stamp created. Time stamps, real or otherwise, are used for
+    modeling trends rather than using a differencing-based approach.
+
+    Also has routines for dealing with a date timestamp - i.e. it can detect a
+    monthly time period (because months are different lengths) and maps date time
+    stamps to equal spaced time intervals. For example, in general, a date time
+    stamp is remapped by subtracting the first observed value and adding this
+    value divided by the constant delta (difference between consecutive steps) to
+    the result. In the case of a detected monthly time period, the remapping
+    involves subtracting the base year and then adding to this the number of the
+    month within the current year plus twelve times the number of intervening
+    years since the base year.
+
+    Also has routines for adding new attributes derived from a date time stamp to
+    the data - e.g. AM indicator, day of the week, month, quarter etc. In the
+    case where there is no real date time stamp, the user may specify a nominal
+    periodic variable (if one exists in the data). For example, month might be
+    coded as a nominal value. In this case it can be specified as the primary
+    periodic variable. The point is, that in all these cases (nominal periodic
+    and date-derived periodics), we are able to determine what the value of these
+    variables will be in future instances (as computed from the last known
+    historic instance).
+    """
+
+    def __init__(self, jobject=None, options=None):
+        """
+        Initializes the TSLagMaker filter.
+
+        :param jobject: the javaobject to use
+        :type jobject: JB_Object
+        :param options: the list of options to use
+        :type options: list
+        """
+        super(TSLagMaker, self).__init__(jobject=jobject, classname="weka.filters.supervised.attribute.TSLagMaker", options=options)
+
+    def clear_custom_periodics(self):
+        """
+        Clears the custom periodics.
+        """
+        javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
+
+    def add_custom_periodics(self, periodic):
+        """
+        Adds the custom periodic.
+
+        :param periodic: the periodic to add
+        :type periodic: str
+        """
+        javabridge.call(self.jobject, "addCustomPeriodic", "(Ljava/lang/String;)V", periodic)
+
+    @property
+    def fields_to_lag(self):
+        """
+        Returns the fields to lag as list.
+
+        :return: the fields to lag
+        :rtype: list
+        """
+        return string_list_to_python(javabridge.call(self.jobject, "getFieldsToLag", "()Ljava/util/List;"))
+
+    @fields_to_lag.setter
+    def fields_to_lag(self, fields):
+        """
+        Sets the fields to lag.
+
+        :param fields: the list of fields to lag
+        :type fields: list
+        """
+        javabridge.call(self.jobject, "setFieldsToLag", "(Ljava/util/List;)V", fields)
+
+    @property
+    def fields_to_lag_as_string(self):
+        """
+        Returns the fields to lag as string.
+
+        :return: the fields to lag
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getFieldsToLagAsString", "()Ljava/lang/String;")
+
+    @fields_to_lag_as_string.setter
+    def fields_to_lag_as_string(self, fields):
+        """
+        Sets the fields to lag as string.
+
+        :param fields: the fields to lag
+        :type fields: str
+        """
+        javabridge.call(self.jobject, "setFieldsToLagAsString", "(Ljava/lang/String;)V", fields)
+
+    @property
+    def overlay_fields(self):
+        """
+        Returns the overlay fields as list.
+
+        :return: the overlay fields
+        :rtype: list
+        """
+        return string_list_to_python(javabridge.call(self.jobject, "getOverlayFields", "()Ljava/util/List;"))
+
+    @overlay_fields.setter
+    def overlay_fields(self, fields):
+        """
+        Sets the overlay fields.
+
+        :param fields: the list of overlay fields
+        :type fields: list
+        """
+        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/util/List;)V", fields)
+
+    @property
+    def timestamp_field(self):
+        """
+        Returns the overlay fields as list.
+
+        :return: the overlay fields
+        :rtype: list
+        """
+        return javabridge.call(self.jobject, "getTimeStampField", "()Ljava/lang/String;")
+
+    @timestamp_field.setter
+    def timestamp_field(self, field):
+        """
+        Sets the timestamp field.
+
+        :param field: the field with the timestamp
+        :type field: str
+        """
+        javabridge.call(self.jobject, "setTimeStampField", "(Ljava/lang/String;)V", field)
+
+    @property
+    def remove_leading_instances_with_unknown_lag_values(self):
+        """
+        Returns whether to remove instances with unknown lag values.
+
+        :return: true if to remove
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getRemoveLeadingInstancesWithUnknownLagValues", "()Z")
+
+    @remove_leading_instances_with_unknown_lag_values.setter
+    def remove_leading_instances_with_unknown_lag_values(self, remove):
+        """
+        Sets whether to remove instances with unknown lag values.
+
+        :param remove: true if to remove
+        :type remove: str
+        """
+        javabridge.call(self.jobject, "setRemoveLeadingInstancesWithUnknownLagValues", "(Z)V", remove)
+
+    @property
+    def adjust_for_trends(self):
+        """
+        Returns true if we are adjusting for trends via a real or artificial time stamp.
+
+        :return: true if to adjust
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAdjustForTrends", "()Z")
+
+    @adjust_for_trends.setter
+    def adjust_for_trends(self, adjust):
+        """
+        Sets whether we are adjusting for trends via a real or artificial time stamp.
+
+        :param adjust: true if to adjust
+        :type adjust: str
+        """
+        javabridge.call(self.jobject, "setAdjustForTrends", "(Z)V", adjust)
+
+    @property
+    def include_timelag_products(self):
+        """
+        Returns whether to include products between time and the lagged variables.
+
+        :return: true if to include
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getIncludeTimeLagProducts", "()Z")
+
+    @include_timelag_products.setter
+    def include_timelag_products(self, include):
+        """
+        Sets whether to include products between time and the lagged variables.
+
+        :param include: true if to include
+        :type include: str
+        """
+        javabridge.call(self.jobject, "setIncludeTimeLagProducts", "(Z)V", include)
+
+    @property
+    def include_powers_of_time(self):
+        """
+        Returns whether to include powers of time in the transformed data.
+
+        :return: true if to include
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getIncludePowersOfTime", "()Z")
+
+    @include_powers_of_time.setter
+    def include_powers_of_time(self, include):
+        """
+        Sets whether to include powers of time in the transformed data.
+
+        :param include: true if to include
+        :type include: str
+        """
+        javabridge.call(self.jobject, "setIncludePowersOfTime", "(Z)V", include)
+
+    @property
+    def adjust_for_variance(self):
+        """
+        Returns true if we are adjusting for variance by taking the log of the target(s).
+
+        :return: true if to adjust
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAdjustForVariance", "()Z")
+
+    @adjust_for_variance.setter
+    def adjust_for_variance(self, adjust):
+        """
+        Sets whether we are adjusting for variance by taking the log of the target(s).
+
+        :param adjust: true if to adjust
+        :type adjust: str
+        """
+        javabridge.call(self.jobject, "setAdjustForVariance", "(Z)V", adjust)
+
+    @property
+    def min_lag(self):
+        """
+        Returns the minimum lag to create.
+
+        :return: the lag
+        :rtype: int
+        """
+        return javabridge.call(self.jobject, "getMinLag", "()I")
+
+    @min_lag.setter
+    def min_lag(self, lag):
+        """
+        Sets the minimum lag to create.
+
+        :param lag: the lag
+        :type lag: int
+        """
+        javabridge.call(self.jobject, "setMinLag", "(I)V", lag)
+
+    @property
+    def max_lag(self):
+        """
+        Returns the maximum lag to create.
+
+        :return: the lag
+        :rtype: int
+        """
+        return javabridge.call(self.jobject, "getMaxLag", "()I")
+
+    @max_lag.setter
+    def max_lag(self, lag):
+        """
+        Sets the maximum lag to create.
+
+        :param lag: the lag
+        :type lag: int
+        """
+        javabridge.call(self.jobject, "setMaxLag", "(I)V", lag)
+
+    @property
+    def lag_range(self):
+        """
+        Returns the lag range to create.
+
+        :return: the lag range
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getLagRange", "()Ljava/lang/String;")
+
+    @lag_range.setter
+    def lag_range(self, lag):
+        """
+        Sets the lag range to create.
+
+        :param lag: the lag range
+        :type lag: str
+        """
+        javabridge.call(self.jobject, "setLagRange", "(Ljava/lang/String;)V", lag)
+
+    @property
+    def average_consecutive_long_lags(self):
+        """
+        Returns true if consecutive long lagged variables are to be averaged.
+
+        :return: true if to average
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAverageConsecutiveLongLags", "()Z")
+
+    @average_consecutive_long_lags.setter
+    def average_consecutive_long_lags(self, average):
+        """
+        Sets whether to average consecutive long lagged variables. Setting this to
+        true creates new variables that are averages of long lags and the original
+        lagged variables involved are removed.
+
+        :param average: true if to average
+        :type average: str
+        """
+        javabridge.call(self.jobject, "setAverageConsecutiveLongLags", "(Z)V", average)
+
+    @property
+    def average_lags_after(self):
+        """
+        Returns the point after which long lagged variables will be averaged.
+
+        :return: the lag
+        :rtype: int
+        """
+        return javabridge.call(self.jobject, "getAverageLagsAfter", "()I")
+
+    @average_lags_after.setter
+    def average_lags_after(self, lag):
+        """
+        Sets the point after which long lagged variables will be averaged.
+
+        :param lag: the lag
+        :type lag: int
+        """
+        javabridge.call(self.jobject, "setAverageLagsAfter", "(I)V", lag)
+
+    @property
+    def num_consecutive_long_lags_to_average(self):
+        """
+        Returns the number of consecutive long lagged variables to average.
+
+        :return: the lag
+        :rtype: int
+        """
+        return javabridge.call(self.jobject, "getNumConsecutiveLongLagsToAverage", "()I")
+
+    @num_consecutive_long_lags_to_average.setter
+    def num_consecutive_long_lags_to_average(self, num):
+        """
+        Sets the number of consecutive long lagged variables to average.
+
+        :param num: the lag
+        :type num: int
+        """
+        javabridge.call(self.jobject, "setNumConsecutiveLongLagsToAverage", "(I)V", num)
+
+    @property
+    def primary_periodic_field_name(self):
+        """
+        Returns the name of the primary periodic attribute or null if one hasn't been specified.
+
+        :return: the name
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getPrimaryPeriodicFieldName", "()Ljava/lang/String;")
+
+    @primary_periodic_field_name.setter
+    def primary_periodic_field_name(self, lag):
+        """
+        Sets the name of the primary periodic attribute or null if one hasn't been specified.
+
+        :param lag: the name
+        :type lag: str
+        """
+        javabridge.call(self.jobject, "setPrimaryPeriodicFieldName", "(Ljava/lang/String;)V", lag)
+
+    @property
+    def add_am_indicator(self):
+        """
+        Returns whether to add an AM indicator.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddAMIndicator", "()Z")
+
+    @add_am_indicator.setter
+    def add_am_indicator(self, add):
+        """
+        Sets whether to add an AM indicator.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddAMIndicator", "(Z)V", add)
+
+    @property
+    def add_day_of_week(self):
+        """
+        Returns whether to add day of week attribute.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddDayOfWeek", "()Z")
+
+    @add_day_of_week.setter
+    def add_day_of_week(self, add):
+        """
+        Sets whether to add day of week attribute.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddDayOfWeek", "(Z)V", add)
+
+    @property
+    def add_day_of_month(self):
+        """
+        Returns whether to add day of month attribute.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddDayOfMonth", "()Z")
+
+    @add_day_of_month.setter
+    def add_day_of_month(self, add):
+        """
+        Sets whether to add day of month attribute.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddDayOfMonth", "(Z)V", add)
+
+    @property
+    def add_num_days_in_month(self):
+        """
+        Returns whether to add # of days in month attribute.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddNumDaysInMonth", "()Z")
+
+    @add_num_days_in_month.setter
+    def add_num_days_in_month(self, add):
+        """
+        Sets whether to add # of days in month attribute.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddNumDaysInMonth", "(Z)V", add)
+
+    @property
+    def add_weekend_indicator(self):
+        """
+        Returns whether to add a weekend indicator.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddWeekendIndicator", "()Z")
+
+    @add_weekend_indicator.setter
+    def add_weekend_indicator(self, add):
+        """
+        Sets whether to add a weekend indicator.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddWeekendIndicator", "(Z)V", add)
+
+    @property
+    def add_month_of_year(self):
+        """
+        Returns whether to add month of year attribute.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddMonthOfYear", "()Z")
+
+    @add_month_of_year.setter
+    def add_month_of_year(self, add):
+        """
+        Sets whether to add month of year attribute.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddAddMonthOfYear", "(Z)V", add)
+
+    @property
+    def add_quarter_of_year(self):
+        """
+        Returns whether to add quarter of year attribute.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "getAddQuarterOfYear", "()Z")
+
+    @add_quarter_of_year.setter
+    def add_quarter_of_year(self, add):
+        """
+        Sets whether to add quarter of year attribute.
+
+        :param add: true if to add
+        :type add: bool
+        """
+        javabridge.call(self.jobject, "setAddAddQuarterOfYear", "(Z)V", add)
+
+    @property
+    def is_using_artificial_time_index(self):
+        """
+        Returns whether an artifical time index is used.
+
+        :return: true if to add
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "isUsingAnArtificialTimeIndex", "()Z")
+
+    @property
+    def artificial_time_start_value(self):
+        """
+        Returns the current value of the artificial time stamp. After training,
+        after priming, and prior to forecasting, this will be equal to the number
+        of training instances seen.
+
+        :return: the start
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "getArtificialTimeStartValue", "()D")
+
+    @artificial_time_start_value.setter
+    def artificial_time_start_value(self, start):
+        """
+        Sets the starting value for the artificial time stamp.
+
+        :param start: the start
+        :type start: float
+        """
+        javabridge.call(self.jobject, "setArtificialTimeStartValue", "(D)V", start)
+
+    @property
+    def current_timestamp_value(self):
+        """
+        Returns the current (i.e. most recent) time stamp value. Unlike an
+        artificial time stamp, the value after training, after priming and before
+        forecasting, will be equal to the time stamp of the most recent priming
+        instance.
+
+        :return: the timestamp value
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "getCurrentTimeStampValue", "()D")
+
+    def increment_artificial_time_value(self, increment):
+        """
+        Increment the artificial time value with the supplied increment value.
+
+        :param increment: the increment
+        :type increment: int
+        """
+        javabridge.call(self.jobject, "incrementArtificialTimeValue", "(I)V", increment)
+
+    @property
+    def delta_time(self):
+        """
+        Returns the difference between time values. This may be only approximate for
+        periods based on dates. It is best to used date-based arithmetic in this
+        case for incrementing/decrementing time stamps.
+
+        :return: the delta
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "getDeltaTime", "()D")
+
+    @property
+    def periodicity(self):
+        """
+        Returns the Periodicity representing the time stamp in use for this lag maker.
+        If the lag maker is not adjusting for trends, or an artificial time stamp
+        is being used, then null is returned.
+
+        :return: the periodicity
+        :rtype: Periodicity
+        """
+        return Periodicity(jobject=javabridge.call(self.jobject, "getPeriodicity", "()Lweka/filters/supervised/attribute/TSLagMaker$Periodicity;"))
+
+    @periodicity.setter
+    def periodicity(self, periodicity):
+        """
+        Sets the periodicity for the data. This is ignored if the lag maker is not
+        adjusting for trends or is using an artificial time stamp. If not specified
+        or set to Periodicity.UNKNOWN (the default) then heuristics will be used to
+        try and automatically determine the periodicity.
+
+        :param periodicity: the periodicity
+        :type periodicity: Periodicity
+        """
+        javabridge.call(self.jobject, "setPeriodicity", "(Lweka/filters/supervised/attribute/TSLagMaker$Periodicity;)V", periodicity.jobject)
+
+    @property
+    def skip_entries(self):
+        """
+        Returns a list of time units to be 'skipped' - i.e. not considered as an
+        increment. E.g financial markets don't trade on the weekend, so the
+        difference between friday closing and the following monday closing is one
+        time unit (and not three). Can accept strings such as "sat", "sunday",
+        "jan", "august", or explicit dates (with optional formatting string) such
+        as "2011-07-04@yyyy-MM-dd", or integers. Integers are interpreted with
+        respect to the periodicity - e.g for daily data they are interpreted as day
+        of the year; for hourly data, hour of the day; weekly data, week of the
+        year.
+
+        :return: the lag range
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getSkipEntries", "()Ljava/lang/String;")
+
+    @skip_entries.setter
+    def skip_entries(self, lag):
+        """
+        Sets the list of time units to be 'skipped' - i.e. not considered as an
+        increment. E.g financial markets don't trade on the weekend, so the
+        difference between friday closing and the following monday closing is one
+        time unit (and not three). Can accept strings such as "sat", "sunday",
+        "jan", "august", or explicit dates (with optional formatting string) such
+        as "2011-07-04@yyyy-MM-dd", or integers. Integers are interpreted with
+        respect to the periodicity - e.g for daily data they are interpreted as day
+        of the year; for hourly data, hour of the day; weekly data, week of the
+        year.
+
+        :param lag: the lag range
+        :type lag: str
+        """
+        javabridge.call(self.jobject, "setSkipEntries", "(Ljava/lang/String;)V", lag)
+
+    def create_time_lag_cross_products(self, data):
+        """
+        Creates the cross-products.
+
+        :param data: the data to create the cross-products for
+        :type data: Instances
+        :return: the cross-products
+        :rtype: Instances
+        """
+        return Instances(javabridge.call(self.jobject, "createTimeLagCrossProducts", "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+
+    def transformed_data(self, data):
+        """
+        Returns the transformed data.
+
+        :param data: the data to transform
+        :type data: Instances
+        :return: the transformed data
+        :rtype: Instances
+        """
+        return Instances(javabridge.call(self.jobject, "getTransformedData", "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+
+    def clear_lag_histories(self):
+        """
+        Clears any history accumulated in the lag creating filters.
+        """
+        return javabridge.call(self.jobject, "clearLagHistories", "()V")
 
 
 class TSForecaster(OptionHandler):
@@ -48,7 +1057,6 @@ class TSForecaster(OptionHandler):
                     "Failed to instantiate forecaster '%s' - is package 'timeseriesForecasting' installed and jvm started with package support?" % classname)
         self.enforce_type(jobject, "weka.classifiers.timeseries.TSForecaster")
         super(TSForecaster, self).__init__(jobject=jobject, options=options)
-        #self.__forecast = javabridge.make_call(self.jobject, "forecast", "(I[Ljava/lang/Object;)Ljava/util/List;")
 
     @property
     def base_model_has_serializer(self):
@@ -254,6 +1262,26 @@ class WekaForecaster(TSForecaster):
         """
         javabridge.call(self.jobject, "setBaseForecaster", "(Lweka/classifiers/Classifier;)V", base_forecaster.jobject)
 
+    @property
+    def tslag_maker(self):
+        """
+        Returns the base forecaster.
+
+        ;return: the base forecaster
+        :rtype: Classifier
+        """
+        return TSLagMaker(jobject=javabridge.call(self.jobject, "getTSLagMaker", "()Lweka/filters/supervised/attribute/TSLagMaker;"))
+
+    @tslag_maker.setter
+    def tslag_maker(self, tslag_maker):
+        """
+        Sets the base forecaster.
+
+        :param tslag_maker: the lag maker to use
+        :type tslag_maker: TSLagMaker
+        """
+        javabridge.call(self.jobject, "setTSLagMaker", "(Lweka/filters/supervised/attribute/TSLagMaker;)V", tslag_maker.jobject)
+
 
 class TSEvalModule(JavaObject):
     """
@@ -332,11 +1360,7 @@ class TSEvalModule(JavaObject):
         :return: the list of target fields
         :rtype: list
         """
-        objs = javabridge.call(self.jobject, "getTargetFields", "()Ljava/util/List;")
-        if objs is None:
-            return []
-        objs = javabridge.get_collection_wrapper(objs)
-        return [str(x) for x in objs]
+        return string_list_to_python(javabridge.call(self.jobject, "getTargetFields", "()Ljava/util/List;"))
 
     @target_fields.setter
     def target_fields(self, fields):
