@@ -54,18 +54,23 @@ def string_list_to_array(l):
     return result
 
 
-def string_list_to_python(l):
+def string_list_to_python(l, return_empty_if_none=True):
     """
     Converts a Java java.util.List containing strings into a Python list.
 
     :param l: the list to convert
     :type l: JB_Object
+    :param return_empty_if_none: whether to return an empty list or None when list object is None
+    :type return_empty_if_none: bool
     :return: the list with UTF strings
     :rtype: list
     """
     result = []
     if l is None:
-        return []
+        if return_empty_if_none:
+            return []
+        else:
+            return None
     objs = javabridge.get_collection_wrapper(l)
     for obj in objs:
         result.append(javabridge.get_env().get_string_utf(obj))
