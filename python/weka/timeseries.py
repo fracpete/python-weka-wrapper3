@@ -407,7 +407,7 @@ class TSLagMaker(Filter):
         """
         javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
 
-    def add_custom_periodics(self, periodic):
+    def add_custom_periodic(self, periodic):
         """
         Adds the custom periodic.
 
@@ -1243,6 +1243,113 @@ class WekaForecaster(TSForecaster):
         super(WekaForecaster, self).__init__(classname="weka.classifiers.timeseries.WekaForecaster", jobject=jobject, options=options)
 
     @property
+    def tslag_maker(self):
+        """
+        Returns the base forecaster.
+
+        ;return: the base forecaster
+        :rtype: Classifier
+        """
+        return TSLagMaker(jobject=javabridge.call(self.jobject, "getTSLagMaker", "()Lweka/filters/supervised/attribute/TSLagMaker;"))
+
+    @tslag_maker.setter
+    def tslag_maker(self, tslag_maker):
+        """
+        Sets the base forecaster.
+
+        :param tslag_maker: the lag maker to use
+        :type tslag_maker: TSLagMaker
+        """
+        javabridge.call(self.jobject, "setTSLagMaker", "(Lweka/filters/supervised/attribute/TSLagMaker;)V", tslag_maker.jobject)
+
+    def clear_custom_periodics(self):
+        """
+        Clears the custom periodics.
+        """
+        javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
+
+    def add_custom_periodic(self, periodic):
+        """
+        Adds the custom periodic.
+
+        :param periodic: the periodic to add
+        :type periodic: str
+        """
+        javabridge.call(self.jobject, "addCustomPeriodic", "(Ljava/lang/String;)V", periodic)
+
+    @property
+    def overlay_fields(self):
+        """
+        Returns the overlay fields as string.
+
+        :return: the overlay fields
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getOverlayFields", "()Ljava/lang/String;")
+
+    @overlay_fields.setter
+    def overlay_fields(self, fields):
+        """
+        Sets the overlay fields as string.
+
+        :param fields: the overlay fields
+        :type fields: str
+        """
+        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", fields)
+
+    @property
+    def calculate_conf_intervals_for_forecasts(self):
+        """
+        Returns the number of steps for which confidence intervals will be computed.
+
+        :return: the steps
+        :rtype: int
+        """
+        return javabridge.call(self.jobject, "getCalculateConfIntervalsForForecasts", "()I")
+
+    @calculate_conf_intervals_for_forecasts.setter
+    def calculate_conf_intervals_for_forecasts(self, steps):
+        """
+        Sets the number of steps for which confidence intervals will be computed.
+
+        :param steps: the steps
+        :type steps: int
+        """
+        javabridge.call(self.jobject, "setCalculateConfIntervalsForForecasts", "(I)V", steps)
+
+    @property
+    def is_producing_confidence_intervals(self):
+        """
+        Returns true if this forecaster is computing confidence limits for some or
+        all of its future forecasts (i.e. getCalculateConfIntervalsForForecasts() >
+        0).
+
+        :return: true if confidence intervals are produced
+        :rtype: bool
+        """
+        return javabridge.call(self.jobject, "isProducingConfidenceIntervals", "()I")
+
+    @property
+    def confidence_level(self):
+        """
+        Returns the confidence level in use for computing confidence intervals.
+
+        :return: the level
+        :rtype: float
+        """
+        return javabridge.call(self.jobject, "getOverlayFields", "()Ljava/lang/String;")
+
+    @confidence_level.setter
+    def confidence_level(self, level):
+        """
+        Sets the confidence level in use for computing confidence intervals.
+
+        :param level: the level
+        :type level: float
+        """
+        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", level)
+
+    @property
     def base_forecaster(self):
         """
         Returns the base forecaster.
@@ -1263,24 +1370,15 @@ class WekaForecaster(TSForecaster):
         javabridge.call(self.jobject, "setBaseForecaster", "(Lweka/classifiers/Classifier;)V", base_forecaster.jobject)
 
     @property
-    def tslag_maker(self):
+    def is_using_overlay_data(self):
         """
-        Returns the base forecaster.
+        Returns true if overlay data has been used to train this forecaster, and
+        thus is expected to be supplied for future time steps when making a
+        forecast.
 
-        ;return: the base forecaster
-        :rtype: Classifier
+        :return:
         """
-        return TSLagMaker(jobject=javabridge.call(self.jobject, "getTSLagMaker", "()Lweka/filters/supervised/attribute/TSLagMaker;"))
-
-    @tslag_maker.setter
-    def tslag_maker(self, tslag_maker):
-        """
-        Sets the base forecaster.
-
-        :param tslag_maker: the lag maker to use
-        :type tslag_maker: TSLagMaker
-        """
-        javabridge.call(self.jobject, "setTSLagMaker", "(Lweka/filters/supervised/attribute/TSLagMaker;)V", tslag_maker.jobject)
+        return javabridge.call(self.jobject, "isUsingOverlayData", "()Z")
 
 
 class TSEvalModule(JavaObject):
