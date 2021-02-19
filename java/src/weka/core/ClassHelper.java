@@ -39,6 +39,17 @@ import java.util.List;
 public class ClassHelper {
 
   /**
+   * Returns the class associated with the classname.
+   *
+   * @param classname the class to load
+   * @return the class
+   * @throws Exception if instantiation fails
+   */
+  public static Class getClass(String classname) throws Exception {
+    return WekaPackageClassLoaderManager.forName(classname);
+  }
+
+  /**
    * Returns the class given its class name.
    *
    * @param classType the class that an instantiated object should be
@@ -52,7 +63,7 @@ public class ClassHelper {
   public static Class forName(Class<?> classType, String className) throws Exception {
     List<String> matches = Run.findSchemeMatch(classType, className, false, true);
     if (matches.size() == 0)
-      return WekaPackageClassLoaderManager.forName(className);
+      return getClass(className);
 
     if (matches.size() > 1) {
       StringBuffer sb = new StringBuffer("More than one possibility matched '" + className + "':\n");
@@ -65,7 +76,7 @@ public class ClassHelper {
 
     Class<?> c = null;
     try {
-      return WekaPackageClassLoaderManager.forName(className);
+      return getClass(className);
     }
     catch (Exception ex) {
       throw new Exception("Can't find a permissible class called: " + className);
@@ -82,7 +93,7 @@ public class ClassHelper {
    */
   public static Object newInstance(String classname, Class[] signature, Object[] values) {
     try {
-      Class cls = WekaPackageClassLoaderManager.forName(classname);
+      Class cls = getClass(classname);
       Constructor constr = cls.getConstructor(signature);
       return constr.newInstance(values);
     }
@@ -104,7 +115,7 @@ public class ClassHelper {
    */
   public static Object invokeStaticMethod(String classname, String methodname, Class[] signature, Object[] values) {
     try {
-      Class cls = WekaPackageClassLoaderManager.forName(classname);
+      Class cls = getClass(classname);
       Method method = cls.getMethod(methodname, signature);
       return method.invoke(null, values);
     }
@@ -127,7 +138,7 @@ public class ClassHelper {
     Class 	cls;
     Field 	field;
 
-    cls = forName(Object.class, classname);
+    cls = getClass(classname);
     field = cls.getField(fieldname);
     if (field != null)
       return field.get(cls);
@@ -170,5 +181,18 @@ public class ClassHelper {
     }
 
     return result.toArray(new String[0]);
+  }
+
+  /**
+   * Returns instance of enum.
+   *
+   * @param classname the name of the enum class
+   * @param enm the name of the enum item to return
+   * @return the return value, null if failed to invoke
+   * @throws Exception if instantation fails
+   */
+  public static Object getEnum(String classname, String enm) throws Exception {
+    Class cls = getClass(classname);
+    return invokeStaticMethod("java.lang.Enum", "valueOf", new Class[]{Class.class, String.class}, new Object[]{cls, enm});
   }
 }
