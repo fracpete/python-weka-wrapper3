@@ -17,7 +17,7 @@
 import javabridge
 import logging
 from weka.core.classes import JavaObject, OptionHandler
-from weka.core.dataset import Instances
+from weka.core.dataset import Instances, Instance
 from weka.classifiers import Classifier, NumericPrediction
 
 
@@ -296,6 +296,34 @@ class TSEvalModule(JavaObject):
         """
         return javabridge.call(self.jobject, "getDefinition", "()Ljava/lang/String;")
 
+    def evaluate_for_instance(self, pred, inst):
+        """
+        Evaluate the given forecast(s) with respect to the given test instance. Targets with missing values are ignored.
+
+        :param pred: the numeric prediction
+        :type pred: NumericPrediction
+        :param inst: the instance
+        :type inst: Instance
+        """
+        javabridge.call(self.jobject, "evaluateForInstance", "(Ljava/util/List;Lweka/core/Instance;)V", pred.jobject, inst.jobject)
+
+    def calculate_measure(self):
+        """
+        Calculate the measure that this module represents.
+
+        :return: the value of the measure for this module for each of the target(s).
+        :rtype: ndarray
+        """
+        result = javabridge.call(self.jobject, "calculateMeasure", "()[D")
+        return javabridge.get_env().get_double_array_elements(result)
+
+    @property
+    def summary(self):
+        """
+        Returns the description.
+        """
+        return javabridge.call(self.jobject, "toSummaryString", "()Ljava/lang/String;")
+
     @property
     def target_fields(self):
         """
@@ -319,13 +347,6 @@ class TSEvalModule(JavaObject):
         :type fields: list
         """
         javabridge.call(self.jobject, "setTargetFields", "(Ljava/util/List;)V", fields)
-
-    @property
-    def summary(self):
-        """
-        Returns the description.
-        """
-        return javabridge.call(self.jobject, "toSummaryString", "()Ljava/lang/String;")
 
     def __str__(self):
         """
