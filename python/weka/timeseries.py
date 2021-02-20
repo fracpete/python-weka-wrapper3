@@ -1737,10 +1737,14 @@ class TSEvaluation(JavaObject):
         """
         Returns the training data.
 
-        :return: the training data
+        :return: the training data, None if none available
         :rtype: Instances
         """
-        return Instances(javabridge.call(self.jobject, "getTrainingData", "()Lweka/core/Instances;"))
+        data = javabridge.call(self.jobject, "getTrainingData", "()Lweka/core/Instances;")
+        if data is None:
+            return None
+        else:
+            return Instances(data)
 
     @training_data.setter
     def training_data(self, data):
@@ -1757,10 +1761,14 @@ class TSEvaluation(JavaObject):
         """
         Returns the test data.
 
-        :return: the test data
+        :return: the test data, None if none available
         :rtype: Instances
         """
-        return Instances(javabridge.call(self.jobject, "getTestData", "()Lweka/core/Instances;"))
+        data = javabridge.call(self.jobject, "getTestData", "()Lweka/core/Instances;")
+        if data is None:
+            return None
+        else:
+            return Instances(data)
 
     @test_data.setter
     def test_data(self, data):
@@ -1967,19 +1975,22 @@ class TSEvaluation(JavaObject):
         """
         eval_modules = [x.eval_name for x in self.evaluation_modules]
 
-        return "=== Evaluation setup ===\n\n" \
-               + "Relation: " + self.training_data.relationname + "\n" \
-               + "# Training instances: " + str(self.training_data.num_instances) + "\n" \
-               + "# Test instances: " + str(self.test_data.num_instances) + "\n" \
-               + "Evaluate on training data: " + str(self.evaluate_on_training_data) + "\n" \
-               + "Evaluate on test data: " + str(self.evaluate_on_test_data) + "\n" \
-               + "Horizon: " + str(self.horizon) + "\n" \
-               + "Prime window size: " + str(self.prime_window_size) + "\n" \
-               + "Prime for test data with test data: " + str(self.prime_for_test_data_with_test_data) + "\n" \
-               + "Rebuild model after each test forecast step: " + str(self.rebuild_model_after_each_test_forecast_step) + "\n" \
-               + "Forecast future: " + str(self.forecast_future) + "\n" \
-               + "Evaluation modules: " + ", ".join(eval_modules) + "\n" \
-               + "\n"
+        result = "=== Evaluation setup ===\n\n"
+        if self.training_data is not None:
+            result += "Relation: " + self.training_data.relationname + "\n" \
+                      + "# Training instances: " + str(self.training_data.num_instances) + "\n"
+        if self.test_data is not None:
+            result +="# Test instances: " + str(self.test_data.num_instances) + "\n"
+        result += "Evaluate on training data: " + str(self.evaluate_on_training_data) + "\n" \
+                  + "Evaluate on test data: " + str(self.evaluate_on_test_data) + "\n" \
+                  + "Horizon: " + str(self.horizon) + "\n" \
+                  + "Prime window size: " + str(self.prime_window_size) + "\n" \
+                  + "Prime for test data with test data: " + str(self.prime_for_test_data_with_test_data) + "\n" \
+                  + "Rebuild model after each test forecast step: " + str(self.rebuild_model_after_each_test_forecast_step) + "\n" \
+                  + "Forecast future: " + str(self.forecast_future) + "\n" \
+                  + "Evaluation modules: " + ", ".join(eval_modules) + "\n" \
+                  + "\n"
+        return result
 
     def evaluate(self, forecaster, build_model=True):
         """
