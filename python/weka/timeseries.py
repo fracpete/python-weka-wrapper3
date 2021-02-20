@@ -1241,7 +1241,7 @@ class TSLagUser(JavaObject):
         """
         Returns the base forecaster.
 
-        ;return: the base forecaster
+        :return: the base forecaster
         :rtype: Classifier
         """
         return TSLagMaker(jobject=javabridge.call(self.jobject, "getTSLagMaker", "()Lweka/filters/supervised/attribute/TSLagMaker;"))
@@ -1475,7 +1475,7 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         """
         Returns the base forecaster.
 
-        ;return: the base forecaster
+        :return: the base forecaster
         :rtype: Classifier
         """
         return Classifier(jobject=javabridge.call(self.jobject, "getBaseForecaster", "()Lweka/classifiers/Classifier;"))
