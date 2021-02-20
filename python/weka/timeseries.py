@@ -16,7 +16,7 @@
 
 import javabridge
 import logging
-from weka.core.classes import JavaObject, OptionHandler, Date, get_enum, new_instance
+from weka.core.classes import JavaObject, OptionHandler, Date, Enum, new_instance
 from weka.core.dataset import Instances, Instance
 from weka.core.typeconv import jstring_list_to_string_list, jdouble_to_float
 from weka.classifiers import Classifier, NumericPrediction
@@ -289,7 +289,7 @@ class CustomPeriodicTest(JavaObject):
         return javabridge.call(self.jobject, "evaluate", "(Ljava/util/Date;)Z", date.jobject)
 
 
-class Periodicity(JavaObject):
+class Periodicity(Enum):
     """
     Defines periodicity.
     """
@@ -303,12 +303,7 @@ class Periodicity(JavaObject):
         :param periodicity: the string representation of the enum
         :type periodicity: str
         """
-        if jobject is None:
-            if periodicity is None:
-                raise Exception("Either jobject or periodicity string have to be provided!")
-            else:
-                jobject = get_enum("weka.filters.supervised.attribute.TSLagMaker$Periodicity", periodicity)
-        super(Periodicity, self).__init__(jobject=jobject)
+        super(Periodicity, self).__init__(jobject=jobject, enum="weka.filters.supervised.attribute.TSLagMaker$Periodicity", member=periodicity)
 
 
 class PeriodicityHandler(JavaObject):
