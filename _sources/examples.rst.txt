@@ -552,6 +552,43 @@ Filters
    print(filtered)
 
 
+Timeseries
+----------
+
+With the `timeseriesForecasting` package installed and the JVM started with package support, you can perform
+timeseries forecasting:
+
+.. code-block:: python
+
+   airline_data = loader.load_file(data_dir + "airline.arff")
+   airline_train, airline_test = airline_data.train_test_split(90.0)
+
+   # configure and build
+   from weka.timeseries import WekaForecaster
+   from weka.classifiers import Classifier
+   forecaster = WekaForecaster()
+   forecaster.fields_to_forecast = ["passenger_numbers"]
+   forecaster.base_forecaster = Classifier(classname="weka.classifiers.functions.LinearRegression")
+   forecaster.fields_to_forecast = "passenger_numbers"
+   forecaster.build_forecaster(airline_train)
+
+   # prime
+   from weka.core.dataset import Instances
+   num_prime_instances = 12
+   airline_prime = Instances.copy_instances(airline_train, airline_train.num_instances - num_prime_instances, num_prime_instances)
+   forecaster.prime_forecaster(airline_prime)
+
+   # forecast
+   num_future_forecasts = airline_test.num_instances
+   preds = forecaster.forecast(num_future_forecasts)
+   print("Actual,Predicted,Error")
+   for i in range(num_future_forecasts):
+       actual = airline_test.get_instance(i).get_value(0)
+       predicted = preds[i][0].predicted
+       error = actual - predicted
+       print("%f,%f,%f" % (actual, predicted, error))
+
+
 Partial classnames
 ------------------
 

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Examples &#8212; python-weka-wrapper3 0.1.16 documentation</title>
+    <title>Examples &#8212; python-weka-wrapper3 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.16',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="sourcecode.html" title="Source code"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -532,6 +532,40 @@ be installed for this to work.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="timeseries">
+<h2>Timeseries<a class="headerlink" href="#timeseries" title="Permalink to this headline">¶</a></h2>
+<p>With the <cite>timeseriesForecasting</cite> package installed and the JVM started with package support, you can perform
+timeseries forecasting:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">airline_data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="s2">&quot;airline.arff&quot;</span><span class="p">)</span>
+<span class="n">airline_train</span><span class="p">,</span> <span class="n">airline_test</span> <span class="o">=</span> <span class="n">airline_data</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="mf">90.0</span><span class="p">)</span>
+
+<span class="c1"># configure and build</span>
+<span class="kn">from</span> <span class="nn">weka.timeseries</span> <span class="kn">import</span> <span class="n">WekaForecaster</span>
+<span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<span class="n">forecaster</span> <span class="o">=</span> <span class="n">WekaForecaster</span><span class="p">()</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">fields_to_forecast</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;passenger_numbers&quot;</span><span class="p">]</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">base_forecaster</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.functions.LinearRegression&quot;</span><span class="p">)</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">fields_to_forecast</span> <span class="o">=</span> <span class="s2">&quot;passenger_numbers&quot;</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">build_forecaster</span><span class="p">(</span><span class="n">airline_train</span><span class="p">)</span>
+
+<span class="c1"># prime</span>
+<span class="kn">from</span> <span class="nn">weka.core.dataset</span> <span class="kn">import</span> <span class="n">Instances</span>
+<span class="n">num_prime_instances</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">airline_prime</span> <span class="o">=</span> <span class="n">Instances</span><span class="o">.</span><span class="n">copy_instances</span><span class="p">(</span><span class="n">airline_train</span><span class="p">,</span> <span class="n">airline_train</span><span class="o">.</span><span class="n">num_instances</span> <span class="o">-</span> <span class="n">num_prime_instances</span><span class="p">,</span> <span class="n">num_prime_instances</span><span class="p">)</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">prime_forecaster</span><span class="p">(</span><span class="n">airline_prime</span><span class="p">)</span>
+
+<span class="c1"># forecast</span>
+<span class="n">num_future_forecasts</span> <span class="o">=</span> <span class="n">airline_test</span><span class="o">.</span><span class="n">num_instances</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">num_future_forecasts</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Actual,Predicted,Error&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_future_forecasts</span><span class="p">):</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">airline_test</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">predicted</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">actual</span> <span class="o">-</span> <span class="n">predicted</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2">,</span><span class="si">%f</span><span class="s2">,</span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">error</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="partial-classnames">
 <h2>Partial classnames<a class="headerlink" href="#partial-classnames" title="Permalink to this headline">¶</a></h2>
 <p>All classes derived from <cite>weka.core.classes.JavaObject</cite> like <cite>Classifier</cite>, <cite>Filter</cite>, etc.,
@@ -658,6 +692,7 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
 <li><a class="reference internal" href="#attribute-selection">Attribute selection</a></li>
 <li><a class="reference internal" href="#data-generators">Data generators</a></li>
 <li><a class="reference internal" href="#filters">Filters</a></li>
+<li><a class="reference internal" href="#timeseries">Timeseries</a></li>
 <li><a class="reference internal" href="#partial-classnames">Partial classnames</a></li>
 <li><a class="reference internal" href="#packages">Packages</a></li>
 <li><a class="reference internal" href="#stop-jvm">Stop JVM</a></li>
@@ -708,11 +743,11 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
         <li class="right" >
           <a href="sourcecode.html" title="Source code"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2021, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

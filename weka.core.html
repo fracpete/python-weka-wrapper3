@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.1.16 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.16',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -732,6 +732,29 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="weka.core.classes.Date">
+<em class="property">class </em><code class="descclassname">weka.core.classes.</code><code class="descname">Date</code><span class="sig-paren">(</span><em>jobject=None</em>, <em>msecs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
+<p>Wraps a java.util.Date object.</p>
+<dl class="attribute">
+<dt id="weka.core.classes.Date.time">
+<code class="descname">time</code><a class="headerlink" href="#weka.core.classes.Date.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the stored milli-seconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the milli-seconds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">long</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="weka.core.classes.Enum">
 <em class="property">class </em><code class="descclassname">weka.core.classes.</code><code class="descname">Enum</code><span class="sig-paren">(</span><em>jobject=None</em>, <em>enum=None</em>, <em>member=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Enum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
@@ -1180,17 +1203,23 @@ using dot notation.</p>
 
 <dl class="classmethod">
 <dt id="weka.core.classes.JavaObject.new_instance">
-<em class="property">classmethod </em><code class="descname">new_instance</code><span class="sig-paren">(</span><em>classname</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.new_instance" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">new_instance</code><span class="sig-paren">(</span><em>classname</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject.new_instance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new object from the given classname using the default constructor, None in case of error.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classname</strong> (<em>str</em>) – the classname in Java notation (eg “weka.core.DenseInstance”)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>classname</strong> (<em>str</em>) – the classname in Java notation (eg “weka.core.DenseInstance”)</li>
+<li><strong>options</strong> (<em>list</em>) – the list of options to use, ignored if None</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the Java object</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the Java object</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JB_Object</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -2087,6 +2116,30 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.classes.get_enum">
+<code class="descclassname">weka.core.classes.</code><code class="descname">get_enum</code><span class="sig-paren">(</span><em>classname</em>, <em>enm</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_enum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the instance of the enum.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>classname</strong> (<em>str</em>) – the classname of the enum</li>
+<li><strong>enm</strong> (<em>str</em>) – the name of the enum element to return</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the enum instance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JB_Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.classes.get_jclass">
 <code class="descclassname">weka.core.classes.</code><code class="descname">get_jclass</code><span class="sig-paren">(</span><em>classname</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_jclass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Java class object associated with the dot-notation classname.</p>
@@ -2233,6 +2286,24 @@ classname if a single match was found, otherwise an exception is raised.</p>
 <code class="descclassname">weka.core.classes.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a classifier from the command-line. Calls JVM start/stop automatically.
 Use -h to see all options.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.new_instance">
+<code class="descclassname">weka.core.classes.</code><code class="descname">new_instance</code><span class="sig-paren">(</span><em>classname</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.new_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiates an object of the specified class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classname</strong> (<em>str</em>) – the name of the class to instantiate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -5220,8 +5291,26 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <div class="section" id="module-weka.core.typeconv">
 <span id="weka-core-typeconv-module"></span><h2>weka.core.typeconv module<a class="headerlink" href="#module-weka.core.typeconv" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="weka.core.typeconv.double_matrix_to_ndarray">
-<code class="descclassname">weka.core.typeconv.</code><code class="descname">double_matrix_to_ndarray</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.double_matrix_to_ndarray" title="Permalink to this definition">¶</a></dt>
+<dt id="weka.core.typeconv.float_to_jfloat">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">float_to_jfloat</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.float_to_jfloat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the Python float into a Java java.lang.Float object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> (<em>float</em>) – the Python float</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the Float object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.typeconv.jdouble_matrix_to_ndarray">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">jdouble_matrix_to_ndarray</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.jdouble_matrix_to_ndarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turns the Java matrix (2-dim array) of doubles into a numpy 2-dim array.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5240,26 +5329,26 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="weka.core.typeconv.double_to_float">
-<code class="descclassname">weka.core.typeconv.</code><code class="descname">double_to_float</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.double_to_float" title="Permalink to this definition">¶</a></dt>
-<dd><p>Turns the Python float into a Java java.lang.Float object.</p>
+<dt id="weka.core.typeconv.jdouble_to_float">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">jdouble_to_float</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.jdouble_to_float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the Java java.lang.Double object into Python float object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> (<em>float</em>) – the Python float</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>d</strong> (<em>JB_Object</em>) – the java.lang.Double</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the Float object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="function">
-<dt id="weka.core.typeconv.enumeration_to_list">
-<code class="descclassname">weka.core.typeconv.</code><code class="descname">enumeration_to_list</code><span class="sig-paren">(</span><em>enm</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.enumeration_to_list" title="Permalink to this definition">¶</a></dt>
+<dt id="weka.core.typeconv.jenumeration_to_list">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">jenumeration_to_list</code><span class="sig-paren">(</span><em>enm</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.jenumeration_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turns the java.util.Enumeration into a list.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5276,8 +5365,8 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="weka.core.typeconv.string_array_to_list">
-<code class="descclassname">weka.core.typeconv.</code><code class="descname">string_array_to_list</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.string_array_to_list" title="Permalink to this definition">¶</a></dt>
+<dt id="weka.core.typeconv.jstring_array_to_list">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">jstring_array_to_list</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.jstring_array_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turns the Java string array into Python unicode string list.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5294,8 +5383,32 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="weka.core.typeconv.string_list_to_array">
-<code class="descclassname">weka.core.typeconv.</code><code class="descname">string_list_to_array</code><span class="sig-paren">(</span><em>l</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.string_list_to_array" title="Permalink to this definition">¶</a></dt>
+<dt id="weka.core.typeconv.jstring_list_to_string_list">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">jstring_list_to_string_list</code><span class="sig-paren">(</span><em>l</em>, <em>return_empty_if_none=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.jstring_list_to_string_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a Java java.util.List containing strings into a Python list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>l</strong> (<em>JB_Object</em>) – the list to convert</li>
+<li><strong>return_empty_if_none</strong> (<em>bool</em>) – whether to return an empty list or None when list object is None</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the list with UTF strings</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.typeconv.string_list_to_jarray">
+<code class="descclassname">weka.core.typeconv.</code><code class="descname">string_list_to_jarray</code><span class="sig-paren">(</span><em>l</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.typeconv.string_list_to_jarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turns a Python unicode string list into a Java String array.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5411,12 +5524,12 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2021, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API &#8212; python-weka-wrapper3 0.1.16 documentation</title>
+    <title>API &#8212; python-weka-wrapper3 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.16',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -260,6 +260,41 @@ using a previously loaded dataset without a class attribute:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="timeseries">
+<h2>Timeseries<a class="headerlink" href="#timeseries" title="Permalink to this headline">¶</a></h2>
+<p>Timeseries forecasting can be achieved with the <cite>weka.timeseries</cite> module (which wraps the <cite>timeseriesForecasting</cite> package).
+Notable are the <cite>WekaForecaster</cite> forecaster, the <cite>TSLagMaker</cite> filter and the <cite>TSEvaluation</cite> class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.timeseries</span> <span class="kn">import</span> <span class="n">WekaForecaster</span>
+<span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<span class="n">forecaster</span> <span class="o">=</span> <span class="n">WekaForecaster</span><span class="p">()</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">fields_to_forecast</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;passenger_numbers&quot;</span><span class="p">]</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">base_forecaster</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.functions.LinearRegression&quot;</span><span class="p">)</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">timestamp_field</span> <span class="o">=</span> <span class="s2">&quot;Date&quot;</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">adjust_for_variance</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">include_powers_of_time</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">include_timelag_products</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">remove_leading_instances_with_unknown_lag_values</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">add_month_of_year</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">add_quarter_of_year</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;algorithm name: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">forecaster</span><span class="o">.</span><span class="n">algorithm_name</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;command-line: &quot;</span> <span class="o">+</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">to_commandline</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;lag maker: &quot;</span> <span class="o">+</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">to_commandline</span><span class="p">())</span>
+
+<span class="n">evaluation</span> <span class="o">=</span> <span class="n">TSEvaluation</span><span class="p">(</span><span class="n">airline_data</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">evaluate_on_training_data</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">evaluate_on_test_data</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">prime_window_size</span> <span class="o">=</span> <span class="n">forecaster</span><span class="o">.</span><span class="n">tslag_maker</span><span class="o">.</span><span class="n">max_lag</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">forecast_future</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">horizon</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">evaluation_modules</span> <span class="o">=</span> <span class="s2">&quot;MAE,RMSE&quot;</span>
+<span class="n">evaluation</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">forecaster</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Evaluation setup:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">evaluation</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Future forecasts&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">print_future_forecast_on_training_data</span><span class="p">(</span><span class="n">forecaster</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="serialization">
 <h2>Serialization<a class="headerlink" href="#serialization" title="Permalink to this headline">¶</a></h2>
 <p>You can easily serialize and de-serialize as well.</p>
@@ -423,6 +458,7 @@ string matching):</p>
 <li><a class="reference internal" href="#clusterers">Clusterers</a></li>
 <li><a class="reference internal" href="#attribute-selection">Attribute selection</a></li>
 <li><a class="reference internal" href="#associators">Associators</a></li>
+<li><a class="reference internal" href="#timeseries">Timeseries</a></li>
 <li><a class="reference internal" href="#serialization">Serialization</a></li>
 <li><a class="reference internal" href="#experiments">Experiments</a></li>
 <li><a class="reference internal" href="#packages">Packages</a></li>
@@ -472,11 +508,11 @@ string matching):</p>
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.1.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014-2020, Peter &#34;fracpete&#34; Reutemann.
+        &#169; Copyright 2014-2021, Peter &#34;fracpete&#34; Reutemann.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>

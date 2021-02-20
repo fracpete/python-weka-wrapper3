@@ -69,6 +69,13 @@ weka\.filters module
     :undoc-members:
     :show-inheritance:
 
+weka\.timeseries module
+-----------------------
+
+.. automodule:: weka.timeseries
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------
