@@ -856,7 +856,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddAddMonthOfYear", "(Z)V", add)
+        javabridge.call(self.jobject, "setAddMonthOfYear", "(Z)V", add)
 
     @property
     def add_quarter_of_year(self):
@@ -876,7 +876,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddAddQuarterOfYear", "(Z)V", add)
+        javabridge.call(self.jobject, "setAddQuarterOfYear", "(Z)V", add)
 
     @property
     def is_using_artificial_time_index(self):
