@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1.17 (????-??-??)
--------------------
+0.2.0 (2021-02-21)
+------------------
 
 - `classes.new_instance` method can take an options list now as well
 - added `classes.get_enum` method to return the instance of a Java enum item
