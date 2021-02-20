@@ -959,11 +959,9 @@ class Enum(JavaObject):
         :type member: str
         """
         if jobject is None:
-            enumclass = get_jclass(classname=enum)
-            jobject = javabridge.static_call(
-                "java/lang/Enum", "valueOf",
-                "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;",
-                enumclass, member)
+            if enum is None:
+                raise Exception("Enum member cannot be None if no JB_Object instance provided!")
+            jobject = get_enum(enum, member)
         super(Enum, self).__init__(jobject)
 
     @property
