@@ -1226,23 +1226,20 @@ class TSForecaster(OptionHandler):
         javabridge.call(self.jobject, "runForecaster", "(Lweka/classifiers/timeseries/TSForecaster;[Ljava/lang/String;)V", forecaster.jobject, options)
 
 
-class WekaForecaster(TSForecaster):
+class TSLagUser(JavaObject):
     """
-    Wrapper class for Weka timeseries forecasters.
+    Wrapper class for TSLagUser objects.
     """
 
-    def __init__(self, jobject=None, options=None):
+    def __init__(self, jobject):
         """
-        Initializes a Weka timeseries forecaster.
+        Wraps the TSLagUser object.
 
         :param jobject: the JB_Object to use
         :type jobject: JB_Object
-        :param options: the list of commandline options to set
-        :type options: list
         """
-        if jobject is None:
-            jobject = new_instance("weka.classifiers.timeseries.WekaForecaster")
-        super(WekaForecaster, self).__init__(jobject=jobject, options=options)
+        self.enforce_type(jobject, "weka.classifiers.timeseries.core.TSLagUser")
+        super(TSLagUser, self).__init__(jobject=jobject)
 
     @property
     def tslag_maker(self):
@@ -1264,40 +1261,21 @@ class WekaForecaster(TSForecaster):
         """
         javabridge.call(self.jobject, "setTSLagMaker", "(Lweka/filters/supervised/attribute/TSLagMaker;)V", tslag_maker.jobject)
 
-    def clear_custom_periodics(self):
-        """
-        Clears the custom periodics.
-        """
-        javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
 
-    def add_custom_periodic(self, periodic):
-        """
-        Adds the custom periodic.
+class ConfidenceIntervalForecaster(JavaObject):
+    """
+    Wrapper class for ConfidenceIntervalForecaster objects.
+    """
 
-        :param periodic: the periodic to add
-        :type periodic: str
+    def __init__(self, jobject):
         """
-        javabridge.call(self.jobject, "addCustomPeriodic", "(Ljava/lang/String;)V", periodic)
+        Wraps a ConfidenceIntervalForecaster object.
 
-    @property
-    def overlay_fields(self):
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
         """
-        Returns the overlay fields as string.
-
-        :return: the overlay fields
-        :rtype: str
-        """
-        return javabridge.call(self.jobject, "getOverlayFields", "()Ljava/lang/String;")
-
-    @overlay_fields.setter
-    def overlay_fields(self, fields):
-        """
-        Sets the overlay fields as string.
-
-        :param fields: the overlay fields
-        :type fields: str
-        """
-        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", fields)
+        self.enforce_type(jobject, "weka.classifiers.timeseries.core.ConfidenceIntervalForecaster")
+        super(ConfidenceIntervalForecaster, self).__init__(jobject=jobject)
 
     @property
     def calculate_conf_intervals_for_forecasts(self):
@@ -1351,6 +1329,152 @@ class WekaForecaster(TSForecaster):
         """
         javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", level)
 
+
+class OverlayForecaster(JavaObject):
+    """
+    Wrapper class for OverlayForecaster objects.
+    """
+
+    def __init__(self, jobject):
+        """
+        Wraps a OverlayForecaster object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        """
+        self.enforce_type(jobject, "weka.classifiers.timeseries.core.OverlayForecaster")
+        super(OverlayForecaster, self).__init__(jobject=jobject)
+
+    @property
+    def overlay_fields(self):
+        """
+        Returns the overlay fields as string.
+
+        :return: the overlay fields
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getOverlayFields", "()Ljava/lang/String;")
+
+    @overlay_fields.setter
+    def overlay_fields(self, fields):
+        """
+        Sets the overlay fields as string.
+
+        :param fields: the overlay fields
+        :type fields: str
+        """
+        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", fields)
+
+    @property
+    def is_using_overlay_data(self):
+        """
+        Returns true if overlay data has been used to train this forecaster, and
+        thus is expected to be supplied for future time steps when making a
+        forecast.
+
+        :return:
+        """
+        return javabridge.call(self.jobject, "isUsingOverlayData", "()Z")
+
+    def forecast_with_overlays(self, steps, overlays):
+        """
+        Produce a forecast for the target field(s). Assumes that the model has been built
+        and/or primed so that a forecast can be generated. Also assumes that
+        the forecaster has been told which attributes are to be considered
+        "overlay" attributes in the data. Overlay data is data that the
+        forecaster will be provided with when making a forecast into the future - i.e.
+        it will be given the values of these attributes for future instances. The
+        overlay data provided to this method should have the same structure as
+        the original data used to train the forecaster - i.e. all original fields
+        should be present, including the targets and time stamp field (if supplied).
+        The values of targets will of course be missing ('?') since we want to forecast
+        those. The time stamp values (if a time stamp is in use) may be provided, in which
+        case the forecaster will use the time stamp values in the overlay instances. If
+        the time stamp values are missing, then date arithmetic (for date time stamps) will
+        be used to advance the time value beyond the last seen training value;
+        similarly, for artificial time stamps or non-date time stamps, the computed
+        time delta will be used to increment beyond the last seen training value.
+
+        The number of instances in the overlay data should typically match the number
+        of steps that have been requested for forecasting. If these differ, then
+        overlay.numInstances() will be the number of steps forecasted.
+
+        :param steps: number of forecasted values to produce for each target. E.g. a value of 5 would produce a prediction for t+1, t+2, ..., t+5.
+        :type steps: int
+        :param overlays: the overlay data to use
+        :type overlays: Instances
+        :return: a List of Lists (one for each step) of forecasted values for each target (NumericPrediction objects)
+        :rtype: list
+        """
+        objs1 = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "forecast", "(Lweka/core/Instances;I[Ljava/io/PrintStream;)Ljava/util/List;", steps, overlays.jobject, []))
+        list1 = []
+        for obj1 in objs1:
+            list2 = []
+            objs2 = javabridge.get_collection_wrapper(obj1)
+            for obj2 in objs2:
+                list2.append(NumericPrediction(obj2))
+            list1.append(list2)
+        return list1
+
+
+class IncrementallyPrimeable(JavaObject):
+    """
+    Wrapper class for IncrementallyPrimeable objects.
+    """
+
+    def __init__(self, jobject):
+        """
+        Wraps a IncrementallyPrimeable object.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        """
+        self.enforce_type(jobject, "weka.classifiers.timeseries.core.IncrementallyPrimeable")
+        super(IncrementallyPrimeable, self).__init__(jobject=jobject)
+
+    def prime_forecaster_incremental(self, inst):
+        """
+        Primes the forecaster using the provided data.
+
+        :param inst: the instance to prime with
+        :type inst: Instance
+        """
+        javabridge.call(self.jobject, "primeForecasterIncremental", "(Lweka/core/Instance;)V", inst.jobject)
+
+
+class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, OverlayForecaster, IncrementallyPrimeable):
+    """
+    Wrapper class for Weka timeseries forecasters.
+    """
+
+    def __init__(self, jobject=None, options=None):
+        """
+        Initializes a Weka timeseries forecaster.
+
+        :param jobject: the JB_Object to use
+        :type jobject: JB_Object
+        :param options: the list of commandline options to set
+        :type options: list
+        """
+        if jobject is None:
+            jobject = new_instance("weka.classifiers.timeseries.WekaForecaster")
+        super(WekaForecaster, self).__init__(jobject=jobject, options=options)
+
+    def clear_custom_periodics(self):
+        """
+        Clears the custom periodics.
+        """
+        javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
+
+    def add_custom_periodic(self, periodic):
+        """
+        Adds the custom periodic.
+
+        :param periodic: the periodic to add
+        :type periodic: str
+        """
+        javabridge.call(self.jobject, "addCustomPeriodic", "(Ljava/lang/String;)V", periodic)
+
     @property
     def base_forecaster(self):
         """
@@ -1370,26 +1494,6 @@ class WekaForecaster(TSForecaster):
         :type base_forecaster: Classifier
         """
         javabridge.call(self.jobject, "setBaseForecaster", "(Lweka/classifiers/Classifier;)V", base_forecaster.jobject)
-
-    @property
-    def is_using_overlay_data(self):
-        """
-        Returns true if overlay data has been used to train this forecaster, and
-        thus is expected to be supplied for future time steps when making a
-        forecast.
-
-        :return:
-        """
-        return javabridge.call(self.jobject, "isUsingOverlayData", "()Z")
-
-    def prime_forecaster_incremental(self, inst):
-        """
-        Primes the forecaster using the provided data.
-
-        :param inst: the instance to prime with
-        :type inst: Instance
-        """
-        javabridge.call(self.jobject, "primeForecasterIncremental", "(Lweka/core/Instance;)V", inst.jobject)
 
 
 class TSEvalModule(JavaObject):
