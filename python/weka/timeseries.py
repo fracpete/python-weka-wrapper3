@@ -18,7 +18,7 @@ import javabridge
 import logging
 from weka.core.classes import JavaObject, OptionHandler, Date, get_enum, new_instance
 from weka.core.dataset import Instances, Instance
-from weka.core.typeconv import string_list_to_python
+from weka.core.typeconv import jstring_list_to_string_list, jdouble_to_float
 from weka.classifiers import Classifier, NumericPrediction
 from weka.filters import Filter
 
@@ -424,7 +424,7 @@ class TSLagMaker(Filter):
         :return: the fields to lag
         :rtype: list
         """
-        return string_list_to_python(javabridge.call(self.jobject, "getFieldsToLag", "()Ljava/util/List;"))
+        return jstring_list_to_string_list(javabridge.call(self.jobject, "getFieldsToLag", "()Ljava/util/List;"))
 
     @fields_to_lag.setter
     def fields_to_lag(self, fields):
@@ -464,7 +464,7 @@ class TSLagMaker(Filter):
         :return: the overlay fields
         :rtype: list
         """
-        return string_list_to_python(javabridge.call(self.jobject, "getOverlayFields", "()Ljava/util/List;"))
+        return jstring_list_to_string_list(javabridge.call(self.jobject, "getOverlayFields", "()Ljava/util/List;"))
 
     @overlay_fields.setter
     def overlay_fields(self, fields):
@@ -1382,6 +1382,15 @@ class WekaForecaster(TSForecaster):
         """
         return javabridge.call(self.jobject, "isUsingOverlayData", "()Z")
 
+    def prime_forecaster_incremental(self, inst):
+        """
+        Primes the forecaster using the provided data.
+
+        :param inst: the instance to prime with
+        :type inst: Instance
+        """
+        javabridge.call(self.jobject, "primeForecasterIncremental", "(Lweka/core/Instance;)V", inst.jobject)
+
 
 class TSEvalModule(JavaObject):
     """
@@ -1460,7 +1469,7 @@ class TSEvalModule(JavaObject):
         :return: the list of target fields
         :rtype: list
         """
-        return string_list_to_python(javabridge.call(self.jobject, "getTargetFields", "()Ljava/util/List;"))
+        return jstring_list_to_string_list(javabridge.call(self.jobject, "getTargetFields", "()Ljava/util/List;"))
 
     @target_fields.setter
     def target_fields(self, fields):
@@ -1523,13 +1532,72 @@ class ErrorModule(TSEvalModule):
         """
         super(ErrorModule, self).__init__(jobject)
 
+    def counts_for_targets(self):
+        """
+        Returns the number of predicted, actual pairs for each target. Only
+        entries that are non-missing for both actual and predicted contribute
+        to the overall count.
+
+        :return: the number of predicted, actual pairs for each target.
+        :rtype: ndarray
+        """
+        result = javabridge.call(self.jobject, "countsForTargets", "()[D")
+        return javabridge.get_env().get_double_array_elements(result)
+
+    def errors_for_target(self, target):
+        """
+        Returns the list of the errors for the supplied target.
+
+        :param target: the target to get the errors for
+        :type target: str
+        :return: the errors
+        :rtype: list
+        """
+        result = []
+        objs = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getErrorsForTarget", "(Ljava/lang/String;)Ljava/util/List;", target))
+        for obj in objs:
+            result.append(jdouble_to_float(obj))
+        return result
+
+    def predictions_for_target(self, target):
+        """
+        Returns the list of predictions for the target.
+
+        :param target: the target to get the predictions for
+        :type target: str
+        :return: list of NumericPrediction
+        :rtype: list
+        """
+        result = []
+        objs = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getPredictionsForTarget", "(Ljava/lang/String;)Ljava/util/List;", target))
+        for obj in objs:
+            result.append(NumericPrediction(obj))
+        return result
+
+    def predictions_for_all_targets(self):
+        """
+        Returns the list of predictions for all targets.
+
+        :return: list of list of NumericPrediction
+        :rtype: list
+        """
+        result1 = []
+        objs1 = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getPredictionsForAllTargets", "()Ljava/util/List;"))
+        for obj1 in objs1:
+            objs2 = javabridge.get_collection_wrapper(obj1)
+            result2 = []
+            for obj2 in objs2:
+                result2.append(NumericPrediction(obj2))
+            result1.append(result2)
+        return result1
+
 
 class TSEvaluation(JavaObject):
     """
     Evaluation class for timeseries forecasters.
     """
 
-    def __init__(self, train, test_split_size=33.0, test=None):
+    def __init__(self, train, test_split_size=0.3, test=None):
         """
         Initializes a TSEvaluation object.
 
