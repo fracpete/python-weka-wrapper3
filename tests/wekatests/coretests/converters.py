@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # converters.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import os
@@ -34,9 +34,9 @@ class TestConverters(weka_test.WekaTest):
         fname = "/some/where/anneal.arff.gz"
         loader = converters.loader_for_file(fname)
         self.assertEqual("weka.core.converters.ArffLoader", loader.classname, msg="Class differs: " + fname)
-        fname = "/some/where/anneal.csv"
+        fname = "/some/where/anneal.names"
         loader = converters.loader_for_file(fname)
-        self.assertEqual("weka.core.converters.CSVLoader", loader.classname, msg="Class differs: " + fname)
+        self.assertEqual("weka.core.converters.C45Loader", loader.classname, msg="Class differs: " + fname)
 
     def test_saver_for_file(self):
         """
@@ -48,9 +48,9 @@ class TestConverters(weka_test.WekaTest):
         fname = "/some/where/anneal.arff.gz"
         loader = converters.saver_for_file(fname)
         self.assertEqual("weka.core.converters.ArffSaver", loader.classname, msg="Class differs: " + fname)
-        fname = "/some/where/anneal.csv"
+        fname = "/some/where/anneal.names"
         loader = converters.saver_for_file(fname)
-        self.assertEqual("weka.core.converters.CSVSaver", loader.classname, msg="Class differs: " + fname)
+        self.assertEqual("weka.core.converters.C45Saver", loader.classname, msg="Class differs: " + fname)
 
     def test_arff_loader(self):
         """
