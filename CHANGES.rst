@@ -12,6 +12,7 @@ Changelog
 - in module `typeconv` renamed methods: `string_array_to_list` to `jstring_array_to_list`,
   `string_list_to_array` to `string_list_to_jarray`, `double_matrix_to_ndarray` to `jdouble_matrix_to_ndarray`,
   `enumeration_to_list` to `jenumeration_to_list`, `double_to_float` to `float_to_jfloat`
+- added `weka.timeseries` module that wraps the `timeseriesForecasting` Weka package
 
 
 0.1.16 (2020-12-26)

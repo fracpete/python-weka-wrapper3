@@ -259,6 +259,44 @@ Associators, like `Apriori`, can be built and output like this:
    print(associator)
 
 
+Timeseries
+----------
+
+Timeseries forecasting can be achieved with the `weka.timeseries` module (which wraps the `timeseriesForecasting` package).
+Notable are the `WekaForecaster` forecaster, the `TSLagMaker` filter and the `TSEvaluation` class:
+
+.. code-block:: python
+
+   from weka.timeseries import WekaForecaster
+   from weka.classifiers import Classifier
+   forecaster = WekaForecaster()
+   forecaster.fields_to_forecast = ["passenger_numbers"]
+   forecaster.base_forecaster = Classifier(classname="weka.classifiers.functions.LinearRegression")
+   forecaster.tslag_maker.timestamp_field = "Date"
+   forecaster.tslag_maker.adjust_for_variance = False
+   forecaster.tslag_maker.include_powers_of_time = True
+   forecaster.tslag_maker.include_timelag_products = True
+   forecaster.tslag_maker.remove_leading_instances_with_unknown_lag_values = False
+   forecaster.tslag_maker.add_month_of_year = True
+   forecaster.tslag_maker.add_quarter_of_year = True
+   print("algorithm name: " + str(forecaster.algorithm_name))
+   print("command-line: " + forecaster.to_commandline())
+   print("lag maker: " + forecaster.tslag_maker.to_commandline())
+
+   evaluation = TSEvaluation(airline_data, 0.0)
+   evaluation.evaluate_on_training_data = False
+   evaluation.evaluate_on_test_data = False
+   evaluation.prime_window_size = forecaster.tslag_maker.max_lag
+   evaluation.forecast_future = True
+   evaluation.horizon = 20
+   evaluation.evaluation_modules = "MAE,RMSE"
+   evaluation.evaluate(forecaster)
+   print("Evaluation setup:")
+   print(evaluation)
+   print("Future forecasts")
+   print(evaluation.print_future_forecast_on_training_data(forecaster))
+
+
 Serialization
 -------------
 
