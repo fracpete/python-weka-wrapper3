@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # associations.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -25,7 +25,7 @@ import weka.core.converters as converters
 from weka.core.classes import OptionHandler, JavaObject, join_options
 from weka.core.capabilities import Capabilities
 from weka.core.dataset import Attribute
-from weka.core.typeconv import string_array_to_list
+from weka.core.typeconv import jstring_array_to_list
 
 # logging setup
 logger = logging.getLogger("weka.associations")
@@ -350,7 +350,7 @@ class AssociationRule(JavaObject):
         :return: the metric names
         :rtype: list
         """
-        return string_array_to_list(javabridge.call(self.jobject, "getMetricNamesForRule", "()[Ljava/lang/String;"))
+        return jstring_array_to_list(javabridge.call(self.jobject, "getMetricNamesForRule", "()[Ljava/lang/String;"))
 
     @property
     def metric_values(self):
@@ -614,7 +614,7 @@ class Associator(OptionHandler):
         """
         if not self.check_type(self.jobject, "weka.associations.AssociationRulesProducer"):
             return None
-        return string_array_to_list(
+        return jstring_array_to_list(
             javabridge.call(self.jobject, "getRuleMetricNames", "()[Ljava/lang/String;"))
 
     @classmethod

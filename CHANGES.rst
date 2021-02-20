@@ -5,9 +5,13 @@ Changelog
 -------------------
 
 - `classes.new_instance` method can take an options list now as well
-- `classes.get_enum` method returns the instance of an enum item
-- `classes.new_instance` method creates new instance of object
-- `typeconv.string_list_to_python` method converts a `java.util.List` containing strings into a Python list
+- added `classes.get_enum` method to return the instance of a Java enum item
+- added `classes.new_instance` method to create new instance of Java class
+- added `typeconv.jstring_list_to_string_list` method to convert a `java.util.List` containing strings into a Python list
+- added `typeconv.jdouble_to_float` method to convert a `java.lang.Double` to a Python float
+- in module `typeconv` renamed methods: `string_array_to_list` to `jstring_array_to_list`,
+  `string_list_to_array` to `string_list_to_jarray`, `double_matrix_to_ndarray` to `jdouble_matrix_to_ndarray`,
+  `enumeration_to_list` to `jenumeration_to_list`, `double_to_float` to `float_to_jfloat`
 
 
 0.1.16 (2020-12-26)

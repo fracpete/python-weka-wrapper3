@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # attribute_selection.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -268,7 +268,7 @@ class AttributeSelection(JavaObject):
         if matrix is None:
             return None
         else:
-            return typeconv.double_matrix_to_ndarray(matrix)
+            return typeconv.jdouble_matrix_to_ndarray(matrix)
 
     def reduce_dimensionality(self, data):
         """

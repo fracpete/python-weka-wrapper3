@@ -998,7 +998,7 @@ class Attribute(JavaObject):
         if enm is None:
             return None
         else:
-            return typeconv.enumeration_to_list(enm)
+            return typeconv.jenumeration_to_list(enm)
 
     @property
     def ordering(self):

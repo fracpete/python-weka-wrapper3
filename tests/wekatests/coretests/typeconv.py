@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # typeconv.py
-# Copyright (C) 2014 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import javabridge
@@ -25,11 +25,11 @@ class TestTypes(weka_test.WekaTest):
 
     def test_string_list_conversions(self):
         """
-        Tests methods string_list_to_array and string_array_to_list.
+        Tests methods string_list_to_jarray and jstring_array_to_list.
         """
         lin = ["A", "B", "C", "D"]
-        a = typeconv.string_list_to_array(lin)
-        lout = typeconv.string_array_to_list(a)
+        a = typeconv.string_list_to_jarray(lin)
+        lout = typeconv.jstring_array_to_list(a)
         self.assertEqual(lin, lout, msg="Elements differ")
 
     def test_enumeration_to_list(self):
@@ -41,7 +41,7 @@ class TestTypes(weka_test.WekaTest):
         for element in lin:
             javabridge.call(v, "add", "(Ljava/lang/Object;)Z", element)
         enm = javabridge.call(v, "elements", "()Ljava/util/Enumeration;")
-        lout = typeconv.enumeration_to_list(enm)
+        lout = typeconv.jenumeration_to_list(enm)
         self.assertEqual(lin, lout, msg="Elements differ")
 
 

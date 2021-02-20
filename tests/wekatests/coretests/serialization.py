@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # serialization.py
-# Copyright (C) 2014 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import tempfile
@@ -43,7 +43,7 @@ class TestSerialization(weka_test.WekaTest):
         vout = serialization.read(fname)
         self.assertIsNotNone(vout, msg="Failed to read from " + fname + "?")
         enm = javabridge.call(vin, "elements", "()Ljava/util/Enumeration;")
-        lout = typeconv.enumeration_to_list(enm)
+        lout = typeconv.jenumeration_to_list(enm)
         self.delfile(fname)
         self.assertEqual(lin, lout, msg="Input/output differ")
 

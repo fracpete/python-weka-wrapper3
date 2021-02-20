@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import sys
 import os
@@ -130,7 +130,7 @@ class Classifier(OptionHandler):
         :rtype: ndarray
         """
         if self.is_batchpredictor:
-            return typeconv.double_matrix_to_ndarray(self.__distributions(data.jobject))
+            return typeconv.jdouble_matrix_to_ndarray(self.__distributions(data.jobject))
         else:
             return None
 
@@ -991,7 +991,7 @@ class NumericPrediction(Prediction):
         :return: the intervals
         :rtype: ndarray
         """
-        return typeconv.double_matrix_to_ndarray(javabridge.call(self.jobject, "predictionIntervals", "()[[D"))
+        return typeconv.jdouble_matrix_to_ndarray(javabridge.call(self.jobject, "predictionIntervals", "()[[D"))
 
 
 class CostMatrix(JavaObject):
@@ -1465,7 +1465,7 @@ class Evaluation(JavaObject):
         :return: the matrix
         :rtype: ndarray
         """
-        return typeconv.double_matrix_to_ndarray(javabridge.call(self.jobject, "confusionMatrix", "()[[D"))
+        return typeconv.jdouble_matrix_to_ndarray(javabridge.call(self.jobject, "confusionMatrix", "()[[D"))
 
     @property
     def correct(self):

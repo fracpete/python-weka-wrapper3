@@ -22,7 +22,7 @@ import numpy
 logger = logging.getLogger(__name__)
 
 
-def string_array_to_list(a):
+def jstring_array_to_list(a):
     """
     Turns the Java string array into Python unicode string list.
 
@@ -39,7 +39,7 @@ def string_array_to_list(a):
     return result
 
 
-def string_list_to_array(l):
+def string_list_to_jarray(l):
     """
     Turns a Python unicode string list into a Java String array.
 
@@ -54,7 +54,7 @@ def string_list_to_array(l):
     return result
 
 
-def string_list_to_python(l, return_empty_if_none=True):
+def jstring_list_to_string_list(l, return_empty_if_none=True):
     """
     Converts a Java java.util.List containing strings into a Python list.
 
@@ -77,7 +77,7 @@ def string_list_to_python(l, return_empty_if_none=True):
     return result
 
 
-def double_matrix_to_ndarray(m):
+def jdouble_matrix_to_ndarray(m):
     """
     Turns the Java matrix (2-dim array) of doubles into a numpy 2-dim array.
 
@@ -101,7 +101,7 @@ def double_matrix_to_ndarray(m):
     return result
 
 
-def enumeration_to_list(enm):
+def jenumeration_to_list(enm):
     """
     Turns the java.util.Enumeration into a list.
 
@@ -116,7 +116,7 @@ def enumeration_to_list(enm):
     return result
 
 
-def double_to_float(d):
+def float_to_jfloat(d):
     """
     Turns the Python float into a Java java.lang.Float object.
 
@@ -126,3 +126,15 @@ def double_to_float(d):
     :rtype: JB_Object
     """
     return javabridge.make_instance("java/lang/Float", "(D)V", d)
+
+
+def jdouble_to_float(d):
+    """
+    Turns the Java java.lang.Double object into Python float object.
+
+    :param d: the java.lang.Double
+    :type d: JB_Object
+    :return: the Float object
+    :rtype: float
+    """
+    return javabridge.call(d, "doubleValue", "()D", d)

@@ -186,7 +186,7 @@ def list_property_names(obj):
     if isinstance(obj, JavaObject):
         obj = obj.jobject
 
-    return typeconv.string_array_to_list(
+    return typeconv.jstring_array_to_list(
         javabridge.static_call(
             "Lweka/core/ClassHelper;", "listPropertyNames",
             "(Ljava/lang/Object;)[Ljava/lang/String;",
@@ -1154,7 +1154,7 @@ class OptionHandler(JavaObject, Configurable):
         :rtype: list
         """
         if self.is_optionhandler:
-            return typeconv.string_array_to_list(javabridge.call(self.jobject, "getOptions", "()[Ljava/lang/String;"))
+            return typeconv.jstring_array_to_list(javabridge.call(self.jobject, "getOptions", "()[Ljava/lang/String;"))
         else:
             return []
 
@@ -1167,7 +1167,7 @@ class OptionHandler(JavaObject, Configurable):
         :type options: list
         """
         if self.is_optionhandler:
-            javabridge.call(self.jobject, "setOptions", "([Ljava/lang/String;)V", typeconv.string_list_to_array(options))
+            javabridge.call(self.jobject, "setOptions", "([Ljava/lang/String;)V", typeconv.string_list_to_jarray(options))
 
     def to_commandline(self):
         """
@@ -1678,7 +1678,7 @@ def split_options(cmdline):
     :return: the split list of commandline options
     :rtype: list
     """
-    return typeconv.string_array_to_list(
+    return typeconv.jstring_array_to_list(
         javabridge.static_call(
             "Lweka/core/Utils;", "splitOptions",
             "(Ljava/lang/String;)[Ljava/lang/String;",
