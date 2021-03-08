@@ -91,6 +91,7 @@ class ASEvaluation(OptionHandler):
         if jobject is None:
             jobject = ASEvaluation.new_instance(classname)
         self.enforce_type(jobject, "weka.attributeSelection.ASEvaluation")
+        self.is_attribute_transformer = self.check_type(jobject, "weka.attributeSelection.AttributeTransformer")
         super(ASEvaluation, self).__init__(jobject=jobject, options=options)
 
     @property
@@ -126,6 +127,49 @@ class ASEvaluation(OptionHandler):
             return None
         else:
             return javabridge.get_env().get_int_array_elements(array)
+
+    def transformed_header(self):
+        """
+        Returns just the header for the transformed data (ie. an empty set of instances. This is so that
+        AttributeSelection can determine the structure of the transformed data without actually having to
+        get all the transformed data through transformed_data().
+        Returns None if not a weka.attributeSelection.AttributeTransformer
+
+        :return: the header
+        :rtype: Instances
+        """
+        if self.is_attribute_transformer:
+            return Instances(javabridge.call(self.jobject, "transformedHeader", "()Lweka/core/Instances;"))
+        else:
+            return None
+
+    def transformed_data(self, data):
+        """
+        Transform the supplied data set (assumed to be the same format as the training data).
+
+        :param data: the data to transform
+        :type data: Instances
+        :return: the transformed data
+        :rtype: Instances
+        """
+        if self.is_attribute_transformer:
+            return Instances(javabridge.call(self.jobject, "transformedData", "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+        else:
+            return None
+
+    def convert_instance(self, inst):
+        """
+        Transforms an instance in the format of the original data to the transformed space.
+
+        :param inst: the Instance to transform
+        :type inst: Instance
+        :return: the transformed instance
+        :rtype: Instance
+        """
+        if self.is_attribute_transformer:
+            return Instance(javabridge.call(self.jobject, "convertInstance", "(Lweka/core/Instance;)Lweka/core/Instance;", inst.jobject))
+        else:
+            return None
 
 
 class AttributeSelection(JavaObject):

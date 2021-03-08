@@ -4,6 +4,8 @@ Changelog
 0.2.1 (????-??-??)
 ------------------
 
+- the `ASEvaluation` class in the `weka.attribute_selection` module now offers the following methods
+  for attribute transformers like PCA: `transformed_header`, `transformed_data`, `convert_instance`
 - ...
 
 
