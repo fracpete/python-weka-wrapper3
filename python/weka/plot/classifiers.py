@@ -448,7 +448,7 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     :type title: str
     :param label_template: the template for the label in the plot
                            (#: 1-based index of classifier, @: full classname, !: simple classname,
-                           $: options, *: 1-based index of test set)
+                           $: options, \*: 1-based index of test set)
     :type label_template: str
     :param key_loc: the location string for the key
     :type key_loc: str
