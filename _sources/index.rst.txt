@@ -6,9 +6,9 @@
 Introduction
 ============
 
-*python-weka-wrapper3* allows you to use `Weka <http://www.cs.waikato.ac.nz/~ml/weka/>`_ from within Python3.
+*python-weka-wrapper3* allows you to use `Weka <http://www.cs.waikato.ac.nz/~ml/weka/>`__ from within Python3.
 
-The library uses the `javabridge <https://pypi.python.org/pypi/javabridge>`_ library for starting up,
+The library uses the `javabridge <https://pypi.python.org/pypi/javabridge>`__ library for starting up,
 communicating with and shutting down the Java Virtual Machine in which the Weka processes get executed.
 
 *python-weka-wrapper3* provides a thin wrapper around the basic (non-GUI) functionality of Weka (some plots are
@@ -19,11 +19,10 @@ Links:
 
 * Looking for code?
 
-  * `Project homepage <https://github.com/fracpete/python-weka-wrapper3>`_
-  * `Example code <https://github.com/fracpete/python-weka-wrapper3-examples>`_
+  * `Project homepage <https://github.com/fracpete/python-weka-wrapper3>`__
+  * `Example code <https://github.com/fracpete/python-weka-wrapper3-examples>`__
 
-* Questions? You can post them in the project's `Google Group <https://groups.google.com/forum/#!forum/python-weka-wrapper>`_
-* `MLOSS project <https://mloss.org/software/view/660/>`_
+* Questions? You can post them in the project's `Google Group <https://groups.google.com/forum/#!forum/python-weka-wrapper>`__
 
 
 Requirements
