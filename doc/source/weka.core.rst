@@ -1,9 +1,6 @@
 weka\.core package
 ==================
 
-Submodules
-----------
-
 weka\.core\.capabilities module
 -------------------------------
 

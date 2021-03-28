@@ -1,9 +1,6 @@
 weka\.plot package
 ==================
 
-Submodules
-----------
-
 weka\.plot\.classifiers module
 ------------------------------
 

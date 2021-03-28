@@ -10,9 +10,6 @@ Subpackages
     weka.flow
     weka.plot
 
-Submodules
-----------
-
 weka\.associations module
 -------------------------
 
@@ -73,14 +70,6 @@ weka\.timeseries module
 -----------------------
 
 .. automodule:: weka.timeseries
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: weka
     :members:
     :undoc-members:
     :show-inheritance:

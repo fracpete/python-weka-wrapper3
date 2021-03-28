@@ -5,22 +5,25 @@ using the [javabridge](https://pypi.python.org/pypi/javabridge) library.
 
 Requirements:
 
-* Python 3 (for Python 2.7 version see [here](https://github.com/fracpete/python-weka-wrapper))
+* Python 3
   * javabridge (>= 1.0.14)
   * matplotlib (optional)
   * pygraphviz (optional)
   * PIL (optional)
-* Oracle JDK 1.8+
+* JDK 8 or later (OpenJDK 11 recommended)
 
 Uses:
 * Weka (3.9.5)
 
+
 ## Installation
 
-Detailed instructions and links to videos on installing the library are located
-[here](http://fracpete.github.io/python-weka-wrapper3/install.html).
+Detailed instructions on installing the library on various operating systems are located here:
+
+http://fracpete.github.io/python-weka-wrapper3/install.html
 
 Please note, that you need a build environment to compile some libraries from source.
+
 
 ## Forum
 
@@ -28,18 +31,24 @@ You can post questions, patches or enhancement requests in the following Google 
 
 https://groups.google.com/forum/#!forum/python-weka-wrapper
 
-## Examples
-See [python-weka-wrapper-examples3](https://github.com/fracpete/python-weka-wrapper3-examples)
-repository for example code on the various APIs. Also, check out the sphinx
-documentation in the **doc** directory. You can generate HTML documentation
-using the `make html` command in the **doc** directory.
 
-Available online documentation:
-* [Full documentation](http://fracpete.github.io/python-weka-wrapper3/)
-* Shortcuts
-  * [Command-line](http://fracpete.github.io/python-weka-wrapper3/commandline.html)
-  * [API](http://fracpete.github.io/python-weka-wrapper3/api.html)
-  * [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
+## Examples
+
+* The [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
+  section in the documentation demonstrates how to use the API. 
+* The [python-weka-wrapper-examples3](https://github.com/fracpete/python-weka-wrapper3-examples)
+  repository contains plenty of example code for the various APIs.
+
+
+## Documentation
+
+The complete documentation for the library is available from here:
+
+http://fracpete.github.io/python-weka-wrapper3/
+
 
 ## Download statistics
-For viewing recent download statistics, go to [pypistats](https://pypistats.org//api/packages/python-weka-wrapper3/recent).
+
+For viewing recent download statistics, go to *pypistats*:
+
+https://pypistats.org//api/packages/python-weka-wrapper3/recent

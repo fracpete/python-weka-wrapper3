@@ -15,6 +15,12 @@ General
   environment (JRE). You also may have to set the ``JAVA_HOME`` environment variable pointing 
   to your JDK installation (above the ``bin`` directory).
 
+* Before you can install `matplotlib`, you may have to upgrade your `distribute` library as follows:
+
+  .. code-block:: bash
+
+     $  ./venv/bin/easy_install -U distribute
+
 
 Debian
 ------
@@ -43,6 +49,29 @@ Ubuntu
   **A:** Simply run the following command to fix this:
   `sudo apt-get install gsettings-desktop-schemas`
 
+* On Ubuntu, follow `this post <http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/>`__
+  to install all the required dependencies for PIL:
+
+  .. code-block:: bash
+
+     $ sudo apt-get build-dep python-imaging
+
+* To enable support for PIL on Ubuntu, see
+  `this post <http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/>`__:
+
+  .. code-block:: bash
+
+     $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/
+     $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/
+     $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/
+
+* Based on `this post <https://askubuntu.com/a/785506>`__ do the following to install
+  matplotlib with tkinter support:
+
+  .. code-block:: bash
+
+     sudo apt install tk-dev
+     ./venv/bin/pip --no-cache-dir install -U --force-reinstall matplotlib
 
 Linux
 -----
@@ -53,6 +82,12 @@ Linux
   `import pygraphviz`
   If you get `undefined symbol: Agundirected`, then follow the steps outlined `here <http://stackoverflow.com/a/33508561/4698227>`__,
   but use `pip3`.
+
+* You may need to install the header files for the following libraries for the compilations to succeed:
+
+  * freetype
+  * graphviz
+  * png
 
 
 Mac OSX
