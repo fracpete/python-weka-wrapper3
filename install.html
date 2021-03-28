@@ -53,29 +53,24 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>The following sections should help you install the library on your machine.</p>
+<p>The following sections should help you install the library on your machine. Instead of installing the
+library system-wide, the instructions show how to install it within in a virtual environment. This avoids
+interfering with your operating system or other libraries, when you should upgrade some libraries.</p>
 <p>Some of the instructions are based on the <em>CellProfiler</em>
 <a class="reference external" href="https://github.com/CellProfiler/python-javabridge/blob/master/docs/installation.rst">instructions</a>, the guys
 behind the <em>javabridge</em> library.</p>
 <p>However, if you should encounter problems or if you would like to submit improvements
 on the instructions below, please use the following mailing list:</p>
 <p><a class="reference external" href="https://groups.google.com/forum/#!forum/python-weka-wrapper">https://groups.google.com/forum/#!forum/python-weka-wrapper</a></p>
-<div class="section" id="videos">
-<h2>Videos<a class="headerlink" href="#videos" title="Permalink to this headline">¶</a></h2>
-<p>You can find videos on <a class="reference external" href="https://www.youtube.com/channel/UCYkzno8dbnAasWakSXVsuPA">YouTube</a> that show the installation process:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://www.youtube.com/watch?v=RnH7r-M5zjM">Windows 8.1 (64-bit)</a></li>
-</ul>
-</div>
-<div class="section" id="prerequisites-for-all-plaforms">
-<h2>Prerequisites for all plaforms<a class="headerlink" href="#prerequisites-for-all-plaforms" title="Permalink to this headline">¶</a></h2>
-<p>You need a Java Development Kit (JDK) 1.8/8 (e.g., <a class="reference external" href="https://adoptopenjdk.net/">OpenJDK</a>) installed and
+<div class="section" id="prerequisites-for-all-platforms">
+<h2>Prerequisites for all platforms<a class="headerlink" href="#prerequisites-for-all-platforms" title="Permalink to this headline">¶</a></h2>
+<p>You need a Java Development Kit (JDK) 8 or later (e.g., <a class="reference external" href="https://adoptopenjdk.net/">OpenJDK</a>) installed and
 the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> <a class="reference external" href="http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html">environment variable</a>
 pointing to the installation directory in order to use <em>python-weka-wrapper3</em>
 library.</p>
 <p><strong>Note:</strong> In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle’s
 version. However, Oracle’s JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
-recommended Java version to use.</p>
+recommended Java version to use. Personally, I recommend the <strong>long-term support version 11 of OpenJDK</strong>.</p>
 </div>
 <div class="section" id="ubuntu">
 <h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
@@ -85,7 +80,7 @@ recommended Java version to use.</p>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>python-weka-wrapper3</em>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install python3-pip python3-numpy
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install python3-pip python3-numpy python3-venv
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
@@ -98,10 +93,14 @@ compiles against (but don’t use it for starting up JVMs):</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get install default-jdk
 </pre></div>
 </div>
-<p>Finally, you can use <code class="docutils literal"><span class="pre">pip3</span></code> to install the Python packages that are not
-available in the repositories:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo pip3 install javabridge
-$ sudo pip3 install python-weka-wrapper3
+<p>Create a virtual environment using the <em>venv</em> module that :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 -m venv pww3
+</pre></div>
+</div>
+<p>Finally, you can use <code class="docutils literal"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
+available in the Ubuntu repositories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./pww3/bin/pip install javabridge
+$ ./pww3/bin/pip install python-weka-wrapper3
 </pre></div>
 </div>
 </div>
@@ -117,7 +116,7 @@ $ sudo pip3 install python-weka-wrapper3
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>`python-weka-wrapper3</em>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install python3-pip python3-numpy
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install python3-pip python3-numpy python3-venv
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
@@ -125,16 +124,21 @@ graphical output:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ apt-get install python3-imaging python3-matplotlib python3-pygraphviz
 </pre></div>
 </div>
-<p>Download a JDK and un-tar it in <code class="docutils literal"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal"><span class="pre">/opt/jdk1.8.0_162/</span></code>).
-Export the Java home directory as follows (required for the <em>javabridge</em>
-installation):</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk1.8.0_162/
+<p>Download a JDK and un-tar it in <code class="docutils literal"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal"><span class="pre">/opt/jdk-11.0.7+10/</span></code>).</p>
+<p>Exit superuser mode and become a regular user again.</p>
+<p>Export the Java home directory as follows, which is required for the <em>javabridge</em>
+installation/compilation (you might want to add this command to your <code class="docutils literal"><span class="pre">.profile</span></code>):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk-11.0.7+10/
 </pre></div>
 </div>
-<p>Finally, you can use <code class="docutils literal"><span class="pre">pip3</span></code> to install the Python packages that are not
-available in the repositories:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip3 install javabridge
-$ pip3 install python-weka-wrapper3
+<p>Create a virtual environment using the <em>venv</em> module that :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 -m venv pww3
+</pre></div>
+</div>
+<p>Finally, you can use <code class="docutils literal"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
+available in the Debian repositories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./pww3/bin/pip install javabridge
+$ ./pww3/bin/pip install python-weka-wrapper3
 </pre></div>
 </div>
 <p>Please note, when using <em>python-weka-wrapper3</em> as a <em>normal</em> user, don’t forget
@@ -152,8 +156,12 @@ to your <code class="docutils literal"><span class="pre">.profile</span></code>)
 <li>install dev tools using <code class="docutils literal"><span class="pre">yum</span> <span class="pre">groupinstall</span> <span class="pre">&quot;Development</span> <span class="pre">tools&quot;</span></code></li>
 <li>install numpy package</li>
 <li>install python-imaging package (shouldn’t be necessary)</li>
-<li>install javabridge using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">javabridge</span></code></li>
-<li>install python-weka-wrapper3 using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">python-weka-wrapper3</span></code></li>
+</ul>
+<p>As regular user:</p>
+<ul class="simple">
+<li>create a virtual environment (see Ubuntu/Debian sections above)</li>
+<li>install javabridge using <code class="docutils literal"><span class="pre">./venv/bin/pip</span> <span class="pre">javabridge</span></code></li>
+<li>install python-weka-wrapper3 using <code class="docutils literal"><span class="pre">./venv/bin/pip</span> <span class="pre">python-weka-wrapper3</span></code></li>
 </ul>
 </div>
 <div class="section" id="other-linux-distributions">
@@ -174,10 +182,14 @@ graphical output and plots:</p>
 <li>matplotlib (optional)</li>
 <li>pygraphviz (optional)</li>
 </ul>
-<p>Once these libraries are installed, you can use <code class="docutils literal"><span class="pre">pip3</span></code> to install the remaining
-Python packages:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo pip3 install javabridge
-$ sudo pip3 install python-weka-wrapper3
+<p>Create a virtual environment using the <em>venv</em> module that :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 -m venv pww3
+</pre></div>
+</div>
+<p>Once these libraries are installed, you can use <code class="docutils literal"><span class="pre">pip</span></code> from the virtual environment to install the Python
+packages that are not available in the distro repositories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./pww3/bin/pip install javabridge
+$ ./pww3/bin/pip install python-weka-wrapper3
 </pre></div>
 </div>
 </div>
@@ -211,10 +223,10 @@ is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
 install a 32-bit JDK (or all of them are 64-bit).</p>
 <ul>
 <li><p class="first">download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge">javabridge</a>
-for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp34/cp36/cp37</em>) and your bitness (32 or 64 bit)</p>
+for Python 3.6/3.7/3.8/3.9 (<em>cp36/cp37/cp38/cp39</em>) and your bitness (32 or 64 bit)</p>
 </li>
-<li><p class="first">the following sets up an environment with Python 3.6</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; conda create --name pww3 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.6
+<li><p class="first">the following sets up an environment with Python 3.7</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; conda create --name pww3 <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
 &gt; activate pww3
 &gt; pip install numpy
 &gt; pip install C:<span class="se">\w</span>here<span class="se">\y</span>ou<span class="se">\d</span>ownloaded<span class="se">\i</span>t<span class="se">\j</span>avabridge-X.Y.Z.whl
@@ -225,7 +237,7 @@ for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp34/cp36/cp37</em>) and your bitness (32 o
 </ul>
 <p>If you want plotting support, then install also <em>graphviz</em> and <em>matplotlib</em>:</p>
 <ul class="simple">
-<li>download <a class="reference external" href="https://graphviz.gitlab.io/_pages/Download/Download_windows.html">graphviz</a>
+<li>download <a class="reference external" href="https://graphviz.org/download/#windows">graphviz</a>
 and add the path to its installed binaries to your <code class="docutils literal"><span class="pre">PATH</span></code> environment variable.</li>
 <li>install matplotlib using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">matplotlib</span></code></li>
 </ul>
@@ -253,7 +265,7 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <blockquote>
 <div><ul class="simple">
 <li>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">numpy 1.9.x MKL</a>
-(or later) for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp35/cp36/cp37</em>) and your <em>bitness</em> (32 or 64 bit)</li>
+(or later) for Python 3.6/3.7/3.8/3.9 (<em>cp36/cp37/cp38/cp39</em>) and your <em>bitness</em> (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy-X.Y.Z.whl</span></code></li>
 </ul>
 </div></blockquote>
@@ -263,16 +275,16 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <blockquote>
 <div><ul class="simple">
 <li>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge">javabridge</a>
-(or later) for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp35/cp36/cp37</em>) and your <em>bitness</em> (32 or 64 bit)</li>
+(or later) for Python 3.6/3.7/3.8/3.9 (<em>cp36/cp37/cp38/cp39</em>) and your <em>bitness</em> (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">javabridge-X.Y.Z.whl</span></code></li>
 </ul>
 </div></blockquote>
 <p>If you want to use the plotting functionality, you need to install <em>graphviz</em> and <em>matplotlib</em> as well:</p>
 <ul class="simple">
-<li>download <a class="reference external" href="https://graphviz.gitlab.io/_pages/Download/Download_windows.html">graphviz</a>
+<li>download <a class="reference external" href="https://graphviz.org/download/#windows">graphviz</a>
 and add the path to its installed binaries to your <code class="docutils literal"><span class="pre">PATH</span></code> enrivornment variable.</li>
 <li>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib">matplotlib</a>
-for Python 3.4/3.5/3.6/3.7 (<em>cp34/cp34/cp36/cp37</em>) and your bitness (32 or 64 bit)</li>
+for Python 3.6/3.7/3.8/3.9 (<em>cp36/cp37/cp38/cp39</em>) and your bitness (32 or 64 bit)</li>
 <li>install the <em>.whl</em> file using pip: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">matplotlib-X.Y.Z.whl</span></code></li>
 </ul>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>&gt; pip install python-weka-wrapper3
@@ -287,32 +299,30 @@ installed.</p>
 <p>You have two options for installing the library from source, either through a release
 archive or using the <em>bleeding edge</em> source code that is available through the
 Github repository.</p>
-<div class="section" id="archive">
-<h3>Archive<a class="headerlink" href="#archive" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="release-archive">
+<h3>Release archive<a class="headerlink" href="#release-archive" title="Permalink to this headline">¶</a></h3>
 <p>Go to the <a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3/releases">releases</a>
 page on Github and download the <em>Source code</em> archive (zip or tar.gz) of the
 release that you want to install. After the download finishes, decompress the
 archive. Open a terminal/command prompt and execute the following command
 from within the directory with the <cite>setup.py</cite> file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 setup.py install
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./venv/bin/python setup.py install
 </pre></div>
 </div>
 <p>Check out the section on <em>virtualenv</em> as well, if you would rather install it
 in a <em>disposable</em> location.</p>
 </div>
-<div class="section" id="gtihub">
-<h3>Gtihub<a class="headerlink" href="#gtihub" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="github">
+<h3>Github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
 <p>Clone the Github repository as follows:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/fracpete/python-weka-wrapper3.git
 </pre></div>
 </div>
 <p>Change into the newly created directory and install the library using the
 following command:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 setup.py install
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ./venv/bin/python setup.py install
 </pre></div>
 </div>
-<p>Check out the section on <em>virtualenv</em> as well, if you would rather install it
-in a <em>disposable</em> location.</p>
 </div>
 </div>
 </div>
@@ -329,8 +339,7 @@ in a <em>disposable</em> location.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#videos">Videos</a></li>
-<li><a class="reference internal" href="#prerequisites-for-all-plaforms">Prerequisites for all plaforms</a></li>
+<li><a class="reference internal" href="#prerequisites-for-all-platforms">Prerequisites for all platforms</a></li>
 <li><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
 <li><a class="reference internal" href="#debian">Debian</a></li>
 <li><a class="reference internal" href="#fedora-centos-redhat">Fedora/CentOS/Redhat</a></li>
@@ -339,8 +348,8 @@ in a <em>disposable</em> location.</p>
 <li><a class="reference internal" href="#windows-using-anaconda">Windows using Anaconda</a></li>
 <li><a class="reference internal" href="#windows">Windows</a></li>
 <li><a class="reference internal" href="#from-source">From source</a><ul>
-<li><a class="reference internal" href="#archive">Archive</a></li>
-<li><a class="reference internal" href="#gtihub">Gtihub</a></li>
+<li><a class="reference internal" href="#release-archive">Release archive</a></li>
+<li><a class="reference internal" href="#github">Github</a></li>
 </ul>
 </li>
 </ul>

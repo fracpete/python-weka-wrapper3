@@ -1,9 +1,6 @@
 weka\.flow package
 ==================
 
-Submodules
-----------
-
 weka\.flow\.base module
 -----------------------
 

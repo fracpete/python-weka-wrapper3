@@ -38,7 +38,7 @@ The library has the following requirements:
  * PIL (optional)
  * matplotlib (optional)
 
-* Oracle JDK 1.8+
+* Oracle JDK 1.8 or later (JDK 11 recommended)
 
 Uses:
 
@@ -52,12 +52,9 @@ Contents
 
    install
    troubleshooting
-   commandline
-   api
-   optionhandling
-   virtualenv
-   sourcecode
    examples
+   commandline
+   optionhandling
    flow
 
 API

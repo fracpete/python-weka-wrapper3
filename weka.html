@@ -58,7 +58,6 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="weka.core.html">weka.core package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="weka.core.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.capabilities">weka.core.capabilities module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.classes">weka.core.classes module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.converters">weka.core.converters module</a></li>
@@ -76,7 +75,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="weka.flow.html">weka.flow package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="weka.flow.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.base">weka.flow.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.container">weka.flow.container module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.control">weka.flow.control module</a></li>
@@ -88,7 +86,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="weka.plot.html">weka.plot package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="weka.plot.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.plot.html#module-weka.plot.classifiers">weka.plot.classifiers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.plot.html#module-weka.plot.clusterers">weka.plot.clusterers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.plot.html#module-weka.plot.dataset">weka.plot.dataset module</a></li>
@@ -99,9 +96,6 @@
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-weka.associations">
 <span id="weka-associations-module"></span><h2>weka.associations module<a class="headerlink" href="#module-weka.associations" title="Permalink to this headline">¶</a></h2>
@@ -625,6 +619,24 @@ returns a system error code.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="weka.attribute_selection.ASEvaluation.convert_instance">
+<code class="descname">convert_instance</code><span class="sig-paren">(</span><em>inst</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.ASEvaluation.convert_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms an instance in the format of the original data to the transformed space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inst</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instance" title="weka.core.dataset.Instance"><em>Instance</em></a>) – the Instance to transform</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the transformed instance</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.core.html#weka.core.dataset.Instance" title="weka.core.dataset.Instance">Instance</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="weka.attribute_selection.ASEvaluation.post_process">
 <code class="descname">post_process</code><span class="sig-paren">(</span><em>indices</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.ASEvaluation.post_process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post-processes the evaluator with the selected attribute indices.</p>
@@ -637,6 +649,43 @@ returns a system error code.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the processed indices</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.attribute_selection.ASEvaluation.transformed_data">
+<code class="descname">transformed_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.ASEvaluation.transformed_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the supplied data set (assumed to be the same format as the training data).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the data to transform</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the transformed data</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="weka.attribute_selection.ASEvaluation.transformed_header">
+<code class="descname">transformed_header</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.attribute_selection.ASEvaluation.transformed_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns just the header for the transformed data (ie. an empty set of instances. This is so that
+AttributeSelection can determine the structure of the transformed data without actually having to
+get all the transformed data through transformed_data().
+Returns None if not a weka.attributeSelection.AttributeTransformer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the header</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
 </tr>
 </tbody>
 </table>
@@ -2693,7 +2742,7 @@ training data, at the confidence level specified when evaluation was performed.<
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter in use</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3685,7 +3734,7 @@ returns a system error code.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the filter</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -3860,11 +3909,11 @@ returns a system error code.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator"><em>DataGenerator</em></a>) – the generator to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator"><em>DataGenerator</em></a>) – the generator to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the generator</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator">DataGenerator</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator">DataGenerator</a></td>
 </tr>
 </tbody>
 </table>
@@ -3879,7 +3928,7 @@ returns a system error code.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>generator</strong> (<a class="reference internal" href="#weka.datagenerators.DataGenerator" title="weka.datagenerators.DataGenerator"><em>DataGenerator</em></a>) – the generator instance to use</li>
+<li><strong>generator</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.source.DataGenerator" title="weka.flow.source.DataGenerator"><em>DataGenerator</em></a>) – the generator instance to use</li>
 <li><strong>args</strong> (<em>list</em>) – the command-line arguments</li>
 </ul>
 </td>
@@ -4781,7 +4830,7 @@ outperforms the other.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">model</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4848,11 +4897,11 @@ using the same setup.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to copy</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flter</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter"><em>Filter</em></a>) – the filter to copy</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy of the filter</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter">Filter</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter">Filter</a></td>
 </tr>
 </tbody>
 </table>
@@ -4943,7 +4992,7 @@ using the same setup.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="#weka.filters.Filter" title="weka.filters.Filter"><em>Filter</em></a>) – the filter to add</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="weka.flow.html#weka.flow.transformer.Filter" title="weka.flow.transformer.Filter"><em>Filter</em></a>) – the filter to add</td>
 </tr>
 </tbody>
 </table>
@@ -6985,9 +7034,6 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-weka">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weka" title="Permalink to this headline">¶</a></h2>
-</div>
 </div>
 
 
@@ -7003,7 +7049,6 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
   <ul>
 <li><a class="reference internal" href="#">weka package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-weka.associations">weka.associations module</a></li>
 <li><a class="reference internal" href="#module-weka.attribute_selection">weka.attribute_selection module</a></li>
 <li><a class="reference internal" href="#module-weka.classifiers">weka.classifiers module</a></li>
@@ -7012,7 +7057,6 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
 <li><a class="reference internal" href="#module-weka.experiments">weka.experiments module</a></li>
 <li><a class="reference internal" href="#module-weka.filters">weka.filters module</a></li>
 <li><a class="reference internal" href="#module-weka.timeseries">weka.timeseries module</a></li>
-<li><a class="reference internal" href="#module-weka">Module contents</a></li>
 </ul>
 </li>
 </ul>

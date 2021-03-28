@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Command-line" href="commandline.html" />
+    <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="commandline.html" title="Command-line"
+          <a href="examples.html" title="Examples"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="install.html" title="Installation"
@@ -65,6 +65,11 @@ javabridge requires header files to present that won’t be present if you only 
 environment (JRE). You also may have to set the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> environment variable pointing
 to your JDK installation (above the <code class="docutils literal"><span class="pre">bin</span></code> directory).</p>
 </li>
+<li><p class="first">Before you can install <cite>matplotlib</cite>, you may have to upgrade your <cite>distribute</cite> library as follows:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$  ./venv/bin/easy_install -U distribute
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 <div class="section" id="debian">
@@ -91,6 +96,27 @@ post, set the following environment variable:</p>
 <p><strong>A:</strong> Simply run the following command to fix this:
 <cite>sudo apt-get install gsettings-desktop-schemas</cite></p>
 </li>
+<li><p class="first">On Ubuntu, follow <a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>
+to install all the required dependencies for PIL:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get build-dep python-imaging
+</pre></div>
+</div>
+</li>
+<li><p class="first">To enable support for PIL on Ubuntu, see
+<a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libfreetype.so /usr/lib/
+$ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libjpeg.so /usr/lib/
+$ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libz.so /usr/lib/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Based on <a class="reference external" href="https://askubuntu.com/a/785506">this post</a> do the following to install
+matplotlib with tkinter support:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt install tk-dev
+./venv/bin/pip --no-cache-dir install -U --force-reinstall matplotlib
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 <div class="section" id="linux">
@@ -101,6 +127,13 @@ post, set the following environment variable:</p>
 <cite>import pygraphviz</cite>
 If you get <cite>undefined symbol: Agundirected</cite>, then follow the steps outlined <a class="reference external" href="http://stackoverflow.com/a/33508561/4698227">here</a>,
 but use <cite>pip3</cite>.</p>
+</li>
+<li><p class="first">You may need to install the header files for the following libraries for the compilations to succeed:</p>
+<ul class="simple">
+<li>freetype</li>
+<li>graphviz</li>
+<li>png</li>
+</ul>
 </li>
 </ul>
 </div>
@@ -216,8 +249,8 @@ you need to install separately. Also, you need to add the directory containing t
   <p class="topless"><a href="install.html"
                         title="previous chapter">Installation</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="commandline.html"
-                        title="next chapter">Command-line</a></p>
+  <p class="topless"><a href="examples.html"
+                        title="next chapter">Examples</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -249,7 +282,7 @@ you need to install separately. Also, you need to add the directory containing t
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="commandline.html" title="Command-line"
+          <a href="examples.html" title="Examples"
              >next</a> |</li>
         <li class="right" >
           <a href="install.html" title="Installation"
