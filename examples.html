@@ -316,6 +316,29 @@ the <code class="docutils literal"><span class="pre">options</span></code> prope
 <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Using the <cite>to_commandline()</cite> method, you can return a single string that contains
+classname and options, just like Weka’s Explorer does when copying the setup to
+the clipboard:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">to_commandline</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The <cite>to_commandline(…)</cite> method of the <cite>weka.core.classes</cite> module generates
+the command-line string for any class that implements the <cite>weka.core.OptionHandler</cite>
+Java interface under the hood (a lot of classes do!):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<span class="kn">from</span> <span class="nn">weka.core.classes</span> <span class="kn">import</span> <span class="n">to_commandline</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="s2">&quot;0.3&quot;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">to_commandline</span><span class="p">(</span><span class="bp">cls</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The reverse, generating an object from a command-line, is done via the
+<cite>from_commandline(…)</cite> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cmdline</span> <span class="o">=</span> <span class="s1">&#39;weka.classifiers.functions.SMO -K &quot;weka.classifiers.functions.supportVector.NormalizedPolyKernel -E 3.0&quot;&#39;</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">from_commandline</span><span class="p">(</span><span class="n">cmdline</span><span class="p">,</span> <span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.Classifier&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="build-classifier-on-dataset-output-predictions">
 <h2>Build classifier on dataset, output predictions<a class="headerlink" href="#build-classifier-on-dataset-output-predictions" title="Permalink to this headline">¶</a></h2>

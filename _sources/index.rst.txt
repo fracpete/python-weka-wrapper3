@@ -53,7 +53,6 @@ Contents
    troubleshooting
    examples
    commandline
-   optionhandling
    flow
 
 API
