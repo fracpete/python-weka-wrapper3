@@ -319,6 +319,35 @@ You can use the ``options`` property also to retrieve the currently set options:
    cls = Classifier(classname="weka.classifiers.trees.J48", options=["-C", "0.3"])
    print(cls.options)
 
+Using the `to_commandline()` method, you can return a single string that contains
+classname and options, just like Weka's Explorer does when copying the setup to
+the clipboard:
+
+.. code-block:: python
+
+   from weka.classifiers import Classifier
+   cls = Classifier(classname="weka.classifiers.trees.J48", options=["-C", "0.3"])
+   print(cls.to_commandline())
+
+The `to_commandline(...)` method of the `weka.core.classes` module generates
+the command-line string for any class that implements the `weka.core.OptionHandler`
+Java interface under the hood (a lot of classes do!):
+
+.. code-block:: python
+
+   from weka.classifiers import Classifier
+   from weka.core.classes import to_commandline
+   cls = Classifier(classname="weka.classifiers.trees.J48", options=["-C", "0.3"])
+   print(to_commandline(cls))
+
+The reverse, generating an object from a command-line, is done via the
+`from_commandline(...)` method:
+
+.. code-block:: python
+
+    cmdline = 'weka.classifiers.functions.SMO -K "weka.classifiers.functions.supportVector.NormalizedPolyKernel -E 3.0"'
+    classifier = from_commandline(cmdline, classname="weka.classifiers.Classifier")
+
 
 Build classifier on dataset, output predictions
 -----------------------------------------------
