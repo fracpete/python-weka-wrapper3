@@ -11,6 +11,8 @@ Changelog
   get the header of a dataset
 - added the property `header` to the following classes that returns the training data structure:
   `ASEvaluation`, `ASSearch`, `Associator`, `Classifier`, `Clusterer`, `TSForecaster`
+- methods from `weka.core.serialization` have been moved into `weka.core.classes`, with the
+  following methods getting the `serialization_` prefix: `write`, `write_all`, `read`, `read_all`
 - ...
 
 
