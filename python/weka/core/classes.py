@@ -526,7 +526,7 @@ class JavaObject(JSONObject):
         self.jobject = jobject
         if not has_dict_handler("JavaObject"):
             register_dict_handler("JavaObject", JavaObject.from_dict)
-        self._make_calls(self)
+        self._make_calls()
 
     def __str__(self):
         """
