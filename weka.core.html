@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.0 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.0',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -2016,6 +2016,24 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.classes.deepcopy">
+<code class="descclassname">weka.core.classes.</code><code class="descname">deepcopy</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a deep copy of the JavaObject (or derived class) or JB_Object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>object</em>) – the object to create a copy of</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy, None if failed to copy</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.classes.deregister_dict_handler">
 <code class="descclassname">weka.core.classes.</code><code class="descname">deregister_dict_handler</code><span class="sig-paren">(</span><em>typestr</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.deregister_dict_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deregisters a handler for restoring an object from a JSON dictionary.</p>
@@ -2024,6 +2042,24 @@ classname if a single match was found, otherwise an exception is raised.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>typestr</strong> (<em>str</em>) – the type of the object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.from_byte_array">
+<code class="descclassname">weka.core.classes.</code><code class="descname">from_byte_array</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.from_byte_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes Java objects from the numpy array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>array</strong> (<em>ndarray</em>) – the numpy array to deserialize the Java objects from</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of deserialized JB_Object instances</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
 </tbody>
 </table>
@@ -2340,6 +2376,78 @@ Use -h to see all options.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.classes.serialization_read">
+<code class="descclassname">weka.core.classes.</code><code class="descname">serialization_read</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.serialization_read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the serialized object from disk. Caller must wrap object in appropriate Python wrapper class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – the file with the serialized object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the JB_Object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.serialization_read_all">
+<code class="descclassname">weka.core.classes.</code><code class="descname">serialization_read_all</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.serialization_read_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the serialized objects from disk. Caller must wrap objects in appropriate Python wrapper classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – the file with the serialized objects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of JB_OBjects</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.serialization_write">
+<code class="descclassname">weka.core.classes.</code><code class="descname">serialization_write</code><span class="sig-paren">(</span><em>filename</em>, <em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.serialization_write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the object to disk. JavaObject instances get automatically unwrapped.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<em>str</em>) – the file to serialize the object to</li>
+<li><strong>jobject</strong> (<em>JB_Object</em><em> or </em><a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><em>JavaObject</em></a>) – the object to serialize</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.serialization_write_all">
+<code class="descclassname">weka.core.classes.</code><code class="descname">serialization_write_all</code><span class="sig-paren">(</span><em>filename</em>, <em>jobjects</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.serialization_write_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the list of objects to disk. JavaObject instances get automatically unwrapped.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<em>str</em>) – the file to serialize the object to</li>
+<li><strong>jobjects</strong> (<em>list</em>) – the list of objects to serialize</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.classes.split_options">
 <code class="descclassname">weka.core.classes.</code><code class="descname">split_options</code><span class="sig-paren">(</span><em>cmdline</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.split_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Splits the commandline into a list of options.</p>
@@ -2385,6 +2493,24 @@ Use -h to see all options.</p>
 <dt id="weka.core.classes.suggestions">
 <code class="descclassname">weka.core.classes.</code><code class="descname">suggestions</code><em class="property"> = None</em><a class="headerlink" href="#weka.core.classes.suggestions" title="Permalink to this definition">¶</a></dt>
 <dd><p>dictionary for class -&gt; package relation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.classes.to_byte_array">
+<code class="descclassname">weka.core.classes.</code><code class="descname">to_byte_array</code><span class="sig-paren">(</span><em>jobjects</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.to_byte_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the list of objects into a numpy array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>jobjects</strong> (<em>list</em>) – the list of objects to serialize</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the numpy array</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">ndarray</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -4031,6 +4157,22 @@ the data is being copied.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="weka.core.dataset.Instances.copy_structure">
+<code class="descname">copy_structure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.copy_structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the dataset structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the structure of the dataset</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="weka.core.dataset.Instances.create_instances">
 <em class="property">classmethod </em><code class="descname">create_instances</code><span class="sig-paren">(</span><em>name</em>, <em>atts</em>, <em>capacity</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.create_instances" title="Permalink to this definition">¶</a></dt>
@@ -5103,96 +5245,6 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </div>
 <div class="section" id="module-weka.core.serialization">
 <span id="weka-core-serialization-module"></span><h2>weka.core.serialization module<a class="headerlink" href="#module-weka.core.serialization" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="weka.core.serialization.deepcopy">
-<code class="descclassname">weka.core.serialization.</code><code class="descname">deepcopy</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.serialization.deepcopy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a deep copy of the JavaObject (or derived class) or JB_Object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>object</em>) – the object to create a copy of</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the copy, None if failed to copy</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="weka.core.serialization.read">
-<code class="descclassname">weka.core.serialization.</code><code class="descname">read</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.serialization.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the serialized object from disk. Caller must wrap object in appropriate Python wrapper class.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – the file with the serialized object</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the JB_Object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">JB_Object</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="weka.core.serialization.read_all">
-<code class="descclassname">weka.core.serialization.</code><code class="descname">read_all</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.serialization.read_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the serialized objects from disk. Caller must wrap objects in appropriate Python wrapper classes.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – the file with the serialized objects</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the list of JB_OBjects</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="weka.core.serialization.write">
-<code class="descclassname">weka.core.serialization.</code><code class="descname">write</code><span class="sig-paren">(</span><em>filename</em>, <em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.serialization.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Serializes the object to disk. JavaObject instances get automatically unwrapped.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<em>str</em>) – the file to serialize the object to</li>
-<li><strong>jobject</strong> (<em>JB_Object</em><em> or </em><a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><em>JavaObject</em></a>) – the object to serialize</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="weka.core.serialization.write_all">
-<code class="descclassname">weka.core.serialization.</code><code class="descname">write_all</code><span class="sig-paren">(</span><em>filename</em>, <em>jobjects</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.serialization.write_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Serializes the list of objects to disk. JavaObject instances get automatically unwrapped.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> (<em>str</em>) – the file to serialize the object to</li>
-<li><strong>jobjects</strong> (<em>list</em>) – the list of objects to serialize</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-weka.core.stemmers">
 <span id="weka-core-stemmers-module"></span><h2>weka.core.stemmers module<a class="headerlink" href="#module-weka.core.stemmers" title="Permalink to this headline">¶</a></h2>
@@ -5520,7 +5572,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>

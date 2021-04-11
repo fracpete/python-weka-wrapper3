@@ -6,13 +6,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index &#8212; python-weka-wrapper3 0.2.0 documentation</title>
+    <title>Index &#8212; python-weka-wrapper3 0.2.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.0',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -516,6 +516,8 @@
 </li>
       <li><a href="weka.core.html#weka.core.dataset.Instances.copy_instances">copy_instances() (weka.core.dataset.Instances class method)</a>
 </li>
+      <li><a href="weka.core.html#weka.core.dataset.Instances.copy_structure">copy_structure() (weka.core.dataset.Instances method)</a>
+</li>
       <li><a href="weka.html#weka.classifiers.Evaluation.correct">correct (weka.classifiers.Evaluation attribute)</a>
 </li>
       <li><a href="weka.html#weka.classifiers.Evaluation.correlation_coefficient">correlation_coefficient (weka.classifiers.Evaluation attribute)</a>
@@ -608,7 +610,7 @@
 </li>
       <li><a href="weka.html#weka.associations.Item.decrease_frequency">decrease_frequency() (weka.associations.Item method)</a>
 </li>
-      <li><a href="weka.core.html#weka.core.serialization.deepcopy">deepcopy() (in module weka.core.serialization)</a>
+      <li><a href="weka.core.html#weka.core.classes.deepcopy">deepcopy() (in module weka.core.classes)</a>
 </li>
       <li><a href="weka.flow.html#weka.flow.control.ActorHandler.default_actors">default_actors() (weka.flow.control.ActorHandler method)</a>
 </li>
@@ -1162,6 +1164,8 @@
 </li>
       <li><a href="weka.html#weka.associations.Item.frequency">frequency (weka.associations.Item attribute)</a>
 </li>
+      <li><a href="weka.core.html#weka.core.classes.from_byte_array">from_byte_array() (in module weka.core.classes)</a>
+</li>
       <li><a href="weka.core.html#weka.core.classes.from_commandline">from_commandline() (in module weka.core.classes)</a>
 </li>
       <li><a href="weka.flow.html#weka.flow.source.DataGenerator.from_config">from_config() (weka.flow.source.DataGenerator method)</a>
@@ -1308,14 +1312,26 @@
         <li><a href="weka.flow.html#weka.flow.transformer.LoadDataset.has_output">(weka.flow.transformer.LoadDataset method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="weka.html#weka.classifiers.Evaluation.header">header (weka.classifiers.Evaluation attribute)</a>
+      <li><a href="weka.html#weka.associations.Associator.header">header (weka.associations.Associator attribute)</a>
 
       <ul>
+        <li><a href="weka.html#weka.attribute_selection.ASEvaluation.header">(weka.attribute_selection.ASEvaluation attribute)</a>
+</li>
+        <li><a href="weka.html#weka.attribute_selection.ASSearch.header">(weka.attribute_selection.ASSearch attribute)</a>
+</li>
+        <li><a href="weka.html#weka.classifiers.Classifier.header">(weka.classifiers.Classifier attribute)</a>
+</li>
+        <li><a href="weka.html#weka.classifiers.Evaluation.header">(weka.classifiers.Evaluation attribute)</a>
+</li>
         <li><a href="weka.html#weka.classifiers.PredictionOutput.header">(weka.classifiers.PredictionOutput attribute)</a>
 </li>
+        <li><a href="weka.html#weka.clusterers.Clusterer.header">(weka.clusterers.Clusterer attribute)</a>
+</li>
+        <li><a href="weka.html#weka.timeseries.TSForecaster.header">(weka.timeseries.TSForecaster attribute)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="weka.html#weka.experiments.Tester.header">header() (weka.experiments.Tester method)</a>
 </li>
       <li><a href="weka.core.html#weka.core.classes.Configurable.help">help (weka.core.classes.Configurable attribute)</a>
@@ -2160,10 +2176,6 @@
 </li>
       <li><a href="weka.html#weka.attribute_selection.AttributeSelection.ranking">ranking() (weka.attribute_selection.AttributeSelection method)</a>
 </li>
-      <li><a href="weka.core.html#weka.core.serialization.read">read() (in module weka.core.serialization)</a>
-</li>
-      <li><a href="weka.core.html#weka.core.serialization.read_all">read_all() (in module weka.core.serialization)</a>
-</li>
       <li><a href="weka.core.html#weka.core.classes.Tag.readable">readable (weka.core.classes.Tag attribute)</a>
 </li>
       <li><a href="weka.html#weka.timeseries.TSEvaluation.rebuild_model_after_each_test_forecast_step">rebuild_model_after_each_test_forecast_step (weka.timeseries.TSEvaluation attribute)</a>
@@ -2186,10 +2198,10 @@
 </li>
       <li><a href="weka.html#weka.timeseries.TSLagMaker.remove_leading_instances_with_unknown_lag_values">remove_leading_instances_with_unknown_lag_values (weka.timeseries.TSLagMaker attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="weka.core.html#weka.core.classes.Environment.remove_variable">remove_variable() (weka.core.classes.Environment method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="weka.flow.html#weka.flow.transformer.RenameRelation">RenameRelation (class in weka.flow.transformer)</a>
 </li>
       <li><a href="weka.html#weka.timeseries.TSEvalModule.reset">reset() (weka.timeseries.TSEvalModule method)</a>
@@ -2286,6 +2298,14 @@
 </li>
       <li><a href="weka.flow.html#weka.flow.control.SequentialDirector">SequentialDirector (class in weka.flow.control)</a>
 </li>
+      <li><a href="weka.core.html#weka.core.classes.serialization_read">serialization_read() (in module weka.core.classes)</a>
+</li>
+      <li><a href="weka.core.html#weka.core.classes.serialization_read_all">serialization_read_all() (in module weka.core.classes)</a>
+</li>
+      <li><a href="weka.core.html#weka.core.classes.serialization_write">serialization_write() (in module weka.core.classes)</a>
+</li>
+      <li><a href="weka.core.html#weka.core.classes.serialization_write_all">serialization_write_all() (in module weka.core.classes)</a>
+</li>
       <li><a href="weka.html#weka.classifiers.Classifier.serialize">serialize() (weka.classifiers.Classifier method)</a>
 
       <ul>
@@ -2366,12 +2386,12 @@
 </li>
       <li><a href="weka.html#weka.experiments.SimpleExperiment">SimpleExperiment (class in weka.experiments)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="weka.html#weka.experiments.SimpleRandomSplitExperiment">SimpleRandomSplitExperiment (class in weka.experiments)</a>
 </li>
       <li><a href="weka.core.html#weka.core.classes.SingleIndex.single_index">single_index (weka.core.classes.SingleIndex attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="weka.html#weka.datagenerators.DataGenerator.single_mode_flag">single_mode_flag (weka.datagenerators.DataGenerator attribute)</a>
 </li>
       <li><a href="weka.html#weka.classifiers.SingleClassifierEnhancer">SingleClassifierEnhancer (class in weka.classifiers)</a>
@@ -2553,6 +2573,8 @@
       <li><a href="weka.core.html#weka.core.classes.Date.time">time (weka.core.classes.Date attribute)</a>
 </li>
       <li><a href="weka.html#weka.timeseries.TSLagMaker.timestamp_field">timestamp_field (weka.timeseries.TSLagMaker attribute)</a>
+</li>
+      <li><a href="weka.core.html#weka.core.classes.to_byte_array">to_byte_array() (in module weka.core.classes)</a>
 </li>
       <li><a href="weka.core.html#weka.core.classes.to_commandline">to_commandline() (in module weka.core.classes)</a>
 
@@ -2806,10 +2828,10 @@
 </li>
       <li><a href="weka.core.html#module-weka.core.serialization">weka.core.serialization (module)</a>
 </li>
-      <li><a href="weka.core.html#module-weka.core.stemmers">weka.core.stemmers (module)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="weka.core.html#module-weka.core.stemmers">weka.core.stemmers (module)</a>
+</li>
       <li><a href="weka.core.html#module-weka.core.stopwords">weka.core.stopwords (module)</a>
 </li>
       <li><a href="weka.core.html#module-weka.core.tokenizers">weka.core.tokenizers (module)</a>
@@ -2868,10 +2890,6 @@
         <li><a href="weka.flow.html#weka.flow.transformer.LoadDataset.wrapup">(weka.flow.transformer.LoadDataset method)</a>
 </li>
       </ul></li>
-      <li><a href="weka.core.html#weka.core.serialization.write">write() (in module weka.core.serialization)</a>
-</li>
-      <li><a href="weka.core.html#weka.core.serialization.write_all">write_all() (in module weka.core.serialization)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -2931,7 +2949,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

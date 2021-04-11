@@ -668,12 +668,12 @@ whether test data is compatible). This is done as follows:
    print(data2)
 
 Clusterers and filters offer the `serialize` and `deserialize` methods as well. For all other
-serialization/deserialiation tasks, use the methods offered by the `weka.core.serialization` module:
+serialization/deserialiation tasks, use the methods offered by the `weka.core.classes` module:
 
-* `write(file, object)`
-* `write_all(file, [obj1, obj2, ...])`
-* `read(file)`
-* `read_all(file)`
+* `serialization_write(file, object)`
+* `serialization_write_all(file, [obj1, obj2, ...])`
+* `serialization_read(file)`
+* `serialization_read_all(file)`
 
 
 Experiments
