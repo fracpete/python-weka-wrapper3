@@ -22,7 +22,7 @@ import argparse
 import traceback
 import weka.core.jvm as jvm
 import weka.core.classes as classes
-import weka.core.serialization as serialization
+from weka.core.classes import serialization_write, serialization_read_all, serialization_write_all
 from weka.core.classes import JavaObject, join_options
 from weka.core.classes import OptionHandler
 from weka.core.classes import Random
@@ -203,7 +203,7 @@ class Clusterer(OptionHandler):
         :rtype: tuple
         """
 
-        objs = serialization.read_all(ser_file)
+        objs = serialization_read_all(ser_file)
         if len(objs) == 1:
             return Clusterer(jobject=objs[0]), None
         elif len(objs) == 2:
@@ -226,9 +226,9 @@ class Clusterer(OptionHandler):
             header = Instances.template_instances(header)
 
         if header is not None:
-            serialization.write_all(ser_file, [self, header])
+            serialization_write_all(ser_file, [self, header])
         else:
-            serialization.write(ser_file, self)
+            serialization_write(ser_file, self)
 
 
 class SingleClustererEnhancer(Clusterer):

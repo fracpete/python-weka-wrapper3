@@ -21,7 +21,7 @@ import javabridge
 import math  # required for MathExpression
 from weka.associations import Associator
 import weka.core.classes as classes
-import weka.core.serialization as serialization
+from weka.core.classes import serialization_read, serialization_read_all, deepcopy
 import weka.attribute_selection as attsel
 import weka.filters as filters
 import weka.flow.base as base
@@ -1405,7 +1405,7 @@ class ModelReader(Transformer):
         :rtype: str
         """
         fname = self.input.payload
-        data = serialization.read_all(fname)
+        data = serialization_read_all(fname)
         if len(data) == 1:
             if is_instance_of(data[0], "weka.classifiers.Classifier"):
                 cont = ModelContainer(model=Classifier(jobject=data[0]))
@@ -1721,7 +1721,7 @@ class Copy(Transformer):
         :rtype: str
         """
         if isinstance(self.input.payload, classes.JavaObject) and self.input.payload.is_serializable:
-            copy = serialization.deepcopy(self.input.payload)
+            copy = deepcopy(self.input.payload)
             if copy is not None:
                 self._output.append(Token(copy))
         else:
@@ -1823,7 +1823,7 @@ class Predict(Transformer):
             model = None
             fname = str(self.resolve_option("model"))
             if os.path.isfile(fname):
-                model = serialization.read(fname)
+                model = serialization_read(fname)
             else:
                 name = self.resolve_option("storage_name")
                 if name in self.storagehandler.storage:

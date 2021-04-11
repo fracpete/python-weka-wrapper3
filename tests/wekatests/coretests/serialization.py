@@ -20,8 +20,8 @@ import javabridge
 import os
 import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
-import weka.core.serialization as serialization
 import wekatests.tests.weka_test as weka_test
+from weka.core.classes import serialization_read, serialization_write, serialization_read_all, serialization_write_all
 
 
 class TestSerialization(weka_test.WekaTest):
@@ -37,10 +37,10 @@ class TestSerialization(weka_test.WekaTest):
         vin = javabridge.make_instance("java/util/Vector", "()V")
         for element in lin:
             javabridge.call(vin, "add", "(Ljava/lang/Object;)Z", element)
-        serialization.write(fname, vin)
+        serialization_write(fname, vin)
         self.assertTrue(os.path.exists(fname), msg="Failed to write to " + fname + "?")
 
-        vout = serialization.read(fname)
+        vout = serialization_read(fname)
         self.assertIsNotNone(vout, msg="Failed to read from " + fname + "?")
         enm = javabridge.call(vin, "elements", "()Ljava/util/Enumeration;")
         lout = typeconv.jenumeration_to_list(enm)
@@ -57,10 +57,10 @@ class TestSerialization(weka_test.WekaTest):
         lin = []
         for i in range(4):
             lin.append(javabridge.make_instance("java/lang/Integer", "(I)V", i))
-        serialization.write_all(fname, lin)
+        serialization_write_all(fname, lin)
         self.assertTrue(os.path.exists(fname), msg="Failed to write to " + fname + "?")
 
-        lout = serialization.read_all(fname)
+        lout = serialization_read_all(fname)
         self.assertIsNotNone(lout, msg="Failed to read from " + fname + "?")
         self.delfile(fname)
         self.assertEqual(len(lin), len(lout), msg="Number of elements differ")

@@ -12,11 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # sink.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 
 import traceback
-import weka.core.serialization as serialization
+from weka.core.classes import serialization_write_all
 from weka.core.dataset import Instances, Instance
 from weka.flow.base import InputConsumer
 from weka.flow.container import ModelContainer
@@ -324,7 +324,7 @@ class ModelWriter(FileOutputSink):
         """
         result = None
         cont = self.input.payload
-        serialization.write_all(
+        serialization_write_all(
             str(self.resolve_option("output")),
             [cont.get("Model").jobject, cont.get("Header").jobject])
         return result

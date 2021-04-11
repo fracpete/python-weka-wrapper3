@@ -14,6 +14,7 @@
 # serialization.py
 # Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
+# for backwards compatibility
 from weka.core.classes import deepcopy
 from weka.core.classes import serialization_read as read
 from weka.core.classes import serialization_read_all as read_all

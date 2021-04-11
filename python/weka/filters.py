@@ -21,7 +21,7 @@ import sys
 import argparse
 import traceback
 import weka.core.jvm as jvm
-import weka.core.serialization as serialization
+from weka.core.classes import serialization_write, serialization_read_all
 from weka.core.classes import OptionHandler, join_options
 from weka.core.capabilities import Capabilities
 from weka.core.converters import Loader
@@ -197,7 +197,7 @@ class Filter(OptionHandler):
         :rtype: Filter
         """
 
-        objs = serialization.read_all(ser_file)
+        objs = serialization_read_all(ser_file)
         if len(objs) == 1:
             return Filter(jobject=objs[0])
         else:
@@ -212,7 +212,7 @@ class Filter(OptionHandler):
         :type ser_file: str
         """
 
-        serialization.write(ser_file, self)
+        serialization_write(ser_file, self)
 
 
 class MultiFilter(Filter):
