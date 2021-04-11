@@ -25,7 +25,7 @@ import weka.core.Instances;
 /**
  * Wrapper class without the "throws Exception" clause in the constructor.
  *
- * @author FracPete (fracpete at gmail dot com)
+ * @author FracPete (pythonwekawrapper at gmail dot com)
  */
 public class EvaluationWrapper {
 

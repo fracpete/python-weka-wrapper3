@@ -35,7 +35,7 @@ import weka.core.Utils;
 /**
  * Helper class for kernels.
  *
- * @author FracPete (fracpete at gmail dot com)
+ * @author FracPete (pythonwekawrapper at gmail dot com)
  */
 public class KernelHelper {
 

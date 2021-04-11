@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Helper class for classes.
  *
- * @author FracPete (fracpete at waikato dot ac dot nz)
+ * @author FracPete (pythonwekawrapper at gmail dot com)
  */
 public class ClassHelper {
 
