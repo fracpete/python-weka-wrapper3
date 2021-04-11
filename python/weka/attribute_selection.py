@@ -50,7 +50,18 @@ class ASSearch(OptionHandler):
         if jobject is None:
             jobject = ASSearch.new_instance(classname)
         self.enforce_type(jobject, "weka.attributeSelection.ASSearch")
+        self._header = None
         super(ASSearch, self).__init__(jobject=jobject, options=options)
+
+    @property
+    def header(self):
+        """
+        Returns the header of the training data.
+
+        :return: the structure of the training data, None if not available
+        :rtype: Instances
+        """
+        return self._header
 
     def search(self, evaluation, data):
         """
@@ -66,6 +77,7 @@ class ASSearch(OptionHandler):
         array = javabridge.call(
             self.jobject, "search", "(Lweka/attributeSelection/ASEvaluation;Lweka/core/Instances;)[I",
             evaluation.jobject, data.jobject)
+        self._header = data.copy_structure()
         if array is None:
             return None
         else:
@@ -92,6 +104,7 @@ class ASEvaluation(OptionHandler):
             jobject = ASEvaluation.new_instance(classname)
         self.enforce_type(jobject, "weka.attributeSelection.ASEvaluation")
         self.is_attribute_transformer = self.check_type(jobject, "weka.attributeSelection.AttributeTransformer")
+        self._header = None
         super(ASEvaluation, self).__init__(jobject=jobject, options=options)
 
     @property
@@ -104,6 +117,16 @@ class ASEvaluation(OptionHandler):
         """
         return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
 
+    @property
+    def header(self):
+        """
+        Returns the header of the training data.
+
+        :return: the structure of the training data, None if not available
+        :rtype: Instances
+        """
+        return self._header
+
     def build_evaluator(self, data):
         """
         Builds the evaluator with the data.
@@ -111,6 +134,7 @@ class ASEvaluation(OptionHandler):
         :param data: the data to use
         :type data: Instances
         """
+        self._header = data.copy_structure()
         javabridge.call(self.jobject, "buildEvaluator", "(Lweka/core/Instances;)V", data.jobject)
 
     def post_process(self, indices):

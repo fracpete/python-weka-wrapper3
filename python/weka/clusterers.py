@@ -55,6 +55,7 @@ class Clusterer(OptionHandler):
         self.is_updateable = self.check_type(jobject, "weka.clusterers.UpdateableClusterer")
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
         self.enforce_type(jobject, "weka.clusterers.Clusterer")
+        self._header = None
         super(Clusterer, self).__init__(jobject=jobject, options=options)
 
     def _make_calls(self):
@@ -76,6 +77,16 @@ class Clusterer(OptionHandler):
         """
         return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
 
+    @property
+    def header(self):
+        """
+        Returns the header of the training data.
+
+        :return: the structure of the training data, None if not available
+        :rtype: Instances
+        """
+        return self._header
+
     def build_clusterer(self, data):
         """
         Builds the clusterer with the data.
@@ -83,6 +94,7 @@ class Clusterer(OptionHandler):
         :param data: the data to use for training the clusterer
         :type data: Instances
         """
+        self._header = data.copy_structure()
         javabridge.call(self.jobject, "buildClusterer", "(Lweka/core/Instances;)V", data.jobject)
 
     def update_clusterer(self, inst):

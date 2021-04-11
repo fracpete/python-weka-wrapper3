@@ -1051,6 +1051,7 @@ class TSForecaster(OptionHandler):
                 raise Exception(
                     "Failed to instantiate forecaster '%s' - is package 'timeseriesForecasting' installed and jvm started with package support?" % classname)
         self.enforce_type(jobject, "weka.classifiers.timeseries.TSForecaster")
+        self._header = None
         super(TSForecaster, self).__init__(jobject=jobject, options=options)
 
     @property
@@ -1176,6 +1177,16 @@ class TSForecaster(OptionHandler):
             fields = ",".join(fields)
         javabridge.call(self.jobject, "setFieldsToForecast", "(Ljava/lang/String;)V", fields)
 
+    @property
+    def header(self):
+        """
+        Returns the header of the training data.
+
+        :return: the structure of the training data, None if not available
+        :rtype: Instances
+        """
+        return self._header
+
     def build_forecaster(self, data):
         """
         Builds the forecaster using the provided data.
@@ -1183,6 +1194,7 @@ class TSForecaster(OptionHandler):
         :param data: the data to train with
         :type data: Instances
         """
+        self._header = data.copy_structure()
         javabridge.call(self.jobject, "buildForecaster", "(Lweka/core/Instances;[Ljava/io/PrintStream;)V", data.jobject, [])
 
     def prime_forecaster(self, data):

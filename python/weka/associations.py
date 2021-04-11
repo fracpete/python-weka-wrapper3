@@ -560,6 +560,7 @@ class Associator(OptionHandler):
         if jobject is None:
             jobject = Associator.new_instance(classname)
         self.enforce_type(jobject, "weka.associations.Associator")
+        self._header = None
         super(Associator, self).__init__(jobject=jobject, options=options)
 
     @property
@@ -572,6 +573,16 @@ class Associator(OptionHandler):
         """
         return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
 
+    @property
+    def header(self):
+        """
+        Returns the header of the training data.
+
+        :return: the structure of the training data, None if not available
+        :rtype: Instances
+        """
+        return self._header
+
     def build_associations(self, data):
         """
         Builds the associator with the data.
@@ -579,6 +590,7 @@ class Associator(OptionHandler):
         :param data: the data to train the associator with
         :type data: Instances
         """
+        self._header = data.copy_structure()
         javabridge.call(self.jobject, "buildAssociations", "(Lweka/core/Instances;)V", data.jobject)
 
     def can_produce_rules(self):

@@ -59,6 +59,7 @@ class Classifier(OptionHandler):
         self.is_updateable = self.check_type(jobject, "weka.classifiers.UpdateableClassifier")
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
         self.is_batchpredictor = self.check_type(jobject, "weka.core.BatchPredictor")
+        self._header = None
         super(Classifier, self).__init__(jobject=jobject, options=options)
 
     def _make_calls(self):
@@ -83,6 +84,16 @@ class Classifier(OptionHandler):
         """
         return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
 
+    @property
+    def header(self):
+        """
+        Returns the header of the training data.
+
+        :return: the structure of the training data, None if not available
+        :rtype: Instances
+        """
+        return self._header
+
     def build_classifier(self, data):
         """
         Builds the classifier with the data.
@@ -90,6 +101,7 @@ class Classifier(OptionHandler):
         :param data: the data to train the classifier with
         :type data: Instances
         """
+        self._header = data.copy_structure()
         javabridge.call(self.jobject, "buildClassifier", "(Lweka/core/Instances;)V", data.jobject)
 
     def update_classifier(self, inst):
