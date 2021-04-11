@@ -60,7 +60,6 @@ class Classifier(OptionHandler):
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
         self.is_batchpredictor = self.check_type(jobject, "weka.core.BatchPredictor")
         super(Classifier, self).__init__(jobject=jobject, options=options)
-        self._make_calls()
 
     def _make_calls(self):
         """

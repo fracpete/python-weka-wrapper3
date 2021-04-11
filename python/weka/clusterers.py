@@ -56,7 +56,6 @@ class Clusterer(OptionHandler):
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
         self.enforce_type(jobject, "weka.clusterers.Clusterer")
         super(Clusterer, self).__init__(jobject=jobject, options=options)
-        self._make_calls()
 
     def _make_calls(self):
         """

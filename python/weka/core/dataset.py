@@ -38,7 +38,6 @@ class Instances(JavaObject):
         """
         self.enforce_type(jobject, "weka.core.Instances")
         super(Instances, self).__init__(jobject)
-        self._make_calls()
 
     def _make_calls(self):
         """
@@ -640,7 +639,6 @@ class Instance(JavaObject):
         """
         self.enforce_type(jobject, "weka.core.Instance")
         super(Instance, self).__init__(jobject)
-        self._make_calls()
 
     def _make_calls(self):
         """

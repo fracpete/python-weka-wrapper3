@@ -38,7 +38,6 @@ class Stemmer(OptionHandler):
             jobject = Stemmer.new_instance(classname)
         self.enforce_type(jobject, "weka.core.stemmers.Stemmer")
         super(Stemmer, self).__init__(jobject=jobject, options=options)
-        self._make_calls()
 
     def _make_calls(self):
         """

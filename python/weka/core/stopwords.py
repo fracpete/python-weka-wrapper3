@@ -38,7 +38,6 @@ class Stopwords(OptionHandler):
             jobject = Stopwords.new_instance(classname)
         self.enforce_type(jobject, "weka.core.stopwords.StopwordsHandler")
         super(Stopwords, self).__init__(jobject=jobject, options=options)
-        self._make_calls()
 
     def _make_calls(self):
         """
