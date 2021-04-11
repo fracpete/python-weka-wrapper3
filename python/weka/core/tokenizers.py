@@ -30,13 +30,13 @@ class TokenIterator(object):
         :type tokenizer: Tokenizer
         """
         self.tokenizer = tokenizer
+        self._make_calls()
 
     def _make_calls(self):
         """
         Method for generating instances using javabridge.make_call.
         Members must start with "_mc_"
         """
-        super(TokenIterator, self)._make_calls()
         self._mc_has_more = javabridge.make_call(self.tokenizer.jobject, "hasMoreElements", "()Z")
         self._mc_next = javabridge.make_call(self.tokenizer.jobject, "nextElement", "()Ljava/lang/String;")
 
