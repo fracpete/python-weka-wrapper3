@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # tokenizers.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 from weka.core.classes import OptionHandler
@@ -30,8 +30,15 @@ class TokenIterator(object):
         :type tokenizer: Tokenizer
         """
         self.tokenizer = tokenizer
-        self.__has_more = javabridge.make_call(self.tokenizer.jobject, "hasMoreElements", "()Z")
-        self.__next = javabridge.make_call(self.tokenizer.jobject, "nextElement", "()Ljava/lang/String;")
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(TokenIterator, self)._make_calls()
+        self._mc_has_more = javabridge.make_call(self.tokenizer.jobject, "hasMoreElements", "()Z")
+        self._mc_next = javabridge.make_call(self.tokenizer.jobject, "nextElement", "()Ljava/lang/String;")
 
     def __iter__(self):
         """
@@ -46,10 +53,10 @@ class TokenIterator(object):
         :return: the next row
         :rtype: Instance
         """
-        if not self.__has_more():
+        if not self._mc_has_more():
             raise StopIteration()
         else:
-            return javabridge.get_env().get_string(self.__next())
+            return javabridge.get_env().get_string(self._mc_next())
 
 
 class Tokenizer(OptionHandler):

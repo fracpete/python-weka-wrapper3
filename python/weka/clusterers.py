@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # clusterers.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -56,8 +56,16 @@ class Clusterer(OptionHandler):
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
         self.enforce_type(jobject, "weka.clusterers.Clusterer")
         super(Clusterer, self).__init__(jobject=jobject, options=options)
-        self.__cluster = javabridge.make_call(self.jobject, "clusterInstance", "(Lweka/core/Instance;)I")
-        self.__distribution = javabridge.make_call(self.jobject, "distributionForInstance", "(Lweka/core/Instance;)[D")
+        self._make_calls()
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(Clusterer, self)._make_calls()
+        self._mc_cluster = javabridge.make_call(self.jobject, "clusterInstance", "(Lweka/core/Instance;)I")
+        self._mc_distribution = javabridge.make_call(self.jobject, "distributionForInstance", "(Lweka/core/Instance;)[D")
 
     @property
     def capabilities(self):
@@ -108,7 +116,7 @@ class Clusterer(OptionHandler):
         :return: the clustering result
         :rtype: float
         """
-        return self.__cluster(inst.jobject)
+        return self._mc_cluster(inst.jobject)
 
     def distribution_for_instance(self, inst):
         """
@@ -119,7 +127,7 @@ class Clusterer(OptionHandler):
         :return: the cluster distribution
         :rtype: float[]
         """
-        pred = self.__distribution(inst.jobject)
+        pred = self._mc_distribution(inst.jobject)
         return javabridge.get_env().get_double_array_elements(pred)
 
     @property

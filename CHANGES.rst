@@ -6,6 +6,7 @@ Changelog
 
 - the `ASEvaluation` class in the `weka.attribute_selection` module now offers the following methods
   for attribute transformers like PCA: `transformed_header`, `transformed_data`, `convert_instance`
+- classes derived from `weka.core.classes.JavaObject` are now serializable via pickle
 - ...
 
 

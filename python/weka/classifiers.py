@@ -60,10 +60,18 @@ class Classifier(OptionHandler):
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
         self.is_batchpredictor = self.check_type(jobject, "weka.core.BatchPredictor")
         super(Classifier, self).__init__(jobject=jobject, options=options)
-        self.__classify = javabridge.make_call(self.jobject, "classifyInstance", "(Lweka/core/Instance;)D")
-        self.__distribution = javabridge.make_call(self.jobject, "distributionForInstance", "(Lweka/core/Instance;)[D")
+        self._make_calls()
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(Classifier, self)._make_calls()
+        self._mc_classify = javabridge.make_call(self.jobject, "classifyInstance", "(Lweka/core/Instance;)D")
+        self._mc_distribution = javabridge.make_call(self.jobject, "distributionForInstance", "(Lweka/core/Instance;)[D")
         if self.is_batchpredictor:
-            self.__distributions = javabridge.make_call(
+            self._mc_distributions = javabridge.make_call(
                 self.jobject, "distributionsForInstances", "(Lweka/core/Instances;)[[D")
 
     @property
@@ -106,7 +114,7 @@ class Classifier(OptionHandler):
         :return: the classification (either regression value or 0-based label index)
         :rtype: float
         """
-        return self.__classify(inst.jobject)
+        return self._mc_classify(inst.jobject)
 
     def distribution_for_instance(self, inst):
         """
@@ -117,7 +125,7 @@ class Classifier(OptionHandler):
         :return: the class distribution array
         :rtype: ndarray
         """
-        pred = self.__distribution(inst.jobject)
+        pred = self._mc_distribution(inst.jobject)
         return javabridge.get_env().get_double_array_elements(pred)
 
     def distributions_for_instances(self, data):
@@ -130,7 +138,7 @@ class Classifier(OptionHandler):
         :rtype: ndarray
         """
         if self.is_batchpredictor:
-            return typeconv.jdouble_matrix_to_ndarray(self.__distributions(data.jobject))
+            return typeconv.jdouble_matrix_to_ndarray(self._mc_distributions(data.jobject))
         else:
             return None
 

@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # stemmers.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 from weka.core.classes import OptionHandler
@@ -38,7 +38,15 @@ class Stemmer(OptionHandler):
             jobject = Stemmer.new_instance(classname)
         self.enforce_type(jobject, "weka.core.stemmers.Stemmer")
         super(Stemmer, self).__init__(jobject=jobject, options=options)
-        self.__stem = javabridge.make_call(self.jobject, "stem", "(Ljava/lang/String;)Ljava/lang/String;")
+        self._make_calls()
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(Stemmer, self)._make_calls()
+        self._mc_stem = javabridge.make_call(self.jobject, "stem", "(Ljava/lang/String;)Ljava/lang/String;")
 
     def stem(self, s):
         """
@@ -49,4 +57,4 @@ class Stemmer(OptionHandler):
         :return: the stemmed string
         :rtype: str
         """
-        return javabridge.get_env().get_string(self.__stem(javabridge.get_env().new_string_utf(s)))
+        return javabridge.get_env().get_string(self._mc_stem(javabridge.get_env().new_string_utf(s)))

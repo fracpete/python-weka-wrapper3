@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -38,17 +38,25 @@ class Instances(JavaObject):
         """
         self.enforce_type(jobject, "weka.core.Instances")
         super(Instances, self).__init__(jobject)
-        self.__attribute = javabridge.make_call(self.jobject, "attribute", "(I)Lweka/core/Attribute;")
-        self.__attribute_by_name = javabridge.make_call(self.jobject, "attribute", "(Ljava/lang/String;)Lweka/core/Attribute;")
-        self.__num_attributes = javabridge.make_call(self.jobject, "numAttributes", "()I")
-        self.__num_instances = javabridge.make_call(self.jobject, "numInstances", "()I")
-        self.__get_class_index = javabridge.make_call(self.jobject, "classIndex", "()I")
-        self.__set_class_index = javabridge.make_call(self.jobject, "setClassIndex", "(I)V")
-        self.__class_attribute = javabridge.make_call(self.jobject, "classAttribute", "()Lweka/core/Attribute;")
-        self.__get_instance = javabridge.make_call(self.jobject, "instance", "(I)Lweka/core/Instance;")
-        self.__set_instance = javabridge.make_call(self.jobject, "set", "(ILweka/core/Instance;)Lweka/core/Instance;")
-        self.__append_instance = javabridge.make_call(self.jobject, "add", "(Lweka/core/Instance;)Z")
-        self.__insert_instance = javabridge.make_call(self.jobject, "add", "(ILweka/core/Instance;)V")
+        self._make_calls()
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(Instances, self)._make_calls()
+        self._mc_attribute = javabridge.make_call(self.jobject, "attribute", "(I)Lweka/core/Attribute;")
+        self._mc_attribute_by_name = javabridge.make_call(self.jobject, "attribute", "(Ljava/lang/String;)Lweka/core/Attribute;")
+        self._mc_num_attributes = javabridge.make_call(self.jobject, "numAttributes", "()I")
+        self._mc_num_instances = javabridge.make_call(self.jobject, "numInstances", "()I")
+        self._mc_get_class_index = javabridge.make_call(self.jobject, "classIndex", "()I")
+        self._mc_set_class_index = javabridge.make_call(self.jobject, "setClassIndex", "(I)V")
+        self._mc_class_attribute = javabridge.make_call(self.jobject, "classAttribute", "()Lweka/core/Attribute;")
+        self._mc_get_instance = javabridge.make_call(self.jobject, "instance", "(I)Lweka/core/Instance;")
+        self._mc_set_instance = javabridge.make_call(self.jobject, "set", "(ILweka/core/Instance;)Lweka/core/Instance;")
+        self._mc_append_instance = javabridge.make_call(self.jobject, "add", "(Lweka/core/Instance;)Z")
+        self._mc_insert_instance = javabridge.make_call(self.jobject, "add", "(ILweka/core/Instance;)V")
 
     def __iter__(self):
         """
@@ -96,7 +104,7 @@ class Instances(JavaObject):
         :return: the number of attributes
         :rtype: int
         """
-        return self.__num_attributes()
+        return self._mc_num_attributes()
 
     def attributes(self):
         """
@@ -113,7 +121,7 @@ class Instances(JavaObject):
         :return: the attribute
         :rtype: Attribute
         """
-        return Attribute(self.__attribute(index))
+        return Attribute(self._mc_attribute(index))
 
     def attribute_names(self):
         """
@@ -136,7 +144,7 @@ class Instances(JavaObject):
         :return: the attribute or None
         :rtype: Attribute
         """
-        att = self.__attribute_by_name(javabridge.get_env().new_string(name))
+        att = self._mc_attribute_by_name(javabridge.get_env().new_string(name))
         if att is None:
             return None
         else:
@@ -174,7 +182,7 @@ class Instances(JavaObject):
         :return: the number of instances
         :rtype: int
         """
-        return self.__num_instances()
+        return self._mc_num_instances()
 
     @property
     def class_attribute(self):
@@ -184,7 +192,7 @@ class Instances(JavaObject):
         :return: the class attribute
         :rtype: Attribute
         """
-        return Attribute(self.__class_attribute())
+        return Attribute(self._mc_class_attribute())
 
     @property
     def class_index(self):
@@ -194,7 +202,7 @@ class Instances(JavaObject):
         :return: the class index, -1 if not set
         :rtype: int
         """
-        return self.__get_class_index()
+        return self._mc_get_class_index()
 
     @class_index.setter
     def class_index(self, index):
@@ -204,7 +212,7 @@ class Instances(JavaObject):
         :param index: the new index, use -1 to unset
         :type index: int
         """
-        self.__set_class_index(index)
+        self._mc_set_class_index(index)
 
     def has_class(self):
         """
@@ -242,7 +250,7 @@ class Instances(JavaObject):
         :return: the instance
         :rtype: Instance
         """
-        return Instance(self.__get_instance(index))
+        return Instance(self._mc_get_instance(index))
 
     def add_instance(self, inst, index=None):
         """
@@ -254,9 +262,9 @@ class Instances(JavaObject):
         :type index: int
         """
         if index is None:
-            self.__append_instance(inst.jobject)
+            self._mc_append_instance(inst.jobject)
         else:
-            self.__insert_instance(index, inst.jobject)
+            self._mc_insert_instance(index, inst.jobject)
 
     def set_instance(self, index, inst):
         """
@@ -270,7 +278,7 @@ class Instances(JavaObject):
         :rtype: Instance
         """
         return Instance(
-            self.__set_instance(index, inst.jobject))
+            self._mc_set_instance(index, inst.jobject))
             
     def delete(self, index=None):
         """
@@ -632,14 +640,22 @@ class Instance(JavaObject):
         """
         self.enforce_type(jobject, "weka.core.Instance")
         super(Instance, self).__init__(jobject)
-        self.__set_value = javabridge.make_call(self.jobject, "setValue", "(ID)V")
-        self.__get_value = javabridge.make_call(self.jobject, "value", "(I)D")
-        self.__set_string_value = javabridge.make_call(self.jobject, "setValue", "(ILjava/lang/String;)V")
-        self.__get_string_value = javabridge.make_call(self.jobject, "stringValue", "(I)Ljava/lang/String;")
-        self.__set_weight = javabridge.make_call(self.jobject, "setWeight", "(D)V")
-        self.__get_weight = javabridge.make_call(self.jobject, "weight", "()D")
-        self.__is_missing = javabridge.make_call(self.jobject, "isMissing", "(I)Z")
-        self.__class_index = javabridge.make_call(self.jobject, "classIndex", "()I")
+        self._make_calls()
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(Instance, self)._make_calls()
+        self._mc_set_value = javabridge.make_call(self.jobject, "setValue", "(ID)V")
+        self._mc_get_value = javabridge.make_call(self.jobject, "value", "(I)D")
+        self._mc_set_string_value = javabridge.make_call(self.jobject, "setValue", "(ILjava/lang/String;)V")
+        self._mc_get_string_value = javabridge.make_call(self.jobject, "stringValue", "(I)Ljava/lang/String;")
+        self._mc_set_weight = javabridge.make_call(self.jobject, "setWeight", "(D)V")
+        self._mc_get_weight = javabridge.make_call(self.jobject, "weight", "()D")
+        self._mc_is_missing = javabridge.make_call(self.jobject, "isMissing", "(I)Z")
+        self._mc_class_index = javabridge.make_call(self.jobject, "classIndex", "()I")
 
     def __iter__(self):
         """
@@ -712,7 +728,7 @@ class Instance(JavaObject):
         :return: the class index, -1 if not set
         :rtype: int
         """
-        return self.__class_index()
+        return self._mc_class_index()
 
     def has_class(self):
         """
@@ -732,7 +748,7 @@ class Instance(JavaObject):
         :param value: the internal float value to set
         :type value: float
         """
-        self.__set_value(index, value)
+        self._mc_set_value(index, value)
 
     def get_value(self, index):
         """
@@ -743,7 +759,7 @@ class Instance(JavaObject):
         :return: the internal value
         :rtype: float
         """
-        return self.__get_value(index)
+        return self._mc_get_value(index)
 
     def set_string_value(self, index, s):
         """
@@ -754,7 +770,7 @@ class Instance(JavaObject):
         :param s: the string value
         :type s: str
         """
-        return self.__set_string_value(index, javabridge.get_env().new_string(s))
+        return self._mc_set_string_value(index, javabridge.get_env().new_string(s))
 
     def get_string_value(self, index):
         """
@@ -765,7 +781,7 @@ class Instance(JavaObject):
         :return: the string value
         :rtype: str
         """
-        return javabridge.get_env().get_string(self.__get_string_value(index))
+        return javabridge.get_env().get_string(self._mc_get_string_value(index))
 
     def get_relational_value(self, index):
         """
@@ -796,7 +812,7 @@ class Instance(JavaObject):
         :return: whether the value is missing
         :rtype: bool
         """
-        return self.__is_missing(index)
+        return self._mc_is_missing(index)
 
     def has_missing(self):
         """
@@ -815,7 +831,7 @@ class Instance(JavaObject):
         :return: the weight
         :rtype: float
         """
-        return self.__get_weight()
+        return self._mc_get_weight()
 
     @weight.setter
     def weight(self, weight):
@@ -825,7 +841,7 @@ class Instance(JavaObject):
         :param weight: the weight to set
         :type weight: float
         """
-        self.__set_weight(weight)
+        self._mc_set_weight(weight)
 
     @property
     def values(self):

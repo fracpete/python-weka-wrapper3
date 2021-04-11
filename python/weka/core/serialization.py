@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # serialization.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -120,3 +120,41 @@ def write_all(filename, jobjects):
         "Lweka/core/SerializationHelper;", "writeAll",
         "(Ljava/lang/String;[Ljava/lang/Object;)V",
         filename, array)
+
+
+def to_byte_array(jobjects):
+    """
+    Serializes the list of objects into a numpy array.
+
+    :param jobjects: the list of objects to serialize
+    :type jobjects: list
+    :return: the numpy array
+    :rtype: ndarray
+    """
+    array = javabridge.get_env().make_object_array(len(jobjects), javabridge.get_env().find_class("java/lang/Object"))
+    for i in range(len(jobjects)):
+        obj = jobjects[i]
+        if isinstance(obj, JavaObject):
+            obj = obj.jobject
+        javabridge.get_env().set_object_array_element(array, i, obj)
+    return javabridge.static_call(
+        "Lweka/core/PickleHelper;", "toByteArray",
+        "([Ljava/lang/Object;)[B",
+        array)
+
+
+def from_byte_array(array):
+    """
+    Deserializes Java objects from the numpy array.
+
+    :param array: the numpy array to deserialize the Java objects from
+    :type array: ndarray
+    :return: the list of deserialized JB_Object instances
+    :rtype: list
+    """
+    byte_array = javabridge.get_env().make_byte_array(array)
+    obj_array = javabridge.static_call(
+        "Lweka/core/PickleHelper;", "fromByteArray",
+        "([B)[Ljava/lang/Object;",
+        byte_array)
+    return javabridge.get_env().get_object_array_elements(obj_array)

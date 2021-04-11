@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # stopwords.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 from weka.core.classes import OptionHandler
@@ -38,7 +38,15 @@ class Stopwords(OptionHandler):
             jobject = Stopwords.new_instance(classname)
         self.enforce_type(jobject, "weka.core.stopwords.StopwordsHandler")
         super(Stopwords, self).__init__(jobject=jobject, options=options)
-        self.__is_stopword = javabridge.make_call(self.jobject, "isStopword", "(Ljava/lang/String;)Z")
+        self._make_calls()
+
+    def _make_calls(self):
+        """
+        Method for generating instances using javabridge.make_call.
+        Members must start with "_mc_"
+        """
+        super(Stopwords, self)._make_calls()
+        self._mc_is_stopword = javabridge.make_call(self.jobject, "isStopword", "(Ljava/lang/String;)Z")
 
     def is_stopword(self, s):
         """
@@ -49,4 +57,4 @@ class Stopwords(OptionHandler):
         :return: True if a stopword
         :rtype: bool
         """
-        return self.__is_stopword(javabridge.get_env().new_string_utf(s))
+        return self._mc_is_stopword(javabridge.get_env().new_string_utf(s))
