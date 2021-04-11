@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.1 (????-??-??)
+0.2.1 (2021-04-12)
 ------------------
 
 - the `ASEvaluation` class in the `weka.attribute_selection` module now offers the following methods
@@ -13,7 +13,6 @@ Changelog
   `ASEvaluation`, `ASSearch`, `Associator`, `Classifier`, `Clusterer`, `TSForecaster`
 - methods from `weka.core.serialization` have been moved into `weka.core.classes`, with the
   following methods getting the `serialization_` prefix: `write`, `write_all`, `read`, `read_all`
-- ...
 
 
 0.2.0 (2021-02-21)
