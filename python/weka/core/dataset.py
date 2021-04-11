@@ -423,6 +423,15 @@ class Instances(JavaObject):
         return javabridge.call(
             self.jobject, "equalHeadersMsg", "(Lweka/core/Instances;)Ljava/lang/String;", inst.jobject)
 
+    def copy_structure(self):
+        """
+        Returns a copy of the dataset structure.
+
+        :return: the structure of the dataset
+        :rtype: Instances
+        """
+        return Instances.copy_instances(self, 0, 0)
+
     @classmethod
     def copy_instances(cls, dataset, from_row=None, num_rows=None):
         """
