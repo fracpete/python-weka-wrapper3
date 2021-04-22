@@ -21,14 +21,19 @@ import weka.core.dataset as dataset
 import wekatests.tests.weka_test as weka_test
 import weka.timeseries as timeseries
 import weka.classifiers as classifiers
+from weka.core.packages import install_missing_package
 
 
 class TestTimeseries(weka_test.WekaTest):
+
+    def _ensure_package_is_installed(self):
+        install_missing_package("timeseriesForecasting", stop_jvm_and_exit=True)
 
     def test_instantiate_classes(self):
         """
         Tests the instantiation of several classes.
         """
+        self._ensure_package_is_installed()
 
         obj = timeseries.TSLagMaker()
         cname = "weka.filters.supervised.attribute.TSLagMaker"
@@ -52,6 +57,7 @@ class TestTimeseries(weka_test.WekaTest):
         """
         Tests evaluating a forecaster.
         """
+        self._ensure_package_is_installed()
 
         loader = converters.Loader(classname="weka.core.converters.ArffLoader")
         data = loader.load_file(self.datafile("airline.arff"))
@@ -86,6 +92,7 @@ class TestTimeseries(weka_test.WekaTest):
         """
         Tests building and using of a forecaster.
         """
+        self._ensure_package_is_installed()
 
         loader = converters.Loader(classname="weka.core.converters.ArffLoader")
         data = loader.load_file(self.datafile("airline.arff"))

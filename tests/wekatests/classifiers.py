@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2020 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
@@ -22,7 +22,7 @@ import weka.classifiers as classifiers
 import weka.filters as filters
 import wekatests.tests.weka_test as weka_test
 import weka.attribute_selection as attsel
-
+from weka.core.packages import install_missing_package
 
 class TestClassifiers(weka_test.WekaTest):
 
@@ -375,6 +375,9 @@ class TestClassifiers(weka_test.WekaTest):
         """
         Tests the GridSearch class.
         """
+        # make sure the package is installed
+        install_missing_package("gridSearch", stop_jvm_and_exit=True)
+
         gs = classifiers.GridSearch()
 
         self.assertEqual({"property": "C", "expression": "pow(BASE,I)", "min": -3.0, "max": 3.0, "step": 1.0, "base": 10.0}, gs.x, msg="x of grid differs")
@@ -406,6 +409,9 @@ class TestClassifiers(weka_test.WekaTest):
         Tests the MultiSearch class.
         NB: multisearch-weka-package must be installed (https://github.com/fracpete/multisearch-weka-package).
         """
+        # make sure the package is installed
+        install_missing_package("multisearch", stop_jvm_and_exit=True)
+
         ms = classifiers.MultiSearch()
 
         mparam = classes.MathParameter()
