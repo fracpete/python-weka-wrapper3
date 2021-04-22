@@ -823,6 +823,24 @@ And here installing it directly from a URL:
    import weka.core.packages as packages
    packages.install_package("http://some.server.com/funky-package-1.0.0.zip")
 
+You can include automatic installation of packages in your scripts:
+
+.. code-block:: python
+
+   import sys
+   import weka.core.jvm as jvm
+   from weka.core.packages import install_missing_package, install_missing_packages, LATEST
+
+   # installs a single package (if missing) and exits if installation occurred (outputs messages in console)
+   install_missing_package("CLOPE", stop_jvm_and_exit=True)
+
+   # installs any missing package, outputs messages in console, but restarting JVM is left to script
+   success, exit_required = install_missing_packages([("CLOPE", LATEST), ("gridSearch", LATEST), ("multisearch", LATEST)])
+   if exit_required:
+       jvm.stop()
+       sys.exit(0)
+
+
 You can also output suggested Weka packages for partial class/package names or exact class names (default is partial
 string matching):
 

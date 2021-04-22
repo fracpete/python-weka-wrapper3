@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Examples &#8212; python-weka-wrapper3 0.2.1 documentation</title>
+    <title>Examples &#8212; python-weka-wrapper3 0.2.2 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.1',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="troubleshooting.html" title="Troubleshooting"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -751,6 +751,21 @@ weka.filters.unsupervised.attribute.Discretize
 <span class="n">packages</span><span class="o">.</span><span class="n">install_package</span><span class="p">(</span><span class="s2">&quot;http://some.server.com/funky-package-1.0.0.zip&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>You can include automatic installation of packages in your scripts:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="kn">as</span> <span class="nn">jvm</span>
+<span class="kn">from</span> <span class="nn">weka.core.packages</span> <span class="kn">import</span> <span class="n">install_missing_package</span><span class="p">,</span> <span class="n">install_missing_packages</span><span class="p">,</span> <span class="n">LATEST</span>
+
+<span class="c1"># installs a single package (if missing) and exits if installation occurred (outputs messages in console)</span>
+<span class="n">install_missing_package</span><span class="p">(</span><span class="s2">&quot;CLOPE&quot;</span><span class="p">,</span> <span class="n">stop_jvm_and_exit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># installs any missing package, outputs messages in console, but restarting JVM is left to script</span>
+<span class="n">success</span><span class="p">,</span> <span class="n">exit_required</span> <span class="o">=</span> <span class="n">install_missing_packages</span><span class="p">([(</span><span class="s2">&quot;CLOPE&quot;</span><span class="p">,</span> <span class="n">LATEST</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;gridSearch&quot;</span><span class="p">,</span> <span class="n">LATEST</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;multisearch&quot;</span><span class="p">,</span> <span class="n">LATEST</span><span class="p">)])</span>
+<span class="k">if</span> <span class="n">exit_required</span><span class="p">:</span>
+    <span class="n">jvm</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>You can also output suggested Weka packages for partial class/package names or exact class names (default is partial
 string matching):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># suggest package for classifier &#39;RBFClassifier&#39;</span>
@@ -894,7 +909,7 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
         <li class="right" >
           <a href="troubleshooting.html" title="Troubleshooting"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

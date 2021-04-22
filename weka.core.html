@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.1 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.2 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.1',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -4950,6 +4950,12 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 
 </dd></dl>
 
+<dl class="data">
+<dt id="weka.core.packages.LATEST">
+<code class="descclassname">weka.core.packages.</code><code class="descname">LATEST</code><em class="property"> = 'Latest'</em><a class="headerlink" href="#weka.core.packages.LATEST" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant for the latest version of a package</p>
+</dd></dl>
+
 <dl class="class">
 <dt id="weka.core.packages.Package">
 <em class="property">class </em><code class="descclassname">weka.core.packages.</code><code class="descname">Package</code><span class="sig-paren">(</span><em>jobject</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.Package" title="Permalink to this definition">¶</a></dt>
@@ -5041,6 +5047,22 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="weka.core.packages.Package.version">
+<code class="descname">version</code><a class="headerlink" href="#weka.core.packages.Package.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the version of the package.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the version</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -5099,6 +5121,24 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.packages.all_package">
+<code class="descclassname">weka.core.packages.</code><code class="descname">all_package</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.all_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Package object for the specified package (either installed or available). Returns None if not found.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the package to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the package information, None if not available</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.core.packages.Package" title="weka.core.packages.Package">Package</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.packages.all_packages">
 <code class="descclassname">weka.core.packages.</code><code class="descname">all_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.all_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of all packages.</p>
@@ -5109,6 +5149,24 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the list of packages</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.packages.available_package">
+<code class="descclassname">weka.core.packages.</code><code class="descname">available_package</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.available_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Package object for the specified, available package. Returns None if not installed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the available package to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the package information</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.core.packages.Package" title="weka.core.packages.Package">Package</a></td>
 </tr>
 </tbody>
 </table>
@@ -5137,9 +5195,64 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.core.packages.install_missing_package">
+<code class="descclassname">weka.core.packages.</code><code class="descname">install_missing_package</code><span class="sig-paren">(</span><em>pkge</em>, <em>version='Latest'</em>, <em>quiet=False</em>, <em>stop_jvm_and_exit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.install_missing_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Installs the package if not yet installed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pkge</strong> (<em>str</em>) – the name of the repository package, a URL (http/https) or a zip file</li>
+<li><strong>version</strong> (<em>str</em>) – in case of the repository packages, the version</li>
+<li><strong>quiet</strong> (<em>bool</em>) – whether to suppress console output and only print error messages</li>
+<li><strong>stop_jvm_and_exit</strong> (<em>bool</em>) – whether to stop the JVM and exit if anything was installed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of (success, exit_required); “success” being True if either nothing to install or all successfully
+installed, False otherwise; “exit_required” being True if at least one package was installed and the
+JVM needs restarting</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.packages.install_missing_packages">
+<code class="descclassname">weka.core.packages.</code><code class="descname">install_missing_packages</code><span class="sig-paren">(</span><em>pkges</em>, <em>quiet=False</em>, <em>stop_jvm_and_exit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.install_missing_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Installs the missing packages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pkges</strong> (<em>the packages to install</em>) – list of tuples (packagename, version), use “Latest” or LATEST constant to grab latest version</li>
+<li><strong>quiet</strong> (<em>bool</em>) – whether to suppress console output and only print error messages</li>
+<li><strong>stop_jvm_and_exit</strong> (<em>bool</em>) – whether to stop the JVM and exit if anything was installed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple of (success, exit_required); “success” being True if either nothing to install or all successfully
+installed, False otherwise; “exit_required” being True if at least one package was installed and the
+JVM needs restarting</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.core.packages.install_package">
 <code class="descclassname">weka.core.packages.</code><code class="descname">install_package</code><span class="sig-paren">(</span><em>pkge</em>, <em>version='Latest'</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.install_package" title="Permalink to this definition">¶</a></dt>
-<dd><p>The list of packages to install.</p>
+<dd><p>Installs the specified package.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -5155,6 +5268,48 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.packages.install_packages">
+<code class="descclassname">weka.core.packages.</code><code class="descname">install_packages</code><span class="sig-paren">(</span><em>pkges</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.install_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Installs the specified package.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pkge</strong> (<em>str</em>) – the name of the repository package, a URL (http/https) or a zip file</li>
+<li><strong>version</strong> (<em>str</em>) – in case of the repository packages, the version</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">whether successfully installed</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.packages.installed_package">
+<code class="descclassname">weka.core.packages.</code><code class="descname">installed_package</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.installed_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Package object for the specified, installed package. Returns None if not installed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the installed package to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the package information</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.core.packages.Package" title="weka.core.packages.Package">Package</a></td>
 </tr>
 </tbody>
 </table>
@@ -5234,9 +5389,19 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – the name of the package</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether successfully uninstalled</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="weka.core.packages.uninstall_packages">
+<code class="descclassname">weka.core.packages.</code><code class="descname">uninstall_packages</code><span class="sig-paren">(</span><em>names</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.packages.uninstall_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uninstalls a package.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>list</em>) – the names of the package</td>
 </tr>
 </tbody>
 </table>
@@ -5572,7 +5737,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>
