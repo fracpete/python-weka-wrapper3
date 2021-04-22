@@ -12,12 +12,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # packages.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
+import sys
+import traceback
 import weka.core.jvm as jvm
 from weka.core.classes import JavaObject
 import weka.core.classes as classes
+
+
+LATEST = "Latest"
+""" Constant for the latest version of a package """
 
 
 class Package(JavaObject):
@@ -34,6 +40,7 @@ class Package(JavaObject):
         """
         self.enforce_type(jobject, "weka.core.packageManagement.Package")
         super(Package, self).__init__(jobject)
+        self._metadata = None
 
     @property
     def name(self):
@@ -44,6 +51,16 @@ class Package(JavaObject):
         :rtype: str
         """
         return javabridge.call(self.jobject, "getName", "()Ljava/lang/String;")
+
+    @property
+    def version(self):
+        """
+        Returns the version of the package.
+
+        :return: the version
+        :rtype: str
+        """
+        return self.metadata["Version"]
 
     @property
     def url(self):
@@ -78,8 +95,12 @@ class Package(JavaObject):
         :return: the meta-data dictionary
         :rtype: dict
         """
-        return javabridge.get_dictionary_wrapper(
-            javabridge.call(self.jobject, "getPackageMetaData", "()Ljava/util/Map;"))
+        if self._metadata is None:
+            map = javabridge.get_map_wrapper(javabridge.call(self.jobject, "getPackageMetaData", "()Ljava/util/Map;"))
+            self._metadata = dict()
+            for k in map:
+                self._metadata[javabridge.get_env().get_string(k)] = map[javabridge.get_env().get_string(k)]
+        return self._metadata
 
     @property
     def is_installed(self):
@@ -96,6 +117,15 @@ class Package(JavaObject):
         Installs the package.
         """
         return javabridge.call(self.jobject, "install", "()V")
+
+    def __str__(self):
+        """
+        Just returns name/version.
+
+        :return: the name/version
+        :rtype: str
+        """
+        print(self.name + "/" + self.version)
 
 
 class PackageConstraint(JavaObject):
@@ -243,6 +273,22 @@ def all_packages():
     return result
 
 
+def all_package(name):
+    """
+    Returns Package object for the specified package (either installed or available). Returns None if not found.
+
+    :param name: the name of the package to retrieve
+    :type name: str
+    :return: the package information, None if not available
+    :rtype: Package
+    """
+    pkgs = all_packages()
+    for pkg in pkgs:
+        if pkg.name == name:
+            return pkg
+    return None
+
+
 def available_packages():
     """
     Returns a list of all packages that aren't installed yet.
@@ -258,6 +304,22 @@ def available_packages():
     for pkge in pkgs:
         result.append(Package(pkge))
     return result
+
+
+def available_package(name):
+    """
+    Returns Package object for the specified, available package. Returns None if not installed.
+
+    :param name: the name of the available package to retrieve
+    :type name: str
+    :return: the package information
+    :rtype: Package
+    """
+    pkgs = available_packages()
+    for pkg in pkgs:
+        if pkg.name == name:
+            return pkg
+    return None
 
 
 def installed_packages():
@@ -277,9 +339,25 @@ def installed_packages():
     return result
 
 
-def install_package(pkge, version="Latest"):
+def installed_package(name):
     """
-    The list of packages to install.
+    Returns Package object for the specified, installed package. Returns None if not installed.
+
+    :param name: the name of the installed package to retrieve
+    :type name: str
+    :return: the package information
+    :rtype: Package
+    """
+    pkgs = installed_packages()
+    for pkg in pkgs:
+        if pkg.name == name:
+            return pkg
+    return None
+
+
+def install_package(pkge, version=LATEST):
+    """
+    Installs the specified package.
 
     :param pkge: the name of the repository package, a URL (http/https) or a zip file
     :type pkge: str
@@ -288,21 +366,145 @@ def install_package(pkge, version="Latest"):
     :return: whether successfully installed
     :rtype: bool
     """
+    return install_packages([(pkge, version)])
+
+
+def install_packages(pkges):
+    """
+    Installs the specified package.
+
+    :param pkge: the name of the repository package, a URL (http/https) or a zip file
+    :type pkge: str
+    :param version: in case of the repository packages, the version
+    :type version: str
+    :return: whether successfully installed
+    :rtype: bool
+    """
+    result = True
     establish_cache()
-    if pkge.startswith("http://") or pkge.startswith("https://"):
-        url = javabridge.make_instance(
-            "java/net/URL", "(Ljava/lang/String;)V", javabridge.get_env().new_string_utf(pkge))
-        return not javabridge.static_call(
-            "weka/core/WekaPackageManager", "installPackageFromURL",
-            "(Ljava/net/URL;[Ljava/io/PrintStream;)Ljava/lang/String;", url, []) is None
-    elif pkge.lower().endswith(".zip"):
-        return not javabridge.static_call(
-            "weka/core/WekaPackageManager", "installPackageFromArchive",
-            "(Ljava/lang/String;[Ljava/io/PrintStream;)Ljava/lang/String;", pkge, []) is None
-    else:
-        return javabridge.static_call(
-            "weka/core/WekaPackageManager", "installPackageFromRepository",
-            "(Ljava/lang/String;Ljava/lang/String;[Ljava/io/PrintStream;)Z", pkge, version, [])
+    for p in pkges:
+        pkge, version = p
+        msg = None
+        if pkge.startswith("http://") or pkge.startswith("https://"):
+            try:
+                url = javabridge.make_instance(
+                    "java/net/URL", "(Ljava/lang/String;)V", javabridge.get_env().new_string_utf(pkge))
+                msg = javabridge.static_call(
+                    "weka/core/WekaPackageManager", "installPackageFromURL",
+                    "(Ljava/net/URL;[Ljava/io/PrintStream;)Ljava/lang/String;", url, [])
+            except:
+                msg = traceback.format_exc()
+        elif pkge.lower().endswith(".zip"):
+            try:
+                msg = javabridge.static_call(
+                    "weka/core/WekaPackageManager", "installPackageFromArchive",
+                    "(Ljava/lang/String;[Ljava/io/PrintStream;)Ljava/lang/String;", pkge, [])
+            except:
+                msg = traceback.format_exc()
+        else:
+            try:
+                javabridge.static_call(
+                    "weka/core/WekaPackageManager", "installPackageFromRepository",
+                    "(Ljava/lang/String;Ljava/lang/String;[Ljava/io/PrintStream;)Z", pkge, version, [])
+            except:
+                msg = traceback.format_exc()
+
+        if msg is not None:
+            print("Failed to install %s/%s:\n%s" % (pkge, version, msg))
+            result = False
+
+        if not result:
+            break
+
+    return result
+
+
+def install_missing_package(pkge, version=LATEST, quiet=False, stop_jvm_and_exit=False):
+    """
+    Installs the package if not yet installed.
+
+    :param pkge: the name of the repository package, a URL (http/https) or a zip file
+    :type pkge: str
+    :param version: in case of the repository packages, the version
+    :type version: str
+    :param quiet: whether to suppress console output and only print error messages
+    :type quiet: bool
+    :param stop_jvm_and_exit: whether to stop the JVM and exit if anything was installed
+    :type stop_jvm_and_exit: bool
+    :return: tuple of (success, exit_required); "success" being True if either nothing to install or all successfully
+             installed, False otherwise; "exit_required" being True if at least one package was installed and the
+             JVM needs restarting
+    :rtype: tuple
+    """
+    return install_missing_packages([(pkge, version)], quiet=quiet, stop_jvm_and_exit=stop_jvm_and_exit)
+
+
+def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
+    """
+    Installs the missing packages.
+
+    :param pkges: list of tuples (packagename, version), use "Latest" or LATEST constant to grab latest version
+    :type pkges: the packages to install
+    :param quiet: whether to suppress console output and only print error messages
+    :type quiet: bool
+    :param stop_jvm_and_exit: whether to stop the JVM and exit if anything was installed
+    :type stop_jvm_and_exit: bool
+    :return: tuple of (success, exit_required); "success" being True if either nothing to install or all successfully
+             installed, False otherwise; "exit_required" being True if at least one package was installed and the
+             JVM needs restarting
+    :rtype: tuple
+    """
+    result = True
+    exit_required = False
+    for p in pkges:
+        pkge, version = p
+        if not is_installed(pkge):
+            if not quiet:
+                print("%s/%s not installed, attempting installation..." % (pkge, version))
+            if install_package(pkge, version=version):
+                inst = installed_package(pkge)
+                exit_required = True
+                if not quiet:
+                    print("%s/%s successfully installed" % (pkge, inst.version))
+            else:
+                result = False
+                print("Failed to install %s/%s" % (pkge, version))
+        else:
+            inst = installed_package(pkge)
+            all = all_package(pkge)
+            install_required = False
+            if (version == LATEST) and (all.version != inst.version):
+                install_required = True
+            if (version != LATEST) and (version != inst.version):
+                install_required = True
+            if install_required:
+                if not quiet:
+                    if version == LATEST:
+                        print("Latest version of %s requested (installed: %s, repository: %s), attempting upgrade" % (pkge, inst.version, all.version))
+                    else:
+                        print("Different version of %s requested (installed: %s, requested: %s), attempting installation" % (pkge, inst.version, version))
+                if install_package(pkge, version=version):
+                    inst = installed_package(pkge)
+                    exit_required = True
+                    if not quiet:
+                        print("%s/%s successfully installed" % (pkge, inst.version))
+                else:
+                    result = False
+                    print("Failed to install %s/%s" % (pkge, version))
+            else:
+                if not quiet:
+                    print("%s/%s already installed, skipping installation" % (pkge, version))
+
+    if exit_required:
+        if not quiet:
+            print("Package(s) installed, JVM needs to be restarted")
+        if stop_jvm_and_exit:
+            print("Stopping JVM...")
+            jvm.stop()
+            print("Exiting...")
+            sys.exit(0)
+
+    return result, exit_required
 
 
 def uninstall_package(name):
@@ -311,13 +513,22 @@ def uninstall_package(name):
 
     :param name: the name of the package
     :type name: str
-    :return: whether successfully uninstalled
-    :rtype: bool
+    """
+    return uninstall_packages([name])
+
+
+def uninstall_packages(names):
+    """
+    Uninstalls a package.
+
+    :param name: the names of the package
+    :type name: list
     """
     establish_cache()
-    javabridge.static_call(
-        "weka/core/WekaPackageManager", "uninstallPackage",
-        "(Ljava/lang/String;Z[Ljava/io/PrintStream;)V", name, True, [])
+    for name in names:
+        javabridge.static_call(
+            "weka/core/WekaPackageManager", "uninstallPackage",
+            "(Ljava/lang/String;Z[Ljava/io/PrintStream;)V", name, True, [])
 
 
 def is_installed(name):

@@ -1,10 +1,15 @@
 Changelog
 =========
 
-0.2.2 (????-??-??)
+0.2.2 (2021-04-23)
 ------------------
 
-- ...
+- the `Package` class of the `weka.core.packages` module now has a `version` property to quickly access the version
+  which is stored in the meta-data; the `metadata` property now returns a proper Python dictionary
+- added convenience methods to the `weka.core.packages` module: `install_packages` to install more than one package,
+  `install_missing_package` and `install_missing_packages` to install one or more packages if missing
+  (can automatically stop the JVM and exit the process), `uninstall_packages` to remove more than one package in
+  one operation
 
 
 0.2.1 (2021-04-12)
