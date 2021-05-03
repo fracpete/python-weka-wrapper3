@@ -189,6 +189,23 @@ packages that are not available in the distro repositories:
    $ ./pww3/bin/pip install python-weka-wrapper3
 
 
+COLAB
+-----
+
+In a Python 3 COLAB environment, you need to install at least these modules to get python-weka-wrapper3 working:
+
+::
+
+   !pip install numpy
+   !pip install javabridge
+   !pip install python-weka-wrapper3
+
+**Notes:**
+
+* Once the JVM has been stopped, you might have to restart the COLAB runtime
+* After installing packages, you need to restart the COLAB runtime, otherwise the packages won't be available to the JV
+
+
 Mac OSX
 -------
 
