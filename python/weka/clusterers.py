@@ -28,6 +28,7 @@ from weka.core.classes import OptionHandler
 from weka.core.classes import Random
 from weka.core.capabilities import Capabilities
 from weka.core.dataset import Instances
+from weka.core.distances import DistanceFunction
 from weka.filters import Filter
 
 # logging setup
@@ -438,6 +439,52 @@ class ClusterEvaluation(JavaObject):
             "Lweka/clusterers/ClusterEvaluation;", "crossValidateModel",
             "(Lweka/clusterers/DensityBasedClusterer;Lweka/core/Instances;ILjava/util/Random;)D",
             clusterer.jobject, data.jobject, num_folds, rnd.jobject)
+
+
+def avg_silhouette_coefficient(clusterer, dist_func, data):
+    """
+    Computes the average silhouette coefficient for a clusterer.
+    Based on Eibe Frank's Groovy code:
+    https://weka.8497.n7.nabble.com/Silhouette-Measures-and-Dunn-Index-DI-in-Weka-td44072.html
+
+    :param clusterer: the trained clusterer model to evaluate
+    :type clusterer: Clusterer
+    :param dist_func: the distance function to use; if Euclidean, make sure that normalization is turned off
+    :type dist_func: DistanceFunction
+    :return: the average silhouette coefficient
+    :param data: the standardized data
+    :type data: Instances
+    :rtype: float
+    """
+    # ensure that distance function is initialized with data
+    dist_func.instances = data
+
+    cluster_index_of_inst = []
+    for i in range(data.num_instances):
+        cluster_index_of_inst.append(int(clusterer.cluster_instance(data.get_instance(i))))
+
+    sum_silhouette_coefficients = 0.0
+    for i in range(data.num_instances):
+        # Compute average distance of current instance to each cluster, including its own cluster
+        average_distance_per_cluster = [0 for x in range(clusterer.number_of_clusters)]
+        num_instances_per_cluster = [0 for x in range(clusterer.number_of_clusters)]
+        for j in range(data.num_instances):
+            average_distance_per_cluster[cluster_index_of_inst[j]] += dist_func.distance(data.get_instance(i), data.get_instance(j))
+            num_instances_per_cluster[cluster_index_of_inst[j]] += 1 # Should the current instance be skipped though?
+        for k in range(len(average_distance_per_cluster)):
+            average_distance_per_cluster[k] /= num_instances_per_cluster[k]
+
+        # Average distance to instance's own cluster
+        a =  average_distance_per_cluster[cluster_index_of_inst[i]]
+
+        # Find the distance of the "closest" other cluster
+        average_distance_per_cluster[cluster_index_of_inst[i]] = sys.float_info.max
+        b = min(average_distance_per_cluster)
+
+        # Compute silhouette coefficient for current instance
+        sum_silhouette_coefficients += ((b - a) / max(a, b)) if (clusterer.number_of_clusters > 1) else 0
+
+    return sum_silhouette_coefficients / data.num_instances
 
 
 def main(args=None):
