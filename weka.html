@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka package &#8212; python-weka-wrapper3 0.2.2 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.2.3 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="flow.html" title="Flow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -63,6 +63,7 @@
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.converters">weka.core.converters module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.database">weka.core.database module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.dataset">weka.core.dataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.distances">weka.core.distances module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.jvm">weka.core.jvm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.packages">weka.core.packages module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.core.html#module-weka.core.serialization">weka.core.serialization module</a></li>
@@ -3846,6 +3847,33 @@ returns a system error code.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="weka.clusterers.avg_silhouette_coefficient">
+<code class="descclassname">weka.clusterers.</code><code class="descname">avg_silhouette_coefficient</code><span class="sig-paren">(</span><em>clusterer</em>, <em>dist_func</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.avg_silhouette_coefficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the average silhouette coefficient for a clusterer.
+Based on Eibe Frank’s Groovy code:
+<a class="reference external" href="https://weka.8497.n7.nabble.com/Silhouette-Measures-and-Dunn-Index-DI-in-Weka-td44072.html">https://weka.8497.n7.nabble.com/Silhouette-Measures-and-Dunn-Index-DI-in-Weka-td44072.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>clusterer</strong> (<a class="reference internal" href="#weka.clusterers.Clusterer" title="weka.clusterers.Clusterer"><em>Clusterer</em></a>) – the trained clusterer model to evaluate</li>
+<li><strong>dist_func</strong> (<a class="reference internal" href="weka.core.html#weka.core.distances.DistanceFunction" title="weka.core.distances.DistanceFunction"><em>DistanceFunction</em></a>) – the distance function to use; if Euclidean, make sure that normalization is turned off</li>
+<li><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the standardized data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the average silhouette coefficient</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="weka.clusterers.main">
 <code class="descclassname">weka.clusterers.</code><code class="descname">main</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.clusterers.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a clusterer from the command-line. Calls JVM start/stop automatically.
@@ -7199,7 +7227,7 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
         <li class="right" >
           <a href="flow.html" title="Flow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

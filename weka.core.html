@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.2 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.3 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li> 
       </ul>
     </div>  
@@ -4838,6 +4838,57 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-weka.core.distances">
+<span id="weka-core-distances-module"></span><h2>weka.core.distances module<a class="headerlink" href="#module-weka.core.distances" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="weka.core.distances.DistanceFunction">
+<em class="property">class </em><code class="descclassname">weka.core.distances.</code><code class="descname">DistanceFunction</code><span class="sig-paren">(</span><em>classname='weka.core.EuclideanDistance'</em>, <em>jobject=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.distances.DistanceFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.OptionHandler" title="weka.core.classes.OptionHandler"><code class="xref py py-class docutils literal"><span class="pre">weka.core.classes.OptionHandler</span></code></a></p>
+<p>Wrapper for Weka’s weka.core.DistanceFunction interface.</p>
+<dl class="method">
+<dt id="weka.core.distances.DistanceFunction.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>first</em>, <em>second</em>, <em>cutoff=None</em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.distances.DistanceFunction.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between the two Instance objects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>first</strong> (<a class="reference internal" href="#weka.core.dataset.Instance" title="weka.core.dataset.Instance"><em>Instance</em></a>) – the first instance</li>
+<li><strong>second</strong> (<a class="reference internal" href="#weka.core.dataset.Instance" title="weka.core.dataset.Instance"><em>Instance</em></a>) – the second instance</li>
+<li><strong>cutoff</strong> (<em>float</em>) – optional cutoff value to speed up calculation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the calculated distance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="weka.core.distances.DistanceFunction.instances">
+<code class="descname">instances</code><a class="headerlink" href="#weka.core.distances.DistanceFunction.instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dataset in use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the dataset</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-weka.core.jvm">
 <span id="weka-core-jvm-module"></span><h2>weka.core.jvm module<a class="headerlink" href="#module-weka.core.jvm" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -5682,6 +5733,7 @@ JVM needs restarting</p>
 <li><a class="reference internal" href="#module-weka.core.converters">weka.core.converters module</a></li>
 <li><a class="reference internal" href="#module-weka.core.database">weka.core.database module</a></li>
 <li><a class="reference internal" href="#module-weka.core.dataset">weka.core.dataset module</a></li>
+<li><a class="reference internal" href="#module-weka.core.distances">weka.core.distances module</a></li>
 <li><a class="reference internal" href="#module-weka.core.jvm">weka.core.jvm module</a></li>
 <li><a class="reference internal" href="#module-weka.core.packages">weka.core.packages module</a></li>
 <li><a class="reference internal" href="#module-weka.core.serialization">weka.core.serialization module</a></li>
@@ -5737,7 +5789,7 @@ JVM needs restarting</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li> 
       </ul>
     </div>
