@@ -1,12 +1,11 @@
 Changelog
 =========
 
-0.2.3 (????-??-??)
+0.2.3 (2021-06-09)
 ------------------
 
 - added `weka.core.distances` module for distance functions, with `DistanceFunction` base class
 - added `avg_silhouette_coefficient` method to `weka.clusterers` to calculate the average silhouette coefficient
-- ...
 
 
 0.2.2 (2021-04-23)
