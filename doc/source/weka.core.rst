@@ -41,6 +41,14 @@ weka\.core\.dataset module
     :undoc-members:
     :show-inheritance:
 
+weka\.core\.distances module
+----------------------------
+
+.. automodule:: weka.core.distances
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 weka\.core\.jvm module
 ----------------------
 
