@@ -4,6 +4,10 @@ Changelog
 0.2.4 (????-??-??)
 ------------------
 
+- added method `help_for` to `weka.core.classes` module to generate a help screen for an `weka.core.OptionHandler`
+  class using just the classname.
+- the `to_help` method of the `weka.core.classes.OptionHandler` class now allows to tweak the generated output a
+  bit better (e.g., what sections to output).
 - ...
 
 

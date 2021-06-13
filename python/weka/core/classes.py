@@ -1358,30 +1358,45 @@ class OptionHandler(JavaObject, Configurable):
             "(Ljava/lang/Object;)Ljava/lang/String;",
             self.jobject)
 
-    def to_help(self):
+    def to_help(self, title=True, description=True, options=True, use_headers=True, separator=""):
         """
         Returns a string that contains the 'global_info' text and the options.
 
+        :param title: whether to output a title
+        :type title: bool
+        :param description: whether to output the description
+        :type description: bool
+        :param options: whether to output the options
+        :type options: bool
+        :param use_headers: whether to output headers, describing the sections
+        :type use_headers: bool
+        :param separator: the separator line to use between sections
+        :type separator: str
         :return: the generated help string
         :rtype: str
         """
         result = []
-        result.append(self.classname)
-        result.append("=" * len(self.classname))
-        result.append("")
-        result.append("DESCRIPTION")
-        result.append("")
-        result.append(self.global_info())
-        result.append("")
-        result.append("OPTIONS")
-        result.append("")
-        options = javabridge.call(self.jobject, "listOptions", "()Ljava/util/Enumeration;")
-        enum = javabridge.get_enumeration_wrapper(options)
-        while enum.hasMoreElements():
-            opt = Option(enum.nextElement())
-            result.append(opt.synopsis)
-            result.append(opt.description)
-            result.append("")
+        if title:
+            result.append(self.classname)
+            result.append("=" * len(self.classname))
+            result.append(separator)
+        if description:
+            if use_headers:
+                result.append("DESCRIPTION")
+                result.append("")
+            result.append(self.global_info())
+            result.append(separator)
+        if options:
+            if use_headers:
+                result.append("OPTIONS")
+                result.append("")
+            options = javabridge.call(self.jobject, "listOptions", "()Ljava/util/Enumeration;")
+            enum = javabridge.get_enumeration_wrapper(options)
+            while enum.hasMoreElements():
+                opt = Option(enum.nextElement())
+                result.append(opt.synopsis)
+                result.append(opt.description)
+                result.append("")
         return '\n'.join(result)
 
     def __str__(self):
@@ -1981,6 +1996,37 @@ def complete_classname(classname):
         raise Exception("Found multiple matches for '" + classname + "':\n" + '\n'.join(matches))
 
 
+def help_for(classname, title=True, description=True, options=True, use_headers=True, separator=""):
+    """
+    Generates a help screen for the specified class.
+
+    :param classname: the class to get the help screen for, must implement the OptionHandler interface
+    :type classname: str
+    :param title: whether to output a title
+    :type title: bool
+    :param description: whether to output the description
+    :type description: bool
+    :param options: whether to output the options
+    :type options: bool
+    :param use_headers: whether to output headers, describing the sections
+    :type use_headers: bool
+    :param separator: the separator line to use between sections
+    :type separator: str
+    :return: the help screen, None if not available
+    :rtype: str
+    """
+    try:
+        obj = new_instance(classname)
+        if is_instance_of(obj, "weka.core.OptionHandler"):
+            handler = OptionHandler(jobject=obj)
+            return handler.to_help(title=title, description=description, options=options,
+                                   use_headers=use_headers, separator=separator)
+        else:
+            return None
+    except Exception:
+        return None
+
+
 class AbstractParameter(OptionHandler):
     """
     Ancestor for all parameter classes used by SetupGenerator and MultiSearch.
@@ -2425,6 +2471,7 @@ def main():
         print(e)
     finally:
         jvm.stop()
+
 
 if __name__ == "__main__":
     try:
