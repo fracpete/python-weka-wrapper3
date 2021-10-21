@@ -20,7 +20,7 @@ Uses:
 
 Detailed instructions on installing the library on various operating systems are located here:
 
-http://fracpete.github.io/python-weka-wrapper3/install.html
+https://fracpete.github.io/python-weka-wrapper3/install.html
 
 Please note, that you need a build environment to compile some libraries from source.
 
@@ -34,7 +34,7 @@ https://groups.google.com/forum/#!forum/python-weka-wrapper
 
 ## Examples
 
-* The [Examples](http://fracpete.github.io/python-weka-wrapper3/examples.html)
+* The [Examples](https://fracpete.github.io/python-weka-wrapper3/examples.html)
   section in the documentation demonstrates how to use the API. 
 * The [python-weka-wrapper-examples3](https://github.com/fracpete/python-weka-wrapper3-examples)
   repository contains plenty of example code for the various APIs.
@@ -44,7 +44,7 @@ https://groups.google.com/forum/#!forum/python-weka-wrapper
 
 The complete documentation for the library is available from here:
 
-http://fracpete.github.io/python-weka-wrapper3/
+https://fracpete.github.io/python-weka-wrapper3/
 
 
 ## Download statistics
