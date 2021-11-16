@@ -59,12 +59,13 @@ setup(
     author='Peter "fracpete" Reutemann',
     author_email='pythonwekawrapper@gmail.com',
     install_requires=[
-        "javabridge>=1.0.14",
+        "python-javabridge>=4.0.0",
         "numpy",
+        "packaging",
     ],
     extras_require={
         'plots': ["matplotlib"],
-        'graphs': ["pygraphviz", "PIL"],
+        'graphs': ["pygraphviz", "pillow"],
     },
     entry_points={
         "console_scripts": [
