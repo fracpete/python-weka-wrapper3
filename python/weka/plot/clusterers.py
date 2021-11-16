@@ -103,7 +103,7 @@ def plot_cluster_assignments(evl, data, atts=None, inst_no=False, size=10, title
 
     if title is None:
         title = data.relationname
-    fig.canvas.set_window_title(title)
+    plot.set_window_title(fig, title)
     plt.draw()
     if not outfile is None:
         plt.savefig(outfile)

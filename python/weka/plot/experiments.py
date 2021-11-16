@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # experiments.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import logging
 import math
@@ -64,7 +64,7 @@ def plot_experiment(mat, title="Experiment", axes_swapped=False, measure="Statis
         ax.set_xlabel("Classifiers")
         ax.set_ylabel(measure)
     ax.set_title(title)
-    fig.canvas.set_window_title(title)
+    plot.set_window_title(fig, title)
     ax.grid(True)
     ticksx = []
     ticks = []
@@ -88,7 +88,7 @@ def plot_experiment(mat, title="Experiment", axes_swapped=False, measure="Statis
                     stdevs.append(stdev)
         plot_label = mat.get_row_name(r)
         if show_stdev:
-            ax.errorbar(x, means, yerr=stdevs, fmt='-o', ls="-", label=plot_label)
+            ax.errorbar(x, means, yerr=stdevs, fmt='-o', label=plot_label)
         else:
             ax.plot(x, means, "o-", label=plot_label)
     plt.draw()

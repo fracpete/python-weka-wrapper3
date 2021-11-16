@@ -12,10 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # __init__.py
-# Copyright (C) 2014 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 from weka.core.dataset import Instances
 from weka.core.classes import Random
+from packaging import version
 
 # check whether pygraphviz is there
 pygraphviz_available = False
@@ -35,9 +36,11 @@ except ImportError:
 
 # check whether matplotlib is there
 matplotlib_available = False
+matplotlib_version = None
 try:
     import matplotlib
     matplotlib_available = True
+    matplotlib_version = matplotlib.__version__
 except ImportError:
     pass
 
@@ -58,3 +61,18 @@ def create_subsample(data, percent, seed=1):
     data.randomize(Random(seed))
     data = Instances.copy_instances(data, 0, int(round(data.num_instances * percent / 100.0)))
     return data
+
+
+def set_window_title(fig, title):
+    """
+    Sets the window title of the figure (if matplotlib is available).
+
+    :param fig: the figure to update
+    :param title: the title to set
+    :type title: str
+    """
+    if matplotlib_available:
+        if version.parse(matplotlib_version) >= version.parse("3.4.0"):
+            fig.canvas.manager.set_window_title(title)
+        else:
+            fig.canvas.set_window_title(title)

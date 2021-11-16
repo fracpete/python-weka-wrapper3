@@ -85,7 +85,7 @@ def scatter_plot(data, index_x, index_y, percent=100.0, seed=1, size=50, title=N
     ax.set_title(title)
     ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
     ax.grid(True)
-    fig.canvas.set_window_title(data.relationname)
+    plot.set_window_title(fig, data.relationname)
     plt.draw()
     if outfile is not None:
         plt.savefig(outfile)
@@ -157,7 +157,7 @@ def matrix_plot(data, percent=100.0, seed=1, size=10, title=None, outfile=None, 
         title = data.relationname
     if percent != 100:
         title += " (%0.1f%%)" % percent
-    fig.canvas.set_window_title(title)
+    plot.set_window_title(fig, title)
     plt.draw()
     if outfile is not None:
         plt.savefig(outfile)
@@ -213,7 +213,7 @@ def line_plot(data, atts=None, percent=100.0, seed=1, title=None, outfile=None, 
         title = data.relationname
     if percent != 100:
         title += " (%0.1f%%)" % percent
-    fig.canvas.set_window_title(title)
+    plot.set_window_title(fig, title)
     plt.draw()
     if outfile is not None:
         plt.savefig(outfile)

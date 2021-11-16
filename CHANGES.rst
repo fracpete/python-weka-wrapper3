@@ -8,6 +8,8 @@ Changelog
   class using just the classname.
 - the `to_help` method of the `weka.core.classes.OptionHandler` class now allows to tweak the generated output a
   bit better (e.g., what sections to output).
+- switched to `python-javabridge`, the new name (fork?) of the `javabridge` library
+- setting window title of Matplotlib is now dependent on version (to avoid deprecation notice being output)
 - ...
 
 

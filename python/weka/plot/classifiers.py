@@ -93,7 +93,7 @@ def plot_classifier_errors(predictions, absolute=True, max_relative_size=50, abs
             ax.set_title(title)
             ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
             ax.grid(True)
-            fig.canvas.set_window_title(title)
+            plot.set_window_title(fig, title)
         if error is None and cls is None:
             ax.scatter(actual, predicted, s=absolute_size, alpha=0.5, label=prefix)
         elif cls is not None:
@@ -222,7 +222,7 @@ def plot_roc(evaluation, class_index=None, title=None, key_loc="lower right", ou
                 title = "ROC"
             ax.set_title(title)
             ax.grid(True)
-            fig.canvas.set_window_title(title)
+            plot.set_window_title(fig, title)
             plt.xlim([-0.05, 1.05])
             plt.ylim([-0.05, 1.05])
         plot_label = head.class_attribute.value(cindex) + " (AUC: %0.4f)" % area
@@ -292,7 +292,7 @@ def plot_rocs(evaluations, class_index=0, title=None, key_loc="lower right", out
                 title = "ROC"
             ax.set_title(title)
             ax.grid(True)
-            fig.canvas.set_window_title(title)
+            plot.set_window_title(fig, title)
             plt.xlim([-0.05, 1.05])
             plt.ylim([-0.05, 1.05])
         plot_label = prefix + " " + head.class_attribute.value(class_index) + " (AUC: %0.4f)" % area
@@ -343,7 +343,7 @@ def plot_prc(evaluation, class_index=None, title=None, key_loc="lower center", o
             if title is None:
                 title = "PRC"
             ax.set_title(title)
-            fig.canvas.set_window_title(title)
+            plot.set_window_title(fig, title)
             plt.xlim([-0.05, 1.05])
             plt.ylim([-0.05, 1.05])
             ax.grid(True)
@@ -413,7 +413,7 @@ def plot_prcs(evaluations, class_index=0, title=None, key_loc="lower center", ou
             if title is None:
                 title = "PRC"
             ax.set_title(title)
-            fig.canvas.set_window_title(title)
+            plot.set_window_title(fig, title)
             plt.xlim([-0.05, 1.05])
             plt.ylim([-0.05, 1.05])
             ax.grid(True)
@@ -520,7 +520,7 @@ def plot_learning_curve(classifiers, train, test=None, increments=100, metric="p
     ax.set_xlabel("# of instances")
     ax.set_ylabel(metric)
     ax.set_title(title)
-    fig.canvas.set_window_title(title)
+    plot.set_window_title(fig, title)
     ax.grid(True)
     i = 0
     for cl in cls:
