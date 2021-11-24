@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -91,7 +91,6 @@ def plot_classifier_errors(predictions, absolute=True, max_relative_size=50, abs
             if title is None:
                 title = "Classifier errors"
             ax.set_title(title)
-            ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
             ax.grid(True)
             plot.set_window_title(fig, title)
         if error is None and cls is None:
@@ -106,6 +105,7 @@ def plot_classifier_errors(predictions, absolute=True, max_relative_size=50, abs
                 for i in range(len(error)):
                     error[i] = error[i] / factor * max_relative_size
             ax.scatter(actual, predicted, s=error, alpha=0.5, label=prefix)
+    ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--", c="0.3")
     plt.draw()
     if len(multiple) > 1:
         plt.legend(loc=key_loc, shadow=True)
