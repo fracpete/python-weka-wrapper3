@@ -10,6 +10,8 @@ Changelog
   bit better (e.g., what sections to output).
 - switched to `python-javabridge`, the new name (fork?) of the `javabridge` library
 - setting window title of Matplotlib is now dependent on version (to avoid deprecation notice being output)
+- `plot_classifier_errors` (module `weka.plot.classifiers`) now plots the diagonal after adding all the plot data to
+  get the right limits
 - ...
 
 
