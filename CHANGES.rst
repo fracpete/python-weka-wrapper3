@@ -1,18 +1,16 @@
 Changelog
 =========
 
-0.2.4 (????-??-??)
+0.2.4 (2021-11-25)
 ------------------
 
 - added method `help_for` to `weka.core.classes` module to generate a help screen for an `weka.core.OptionHandler`
   class using just the classname.
 - the `to_help` method of the `weka.core.classes.OptionHandler` class now allows to tweak the generated output a
   bit better (e.g., what sections to output).
-- switched to `python-javabridge`, the new name (fork?) of the `javabridge` library
 - setting window title of Matplotlib is now dependent on version (to avoid deprecation notice being output)
 - `plot_classifier_errors` (module `weka.plot.classifiers`) now plots the diagonal after adding all the plot data to
   get the right limits
-- ...
 
 
 0.2.3 (2021-06-09)
