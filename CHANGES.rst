@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.2.5 (????-??-??)
+------------------
+
+- switched to `python-javabridge`, the new name (fork?) of the `javabridge` library
+- ...
+
+
 0.2.4 (2021-11-25)
 ------------------
 
