@@ -1,32 +1,25 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Flow &#8212; python-weka-wrapper3 0.2.3 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2.3',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Flow &#8212; python-weka-wrapper3 0.2.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="weka package" href="weka.html" />
     <link rel="prev" title="Command-line" href="commandline.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -42,7 +35,8 @@
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Flow</a></li> 
       </ul>
     </div>  
 
@@ -51,21 +45,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="flow">
+  <section id="flow">
 <h1>Flow<a class="headerlink" href="#flow" title="Permalink to this headline">¶</a></h1>
 <p>The flow components of <em>python-weka-wrapper3</em> are not related to Weka’s KnowledgeFlow. Instead, they were
 inspired by the <a class="reference external" href="https://adams.cms.waikato.ac.nz/">ADAMS workflow engine</a>. It is a very simple workflow,
 aimed at automating tasks and easy to extend as well. Instead of linking operators with explicit
 connections, this flow uses a tree structure for implicitly defining how the data is processed.</p>
-<div class="section" id="overview">
+<section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>A workflow component is called an <em>actor</em>. All actors are derived from the <cite>Actor</cite> class,
 but there are four different kinds of actors present:</p>
 <ul class="simple">
-<li><strong>source</strong> actors generate data, but don’t consume any</li>
-<li><strong>transformer</strong> actors consume and generate data, similar to a filter</li>
-<li><strong>sink</strong> actors only consume data, e.g., displaying data or writing to file</li>
-<li><strong>control</strong> actors define how the data is passed around in a flow, e.g., branching</li>
+<li><p><strong>source</strong> actors generate data, but don’t consume any</p></li>
+<li><p><strong>transformer</strong> actors consume and generate data, similar to a filter</p></li>
+<li><p><strong>sink</strong> actors only consume data, e.g., displaying data or writing to file</p></li>
+<li><p><strong>control</strong> actors define how the data is passed around in a flow, e.g., branching</p></li>
 </ul>
 <p>Data itself is being passed around in <em>Token</em> containers.</p>
 <p>Due to the limitation of the tree structure of providing only 1-to-n connections, objects can be stored
@@ -74,116 +68,117 @@ update and delete these objects.</p>
 <p>For finding out more about a specific actor, and what parameters it offers (via the <cite>config</cite> dictionary
 property), you use one of the following actor methods:</p>
 <ul class="simple">
-<li><strong>print_help()</strong> – outputs a description of actor and its options on stdout</li>
-<li><strong>generate_help()</strong> – generates the help string output by <cite>print_help()</cite></li>
+<li><p><strong>print_help()</strong> – outputs a description of actor and its options on stdout</p></li>
+<li><p><strong>generate_help()</strong> – generates the help string output by <cite>print_help()</cite></p></li>
 </ul>
 <p>Printing the layout of a flow is very simple. Assuming you have a flow variable called <cite>myflow</cite>, you simply
 use the <cite>tree</cite> method to output the structure: <cite>print(myflow.tree)</cite></p>
 <p>All actors can return and restore from JSON as well, simply use the following property to access or
 set the JSON representation: <cite>json</cite></p>
-</div>
-<div class="section" id="life-cycle">
+</section>
+<section id="life-cycle">
 <h2>Life cycle<a class="headerlink" href="#life-cycle" title="Permalink to this headline">¶</a></h2>
 <p>The typical life-cycle of a flow (actually any actor) can be described through the following method calls:</p>
 <ol class="arabic simple">
-<li><strong>setup()</strong> configures and checks the flow (outputs error message if failed, None otherwise)</li>
-<li><strong>execute()</strong> performs the execution of actors (outputs error message if failed, None otherwise)</li>
-<li><strong>wrapup()</strong> finishes up the execution</li>
-<li><strong>cleanup()</strong> destructive, frees up memory</li>
+<li><p><strong>setup()</strong> configures and checks the flow (outputs error message if failed, None otherwise)</p></li>
+<li><p><strong>execute()</strong> performs the execution of actors (outputs error message if failed, None otherwise)</p></li>
+<li><p><strong>wrapup()</strong> finishes up the execution</p></li>
+<li><p><strong>cleanup()</strong> destructive, frees up memory</p></li>
 </ol>
-</div>
-<div class="section" id="sources">
+</section>
+<section id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <p>The following <em>source</em> actors are available:</p>
 <ul class="simple">
-<li><strong>CombineStorage</strong> expands storage items in a format string and forwards the generated string</li>
-<li><strong>DataGenerator</strong> outputs artificial data</li>
-<li><strong>FileSupplier</strong> outputs predefined file names</li>
-<li><strong>ForLoop</strong> outputs integer tokens as defined by the loop setup (min, max, step)</li>
-<li><strong>GetStorageValue</strong> outputs a storage from internal storage</li>
-<li><strong>ListFiles</strong> lists files/directories</li>
-<li><strong>LoadDatabase</strong> loads data from a database using an SQL query</li>
-<li><strong>Start</strong> dummy source that just triggers the execution of other actors following</li>
-<li><strong>StringConstants</strong> simply outputs a list of predefined strings, one by one</li>
+<li><p><strong>CombineStorage</strong> expands storage items in a format string and forwards the generated string</p></li>
+<li><p><strong>DataGenerator</strong> outputs artificial data</p></li>
+<li><p><strong>FileSupplier</strong> outputs predefined file names</p></li>
+<li><p><strong>ForLoop</strong> outputs integer tokens as defined by the loop setup (min, max, step)</p></li>
+<li><p><strong>GetStorageValue</strong> outputs a storage from internal storage</p></li>
+<li><p><strong>ListFiles</strong> lists files/directories</p></li>
+<li><p><strong>LoadDatabase</strong> loads data from a database using an SQL query</p></li>
+<li><p><strong>Start</strong> dummy source that just triggers the execution of other actors following</p></li>
+<li><p><strong>StringConstants</strong> simply outputs a list of predefined strings, one by one</p></li>
 </ul>
-</div>
-<div class="section" id="transformers">
+</section>
+<section id="transformers">
 <h2>Transformers<a class="headerlink" href="#transformers" title="Permalink to this headline">¶</a></h2>
 <p>The following <em>transformers</em> are available:</p>
 <ul class="simple">
-<li><strong>AttributeSelection</strong> performs attribute selection on a dataset and outputs an <cite>AttributeSelectionContainer</cite></li>
-<li><strong>ClassSelector</strong> sets/unsets the class attribute of a dataset</li>
-<li><strong>Convert</strong> applies simple conversion schemes to the data passing through</li>
-<li><strong>Copy</strong> creates a deep copy of serializable Java objects</li>
-<li><strong>CrossValidate</strong> performs cross-validation on a classifier or clusterer</li>
-<li><strong>DeleteFile</strong> deletes files that match a regular expression</li>
-<li><strong>DeleteStorageValue</strong> deletes a value from internal storage</li>
-<li><strong>Evaluatie</strong> evaluates a trained classifier/clusterer in internal storage on the data passing through</li>
-<li><strong>EvaluationSummary</strong> generates a summary from a classifier/clusterer evaluation object</li>
-<li><strong>Filter</strong> applies a Weka filter to the data passing through</li>
-<li><strong>InitStorageValue</strong> sets the initial value for a internal storage value</li>
-<li><strong>LoadDataset</strong> loads the data stored in the file received as input, either using automatic
-determined loader or user-specified one</li>
-<li><strong>MathExpression</strong> computes a numeric value from a expression and numeric input</li>
-<li><strong>ModelReader</strong> reads classifier/clusterer models from disk and forwards a <cite>ModelContainer</cite></li>
-<li><strong>PassThrough</strong> is a dummy that just passes through the tokens</li>
-<li><strong>Predict</strong> applies classifier/clusterer model (serialized file or from storage) to incoming Instance objects</li>
-<li><strong>RenameRelation</strong> updates the relation name of Instance/Instances objects</li>
-<li><strong>SetStorageValue</strong> stores the payload of the current token in internal storage</li>
-<li><strong>Train</strong> builds a classifier/clusterer/associator and passes on a <cite>ModelContainer</cite></li>
-<li><strong>UpdateStorageValue</strong> applies an expression to update an internal storage value, e.g.
-incrementing a counter</li>
+<li><p><strong>AttributeSelection</strong> performs attribute selection on a dataset and outputs an <cite>AttributeSelectionContainer</cite></p></li>
+<li><p><strong>ClassSelector</strong> sets/unsets the class attribute of a dataset</p></li>
+<li><p><strong>Convert</strong> applies simple conversion schemes to the data passing through</p></li>
+<li><p><strong>Copy</strong> creates a deep copy of serializable Java objects</p></li>
+<li><p><strong>CrossValidate</strong> performs cross-validation on a classifier or clusterer</p></li>
+<li><p><strong>DeleteFile</strong> deletes files that match a regular expression</p></li>
+<li><p><strong>DeleteStorageValue</strong> deletes a value from internal storage</p></li>
+<li><p><strong>Evaluatie</strong> evaluates a trained classifier/clusterer in internal storage on the data passing through</p></li>
+<li><p><strong>EvaluationSummary</strong> generates a summary from a classifier/clusterer evaluation object</p></li>
+<li><p><strong>Filter</strong> applies a Weka filter to the data passing through</p></li>
+<li><p><strong>InitStorageValue</strong> sets the initial value for a internal storage value</p></li>
+<li><p><strong>LoadDataset</strong> loads the data stored in the file received as input, either using automatic
+determined loader or user-specified one</p></li>
+<li><p><strong>MathExpression</strong> computes a numeric value from a expression and numeric input</p></li>
+<li><p><strong>ModelReader</strong> reads classifier/clusterer models from disk and forwards a <cite>ModelContainer</cite></p></li>
+<li><p><strong>PassThrough</strong> is a dummy that just passes through the tokens</p></li>
+<li><p><strong>Predict</strong> applies classifier/clusterer model (serialized file or from storage) to incoming Instance objects</p></li>
+<li><p><strong>RenameRelation</strong> updates the relation name of Instance/Instances objects</p></li>
+<li><p><strong>SetStorageValue</strong> stores the payload of the current token in internal storage</p></li>
+<li><p><strong>Train</strong> builds a classifier/clusterer/associator and passes on a <cite>ModelContainer</cite></p></li>
+<li><p><strong>UpdateStorageValue</strong> applies an expression to update an internal storage value, e.g.
+incrementing a counter</p></li>
 </ul>
-</div>
-<div class="section" id="sinks">
+</section>
+<section id="sinks">
 <h2>Sinks<a class="headerlink" href="#sinks" title="Permalink to this headline">¶</a></h2>
 <p>The following <em>sinks</em> are available:</p>
 <ul class="simple">
-<li><strong>ClassifierErrors</strong> displays the classifier errors obtained from an Evaluation object</li>
-<li><strong>Console</strong> just outputs a string representation of the object on stdout</li>
-<li><strong>DumpFile</strong> similar to <em>Console</em>, but stores the string representation in a file</li>
-<li><strong>InstanceDumper</strong> dumps incoming Instance/Instances object in a file</li>
-<li><strong>LinePlot</strong> displays an Instances object as line plot, using the internal format</li>
-<li><strong>MatrixPlot</strong> displays an Instances object as matrix plot</li>
-<li><strong>ModelWriter</strong> stores a trained model on disk</li>
-<li><strong>Null</strong> simply swallows any token (like <cite>/dev/null</cite> on Linux)</li>
-<li><strong>PRC</strong> plots a precision-recall curve from an Evaluation object</li>
-<li><strong>ROC</strong> plots a receiver-operator curver from an Evaluation object</li>
+<li><p><strong>ClassifierErrors</strong> displays the classifier errors obtained from an Evaluation object</p></li>
+<li><p><strong>Console</strong> just outputs a string representation of the object on stdout</p></li>
+<li><p><strong>DumpFile</strong> similar to <em>Console</em>, but stores the string representation in a file</p></li>
+<li><p><strong>InstanceDumper</strong> dumps incoming Instance/Instances object in a file</p></li>
+<li><p><strong>LinePlot</strong> displays an Instances object as line plot, using the internal format</p></li>
+<li><p><strong>MatrixPlot</strong> displays an Instances object as matrix plot</p></li>
+<li><p><strong>ModelWriter</strong> stores a trained model on disk</p></li>
+<li><p><strong>Null</strong> simply swallows any token (like <cite>/dev/null</cite> on Linux)</p></li>
+<li><p><strong>PRC</strong> plots a precision-recall curve from an Evaluation object</p></li>
+<li><p><strong>ROC</strong> plots a receiver-operator curver from an Evaluation object</p></li>
 </ul>
-</div>
-<div class="section" id="control-actors">
+</section>
+<section id="control-actors">
 <h2>Control actors<a class="headerlink" href="#control-actors" title="Permalink to this headline">¶</a></h2>
 <p>The following <em>control</em> actors define how data is getting passed around in a workflow:</p>
 <ul class="simple">
-<li><strong>Branch</strong> forwards the same input token to all of its sub-branches</li>
-<li><strong>ContainerValuePicker</strong> extracts a named value from a container, e.g. the <cite>Model</cite> from a <cite>ModelContainer</cite></li>
-<li><strong>Flow</strong> the outermost actor that also handles the internal storage</li>
-<li><strong>Sequence</strong> executes its sub-actors sequentially, with the data generated by the previous being the input
-for the next one</li>
-<li><strong>Stop</strong> stops the execution of the flow</li>
-<li><strong>Tee</strong> allows to <em>tee</em> off the current token and process it separately in a sub-flow before continuing with
-the processing; optional condition available that determines when a token gets tee’d off</li>
-<li><strong>Trigger</strong> executes its sub-actors whenever a token passes through (i.e., when the condition evaluates to True)</li>
+<li><p><strong>Branch</strong> forwards the same input token to all of its sub-branches</p></li>
+<li><p><strong>ContainerValuePicker</strong> extracts a named value from a container, e.g. the <cite>Model</cite> from a <cite>ModelContainer</cite></p></li>
+<li><p><strong>Flow</strong> the outermost actor that also handles the internal storage</p></li>
+<li><p><strong>Sequence</strong> executes its sub-actors sequentially, with the data generated by the previous being the input
+for the next one</p></li>
+<li><p><strong>Stop</strong> stops the execution of the flow</p></li>
+<li><p><strong>Tee</strong> allows to <em>tee</em> off the current token and process it separately in a sub-flow before continuing with
+the processing; optional condition available that determines when a token gets tee’d off</p></li>
+<li><p><strong>Trigger</strong> executes its sub-actors whenever a token passes through (i.e., when the condition evaluates to True)</p></li>
 </ul>
-</div>
-<div class="section" id="conversions">
+</section>
+<section id="conversions">
 <h2>Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h2>
 <p>The following <em>conversion</em> schemes can be used in conjunction with the <em>Convert</em> transformer:</p>
 <ul class="simple">
-<li><strong>AnyToCommandline</strong> generates a command-line string from an object, e.g., a classifier</li>
-<li><strong>CommandlineToAny</strong> generates an object from a command-line string, e.g., a classifier setup</li>
-<li><strong>PassThrough</strong> is a dummy conversion that just passes through the data</li>
+<li><p><strong>AnyToCommandline</strong> generates a command-line string from an object, e.g., a classifier</p></li>
+<li><p><strong>CommandlineToAny</strong> generates an object from a command-line string, e.g., a classifier setup</p></li>
+<li><p><strong>PassThrough</strong> is a dummy conversion that just passes through the data</p></li>
 </ul>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Check out the examples available through the <em>python-weka-wrapper3-examples</em> project on Github:</p>
 <blockquote>
-<div><a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3-examples">https://github.com/fracpete/python-weka-wrapper3-examples</a></div></blockquote>
+<div><p><a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3-examples">https://github.com/fracpete/python-weka-wrapper3-examples</a></p>
+</div></blockquote>
 <p>The example scripts are located in the <cite>src/wekaexamples/flow</cite> sub-directory.</p>
 <p>Below is a code snippet for building a flow that cross-validates a classifier on a dataset
 and outputs the evaluation summary and the ROC and PRC curves:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
 <span class="kn">from</span> <span class="nn">weka.flow.control</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Branch</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="kn">from</span> <span class="nn">weka.flow.source</span> <span class="kn">import</span> <span class="n">FileSupplier</span>
 <span class="kn">from</span> <span class="nn">weka.flow.transformer</span> <span class="kn">import</span> <span class="n">LoadDataset</span><span class="p">,</span> <span class="n">ClassSelector</span><span class="p">,</span> <span class="n">CrossValidate</span><span class="p">,</span> <span class="n">EvaluationSummary</span>
@@ -215,8 +210,8 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 
 <span class="n">summary</span> <span class="o">=</span> <span class="n">EvaluationSummary</span><span class="p">()</span>
 <span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;=== J48/iris ===&quot;</span>
-<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;complexity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;complexity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">seqsum</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
 
 <span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
@@ -227,7 +222,7 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqerr</span><span class="p">)</span>
 
 <span class="n">errors</span> <span class="o">=</span> <span class="n">ClassifierErrors</span><span class="p">()</span>
-<span class="n">errors</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">errors</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">seqerr</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
 
 <span class="n">seqroc</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">()</span>
@@ -235,7 +230,7 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqroc</span><span class="p">)</span>
 
 <span class="n">roc</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">()</span>
-<span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">roc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;class_index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">seqroc</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc</span><span class="p">)</span>
 
@@ -244,28 +239,28 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 <span class="n">branch</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seqprc</span><span class="p">)</span>
 
 <span class="n">prc</span> <span class="o">=</span> <span class="n">PRC</span><span class="p">()</span>
-<span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;wait&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">prc</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;class_index&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">seqprc</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prc</span><span class="p">)</span>
 
 <span class="c1"># run the flow</span>
 <span class="n">msg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-<span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error executing flow:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error executing flow:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error setting up flow:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error setting up flow:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">wrapup</span><span class="p">()</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>With the following command you can output the built flow tree:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">tree</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The above example gets printed like this:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>Flow &#39;cross-validate classifier&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Flow &#39;cross-validate classifier&#39;
 |-FileSupplier [files: 1]
 |-LoadDataset [incremental: False, custom: False, loader: weka.core.converters.ArffLoader]
 |-ClassSelector [index: last]
@@ -282,39 +277,40 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 | | |-PRC [classes: [0, 1, 2], title: None, outfile: None, wait: True]
 </pre></div>
 </div>
-</div>
-<div class="section" id="extending">
+</section>
+<section id="extending">
 <h2>Extending<a class="headerlink" href="#extending" title="Permalink to this headline">¶</a></h2>
 <p>Adding additional flow components is quite easy:</p>
 <ul class="simple">
-<li>Choose the superclass, based on how the actor is supposed to behave:</li>
+<li><p>Choose the superclass, based on how the actor is supposed to behave:</p></li>
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li><strong>source</strong> – <cite>weka.flow.source.Source</cite></li>
-<li><strong>transformer</strong> – <cite>weka.flow.transformer.Transformer</cite></li>
-<li><strong>sink</strong> – <cite>weka.flow.sink.Sink</cite></li>
+<li><p><strong>source</strong> – <cite>weka.flow.source.Source</cite></p></li>
+<li><p><strong>transformer</strong> – <cite>weka.flow.transformer.Transformer</cite></p></li>
+<li><p><strong>sink</strong> – <cite>weka.flow.sink.Sink</cite></p></li>
 </ul>
 </div></blockquote>
 <ul class="simple">
-<li>add the new class with a constructor like this <cite>def __init__(self, name=None, options=None):</cite></li>
-<li>add a <cite>description</cite> method that returns a string, describing what your actor does</li>
-<li>added a <cite>fix_config</cite> method that ensures that all configurations are present and help for them as well
-(e.g., <cite>transformer.ClassSelector</cite>)</li>
-<li>if you want to output some additional info in the tree layout, implement a <cite>quickinfo</cite> method
-(see, e.g., <cite>transformer.ClassSelector</cite>)</li>
-<li>override the <cite>setup</cite> method if you require some additional checks (e.g., file actually exists)
+<li><p>add the new class with a constructor like this <cite>def __init__(self, name=None, options=None):</cite></p></li>
+<li><p>add a <cite>description</cite> method that returns a string, describing what your actor does</p></li>
+<li><p>added a <cite>fix_config</cite> method that ensures that all configurations are present and help for them as well
+(e.g., <cite>transformer.ClassSelector</cite>)</p></li>
+<li><p>if you want to output some additional info in the tree layout, implement a <cite>quickinfo</cite> method
+(see, e.g., <cite>transformer.ClassSelector</cite>)</p></li>
+<li><p>override the <cite>setup</cite> method if you require some additional checks (e.g., file actually exists)
 or setup steps (e.g., loading of model from disk); return None if everything OK, otherwise
-the error; don’t forget to call the super-method.</li>
-<li>transformers or sink can check the input data by overriding the <cite>check_input</cite> method</li>
-<li>the actual execution or processing of input data happens in the <cite>do_execute</cite> method;
+the error; don’t forget to call the super-method.</p></li>
+<li><p>transformers or sink can check the input data by overriding the <cite>check_input</cite> method</p></li>
+<li><p>the actual execution or processing of input data happens in the <cite>do_execute</cite> method;
 return an error string if something failed, otherwise None; sources and transformers
-can append the generated data (wrapped in Token objects) to the <cite>self._output</cite> list</li>
+can append the generated data (wrapped in Token objects) to the <cite>self._output</cite> list</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -323,7 +319,7 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Flow</a><ul>
 <li><a class="reference internal" href="#overview">Overview</a></li>
@@ -353,15 +349,15 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -381,12 +377,13 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
         <li class="right" >
           <a href="commandline.html" title="Command-line"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Flow</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

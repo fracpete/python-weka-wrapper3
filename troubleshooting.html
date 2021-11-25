@@ -1,32 +1,25 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Troubleshooting &#8212; python-weka-wrapper3 0.2.3 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2.3',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Troubleshooting &#8212; python-weka-wrapper3 0.2.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -42,7 +35,8 @@
         <li class="right" >
           <a href="install.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Troubleshooting</a></li> 
       </ul>
     </div>  
 
@@ -51,179 +45,179 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="troubleshooting">
+  <section id="troubleshooting">
 <h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="general">
+<section id="general">
 <h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>Q:</strong> How do I install <cite>.whl</cite> files?</p>
+<li><p><strong>Q:</strong> How do I install <cite>.whl</cite> files?</p>
 <p><strong>A:</strong> <cite>.whl</cite> are <em>Python Wheels</em> archives, which you can install using pip (&gt;= 1.4). See also <a class="reference external" href="http://pythonwheels.com/">this website</a>.</p>
 </li>
-<li><p class="first"><strong>Q:</strong> Why does javabridge not compile?</p>
-<p><strong>A:</strong> Ensure that you have an actual JDK installed (test it by issuing the <code class="docutils literal"><span class="pre">javac</span></code> command), as
+<li><p><strong>Q:</strong> Why does javabridge not compile?</p>
+<p><strong>A:</strong> Ensure that you have an actual JDK installed (test it by issuing the <code class="docutils literal notranslate"><span class="pre">javac</span></code> command), as
 javabridge requires header files to present that won’t be present if you only have a runtime
-environment (JRE). You also may have to set the <code class="docutils literal"><span class="pre">JAVA_HOME</span></code> environment variable pointing
-to your JDK installation (above the <code class="docutils literal"><span class="pre">bin</span></code> directory).</p>
+environment (JRE). You also may have to set the <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> environment variable pointing
+to your JDK installation (above the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).</p>
 </li>
-<li><p class="first">Before you can install <cite>matplotlib</cite>, you may have to upgrade your <cite>distribute</cite> library as follows:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$  ./venv/bin/easy_install -U distribute
+<li><p>Before you can install <cite>matplotlib</cite>, you may have to upgrade your <cite>distribute</cite> library as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$  ./venv/bin/easy_install -U distribute
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="debian">
+</section>
+<section id="debian">
 <h2>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>Q:</strong> On a headless Debian server, building a classifier can result in Python exiting, printing the error message
+<li><p><strong>Q:</strong> On a headless Debian server, building a classifier can result in Python exiting, printing the error message
 <cite>GConf Error: Failed to contact configuration server; some possible causes are that you need to enable TCP/IP
 networking for ORBit, or you have stale NFS locks due to a system crash. See http://projects.gnome.org/gconf/
 for information. (Details -  1: Not running within active session)</cite>. How to fix?</p>
 <p><strong>A:</strong> According to <a class="reference external" href="http://stackoverflow.com/questions/1421498/linux-gedit-i-always-get-gconf-error-failed-to-contact-configuration-server">this</a>
 post, set the following environment variable:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DBUS_SESSION_BUS_ADDRESS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DBUS_SESSION_BUS_ADDRESS</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 </pre></div>
 </div>
 <p>And make sure that the <cite>~/.dbus</cite> directory has 0700 as permission mask.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="ubuntu">
+</section>
+<section id="ubuntu">
 <h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>Q:</strong> On a headless Ubuntu server, building a classifier can result in Python exiting, printing the error message
+<li><p><strong>Q:</strong> On a headless Ubuntu server, building a classifier can result in Python exiting, printing the error message
 <cite>GLib-GIO-ERROR **: Settings schema ‘org.gnome.system.proxy’ is not installed</cite>. How to fix?</p>
 <p><strong>A:</strong> Simply run the following command to fix this:
 <cite>sudo apt-get install gsettings-desktop-schemas</cite></p>
 </li>
-<li><p class="first">On Ubuntu, follow <a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>
+<li><p>On Ubuntu, follow <a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>
 to install all the required dependencies for PIL:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo apt-get build-dep python-imaging
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get build-dep python-imaging
 </pre></div>
 </div>
 </li>
-<li><p class="first">To enable support for PIL on Ubuntu, see
+<li><p>To enable support for PIL on Ubuntu, see
 <a class="reference external" href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">this post</a>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libfreetype.so /usr/lib/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libfreetype.so /usr/lib/
 $ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libjpeg.so /usr/lib/
 $ sudo ln -s /usr/lib/<span class="sb">`</span>uname -i<span class="sb">`</span>-linux-gnu/libz.so /usr/lib/
 </pre></div>
 </div>
 </li>
-<li><p class="first">Based on <a class="reference external" href="https://askubuntu.com/a/785506">this post</a> do the following to install
+<li><p>Based on <a class="reference external" href="https://askubuntu.com/a/785506">this post</a> do the following to install
 matplotlib with tkinter support:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt install tk-dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install tk-dev
 ./venv/bin/pip --no-cache-dir install -U --force-reinstall matplotlib
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="linux">
+</section>
+<section id="linux">
 <h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>Q:</strong> I installed <em>pygraphviz</em> but I keep getting <cite>Pygraphviz is not installed, cannot generate graph plot!</cite>. How to fix?</p>
+<li><p><strong>Q:</strong> I installed <em>pygraphviz</em> but I keep getting <cite>Pygraphviz is not installed, cannot generate graph plot!</cite>. How to fix?</p>
 <p><strong>A:</strong> : Open up an interactive Python3 shell and type:
 <cite>import pygraphviz</cite>
 If you get <cite>undefined symbol: Agundirected</cite>, then follow the steps outlined <a class="reference external" href="http://stackoverflow.com/a/33508561/4698227">here</a>,
 but use <cite>pip3</cite>.</p>
 </li>
-<li><p class="first">You may need to install the header files for the following libraries for the compilations to succeed:</p>
+<li><p>You may need to install the header files for the following libraries for the compilations to succeed:</p>
 <ul class="simple">
-<li>freetype</li>
-<li>graphviz</li>
-<li>png</li>
+<li><p>freetype</p></li>
+<li><p>graphviz</p></li>
+<li><p>png</p></li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="mac-osx">
+</section>
+<section id="mac-osx">
 <h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>Q:</strong> Why does javabridge fail with compiler error <cite>clang: error: unknown argument: ‘-mno-fused-madd’</cite>?</p>
+<li><p><strong>Q:</strong> Why does javabridge fail with compiler error <cite>clang: error: unknown argument: ‘-mno-fused-madd’</cite>?</p>
 <p><strong>A:</strong> XCode 5.1 changed how unknown arguments are handled and now treats them  as error (<a class="reference external" href="http://bruteforce.gr/bypassing-clang-error-unknown-argument.html">source</a>). You can precede the <cite>pip install javabridge</cite> command with the following environment variable:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wno-error=unused-command-line-argument-hard-error-in-future&quot;</span> pip install javabridge
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wno-error=unused-command-line-argument-hard-error-in-future&quot;</span> pip install javabridge
 </pre></div>
 </div>
 </li>
-<li><p class="first"><strong>Q:</strong> Compiling javabridge fails with missing <cite>jni.h</cite> header file - what now?</p>
+<li><p><strong>Q:</strong> Compiling javabridge fails with missing <cite>jni.h</cite> header file - what now?</p>
 <p><strong>A:</strong> You will need an Oracle JDK installed for this. <a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/">Download</a> and install one. Below is a command-line that uses the <cite>jni.h</cite> header file that comes with <cite>1.7.0_45</cite>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/ -I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/darwin&quot;</span> pip install --user javabridge
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/ -I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/darwin&quot;</span> pip install --user javabridge
 </pre></div>
 </div>
 <p><em>PS:</em> You may need to combine the <cite>ARCHFLAGS</cite> setting with the one from the previous Q&amp;A.</p>
 </li>
-<li><p class="first"><strong>Q:</strong> When I use <cite>import javabridge</cite> in my Python shell, a
+<li><p><strong>Q:</strong> When I use <cite>import javabridge</cite> in my Python shell, a
 dialog pops up, telling me that I don’t have Java installed. However, I have
 an Oracle JDK installed. What’s wrong?</p>
 <p><strong>A:</strong> Java environments that are not from Apple don’t seem to get picked up
 by Python correctly. Simply install the Java 1.6 that Apple supplies on your
 system as well.</p>
 </li>
-<li><p class="first"><strong>Q:</strong> Installing <cite>pygraphviz</cite> fails, because it cannot find the library or
+<li><p><strong>Q:</strong> Installing <cite>pygraphviz</cite> fails, because it cannot find the library or
 its includes. What now?</p>
-<dl class="docutils">
-<dt><strong>A:</strong> Here is what to do:</dt>
-<dd><ul class="first last simple">
-<li>Make sure that you have the <a class="reference external" href="http://graphviz.org/Download_macos.php">GraphViz</a>
-package installed.</li>
-<li>If the installer is still not finding the libraries, download the
+<dl class="simple">
+<dt><strong>A:</strong> Here is what to do:</dt><dd><ul class="simple">
+<li><p>Make sure that you have the <a class="reference external" href="http://graphviz.org/Download_macos.php">GraphViz</a>
+package installed.</p></li>
+<li><p>If the installer is still not finding the libraries, download the
 <a class="reference external" href="https://pypi.python.org/pypi/pygraphviz">pygraphviz</a> sources from PyPi and
-extract them.</li>
-<li>Open the <cite>setup.py</cite> file in a text editor and set the <cite>library_path</cite> and
+extract them.</p></li>
+<li><p>Open the <cite>setup.py</cite> file in a text editor and set the <cite>library_path</cite> and
 <cite>include_path</cite> variables to the correct paths on your machine, e.g.,
 <cite>library_path=/usr/local/lib/graphviz</cite> and
-<cite>include_path=/usr/local/include/graphviz</cite> and save the file.</li>
-<li>Open a terminal and navigate to the directory where the <cite>setup.py</cite> file
-is located that you just edited.</li>
-<li>Install the package using <cite>python setup.py install –user</cite></li>
+<cite>include_path=/usr/local/include/graphviz</cite> and save the file.</p></li>
+<li><p>Open a terminal and navigate to the directory where the <cite>setup.py</cite> file
+is located that you just edited.</p></li>
+<li><p>Install the package using <cite>python setup.py install –user</cite></p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p class="first"><strong>Q:</strong> Installing <cite>pygraphviz</cite> fails with error message
+<li><p><strong>Q:</strong> Installing <cite>pygraphviz</cite> fails with error message
 <cite>ld: library not found for -lcgraph</cite>. What is wrong?</p>
 <p><strong>A:</strong> Apparently, the XCode command-line are not installed. You can install
 them by opening a terminal and running the following command:
 <cite>xcode-select –install</cite></p>
 </li>
-<li><p class="first"><strong>Q:</strong> Installing <cite>javabridge</cite> fails with the error message <cite>Exception: JVM not found</cite>,
+<li><p><strong>Q:</strong> Installing <cite>javabridge</cite> fails with the error message <cite>Exception: JVM not found</cite>,
 but I have Java installed?</p>
 <p><strong>A:</strong> Set the <cite>JAVA_HOME</cite> environment variable, by pointing it to your JDK installation
 (should be the directory above the <cite>bin</cite> directory containing the <cite>java</cite> executable).</p>
 </li>
 </ul>
-</div>
-<div class="section" id="windows">
+</section>
+<section id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>Q:</strong> The Windows SDK 7.1 installer fails (eg when behind a proxy). What now?</p>
+<li><p><strong>Q:</strong> The Windows SDK 7.1 installer fails (eg when behind a proxy). What now?</p>
 <p><strong>A:</strong> You can download an ISO image of the SDK from
 <a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=8442">here</a>
 (<cite>GRMSDK_EN_DVD.iso</cite> is the 32-bit version and <cite>GRMSDKX_EN_DVD.iso</cite> is the 64-bit version).
 See <a class="reference external" href="http://www.howtogeek.com/howto/windows-vista/mount-an-iso-image-in-windows-vista/">this HOWTO</a>
 for mounting the ISO image once downloaded.</p>
 </li>
-<li><p class="first"><strong>Q:</strong> I cannot display graphs, e.g., generated by J48, as I keep getting the error message <cite>ValueError: Program dot not found in path.</cite> - what can I do?</p>
+<li><p><strong>Q:</strong> I cannot display graphs, e.g., generated by J48, as I keep getting the error message <cite>ValueError: Program dot not found in path.</cite> - what can I do?</p>
 <p><strong>A:</strong> PyGraphviz is just a wrapper for <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> which you
 you need to install separately. Also, you need to add the directory containing the GraphViz binaries, like <cite>dot.exe</cite>, to the <cite>PATH</cite> environment variable, e.g., <cite>C:\Program Files (x86)\Graphviz2.38\bin</cite> (you may have to log out and back in again for these changes to take effect).</p>
 </li>
-<li><p class="first"><strong>Q:</strong> I cannot use datasets that are in UTF-8 - but it works in the Weka GUI when I change the file encoding parameter in <cite>RunWeka.ini</cite>!</p>
+<li><p><strong>Q:</strong> I cannot use datasets that are in UTF-8 - but it works in the Weka GUI when I change the file encoding parameter in <cite>RunWeka.ini</cite>!</p>
 <p><strong>A:</strong> The JVM will pick up options via the <cite>_JAVA_OPTIONS</cite> environment variable. You can set an environment variables in your Python code with <cite>os.environ</cite>, e.g., the file encoding:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="kn">as</span> <span class="nn">jvm</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="k">as</span> <span class="nn">jvm</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;_JAVA_OPTIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-Dfile.encoding=UTF-8&quot;</span>
-<span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">jvm</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -232,7 +226,7 @@ you need to install separately. Also, you need to add the directory containing t
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/logo.jpg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Troubleshooting</a><ul>
 <li><a class="reference internal" href="#general">General</a></li>
@@ -259,15 +253,15 @@ you need to install separately. Also, you need to add the directory containing t
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -287,12 +281,13 @@ you need to install separately. Also, you need to add the directory containing t
         <li class="right" >
           <a href="install.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Troubleshooting</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014-2021, Peter &#34;fracpete&#34; Reutemann.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>
