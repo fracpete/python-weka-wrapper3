@@ -34,12 +34,12 @@ rm dist/*
 ./venv/bin/twine upload dist/*
 ```
 
-Commands for updating github pages (requires Java 8!):
+Commands for updating github pages (requires sphinx in venv and Java 8!):
 
 ```
 find -name "*~" -delete
 cd doc
-make html
+make -e SPHINXBUILD=../venv/bin/sphinx-build html
 cd build/html
 cp -R * ../../../../python-weka-wrapper3.gh-pages/
 cd ../../../../python-weka-wrapper3.gh-pages/
