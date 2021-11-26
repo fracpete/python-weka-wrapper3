@@ -794,7 +794,7 @@ The following examples show how to list, install and uninstall an *official* pac
    import weka.core.packages as packages
    items = packages.all_packages()
    for item in items:
-       if item.get_name() == "CLOPE":
+       if item.name == "CLOPE":
            print(item.name + " " + item.url)
 
    packages.install_package("CLOPE")
