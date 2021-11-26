@@ -499,9 +499,7 @@ The following code optimizes the `C` property of `SMOreg` and the `gamma` proper
 .. code-block:: python
 
    from weka.core.classes import ListParameter, MathParameter
-   multi = MultiSearch(
-       options=["-sample-size", "100.0", "-initial-folds", "2", "-subsequent-folds", "2",
-                "-num-slots", "1", "-S", "1"])
+   multi = MultiSearch(options=["-S", "1"])
    multi.evaluation = "CC"
    mparam = MathParameter()
    mparam.prop = "classifier.kernel.gamma"
