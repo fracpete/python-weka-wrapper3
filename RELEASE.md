@@ -39,6 +39,7 @@ Commands for updating github pages (requires sphinx in venv and Java 8!):
 ```
 find -name "*~" -delete
 cd doc
+make -e SPHINXBUILD=../venv/bin/sphinx-build clean
 make -e SPHINXBUILD=../venv/bin/sphinx-build html
 cd build/html
 cp -R * ../../../../python-weka-wrapper3.gh-pages/
