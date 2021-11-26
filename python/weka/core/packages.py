@@ -125,7 +125,7 @@ class Package(JavaObject):
         :return: the name/version
         :rtype: str
         """
-        print(self.name + "/" + self.version)
+        return self.name + "/" + self.version
 
 
 class PackageConstraint(JavaObject):

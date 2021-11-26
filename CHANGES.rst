@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - switched to `python-javabridge`, the new name (fork?) of the `javabridge` library
+- `Package.__str__` (`weka.core.packages` module) method now returns a string rather than printing the name/version
 - ...
 
 
