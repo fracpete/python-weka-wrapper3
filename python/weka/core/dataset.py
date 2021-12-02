@@ -633,6 +633,51 @@ class Instances(JavaObject):
 
         return result
 
+    def to_numpy(self, internal=False):
+        """
+        Turns the dataset into a numpy matrix.
+
+        :param internal: whether to return the internal format
+        :type internal: bool
+        :return: the dataset as matrix
+        :rtype: np.ndarray
+        """
+        names = []
+        for n in range(self.num_attributes):
+            names.append(self.attribute(n).name)
+
+        if internal:
+            formats = []
+            for n in range(self.num_attributes):
+                formats.append(np.float64)
+            dtypes = np.dtype({'names': names, 'formats': formats})
+            result = np.empty(self.num_instances, dtypes)
+            for i in range(self.num_instances):
+                values = self.get_instance(i).values
+                for n in range(len(values)):
+                    result[i][n] = values[n]
+            return result
+        else:
+            numeric = []
+            formats = []
+            for n in range(self.num_attributes):
+                if self.attribute(n).is_numeric:
+                    numeric.append(True)
+                    formats.append(np.float64)
+                else:
+                    numeric.append(False)
+                    formats.append(np.object_)
+            dtypes = np.dtype({'names': names, 'formats': formats})
+            result = np.empty(self.num_instances, dtypes)
+            for i in range(self.num_instances):
+                inst = self.get_instance(i)
+                for n in range(self.num_attributes):
+                    if numeric[n]:
+                        result[i][n] = inst.get_value(n)
+                    else:
+                        result[i][n] = inst.get_string_value(n)
+            return result
+
 
 class Instance(JavaObject):
     """
@@ -921,6 +966,48 @@ class Instance(JavaObject):
         :rtype: float
         """
         return missing_value()
+
+    def to_numpy(self, internal=False):
+        """
+        Turns the instance into a numpy matrix.
+
+        :param internal: whether to return the internal format
+        :type internal: bool
+        :return: the dataset as matrix with single row
+        :rtype: np.ndarray
+        """
+        names = []
+        for n in range(self.num_attributes):
+            names.append(self.dataset.attribute(n).name)
+
+        if internal:
+            formats = []
+            for n in range(self.num_attributes):
+                formats.append(np.float64)
+            dtypes = np.dtype({'names': names, 'formats': formats})
+            result = np.empty(1, dtypes)
+            values = self.values
+            for n in range(len(values)):
+                result[0][n] = values[n]
+            return result
+        else:
+            numeric = []
+            formats = []
+            for n in range(self.dataset.num_attributes):
+                if self.dataset.attribute(n).is_numeric:
+                    numeric.append(True)
+                    formats.append(np.float64)
+                else:
+                    numeric.append(False)
+                    formats.append(np.object_)
+            dtypes = np.dtype({'names': names, 'formats': formats})
+            result = np.empty(1, dtypes)
+            for n in range(self.num_attributes):
+                if numeric[n]:
+                    result[0][n] = self.get_value(n)
+                else:
+                    result[0][n] = self.get_string_value(n)
+            return result
 
 
 class Attribute(JavaObject):
