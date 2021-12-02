@@ -647,15 +647,11 @@ class Instances(JavaObject):
             names.append(self.attribute(n).name)
 
         if internal:
-            formats = []
-            for n in range(self.num_attributes):
-                formats.append(np.float64)
-            dtypes = np.dtype({'names': names, 'formats': formats})
-            result = np.empty(self.num_instances, dtypes)
+            result = np.empty((self.num_instances, self.num_attributes))
             for i in range(self.num_instances):
                 values = self.get_instance(i).values
                 for n in range(len(values)):
-                    result[i][n] = values[n]
+                    result[i, n] = values[n]
             return result
         else:
             numeric = []
@@ -663,19 +659,22 @@ class Instances(JavaObject):
             for n in range(self.num_attributes):
                 if self.attribute(n).is_numeric:
                     numeric.append(True)
-                    formats.append(np.float64)
+                    formats.append("float64")
                 else:
                     numeric.append(False)
-                    formats.append(np.object_)
-            dtypes = np.dtype({'names': names, 'formats': formats})
-            result = np.empty(self.num_instances, dtypes)
+                    formats.append("object")
+            result = np.empty((self.num_instances, ), dtype=",".join(formats))
+            data = []
             for i in range(self.num_instances):
                 inst = self.get_instance(i)
+                row = []
                 for n in range(self.num_attributes):
                     if numeric[n]:
-                        result[i][n] = inst.get_value(n)
+                        row.append(inst.get_value(n))
                     else:
-                        result[i][n] = inst.get_string_value(n)
+                        row.append(inst.get_string_value(n))
+                data.append(tuple(row))
+            result[:] = data
             return result
 
 
@@ -981,14 +980,10 @@ class Instance(JavaObject):
             names.append(self.dataset.attribute(n).name)
 
         if internal:
-            formats = []
-            for n in range(self.num_attributes):
-                formats.append(np.float64)
-            dtypes = np.dtype({'names': names, 'formats': formats})
-            result = np.empty(1, dtypes)
+            result = np.empty((1, self.num_attributes))
             values = self.values
             for n in range(len(values)):
-                result[0][n] = values[n]
+                result[0, n] = values[n]
             return result
         else:
             numeric = []
@@ -996,17 +991,18 @@ class Instance(JavaObject):
             for n in range(self.dataset.num_attributes):
                 if self.dataset.attribute(n).is_numeric:
                     numeric.append(True)
-                    formats.append(np.float64)
+                    formats.append("float64")
                 else:
                     numeric.append(False)
-                    formats.append(np.object_)
-            dtypes = np.dtype({'names': names, 'formats': formats})
-            result = np.empty(1, dtypes)
+                    formats.append("object")
+            result = np.empty((1, ), dtype=",".join(formats))
+            row = []
             for n in range(self.num_attributes):
                 if numeric[n]:
-                    result[0][n] = self.get_value(n)
+                    row.append(self.get_value(n))
                 else:
-                    result[0][n] = self.get_string_value(n)
+                    row.append(self.get_string_value(n))
+            result[0] = tuple(row)
             return result
 
 
