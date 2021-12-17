@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.4 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.5 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="weka.html" title="weka package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" accesskey="U">weka package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">weka.core package</a></li> 
       </ul>
@@ -3503,6 +3503,23 @@ number of attributes in the dataset.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="weka.core.dataset.Instance.to_numpy">
+<span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">internal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instance.to_numpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the instance into a numpy matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>internal</strong> (<em>bool</em>) – whether to return the internal format</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the dataset as matrix with single row</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="weka.core.dataset.Instance.values">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">values</span></span><a class="headerlink" href="#weka.core.dataset.Instance.values" title="Permalink to this definition">¶</a></dt>
@@ -4082,6 +4099,23 @@ takes precedence over col_range</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="weka.core.dataset.Instances.to_numpy">
+<span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">internal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.to_numpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the dataset into a numpy matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>internal</strong> (<em>bool</em>) – whether to return the internal format</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the dataset as matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5176,7 +5210,7 @@ JVM needs restarting</p>
         <li class="right" >
           <a href="weka.html" title="weka package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">python-weka-wrapper3 0.2.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="weka.html" >weka package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">weka.core package</a></li> 
       </ul>
