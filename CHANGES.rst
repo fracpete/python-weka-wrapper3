@@ -1,14 +1,13 @@
 Changelog
 =========
 
-0.2.5 (????-??-??)
+0.2.5 (2021-12-17)
 ------------------
 
 - switched to `python-javabridge`, the new name (fork?) of the `javabridge` library
 - `Package.__str__` (`weka.core.packages` module) method now returns a string rather than printing the name/version
 - added `to_numpy(...)` methods to `Instance` and `Instances` classes (module `weka.core.dataset`)
   to make it easy to obtain a numpy array from the Weka dataset
-- ...
 
 
 0.2.4 (2021-11-25)
