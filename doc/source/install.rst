@@ -71,7 +71,7 @@ available in the Ubuntu repositories:
 
 .. code-block:: bash
 
-   $ ./pww3/bin/pip install javabridge
+   $ ./pww3/bin/pip install python-javabridge
    $ ./pww3/bin/pip install python-weka-wrapper3
 
 

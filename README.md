@@ -1,12 +1,12 @@
 # python-weka-wrapper3
 
 Python wrapper for the Java machine learning workbench [Weka](http://www.cs.waikato.ac.nz/~ml/weka/)
-using the [javabridge](https://pypi.python.org/pypi/javabridge) library.
+using the [python-javabridge](https://pypi.python.org/pypi/python-javabridge) library.
 
 Requirements:
 
 * Python 3
-  * javabridge (>= 1.0.14)
+  * python-javabridge (>= 4.0.0)
   * matplotlib (optional)
   * pygraphviz (optional)
   * PIL (optional)
