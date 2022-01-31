@@ -13,7 +13,7 @@ Requirements:
 * JDK 8 or later (OpenJDK 11 recommended)
 
 Uses:
-* Weka (3.9.5)
+* Weka (3.9.6)
 
 
 ## Installation

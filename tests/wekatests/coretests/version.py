@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # version.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
@@ -26,7 +26,7 @@ class TestVersion(weka_test.WekaTest):
         """
         Tests the version.weka_version() method
         """
-        self.assertEqual("3.9.5", version.weka_version())
+        self.assertEqual("3.9.6", version.weka_version())
 
 
 def suite():
