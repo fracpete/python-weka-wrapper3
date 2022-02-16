@@ -73,6 +73,26 @@ class DistanceFunction(OptionHandler):
         """
         javabridge.call(self.jobject, "setInstances", "(Lweka/core/Instances;)V", instances.jobject)
 
+    @property
+    def attribute_indices(self):
+        """
+        Returns the attribute indices in use.
+
+        :return: the attribute indices
+        :rtype: str
+        """
+        return javabridge.call(self.jobject, "getAttributeIndices", "()Ljava/lang/String;")
+
+    @attribute_indices.setter
+    def attribute_indices(self, indices):
+        """
+        Sets the attribute indices to use.
+
+        :param indices: the indices to use
+        :type indices: str
+        """
+        javabridge.call(self.jobject, "setAttributeIndices", "(Ljava/lang/String;)V", indices)
+    
     def distance(self, first, second, cutoff=None):
         """
         Computes the distance between the two Instance objects.
