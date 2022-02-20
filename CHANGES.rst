@@ -4,7 +4,9 @@ Changelog
 0.2.7 (????-??-??)
 ------------------
 
--
+- Added property for attribute indices to `DistanceFunction` class (module `weka.core.distances`)
+  (thanks to Martin Trat, https://github.com/fracpete/python-weka-wrapper3/pull/39)
+- ...
 
 
 0.2.6 (2022-02-01)
