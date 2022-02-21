@@ -198,9 +198,7 @@ def get_jclass(classname):
     :return: the class object
     :rtype: JB_Object
     """
-    try:
-        return javabridge.class_for_name(classname)
-    except:
+    if jvm.with_package_support:
         try:
             return javabridge.static_call(
                 "Lweka/core/ClassHelper;", "forName",
@@ -211,6 +209,8 @@ def get_jclass(classname):
                 "Lweka/core/ClassHelper;", "newInstance",
                 "(Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
                 classname, None, None)
+    else:
+        return javabridge.class_for_name(classname)
 
 
 def get_enum(classname, enm):
@@ -241,13 +241,13 @@ def get_static_field(classname, fieldname, signature):
     :return: the object
     :rtype: JB_Object
     """
-    try:
-        return javabridge.get_static_field(classname, fieldname, signature)
-    except:
+    if jvm.with_package_support:
         return javabridge.static_call(
             "Lweka/core/ClassHelper;", "getStaticField",
             "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
             classname, fieldname)
+    else:
+        return javabridge.get_static_field(classname, fieldname, signature)
 
 
 def get_classname(obj):
@@ -1090,6 +1090,21 @@ class JavaArray(JavaObject):
         :rtype: JavaArrayIterator
         """
         return JavaArrayIterator(self)
+
+    def __str__(self):
+        """
+        Returns a short description of itself.
+        """
+        return "%s[%d]" % (self.component_type(), len(self))
+
+    def __repr__(self):
+        """
+        Just returns the representation from __str__.
+
+        :return: the representation
+        :rtype: str
+        """
+        return self.__str__()
 
     def component_type(self):
         """
@@ -2126,7 +2141,7 @@ class MathParameter(AbstractParameter):
         """
         classname = "weka.core.setupgenerator.MathParameter"
         if jobject is None:
-            jobject = ListParameter.new_instance(classname)
+            jobject = MathParameter.new_instance(classname)
         self.enforce_type(jobject, "weka.core.setupgenerator.MathParameter")
         super(MathParameter, self).__init__(jobject=jobject, options=options)
 

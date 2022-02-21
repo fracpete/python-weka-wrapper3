@@ -6,7 +6,9 @@ Changelog
 
 - Added property for attribute indices to `DistanceFunction` class (module `weka.core.distances`)
   (thanks to Martin Trat, https://github.com/fracpete/python-weka-wrapper3/pull/39)
-- ...
+- improved instantiation of classes, avoiding misleading output of exceptions
+- `JavaArray` class (module: `weka.core.classes`) now has `__str__` and `__repr__` methods that output
+  classname and size
 
 
 0.2.6 (2022-02-01)
