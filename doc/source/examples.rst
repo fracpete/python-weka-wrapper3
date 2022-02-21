@@ -502,14 +502,14 @@ The following code optimizes the `C` property of `SMOreg` and the `gamma` proper
    multi = MultiSearch(options=["-S", "1"])
    multi.evaluation = "CC"
    mparam = MathParameter()
-   mparam.prop = "classifier.kernel.gamma"
+   mparam.prop = "kernel.gamma"
    mparam.minimum = -3.0
    mparam.maximum = 3.0
    mparam.step = 1.0
    mparam.base = 10.0
    mparam.expression = "pow(BASE,I)"
    lparam = ListParameter()
-   lparam.prop = "classifier.C"
+   lparam.prop = "C"
    lparam.values = ["-2.0", "-1.0", "0.0", "1.0", "2.0"]
    multi.parameters = [mparam, lparam]
    cls = Classifier(
