@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.7 (????-??-??)
+0.2.7 (2022-02-22)
 ------------------
 
 - Added property for attribute indices to `DistanceFunction` class (module `weka.core.distances`)
