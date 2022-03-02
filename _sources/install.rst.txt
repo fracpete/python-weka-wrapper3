@@ -126,7 +126,7 @@ available in the Debian repositories:
 
 .. code-block:: bash
 
-   $ ./pww3/bin/pip install javabridge
+   $ ./pww3/bin/pip install python-javabridge
    $ ./pww3/bin/pip install python-weka-wrapper3
 
 Please note, when using *python-weka-wrapper3* as a *normal* user, don't forget
@@ -185,7 +185,7 @@ packages that are not available in the distro repositories:
 
 .. code-block:: bash
 
-   $ ./pww3/bin/pip install javabridge
+   $ ./pww3/bin/pip install python-javabridge
    $ ./pww3/bin/pip install python-weka-wrapper3
 
 
@@ -197,7 +197,7 @@ In a Python 3 COLAB environment, you need to install at least these modules to g
 ::
 
    !pip install numpy
-   !pip install javabridge
+   !pip install python-javabridge
    !pip install python-weka-wrapper3
 
 **Notes:**
@@ -225,13 +225,13 @@ You need to install the following Python packages:
 * pillow
 * matplotlib
 * pygraphviz
+* python-javabridge
 
 Once these libraries are installed, you can use ``pip`` to install the remaining
 Python packages:
 
 .. code-block:: bash
 
-   $ pip3 install javabridge
    $ pip3 install python-weka-wrapper3
 
 
@@ -242,24 +242,26 @@ Windows using Anaconda
 is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
 install a 32-bit JDK (or all of them are 64-bit).
 
-* download `javabridge <http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge>`__
-  for Python 3.6/3.7/3.8/3.9 (*cp36/cp37/cp38/cp39*) and your bitness (32 or 64 bit)
+* download `python-javabridge <https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-javabridge>`__
+  (or later) for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/310*) and your *bitness* (32 or 64 bit)
 
-* the following sets up an environment with Python 3.7
+* the following sets up an environment with Python 3.9
 
-  .. code-block:: bash
+  .. code-block:: doscon
 
-     > conda create --name pww3 python=3.7
-     > activate pww3
-     > pip install numpy
-     > pip install C:\where\you\downloaded\it\javabridge-X.Y.Z.whl
+     > conda create --name pww3 python=3.9
+     > conda activate pww3
+     > conda install -c conda-forge numpy
+     > conda install -c conda-forge pillow
+     > pip install python-javabridge-X.Y.Z.whl   # adjust path to where you downloaded the file
      > pip install python-weka-wrapper3
 
 If you want plotting support, then install also *graphviz* and *matplotlib*:
 
 * download `graphviz <https://graphviz.org/download/#windows>`__
   and add the path to its installed binaries to your ``PATH`` environment variable.
-* install matplotlib using ``pip install matplotlib``
+* install pygraphviz using ``conda install -c conda-forge pygraphviz``
+* install matplotlib using ``conda install -c conda-forge matplotlib``
 
 
 Windows
@@ -281,21 +283,21 @@ Perform the following steps:
 * install numpy
 
  * download `numpy 1.9.x MKL <http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy>`__
-   (or later) for Python 3.6/3.7/3.8/3.9 (*cp36/cp37/cp38/cp39*) and your *bitness* (32 or 64 bit)
+   (or later) for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/cp310*) and your *bitness* (32 or 64 bit)
  * install the *.whl* file using pip: ``pip install numpy-X.Y.Z.whl``
 
-* install javabridge
+* install python-javabridge
 
- * download `javabridge <http://www.lfd.uci.edu/~gohlke/pythonlibs/#javabridge>`__
-   (or later) for Python 3.6/3.7/3.8/3.9 (*cp36/cp37/cp38/cp39*) and your *bitness* (32 or 64 bit)
- * install the *.whl* file using pip: ``pip install javabridge-X.Y.Z.whl``
+ * download `python-javabridge <https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-javabridge>`__
+   (or later) for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/310*) and your *bitness* (32 or 64 bit)
+ * install the *.whl* file using pip: ``pip install python-javabridge-X.Y.Z.whl``
 
 If you want to use the plotting functionality, you need to install *graphviz* and *matplotlib* as well:
 
 * download `graphviz <https://graphviz.org/download/#windows>`__
-  and add the path to its installed binaries to your ``PATH`` enrivornment variable.
+  and add the path to its installed binaries to your ``PATH`` environment variable.
 * download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
-  for Python 3.6/3.7/3.8/3.9 (*cp36/cp37/cp38/cp39*) and your bitness (32 or 64 bit)
+  for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/cp310*) and your bitness (32 or 64 bit)
 * install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
 
 .. code-block:: bash
