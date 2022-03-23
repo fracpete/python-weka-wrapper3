@@ -151,7 +151,7 @@ objects) can be added.
 Create dataset from lists
 -------------------------
 
-If your data is easily available as lists, you can also construct datasets using this approach:
+If your data is easily available as lists, you can also construct datasets using this approach (custom column names can be supplied via `cols_x` and `col_y`):
 
 .. code-block:: python
 
@@ -170,14 +170,14 @@ If your data is easily available as lists, you can also construct datasets using
    # mixed data types
    x = [["TEXT", 1, 1.1], ["XXX", 2, 2.2]]
    y = ["A", "B"]
-   dataset = create_instances_from_lists(x, y, name="generated from mixed lists")
+   dataset = create_instances_from_lists(x, y, name="generated from mixed lists", cols_x=["text", "integer", "float"], col_y="class")
    print(dataset)
 
 
 Create dataset from matrices
 ----------------------------
 
-Another way of constructing a dataset is to use numpy matrices/arrays (e.g., obtained from a Panda data frame):
+Another way of constructing a dataset is to use numpy matrices/arrays, e.g., obtained from a Panda data frame (custom column names can be supplied via `cols_x` and `col_y`):
 
 .. code-block:: python
 
@@ -196,7 +196,7 @@ Another way of constructing a dataset is to use numpy matrices/arrays (e.g., obt
    # mixed data types
    x = np.array([("TEXT", 1, 1.1), ("XXX", 2, 2.2)], dtype='S20, i4, f8')
    y = np.array(["A", "B"], dtype='S20')
-   dataset = create_instances_from_matrices(x, y, name="generated from mixed matrices")
+   dataset = create_instances_from_matrices(x, y, name="generated from mixed matrices", cols_x=["text", "integer", "float"], col_y="class")
    print(dataset)
 
 
