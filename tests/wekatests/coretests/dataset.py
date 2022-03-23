@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
@@ -341,9 +341,9 @@ class TestDataset(weka_test.WekaTest):
         y = ["A", "B"]
         self.assertEqual(len(x), 2)
         self.assertEqual(len(y), 2)
-        dataset = create_instances_from_lists(x, name="generated from mixed lists (no y)")
+        dataset = create_instances_from_lists(x, name="generated from mixed lists (no y)", cols_x=["text", "integer", "float"])
         self.assertEqual(len(dataset), 2)
-        dataset = create_instances_from_lists(x, y, name="generated from mixed lists")
+        dataset = create_instances_from_lists(x, y, name="generated from mixed lists", cols_x=["text", "integer", "float"], col_y="class")
         self.assertEqual(len(dataset), 2)
 
     def test_create_instances_from_matrices(self):
@@ -366,9 +366,9 @@ class TestDataset(weka_test.WekaTest):
         y = np.array(["A", "B"], dtype='S20')
         self.assertEqual(len(x), 2)
         self.assertEqual(len(y), 2)
-        dataset = create_instances_from_matrices(x, name="generated from mixed lists (no y)")
+        dataset = create_instances_from_matrices(x, name="generated from mixed lists (no y)", cols_x=["text", "integer", "float"])
         self.assertEqual(len(dataset), 2)
-        dataset = create_instances_from_matrices(x, y, name="generated from mixed lists")
+        dataset = create_instances_from_matrices(x, y, name="generated from mixed lists", cols_x=["text", "integer", "float"], col_y="class")
         self.assertEqual(len(dataset), 2)
 
 

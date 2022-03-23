@@ -4,7 +4,9 @@ Changelog
 0.2.8 (????-??-??)
 ------------------
 
-- ...
+- methods `create_instances_from_lists` and `create_instances_from_matrices`
+  (module `weka.core.dataset`) now allow the specification of column names,
+  for input and output variables.
 
 
 0.2.7 (2022-02-22)

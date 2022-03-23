@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -1674,7 +1674,29 @@ class InstanceValueIterator(object):
             raise StopIteration()
 
 
-def create_instances_from_lists(x, y=None, name="data"):
+def check_col_names_unique(cols_x, col_y=None):
+    """
+    Checks whether the column names are unique (a requirement for Instances objects).
+
+    :param cols_x: the column names for the input variables
+    :type cols_x: list
+    :param col_y: the optional name for the output variable
+    :type col_y: str
+    :return: None if check passed, otherwise error message
+    :rtype: str
+    """
+    names = set()
+    for i, name in enumerate(cols_x):
+        if name in names:
+            return "Input variable name at #%d is already present: %s" % (i, name)
+        names.add(name)
+    if col_y is not None:
+        if col_y in names:
+            return "Output variable name is already present: %s" % col_y
+    return None
+
+
+def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None):
     """
     Allows the generation of an Instances object from a list of lists for X and a list for Y (optional).
     Data can be numeric, string or bytes. Attributes can be converted to nominal with the
@@ -1686,6 +1708,10 @@ def create_instances_from_lists(x, y=None, name="data"):
     :type y: list
     :param name: the name of the dataset
     :type name: str
+    :param cols_x: the column names to use
+    :type cols_x: list
+    :param col_y: the column name to use for the output variable (y)
+    :type col_y: str
     :return: the generated dataset
     :rtype: Instances
     """
@@ -1693,19 +1719,31 @@ def create_instances_from_lists(x, y=None, name="data"):
         if len(x) != len(y):
             raise Exception("Dimensions of x and y differ: " + str(len(x)) + " != " + str(len(y)))
 
+    # column names
+    if cols_x is None:
+        cols_x = []
+    for i in range(len(cols_x), len(x[0])):
+        cols_x.append("x" + str(i + 1))
+    if y is not None:
+        if col_y is None:
+            col_y = "y"
+    msg = check_col_names_unique(cols_x, col_y=col_y)
+    if msg is not None:
+        raise Exception(msg)
+
     # create header
     atts = []
     type_x = []
     for i in range(len(x[0])):
         if isinstance(x[0][i], float) or isinstance(x[0][i], int):
             type_x.append("N")
-            atts.append(Attribute.create_numeric("x" + str(i+1)))
+            atts.append(Attribute.create_numeric(cols_x[i]))
         elif isinstance(x[0][i], bytes):
             type_x.append("B")
-            atts.append(Attribute.create_string("x" + str(i+1)))
+            atts.append(Attribute.create_string(cols_x[i]))
         elif isinstance(x[0][i], str):
             type_x.append("S")
-            atts.append(Attribute.create_string("x" + str(i+1)))
+            atts.append(Attribute.create_string(cols_x[i]))
         else:
             raise Exception("Only float, int, bytes and str are supported, #" + str(i) + ": " + str(type(x[i][0])))
 
@@ -1713,13 +1751,13 @@ def create_instances_from_lists(x, y=None, name="data"):
     if y is not None:
         if isinstance(y[0], float) or isinstance(y[0], int):
             type_y = "N"
-            atts.append(Attribute.create_numeric("y"))
+            atts.append(Attribute.create_numeric(col_y))
         elif isinstance(y[0], bytes):
             type_y = "B"
-            atts.append(Attribute.create_string("y"))
+            atts.append(Attribute.create_string(col_y))
         elif isinstance(y[0], str):
             type_y = "S"
-            atts.append(Attribute.create_string("y"))
+            atts.append(Attribute.create_string(col_y))
         else:
             raise Exception("Only float, int, bytes and str are supported for y: " + str(type(y[0])))
 
@@ -1747,7 +1785,7 @@ def create_instances_from_lists(x, y=None, name="data"):
     return result
 
 
-def create_instances_from_matrices(x, y=None, name="data"):
+def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=None):
     """
     Allows the generation of an Instances object from a 2-dimensional matrix for X and a
     1-dimensional matrix for Y (optional).
@@ -1760,12 +1798,28 @@ def create_instances_from_matrices(x, y=None, name="data"):
     :type y: ndarray
     :param name: the name of the dataset
     :type name: str
+    :param cols_x: the column names to use
+    :type cols_x: list
+    :param col_y: the column name to use for the output variable (y)
+    :type col_y: str
     :return: the generated dataset
     :rtype: Instances
     """
     if y is not None:
         if len(x) != len(y):
             raise Exception("Dimensions of x and y differ: " + str(len(x)) + " != " + str(len(y)))
+
+    # column names
+    if cols_x is None:
+        cols_x = []
+    for i in range(len(cols_x), len(x[0])):
+        cols_x.append("x" + str(i + 1))
+    if y is not None:
+        if col_y is None:
+            col_y = "y"
+    msg = check_col_names_unique(cols_x, col_y=col_y)
+    if msg is not None:
+        raise Exception(msg)
 
     # create header
     atts = []
@@ -1775,27 +1829,27 @@ def create_instances_from_matrices(x, y=None, name="data"):
             len(x.dtype)
             if np.issubdtype(x.dtype[i], np.number):
                 type_x.append("N")  # number
-                atts.append(Attribute.create_numeric("x" + str(i+1)))
+                atts.append(Attribute.create_numeric(cols_x[i]))
             elif np.issubdtype(x.dtype[i], np.str_):
                 type_x.append("S")  # string
-                atts.append(Attribute.create_string("x" + str(i+1)))
+                atts.append(Attribute.create_string(cols_x[i]))
             else:
                 type_x.append("B")  # bytes
-                atts.append(Attribute.create_string("x" + str(i+1)))
+                atts.append(Attribute.create_string(cols_x[i]))
         except:
             type_x.append("N")  # number
-            atts.append(Attribute.create_numeric("x" + str(i+1)))
+            atts.append(Attribute.create_numeric(cols_x[i]))
     type_y = ""
     if y is not None:
         if np.issubdtype(y.dtype, np.number):
             type_y = "N"  # number
-            atts.append(Attribute.create_numeric("y"))
+            atts.append(Attribute.create_numeric(col_y))
         elif np.issubdtype(y.dtype, np.str_):
             type_y = "S"  # string
-            atts.append(Attribute.create_string("y"))
+            atts.append(Attribute.create_string(col_y))
         else:
             type_y = "B"  # bytes
-            atts.append(Attribute.create_string("y"))
+            atts.append(Attribute.create_string(col_y))
 
     result = Instances.create_instances(name, atts, len(x))
 
