@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.7 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -4270,8 +4270,28 @@ takes precedence over col_range</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="weka.core.dataset.check_col_names_unique">
+<span class="sig-prename descclassname"><span class="pre">weka.core.dataset.</span></span><span class="sig-name descname"><span class="pre">check_col_names_unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cols_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.check_col_names_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the column names are unique (a requirement for Instances objects).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cols_x</strong> (<em>list</em>) – the column names for the input variables</p></li>
+<li><p><strong>col_y</strong> (<em>str</em>) – the optional name for the output variable</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if check passed, otherwise error message</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="weka.core.dataset.create_instances_from_lists">
-<span class="sig-prename descclassname"><span class="pre">weka.core.dataset.</span></span><span class="sig-name descname"><span class="pre">create_instances_from_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.create_instances_from_lists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">weka.core.dataset.</span></span><span class="sig-name descname"><span class="pre">create_instances_from_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.create_instances_from_lists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows the generation of an Instances object from a list of lists for X and a list for Y (optional).
 Data can be numeric, string or bytes. Attributes can be converted to nominal with the
 weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
@@ -4281,6 +4301,8 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <li><p><strong>x</strong> (<em>list of list</em>) – the input variables (row wise)</p></li>
 <li><p><strong>y</strong> (<em>list</em>) – the output variable (optional)</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – the name of the dataset</p></li>
+<li><p><strong>cols_x</strong> (<em>list</em>) – the column names to use</p></li>
+<li><p><strong>col_y</strong> (<em>str</em>) – the column name to use for the output variable (y)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -4294,7 +4316,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.dataset.create_instances_from_matrices">
-<span class="sig-prename descclassname"><span class="pre">weka.core.dataset.</span></span><span class="sig-name descname"><span class="pre">create_instances_from_matrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.create_instances_from_matrices" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">weka.core.dataset.</span></span><span class="sig-name descname"><span class="pre">create_instances_from_matrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.create_instances_from_matrices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows the generation of an Instances object from a 2-dimensional matrix for X and a
 1-dimensional matrix for Y (optional).
 Data can be numeric, string or bytes. Attributes can be converted to nominal with the
@@ -4305,6 +4327,8 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <li><p><strong>x</strong> (<em>ndarray</em>) – the input variables</p></li>
 <li><p><strong>y</strong> (<em>ndarray</em>) – the output variable (optional)</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – the name of the dataset</p></li>
+<li><p><strong>cols_x</strong> (<em>list</em>) – the column names to use</p></li>
+<li><p><strong>col_y</strong> (<em>str</em>) – the column name to use for the output variable (y)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -5235,7 +5259,7 @@ JVM needs restarting</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2014-2021, Peter "fracpete" Reutemann.
+      &copy;2014-2022, Peter "fracpete" Reutemann.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
