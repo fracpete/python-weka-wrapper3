@@ -156,7 +156,7 @@ objects) can be added.</p>
 </section>
 <section id="create-dataset-from-lists">
 <h2>Create dataset from lists<a class="headerlink" href="#create-dataset-from-lists" title="Permalink to this headline">¶</a></h2>
-<p>If your data is easily available as lists, you can also construct datasets using this approach:</p>
+<p>If your data is easily available as lists, you can also construct datasets using this approach (custom column names can be supplied via <cite>cols_x</cite> and <cite>col_y</cite>):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.core.dataset</span> <span class="kn">import</span> <span class="n">create_instances_from_lists</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
@@ -172,14 +172,14 @@ objects) can be added.</p>
 <span class="c1"># mixed data types</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;XXX&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">]</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">create_instances_from_lists</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generated from mixed lists&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">create_instances_from_lists</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generated from mixed lists&quot;</span><span class="p">,</span> <span class="n">cols_x</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">],</span> <span class="n">col_y</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="create-dataset-from-matrices">
 <h2>Create dataset from matrices<a class="headerlink" href="#create-dataset-from-matrices" title="Permalink to this headline">¶</a></h2>
-<p>Another way of constructing a dataset is to use numpy matrices/arrays (e.g., obtained from a Panda data frame):</p>
+<p>Another way of constructing a dataset is to use numpy matrices/arrays, e.g., obtained from a Panda data frame (custom column names can be supplied via <cite>cols_x</cite> and <cite>col_y</cite>):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.core.dataset</span> <span class="kn">import</span> <span class="n">create_instances_from_matrices</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -195,7 +195,7 @@ objects) can be added.</p>
 <span class="c1"># mixed data types</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="s2">&quot;TEXT&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;XXX&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;S20, i4, f8&#39;</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;S20&#39;</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">create_instances_from_matrices</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generated from mixed matrices&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">create_instances_from_matrices</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;generated from mixed matrices&quot;</span><span class="p">,</span> <span class="n">cols_x</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">],</span> <span class="n">col_y</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
