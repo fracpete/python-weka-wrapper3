@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.8 (????-??-??)
+0.2.8 (2022-03-24)
 ------------------
 
 - methods `create_instances_from_lists` and `create_instances_from_matrices`
