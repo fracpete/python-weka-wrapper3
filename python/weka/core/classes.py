@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import os
 import inspect
@@ -21,6 +21,7 @@ import json
 import logging
 import re
 import csv
+import sys
 import weka.core.typeconv as typeconv
 import javabridge
 from javabridge import JWrapper, JClassWrapper
@@ -331,11 +332,12 @@ def list_property_names(obj):
 
 def new_instance(classname):
     """
-    Instantiates an object of the specified class.
+    Instantiates an object of the specified class. Does not raise an Exception
+    if it fails to do so (opposed to JavaObject.new_instance).
 
     :param classname: the name of the class to instantiate
     :type classname: str
-    :return: the object
+    :return: the object, None if failed to instantiate
     :rtype: JB_Object
     """
     return javabridge.static_call(
@@ -892,9 +894,18 @@ class JavaObject(JSONObject):
             print("Failed to instantiate " + classname + ": " + str(e))
             suggestions = suggest_package(classname, exact=True)
             if len(suggestions) > 0:
-                print("Class '" + classname + "' is available from package: " + ", ".join(suggestions))
-                if not jvm.with_package_support:
-                    print("Also, you need to start up the JVM with package support:\njvm.start(packages=True)")
+                if jvm.automatically_install_packages:
+                    from weka.core.packages import install_package
+                    for suggestion in suggestions:
+                        print("Installing package: %s" % suggestion)
+                        install_package(suggestion)
+                    print("Please restart script to take advantage of newly installed packages. Exiting now...")
+                    jvm.stop()
+                    sys.exit(0)
+                else:
+                    print("Class '" + classname + "' is available from package: " + ", ".join(suggestions))
+                    if not jvm.with_package_support:
+                        print("Also, you need to start up the JVM with package support:\njvm.start(packages=True)")
             else:
                 if not jvm.with_package_support:
                     print("If this class is from a Weka package, then you need to start up the JVM with package support:\njvm.start(packages=True)")
@@ -2031,7 +2042,7 @@ def help_for(classname, title=True, description=True, options=True, use_headers=
     :rtype: str
     """
     try:
-        obj = new_instance(classname)
+        obj = JavaObject.new_instance(classname)
         if is_instance_of(obj, "weka.core.OptionHandler"):
             handler = OptionHandler(jobject=obj)
             return handler.to_help(title=title, description=description, options=options,
