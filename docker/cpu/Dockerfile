@@ -11,4 +11,10 @@ RUN apt-get update && \
 
 RUN pip3 --no-cache-dir install numpy matplotlib pygraphviz && \
     pip3 --no-cache-dir install python-javabridge && \
-    pip3 --no-cache-dir install python-weka-wrapper3 && \
+    pip3 --no-cache-dir install python-weka-wrapper3
+
+COPY bash.bashrc /etc/bash.bashrc
+
+ENV WEKA_HOME=/workspace/wekafiles
+WORKDIR /workspace
+RUN chmod 777 /workspace
