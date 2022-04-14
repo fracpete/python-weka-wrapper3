@@ -1,10 +1,15 @@
 Docker
 ======
 
-In order to make installation reproducible, Docker images for various
-python-weka-wrapper3 versions are made available as well on Docker Hub:
+In order to make installation reproducible, `Docker <https://www.docker.com/>`__
+images for various python-weka-wrapper3 versions are available from Docker Hub:
 
 `fracpete/pww3/tags <https://hub.docker.com/r/fracpete/pww3/tags>`__
+
+If you are unfamiliar with Docker, then have a look at the following
+introduction for Data Scientists:
+
+`data-mining.co.nz/docker-for-data-scientists/ <https://www.data-mining.co.nz/docker-for-data-scientists/>`__
 
 
 CPU
