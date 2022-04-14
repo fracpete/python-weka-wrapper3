@@ -50,6 +50,7 @@ Contents
    :maxdepth: 2
 
    install
+   docker
    troubleshooting
    examples
    commandline

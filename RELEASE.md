@@ -1,11 +1,11 @@
-PyPi
-====
+# PyPi
 
 Preparation:
 
 * run unit tests: `tests/wekatests/all_tests.py`
 * increment version in `setup.py`
 * increment versions/copyright in `doc/source/conf.py`
+* increment versions in `doc/source/docker.rst` (will be built later)  
 * update API documentation
 
   * cd python/weka
@@ -52,8 +52,7 @@ git push origin gh-pages
 ```
 
 
-Github
-======
+# Github
 
 Steps:
 
@@ -63,20 +62,13 @@ Steps:
 * publish
 
 
-MLOSS
-=====
+# Docker
 
-Steps:
-
-* login
-* goto project page https://mloss.org/software/view/660/
-* click on `Update project`
-* update `Version` and `Download URL`
-* re-use release notes from Github release in `Changes since last revision`
-* save
+Create new docker images for cpu and CUDA X.Y (aligned with 
+[wekadeeplearning4j](https://github.com/Waikato/wekaDeeplearning4j/releases/)) 
+for this release and push them to docker hub.
 
 
-Google Group
-============
+# Google Group
 
 * post release on the Google Group: https://groups.google.com/forum/#!forum/python-weka-wrapper

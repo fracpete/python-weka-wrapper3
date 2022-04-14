@@ -25,6 +25,12 @@ https://fracpete.github.io/python-weka-wrapper3/install.html
 Please note, that you need a build environment to compile some libraries from source.
 
 
+## Docker
+
+python-weka-wrapper3 also offers pre-built Docker images, making it easy to run the
+tool without having to install it. See [docker/README.md] for more information.
+
+
 ## Forum
 
 You can post questions, patches or enhancement requests in the following Google Group:
