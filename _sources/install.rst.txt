@@ -102,7 +102,9 @@ graphical output:
 
 .. code-block:: bash
 
-   $ apt-get install python3-imaging python3-matplotlib python3-pygraphviz
+   $ apt-get install python3-pil python3-matplotlib python3-pygraphviz
+
+Older Debian versions used `python3-imaging` instead of `python3-pil`.
 
 Download a JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk-11.0.7+10/``).
 

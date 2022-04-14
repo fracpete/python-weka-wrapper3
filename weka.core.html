@@ -2088,13 +2088,14 @@ Use -h to see all options.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.classes.new_instance">
 <span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">new_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.new_instance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instantiates an object of the specified class.</p>
+<dd><p>Instantiates an object of the specified class. Does not raise an Exception
+if it fails to do so (opposed to JavaObject.new_instance).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>classname</strong> (<em>str</em>) – the name of the class to instantiate</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the object</p>
+<dd class="field-even"><p>the object, None if failed to instantiate</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>JB_Object</p>
@@ -4428,6 +4429,12 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <dd><p>Adds the system’s classpath to the JVM’s classpath.</p>
 </dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="weka.core.jvm.automatically_install_packages">
+<span class="sig-prename descclassname"><span class="pre">weka.core.jvm.</span></span><span class="sig-name descname"><span class="pre">automatically_install_packages</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#weka.core.jvm.automatically_install_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether to automatically install missing packages</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.jvm.lib_dir">
 <span class="sig-prename descclassname"><span class="pre">weka.core.jvm.</span></span><span class="sig-name descname"><span class="pre">lib_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.lib_dir" title="Permalink to this definition">¶</a></dt>
@@ -4444,7 +4451,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.jvm.start">
-<span class="sig-prename descclassname"><span class="pre">weka.core.jvm.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_cp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_heap_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.start" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">weka.core.jvm.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_cp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_heap_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_install</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the javabridge connection (starts up the JVM).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4455,6 +4462,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <li><p><strong>system_cp</strong> (<em>bool</em>) – whether to add the system classpath as well</p></li>
 <li><p><strong>max_heap_size</strong> (<em>str</em>) – the maximum heap size (-Xmx parameter, eg 512m or 4g)</p></li>
 <li><p><strong>system_info</strong> (<em>bool</em>) – whether to print the system info (generated by weka.core.SystemInfo)</p></li>
+<li><p><strong>auto_install</strong> (<em>bool</em>) – whether to automatically install missing Weka packages (based on suggestions); in conjunction with package support</p></li>
 </ul>
 </dd>
 </dl>
@@ -5183,6 +5191,7 @@ JVM needs restarting</p>
 <h3>Navigation</h3>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commandline.html">Command-line</a></li>
