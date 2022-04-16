@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.9 (????-??-??)
+0.2.9 (2022-04-17)
 ------------------
 
 - method `JavaObject.new_instance` in module `weka.core.classes` now automatically
@@ -10,7 +10,6 @@ Changelog
 - method `test_model_once` of class `Evaluation` (module: `weka.classifiers`) now has the
   additional parameter `store`, which  allows the recording of the predictions (necessary
   for statistics like AUC)
-- ...
 
 
 0.2.8 (2022-03-24)

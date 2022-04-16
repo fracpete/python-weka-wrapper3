@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # setup.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 from setuptools import setup
 
@@ -55,7 +55,7 @@ setup(
         "weka": ["lib/*.jar"],
     },
     include_package_data=True,
-    version="0.2.8",
+    version="0.2.9",
     author='Peter "fracpete" Reutemann',
     author_email='pythonwekawrapper@gmail.com',
     install_requires=[
