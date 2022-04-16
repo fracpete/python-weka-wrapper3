@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import sys
 import os
@@ -1341,21 +1341,29 @@ class Evaluation(JavaObject):
         else:
             return javabridge.get_env().get_double_array_elements(cls)
 
-    def test_model_once(self, classifier, inst):
+    def test_model_once(self, classifier, inst, store=False):
         """
         Evaluates the built model using the specified test instance and returns the classification.
 
         :param classifier: the classifier to cross-validate
         :type classifier: Classifier
         :param inst: the Instance to evaluate on
-        :type inst: Instances
+        :type inst: Instance
+        :param store: whether to store the predictions (some statistics in class_details() like AUC require that that)
+        :type store: bool
         :return: the classification
         :rtype: float
         """
-        return javabridge.call(
-            self.jobject, "evaluateModelOnce",
-            "(Lweka/classifiers/Classifier;Lweka/core/Instance;)D",
-            classifier.jobject, inst.jobject)
+        if not store:
+            return javabridge.call(
+                self.jobject, "evaluateModelOnce",
+                "(Lweka/classifiers/Classifier;Lweka/core/Instance;)D",
+                classifier.jobject, inst.jobject)
+        else:
+            return javabridge.call(
+                self.jobject, "evaluateModelOnceAndRecordPrediction",
+                "(Lweka/classifiers/Classifier;Lweka/core/Instance;)D",
+                classifier.jobject, inst.jobject)
 
     def summary(self, title=None, complexity=False):
         """

@@ -7,6 +7,9 @@ Changelog
 - method `JavaObject.new_instance` in module `weka.core.classes` now automatically
   installs packages based on suggestions if the JVM was started with the `auto_install`
   flag enabled.
+- method `test_model_once` of class `Evaluation` (module: `weka.classifiers`) now has the
+  additional parameter `store`, which  allows the recording of the predictions (necessary
+  for statistics like AUC)
 - ...
 
 
