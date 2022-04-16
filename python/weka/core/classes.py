@@ -895,13 +895,16 @@ class JavaObject(JSONObject):
             suggestions = suggest_package(classname, exact=True)
             if len(suggestions) > 0:
                 if jvm.automatically_install_packages:
-                    from weka.core.packages import install_package
-                    for suggestion in suggestions:
-                        print("Installing package: %s" % suggestion)
-                        install_package(suggestion)
-                    print("Please restart script to take advantage of newly installed packages. Exiting now...")
-                    jvm.stop()
-                    sys.exit(0)
+                    if len(suggestions) > 1:
+                        print("More than one package (%s) contains class (%s), cannot install automatically!" % (classname, ", ".join(suggestions)))
+                    elif len(suggestions) == 1:
+                        from weka.core.packages import install_package
+                        for suggestion in suggestions:
+                            print("Installing package: %s" % suggestion)
+                            install_package(suggestion)
+                        print("Please restart script to take advantage of newly installed packages. Exiting now...")
+                        jvm.stop()
+                        sys.exit(0)
                 else:
                     print("Class '" + classname + "' is available from package: " + ", ".join(suggestions))
                     if not jvm.with_package_support:
