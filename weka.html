@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka package &#8212; python-weka-wrapper3 0.2.8 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.2.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -2190,13 +2190,14 @@ training data, at the confidence level specified when evaluation was performed.<
 
 <dl class="py method">
 <dt class="sig sig-object py" id="weka.classifiers.Evaluation.test_model_once">
-<span class="sig-name descname"><span class="pre">test_model_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Evaluation.test_model_once" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">test_model_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Evaluation.test_model_once" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates the built model using the specified test instance and returns the classification.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>classifier</strong> (<a class="reference internal" href="#weka.classifiers.Classifier" title="weka.classifiers.Classifier"><em>Classifier</em></a>) – the classifier to cross-validate</p></li>
-<li><p><strong>inst</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the Instance to evaluate on</p></li>
+<li><p><strong>inst</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instance" title="weka.core.dataset.Instance"><em>Instance</em></a>) – the Instance to evaluate on</p></li>
+<li><p><strong>store</strong> (<em>bool</em>) – whether to store the predictions (some statistics in class_details() like AUC require that that)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -6373,7 +6374,7 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
       &copy;2014-2022, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

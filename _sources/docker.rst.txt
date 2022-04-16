@@ -20,7 +20,7 @@ For using the image interactively, you can run the following command:
 .. code-block:: bash
 
    docker run -u $(id -u):$(id -g) \
-       -it fracpete/pww3:0.2.8_cpu
+       -it fracpete/pww3:0.2.9_cpu
 
 Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:
@@ -29,7 +29,7 @@ you can map your local Weka packages into the container as follows:
 
    docker run -u $(id -u):$(id -g) \
        -v $HOME/wekafiles/:/workspace/wekafiles \
-       -it fracpete/pww3:0.2.8_cpu
+       -it fracpete/pww3:0.2.9_cpu
 
 
 GPU
@@ -40,7 +40,7 @@ For using the image interactively, you can run the following command:
 .. code-block:: bash
 
    docker run --gpus=all -u $(id -u):$(id -g) \
-       -it fracpete/pww3:0.2.8_cuda10.2
+       -it fracpete/pww3:0.2.9_cuda10.2
 
 Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:
@@ -49,4 +49,4 @@ you can map your local Weka packages into the container as follows:
 
    docker run --gpus=all -u $(id -u):$(id -g) \
        -v $HOME/wekafiles/:/workspace/wekafiles \
-       -it fracpete/pww3:0.2.8_cuda10.2
+       -it fracpete/pww3:0.2.9_cuda10.2
