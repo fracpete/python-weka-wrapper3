@@ -13,7 +13,7 @@ RUN wget -O /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
     python3.8 /tmp/get-pip.py
 RUN python3.8 -m pip --no-cache-dir install numpy matplotlib pygraphviz && \
     python3.8 -m pip --no-cache-dir install python-javabridge && \
-    python3.8 -m pip --no-cache-dir install python-weka-wrapper3
+    python3.8 -m pip --no-cache-dir install python-weka-wrapper3==0.2.8
 
 COPY bash.bashrc /etc/bash.bashrc
 

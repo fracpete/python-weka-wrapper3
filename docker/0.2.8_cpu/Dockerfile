@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 RUN pip3 --no-cache-dir install numpy matplotlib pygraphviz && \
     pip3 --no-cache-dir install python-javabridge && \
-    pip3 --no-cache-dir install python-weka-wrapper3
+    pip3 --no-cache-dir install python-weka-wrapper3==0.2.8
 
 COPY bash.bashrc /etc/bash.bashrc
 
