@@ -1349,7 +1349,7 @@ class Evaluation(JavaObject):
         :type classifier: Classifier
         :param inst: the Instance to evaluate on
         :type inst: Instance
-        :param store: whether to store the predictions (some statistics in class_details() like AUC require that that)
+        :param store: whether to store the predictions (some statistics in class_details() like AUC require that)
         :type store: bool
         :return: the classification
         :rtype: float
