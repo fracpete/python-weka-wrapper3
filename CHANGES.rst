@@ -4,6 +4,8 @@ Changelog
 0.2.10 (????-??-??)
 -------------------
 
+- added `logging_level` parameter to the `start` method of the `weka.core.jvm` module, enabling the user
+  to turn off debugging output in an easy way (https://github.com/fracpete/python-weka-wrapper3/issues/40)
 - ...
 
 

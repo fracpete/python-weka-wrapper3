@@ -71,7 +71,7 @@ def add_system_classpath():
 
 
 def start(class_path=None, bundled=True, packages=False, system_cp=False, max_heap_size=None, system_info=False,
-          auto_install=False):
+          auto_install=False, logging_level=logging.DEBUG):
     """
     Initializes the javabridge connection (starts up the JVM).
 
@@ -89,10 +89,15 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
     :type system_info: bool
     :param auto_install: whether to automatically install missing Weka packages (based on suggestions); in conjunction with package support
     :type auto_install: bool
+    :param logging_level: the logging level to use for this module, e.g., logging.DEBUG or logging.INFO
+    :type logging_level: int
     """
     global started
     global with_package_support
     global automatically_install_packages
+    global logger
+
+    logger.setLevel(logging_level)
 
     if started is not None:
         logger.info("JVM already running, call jvm.stop() first")
