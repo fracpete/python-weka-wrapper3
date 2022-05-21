@@ -3766,6 +3766,28 @@ the data is being copied.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="weka.core.dataset.Instances.cv_splits">
+<span class="sig-name descname"><span class="pre">cv_splits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stratify</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.cv_splits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a list of train/test pairs used in cross-validation.
+Creates a copy of the dataset beforehand when randomizing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folds</strong> (<em>int</em>) – the number of folds to use, &gt;= 2</p></li>
+<li><p><strong>rnd</strong> (<a class="reference internal" href="#weka.core.classes.Random" title="weka.core.classes.Random"><em>Random</em></a>) – the random number generator to use for randomization, skips randomization if None</p></li>
+<li><p><strong>stratify</strong> (<em>bool</em>) – whether to stratify the data after randomization</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the list of train/test split tuples</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="weka.core.dataset.Instances.delete">
 <span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.Instances.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes either the specified Instance or all Instance objects.</p>
@@ -4451,7 +4473,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.jvm.start">
-<span class="sig-prename descclassname"><span class="pre">weka.core.jvm.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_cp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_heap_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_install</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.start" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">weka.core.jvm.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bundled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_cp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_heap_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_install</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.jvm.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the javabridge connection (starts up the JVM).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4463,6 +4485,7 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <li><p><strong>max_heap_size</strong> (<em>str</em>) – the maximum heap size (-Xmx parameter, eg 512m or 4g)</p></li>
 <li><p><strong>system_info</strong> (<em>bool</em>) – whether to print the system info (generated by weka.core.SystemInfo)</p></li>
 <li><p><strong>auto_install</strong> (<em>bool</em>) – whether to automatically install missing Weka packages (based on suggestions); in conjunction with package support</p></li>
+<li><p><strong>logging_level</strong> (<em>int</em>) – the logging level to use for this module, e.g., logging.DEBUG or logging.INFO</p></li>
 </ul>
 </dd>
 </dl>

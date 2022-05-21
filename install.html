@@ -312,12 +312,18 @@ in a <em>disposable</em> location.</p>
 </section>
 <section id="github">
 <h3>Github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
-<p>Clone the Github repository as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/fracpete/python-weka-wrapper3.git
+<p>You can install python-weka-wrapper3 directly from its Github repository with <cite>pip</cite>
+as follows (e.g., to get the latest fixes/features):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./venv/bin/pip install git+https://github.com/fracpete/python-weka-wrapper3.git
 </pre></div>
 </div>
-<p>Change into the newly created directory and install the library using the
-following command:</p>
+<p>Alternatively, you can clone the repository separately and install it from there.</p>
+<p>First, clone the Github repository as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/fracpete/python-weka-wrapper3.git
+</pre></div>
+</div>
+<p>Second, change into the newly created directory and install the library using the
+following command (adjusting the path to your virtual environment):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./venv/bin/python setup.py install
 </pre></div>
 </div>

@@ -339,14 +339,24 @@ in a *disposable* location.
 Github
 ++++++
 
-Clone the Github repository as follows:
+You can install python-weka-wrapper3 directly from its Github repository with `pip`
+as follows (e.g., to get the latest fixes/features):
 
 .. code-block:: bash
 
-   git clone https://github.com/fracpete/python-weka-wrapper3.git
+   $ ./venv/bin/pip install git+https://github.com/fracpete/python-weka-wrapper3.git
 
-Change into the newly created directory and install the library using the
-following command:
+
+Alternatively, you can clone the repository separately and install it from there.
+
+First, clone the Github repository as follows:
+
+.. code-block:: bash
+
+   $ git clone https://github.com/fracpete/python-weka-wrapper3.git
+
+Second, change into the newly created directory and install the library using the
+following command (adjusting the path to your virtual environment):
 
 .. code-block:: bash
 
