@@ -17,7 +17,7 @@
 import javabridge
 import logging
 import numpy as np
-from weka.core.classes import JavaObject
+from weka.core.classes import JavaObject, Random
 import weka.core.typeconv as typeconv
 
 # logging setup
@@ -557,6 +557,36 @@ class Instances(JavaObject):
         train_inst = Instances.copy_instances(data, 0, train_size)
         test_inst = Instances.copy_instances(data, train_size, test_size)
         return train_inst, test_inst
+
+    def cv_splits(self, folds=10, rnd=None, stratify=True):
+        """
+        Generates a list of train/test pairs used in cross-validation.
+        Creates a copy of the dataset beforehand when randomizing.
+
+        :param folds: the number of folds to use, >= 2
+        :type folds: int
+        :param rnd: the random number generator to use for randomization, skips randomization if None
+        :type rnd: Random
+        :param stratify: whether to stratify the data after randomization
+        :type stratify: bool
+        :return: the list of train/test split tuples
+        :rtype: list
+        """
+        result = []
+        if rnd is not None:
+            data = Instances.copy_instances(self)
+            data.randomize(rnd)
+            if stratify:
+                data.stratify(folds)
+        else:
+            data = self
+
+        for i in range(folds):
+            train = data.train_cv(folds, i, random=rnd)
+            test = data.test_cv(folds, i)
+            result.append((train, test))
+
+        return result
 
     @classmethod
     def summary(cls, inst):
