@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # experiments.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import logging
 import javabridge
@@ -622,7 +622,7 @@ class Tester(OptionHandler):
     For generating statistical results from an experiment.
     """
 
-    def __init__(self, classname="weka.experiment.PairedCorrectedTTester", jobject=None, options=None):
+    def __init__(self, classname="weka.experiment.PairedCorrectedTTester", jobject=None, options=None, swap_rows_and_cols=False):
         """
         Initializes the specified tester using either the classname or the supplied JB_Object.
 
@@ -632,16 +632,40 @@ class Tester(OptionHandler):
         :type jobject: JB_Object
         :param options: the list of commandline options to set
         :type options: list
+        :param swap_rows_and_cols: whether to swap rows/columns, to compare datasets rather than classifiers
+        :type swap_rows_and_cols: bool
         """
         if jobject is None:
             jobject = Tester.new_instance(classname)
         self.enforce_type(jobject, "weka.experiment.Tester")
         self.columns_determined = False
-        self._dataset_columns = ["Key_Dataset"]
         self._run_column = "Key_Run"
         self._fold_column = "Key_Fold"
+        self._swap_rows_and_cols = swap_rows_and_cols
+        self._dataset_columns = ["Key_Dataset"]
         self._result_columns = ["Key_Scheme", "Key_Scheme_options", "Key_Scheme_version_ID"]
         super(Tester, self).__init__(jobject=jobject, options=options)
+
+    @property
+    def swap_rows_and_cols(self):
+        """
+        Returns whether to swap rows/cols.
+
+        :return: whether to swap
+        :rtype: bool
+        """
+        return self._swap_rows_and_cols
+
+    @swap_rows_and_cols.setter
+    def swap_rows_and_cols(self, swap):
+        """
+        Sets whether to swap rows/cols.
+
+        :param swap: whether to swap
+        :type swap: bool
+        """
+        self.columns_determined = False
+        self._swap_rows_and_cols = swap
 
     @property
     def resultmatrix(self):
@@ -780,11 +804,18 @@ class Tester(OptionHandler):
             print("No instances set, cannot determine columns!")
             return
 
+        if self.swap_rows_and_cols:
+            dataset_columns = self.result_columns
+            result_columns = self.dataset_columns
+        else:
+            dataset_columns = self.dataset_columns
+            result_columns = self.result_columns
+
         # dataset
-        if self.dataset_columns is None:
+        if dataset_columns is None:
             raise Exception("No dataset columns set!")
         cols = ""
-        for name in self.dataset_columns:
+        for name in dataset_columns:
             att = data.attribute_by_name(name)
             if att is None:
                 raise Exception("Dataset column not found: " + name)
@@ -814,10 +845,10 @@ class Tester(OptionHandler):
                 self.jobject, "setFoldColumn", "(I)V", index)
 
         # result
-        if self._result_columns is None:
-            raise Exception("No reset columns set!")
+        if result_columns is None:
+            raise Exception("No result columns set!")
         cols = ""
-        for name in self._result_columns:
+        for name in result_columns:
             att = data.attribute_by_name(name)
             if att is None:
                 raise Exception("Result column not found: " + name)

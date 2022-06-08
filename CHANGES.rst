@@ -8,6 +8,8 @@ Changelog
   to turn off debugging output in an easy way (https://github.com/fracpete/python-weka-wrapper3/issues/40)
 - added method `cv_splits` to class `Instances` from module `weka.core.dataset` to return a list of
   train/test tuples as used by cross-validation
+- the `Tester` class (module: `weka.experiments`) now has an option to swap columns/rows for comparing
+  datasets rather than classifiers
 - ...
 
 
