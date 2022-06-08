@@ -53,7 +53,8 @@ class SimpleExperiment(OptionHandler):
     http://weka.wikispaces.com/Using+the+Experiment+API
     """
 
-    def __init__(self, datasets, classifiers, jobject=None, classification=True, runs=10, result=None):
+    def __init__(self, datasets, classifiers, jobject=None, classification=True, runs=10, result=None,
+                 class_for_ir_statistics=0, attribute_id=-1, pred_target_column=False):
         """
         Initializes the experiment.
 
@@ -69,6 +70,12 @@ class SimpleExperiment(OptionHandler):
         :type runs: int
         :param result: the filename of the file to store the results in
         :type result: str
+        :param class_for_ir_statistics: the class label index to use IR statistics (classification only)
+        :type class_for_ir_statistics: int
+        :param attribute_id: the 0-based index of the attribute identifying instances (classification only)
+        :type attribute_id: int
+        :param pred_target_column: whether to store the predicted and target columns as well (classification only)
+        :type pred_target_column: bool
         """
 
         if not jobject is None:
@@ -81,6 +88,9 @@ class SimpleExperiment(OptionHandler):
         self.datasets = datasets[:]
         self.classifiers = classifiers[:]
         self.result = result
+        self.class_for_ir_statistics = class_for_ir_statistics
+        self.attribute_id = attribute_id
+        self.pred_target_column = pred_target_column
         super(SimpleExperiment, self).__init__(jobject=jobject)
 
     def configure_splitevaluator(self):
@@ -92,8 +102,12 @@ class SimpleExperiment(OptionHandler):
         """
         if self.classification:
             speval = javabridge.make_instance("weka/experiment/ClassifierSplitEvaluator", "()V")
+            javabridge.call(speval, "setClassForIRStatistics", "(I)V", self.class_for_ir_statistics)
+            javabridge.call(speval, "setAttributeID", "(I)V", self.attribute_id)
+            javabridge.call(speval, "setPredTargetColumn", "(Z)V", self.pred_target_column)
         else:
             speval = javabridge.make_instance("weka/experiment/RegressionSplitEvaluator", "()V")
+
         classifier = javabridge.call(speval, "getClassifier", "()Lweka/classifiers/Classifier;")
         return speval, classifier
 
@@ -221,7 +235,8 @@ class SimpleCrossValidationExperiment(SimpleExperiment):
     Performs a simple cross-validation experiment. Can output the results either in ARFF or CSV.
     """
 
-    def __init__(self, datasets, classifiers, classification=True, runs=10, folds=10, result=None):
+    def __init__(self, datasets, classifiers, classification=True, runs=10, folds=10, result=None,
+                 class_for_ir_statistics=0, attribute_id=-1, pred_target_column=False):
         """
         Initializes the experiment.
 
@@ -237,6 +252,12 @@ class SimpleCrossValidationExperiment(SimpleExperiment):
         :type folds: int
         :param result: the filename of the file to store the results in
         :type result: str
+        :param class_for_ir_statistics: the class label index to use IR statistics (classification only)
+        :type class_for_ir_statistics: int
+        :param attribute_id: the 0-based index of the attribute identifying instances (classification only)
+        :type attribute_id: int
+        :param pred_target_column: whether to store the predicted and target columns as well (classification only)
+        :type pred_target_column: bool
         """
 
         if runs < 1:
@@ -252,7 +273,9 @@ class SimpleCrossValidationExperiment(SimpleExperiment):
 
         super(SimpleCrossValidationExperiment, self).__init__(
             classification=classification, runs=runs, datasets=datasets,
-            classifiers=classifiers, result=result)
+            classifiers=classifiers, result=result,
+            class_for_ir_statistics=class_for_ir_statistics, attribute_id=attribute_id,
+            pred_target_column=pred_target_column)
 
         self.folds = folds
 
@@ -293,7 +316,7 @@ class SimpleRandomSplitExperiment(SimpleExperiment):
     """
 
     def __init__(self, datasets, classifiers, classification=True, runs=10, percentage=66.6, preserve_order=False,
-                 result=None):
+                 result=None, class_for_ir_statistics=0, attribute_id=-1, pred_target_column=False):
         """
         Initializes the experiment.
 
@@ -311,6 +334,12 @@ class SimpleRandomSplitExperiment(SimpleExperiment):
         :type classifiers: list
         :param result: the filename of the file to store the results in
         :type result: str
+        :param class_for_ir_statistics: the class label index to use IR statistics (classification only)
+        :type class_for_ir_statistics: int
+        :param attribute_id: the 0-based index of the attribute identifying instances (classification only)
+        :type attribute_id: int
+        :param pred_target_column: whether to store the predicted and target columns as well (classification only)
+        :type pred_target_column: bool
         """
 
         if runs < 1:
@@ -328,7 +357,9 @@ class SimpleRandomSplitExperiment(SimpleExperiment):
 
         super(SimpleRandomSplitExperiment, self).__init__(
             classification=classification, runs=runs, datasets=datasets,
-            classifiers=classifiers, result=result)
+            classifiers=classifiers, result=result,
+            class_for_ir_statistics=class_for_ir_statistics, attribute_id=attribute_id,
+            pred_target_column=pred_target_column)
 
         self.percentage = percentage
         self.preserve_order = preserve_order

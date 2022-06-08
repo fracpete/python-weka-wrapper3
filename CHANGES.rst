@@ -10,6 +10,8 @@ Changelog
   train/test tuples as used by cross-validation
 - the `Tester` class (module: `weka.experiments`) now has an option to swap columns/rows for comparing
   datasets rather than classifiers
+- the `SimpleExperiment` class and derived classes (module: `weka.experiments`) now have the additional
+  parameters in the constructor: class_for_ir_statistics, attribute_id, pred_target_column
 - ...
 
 

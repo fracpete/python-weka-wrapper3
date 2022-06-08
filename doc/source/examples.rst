@@ -720,6 +720,14 @@ Here is an example for performing a cross-validated classification experiment:
    print(tester.multi_resultset_full(1, comparison_col))
 
 
+Other parameters that can be supplied to the constructor of the `SimpleCrossValidationExperiment` or
+`SimpleRandomSplitExperiment` classes:
+
+* `class_for_ir_statistics` - defines the class label to use for computing IR statistics like AUC
+* `attribute_id` - the 0-based index of the attribute that identifies rows
+* `pred_target_column` - for outputting the predictions and ground truth in separate columns in case of classification, e.g., for calculating confusion matrices manually afterwards
+
+
 And a setup for performing regression experiments on random splits on the datasets:
 
 .. code-block:: python
@@ -751,6 +759,15 @@ And a setup for performing regression experiments on random splits on the datase
    tester.instances = data
    print(tester.header(comparison_col))
    print(tester.multi_resultset_full(0, comparison_col))
+
+
+The `Tester` class allows you to swap columns and rows, therefore comparing datasets rather than classifiers:
+
+.. code-block:: python
+
+   tester = Tester(classname="weka.experiment.PairedCorrectedTTester")
+   tester.swap_rows_and_cols = True
+   tester.resultmatrix = matrix
 
 
 Partial classnames
