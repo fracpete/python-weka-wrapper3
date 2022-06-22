@@ -16,3 +16,9 @@ In order to make installation reproducible, the following Docker images
 The images themselves are available through Docker hub:
 
 https://hub.docker.com/u/fracpete
+
+
+## Installing Weka packages
+
+Instructions and example code/Dockerfile for installing additional Weka packages in a 
+Docker image are located [here](packages).
