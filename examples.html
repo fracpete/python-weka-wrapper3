@@ -647,6 +647,13 @@ serialization/deserialiation tasks, use the methods offered by the <cite>weka.co
 <span class="nb">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">multi_resultset_full</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">comparison_col</span><span class="p">))</span>
 </pre></div>
 </div>
+<p>Other parameters that can be supplied to the constructor of the <cite>SimpleCrossValidationExperiment</cite> or
+<cite>SimpleRandomSplitExperiment</cite> classes:</p>
+<ul class="simple">
+<li><p><cite>class_for_ir_statistics</cite> - defines the class label to use for computing IR statistics like AUC</p></li>
+<li><p><cite>attribute_id</cite> - the 0-based index of the attribute that identifies rows</p></li>
+<li><p><cite>pred_target_column</cite> - for outputting the predictions and ground truth in separate columns in case of classification, e.g., for calculating confusion matrices manually afterwards</p></li>
+</ul>
 <p>And a setup for performing regression experiments on random splits on the datasets:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.experiments</span> <span class="kn">import</span> <span class="n">SimpleCrossValidationExperiment</span><span class="p">,</span> <span class="n">SimpleRandomSplitExperiment</span><span class="p">,</span> <span class="n">Tester</span><span class="p">,</span> <span class="n">ResultMatrix</span>
 <span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
@@ -675,6 +682,12 @@ serialization/deserialiation tasks, use the methods offered by the <cite>weka.co
 <span class="n">tester</span><span class="o">.</span><span class="n">instances</span> <span class="o">=</span> <span class="n">data</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">comparison_col</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">multi_resultset_full</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">comparison_col</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <cite>Tester</cite> class allows you to swap columns and rows, therefore comparing datasets rather than classifiers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.experiment.PairedCorrectedTTester&quot;</span><span class="p">)</span>
+<span class="n">tester</span><span class="o">.</span><span class="n">swap_rows_and_cols</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">tester</span><span class="o">.</span><span class="n">resultmatrix</span> <span class="o">=</span> <span class="n">matrix</span>
 </pre></div>
 </div>
 </section>
@@ -900,7 +913,7 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
       &copy;2014-2022, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
