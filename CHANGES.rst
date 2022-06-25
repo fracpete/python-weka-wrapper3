@@ -12,6 +12,9 @@ Changelog
   datasets rather than classifiers
 - the `SimpleExperiment` class and derived classes (module: `weka.experiments`) now have the additional
   parameters in the constructor: class_for_ir_statistics, attribute_id, pred_target_column
+- the method `is_installed` (module: `weka.core.packages`) now can check whether a specific version is installed
+- added `pww-packages` entry point to allow managing of Weka packges from the command-line
+  (actions: list/info/install/uninstall/suggest/is-installed)
 - ...
 
 

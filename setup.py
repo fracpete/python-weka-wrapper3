@@ -75,6 +75,7 @@ setup(
             "pww-clusterer=weka.clusterers:sys_main",
             "pww-datagenerator=weka.datagenerators:sys_main",
             "pww-filter=weka.filters:sys_main",
+            "pww-packages=weka.core.packages:sys_main",
         ]
     }
 )

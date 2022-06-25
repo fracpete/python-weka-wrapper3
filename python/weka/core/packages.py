@@ -12,9 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # packages.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
+import argparse
 import javabridge
+import json
 import sys
 import traceback
 import weka.core.jvm as jvm
@@ -117,6 +119,22 @@ class Package(JavaObject):
         Installs the package.
         """
         return javabridge.call(self.jobject, "install", "()V")
+
+    def as_dict(self):
+        """
+        Turns the package information into a dictionary. Not to be confused with 'to_dict'!
+
+        :return: the package information as dictionary
+        :rtype: dict
+        """
+        return {
+            "name": self.name,
+            "version": self.version,
+            "url": self.url,
+            "is_installed": self.is_installed,
+            "dependencies": self.dependencies,
+            "metadata": self.metadata,
+        }
 
     def __str__(self):
         """
@@ -531,19 +549,25 @@ def uninstall_packages(names):
             "(Ljava/lang/String;Z[Ljava/io/PrintStream;)V", name, True, [])
 
 
-def is_installed(name):
+def is_installed(name, version=None):
     """
     Checks whether a package with the name is already installed.
 
     :param name: the name of the package
     :type name: str
+    :param version: the version to check as well, ignored if None
+    :type version: str
     :return: whether the package is installed
     :rtype: bool
     """
     pkgs = installed_packages()
     for pkge in pkgs:
         if pkge.name == name:
-            return True
+            if version is not None:
+                if pkge.version == version:
+                    return True
+            else:
+                return True
     return False
 
 
@@ -562,42 +586,260 @@ def suggest_package(name, exact=False):
     return classes.suggest_package(name, exact)
 
 
-if __name__ == "__main__":
-    jvm.start()
+def _output_text(content, format_lambda, output):
+    """
+    Outputs the text to the specified file or, if None, to stdout.
+
+    :param content: the content to output
+    :type content: list
+    :param format_lambda: the lambda to format the list
+    :param output: the file to output the content to, uses stdout if None
+    :type output: str
+    """
+    formatted = []
+    for c in content:
+        formatted.append(format_lambda(c))
+    if output is None:
+        print("\n".join(formatted))
+    else:
+        with open(output, "w") as fp:
+            fp.write("\n".join(formatted))
+
+
+def _output_json(content, content_filter, output):
+    """
+    Outputs the content to the specified json file or, if None, to stdout.
+
+    :param content: the content to output
+    :type content: list
+    :param content_filter: the lambda for filtering the content dictionaries, ignored if None
+    :param output: the file to output the content to, uses stdout if None
+    :type output: str
+    """
+    if content_filter is None:
+        filtered = content
+    else:
+        filtered = [content_filter(x) for x in content]
+    if output is None:
+        print(json.dumps(filtered, indent=2))
+    else:
+        with open(output, "w") as fp:
+            json.dump(filtered, fp, indent=2)
+
+
+def _output_pkg_list(pkgs, args):
+    """
+    Outputs a package list.
+
+    :param pkgs: the list of packages
+    :type pkgs: list
+    :param args: the parsed command-line arguments
+    :type args: argparse.Namespace
+    """
+    content = [pkg.as_dict() for pkg in pkgs]
+    if args.format == "text":
+        _output_text(content, lambda x: "%s/%s" % (x["name"], x["version"]), args.output)
+    elif args.format == "json":
+        _output_json(content, lambda x: {"name": x["name"], "version": x["version"]}, args.output)
+
+
+def _output_pkg_info(pkgs, args):
+    """
+    Outputs package information.
+
+    :param pkgs: the list of packages
+    :type pkgs: list
+    :param args: the parsed command-line arguments
+    :type args: argparse.Namespace
+    """
+    if args.format == "text":
+        if args.type == "brief":
+            _output_text(pkgs, lambda x: "%s/%s\n  dependencies: %s" % (x["name"], x["version"], x["dependencies"]),
+                         args.output)
+        elif args.type == "full":
+            _output_text(pkgs, lambda x: "%s/%s\n  url: %s\n  dependencies: %s\n  metadata: %s" % (
+            x["name"], x["version"], x["url"], x["dependencies"], x["metadata"]), args.output)
+        else:
+            raise Exception("Unhandled type: %s" % args.type)
+    elif args.format == "json":
+        if args.type == "brief":
+            _output_json(pkgs,
+                         lambda x: {"name": x["name"], "version": x["version"], "dependencies": x["dependencies"]},
+                         args.output)
+        elif args.type == "full":
+            _output_json(pkgs, None, args.output)
+        else:
+            raise Exception("Unhandled type: %s" % args.type)
+
+
+def _subcmd_list(args):
+    """
+    Lists packages (name and version).
+    """
+    if args.type == "all":
+        pkgs = all_packages()
+    elif args.type == "installed":
+        pkgs = installed_packages()
+    elif args.type == "available":
+        pkgs = available_packages()
+    else:
+        raise Exception("Unhandled list type: %s" % args.type)
+    _output_pkg_list(pkgs, args)
+
+
+def _subcmd_info(args):
+    """
+    Outputs information for packages.
+    """
+    pkgs = [all_package(x).as_dict() for x in args.name]
+    _output_pkg_info(pkgs, args)
+
+
+def _subcmd_install(args):
+    """
+    Installs one or more packages. Specific versions are suffixed with "==VERSION".
+    """
+    for pkg in args.packages:
+        version = LATEST
+        if "==" in pkg:
+            pkg, version = pkg.split("==")
+        print("Installing: %s/%s" % (pkg, version))
+        success = install_package(pkg, version)
+        print("  installed successfully" if success else "  failed to install")
+
+
+def _subcmd_uninstall(args):
+    """
+    Uninstalls one or more packages.
+    """
+    for pkg in args.packages:
+        print("Uninstalling: %s" % pkg)
+        if is_installed(pkg):
+            uninstall_package(pkg)
+            print("  uninstalled")
+        else:
+            print("  not installed, skipping")
+
+
+def _subcmd_suggest(args):
+    """
+    Suggests packages that contain the specified classname.
+    """
+    suggestions = []
+    for classname in args.classname:
+        suggestions.extend(suggest_package(classname, exact=args.exact))
+    pkgs = []
+    for suggestion in suggestions:
+        if suggestion is None:
+            continue
+        pkgs.append(all_package(suggestion))
+    _output_pkg_list(pkgs, args)
+
+
+def _subcmd_is_installed(args):
+    content = []
+    for name in args.name:
+        version = None
+        if "==" in name:
+            name, version = name.split("==")
+        installed = is_installed(name, version=version)
+        if version is None:
+            if installed:
+                version = installed_package(name).version
+            else:
+                version = LATEST
+        content.append({"name": name, "version": version, "installed": installed})
+
+    if args.format == "text":
+        _output_text(content, lambda x: "%s/%s: %s" % (x["name"], x["version"], str(x["installed"])), args.output)
+    elif args.format == "json":
+        _output_json(content, None, args.output)
+
+
+def main(args=None):
+    """
+    Performs the specified package operation from the command-line. Calls JVM start/stop automatically.
+    Use -h to see all options.
+
+    :param args: the command-line arguments to use, uses sys.argv if None
+    :type args: list
+    """
+
+    main_parser = argparse.ArgumentParser(
+        description='Manages Weka packages.')
+    sub_parsers = main_parser.add_subparsers()
+
+    # list
+    parser = sub_parsers.add_parser("list", help="For listing all/installed/available packages")
+    parser.add_argument("type", nargs="?", choices=["all", "installed", "available"], default="all", help="defines what packages to list")
+    parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
+    parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
+    parser.set_defaults(func=_subcmd_list)
+
+    # info
+    parser = sub_parsers.add_parser("info", help="Outputs information about packages")
+    parser.add_argument("name", nargs="+", help="the package(s) to output the information for")
+    parser.add_argument("-t", "--type", choices=["brief", "full"], default="brief", help="the type of information to output")
+    parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
+    parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
+    parser.set_defaults(func=_subcmd_info)
+
+    # install
+    parser = sub_parsers.add_parser("install", help="For installing one or more packages")
+    parser.add_argument("packages", nargs="+", help="the name of the package(s) to install, append '==VERSION' to pin to a specific version")
+    parser.set_defaults(func=_subcmd_install)
+
+    # uninstall/remove
+    parser = sub_parsers.add_parser("uninstall", aliases=["remove"], help="For uninstalling one or more packages")
+    parser.add_argument("packages", nargs="+", help="the name of the package(s) to uninstall")
+    parser.set_defaults(func=_subcmd_uninstall)
+
+    # suggest
+    parser = sub_parsers.add_parser("suggest", help="For suggesting packages that contain the specified class")
+    parser.add_argument("classname", nargs=1, help="the classname to suggest packages for")
+    parser.add_argument("-e", "--exact", action="store_true", help="whether to match the name exactly or perform substring matching")
+    parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
+    parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
+    parser.set_defaults(func=_subcmd_suggest)
+
+    # is-installed
+    parser = sub_parsers.add_parser("is-installed", help="Checks whether a package is installed, simply outputs true/false")
+    parser.add_argument("name", nargs="+", help="the name of the package to check, append '==VERSION' to pin to a specific version")
+    parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
+    parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
+    parser.set_defaults(func=_subcmd_is_installed)
+
+    parsed = main_parser.parse_args(args=args)
+
+    # execute action
+    jvm.start(packages=True)
     try:
-        print("Establish cache")
-        print("===============")
-        establish_cache()
-
-        print("Refresh cache")
-        print("=============")
-        refresh_cache()
-
-        print("All packages")
-        print("============")
-        packages = all_packages()
-        for pkg in packages:
-            print(pkg.name)
-            print("  url: " + pkg.url)
-            print("")
-
-        print("Available packages")
-        print("==================")
-        packages = available_packages()
-        p = packages[0]
-        for pkg in packages:
-            print(pkg.name)
-            print("  url: " + pkg.url)
-            print("")
-
-        print("Installed packages")
-        print("==================")
-        packages = installed_packages()
-        for pkg in packages:
-            print(pkg.name)
-            print("  url: " + pkg.url)
-            print("")
-    except Exception as e:
-        print(e)
+        parsed.func(parsed)
+    except Exception:
+        print(traceback.format_exc())
     finally:
         jvm.stop()
+
+
+def sys_main():
+    """
+    Runs the main function using the system cli arguments, and
+    returns a system error code.
+
+    :return: 0 for success, 1 for failure.
+    :rtype: int
+    """
+
+    try:
+        main()
+        return 0
+    except Exception:
+        print(traceback.format_exc())
+        return 1
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception:
+        print(traceback.format_exc())
