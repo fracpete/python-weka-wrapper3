@@ -770,7 +770,8 @@ def main(args=None):
     """
 
     main_parser = argparse.ArgumentParser(
-        description='Manages Weka packages.')
+        description='Manages Weka packages.',
+        prog='pww-packages')
     sub_parsers = main_parser.add_subparsers()
 
     # list
