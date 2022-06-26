@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # attribute_selection.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -386,7 +386,8 @@ def main(args=None):
     """
 
     parser = argparse.ArgumentParser(
-        description='Performs attribute selection from the command-line. Calls JVM start/stop automatically.')
+        description='Performs attribute selection from the command-line. Calls JVM start/stop automatically.',
+        prog='pww-attsel')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
     parser.add_argument("-X", metavar="heap", dest="heap", help="max heap size for jvm, e.g., 512m")
     parser.add_argument("-i", metavar="input", dest="input", required=True, help="input file")

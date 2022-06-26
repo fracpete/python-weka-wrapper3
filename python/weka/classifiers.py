@@ -2271,7 +2271,8 @@ def main(args=None):
     """
 
     parser = argparse.ArgumentParser(
-        description='Performs classification/regression from the command-line. Calls JVM start/stop automatically.')
+        description='Performs classification/regression from the command-line. Calls JVM start/stop automatically.',
+        prog='pww-classifier')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
     parser.add_argument("-X", metavar="heap", dest="heap", help="max heap size for jvm, e.g., 512m")
     parser.add_argument("-t", metavar="train", dest="train", required=True, help="Training set file")

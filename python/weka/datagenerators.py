@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # datagenerators.py
-# Copyright (C) 2014-2019 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -188,7 +188,8 @@ def main(args=None):
     """
 
     parser = argparse.ArgumentParser(
-        description='Executes a data generator from the command-line. Calls JVM start/stop automatically.')
+        description='Executes a data generator from the command-line. Calls JVM start/stop automatically.',
+        prog='pww-datagenerator')
     parser.add_argument("-j", metavar="classpath", dest="classpath", help="additional classpath, jars/directories")
     parser.add_argument("-X", metavar="heap", dest="heap", help="max heap size for jvm, e.g., 512m")
     parser.add_argument("datagenerator", help="data generator classname, e.g., "
