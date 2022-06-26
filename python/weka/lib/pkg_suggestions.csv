@@ -810,6 +810,7 @@ ridor,weka.classifiers.rules.Ridor
 rotationForest,weka.classifiers.meta.RotationForest
 RPlugin,weka.classifiers.mlr.impl.MLRClassifierImpl
 RPlugin,weka.classifiers.mlr.MLRClassifier
+RPlugin,weka.core.BasicRLogger
 RPlugin,weka.core.JavaGDListener
 RPlugin,weka.core.JavaGDNotifier
 RPlugin,weka.core.JavaGDOffscreenRenderer
