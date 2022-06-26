@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.10 (????-??-??)
+0.2.10 (2022-06-27)
 -------------------
 
 - added `logging_level` parameter to the `start` method of the `weka.core.jvm` module, enabling the user
@@ -15,7 +15,6 @@ Changelog
 - the method `is_installed` (module: `weka.core.packages`) now can check whether a specific version is installed
 - added `pww-packages` entry point to allow managing of Weka packges from the command-line
   (actions: list/info/install/uninstall/suggest/is-installed)
-- ...
 
 
 0.2.9 (2022-04-17)
