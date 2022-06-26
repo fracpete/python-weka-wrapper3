@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Command-line &#8212; python-weka-wrapper3 0.2.9 documentation</title>
+    <title>Command-line &#8212; python-weka-wrapper3 0.2.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -55,6 +55,23 @@ backslashes <cite>\</cite> at the end of the lines removed.</p>
     weka.datagenerators.classifiers.classification.Agrawal
 </pre></div>
 </div>
+<p>Command-line help screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">datagenerator</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">classpath</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">heap</span><span class="p">]</span> <span class="n">datagenerator</span> <span class="o">...</span>
+
+<span class="n">Executes</span> <span class="n">a</span> <span class="n">data</span> <span class="n">generator</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span><span class="o">.</span> <span class="n">Calls</span> <span class="n">JVM</span> <span class="n">start</span><span class="o">/</span><span class="n">stop</span>
+<span class="n">automatically</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">datagenerator</span>  <span class="n">data</span> <span class="n">generator</span> <span class="n">classname</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span>
+                 <span class="n">weka</span><span class="o">.</span><span class="n">datagenerators</span><span class="o">.</span><span class="n">classifiers</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">LED24</span>
+  <span class="n">option</span>         <span class="n">additional</span> <span class="n">data</span> <span class="n">generator</span> <span class="n">options</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>     <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">j</span> <span class="n">classpath</span>   <span class="n">additional</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">jars</span><span class="o">/</span><span class="n">directories</span>
+  <span class="o">-</span><span class="n">X</span> <span class="n">heap</span>        <span class="nb">max</span> <span class="n">heap</span> <span class="n">size</span> <span class="k">for</span> <span class="n">jvm</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="mi">512</span><span class="n">m</span>
+</pre></div>
+</div>
 </section>
 <section id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
@@ -69,6 +86,28 @@ backslashes <cite>\</cite> at the end of the lines removed.</p>
 </div>
 <p>For batch filtering, you can use the <cite>-r</cite> and <cite>-s</cite> options for the input and output
 for the second file.</p>
+<p>Command-line help screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="nb">filter</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">classpath</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">heap</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="n">input1</span> <span class="o">-</span><span class="n">o</span> <span class="n">output1</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">input2</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">output2</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">classindex</span><span class="p">]</span>
+                  <span class="nb">filter</span> <span class="o">...</span>
+
+<span class="n">Executes</span> <span class="n">a</span> <span class="nb">filter</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span><span class="o">.</span> <span class="n">Calls</span> <span class="n">JVM</span> <span class="n">start</span><span class="o">/</span><span class="n">stop</span> <span class="n">automatically</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="nb">filter</span>         <span class="nb">filter</span> <span class="n">classname</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">weka</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">AllFilter</span>
+  <span class="n">option</span>         <span class="n">additional</span> <span class="nb">filter</span> <span class="n">options</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>     <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">j</span> <span class="n">classpath</span>   <span class="n">additional</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">jars</span><span class="o">/</span><span class="n">directories</span>
+  <span class="o">-</span><span class="n">X</span> <span class="n">heap</span>        <span class="nb">max</span> <span class="n">heap</span> <span class="n">size</span> <span class="k">for</span> <span class="n">jvm</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="mi">512</span><span class="n">m</span>
+  <span class="o">-</span><span class="n">i</span> <span class="n">input1</span>      <span class="nb">input</span> <span class="n">file</span> <span class="mi">1</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">output1</span>     <span class="n">output</span> <span class="n">file</span> <span class="mi">1</span>
+  <span class="o">-</span><span class="n">r</span> <span class="n">input2</span>      <span class="nb">input</span> <span class="n">file</span> <span class="mi">2</span>
+  <span class="o">-</span><span class="n">s</span> <span class="n">output2</span>     <span class="n">output</span> <span class="n">file</span> <span class="mi">2</span>
+  <span class="o">-</span><span class="n">c</span> <span class="n">classindex</span>  <span class="mi">1</span><span class="o">-</span><span class="n">based</span> <span class="k">class</span> <span class="nc">attribute</span> <span class="n">index</span>
+</pre></div>
+</div>
 </section>
 <section id="classifiers">
 <h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this headline">¶</a></h2>
@@ -81,6 +120,39 @@ on the iris UCI dataset:</p>
      -C <span class="m">0</span>.3
 </pre></div>
 </div>
+<p>Command-line help screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">classifier</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">classpath</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">heap</span><span class="p">]</span> <span class="o">-</span><span class="n">t</span> <span class="n">train</span> <span class="p">[</span><span class="o">-</span><span class="n">T</span> <span class="n">test</span><span class="p">]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="k">class</span> <span class="nc">index</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">outmodel</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">inmodel</span><span class="p">]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">num</span> <span class="n">folds</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">seed</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">k</span><span class="p">]</span>
+                      <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">costmatrix</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="n">graph</span><span class="p">]</span>
+                      <span class="n">classifier</span> <span class="o">...</span>
+
+<span class="n">Performs</span> <span class="n">classification</span><span class="o">/</span><span class="n">regression</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span><span class="o">.</span> <span class="n">Calls</span> <span class="n">JVM</span> <span class="n">start</span><span class="o">/</span><span class="n">stop</span>
+<span class="n">automatically</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">classifier</span>      <span class="n">classifier</span> <span class="n">classname</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">weka</span><span class="o">.</span><span class="n">classifiers</span><span class="o">.</span><span class="n">trees</span><span class="o">.</span><span class="n">J48</span>
+  <span class="n">option</span>          <span class="n">additional</span> <span class="n">classifier</span> <span class="n">options</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>      <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">j</span> <span class="n">classpath</span>    <span class="n">additional</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">jars</span><span class="o">/</span><span class="n">directories</span>
+  <span class="o">-</span><span class="n">X</span> <span class="n">heap</span>         <span class="nb">max</span> <span class="n">heap</span> <span class="n">size</span> <span class="k">for</span> <span class="n">jvm</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="mi">512</span><span class="n">m</span>
+  <span class="o">-</span><span class="n">t</span> <span class="n">train</span>        <span class="n">Training</span> <span class="nb">set</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">T</span> <span class="n">test</span>         <span class="n">Test</span> <span class="nb">set</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">c</span> <span class="k">class</span> <span class="nc">index</span>  <span class="mi">1</span><span class="o">-</span><span class="n">based</span> <span class="k">class</span> <span class="nc">attribute</span> <span class="n">index</span>
+  <span class="o">-</span><span class="n">d</span> <span class="n">outmodel</span>     <span class="n">model</span> <span class="n">output</span> <span class="n">file</span> <span class="n">name</span>
+  <span class="o">-</span><span class="n">l</span> <span class="n">inmodel</span>      <span class="n">model</span> <span class="nb">input</span> <span class="n">file</span> <span class="n">name</span>
+  <span class="o">-</span><span class="n">x</span> <span class="n">num</span> <span class="n">folds</span>    <span class="n">number</span> <span class="n">of</span> <span class="n">folds</span> <span class="k">for</span> <span class="n">cross</span><span class="o">-</span><span class="n">validation</span>
+  <span class="o">-</span><span class="n">s</span> <span class="n">seed</span>         <span class="n">seed</span> <span class="n">value</span> <span class="k">for</span> <span class="n">randomization</span>
+  <span class="o">-</span><span class="n">v</span>              <span class="n">no</span> <span class="n">statistics</span> <span class="k">for</span> <span class="n">training</span>
+  <span class="o">-</span><span class="n">o</span>              <span class="n">only</span> <span class="n">statistics</span><span class="p">,</span> <span class="n">don</span><span class="s1">&#39;t output model</span>
+  <span class="o">-</span><span class="n">i</span>              <span class="n">output</span> <span class="n">information</span> <span class="n">retrieval</span> <span class="n">statistics</span>
+  <span class="o">-</span><span class="n">k</span>              <span class="n">output</span> <span class="n">information</span> <span class="n">theoretic</span> <span class="n">statistics</span>
+  <span class="o">-</span><span class="n">m</span> <span class="n">costmatrix</span>   <span class="n">cost</span> <span class="n">matrix</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">g</span> <span class="n">graph</span>        <span class="n">output</span> <span class="n">file</span> <span class="k">for</span> <span class="n">graph</span> <span class="p">(</span><span class="k">if</span> <span class="n">supported</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="clusterers">
 <h2>Clusterers<a class="headerlink" href="#clusterers" title="Permalink to this headline">¶</a></h2>
@@ -91,6 +163,33 @@ on the iris UCI dataset:</p>
     -c last <span class="se">\</span>
     weka.clusterers.SimpleKMeans
     -N <span class="m">3</span>
+</pre></div>
+</div>
+<p>Command-line help screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">clusterer</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">classpath</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">heap</span><span class="p">]</span> <span class="o">-</span><span class="n">t</span> <span class="n">train</span> <span class="p">[</span><span class="o">-</span><span class="n">T</span> <span class="n">test</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">outmodel</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">inmodel</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">attributes</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">num</span> <span class="n">folds</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">seed</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="k">class</span> <span class="nc">index</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="n">graph</span><span class="p">]</span>
+                     <span class="n">clusterer</span> <span class="o">...</span>
+
+<span class="n">Performs</span> <span class="n">clustering</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span><span class="o">.</span> <span class="n">Calls</span> <span class="n">JVM</span> <span class="n">start</span><span class="o">/</span><span class="n">stop</span> <span class="n">automatically</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">clusterer</span>       <span class="n">clusterer</span> <span class="n">classname</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">weka</span><span class="o">.</span><span class="n">clusterers</span><span class="o">.</span><span class="n">SimpleKMeans</span>
+  <span class="n">option</span>          <span class="n">additional</span> <span class="n">clusterer</span> <span class="n">options</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>      <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">j</span> <span class="n">classpath</span>    <span class="n">additional</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">jars</span><span class="o">/</span><span class="n">directories</span>
+  <span class="o">-</span><span class="n">X</span> <span class="n">heap</span>         <span class="nb">max</span> <span class="n">heap</span> <span class="n">size</span> <span class="k">for</span> <span class="n">jvm</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="mi">512</span><span class="n">m</span>
+  <span class="o">-</span><span class="n">t</span> <span class="n">train</span>        <span class="n">training</span> <span class="nb">set</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">T</span> <span class="n">test</span>         <span class="n">test</span> <span class="nb">set</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">d</span> <span class="n">outmodel</span>     <span class="n">model</span> <span class="n">output</span> <span class="n">file</span> <span class="n">name</span>
+  <span class="o">-</span><span class="n">l</span> <span class="n">inmodel</span>      <span class="n">model</span> <span class="nb">input</span> <span class="n">file</span> <span class="n">name</span>
+  <span class="o">-</span><span class="n">p</span> <span class="n">attributes</span>   <span class="n">attribute</span> <span class="nb">range</span>
+  <span class="o">-</span><span class="n">x</span> <span class="n">num</span> <span class="n">folds</span>    <span class="n">number</span> <span class="n">of</span> <span class="n">folds</span>
+  <span class="o">-</span><span class="n">s</span> <span class="n">seed</span>         <span class="n">seed</span> <span class="n">value</span> <span class="k">for</span> <span class="n">randomization</span>
+  <span class="o">-</span><span class="n">c</span> <span class="k">class</span> <span class="nc">index</span>  <span class="mi">1</span><span class="o">-</span><span class="n">based</span> <span class="k">class</span> <span class="nc">attribute</span> <span class="n">index</span>
+  <span class="o">-</span><span class="n">g</span> <span class="n">graph</span>        <span class="n">graph</span> <span class="n">output</span> <span class="n">file</span> <span class="p">(</span><span class="k">if</span> <span class="n">supported</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -108,6 +207,30 @@ on the iris UCI dataset:</p>
     -E <span class="m">1</span>
 </pre></div>
 </div>
+<p>Command-line help screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">attsel</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">classpath</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">heap</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="nb">input</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="k">class</span> <span class="nc">index</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">search</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">num</span> <span class="n">folds</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">seed</span><span class="p">]</span>
+                  <span class="n">evaluator</span> <span class="o">...</span>
+
+<span class="n">Performs</span> <span class="n">attribute</span> <span class="n">selection</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span><span class="o">.</span> <span class="n">Calls</span> <span class="n">JVM</span> <span class="n">start</span><span class="o">/</span><span class="n">stop</span>
+<span class="n">automatically</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">evaluator</span>       <span class="n">evaluator</span> <span class="n">classname</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span>
+                  <span class="n">weka</span><span class="o">.</span><span class="n">attributeSelection</span><span class="o">.</span><span class="n">CfsSubsetEval</span>
+  <span class="n">option</span>          <span class="n">additional</span> <span class="n">evaluator</span> <span class="n">options</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>      <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">j</span> <span class="n">classpath</span>    <span class="n">additional</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">jars</span><span class="o">/</span><span class="n">directories</span>
+  <span class="o">-</span><span class="n">X</span> <span class="n">heap</span>         <span class="nb">max</span> <span class="n">heap</span> <span class="n">size</span> <span class="k">for</span> <span class="n">jvm</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="mi">512</span><span class="n">m</span>
+  <span class="o">-</span><span class="n">i</span> <span class="nb">input</span>        <span class="nb">input</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">c</span> <span class="k">class</span> <span class="nc">index</span>  <span class="mi">1</span><span class="o">-</span><span class="n">based</span> <span class="k">class</span> <span class="nc">attribute</span> <span class="n">index</span>
+  <span class="o">-</span><span class="n">s</span> <span class="n">search</span>       <span class="n">search</span> <span class="n">method</span><span class="p">,</span> <span class="n">classname</span> <span class="ow">and</span> <span class="n">options</span>
+  <span class="o">-</span><span class="n">x</span> <span class="n">num</span> <span class="n">folds</span>    <span class="n">number</span> <span class="n">of</span> <span class="n">folds</span>
+  <span class="o">-</span><span class="n">n</span> <span class="n">seed</span>         <span class="n">the</span> <span class="n">seed</span> <span class="n">value</span> <span class="k">for</span> <span class="n">randomization</span>
+</pre></div>
+</div>
 </section>
 <section id="associators">
 <h2>Associators<a class="headerlink" href="#associators" title="Permalink to this headline">¶</a></h2>
@@ -118,6 +241,155 @@ on the iris UCI dataset:</p>
     -N <span class="m">9</span> -I
 </pre></div>
 </div>
+<p>Command-line help screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">associator</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">j</span> <span class="n">classpath</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">X</span> <span class="n">heap</span><span class="p">]</span> <span class="o">-</span><span class="n">t</span> <span class="n">train</span> <span class="n">associator</span> <span class="o">...</span>
+
+<span class="n">Executes</span> <span class="n">an</span> <span class="n">associator</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span><span class="o">-</span><span class="n">line</span><span class="o">.</span> <span class="n">Calls</span> <span class="n">JVM</span> <span class="n">start</span><span class="o">/</span><span class="n">stop</span>
+<span class="n">automatically</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">associator</span>    <span class="n">associator</span> <span class="n">classname</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">weka</span><span class="o">.</span><span class="n">associations</span><span class="o">.</span><span class="n">Apriori</span>
+  <span class="n">option</span>        <span class="n">additional</span> <span class="n">associator</span> <span class="n">options</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>    <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">j</span> <span class="n">classpath</span>  <span class="n">additional</span> <span class="n">classpath</span><span class="p">,</span> <span class="n">jars</span><span class="o">/</span><span class="n">directories</span>
+  <span class="o">-</span><span class="n">X</span> <span class="n">heap</span>       <span class="nb">max</span> <span class="n">heap</span> <span class="n">size</span> <span class="k">for</span> <span class="n">jvm</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="mi">512</span><span class="n">m</span>
+  <span class="o">-</span><span class="n">t</span> <span class="n">train</span>      <span class="n">training</span> <span class="nb">set</span> <span class="n">file</span>
+</pre></div>
+</div>
+</section>
+<section id="package-management">
+<h2>Package management<a class="headerlink" href="#package-management" title="Permalink to this headline">¶</a></h2>
+<p>Versions newer than 0.2.9 also offer package management from the command-line via the <cite>pww-packages</cite>
+command. There are several sub-commands available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+                   <span class="p">{</span><span class="nb">list</span><span class="p">,</span><span class="n">info</span><span class="p">,</span><span class="n">install</span><span class="p">,</span><span class="n">uninstall</span><span class="p">,</span><span class="n">remove</span><span class="p">,</span><span class="n">suggest</span><span class="p">,</span><span class="ow">is</span><span class="o">-</span><span class="n">installed</span><span class="p">}</span>
+                   <span class="o">...</span>
+
+<span class="n">Manages</span> <span class="n">Weka</span> <span class="n">packages</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="nb">list</span><span class="p">,</span><span class="n">info</span><span class="p">,</span><span class="n">install</span><span class="p">,</span><span class="n">uninstall</span><span class="p">,</span><span class="n">remove</span><span class="p">,</span><span class="n">suggest</span><span class="p">,</span><span class="ow">is</span><span class="o">-</span><span class="n">installed</span><span class="p">}</span>
+    <span class="nb">list</span>                <span class="n">For</span> <span class="n">listing</span> <span class="nb">all</span><span class="o">/</span><span class="n">installed</span><span class="o">/</span><span class="n">available</span> <span class="n">packages</span>
+    <span class="n">info</span>                <span class="n">Outputs</span> <span class="n">information</span> <span class="n">about</span> <span class="n">packages</span>
+    <span class="n">install</span>             <span class="n">For</span> <span class="n">installing</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">packages</span>
+    <span class="n">uninstall</span> <span class="p">(</span><span class="n">remove</span><span class="p">)</span>  <span class="n">For</span> <span class="n">uninstalling</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">packages</span>
+    <span class="n">suggest</span>             <span class="n">For</span> <span class="n">suggesting</span> <span class="n">packages</span> <span class="n">that</span> <span class="n">contain</span> <span class="n">the</span> <span class="n">specified</span>
+                        <span class="k">class</span>
+    <span class="nc">is</span><span class="o">-</span><span class="n">installed</span>        <span class="n">Checks</span> <span class="n">whether</span> <span class="n">a</span> <span class="n">package</span> <span class="ow">is</span> <span class="n">installed</span><span class="p">,</span> <span class="n">simply</span> <span class="n">outputs</span>
+                        <span class="n">true</span><span class="o">/</span><span class="n">false</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<section id="listing-packages">
+<h3>Listing packages<a class="headerlink" href="#listing-packages" title="Permalink to this headline">¶</a></h3>
+<p>Listing all, available or installed packages can be done using the <cite>list</cite> sub-command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="nb">list</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">]</span>
+                         <span class="p">[{</span><span class="nb">all</span><span class="p">,</span><span class="n">installed</span><span class="p">,</span><span class="n">available</span><span class="p">}]</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="nb">all</span><span class="p">,</span><span class="n">installed</span><span class="p">,</span><span class="n">available</span><span class="p">}</span>
+                        <span class="n">defines</span> <span class="n">what</span> <span class="n">packages</span> <span class="n">to</span> <span class="nb">list</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}</span>
+                        <span class="n">the</span> <span class="n">output</span> <span class="nb">format</span> <span class="n">to</span> <span class="n">use</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">FILE</span>
+                        <span class="n">the</span> <span class="n">file</span> <span class="n">to</span> <span class="n">store</span> <span class="n">the</span> <span class="n">output</span> <span class="ow">in</span><span class="p">,</span> <span class="n">uses</span> <span class="n">stdout</span> <span class="k">if</span> <span class="ow">not</span>
+                        <span class="n">supplied</span>
+  <span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">refresh</span><span class="o">-</span><span class="n">cache</span>   <span class="n">whether</span> <span class="n">to</span> <span class="n">refresh</span> <span class="n">the</span> <span class="n">package</span> <span class="n">cache</span>
+</pre></div>
+</div>
+</section>
+<section id="info-on-packages">
+<h3>Info on packages<a class="headerlink" href="#info-on-packages" title="Permalink to this headline">¶</a></h3>
+<p>Outputting information on one or more packages is achieved with the <cite>list</cite> sub-command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="n">info</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="p">{</span><span class="n">brief</span><span class="p">,</span><span class="n">full</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">]</span>
+                         <span class="p">[</span><span class="o">-</span><span class="n">r</span><span class="p">]</span>
+                         <span class="n">name</span> <span class="p">[</span><span class="n">name</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">name</span>                  <span class="n">the</span> <span class="n">package</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">output</span> <span class="n">the</span> <span class="n">information</span> <span class="k">for</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">t</span> <span class="p">{</span><span class="n">brief</span><span class="p">,</span><span class="n">full</span><span class="p">},</span> <span class="o">--</span><span class="nb">type</span> <span class="p">{</span><span class="n">brief</span><span class="p">,</span><span class="n">full</span><span class="p">}</span>
+                        <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">information</span> <span class="n">to</span> <span class="n">output</span>
+  <span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}</span>
+                        <span class="n">the</span> <span class="n">output</span> <span class="nb">format</span> <span class="n">to</span> <span class="n">use</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">FILE</span>
+                        <span class="n">the</span> <span class="n">file</span> <span class="n">to</span> <span class="n">store</span> <span class="n">the</span> <span class="n">output</span> <span class="ow">in</span><span class="p">,</span> <span class="n">uses</span> <span class="n">stdout</span> <span class="k">if</span> <span class="ow">not</span>
+                        <span class="n">supplied</span>
+  <span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">refresh</span><span class="o">-</span><span class="n">cache</span>   <span class="n">whether</span> <span class="n">to</span> <span class="n">refresh</span> <span class="n">the</span> <span class="n">package</span> <span class="n">cache</span>
+</pre></div>
+</div>
+</section>
+<section id="installing-uninstalling-check-installed-status">
+<h3>Installing/uninstalling/check installed status<a class="headerlink" href="#installing-uninstalling-check-installed-status" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>install</cite> sub-command installs one or more packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="n">install</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="n">packages</span> <span class="p">[</span><span class="n">packages</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">packages</span>    <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">package</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">install</span><span class="p">,</span> <span class="n">append</span> <span class="s1">&#39;==VERSION&#39;</span> <span class="n">to</span> <span class="n">pin</span>
+              <span class="n">to</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">version</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>  <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<p>The <cite>uninstall</cite> (or <cite>remove</cite>) sub-command removes one or more packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="n">uninstall</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="n">packages</span> <span class="p">[</span><span class="n">packages</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">packages</span>    <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">package</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">uninstall</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>  <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<p>The <cite>is-installed</cite> sub-command outputs whether a package is installed or not:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="ow">is</span><span class="o">-</span><span class="n">installed</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">]</span>
+                                 <span class="n">name</span> <span class="p">[</span><span class="n">name</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">name</span>                  <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">package</span> <span class="n">to</span> <span class="n">check</span><span class="p">,</span> <span class="n">append</span> <span class="s1">&#39;==VERSION&#39;</span>
+                        <span class="n">to</span> <span class="n">pin</span> <span class="n">to</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">version</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}</span>
+                        <span class="n">the</span> <span class="n">output</span> <span class="nb">format</span> <span class="n">to</span> <span class="n">use</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">FILE</span>
+                        <span class="n">the</span> <span class="n">file</span> <span class="n">to</span> <span class="n">store</span> <span class="n">the</span> <span class="n">output</span> <span class="ow">in</span><span class="p">,</span> <span class="n">uses</span> <span class="n">stdout</span> <span class="k">if</span> <span class="ow">not</span>
+                        <span class="n">supplied</span>
+</pre></div>
+</div>
+</section>
+<section id="suggest-packages">
+<h3>Suggest packages<a class="headerlink" href="#suggest-packages" title="Permalink to this headline">¶</a></h3>
+<p>If you are not sure which package a certain class is part of, then use the <cite>suggest</cite>
+sub-command to help with that (this works only for official packages):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">pww</span><span class="o">-</span><span class="n">packages</span> <span class="n">suggest</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">]</span> <span class="n">classname</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">classname</span>             <span class="n">the</span> <span class="n">classname</span> <span class="n">to</span> <span class="n">suggest</span> <span class="n">packages</span> <span class="k">for</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">exact</span>           <span class="n">whether</span> <span class="n">to</span> <span class="n">match</span> <span class="n">the</span> <span class="n">name</span> <span class="n">exactly</span> <span class="ow">or</span> <span class="n">perform</span> <span class="n">substring</span>
+                        <span class="n">matching</span>
+  <span class="o">-</span><span class="n">f</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">},</span> <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">text</span><span class="p">,</span><span class="n">json</span><span class="p">}</span>
+                        <span class="n">the</span> <span class="n">output</span> <span class="nb">format</span> <span class="n">to</span> <span class="n">use</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">FILE</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">FILE</span>
+                        <span class="n">the</span> <span class="n">file</span> <span class="n">to</span> <span class="n">store</span> <span class="n">the</span> <span class="n">output</span> <span class="ow">in</span><span class="p">,</span> <span class="n">uses</span> <span class="n">stdout</span> <span class="k">if</span> <span class="ow">not</span>
+                        <span class="n">supplied</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -153,6 +425,7 @@ on the iris UCI dataset:</p>
 <li class="toctree-l2"><a class="reference internal" href="#clusterers">Clusterers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#attribute-selection">Attribute selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#associators">Associators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#package-management">Package management</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flow.html">Flow</a></li>
