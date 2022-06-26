@@ -676,6 +676,8 @@ def _subcmd_list(args):
     """
     Lists packages (name and version).
     """
+    if args.refresh_cache:
+        refresh_cache()
     if args.type == "all":
         pkgs = all_packages()
     elif args.type == "installed":
@@ -691,6 +693,8 @@ def _subcmd_info(args):
     """
     Outputs information for packages.
     """
+    if args.refresh_cache:
+        refresh_cache()
     pkgs = [all_package(x).as_dict() for x in args.name]
     _output_pkg_info(pkgs, args)
 
@@ -774,6 +778,7 @@ def main(args=None):
     parser.add_argument("type", nargs="?", choices=["all", "installed", "available"], default="all", help="defines what packages to list")
     parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
     parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
+    parser.add_argument("-r", "--refresh-cache", dest="refresh_cache", action="store_true", help="whether to refresh the package cache")
     parser.set_defaults(func=_subcmd_list)
 
     # info
@@ -782,6 +787,7 @@ def main(args=None):
     parser.add_argument("-t", "--type", choices=["brief", "full"], default="brief", help="the type of information to output")
     parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
     parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
+    parser.add_argument("-r", "--refresh-cache", dest="refresh_cache", action="store_true", help="whether to refresh the package cache")
     parser.set_defaults(func=_subcmd_info)
 
     # install
@@ -810,15 +816,18 @@ def main(args=None):
     parser.set_defaults(func=_subcmd_is_installed)
 
     parsed = main_parser.parse_args(args=args)
-
-    # execute action
-    jvm.start(packages=True)
-    try:
-        parsed.func(parsed)
-    except Exception:
-        print(traceback.format_exc())
-    finally:
-        jvm.stop()
+    # no action chosen? show help
+    if not hasattr(parsed, "func"):
+        main_parser.print_help()
+    else:
+        # execute action
+        jvm.start(packages=True)
+        try:
+            parsed.func(parsed)
+        except Exception:
+            print(traceback.format_exc())
+        finally:
+            jvm.stop()
 
 
 def sys_main():
