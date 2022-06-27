@@ -1,5 +1,7 @@
 # Installing packages in Docker image
 
+## 0.2.9 and older
+
 When building Docker images for your environments, your code will most likely rely
 on additional Weka packages. You can install the packages by creating a little
 Python script that uses python-weka-wrapper3 to install them (just like you would
@@ -53,4 +55,24 @@ DEBUG:weka.core.jvm:Package support enabled
 SelfOrganizingMap/1.0.3
   http://prdownloads.sourceforge.net/wekann/SelfOrganizingMap1.0.3.zip?download
 weka.clusterers.SelfOrganizingMap -L 1.0 -O 2000 -C 1000 -H 2 -W 2
+```
+
+## 0.2.10 and newer
+
+With version 0.2.10 and later, you can also use the `pww-packages` entry point to install packages
+rather than having to rely on Python scripts.
+
+The above minimal `Dockerfile` gets even shorter (using the CPU Docker base image of pww3 0.2.10):
+
+```
+FROM fracpete/pww3:0.2.10_cpu
+RUN pww-packages install SelfOrganizingMap==1.0.3 
+```
+
+And you can also list the installed packages without a script now:
+
+```bash
+docker run \
+    -t pww3-pkg:latest \
+    pww-packages list installed
 ```
