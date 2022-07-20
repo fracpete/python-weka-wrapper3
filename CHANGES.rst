@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.2.11 (????-??-??)
+-------------------
+
+- methods `install_packages` and `install_missing_packages` of module `weka.core.packages` now
+  allow a list of package names instead of tuples (name, version), assuming `latest` as version
+-
+
+
 0.2.10 (2022-06-27)
 -------------------
 

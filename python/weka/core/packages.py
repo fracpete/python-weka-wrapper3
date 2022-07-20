@@ -391,17 +391,21 @@ def install_packages(pkges):
     """
     Installs the specified package.
 
-    :param pkge: the name of the repository package, a URL (http/https) or a zip file
-    :type pkge: str
-    :param version: in case of the repository packages, the version
-    :type version: str
+    :param pkges: the list of packages to install (name of the repository package, a URL (http/https) or a zip file), if tuple must be name/version
+    :type pkges: list
     :return: whether successfully installed
     :rtype: bool
     """
     result = True
     establish_cache()
     for p in pkges:
-        pkge, version = p
+        # get name/version
+        if isinstance(p, tuple):
+            pkge, version = p
+        else:
+            pkge = p
+            version = LATEST
+
         msg = None
         if pkge.startswith("http://") or pkge.startswith("https://"):
             try:
@@ -461,7 +465,7 @@ def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
     """
     Installs the missing packages.
 
-    :param pkges: list of tuples (packagename, version), use "Latest" or LATEST constant to grab latest version
+    :param pkges: list of tuples (packagename, version) or strings (packagename, LATEST is assume for version), use "Latest" or LATEST constant to grab latest version
     :type pkges: the packages to install
     :param quiet: whether to suppress console output and only print error messages
     :type quiet: bool
@@ -475,7 +479,13 @@ def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
     result = True
     exit_required = False
     for p in pkges:
-        pkge, version = p
+        # get name/version
+        if isinstance(p, tuple):
+            pkge, version = p
+        else:
+            pkge = p
+            version = LATEST
+
         if not is_installed(pkge):
             if not quiet:
                 print("%s/%s not installed, attempting installation..." % (pkge, version))
