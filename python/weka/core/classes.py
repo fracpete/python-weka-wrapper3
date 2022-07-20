@@ -193,12 +193,32 @@ def get_class(classname):
 def get_jclass(classname):
     """
     Returns the Java class object associated with the dot-notation classname.
+    Also supports the Java primitives: boolean, byte, short, int, long, float, double, char.
 
     :param classname: the classname
     :type classname: str
     :return: the class object
     :rtype: JB_Object
     """
+    # primitive?
+    if "." not in classname:
+        if classname == "boolean":
+            return get_static_field("java.lang.Boolean", "TYPE", "Ljava/lang/Class;")
+        elif classname == "byte":
+            return get_static_field("java.lang.Byte", "TYPE", "Ljava/lang/Class;")
+        elif classname == "short":
+            return get_static_field("java.lang.Short", "TYPE", "Ljava/lang/Class;")
+        elif classname == "int":
+            return get_static_field("java.lang.Integer", "TYPE", "Ljava/lang/Class;")
+        elif classname == "long":
+            return get_static_field("java.lang.Long", "TYPE", "Ljava/lang/Class;")
+        elif classname == "float":
+            return get_static_field("java.lang.Float", "TYPE", "Ljava/lang/Class;")
+        elif classname == "double":
+            return get_static_field("java.lang.Double", "TYPE", "Ljava/lang/Class;")
+        elif classname == "char":
+            return get_static_field("java.lang.Character", "TYPE", "Ljava/lang/Class;")
+
     if jvm.with_package_support:
         try:
             return javabridge.static_call(
@@ -248,6 +268,7 @@ def get_static_field(classname, fieldname, signature):
             "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
             classname, fieldname)
     else:
+        classname = classname.replace(".", "/")
         return javabridge.get_static_field(classname, fieldname, signature)
 
 
@@ -344,6 +365,7 @@ def new_instance(classname):
         "Lweka/core/ClassHelper;", "newInstance",
         "(Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
         classname, None, None)
+
 
 class Stoppable(object):
     """
@@ -1033,6 +1055,15 @@ class JavaArray(JavaObject):
     Convenience wrapper around Java arrays.
     """
 
+    def __len__(self):
+        """
+        Returns the length of the array.
+
+        :return: the array length
+        :rtype: int
+        """
+        return javabridge.get_env().get_array_length(self.jobject)
+
     def __init__(self, jobject):
         """
         Initializes the wrapper with the specified Java object.
@@ -1044,15 +1075,6 @@ class JavaArray(JavaObject):
         c = self.jclass
         if not javabridge.call(c, "isArray", "()Z"):
             raise Exception("Not an array!")
-
-    def __len__(self):
-        """
-        Returns the length of the array.
-
-        :return: the array length
-        :rtype: int
-        """
-        return javabridge.get_env().get_array_length(self.jobject)
 
     def __getitem__(self, key):
         """
@@ -2444,6 +2466,48 @@ def suggest_package(name, exact=False):
                 result.append(pkg)
 
     return result
+
+
+def get_non_public_field(jobject, field):
+    """
+    Returns the specified non-public field from the Java object.
+
+    :param jobject: the Java object to get the field from
+    :type jobject: JBObject
+    :param field: the name of the field to retrieve
+    :type field: str
+    :return: the value
+    """
+    return javabridge.static_call(
+        "Lweka/core/ClassHelper;", "getNonPublicField",
+        "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+        jobject, field)
+
+
+def call_non_public_method(jobject, method, arg_types=None, arg_values=None):
+    """
+    For calling a non-public method of the provided Java object.
+
+    :param jobject: the Java object to call the method on
+    :type jobject: JBObject
+    :param method: the name of the method to call
+    :type method: str
+    :param arg_types: the method argument types, either Java objects or classname strings (eg "java.lang.Integer" or "int")
+    :type arg_types: list
+    :param arg_values: the method argument values
+    :type arg_values: list
+    :return: the result of the method call
+    """
+    # convert string classnames into Java class objects
+    if arg_types is not None:
+        for i in range(len(arg_types)):
+            if isinstance(arg_types[i], str):
+                arg_types[i] = get_jclass(arg_types[i])
+
+    return javabridge.static_call(
+        "Lweka/core/ClassHelper;", "callNonPublicMethod",
+        "(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
+        jobject, method, arg_types, arg_values)
 
 
 def main():

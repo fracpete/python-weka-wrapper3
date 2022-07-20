@@ -6,7 +6,12 @@ Changelog
 
 - methods `install_packages` and `install_missing_packages` of module `weka.core.packages` now
   allow a list of package names instead of tuples (name, version), assuming `latest` as version
--
+- method `get_jclass` in module `weka.core.classes` can handle primitive classes now as well
+  (eg `int` -> `java.lang.Integer.TYPE`)
+- methods `get_non_public_field` and `call_non_public_method` in module `weka.core.classes`
+  allow accessing private/protected fields and calling private/protected methods of Java objects,
+  which avoids having to sub-class classes to get public access to them (NB: only works as long
+  as the security manager allows that)
 
 
 0.2.10 (2022-06-27)

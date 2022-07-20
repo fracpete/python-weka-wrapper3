@@ -15,7 +15,7 @@
 
 /*
  * ClassHelper.java
- * Copyright (C) 2018-2021 Fracpete (pythonwekawrapper at gmail dot com)
+ * Copyright (C) 2018-2022 Fracpete (pythonwekawrapper at gmail dot com)
  */
 
 package weka.core;
@@ -194,5 +194,43 @@ public class ClassHelper {
   public static Object getEnum(String classname, String enm) throws Exception {
     Class cls = getClass(classname);
     return invokeStaticMethod("java.lang.Enum", "valueOf", new Class[]{Class.class, String.class}, new Object[]{cls, enm});
+  }
+
+  /**
+   * Retrieves the specified non-public field from the object instance and returns its value.
+   *
+   * @param o the object to obtain the field from
+   * @param fieldName the name of the field to obtain
+   * @return the field value
+   * @throws Exception if failed to access the field, e.g., it doesn't exist or security manager prohibited it
+   */
+  public static Object getNonPublicField(Object o, String fieldName) throws Exception {
+    Field   f;
+
+    f = o.getClass().getDeclaredField(fieldName);
+    f.setAccessible(true);
+    return f.get(o);
+  }
+
+  /**
+   * Calls the specified non-public method of the object and returns its value.
+   *
+   * @param o the object to obtain the field from
+   * @param methodName the name of the method to obtain
+   * @param types the optional method argument types
+   * @param args the optional arguments to the method
+   * @return the method value
+   * @throws Exception if failed to access the method, e.g., it doesn't exist or security manager prohibited it
+   */
+  public static Object callNonPublicMethod(Object o, String methodName, Class[] types, Object[] args) throws Exception {
+    Method  m;
+
+    if (types == null)
+      types = new Class[0];
+    if (args == null)
+      args = new Object[0];
+    m = o.getClass().getDeclaredMethod(methodName, types);
+    m.setAccessible(true);
+    return m.invoke(o, args);
   }
 }
