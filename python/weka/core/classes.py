@@ -1928,6 +1928,21 @@ def split_options(cmdline):
             cmdline))
 
 
+def split_commandline(cmdline):
+    """
+    Splits the commandline string into classname and options list.
+
+    :param cmdline: the commandline string to split
+    :type cmdline: str
+    :return: the tuple of classname and options list
+    :rtype: tuple
+    """
+    options = split_options(cmdline)
+    clsname = options[0]
+    options.pop(0)
+    return clsname, options
+
+
 def backquote(s):
     """
     Backquotes the string.

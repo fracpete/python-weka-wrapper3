@@ -12,6 +12,8 @@ Changelog
   allow accessing private/protected fields and calling private/protected methods of Java objects,
   which avoids having to sub-class classes to get public access to them (NB: only works as long
   as the security manager allows that)
+- added `split_commandline` method to module `weka.core.classes`, which splits a command-line
+  into classname and option list tuple
 
 
 0.2.10 (2022-06-27)
