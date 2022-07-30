@@ -2021,9 +2021,7 @@ def from_commandline(cmdline, classname=None):
     :return: the generated option handler instance
     :rtype: object
     """
-    params = split_options(cmdline)
-    cls = params[0]
-    params = params[1:]
+    cls, params = split_commandline(cmdline)
     handler = OptionHandler(javabridge.static_call(
         "Lweka/core/Utils;", "forName",
         "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;",
