@@ -17,7 +17,6 @@
 import unittest
 import weka.core.jvm as jvm
 import weka.core.converters as converters
-import weka.core.dataset as dataset
 import weka.plot.dataset as plot
 import wekatests.tests.weka_test as weka_test
 
@@ -28,7 +27,7 @@ class TestDataset(weka_test.WekaTest):
         """
         Tests the scatter_plot method.
         """
-        loader = converters.Loader("weka.core.converters.ArffLoader")
+        loader = converters.Loader(classname="weka.core.converters.ArffLoader")
         iris_data = loader.load_file(self.datafile("iris.arff"))
         iris_data.class_is_last()
         plot.scatter_plot(
@@ -41,7 +40,7 @@ class TestDataset(weka_test.WekaTest):
         """
         Tests the matrix_plot method.
         """
-        loader = converters.Loader("weka.core.converters.ArffLoader")
+        loader = converters.Loader(classname="weka.core.converters.ArffLoader")
         iris_data = loader.load_file(self.datafile("iris.arff"))
         iris_data.class_is_last()
         plot.matrix_plot(iris_data, percent=50, title="Matrix plot iris", wait=False)

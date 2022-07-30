@@ -28,7 +28,7 @@ class TestClusterers(weka_test.WekaTest):
         """
         Tests the plot_cluster_assignments method.
         """
-        loader = converters.Loader("weka.core.converters.ArffLoader")
+        loader = converters.Loader(classname="weka.core.converters.ArffLoader")
         data = loader.load_file(self.datafile("iris.arff"))
         data.delete_last_attribute()
 

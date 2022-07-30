@@ -31,9 +31,9 @@ class TestExperiments(weka_test.WekaTest):
         """
         datasets = [self.datafile("bolts.arff"), self.datafile("bodyfat.arff"), self.datafile("autoPrice.arff")]
         cls = [
-            classifiers.Classifier("weka.classifiers.trees.REPTree"),
-            classifiers.Classifier("weka.classifiers.functions.LinearRegression"),
-            classifiers.Classifier("weka.classifiers.functions.SMOreg"),
+            classifiers.Classifier(classname="weka.classifiers.trees.REPTree"),
+            classifiers.Classifier(classname="weka.classifiers.functions.LinearRegression"),
+            classifiers.Classifier(classname="weka.classifiers.functions.SMOreg"),
         ]
         outfile = self.tempfile("results-rs.arff")
         exp = experiments.SimpleRandomSplitExperiment(
