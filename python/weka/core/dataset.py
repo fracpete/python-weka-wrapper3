@@ -75,6 +75,23 @@ class Instances(JavaObject):
         """
         return self.num_instances
 
+    def __getitem__(self, subset):
+        """
+        Returns the specified row or subset.
+
+        :param subset: the index of the row to return or a subset (slice)
+        :type subset: int or slice
+        :return: the row or subset
+        :rtype: Instance or Instances
+        """
+        if isinstance(subset, slice):
+            result = Instances.template_instances(self)
+            for i in range(*subset.indices(len(self))):
+                result.add_instance(self.get_instance(i))
+        else:
+            result = self.get_instance(subset)
+        return result
+
     @property
     def relationname(self):
         """

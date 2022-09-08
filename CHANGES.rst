@@ -14,6 +14,7 @@ Changelog
   as the security manager allows that)
 - added `split_commandline` method to module `weka.core.classes`, which splits a command-line
   into classname and option list tuple
+- the `Instances` class (module: `weka.core.dataset`) now supports slicing
 
 
 0.2.10 (2022-06-27)
