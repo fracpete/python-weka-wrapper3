@@ -10,7 +10,8 @@ Requirements:
   * matplotlib (optional)
   * pygraphviz (optional)
   * PIL (optional)
-* JDK 8 or later (OpenJDK 11 recommended)
+  * lxml (optional)
+* OpenJDK 11 (or later)
 
 Uses:
 * Weka (3.9.6)
