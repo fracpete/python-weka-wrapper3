@@ -65,7 +65,7 @@ setup(
     ],
     extras_require={
         'plots': ["matplotlib"],
-        'graphs': ["pygraphviz", "pillow"],
+        'graphs': ["pygraphviz", "pillow", "lxml"],
     },
     entry_points={
         "console_scripts": [

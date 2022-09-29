@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # __init__.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
 
 from weka.core.dataset import Instances
 from weka.core.classes import Random
@@ -41,6 +41,14 @@ try:
     import matplotlib
     matplotlib_available = True
     matplotlib_version = matplotlib.__version__
+except ImportError:
+    pass
+
+# check whether lxml is there
+lxml_available = False
+try:
+    from lxml import etree
+    lxml_available = True
 except ImportError:
     pass
 
