@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.11 (????-??-??)
+0.2.11 (2022-10-11)
 -------------------
 
 - methods `install_packages` and `install_missing_packages` of module `weka.core.packages` now

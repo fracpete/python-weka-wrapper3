@@ -12,13 +12,13 @@ Preparation:
   * sphinx-apidoc -f -o ../../doc/source .
   * make sure that all modules are included in `index.rst` (apart from `modules.rst`)
 
-* update package suggestions by generating list of packages/classes within `weka-HEAD/packages`:
+* update package suggestions by generating list of packages/classes within `weka-HEAD/trunk/packages`:
   
     ```bash
     find -name "*.java" | grep -v "\/dist\/" | grep "src\/main" | \
         sed s/".*internal\/"//g | sed s/".*external\/"//g | \
         sed s/"\.java"//g | sed s/"\/src\/main\/java\/"/","/g | \
-        sed s/"\/"/.""/g | sort -f > ../../../../fracpete/python-weka-wrapper3/python/weka/lib/pkg_suggestions.csv
+        sed s/"\/"/.""/g | sort -f > ../../../../../fracpete/python-weka-wrapper3/python/weka/lib/pkg_suggestions.csv
     ```
     
 * add new changelog section in `CHANGES.rst`
