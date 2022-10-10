@@ -1,10 +1,10 @@
-# python-weka-wrapper3 Docker (CPU)
+# python-weka-wrapper3 Docker (CUDA 10.2)
 
 ## Docker
 
 ### Build local image
 
-* Build the image from Docker file (from within `docker/cpu`)
+* Build the image from Docker file (from within `docker/0.2.10_cuda10.2`)
 
   ```commandline
   docker build -t pww3_cuda10.2 .

@@ -4,7 +4,7 @@
 
 ### Build local image
 
-* Build the image from Docker file (from within `docker/cpu`)
+* Build the image from Docker file (from within `docker/0.2.8_cpu`)
 
   ```commandline
   docker build -t pww3_cpu .
