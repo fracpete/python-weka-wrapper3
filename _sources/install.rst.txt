@@ -227,6 +227,7 @@ You need to install the following Python packages:
 * pillow
 * matplotlib
 * pygraphviz
+* lxml
 * python-javabridge
 
 Once these libraries are installed, you can use ``pip`` to install the remaining

@@ -36,8 +36,9 @@ The library has the following requirements:
  * pygraphviz (optional)
  * PIL (optional)
  * matplotlib (optional)
+ * lxml (optional)
 
-* Oracle JDK 1.8 or later (JDK 11 recommended)
+* OpenJDK 11 (or later)
 
 Uses:
 

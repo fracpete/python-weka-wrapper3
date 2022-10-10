@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka.plot package &#8212; python-weka-wrapper3 0.2.10 documentation</title>
+    <title>weka.plot package &#8212; python-weka-wrapper3 0.2.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -356,12 +356,62 @@ in the plot key as prefix</p></li>
 <dt class="sig sig-object py" id="weka.plot.graph.plot_dot_graph">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.graph.</span></span><span class="sig-name descname"><span class="pre">plot_dot_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.graph.plot_dot_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots a graph in graphviz dot notation.</p>
+<p><a class="reference external" href="http://graphviz.org/doc/info/lang.html">http://graphviz.org/doc/info/lang.html</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> (<em>str</em>) – the dot notation graph</p></li>
 <li><p><strong>filename</strong> (<em>str</em>) – the (optional) file to save the generated plot to. The extension determines the file format.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="weka.plot.graph.plot_graph">
+<span class="sig-prename descclassname"><span class="pre">weka.plot.graph.</span></span><span class="sig-name descname"><span class="pre">plot_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.graph.plot_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a graph in dot or XML BIF notation.</p>
+<p><a class="reference external" href="http://graphviz.org/doc/info/lang.html">http://graphviz.org/doc/info/lang.html</a>
+<a class="reference external" href="http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html">http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>str</em>) – the dot/XML BIF notation graph</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – the (optional) file to save the generated plot to. The extension determines the file format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="weka.plot.graph.plot_xmlbif_graph">
+<span class="sig-prename descclassname"><span class="pre">weka.plot.graph.</span></span><span class="sig-name descname"><span class="pre">plot_xmlbif_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.graph.plot_xmlbif_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a graph in XML BIF notation. Only plots the structure, not the tables.</p>
+<p><a class="reference external" href="http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html">http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>str</em>) – the XML BIF notation graph</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – the (optional) file to save the generated plot to. The extension determines the file format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="weka.plot.graph.xmlbif_to_dot">
+<span class="sig-prename descclassname"><span class="pre">weka.plot.graph.</span></span><span class="sig-name descname"><span class="pre">xmlbif_to_dot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.graph.xmlbif_to_dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the graph in XML BIF notation into a dot graph.</p>
+<p><a class="reference external" href="http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html">http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>str</em>) – the graph to convert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the graph in dot notation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>

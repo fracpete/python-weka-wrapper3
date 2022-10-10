@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.10 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -1769,6 +1769,25 @@ tags = Tags.get_tags(“weka.classifiers.functions.SMO”, “TAGS_FILTER”)</p
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="weka.core.classes.call_non_public_method">
+<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">call_non_public_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.call_non_public_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>For calling a non-public method of the provided Java object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jobject</strong> (<em>JBObject</em>) – the Java object to call the method on</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – the name of the method to call</p></li>
+<li><p><strong>arg_types</strong> (<em>list</em>) – the method argument types, either Java objects or classname strings (eg “java.lang.Integer” or “int”)</p></li>
+<li><p><strong>arg_values</strong> (<em>list</em>) – the method argument values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the result of the method call</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="weka.core.classes.complete_classname">
 <span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">complete_classname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.complete_classname" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attempts to complete a partial classname like ‘.J48’ and returns the full
@@ -1929,7 +1948,8 @@ classname if a single match was found, otherwise an exception is raised.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.classes.get_jclass">
 <span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">get_jclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_jclass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Java class object associated with the dot-notation classname.</p>
+<dd><p>Returns the Java class object associated with the dot-notation classname.
+Also supports the Java primitives: boolean, byte, short, int, long, float, double, char.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>classname</strong> (<em>str</em>) – the classname</p>
@@ -1939,6 +1959,23 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>JB_Object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="weka.core.classes.get_non_public_field">
+<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">get_non_public_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_non_public_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the specified non-public field from the Java object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jobject</strong> (<em>JBObject</em>) – the Java object to get the field from</p></li>
+<li><p><strong>field</strong> (<em>str</em>) – the name of the field to retrieve</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the value</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2192,6 +2229,23 @@ if it fails to do so (opposed to JavaObject.new_instance).</p>
 <li><p><strong>filename</strong> (<em>str</em>) – the file to serialize the object to</p></li>
 <li><p><strong>jobjects</strong> (<em>list</em>) – the list of objects to serialize</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="weka.core.classes.split_commandline">
+<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">split_commandline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmdline</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.split_commandline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the commandline string into classname and options list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cmdline</strong> (<em>str</em>) – the commandline string to split</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the tuple of classname and options list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4809,7 +4863,7 @@ JVM needs restarting</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pkges</strong> (<em>the packages to install</em>) – list of tuples (packagename, version), use “Latest” or LATEST constant to grab latest version</p></li>
+<li><p><strong>pkges</strong> (<em>the packages to install</em>) – list of tuples (packagename, version) or strings (packagename, LATEST is assume for version), use “Latest” or LATEST constant to grab latest version</p></li>
 <li><p><strong>quiet</strong> (<em>bool</em>) – whether to suppress console output and only print error messages</p></li>
 <li><p><strong>stop_jvm_and_exit</strong> (<em>bool</em>) – whether to stop the JVM and exit if anything was installed</p></li>
 </ul>
@@ -4851,10 +4905,7 @@ JVM needs restarting</p>
 <dd><p>Installs the specified package.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pkge</strong> (<em>str</em>) – the name of the repository package, a URL (http/https) or a zip file</p></li>
-<li><p><strong>version</strong> (<em>str</em>) – in case of the repository packages, the version</p></li>
-</ul>
+<dd class="field-odd"><p><strong>pkges</strong> (<em>list</em>) – the list of packages to install (name of the repository package, a URL (http/https) or a zip file), if tuple must be name/version</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>whether successfully installed</p>
