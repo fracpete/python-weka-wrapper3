@@ -829,14 +829,45 @@ You can also install *unofficial* packages. The following example installs a pre
 .. code-block:: python
 
    import weka.core.packages as packages
-   packages.install_package("/some/where/funky-package-1.0.0.zip")
+   success = packages.install_package("/some/where/funky-package-1.0.0.zip")
+   print(success)
 
 And here installing it directly from a URL:
 
 .. code-block:: python
 
    import weka.core.packages as packages
-   packages.install_package("http://some.server.com/funky-package-1.0.0.zip")
+   info = packages.install_package("http://some.server.com/funky-package-1.0.0.zip", details=True)
+   print(info)
+
+Using the `details=True` flag, you can receive a dictionary instead of a simple boolean.
+This dictionary consists of:
+
+* `from_repo`: whether the package was installed from the repo or not (i.e., unofficial URL or local archive)
+* `version`: the version (only for packages from the repo)
+* `error`: any error that may have occurred during installation
+* `install_message`: optional message from the package maintainer on the installation
+* `success`: whether the package was installed successfully
+
+Of course, you can also install multiple packages in one go using the
+`install_packages` method:
+
+.. code-block:: python
+
+   import weka.core.packages as packages
+   info = packages.install_packages([
+       "http://some.server.com/funky-package-1.0.0.zip",
+       "http://some.server.com/cool-package-2.0.0.zip",
+       "http://some.server.com/fancy-package-1.1.0.zip",
+   ], fail_fast=False, details=True)
+
+This method offers the `details` flag as well and returns a dictionary with
+the package name/URL/file name as the key and the information dictionary as
+the value.
+
+With the `fail_fast` flag you can control whether to stop the installation process
+as soon as the first package fails to install (`fail_fast=True`) or keep trying to
+install them (`fail_fast=False`).
 
 You can include automatic installation of packages in your scripts:
 
