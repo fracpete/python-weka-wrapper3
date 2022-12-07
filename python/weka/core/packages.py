@@ -373,7 +373,7 @@ def installed_package(name):
     return None
 
 
-def install_package(pkge, version=LATEST):
+def install_package(pkge, version=LATEST, details=False):
     """
     Installs the specified package.
 
@@ -381,22 +381,43 @@ def install_package(pkge, version=LATEST):
     :type pkge: str
     :param version: in case of the repository packages, the version
     :type version: str
-    :return: whether successfully installed
-    :rtype: bool
+    :param details: whether to just return a success/failure flag (False) or a dict with detailed information (from_repo, version, error, install_message, success)
+    :type details: bool
+    :return: whether successfully installed or dict with detailed information
+    :rtype: bool or dict
     """
-    return install_packages([(pkge, version)])
+    result = install_packages([(pkge, version)], details=details)
+    if details:
+        return result[pkge]
+    else:
+        return result
 
 
-def install_packages(pkges):
+def install_packages(pkges, fail_fast=True, details=False):
     """
-    Installs the specified package.
+    Installs the specified packages. When running in fail_fast mode, then the first package
+    that fails to install will stop the installation process. Otherwise, all packages are attempted
+    to get installed.
+
+    The details dictionary uses the package name, url or file path as the key and stores the following
+    information in a dict as value:
+    - from_repo (bool): whether installed from repo or "unofficial" package (ie URL or local file)
+    - version (str): the version that was attempted to be installed (if applicable)
+    - error (str): any error message that was encountered
+    - install_message (str): any installation message that got returned when installing from URL or zip file
+    - success (bool): whether successfully installed or not
 
     :param pkges: the list of packages to install (name of the repository package, a URL (http/https) or a zip file), if tuple must be name/version
     :type pkges: list
-    :return: whether successfully installed
-    :rtype: bool
+    :param fail_fast: whether to quit the installation of packages with the first package that fails (True) or whether to attempt to install all packages (False)
+    :type fail_fast: bool
+    :param details: whether to just return a success/failure flag (False) or a dict with detailed information (per package: from_repo, version, error, install_message, success)
+    :type details: bool
+    :return: whether successfully installed or detailed information
+    :rtype: bool or dict
     """
     result = True
+    result_details = dict()
     establish_cache()
     for p in pkges:
         # get name/version
@@ -407,23 +428,27 @@ def install_packages(pkges):
             version = LATEST
 
         msg = None
+        install_msg = None
+        from_repo = False
+        success = True
         if pkge.startswith("http://") or pkge.startswith("https://"):
             try:
                 url = javabridge.make_instance(
                     "java/net/URL", "(Ljava/lang/String;)V", javabridge.get_env().new_string_utf(pkge))
-                msg = javabridge.static_call(
+                install_msg = javabridge.static_call(
                     "weka/core/WekaPackageManager", "installPackageFromURL",
                     "(Ljava/net/URL;[Ljava/io/PrintStream;)Ljava/lang/String;", url, [])
             except:
                 msg = traceback.format_exc()
         elif pkge.lower().endswith(".zip"):
             try:
-                msg = javabridge.static_call(
+                install_msg = javabridge.static_call(
                     "weka/core/WekaPackageManager", "installPackageFromArchive",
                     "(Ljava/lang/String;[Ljava/io/PrintStream;)Ljava/lang/String;", pkge, [])
             except:
                 msg = traceback.format_exc()
         else:
+            from_repo = True
             try:
                 javabridge.static_call(
                     "weka/core/WekaPackageManager", "installPackageFromRepository",
@@ -432,13 +457,30 @@ def install_packages(pkges):
                 msg = traceback.format_exc()
 
         if msg is not None:
-            print("Failed to install %s/%s:\n%s" % (pkge, version, msg))
+            if from_repo:
+                print("Failed to install %s/%s:\n%s" % (pkge, version, msg))
+            else:
+                print("Failed to install %s:\n%s" % (pkge, msg))
+            success = False
             result = False
+        elif install_msg is not None:
+            print("Installation message from %s:\n%s" % (pkge, install_msg))
 
-        if not result:
+        result_details[pkge] = {
+            "from_repo": from_repo,
+            "version": version if from_repo else None,
+            "error": msg,
+            "install_message": install_msg,
+            "success": success,
+        }
+
+        if not result and fail_fast:
             break
 
-    return result
+    if details:
+        return result_details
+    else:
+        return result
 
 
 def install_missing_package(pkge, version=LATEST, quiet=False, stop_jvm_and_exit=False):

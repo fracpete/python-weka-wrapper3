@@ -1,10 +1,16 @@
 Changelog
 =========
 
-0.2.12 (????-??-??)
+0.2.12 (2022-12-08)
 -------------------
 
-- ...
+- method `install_packages` (module: `weka.core.packages`) now no longer interprets
+  the installation message returned when installing from URL or local zip file as
+  failure to install; also outputs any installation message now in the console;
+  now has flags for `fail_fast` mode (first package that fails stops installation process)
+  and whether to return `details` (dict per package rather than just a bool for all packages)
+- method `install_package` (module: `weka.core.packages`) can return either a
+  boolean flag of success or detailed information
 
 
 0.2.11 (2022-10-11)
