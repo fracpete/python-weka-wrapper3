@@ -6,13 +6,13 @@
 
 * Build the image from Docker file (from within `docker/0.2.8_cuda10.2`)
 
-  ```commandline
+  ```bash
   docker build -t pww3_cuda10.2 .
   ```
   
 * Run the container
 
-  ```commandline
+  ```bash
   docker run --gpus=all -v /local/dir:/container/dir -it pww3_cuda10.2
   ```
   `/local/dir:/container/dir` maps a local disk directory into a directory inside the container
@@ -21,13 +21,13 @@
 
 * Build
 
-  ```commandline
+  ```bash
   docker build -t pww3:0.2.8_cuda10.2 .
   ```
   
 * Tag
 
-  ```commandline
+  ```bash
   docker tag \
     pww3:0.2.8_cuda10.2 \
     fracpete/pww3:0.2.8_cuda10.2
@@ -35,7 +35,7 @@
   
 * Push
 
-  ```commandline
+  ```bash
   docker push fracpete/pww3:0.2.8_cuda10.2
   ```
 

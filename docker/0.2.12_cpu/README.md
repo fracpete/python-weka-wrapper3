@@ -6,13 +6,13 @@
 
 * Build the image from Docker file (from within `docker/0.2.12_cpu`)
 
-  ```commandline
+  ```bash
   docker build -t pww3_cpu .
   ```
   
 * Run the container
 
-  ```commandline
+  ```bash
   docker run -v /local/dir:/container/dir -it pww3_cpu
   ```
   `/local/dir:/container/dir` maps a local disk directory into a directory inside the container
@@ -21,13 +21,13 @@
 
 * Build
 
-  ```commandline
+  ```bash
   docker build -t pww3:0.2.12_cpu .
   ```
   
 * Tag
 
-  ```commandline
+  ```bash
   docker tag \
     pww3:0.2.12_cpu \
     fracpete/pww3:0.2.12_cpu
@@ -35,7 +35,7 @@
   
 * Push
 
-  ```commandline
+  ```bash
   docker push fracpete/pww3:0.2.12_cpu
   ```
 
