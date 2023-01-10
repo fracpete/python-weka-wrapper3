@@ -62,6 +62,8 @@ setup(
         "python-javabridge>=4.0.0",
         "numpy",
         "packaging",
+        "configurable-objects",
+        "simple-data-flow",
     ],
     extras_require={
         'plots': ["matplotlib"],
