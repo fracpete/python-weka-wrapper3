@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.2.13 (????-??-??)
+-------------------
+
+- moved `Configurable` and `JSONObject` into *configurable-objects* library
+- moved base flow components into *simple-data-flow* library
+
+
 0.2.12 (2022-12-08)
 -------------------
 
