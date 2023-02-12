@@ -6,6 +6,9 @@ Changelog
 
 - moved `Configurable` and `JSONObject` into *configurable-objects* library
 - moved base flow components into *simple-data-flow* library
+- added methods `subset_results`, `rank_results` to class `AttributeSelection`
+  (module: `weka.attribute_selection`) to give access to cross-validation
+  output in numeric rather textual form (NB: it has to parse the textual CV output).
 
 
 0.2.12 (2022-12-08)

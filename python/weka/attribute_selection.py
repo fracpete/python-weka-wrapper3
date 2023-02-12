@@ -207,6 +207,7 @@ class AttributeSelection(JavaObject):
         """
         jobject = AttributeSelection.new_instance("weka.attributeSelection.AttributeSelection")
         super(AttributeSelection, self).__init__(jobject)
+        self._cv_results = None
 
     def evaluator(self, evaluator):
         """
@@ -269,6 +270,7 @@ class AttributeSelection(JavaObject):
         :param instances: the data to process
         :type instances: Instances
         """
+        self._cv_results = None
         javabridge.call(self.jobject, "SelectAttributes", "(Lweka/core/Instances;)V", instances.jobject)
 
     def select_attributes_cv_split(self, instances):
@@ -312,7 +314,96 @@ class AttributeSelection(JavaObject):
         :return: the results string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "CVResultsString", "()Ljava/lang/String;")
+        if self._cv_results is None:
+            self._cv_results = javabridge.call(self.jobject, "CVResultsString", "()Ljava/lang/String;")
+        return self._cv_results
+
+    @property
+    def subset_results(self):
+        """
+        Returns the results from the cross-validation subsets, i.e., how often
+        an attribute was selected.
+
+        Unfortunately, the Weka API does not give direct access to underlying
+        data structures, hence we have to parse the textual output.
+
+        :return: the list of results (double)
+        :rtype: list
+        """
+        if self._cv_results is None:
+            raise Exception("No attribute selection performed?")
+        lines = self._cv_results.split("\n")
+
+        # ranking or subset eval?
+        start = 0
+        for i, l in enumerate(lines):
+            if "average merit" in l:
+                raise Exception("Cannot parse output from ranker!")
+            elif "number of folds" in l:
+                start = i + 1
+                break
+
+        # parse text
+        result = []
+        for i in range(start, len(lines)):
+            l = lines[i]
+            if "(" in l:
+                result.append(float(l[0:l.index("(")].strip()))
+
+        return result
+
+    @property
+    def rank_results(self):
+        """
+        Returns the results from the cross-validation for rankers.
+
+        Unfortunately, the Weka API does not give direct access to underlying
+        data structures, hence we have to parse the textual output.
+
+        :return: the dictionary of results (mean and stdev for rank and merit)
+        :rtype: dict
+        """
+        if self._cv_results is None:
+            raise Exception("No attribute selection performed?")
+        lines = self.cv_results.split("\n")
+
+        # ranking or subset eval?
+        start = 0
+        for i, l in enumerate(lines):
+            if "average merit" in l:
+                start = i + 1
+                break
+            elif "number of folds" in l:
+                raise Exception("Cannot parse output from non-rankers!")
+
+        # parse text
+        merit_mean = []
+        merit_stdev = []
+        rank_mean = []
+        rank_stdev = []
+        for i in range(start, len(lines)):
+            l = lines[i]
+            if "+-" in l:
+                parts = l.split(" +- ")
+                inner = None
+                right = None
+                if len(parts) == 3:
+                    inner = [x for x in parts[1].split(" ") if x]
+                    right = [x for x in parts[2].split(" ") if x]
+                if (len(inner) == 2) and (len(right) > 2):
+                    merit_mean.append(float(parts[0]))
+                    merit_stdev.append(float(inner[0]))
+                    rank_mean.append(float(inner[1]))
+                    rank_stdev.append(float(right[0]))
+
+        result = {
+            "merit_mean": merit_mean,
+            "merit_stdev": merit_stdev,
+            "rank_mean": rank_mean,
+            "rank_stdev": rank_stdev,
+        }
+
+        return result
 
     @property
     def number_attributes_selected(self):
