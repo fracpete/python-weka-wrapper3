@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # experiments.py
-# Copyright (C) 2015-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2023 Fracpete (pythonwekawrapper at gmail dot com)
 
 import logging
 import math
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 def plot_experiment(mat, title="Experiment", axes_swapped=False, measure="Statistic", show_stdev=False,
-                    key_loc="lower right", outfile=None, wait=True):
+                    x_label=None, y_label=None, key_loc="lower right", bbox_to_anchor=None, outfile=None, wait=True):
     """
     Plots the results from an experiment.
 
@@ -34,14 +34,20 @@ def plot_experiment(mat, title="Experiment", axes_swapped=False, measure="Statis
     :type mat: ResultMatrix
     :param title: the title for the experiment
     :type title: str
-    :param axes_swapped: whether the axes whether swapped ("sets x cls" or "cls x sets")
+    :param axes_swapped: whether the axes whether swapped for the evaluation ("datasets x classifers" or "classifers x datasets")
     :type axes_swapped: bool
     :param measure: the measure that is being displayed
     :type measure: str
     :param show_stdev: whether to show the standard deviation as error bar
     :type show_stdev: bool
+    :param x_label: the label to override the default x label with (ie Classifiers/Datasets)
+    :type x_label: str
+    :param y_label: the label to override the default y label with (ie the measure)
+    :type y_label: str
     :param key_loc: the location string for the key
     :type key_loc: str
+    :param bbox_to_anchor: tuple for the key anchor
+    :type bbox_to_anchor: tuple
     :param outfile: the output file, ignored if None
     :type outfile: str
     :param wait: whether to wait for the user to close the plot
@@ -58,11 +64,11 @@ def plot_experiment(mat, title="Experiment", axes_swapped=False, measure="Statis
 
     fig, ax = plt.subplots()
     if axes_swapped:
-        ax.set_xlabel(measure)
-        ax.set_ylabel("Classifiers")
+        ax.set_xlabel(x_label if x_label is not None else "Datasets")
+        ax.set_ylabel(y_label if y_label is not None else measure)
     else:
-        ax.set_xlabel("Classifiers")
-        ax.set_ylabel(measure)
+        ax.set_xlabel(x_label if x_label is not None else "Classifiers")
+        ax.set_ylabel(y_label if y_label is not None else measure)
     ax.set_title(title)
     plot.set_window_title(fig, title)
     ax.grid(True)
@@ -92,7 +98,7 @@ def plot_experiment(mat, title="Experiment", axes_swapped=False, measure="Statis
         else:
             ax.plot(x, means, "o-", label=plot_label)
     plt.draw()
-    plt.legend(loc=key_loc, shadow=True)
+    plt.legend(loc=key_loc, bbox_to_anchor=bbox_to_anchor, mode="expand", shadow=True)
     if outfile is not None:
         plt.savefig(outfile)
     if wait:

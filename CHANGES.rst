@@ -9,6 +9,7 @@ Changelog
 - added methods `subset_results`, `rank_results` to class `AttributeSelection`
   (module: `weka.attribute_selection`) to give access to cross-validation
   output in numeric rather textual form (NB: it has to parse the textual CV output).
+- made the `plot_experiments` method (module `weka.plot.experiments`) more customizable
 
 
 0.2.12 (2022-12-08)
