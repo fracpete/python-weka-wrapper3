@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.13 (????-??-??)
+0.2.13 (2023-04-26)
 -------------------
 
 - moved `Configurable` and `JSONObject` into *configurable-objects* library
