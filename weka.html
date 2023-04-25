@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka package &#8212; python-weka-wrapper3 0.2.12 documentation</title>
+    <title>weka package &#8212; python-weka-wrapper3 0.2.13 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -58,9 +58,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="weka.flow.html">weka.flow package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.base">weka.flow.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.flow.html#weka-flow-base-module">weka.flow.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.container">weka.flow.container module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.control">weka.flow.control module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.flow.html#weka-flow-control-module">weka.flow.control module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.conversion">weka.flow.conversion module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.sink">weka.flow.sink module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="weka.flow.html#module-weka.flow.source">weka.flow.source module</a></li>
@@ -764,6 +764,22 @@ Returns None if not a weka.attributeSelection.AttributeTransformer</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="weka.attribute_selection.AttributeSelection.rank_results">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rank_results</span></span><a class="headerlink" href="#weka.attribute_selection.AttributeSelection.rank_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the results from the cross-validation for rankers.</p>
+<p>Unfortunately, the Weka API does not give direct access to underlying
+data structures, hence we have to parse the textual output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the dictionary of results (mean and stdev for rank and merit)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="weka.attribute_selection.AttributeSelection.ranked_attributes">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ranked_attributes</span></span><a class="headerlink" href="#weka.attribute_selection.AttributeSelection.ranked_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the matrix of ranked attributes from the last run.</p>
@@ -873,6 +889,23 @@ Returns None if not a weka.attributeSelection.AttributeTransformer</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="weka.attribute_selection.AttributeSelection.subset_results">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subset_results</span></span><a class="headerlink" href="#weka.attribute_selection.AttributeSelection.subset_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the results from the cross-validation subsets, i.e., how often
+an attribute was selected.</p>
+<p>Unfortunately, the Weka API does not give direct access to underlying
+data structures, hence we have to parse the textual output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the list of results (double)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
 </dd></dl>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weka.core package &#8212; python-weka-wrapper3 0.2.12 documentation</title>
+    <title>weka.core package &#8212; python-weka-wrapper3 0.2.13 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -497,145 +497,6 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">Configurable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JSONObject" title="weka.core.classes.JSONObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.JSONObject</span></code></a></p>
-<p>The ancestor for all actors.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.config">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">config</span></span><a class="headerlink" href="#weka.core.classes.Configurable.config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtains the currently set options of the actor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the options</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.description">
-<span class="sig-name descname"><span class="pre">description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.description" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a description of the object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the description</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.fix_config">
-<span class="sig-name descname"><span class="pre">fix_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.fix_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fixes the options, if necessary. I.e., it adds all required elements to the dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>options</strong> (<em>dict</em>) – the options to fix</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the (potentially) fixed options</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restores its state from a dictionary, used in de-JSONification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – the object dictionary</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.generate_help">
-<span class="sig-name descname"><span class="pre">generate_help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.generate_help" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a help string for this actor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the help string</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.help">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">help</span></span><a class="headerlink" href="#weka.core.classes.Configurable.help" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtains the help information per option for this actor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the help</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.logger">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#weka.core.classes.Configurable.logger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the logger object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the logger</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>logger</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.new_logger">
-<span class="sig-name descname"><span class="pre">new_logger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.new_logger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new logger instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the logger instance</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>logger</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.print_help">
-<span class="sig-name descname"><span class="pre">print_help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.print_help" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints a help string for this actor to stdout.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.Configurable.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Configurable.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary that represents this object, to be used for JSONification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the object dictionary</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="weka.core.classes.Date">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">Date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msecs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.Date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
@@ -778,86 +639,6 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="weka.core.classes.JSONObject">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">JSONObject</span></span><a class="headerlink" href="#weka.core.classes.JSONObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Ancestor for classes that can be represented as JSON and restored from JSON.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.JSONObject.from_dict">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JSONObject.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restores an object state from a dictionary, used in de-JSONification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – the object dictionary</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.JSONObject.from_json">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JSONObject.from_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Restores the object from the given JSON.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – the JSON string to parse</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.JSONObject.shallow_copy">
-<span class="sig-name descname"><span class="pre">shallow_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JSONObject.shallow_copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a shallow copy of itself.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the copy</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.JSONObject.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JSONObject.to_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary that represents this object, to be used for JSONification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the object dictionary</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="weka.core.classes.JSONObject.to_json">
-<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JSONObject.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the options as JSON.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the object as string</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="weka.core.classes.JavaArray">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">JavaArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobject</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.JavaObject</span></code></a></p>
@@ -908,7 +689,7 @@ capabilities of the given Capabilities object (checks only the enum!)</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="weka.core.classes.JavaObject">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">JavaObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobject</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.JavaObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JSONObject" title="weka.core.classes.JSONObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.JSONObject</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">confobj._core.JSONObject</span></code></p>
 <p>Basic Java object.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="weka.core.classes.JavaObject.check_type">
@@ -1266,7 +1047,7 @@ using dot notation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="weka.core.classes.OptionHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">OptionHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.OptionHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.JavaObject</span></code></a>, <a class="reference internal" href="#weka.core.classes.Configurable" title="weka.core.classes.Configurable"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.Configurable</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#weka.core.classes.JavaObject" title="weka.core.classes.JavaObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.JavaObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">confobj._core.Configurable</span></code></p>
 <p>Ancestor for option-handling classes. 
 Classes should implement the weka.core.OptionHandler interface to have any effect.</p>
 <dl class="py method">
@@ -1823,17 +1604,6 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="weka.core.classes.deregister_dict_handler">
-<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">deregister_dict_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typestr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.deregister_dict_handler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deregisters a handler for restoring an object from a JSON dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>typestr</strong> (<em>str</em>) – the type of the object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="weka.core.classes.from_byte_array">
 <span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">from_byte_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.from_byte_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deserializes Java objects from the numpy array.</p>
@@ -1870,30 +1640,6 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dl>
 </dd></dl>
 
-<dl class="py data">
-<dt class="sig sig-object py" id="weka.core.classes.from_dict_handlers">
-<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">from_dict_handlers</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#weka.core.classes.from_dict_handlers" title="Permalink to this definition">¶</a></dt>
-<dd><p>The methods that handle the restoration from a JSON dictionary, stored under their ‘type’.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="weka.core.classes.get_class">
-<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">get_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class object associated with the dot-notation classname.</p>
-<p>Taken from here: <a class="reference external" href="http://stackoverflow.com/a/452981">http://stackoverflow.com/a/452981</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>classname</strong> (<em>str</em>) – the classname</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the class object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>object</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.core.classes.get_classname">
 <span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">get_classname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_classname" title="Permalink to this definition">¶</a></dt>
@@ -1907,20 +1653,6 @@ classname if a single match was found, otherwise an exception is raised.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="weka.core.classes.get_dict_handler">
-<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">get_dict_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typestr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.get_dict_handler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the handler for restoring an object from a JSON dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>typestr</strong> (<em>str</em>) – the type of the object</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the handler, None if not available</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1996,20 +1728,6 @@ Also supports the Java primitives: boolean, byte, short, int, long, float, doubl
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>JB_Object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="weka.core.classes.has_dict_handler">
-<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">has_dict_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typestr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.has_dict_handler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the handler for restoring an object from a JSON dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>typestr</strong> (<em>str</em>) – the type of the object</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the handler, None if not available</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2153,20 +1871,6 @@ if it fails to do so (opposed to JavaObject.new_instance).</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="weka.core.classes.register_dict_handler">
-<span class="sig-prename descclassname"><span class="pre">weka.core.classes.</span></span><span class="sig-name descname"><span class="pre">register_dict_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typestr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.classes.register_dict_handler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Registers a handler for restoring an object from a JSON dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>typestr</strong> (<em>str</em>) – the type of the object</p></li>
-<li><p><strong>handler</strong> – the method</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
