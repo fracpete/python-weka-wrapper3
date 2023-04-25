@@ -3,6 +3,11 @@
 In order to make installation reproducible, the following Docker images 
 (which can be used interactively) are maintained:
 
+* 0.2.13
+  
+  * [CPU only](0.2.13_cpu)
+  * [CUDA 10.2](0.2.13_cuda10.2)
+
 * 0.2.12
   
   * [CPU only](0.2.12_cpu)
