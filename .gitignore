@@ -76,3 +76,4 @@ blah*
 *.bak
 update_gh.sh
 update_suggestions.sh
+!python/weka/lib/
