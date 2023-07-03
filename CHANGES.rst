@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.2.14 (????-??-??)
+0.2.14 (2023-07-04)
 -------------------
 
-- extracted arpack_combined.jar, core.jar and mtj.jar from weka.jar to make available under Java 17
+- extracted arpack_combined.jar, core.jar and mtj.jar from weka.jar to make them available under Java 17
 
 
 0.2.13 (2023-04-26)
