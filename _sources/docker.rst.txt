@@ -20,7 +20,7 @@ For using the image interactively, you can run the following command:
 .. code-block:: bash
 
    docker run -u $(id -u):$(id -g) \
-       -it fracpete/pww3:0.2.13_cpu
+       -it fracpete/pww3:0.2.14_cpu
 
 Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:
@@ -29,7 +29,7 @@ you can map your local Weka packages into the container as follows:
 
    docker run -u $(id -u):$(id -g) \
        -v $HOME/wekafiles/:/workspace/wekafiles \
-       -it fracpete/pww3:0.2.13_cpu
+       -it fracpete/pww3:0.2.14_cpu
 
 
 GPU
@@ -40,7 +40,7 @@ For using the image interactively, you can run the following command:
 .. code-block:: bash
 
    docker run --gpus=all -u $(id -u):$(id -g) \
-       -it fracpete/pww3:0.2.13_cuda10.2
+       -it fracpete/pww3:0.2.14_cuda10.2
 
 Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:
@@ -49,7 +49,7 @@ you can map your local Weka packages into the container as follows:
 
    docker run --gpus=all -u $(id -u):$(id -g) \
        -v $HOME/wekafiles/:/workspace/wekafiles \
-       -it fracpete/pww3:0.2.13_cuda10.2
+       -it fracpete/pww3:0.2.14_cuda10.2
 
 
 Additional Weka packages
@@ -75,11 +75,11 @@ script:
 
 
 A minimal ``Dockerfile`` (in the same directory as ``install_packages.py``) then looks
-like this (using pww3 0.2.13 for CPU):
+like this (using pww3 0.2.14 for CPU):
 
 ::
 
-   FROM fracpete/pww3:0.2.13_cpu
+   FROM fracpete/pww3:0.2.14_cpu
    COPY install_packages.py /workspace/install_packages.py
    RUN python3 /workspace/install_packages.py
 
