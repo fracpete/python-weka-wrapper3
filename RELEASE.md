@@ -18,7 +18,8 @@ Preparation:
     find -name "*.java" | grep -v "\/dist\/" | grep "src\/main" | \
         sed s/".*internal\/"//g | sed s/".*external\/"//g | \
         sed s/"\.java"//g | sed s/"\/src\/main\/java\/"/","/g | \
-        sed s/"\/"/.""/g | sort -f > ../../../../../fracpete/python-weka-wrapper3/python/weka/lib/pkg_suggestions.csv
+        sed s/"\/"/.""/g | grep -v "..weka," | grep -v "..wekaexamples," | sort -f > \
+        /home/fracpete/development/projects/fracpete/python-weka-wrapper3/python/weka/lib/pkg_suggestions.csv
     ```
     
 * add new changelog section in `CHANGES.rst`
