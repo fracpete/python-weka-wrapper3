@@ -12,14 +12,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # converters.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 from weka.core.classes import OptionHandler
 from weka.core.capabilities import Capabilities
-from weka.core.dataset import Instances, Instance, Attribute
+from weka.core.dataset import Instances, Instance, Attribute, create_instances_from_lists
 import numpy
 import os
+import csv
 
 
 class Loader(OptionHandler):
@@ -358,3 +359,43 @@ def ndarray_to_instances(array, relation, att_template="Att-#", att_list=None):
         result.add_instance(inst)
 
     return result
+
+
+def load_csv(filename, dialect="excel", delimiter=",", quotechar='"', num_cols=None):
+    """
+    Loads a CSV file using the Python csv module and then converts it
+    to an Instances object. Better at reading CSV files than Weka's
+    built-in CSVLoader. String attributes can be converted to nominal
+    ones using the weka.filters.unsupervised.attribute.StringToNominal filter.
+
+    :param filename: the name of the CSV file to load
+    :type filename: str
+    :param dialect: the type of CSV file to load
+    :type dialect: str
+    :param delimiter: the field delimiter
+    :type delimiter: str
+    :param quotechar: the character used for quoting cells
+    :type quotechar: str
+    :param quoting: how the quoting works
+    :param num_cols: the list of 0-based column indices that are numeric, default for cols is str
+    :type num_cols: list
+    """
+    with open(filename) as fp:
+        r = csv.reader(fp, dialect=dialect, delimiter=delimiter, quotechar=quotechar)
+        header = None
+        data = []
+        for row in r:
+            row = list(row)
+            if header is None:
+                header = row
+            else:
+                if num_cols is not None:
+                    for num_col in num_cols:
+                        s = row[num_col]
+                        try:
+                            row[num_col] = float(s)
+                        except:
+                            row[num_col] = None
+                data.append(row)
+
+    return create_instances_from_lists(data, cols_x=header, name=os.path.basename(filename))

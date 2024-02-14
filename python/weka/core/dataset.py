@@ -12,10 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
+import math
 import numpy as np
 from weka.core.classes import JavaObject, Random
 import weka.core.typeconv as typeconv
@@ -966,7 +967,10 @@ class Instance(JavaObject):
         jni_classname = classname.replace(".", "/")
         if type(values) is list:
             for i in range(len(values)):
-                values[i] = float(values[i])
+                if (values[i] is None) or math.isnan(values[i]):
+                    values[i] = np.nan
+                else:
+                    values[i] = float(values[i])
             values = np.array(values)
         return Instance(
             javabridge.make_instance(
@@ -1748,6 +1752,7 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
     Allows the generation of an Instances object from a list of lists for X and a list for Y (optional).
     Data can be numeric, string or bytes. Attributes can be converted to nominal with the
     weka.filters.unsupervised.attribute.NumericToNominal filter.
+    None values are interpreted as missing values.
 
     :param x: the input variables (row wise)
     :type x: list of list
@@ -1782,51 +1787,83 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
     atts = []
     type_x = []
     for i in range(len(x[0])):
-        if isinstance(x[0][i], float) or isinstance(x[0][i], int):
-            type_x.append("N")
+        type_x.append(None)
+    for i in range(len(x[0])):
+        for n in range(len(x)):
+            if x[n][i] is None:
+                continue
+            if isinstance(x[n][i], float) or isinstance(x[n][i], int):
+                type_x[i] = "N"
+                break
+            elif isinstance(x[n][i], bytes):
+                type_x[i] = "B"
+                break
+            elif isinstance(x[n][i], str):
+                type_x[i] = "S"
+                break
+            else:
+                raise Exception("Only float, int, bytes and str are supported, #" + str(i) + ": " + str(type(x[i][0])))
+
+    for i in range(len(type_x)):
+        if type_x[i] == "N":
             atts.append(Attribute.create_numeric(cols_x[i]))
-        elif isinstance(x[0][i], bytes):
-            type_x.append("B")
+        elif type_x[i] == "B":
             atts.append(Attribute.create_string(cols_x[i]))
-        elif isinstance(x[0][i], str):
-            type_x.append("S")
+        elif type_x[i] == "S":
             atts.append(Attribute.create_string(cols_x[i]))
         else:
-            raise Exception("Only float, int, bytes and str are supported, #" + str(i) + ": " + str(type(x[i][0])))
+            print("WARNING: Failed to determine data type for column #%d" % i)
+            atts.append(Attribute.create_numeric(cols_x[i]))
 
     type_y = ""
     if y is not None:
-        if isinstance(y[0], float) or isinstance(y[0], int):
-            type_y = "N"
-            atts.append(Attribute.create_numeric(col_y))
-        elif isinstance(y[0], bytes):
-            type_y = "B"
-            atts.append(Attribute.create_string(col_y))
-        elif isinstance(y[0], str):
-            type_y = "S"
-            atts.append(Attribute.create_string(col_y))
-        else:
-            raise Exception("Only float, int, bytes and str are supported for y: " + str(type(y[0])))
+        for n in range(len(y)):
+            if y[n] is None:
+                continue
+            if isinstance(y[n], float) or isinstance(y[n], int):
+                type_y = "N"
+                atts.append(Attribute.create_numeric(col_y))
+                break
+            elif isinstance(y[n], bytes):
+                type_y = "B"
+                atts.append(Attribute.create_string(col_y))
+                break
+            elif isinstance(y[n], str):
+                type_y = "S"
+                atts.append(Attribute.create_string(col_y))
+                break
+            else:
+                raise Exception("Only float, int, bytes and str are supported for y: " + str(type(y[0])))
 
     result = Instances.create_instances(name, atts, len(x))
 
     # add data
+    nan = float("nan")
     for i in range(len(x)):
         values = []
+
         for n in range(len(x[i])):
+            if x[i][n] == nan:
+                values.append(x[i][n])
+                continue
             if type_x[n] == "N":
                 values.append(x[i][n])
             elif type_x[n] == "B":
                 values.append(result.attribute(n).add_string_value(x[i][n].decode("utf-8")))
             else:
                 values.append(result.attribute(n).add_string_value(x[i][n]))
+
         if y is not None:
+            if y[i] == nan:
+                values.append(y[i])
+                continue
             if type_y == "N":
                 values.append(y[i])
             elif type_y == "B":
                 values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i].decode("utf-8")))
             else:
                 values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i]))
+
         result.add_instance(Instance.create_instance(values))
 
     return result
@@ -1838,11 +1875,12 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
     1-dimensional matrix for Y (optional).
     Data can be numeric, string or bytes. Attributes can be converted to nominal with the
     weka.filters.unsupervised.attribute.NumericToNominal filter.
+    nan values are interpreted as missing values.
 
     :param x: the input variables
-    :type x: ndarray
+    :type x: np.ndarray
     :param y: the output variable (optional)
-    :type y: ndarray
+    :type y: np.ndarray
     :param name: the name of the dataset
     :type name: str
     :param cols_x: the column names to use
@@ -1903,20 +1941,27 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
     # add data
     for i in range(len(x)):
         values = []
+
         for n in range(len(x[i])):
-            if type_x[n] == "N":
+            if isinstance(x[i][n], float) and np.isnan(x[i][n]):
+                values.append(missing_value())
+            elif type_x[n] == "N":
                 values.append(x[i][n])
             elif type_x[n] == "S":
                 values.append(result.attribute(n).add_string_value(x[i][n]))
             else:
                 values.append(result.attribute(n).add_string_value(x[i][n].decode("utf-8")))
+
         if y is not None:
-            if type_y == "N":
+            if isinstance(y[i], float) and np.isnan(y[i]):
+                values.append(missing_value())
+            elif type_y == "N":
                 values.append(y[i])
             elif type_y == "S":
                 values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i]))
             else:
                 values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i].decode("utf-8")))
+
         result.add_instance(Instance.create_instance(values))
 
     return result

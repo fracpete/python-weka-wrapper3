@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # dataset.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
 import weka.core.jvm as jvm
@@ -346,6 +346,21 @@ class TestDataset(weka_test.WekaTest):
         dataset = create_instances_from_lists(x, y, name="generated from mixed lists", cols_x=["text", "integer", "float"], col_y="class")
         self.assertEqual(len(dataset), 2)
 
+        # missing
+        x = [[randint(1, 10) for _ in range(5)] for _ in range(10)]
+        x[0][1] = None
+        y = [randint(0, 1) for _ in range(10)]
+        y[2] = None
+        self.assertEqual(len(x), 10)
+        self.assertEqual(len(y), 10)
+        dataset = create_instances_from_lists(x, name="generated from lists (no y)")
+        self.assertEqual(len(dataset), 10)
+        self.assertTrue(dataset.get_instance(0).is_missing(1))
+        dataset = create_instances_from_lists(x, y, name="generated from lists")
+        self.assertEqual(len(dataset), 10)
+        self.assertTrue(dataset.get_instance(0).is_missing(1))
+        self.assertTrue(dataset.get_instance(2).is_missing(dataset.num_attributes - 1))
+
     def test_create_instances_from_matrices(self):
         """
         Tests the create_instances_from_matrices method.
@@ -356,9 +371,9 @@ class TestDataset(weka_test.WekaTest):
         y = np.random.randn(10)
         self.assertEqual(len(x), 10)
         self.assertEqual(len(y), 10)
-        dataset = create_instances_from_lists(x, name="generated from lists (no y)")
+        dataset = create_instances_from_lists(x, name="generated from matrices (no y)")
         self.assertEqual(len(dataset), 10)
-        dataset = create_instances_from_lists(x, y, name="generated from lists")
+        dataset = create_instances_from_lists(x, y, name="generated from matrices")
         self.assertEqual(len(dataset), 10)
 
         # mixed
@@ -366,10 +381,23 @@ class TestDataset(weka_test.WekaTest):
         y = np.array(["A", "B"], dtype='S20')
         self.assertEqual(len(x), 2)
         self.assertEqual(len(y), 2)
-        dataset = create_instances_from_matrices(x, name="generated from mixed lists (no y)", cols_x=["text", "integer", "float"])
+        dataset = create_instances_from_matrices(x, name="generated from mixed matrices (no y)", cols_x=["text", "integer", "float"])
         self.assertEqual(len(dataset), 2)
-        dataset = create_instances_from_matrices(x, y, name="generated from mixed lists", cols_x=["text", "integer", "float"], col_y="class")
+        dataset = create_instances_from_matrices(x, y, name="generated from mixed matrices", cols_x=["text", "integer", "float"], col_y="class")
         self.assertEqual(len(dataset), 2)
+
+        # missing
+        x = np.array([("TEXT", 1, 1.1), ("XXX", 2, np.nan)], dtype='S20, i4, f8')
+        y = np.array([7.1, np.nan], dtype='f8')
+        self.assertEqual(len(x), 2)
+        self.assertEqual(len(y), 2)
+        dataset = create_instances_from_matrices(x, name="generated from mixed matrices, missing values (no y)", cols_x=["text", "integer", "float"])
+        self.assertEqual(len(dataset), 2)
+        self.assertTrue(dataset.get_instance(1).is_missing(2))
+        dataset = create_instances_from_matrices(x, y, name="generated from mixed matrices, missing values", cols_x=["text", "integer", "float"], col_y="class")
+        self.assertEqual(len(dataset), 2)
+        self.assertTrue(dataset.get_instance(1).is_missing(2))
+        self.assertTrue(dataset.get_instance(1).is_missing(dataset.num_attributes - 1))
 
 
 def suite():
