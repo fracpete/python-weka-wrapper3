@@ -361,7 +361,7 @@ def ndarray_to_instances(array, relation, att_template="Att-#", att_list=None):
     return result
 
 
-def load_csv(filename, dialect="excel", delimiter=",", quotechar='"', num_cols=None):
+def load_csv_file(filename, dialect="excel", delimiter=",", quotechar='"', num_cols=None):
     """
     Loads a CSV file using the Python csv module and then converts it
     to an Instances object. Better at reading CSV files than Weka's
