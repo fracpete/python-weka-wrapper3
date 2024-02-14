@@ -64,6 +64,7 @@ setup(
         "packaging",
         "configurable-objects",
         "simple-data-flow",
+        "simple-range",
     ],
     extras_require={
         'plots': ["matplotlib"],

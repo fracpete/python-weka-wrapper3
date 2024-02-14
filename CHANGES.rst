@@ -10,6 +10,7 @@ Changelog
 - added the method `load_csv_file` to the module `weka.core.converters` to provide a more
   reliable way of loading CSV files compared to Weka's native `CSVLoader` converter
   (uses Python's csv module and then calls `create_instances_from_lists`).
+- added `simple_range` library as dependency to make it easier to generate integer list from range strings
 
 
 0.2.14 (2023-07-04)
