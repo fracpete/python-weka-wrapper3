@@ -1,26 +1,10 @@
 weka\.flow package
 ==================
 
-weka\.flow\.base module
------------------------
-
-.. automodule:: weka.flow.base
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 weka\.flow\.container module
 ----------------------------
 
 .. automodule:: weka.flow.container
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-weka\.flow\.control module
---------------------------
-
-.. automodule:: weka.flow.control
     :members:
     :undoc-members:
     :show-inheritance:
