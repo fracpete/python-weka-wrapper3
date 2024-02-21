@@ -263,8 +263,12 @@ If you want plotting support, then install also *graphviz* and *matplotlib*:
 
 * download `graphviz <https://graphviz.org/download/#windows>`__
   and add the path to its installed binaries to your ``PATH`` environment variable.
-* install pygraphviz using ``conda install -c conda-forge pygraphviz``
-* install matplotlib using ``conda install -c conda-forge matplotlib``
+* install pygraphviz and matplotlib:
+
+  .. code-block:: doscon
+
+     conda install -c conda-forge pygraphviz
+     conda install -c conda-forge matplotlib
 
 
 Windows
@@ -312,10 +316,6 @@ If you want to use the plotting functionality, you need to install *graphviz* an
 .. code-block:: bash
 
    pip install matplotlib pygraphviz pillow lxml
-
-For being able to compile libraries on Windows, you need the
-`Microsoft Build Tools 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48159>`_
-installed.
 
 
 From source

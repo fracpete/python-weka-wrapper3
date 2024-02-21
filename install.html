@@ -235,11 +235,15 @@ select the <strong>Desktop development with C++</strong> option in the installer
 </li>
 </ul>
 <p>If you want plotting support, then install also <em>graphviz</em> and <em>matplotlib</em>:</p>
-<ul class="simple">
+<ul>
 <li><p>download <a class="reference external" href="https://graphviz.org/download/#windows">graphviz</a>
 and add the path to its installed binaries to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.</p></li>
-<li><p>install pygraphviz using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">pygraphviz</span></code></p></li>
-<li><p>install matplotlib using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">matplotlib</span></code></p></li>
+<li><p>install pygraphviz and matplotlib:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">conda install -c conda-forge pygraphviz</span>
+<span class="go">conda install -c conda-forge matplotlib</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
 <section id="windows">
@@ -288,9 +292,6 @@ and add the path to its installed binaries to your <code class="docutils literal
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install matplotlib pygraphviz pillow lxml
 </pre></div>
 </div>
-<p>For being able to compile libraries on Windows, you need the
-<a class="reference external" href="https://www.microsoft.com/en-us/download/details.aspx?id=48159">Microsoft Build Tools 2015</a>
-installed.</p>
 </section>
 <section id="from-source">
 <h2>From source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h2>
