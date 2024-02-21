@@ -293,9 +293,8 @@ If you want to use the plotting functionality, you need to install *graphviz* an
 
 * download `graphviz <https://graphviz.org/download/#windows>`__
   and add the path to its installed binaries to your ``PATH`` environment variable.
-* download `matplotlib <http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib>`__
-  for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/cp310*) and your bitness (32 or 64 bit)
-* install the *.whl* file using pip: ``pip install matplotlib-X.Y.Z.whl``
+* install support for graphviz using `pip install pygraphviz pillow lxml`
+* install matplotlib using `pip install matplotlib`
 
 .. code-block:: bash
 
