@@ -18,7 +18,7 @@ https://groups.google.com/forum/#!forum/python-weka-wrapper
 Prerequisites for all platforms
 -------------------------------
 
-You need a Java Development Kit (JDK) 8 or later (e.g., `OpenJDK <https://adoptopenjdk.net/>`__) installed and
+You need a Java Development Kit (JDK) 8 or later (e.g., `OpenJDK <https://adoptium.net//>`__) installed and
 the ``JAVA_HOME`` `environment variable
 <http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`__
 pointing to the installation directory in order to use *python-weka-wrapper3*
@@ -245,18 +245,18 @@ Windows using Anaconda
 is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
 install a 32-bit JDK (or all of them are 64-bit).
 
-* download `python-javabridge <https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-javabridge>`__
-  (or later) for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/310*) and your *bitness* (32 or 64 bit)
-
-* the following sets up an environment with Python 3.9
+* set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
+* download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
+  select the **Desktop development with C++** option in the installer
+* the following configures an environment with Python 3.10 (3.11+ does not work at this stage)
 
   .. code-block:: doscon
 
-     > conda create --name pww3 python=3.9
+     > conda create --name pww3 python=3.10
      > conda activate pww3
      > conda install -c conda-forge numpy
      > conda install -c conda-forge pillow
-     > pip install python-javabridge-X.Y.Z.whl   # adjust path to where you downloaded the file
+     > pip install python-javabridge
      > pip install python-weka-wrapper3
 
 If you want plotting support, then install also *graphviz* and *matplotlib*:
@@ -276,24 +276,18 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).
 
 Perform the following steps:
 
-* install `Python <http://www.python.org/downloads>`__, make sure you check *Add python.exe to path* during the installation
+* set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
+* download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
+  select the **Desktop development with C++** option in the installer
+* install `Python <http://www.python.org/downloads>`__ (<=3.10), make sure you check *Add python.exe to path* during the installation
 * add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python35\\Scripts``
 * install ``pip`` with these steps:
 
  * download from `here <https://bootstrap.pypa.io/get-pip.py>`__
  * install using ``python get-pip.py``
 
-* install numpy
-
- * download `numpy 1.9.x MKL <http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy>`__
-   (or later) for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/cp310*) and your *bitness* (32 or 64 bit)
- * install the *.whl* file using pip: ``pip install numpy-X.Y.Z.whl``
-
-* install python-javabridge
-
- * download `python-javabridge <https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-javabridge>`__
-   (or later) for Python 3.7/3.8/3.9/3.10 (*cp37/cp38/cp39/310*) and your *bitness* (32 or 64 bit)
- * install the *.whl* file using pip: ``pip install python-javabridge-X.Y.Z.whl``
+* install numpy with `pip install numpy`
+* install python-javabridge with `pip install python-javabridge`
 
 If you want to use the plotting functionality, you need to install *graphviz* and *matplotlib* as well:
 

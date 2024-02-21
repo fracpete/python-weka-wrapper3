@@ -2206,6 +2206,27 @@ In case of incremental loading, only the structure.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="weka.core.converters.load_csv_file">
+<span class="sig-prename descclassname"><span class="pre">weka.core.converters.</span></span><span class="sig-name descname"><span class="pre">load_csv_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'excel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quotechar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&quot;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.converters.load_csv_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a CSV file using the Python csv module and then converts it
+to an Instances object. Better at reading CSV files than Weka’s
+built-in CSVLoader. String attributes can be converted to nominal
+ones using the weka.filters.unsupervised.attribute.StringToNominal filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – the name of the CSV file to load</p></li>
+<li><p><strong>dialect</strong> (<em>str</em>) – the type of CSV file to load</p></li>
+<li><p><strong>delimiter</strong> (<em>str</em>) – the field delimiter</p></li>
+<li><p><strong>quotechar</strong> (<em>str</em>) – the character used for quoting cells</p></li>
+<li><p><strong>quoting</strong> – how the quoting works</p></li>
+<li><p><strong>num_cols</strong> (<em>list</em>) – the list of 0-based column indices that are numeric, default for cols is str</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="weka.core.converters.loader_for_file">
 <span class="sig-prename descclassname"><span class="pre">weka.core.converters.</span></span><span class="sig-name descname"><span class="pre">loader_for_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.converters.loader_for_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a Loader that can load the specified file, based on the file extension. None if failed to determine.</p>
@@ -4075,7 +4096,8 @@ takes precedence over col_range</p></li>
 <span class="sig-prename descclassname"><span class="pre">weka.core.dataset.</span></span><span class="sig-name descname"><span class="pre">create_instances_from_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.core.dataset.create_instances_from_lists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows the generation of an Instances object from a list of lists for X and a list for Y (optional).
 Data can be numeric, string or bytes. Attributes can be converted to nominal with the
-weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
+weka.filters.unsupervised.attribute.NumericToNominal filter.
+None values are interpreted as missing values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -4101,12 +4123,13 @@ weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
 <dd><p>Allows the generation of an Instances object from a 2-dimensional matrix for X and a
 1-dimensional matrix for Y (optional).
 Data can be numeric, string or bytes. Attributes can be converted to nominal with the
-weka.filters.unsupervised.attribute.NumericToNominal filter.</p>
+weka.filters.unsupervised.attribute.NumericToNominal filter.
+nan values are interpreted as missing values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>ndarray</em>) – the input variables</p></li>
-<li><p><strong>y</strong> (<em>ndarray</em>) – the output variable (optional)</p></li>
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – the input variables</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – the output variable (optional)</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – the name of the dataset</p></li>
 <li><p><strong>cols_x</strong> (<em>list</em>) – the column names to use</p></li>
 <li><p><strong>col_y</strong> (<em>str</em>) – the column name to use for the output variable (y)</p></li>

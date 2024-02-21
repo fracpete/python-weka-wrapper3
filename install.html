@@ -46,7 +46,7 @@ on the instructions below, please use the following mailing list:</p>
 <p><a class="reference external" href="https://groups.google.com/forum/#!forum/python-weka-wrapper">https://groups.google.com/forum/#!forum/python-weka-wrapper</a></p>
 <section id="prerequisites-for-all-platforms">
 <h2>Prerequisites for all platforms<a class="headerlink" href="#prerequisites-for-all-platforms" title="Permalink to this headline">¶</a></h2>
-<p>You need a Java Development Kit (JDK) 8 or later (e.g., <a class="reference external" href="https://adoptopenjdk.net/">OpenJDK</a>) installed and
+<p>You need a Java Development Kit (JDK) 8 or later (e.g., <a class="reference external" href="https://adoptium.net//">OpenJDK</a>) installed and
 the <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> <a class="reference external" href="http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html">environment variable</a>
 pointing to the installation directory in order to use <em>python-weka-wrapper3</em>
 library.</p>
@@ -220,14 +220,15 @@ Python packages:</p>
 is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
 install a 32-bit JDK (or all of them are 64-bit).</p>
 <ul>
-<li><p>download <a class="reference external" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-javabridge">python-javabridge</a>
-(or later) for Python 3.7/3.8/3.9/3.10 (<em>cp37/cp38/cp39/310</em>) and your <em>bitness</em> (32 or 64 bit)</p></li>
-<li><p>the following sets up an environment with Python 3.9</p>
-<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> conda create --name pww3 python=3.9
+<li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
+<li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
+select the <strong>Desktop development with C++</strong> option in the installer</p></li>
+<li><p>the following configures an environment with Python 3.10 (3.11+ does not work at this stage)</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> conda create --name pww3 python=3.10
 <span class="gp">&gt;</span> conda activate pww3
 <span class="gp">&gt;</span> conda install -c conda-forge numpy
 <span class="gp">&gt;</span> conda install -c conda-forge pillow
-<span class="gp">&gt;</span> pip install python-javabridge-X.Y.Z.whl   # adjust path to where you downloaded the file
+<span class="gp">&gt;</span> pip install python-javabridge
 <span class="gp">&gt;</span> pip install python-weka-wrapper3
 </pre></div>
 </div>
@@ -248,7 +249,10 @@ is consistent.  I.e., if you install a 32-bit version of Python, you need to
 install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <p>Perform the following steps:</p>
 <ul class="simple">
-<li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a>, make sure you check <em>Add python.exe to path</em> during the installation</p></li>
+<li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
+<li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
+select the <strong>Desktop development with C++</strong> option in the installer</p></li>
+<li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a> (&lt;=3.10), make sure you check <em>Add python.exe to path</em> during the installation</p></li>
 <li><p>add the Python scripts directory to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal notranslate"><span class="pre">C:\\Python35\\Scripts</span></code></p></li>
 <li><p>install <code class="docutils literal notranslate"><span class="pre">pip</span></code> with these steps:</p></li>
 </ul>
@@ -259,25 +263,9 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 </ul>
 </div></blockquote>
 <ul class="simple">
-<li><p>install numpy</p></li>
+<li><p>install numpy with <cite>pip install numpy</cite></p></li>
+<li><p>install python-javabridge with <cite>pip install python-javabridge</cite></p></li>
 </ul>
-<blockquote>
-<div><ul class="simple">
-<li><p>download <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">numpy 1.9.x MKL</a>
-(or later) for Python 3.7/3.8/3.9/3.10 (<em>cp37/cp38/cp39/cp310</em>) and your <em>bitness</em> (32 or 64 bit)</p></li>
-<li><p>install the <em>.whl</em> file using pip: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy-X.Y.Z.whl</span></code></p></li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><p>install python-javabridge</p></li>
-</ul>
-<blockquote>
-<div><ul class="simple">
-<li><p>download <a class="reference external" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#python-javabridge">python-javabridge</a>
-(or later) for Python 3.7/3.8/3.9/3.10 (<em>cp37/cp38/cp39/310</em>) and your <em>bitness</em> (32 or 64 bit)</p></li>
-<li><p>install the <em>.whl</em> file using pip: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">python-javabridge-X.Y.Z.whl</span></code></p></li>
-</ul>
-</div></blockquote>
 <p>If you want to use the plotting functionality, you need to install <em>graphviz</em> and <em>matplotlib</em> as well:</p>
 <ul class="simple">
 <li><p>download <a class="reference external" href="https://graphviz.org/download/#windows">graphviz</a>
