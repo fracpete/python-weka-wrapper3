@@ -280,7 +280,7 @@ Perform the following steps:
 * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
   select the **Desktop development with C++** option in the installer
 * install `Python <http://www.python.org/downloads>`__ (<=3.10), make sure you check *Add python.exe to path* during the installation
-* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python35\\Scripts``
+* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python310\\Scripts``
 * install ``pip`` with these steps:
 
  * download from `here <https://bootstrap.pypa.io/get-pip.py>`__
