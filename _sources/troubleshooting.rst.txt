@@ -15,11 +15,13 @@ General
   environment (JRE). You also may have to set the ``JAVA_HOME`` environment variable pointing 
   to your JDK installation (above the ``bin`` directory).
 
-* Before you can install `matplotlib`, you may have to upgrade your `distribute` library as follows:
+* **Q:** I cannot start the JVM once stopped - why?
 
-  .. code-block:: bash
+  **A:** That's unfortunately one of the limitations of the underlying python-javabridge library:
+  https://github.com/LeeKamentsky/python-javabridge/issues/88
 
-     $  ./venv/bin/easy_install -U distribute
+  However, a potential workaround was suggested in that same thread (not tested):
+  https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968
 
 
 Debian

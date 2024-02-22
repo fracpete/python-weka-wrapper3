@@ -47,10 +47,11 @@ javabridge requires header files to present that won’t be present if you only 
 environment (JRE). You also may have to set the <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> environment variable pointing
 to your JDK installation (above the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory).</p>
 </li>
-<li><p>Before you can install <cite>matplotlib</cite>, you may have to upgrade your <cite>distribute</cite> library as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$  ./venv/bin/easy_install -U distribute
-</pre></div>
-</div>
+<li><p><strong>Q:</strong> I cannot start the JVM once stopped - why?</p>
+<p><strong>A:</strong> That’s unfortunately one of the limitations of the underlying python-javabridge library:
+<a class="reference external" href="https://github.com/LeeKamentsky/python-javabridge/issues/88">https://github.com/LeeKamentsky/python-javabridge/issues/88</a></p>
+<p>However, a potential workaround was suggested in that same thread (not tested):
+<a class="reference external" href="https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968">https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968</a></p>
 </li>
 </ul>
 </section>
