@@ -15,12 +15,6 @@ General
   environment (JRE). You also may have to set the ``JAVA_HOME`` environment variable pointing 
   to your JDK installation (above the ``bin`` directory).
 
-* Before you can install `matplotlib`, you may have to upgrade your `distribute` library as follows:
-
-  .. code-block:: bash
-
-     $  ./venv/bin/easy_install -U distribute
-
 
 Debian
 ------
