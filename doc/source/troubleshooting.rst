@@ -15,6 +15,14 @@ General
   environment (JRE). You also may have to set the ``JAVA_HOME`` environment variable pointing 
   to your JDK installation (above the ``bin`` directory).
 
+* **Q:** I cannot start the JVM once stopped - why?
+
+  **A:** That's unfortunately one of the limitations of the underlying python-javabridge library:
+  https://github.com/LeeKamentsky/python-javabridge/issues/88
+
+  However, a potential workaround was suggested in that same thread (not tested):
+  https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968
+
 
 Debian
 ------
