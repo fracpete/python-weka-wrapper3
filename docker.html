@@ -41,9 +41,11 @@ images for various python-weka-wrapper3 versions are available from Docker Hub:<
 <p>If you are unfamiliar with Docker, then have a look at the following
 introduction for Data Scientists:</p>
 <p><a class="reference external" href="https://www.data-mining.co.nz/docker-for-data-scientists/">data-mining.co.nz/docker-for-data-scientists/</a></p>
+<section id="images">
+<h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
 <section id="cpu">
-<h2>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h2>
-<p>For using the image interactively, you can run the following command:</p>
+<h3>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h3>
+<p>For using the CPU image interactively, you can run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -u <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="se">\</span>
     -it fracpete/pww3:0.2.14_cpu
 </pre></div>
@@ -57,8 +59,8 @@ you can map your local Weka packages into the container as follows:</p>
 </div>
 </section>
 <section id="gpu">
-<h2>GPU<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h2>
-<p>For using the image interactively, you can run the following command:</p>
+<h3>GPU<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h3>
+<p>For using the GPU image interactively, you can run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --gpus<span class="o">=</span>all -u <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="se">\</span>
     -it fracpete/pww3:0.2.14_cuda10.2
 </pre></div>
@@ -71,8 +73,58 @@ you can map your local Weka packages into the container as follows:</p>
 </pre></div>
 </div>
 </section>
-<section id="additional-weka-packages">
-<h2>Additional Weka packages<a class="headerlink" href="#additional-weka-packages" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<section id="executables">
+<h3>Executables<a class="headerlink" href="#executables" title="Permalink to this headline">¶</a></h3>
+<p>Since python-weka-wrapper3 installs executables for the main class hierarchies
+of Weka, you can run these directly with a single command.</p>
+<p>E.g., if we want to train a J48 classifier on the dataset <cite>anneal.arff</cite> which
+is in our current directory (<cite>pwd</cite>), then we can do something like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -u <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="se">\</span>
+    -v <span class="nv">$HOME</span>/wekafiles:/workspace/wekafiles <span class="se">\</span>
+    -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/data <span class="se">\</span>
+    -t fracpete/pww3:0.2.14_cpu <span class="se">\</span>
+    pww-classifier <span class="se">\</span>
+    -t /workspace/data/anneal.arff <span class="se">\</span>
+    weka.classifiers.trees.J48
+</pre></div>
+</div>
+</section>
+<section id="scripts">
+<h3>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h3>
+<p>For more flexibility and/or more complex operations, you would normally want to
+fall back on using Python scripts. The above example can be translated into
+the following Python script (saved in current directory as <cite>j48.py</cite>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="k">as</span> <span class="nn">jvm</span>
+<span class="kn">from</span> <span class="nn">weka.core.classes</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">from</span> <span class="nn">weka.core.converters</span> <span class="kn">import</span> <span class="n">load_any_file</span>
+<span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span><span class="p">,</span> <span class="n">Evaluation</span>
+
+<span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_any_file</span><span class="p">(</span><span class="s2">&quot;/workspace/data/anneal.arff&quot;</span><span class="p">,</span> <span class="n">class_index</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">)</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
+<span class="n">evl</span> <span class="o">=</span> <span class="n">Evaluation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">evl</span><span class="o">.</span><span class="n">crossvalidate_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">Random</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">evl</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+<span class="n">jvm</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This script is then executed as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -u <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="se">\</span>
+    -v <span class="nv">$HOME</span>/wekafiles:/workspace/wekafiles <span class="se">\</span>
+    -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/data <span class="se">\</span>
+    -t fracpete/pww3:0.2.14_cpu <span class="se">\</span>
+    python3 /workspace/data/j48.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installing-weka-packages">
+<h2>Installing Weka packages<a class="headerlink" href="#installing-weka-packages" title="Permalink to this headline">¶</a></h2>
 <p>When building Docker images for your environments, your code will most likely rely
 on additional Weka packages. You can install the packages by creating a little
 Python script that uses python-weka-wrapper3 to install them (just like you would
@@ -125,7 +177,7 @@ the command maps the current directory (<code class="docutils literal notranslat
 directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run <span class="se">\</span>
     -v <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/scripts <span class="se">\</span>
-   -t pww3-pkg:latest <span class="se">\</span>
+    -t pww3-pkg:latest <span class="se">\</span>
     python3 /workspace/scripts/test_packages.py
 </pre></div>
 </div>
@@ -165,9 +217,9 @@ weka.clusterers.SelfOrganizingMap -L 1.0 -O 2000 -C 1000 -H 2 -W 2
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Docker</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cpu">CPU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#gpu">GPU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#additional-weka-packages">Additional Weka packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#images">Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-weka-packages">Installing Weka packages</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>

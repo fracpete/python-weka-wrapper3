@@ -12,10 +12,13 @@ introduction for Data Scientists:
 `data-mining.co.nz/docker-for-data-scientists/ <https://www.data-mining.co.nz/docker-for-data-scientists/>`__
 
 
-CPU
----
+Images
+------
 
-For using the image interactively, you can run the following command:
+CPU
++++
+
+For using the CPU image interactively, you can run the following command:
 
 .. code-block:: bash
 
@@ -33,9 +36,9 @@ you can map your local Weka packages into the container as follows:
 
 
 GPU
----
++++
 
-For using the image interactively, you can run the following command:
+For using the GPU image interactively, you can run the following command:
 
 .. code-block:: bash
 
@@ -52,7 +55,66 @@ you can map your local Weka packages into the container as follows:
        -it fracpete/pww3:0.2.14_cuda10.2
 
 
-Additional Weka packages
+Usage
+-----
+
+Executables
++++++++++++
+
+Since python-weka-wrapper3 installs executables for the main class hierarchies
+of Weka, you can run these directly with a single command.
+
+E.g., if we want to train a J48 classifier on the dataset `anneal.arff` which
+is in our current directory (`pwd`), then we can do something like this:
+
+.. code-block:: bash
+
+   docker run --rm -u $(id -u):$(id -g) \
+       -v $HOME/wekafiles:/workspace/wekafiles \
+       -v `pwd`:/workspace/data \
+       -t fracpete/pww3:0.2.14_cpu \
+       pww-classifier \
+       -t /workspace/data/anneal.arff \
+       weka.classifiers.trees.J48
+
+
+Scripts
++++++++
+
+For more flexibility and/or more complex operations, you would normally want to
+fall back on using Python scripts. The above example can be translated into
+the following Python script (saved in current directory as `j48.py`):
+
+.. code-block:: python
+
+   import weka.core.jvm as jvm
+   from weka.core.classes import Random
+   from weka.core.converters import load_any_file
+   from weka.classifiers import Classifier, Evaluation
+
+   jvm.start()
+
+   data = load_any_file("/workspace/data/anneal.arff", class_index="last")
+   cls = Classifier(classname="weka.classifiers.trees.J48")
+   evl = Evaluation(data)
+   evl.crossvalidate_model(cls, data, 10, Random(1))
+   print(evl.summary())
+
+   jvm.stop()
+
+
+This script is then executed as follows:
+
+.. code-block:: bash
+
+   docker run --rm -u $(id -u):$(id -g) \
+       -v $HOME/wekafiles:/workspace/wekafiles \
+       -v `pwd`:/workspace/data \
+       -t fracpete/pww3:0.2.14_cpu \
+       python3 /workspace/data/j48.py
+
+
+Installing Weka packages
 ------------------------
 
 When building Docker images for your environments, your code will most likely rely
@@ -122,7 +184,7 @@ directory:
 
    docker run \
        -v `pwd`:/workspace/scripts \
-      -t pww3-pkg:latest \
+       -t pww3-pkg:latest \
        python3 /workspace/scripts/test_packages.py
 
 
