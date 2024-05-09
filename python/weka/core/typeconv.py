@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # typeconv.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import javabridge
 import logging
@@ -138,3 +138,25 @@ def jdouble_to_float(d):
     :rtype: float
     """
     return javabridge.call(d, "doubleValue", "()D", d)
+
+
+def to_string(o):
+    """
+    Turns the object into a string.
+
+    :param o: the object to convert
+    :return: the generated string
+    :rtype: str
+    """
+    if o is None:
+        return None
+
+    result = str(o)
+
+    if isinstance(o, bytes):
+        try:
+            result = o.decode("utf-8")
+        except:
+            pass
+
+    return result

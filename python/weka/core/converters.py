@@ -361,7 +361,7 @@ def ndarray_to_instances(array, relation, att_template="Att-#", att_list=None):
     return result
 
 
-def load_csv_file(filename, dialect="excel", delimiter=",", quotechar='"', num_cols=None):
+def load_csv_file(filename, dialect="excel", delimiter=",", quotechar='"', num_cols=None, nom_cols=None):
     """
     Loads a CSV file using the Python csv module and then converts it
     to an Instances object. Better at reading CSV files than Weka's
@@ -379,6 +379,8 @@ def load_csv_file(filename, dialect="excel", delimiter=",", quotechar='"', num_c
     :param quoting: how the quoting works
     :param num_cols: the list of 0-based column indices that are numeric, default for cols is str
     :type num_cols: list
+    :param nom_cols: the list of 0-based column indices that are nominal, default for cols is str
+    :type nom_cols: list
     """
     with open(filename) as fp:
         r = csv.reader(fp, dialect=dialect, delimiter=delimiter, quotechar=quotechar)
@@ -398,4 +400,4 @@ def load_csv_file(filename, dialect="excel", delimiter=",", quotechar='"', num_c
                             row[num_col] = None
                 data.append(row)
 
-    return create_instances_from_lists(data, cols_x=header, name=os.path.basename(filename))
+    return create_instances_from_lists(data, cols_x=header, name=os.path.basename(filename), nominal_x=nom_cols)

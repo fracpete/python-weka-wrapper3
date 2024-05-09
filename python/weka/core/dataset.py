@@ -1747,7 +1747,7 @@ def check_col_names_unique(cols_x, col_y=None):
     return None
 
 
-def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None):
+def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None, nominal_x=None, nominal_y=False):
     """
     Allows the generation of an Instances object from a list of lists for X and a list for Y (optional).
     Data can be numeric, string or bytes. Attributes can be converted to nominal with the
@@ -1764,6 +1764,10 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
     :type cols_x: list
     :param col_y: the column name to use for the output variable (y)
     :type col_y: str
+    :param nominal_x: the list of 0-based column indices to treat as nominal ones, ignored if None
+    :type nominal_x: list
+    :param nominal_y: whether the y column is to be treated as nominal
+    :type nominal_y: bool
     :return: the generated dataset
     :rtype: Instances
     """
@@ -1783,6 +1787,16 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
     if msg is not None:
         raise Exception(msg)
 
+    # nominal x columns?
+    nominal_x_values = None
+    if nominal_x is not None:
+        nominal_x_values = dict()
+        for nominal_col in nominal_x:
+            labels = set()
+            for n in range(len(x)):
+                labels.add(typeconv.to_string(x[n][nominal_col]))
+            nominal_x_values[nominal_col] = sorted(list(labels))
+
     # create header
     atts = []
     type_x = []
@@ -1792,6 +1806,9 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
         for n in range(len(x)):
             if x[n][i] is None:
                 continue
+            if (nominal_x_values is not None) and (i in nominal_x_values):
+                type_x[i] = "C"
+                break
             if isinstance(x[n][i], float) or isinstance(x[n][i], int):
                 type_x[i] = "N"
                 break
@@ -1811,15 +1828,29 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
             atts.append(Attribute.create_string(cols_x[i]))
         elif type_x[i] == "S":
             atts.append(Attribute.create_string(cols_x[i]))
+        elif type_x[i] == "C":
+            atts.append(Attribute.create_nominal(cols_x[i], nominal_x_values[i]))
         else:
             print("WARNING: Failed to determine data type for column #%d" % i)
             atts.append(Attribute.create_numeric(cols_x[i]))
 
     type_y = ""
     if y is not None:
+        # nominal y column?
+        nominal_y_values = None
+        if nominal_y:
+            labels = set()
+            for n in range(len(y)):
+                labels.add(typeconv.to_string(y[n]))
+            nominal_y_values = sorted(list(labels))
+
         for n in range(len(y)):
             if y[n] is None:
                 continue
+            if nominal_y:
+                type_y = "C"
+                atts.append(Attribute.create_nominal(col_y, nominal_y_values))
+                break
             if isinstance(y[n], float) or isinstance(y[n], int):
                 type_y = "N"
                 atts.append(Attribute.create_numeric(col_y))
@@ -1849,7 +1880,9 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
             if type_x[n] == "N":
                 values.append(x[i][n])
             elif type_x[n] == "B":
-                values.append(result.attribute(n).add_string_value(x[i][n].decode("utf-8")))
+                values.append(result.attribute(n).add_string_value(typeconv.to_string(x[i][n])))
+            elif type_x[n] == "C":
+                values.append(result.attribute(n).index_of(typeconv.to_string(x[i][n])))
             else:
                 values.append(result.attribute(n).add_string_value(x[i][n]))
 
@@ -1860,7 +1893,9 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
             if type_y == "N":
                 values.append(y[i])
             elif type_y == "B":
-                values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i].decode("utf-8")))
+                values.append(result.attribute(result.num_attributes - 1).add_string_value(typeconv.to_string(y[i])))
+            elif type_y == "C":
+                values.append(result.attribute(result.num_attributes - 1).index_of(typeconv.to_string(y[i])))
             else:
                 values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i]))
 
@@ -1869,7 +1904,7 @@ def create_instances_from_lists(x, y=None, name="data", cols_x=None, col_y=None)
     return result
 
 
-def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=None):
+def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=None, nominal_x=None, nominal_y=False):
     """
     Allows the generation of an Instances object from a 2-dimensional matrix for X and a
     1-dimensional matrix for Y (optional).
@@ -1887,6 +1922,10 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
     :type cols_x: list
     :param col_y: the column name to use for the output variable (y)
     :type col_y: str
+    :param nominal_x: the list of 0-based column indices to treat as nominal ones, ignored if None
+    :type nominal_x: list
+    :param nominal_y: whether the y column is to be treated as nominal
+    :type nominal_y: bool
     :return: the generated dataset
     :rtype: Instances
     """
@@ -1906,11 +1945,25 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
     if msg is not None:
         raise Exception(msg)
 
+    # nominal x columns?
+    nominal_x_values = None
+    if nominal_x is not None:
+        nominal_x_values = dict()
+        for nominal_col in nominal_x:
+            labels = set()
+            for n in range(len(x)):
+                labels.add(typeconv.to_string(x[n][nominal_col]))
+            nominal_x_values[nominal_col] = sorted(list(labels))
+
     # create header
     atts = []
     type_x = []
     for i in range(len(x[0])):
         try:
+            if (nominal_x_values is not None) and (i in nominal_x_values):
+                type_x.append("C")  # nominal
+                atts.append(Attribute.create_nominal(cols_x[i], nominal_x_values[i]))
+                continue
             len(x.dtype)
             if np.issubdtype(x.dtype[i], np.number):
                 type_x.append("N")  # number
@@ -1926,7 +1979,18 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
             atts.append(Attribute.create_numeric(cols_x[i]))
     type_y = ""
     if y is not None:
-        if np.issubdtype(y.dtype, np.number):
+        # nominal y column?
+        nominal_y_values = None
+        if nominal_y:
+            labels = set()
+            for n in range(len(y)):
+                labels.add(typeconv.to_string(y[n]))
+            nominal_y_values = sorted(list(labels))
+
+        if nominal_y:
+            type_y = "C"
+            atts.append(Attribute.create_nominal(col_y, nominal_y_values))
+        elif np.issubdtype(y.dtype, np.number):
             type_y = "N"  # number
             atts.append(Attribute.create_numeric(col_y))
         elif np.issubdtype(y.dtype, np.str_):
@@ -1949,8 +2013,10 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
                 values.append(x[i][n])
             elif type_x[n] == "S":
                 values.append(result.attribute(n).add_string_value(x[i][n]))
+            elif type_x[n] == "C":
+                values.append(result.attribute(n).index_of(typeconv.to_string(x[i][n])))
             else:
-                values.append(result.attribute(n).add_string_value(x[i][n].decode("utf-8")))
+                values.append(result.attribute(n).add_string_value(typeconv.to_string(x[i][n])))
 
         if y is not None:
             if isinstance(y[i], float) and np.isnan(y[i]):
@@ -1959,8 +2025,10 @@ def create_instances_from_matrices(x, y=None, name="data", cols_x=None, col_y=No
                 values.append(y[i])
             elif type_y == "S":
                 values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i]))
+            elif type_y == "C":
+                values.append(result.attribute(result.num_attributes - 1).index_of(typeconv.to_string(y[i])))
             else:
-                values.append(result.attribute(result.num_attributes - 1).add_string_value(y[i].decode("utf-8")))
+                values.append(result.attribute(result.num_attributes - 1).add_string_value(typeconv.to_string(y[i])))
 
         result.add_instance(Instance.create_instance(values))
 

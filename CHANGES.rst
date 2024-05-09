@@ -6,7 +6,7 @@ Changelog
 
 - the methods `create_instances_from_lists` and `create_instances_from_matrices` of the
   `weka.core.dataset` module can handle missing values now (`None` in case of lists,
-  `nan` in case of matrices)
+  `nan` in case of matrices), as well as being able to force columns to be nominal
 - added the method `load_csv_file` to the module `weka.core.converters` to provide a more
   reliable way of loading CSV files compared to Weka's native `CSVLoader` converter
   (uses Python's csv module and then calls `create_instances_from_lists`).
