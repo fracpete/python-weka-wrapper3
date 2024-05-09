@@ -3,6 +3,10 @@
 In order to make installation reproducible, the following Docker images 
 (which can be used interactively) are maintained:
 
+* 0.2.16
+  
+  * [CPU only](0.2.16_cpu)
+
 * 0.2.15
   
   * [CPU only](0.2.15_cpu)
