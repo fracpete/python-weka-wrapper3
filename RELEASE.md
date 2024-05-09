@@ -67,9 +67,7 @@ Steps:
 
 # Docker
 
-Create new docker images for cpu and CUDA X.Y (aligned with 
-[wekadeeplearning4j](https://github.com/Waikato/wekaDeeplearning4j/releases/)) 
-for this release and push them to docker hub.
+Create new CPU docker imagefor this release and push it to docker hub.
 
 
 # Google Group
