@@ -71,7 +71,8 @@ available in the Ubuntu repositories:
 
 .. code-block:: bash
 
-   ./pww3/bin/pip install python-javabridge
+   ./pww3/bin/pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
+   ./pww3/bin/pip install "git+https://github.com/CellProfiler/python-javabridge.git"
    ./pww3/bin/pip install python-weka-wrapper3
 
 
@@ -128,7 +129,8 @@ available in the Debian repositories:
 
 .. code-block:: bash
 
-   ./pww3/bin/pip install python-javabridge
+   ./pww3/bin/pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
+   ./pww3/bin/pip install "git+https://github.com/CellProfiler/python-javabridge.git"
    ./pww3/bin/pip install python-weka-wrapper3
 
 Please note, when using *python-weka-wrapper3* as a *normal* user, don't forget
@@ -187,7 +189,8 @@ packages that are not available in the distro repositories:
 
 .. code-block:: bash
 
-   ./pww3/bin/pip install python-javabridge
+   ./pww3/bin/pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
+   ./pww3/bin/pip install "git+https://github.com/CellProfiler/python-javabridge.git"
    ./pww3/bin/pip install python-weka-wrapper3
 
 
@@ -198,8 +201,8 @@ In a Python 3 COLAB environment, you need to install at least these modules to g
 
 ::
 
-   !pip install numpy
-   !pip install python-javabridge
+   !pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
+   !pip install "git+https://github.com/CellProfiler/python-javabridge.git"
    !pip install python-weka-wrapper3
 
 **Notes:**
@@ -248,15 +251,14 @@ install a 32-bit JDK (or all of them are 64-bit).
 * set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
 * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
   select the **Desktop development with C++** option in the installer
-* the following configures an environment with Python 3.10 (3.11+ does not work at this stage)
+* the following configures an environment with Python 3.10
 
   .. code-block:: doscon
 
      conda create --name pww3 python=3.10
      conda activate pww3
-     conda install -c conda-forge numpy
-     conda install -c conda-forge pillow
-     pip install python-javabridge
+     conda install -c conda-forge setuptools wheel "numpy>=1.20.1" pillow "cython>=0.29.25,<3.0.0"
+     pip install "git+https://github.com/CellProfiler/python-javabridge.git"
      pip install python-weka-wrapper3
 
 If you want plotting support, then install also *graphviz* and *matplotlib*:
@@ -283,29 +285,19 @@ Perform the following steps:
 * set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
 * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
   select the **Desktop development with C++** option in the installer
-* install `Python <http://www.python.org/downloads>`__ (<=3.10), make sure you check *Add python.exe to path* during the installation
+* install `Python <http://www.python.org/downloads>`__, make sure you check *Add python.exe to path* during the installation
 * add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python310\\Scripts``
 * install ``pip`` with these steps:
 
  * download from `here <https://bootstrap.pypa.io/get-pip.py>`__
  * install using ``python get-pip.py``
 
-* install numpy:
+* install pww3:
 
 .. code-block:: bash
 
-   pip install numpy
-
-* install python-javabridge:
-
-.. code-block:: bash
-
-   pip install python-javabridge
-
-* install python-weka-wrapper3:
-
-.. code-block:: bash
-
+   pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
+   pip install "git+https://github.com/CellProfiler/python-javabridge.git"
    pip install python-weka-wrapper3
 
 If you want to use the plotting functionality, you need to install *graphviz* and *matplotlib* as well:

@@ -105,6 +105,14 @@ weka\.core\.typeconv module
     :undoc-members:
     :show-inheritance:
 
+weka\.core\.utils module
+---------------------------
+
+.. automodule:: weka.core.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 weka\.core\.version module
 --------------------------
 

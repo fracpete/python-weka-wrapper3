@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Installation &#8212; python-weka-wrapper3 0.2.14 documentation</title>
+    <title>Installation &#8212; python-weka-wrapper3 0.2.15 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -81,7 +81,8 @@ compiles against (but don’t use it for starting up JVMs):</p>
 </div>
 <p>Finally, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
 available in the Ubuntu repositories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install python-javabridge
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
+./pww3/bin/pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
 ./pww3/bin/pip install python-weka-wrapper3
 </pre></div>
 </div>
@@ -120,7 +121,8 @@ installation/compilation (you might want to add this command to your <code class
 </div>
 <p>Finally, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
 available in the Debian repositories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install python-javabridge
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
+./pww3/bin/pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
 ./pww3/bin/pip install python-weka-wrapper3
 </pre></div>
 </div>
@@ -171,7 +173,8 @@ graphical output and plots:</p>
 </div>
 <p>Once these libraries are installed, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python
 packages that are not available in the distro repositories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install python-javabridge
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
+./pww3/bin/pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
 ./pww3/bin/pip install python-weka-wrapper3
 </pre></div>
 </div>
@@ -179,8 +182,8 @@ packages that are not available in the distro repositories:</p>
 <section id="colab">
 <h2>COLAB<a class="headerlink" href="#colab" title="Permalink to this headline">¶</a></h2>
 <p>In a Python 3 COLAB environment, you need to install at least these modules to get python-weka-wrapper3 working:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install numpy
-!pip install python-javabridge
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install setuptools wheel &quot;cython&gt;=0.29.25,&lt;3.0.0&quot; &quot;numpy&gt;=1.20.1&quot;
+!pip install &quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;
 !pip install python-weka-wrapper3
 </pre></div>
 </div>
@@ -223,12 +226,11 @@ install a 32-bit JDK (or all of them are 64-bit).</p>
 <li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
 <li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
 select the <strong>Desktop development with C++</strong> option in the installer</p></li>
-<li><p>the following configures an environment with Python 3.10 (3.11+ does not work at this stage)</p>
+<li><p>the following configures an environment with Python 3.10</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">conda create --name pww3 python=3.10</span>
 <span class="go">conda activate pww3</span>
-<span class="go">conda install -c conda-forge numpy</span>
-<span class="go">conda install -c conda-forge pillow</span>
-<span class="go">pip install python-javabridge</span>
+<span class="gp">conda install -c conda-forge setuptools wheel &quot;numpy&gt;</span>=1.20.1<span class="s2">&quot; pillow &quot;</span>cython<span class="p">&gt;</span>=0.29.25,<span class="p">&lt;</span>3.0.0<span class="s2">&quot;</span>
+<span class="go">pip install &quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
 <span class="go">pip install python-weka-wrapper3</span>
 </pre></div>
 </div>
@@ -256,7 +258,7 @@ install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
 <li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
 <li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
 select the <strong>Desktop development with C++</strong> option in the installer</p></li>
-<li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a> (&lt;=3.10), make sure you check <em>Add python.exe to path</em> during the installation</p></li>
+<li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a>, make sure you check <em>Add python.exe to path</em> during the installation</p></li>
 <li><p>add the Python scripts directory to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal notranslate"><span class="pre">C:\\Python310\\Scripts</span></code></p></li>
 <li><p>install <code class="docutils literal notranslate"><span class="pre">pip</span></code> with these steps:</p></li>
 </ul>
@@ -267,21 +269,11 @@ select the <strong>Desktop development with C++</strong> option in the installer
 </ul>
 </div></blockquote>
 <ul class="simple">
-<li><p>install numpy:</p></li>
+<li><p>install pww3:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install numpy
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>install python-javabridge:</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install python-javabridge
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>install python-weka-wrapper3:</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install python-weka-wrapper3
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
+pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
+pip install python-weka-wrapper3
 </pre></div>
 </div>
 <p>If you want to use the plotting functionality, you need to install <em>graphviz</em> and <em>matplotlib</em> as well:</p>

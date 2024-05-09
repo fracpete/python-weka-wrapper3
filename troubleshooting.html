@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Troubleshooting &#8212; python-weka-wrapper3 0.2.14 documentation</title>
+    <title>Troubleshooting &#8212; python-weka-wrapper3 0.2.15 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -41,7 +41,7 @@
 <li><p><strong>Q:</strong> How do I install <cite>.whl</cite> files?</p>
 <p><strong>A:</strong> <cite>.whl</cite> are <em>Python Wheels</em> archives, which you can install using pip (&gt;= 1.4). See also <a class="reference external" href="http://pythonwheels.com/">this website</a>.</p>
 </li>
-<li><p><strong>Q:</strong> Why does javabridge not compile?</p>
+<li><p><strong>Q:</strong> Why does python-javabridge not compile?</p>
 <p><strong>A:</strong> Ensure that you have an actual JDK installed (test it by issuing the <code class="docutils literal notranslate"><span class="pre">javac</span></code> command), as
 javabridge requires header files to present that won’t be present if you only have a runtime
 environment (JRE). You also may have to set the <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> environment variable pointing
@@ -52,6 +52,12 @@ to your JDK installation (above the <code class="docutils literal notranslate"><
 <a class="reference external" href="https://github.com/LeeKamentsky/python-javabridge/issues/88">https://github.com/LeeKamentsky/python-javabridge/issues/88</a></p>
 <p>However, a potential workaround was suggested in that same thread (not tested):
 <a class="reference external" href="https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968">https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968</a></p>
+</li>
+<li><p><strong>Q:</strong> When installing python-javabridge, I get <cite>fatal error: longintrepr.h: No such file or directory</cite> - how to resolve?</p>
+<p><strong>A:</strong> Starting with Python 3.11, the <cite>longintrepr.h</cite> file got moved to a sub-directory and the
+pre-built wheel files of python-javabridge fail to include that sub-directory during the
+build process. The easiest workaround is to install the <cite>setuptools</cite> and <cite>wheel</cite> packages
+and then install python-javabridge directly from github using <cite>pip install “git+https://github.com/CellProfiler/python-javabridge.git”</cite></p>
 </li>
 </ul>
 </section>
@@ -120,8 +126,8 @@ but use <cite>pip3</cite>.</p>
 </li>
 </ul>
 </section>
-<section id="mac-osx">
-<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a></h2>
+<section id="mac-osx-intel">
+<h2>Mac OSX (Intel)<a class="headerlink" href="#mac-osx-intel" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p><strong>Q:</strong> Why does javabridge fail with compiler error <cite>clang: error: unknown argument: ‘-mno-fused-madd’</cite>?</p>
 <p><strong>A:</strong> XCode 5.1 changed how unknown arguments are handled and now treats them  as error (<a class="reference external" href="http://bruteforce.gr/bypassing-clang-error-unknown-argument.html">source</a>). You can precede the <cite>pip install javabridge</cite> command with the following environment variable:</p>
@@ -233,7 +239,7 @@ you need to install separately. Also, you need to add the directory containing t
 <li class="toctree-l2"><a class="reference internal" href="#debian">Debian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mac-osx">Mac OSX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mac-osx-intel">Mac OSX (Intel)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a></li>
 </ul>
 </li>
