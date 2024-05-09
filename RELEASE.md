@@ -50,6 +50,8 @@ git add -A
 git commit -a -m "updated documentation"
 git rebase gh-pages
 git push origin gh-pages
+cd ../python-weka-wrapper3/
+git pull
 ```
 
 
