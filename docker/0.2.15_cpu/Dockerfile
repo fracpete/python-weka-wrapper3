@@ -12,7 +12,7 @@ RUN apt-get update && \
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 RUN pip3 --no-cache-dir install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1" matplotlib pygraphviz && \
     pip3 --no-cache-dir install "git+https://github.com/CellProfiler/python-javabridge.git" && \
-    pip3 --no-cache-dir install python-weka-wrapper3==0.2.15
+    pip3 --no-cache-dir install "git+https://github.com/fracpete/python-weka-wrapper3.git@v0.2.15"
 
 COPY bash.bashrc /etc/bash.bashrc
 
