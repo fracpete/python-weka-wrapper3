@@ -5,7 +5,7 @@ Preparation:
 * run unit tests: `tests/wekatests/all_tests.py`
 * increment version in `setup.py`
 * increment versions/copyright in `doc/source/conf.py`
-* increment versions in `doc/source/docker.rst` (will be built later)  
+* increment CPU versions in `doc/source/docker.rst` (will be built later)  
 * update API documentation
 
   * cd python/weka

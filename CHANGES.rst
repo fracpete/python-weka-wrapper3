@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.15 (????-??-??)
+0.2.15 (2024-05-10)
 -------------------
 
 - the methods `create_instances_from_lists` and `create_instances_from_matrices` of the
