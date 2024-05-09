@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.2.16 (2024-05-10)
+-------------------
+
+- `setup.py` no longer lists python-javabridge with github URL, as it fails to
+  install via pip otherwise
+
+
 0.2.15 (2024-05-10)
 -------------------
 
