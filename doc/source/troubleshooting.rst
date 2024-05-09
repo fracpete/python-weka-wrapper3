@@ -8,7 +8,7 @@ General
 
   **A:** `.whl` are *Python Wheels* archives, which you can install using pip (>= 1.4). See also `this website <http://pythonwheels.com/>`__.
 
-* **Q:** Why does javabridge not compile?
+* **Q:** Why does python-javabridge not compile?
 
   **A:** Ensure that you have an actual JDK installed (test it by issuing the ``javac`` command), as 
   javabridge requires header files to present that won't be present if you only have a runtime 
@@ -22,6 +22,13 @@ General
 
   However, a potential workaround was suggested in that same thread (not tested):
   https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968
+
+* **Q:** When installing python-javabridge, I get `fatal error: longintrepr.h: No such file or directory` - how to resolve?
+
+  **A:** Starting with Python 3.11, the `longintrepr.h` file got moved to a sub-directory and the
+  pre-built wheel files of python-javabridge fail to include that sub-directory during the
+  build process. The easiest workaround is to install the `setuptools` and `wheel` packages
+  and then install python-javabridge directly from github using `pip install "git+https://github.com/CellProfiler/python-javabridge.git"`
 
 
 Debian
@@ -92,8 +99,8 @@ Linux
   * png
 
 
-Mac OSX
--------
+Mac OSX (Intel)
+---------------
 
 * **Q:** Why does javabridge fail with compiler error `clang: error: unknown argument: '-mno-fused-madd'`?
 

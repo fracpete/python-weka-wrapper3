@@ -59,8 +59,9 @@ setup(
     author='Peter "fracpete" Reutemann',
     author_email='pythonwekawrapper@gmail.com',
     install_requires=[
-        "python-javabridge>=4.0.0",
-        "numpy",
+        "python-javabridge @ git+https://github.com/CellProfiler/python-javabridge.git",
+        "cython>=0.29.25,<3.0.0",
+        "numpy>=1.20.1",
         "packaging",
         "configurable-objects",
         "simple-data-flow",

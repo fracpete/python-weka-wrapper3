@@ -12,6 +12,7 @@ Changelog
   (uses Python's csv module and then calls `create_instances_from_lists`).
 - added `simple_range` library as dependency to make it easier to generate integer list from range strings
 - added `weka.core.utils` module with following methods: correlation, variance, normalize
+- updated requirements (and install instructions) to make pww3 work with Python 3.11+
 
 
 0.2.14 (2023-07-04)
