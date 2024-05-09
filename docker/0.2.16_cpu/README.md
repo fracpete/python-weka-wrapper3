@@ -4,7 +4,7 @@
 
 ### Build local image
 
-* Build the image from Docker file (from within `docker/0.2.15_cpu`)
+* Build the image from Docker file (from within `docker/0.2.16_cpu`)
 
   ```bash
   docker build -t pww3_cpu .
@@ -22,21 +22,21 @@
 * Build
 
   ```bash
-  docker build -t pww3:0.2.15_cpu .
+  docker build -t pww3:0.2.16_cpu .
   ```
   
 * Tag
 
   ```bash
   docker tag \
-    pww3:0.2.15_cpu \
-    fracpete/pww3:0.2.15_cpu
+    pww3:0.2.16_cpu \
+    fracpete/pww3:0.2.16_cpu
   ```
   
 * Push
 
   ```bash
-  docker push fracpete/pww3:0.2.15_cpu
+  docker push fracpete/pww3:0.2.16_cpu
   ```
 
 ### Special directories
@@ -52,7 +52,7 @@ For using the image interactively, you can run the following command:
 
 ```bash
 docker run -u $(id -u):$(id -g) \
-    -it fracpete/pww3:0.2.15_cpu
+    -it fracpete/pww3:0.2.16_cpu
 ```
 
 **NB:** Use `-v localdir:containerdir` to map directories from your host into the container.
@@ -65,7 +65,7 @@ you can map your local Weka packages into the container as follows:
 ```bash
 docker run -u $(id -u):$(id -g) \
     -v $HOME/wekafiles/:/workspace/wekafiles \
-    -it fracpete/pww3:0.2.15_cpu
+    -it fracpete/pww3:0.2.16_cpu
 ```
 
 **NB:** That way, you can separate various package installations on your host system

@@ -29,7 +29,7 @@ cat<<DBG
 | .__/ \\_/\\_/    \\_/\\_/ |____/ 
 |_|                            
 
-0.2.15, OpenJDK 11, Python 3.10
+0.2.16, OpenJDK 11, Python 3.10
 
 DBG
 echo -e "\e[0;33m"
