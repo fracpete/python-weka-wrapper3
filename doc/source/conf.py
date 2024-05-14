@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'python-weka-wrapper3'
-copyright = u'2014-2022, Peter "fracpete" Reutemann'
+copyright = u'2014-2024, Peter "fracpete" Reutemann'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
