@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Development &#8212; python-weka-wrapper3 0.2.16 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Flow" href="flow.html" />
+    <link rel="prev" title="Command-line" href="commandline.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>The Python code of the <em>python-weka-wrapper3</em> library shields the user from the
+complicated Java Native Interface (JNI) calls that are required to communicate
+with objects in the Java Virtual Machine (JVM). However, there may be times
+that additional or missing access methods need to be</p>
+<section id="jni-signatures">
+<h2>JNI Signatures<a class="headerlink" href="#jni-signatures" title="Permalink to this headline">¶</a></h2>
+<p>Documentation on JNI signatures can be found here:</p>
+<p><a class="reference external" href="https://docs.oracle.com/en/java/javase/17/docs/specs/jni/types.html#type-signatures">https://docs.oracle.com/en/java/javase/17/docs/specs/jni/types.html#type-signatures</a></p>
+</section>
+<section id="javap">
+<h2>javap<a class="headerlink" href="#javap" title="Permalink to this headline">¶</a></h2>
+<p><cite>javap</cite> is a little tool that is bundled with a JDK and can be used for outputting the
+internal (aka JNI) signatures of methods. The following outputs the signatures
+of the <cite>weka.classifiers.Classifier</cite> interface:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>javap -cp weka.jar -s weka.classifiers.Classifier
+</pre></div>
+</div>
+<p>The output will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Compiled</span> <span class="kn">from</span> <span class="s2">&quot;Classifier.java&quot;</span>
+<span class="n">public</span> <span class="n">interface</span> <span class="n">weka</span><span class="o">.</span><span class="n">classifiers</span><span class="o">.</span><span class="n">Classifier</span> <span class="p">{</span>
+  <span class="n">public</span> <span class="n">abstract</span> <span class="n">void</span> <span class="n">buildClassifier</span><span class="p">(</span><span class="n">weka</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Instances</span><span class="p">)</span> <span class="n">throws</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">Exception</span><span class="p">;</span>
+    <span class="n">descriptor</span><span class="p">:</span> <span class="p">(</span><span class="n">Lweka</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">Instances</span><span class="p">;)</span><span class="n">V</span>
+
+  <span class="n">public</span> <span class="n">abstract</span> <span class="n">double</span> <span class="n">classifyInstance</span><span class="p">(</span><span class="n">weka</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Instance</span><span class="p">)</span> <span class="n">throws</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">Exception</span><span class="p">;</span>
+    <span class="n">descriptor</span><span class="p">:</span> <span class="p">(</span><span class="n">Lweka</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">Instance</span><span class="p">;)</span><span class="n">D</span>
+
+  <span class="n">public</span> <span class="n">abstract</span> <span class="n">double</span><span class="p">[]</span> <span class="n">distributionForInstance</span><span class="p">(</span><span class="n">weka</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Instance</span><span class="p">)</span> <span class="n">throws</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">Exception</span><span class="p">;</span>
+    <span class="n">descriptor</span><span class="p">:</span> <span class="p">(</span><span class="n">Lweka</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">Instance</span><span class="p">;)[</span><span class="n">D</span>
+
+  <span class="n">public</span> <span class="n">abstract</span> <span class="n">weka</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Capabilities</span> <span class="n">getCapabilities</span><span class="p">();</span>
+    <span class="n">descriptor</span><span class="p">:</span> <span class="p">()</span><span class="n">Lweka</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">Capabilities</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="calling-methods">
+<h2>Calling methods<a class="headerlink" href="#calling-methods" title="Permalink to this headline">¶</a></h2>
+<section id="non-static-methods">
+<h3>Non-static methods<a class="headerlink" href="#non-static-methods" title="Permalink to this headline">¶</a></h3>
+<p>For calling a <strong>non-static method</strong>, you can use the <cite>call</cite> method of the <cite>javabridge</cite> module.
+You have to provide the Javabridge object, the method name, its JNI signature and any
+parameters that the method requires.</p>
+<p>Here is a code snippet that calls the <cite>buildClassifier</cite> method of a <cite>weka.classifiers.Classifier</cite>
+object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">javabridge</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobject</span><span class="p">,</span> <span class="s2">&quot;buildClassifier&quot;</span><span class="p">,</span> <span class="s2">&quot;(Lweka/core/Instances;)V&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">jobject</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p><cite>self.jobject</cite> - the Javabridge object representing the classifier Java object</p></li>
+<li><p><cite>buildClassifier</cite> - the method that we want to call</p></li>
+<li><p><cite>(Lweka/core/Instances;)V</cite> - the signature obtained via <cite>javap</cite></p></li>
+<li><p><cite>data.object</cite> - the Javabridge object representing a <cite>weka.core.Instances</cite> object</p></li>
+</ul>
+</section>
+<section id="static-methods">
+<h3>Static methods<a class="headerlink" href="#static-methods" title="Permalink to this headline">¶</a></h3>
+<p>For calling a <strong>static method</strong>, Javabridge offers the <cite>static_call</cite> method.
+Below is an example for calling the <cite>makeCopy</cite> method of the <cite>weka.classifiers.AbstractClassifier</cite>
+class to make a copy of a classifier object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jobject</span> <span class="o">=</span> <span class="n">javabridge</span><span class="o">.</span><span class="n">static_call</span><span class="p">(</span>
+    <span class="s2">&quot;weka/classifiers/AbstractClassifier&quot;</span><span class="p">,</span> <span class="s2">&quot;makeCopy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;(Lweka/classifiers/Classifier;)Lweka/classifiers/Classifier;&quot;</span><span class="p">,</span> <span class="n">classifier</span><span class="o">.</span><span class="n">jobject</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p><cite>jobject</cite> - the result of the method call, another Javabridge object</p></li>
+<li><p><cite>weka/classifiers/AbstractClassifier</cite> - the classname, using forward slashes instead of dots</p></li>
+<li><p><cite>makeCopy</cite> - the name of the static method to call</p></li>
+<li><p><cite>(Lweka/classifiers/Classifier;)Lweka/classifiers/Classifier;</cite> - the signature of the method</p></li>
+<li><p><cite>classifier.jobject</cite> - the Javabridge object representing a classifier that is to be copied</p></li>
+</ul>
+</section>
+<section id="jwrapper-and-jclasswrapper">
+<h3>JWrapper and JClassWrapper<a class="headerlink" href="#jwrapper-and-jclasswrapper" title="Permalink to this headline">¶</a></h3>
+<p>Later versions of Javabridge also introduced a simpler way of calling methods:</p>
+<ul class="simple">
+<li><p><cite>javabridge.JWrapper</cite></p></li>
+<li><p><cite>javabridge.JClassWrapper</cite></p></li>
+</ul>
+<p>The first one is used to wrap around a <em>Java object</em>, giving access to its methods using dot notation.
+The second is to be wrapped around a <em>Java class</em>, in order to gain access to its methods via dot notation.</p>
+<p><em>python-weka-wrapper3</em> offers convenience properties for these two wrappers, as implemented by
+the <cite>weka.core.classes.JavaObject</cite> class:</p>
+<ul class="simple">
+<li><p><cite>jwrapper</cite></p></li>
+<li><p><cite>jclasswrapper</cite></p></li>
+</ul>
+<p>For example, for accessing the <cite>getMeasure(String)</cite> method of the J48 classifier
+(as it implements the <cite>weka.core.AdditionalMeasureProducer</cite> interface) to retrieve
+the number of leaves in the tree, you can do the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># the training data</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
+<span class="bp">cls</span><span class="o">.</span><span class="n">build_classifier</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># call getMeasure(String)</span>
+<span class="nb">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">jwrapper</span><span class="o">.</span><span class="n">getMeasure</span><span class="p">(</span><span class="s2">&quot;measureNumLeaves&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The same call using JNI calls would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># the training data</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">Classifier</span><span class="p">(</span><span class="n">classname</span><span class="o">=</span><span class="s2">&quot;weka.classifiers.trees.J48&quot;</span><span class="p">)</span>
+<span class="bp">cls</span><span class="o">.</span><span class="n">build_classifier</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># call getMeasure(String)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">javabridge</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">jobject</span><span class="p">,</span> <span class="s2">&quot;getMeasure&quot;</span><span class="p">,</span> <span class="s2">&quot;(Ljava/lang/String;)D&quot;</span><span class="p">,</span> <span class="s2">&quot;measureNumLeaves&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="type-conversions">
+<h2>Type conversions<a class="headerlink" href="#type-conversions" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>weka.core.typeconv</cite> module contains a number of helper functions for converting
+between Java and Python objects.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">python-weka-wrapper3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandline.html">Command-line</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jni-signatures">JNI Signatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#javap">javap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calling-methods">Calling methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#type-conversions">Type conversions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flow.html">Flow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="weka.html">weka package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="commandline.html" title="previous chapter">Command-line</a></li>
+      <li>Next: <a href="flow.html" title="next chapter">Flow</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2024, Peter "fracpete" Reutemann.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/development.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

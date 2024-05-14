@@ -55,6 +55,7 @@ Contents
    troubleshooting
    examples
    commandline
+   development
    flow
 
 API

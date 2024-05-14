@@ -981,6 +981,37 @@ returns a system error code.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weka.classifiers.</span></span><span class="sig-name descname"><span class="pre">Classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weka.classifiers.rules.ZeroR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Classifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="weka.core.html#weka.core.classes.OptionHandler" title="weka.core.classes.OptionHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">weka.core.classes.OptionHandler</span></code></a></p>
 <p>Wrapper class for classifiers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="weka.classifiers.Classifier.additional_measure">
+<span class="sig-name descname"><span class="pre">additional_measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measure</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.classifiers.Classifier.additional_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the specified additional measure if implementing weka.core.AdditionalMeasureProducer, otherwise None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>measure</strong> (<em>str</em>) – the measure to retrieve</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the additional measure</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="weka.classifiers.Classifier.additional_measures">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">additional_measures</span></span><a class="headerlink" href="#weka.classifiers.Classifier.additional_measures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of additional measures if implementing weka.core.AdditionalMeasureProducer, otherwise None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the additional measures</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="weka.classifiers.Classifier.batch_size">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#weka.classifiers.Classifier.batch_size" title="Permalink to this definition">¶</a></dt>
@@ -6363,6 +6394,7 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commandline.html">Command-line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flow.html">Flow</a></li>
 </ul>
 <ul class="current">
@@ -6417,7 +6449,7 @@ so that intervals such as oct &lt; date &lt; mar evaluate correctly.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2014-2022, Peter "fracpete" Reutemann.
+      &copy;2014-2024, Peter "fracpete" Reutemann.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
