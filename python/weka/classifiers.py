@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import sys
 import os
@@ -58,6 +58,7 @@ class Classifier(OptionHandler):
         self.enforce_type(jobject, "weka.classifiers.Classifier")
         self.is_updateable = self.check_type(jobject, "weka.classifiers.UpdateableClassifier")
         self.is_drawable = self.check_type(jobject, "weka.core.Drawable")
+        self.is_additional_measure_producer = self.check_type(jobject, "weka.core.AdditionalMeasureProducer")
         self.is_batchpredictor = self.check_type(jobject, "weka.core.BatchPredictor")
         self._header = None
         super(Classifier, self).__init__(jobject=jobject, options=options)
@@ -212,6 +213,37 @@ class Classifier(OptionHandler):
         """
         if self.is_drawable:
             return javabridge.call(self.jobject, "graph", "()Ljava/lang/String;")
+        else:
+            return None
+
+    @property
+    def additional_measures(self):
+        """
+        Returns the list of additional measures if implementing weka.core.AdditionalMeasureProducer, otherwise None.
+
+        :return: the additional measures
+        :rtype: str
+        """
+        if self.is_additional_measure_producer:
+            enm = javabridge.call(self.jobject, "enumerateMeasures", "()Ljava/util/Enumeration;")
+            if enm is None:
+                return None
+            else:
+                return typeconv.jenumeration_to_list(enm)
+        else:
+            return None
+
+    def additional_measure(self, measure):
+        """
+        Returns the specified additional measure if implementing weka.core.AdditionalMeasureProducer, otherwise None.
+
+        :param measure: the measure to retrieve
+        :type measure: str
+        :return: the additional measure
+        :rtype: str
+        """
+        if self.is_additional_measure_producer:
+            return javabridge.call(self.jobject, "getMeasure", "(Ljava/lang/String;)D", measure)
         else:
             return None
 

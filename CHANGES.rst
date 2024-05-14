@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.2.17 (????-??-??)
+-------------------
+
+- added `is_additional_measure_producer` variable, `additional_measures` property and
+  `additional_measure(str)` method to the `weka.classifiers.Classifier` class,
+  giving convenient access to classes implementing `weka.core.AdditionalMeasureProducer`
+
+
 0.2.16 (2024-05-10)
 -------------------
 
