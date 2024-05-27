@@ -183,7 +183,7 @@ class Instances(JavaObject):
         Returns the internal values of this attribute from all the instance objects.
 
         :return: the values as numpy array
-        :rtype: list
+        :rtype: np.ndarray
         """
         values = []
         for i in range(self.num_instances):
