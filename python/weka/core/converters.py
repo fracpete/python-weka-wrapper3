@@ -14,7 +14,7 @@
 # converters.py
 # Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
+from jpype import JClass
 from weka.core.classes import OptionHandler
 from weka.core.capabilities import Capabilities
 from weka.core.dataset import Instances, Instance, Attribute, create_instances_from_lists
@@ -75,20 +75,20 @@ class Loader(OptionHandler):
         """
         self.enforce_type(self.jobject, "weka.core.converters.FileSourcedConverter")
         self.incremental = incremental
-        if not javabridge.is_instance_of(dfile, "Ljava/io/File;"):
-            dfile = javabridge.make_instance(
-                "Ljava/io/File;", "(Ljava/lang/String;)V", javabridge.get_env().new_string_utf(str(dfile)))
-        javabridge.call(self.jobject, "reset", "()V")
+        File = JClass("java.io.File")
+        if not isinstance(dfile, File):
+            dfile = File(str(dfile))
+        self.jobject.reset()
         # check whether file exists, otherwise previously set file gets loaded again
-        sfile = javabridge.to_string(dfile)
+        sfile = str(dfile)
         if not os.path.exists(sfile):
             raise Exception("Dataset file does not exist: " + str(sfile))
-        javabridge.call(self.jobject, "setFile", "(Ljava/io/File;)V", dfile)
+        self.jobject.setFile(dfile)
         if incremental:
-            self.structure = Instances(javabridge.call(self.jobject, "getStructure", "()Lweka/core/Instances;"))
+            self.structure = Instances(self.jobject.getStructure())
             result = self.structure
         else:
-            result = Instances(javabridge.call(self.jobject, "getDataSet", "()Lweka/core/Instances;"))
+            result = Instances(self.jobject.getDataSet())
         if class_index is not None:
             if class_index == 'first':
                 result.class_index = 0
@@ -120,13 +120,13 @@ class Loader(OptionHandler):
         """
         self.enforce_type(self.jobject, "weka.core.converters.URLSourcedLoader")
         self.incremental = incremental
-        javabridge.call(self.jobject, "reset", "()V")
-        javabridge.call(self.jobject, "setURL", "(Ljava/lang/String;)V", str(url))
+        self.jobject.reset()
+        self.jobject.setURL(str(url))
         if incremental:
-            self.structure = Instances(javabridge.call(self.jobject, "getStructure", "()Lweka/core/Instances;"))
+            self.structure = Instances(self.jobject.getStructure)
             return self.structure
         else:
-            return Instances(javabridge.call(self.jobject, "getDataSet", "()Lweka/core/Instances;"))
+            return Instances(self.jobject.getDataSet())
 
 
 class IncrementalLoaderIterator(object):
@@ -156,9 +156,7 @@ class IncrementalLoaderIterator(object):
         :return: the next row
         :rtype: Instance
         """
-        result = javabridge.call(
-            self.loader.jobject, "getNextInstance",
-            "(Lweka/core/Instances;)Lweka/core/Instance;", self.structure.jobject)
+        result = self.loader.jobject.getNextInstance(self.structure.jobject)
         if result is None:
             raise StopIteration()
         else:
@@ -192,8 +190,8 @@ class TextDirectoryLoader(OptionHandler):
         :return: the full dataset or the header (if incremental)
         :rtype: Instances
         """
-        javabridge.call(self.jobject, "reset", "()V")
-        return Instances(javabridge.call(self.jobject, "getDataSet", "()Lweka/core/Instances;"))
+        self.jobject.reset()
+        return Instances(self.jobject.getDataSet())
 
 
 class Saver(OptionHandler):
@@ -224,7 +222,7 @@ class Saver(OptionHandler):
         :return: the capabilities
         :rtype: Capabilities
         """
-        return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
+        return Capabilities(self.jobject.getCapabilities())
 
     def save_file(self, data, dfile):
         """
@@ -236,12 +234,12 @@ class Saver(OptionHandler):
         :type dfile: str
         """
         self.enforce_type(self.jobject, "weka.core.converters.FileSourcedConverter")
-        if not javabridge.is_instance_of(dfile, "Ljava/io/File;"):
-            dfile = javabridge.make_instance(
-                "Ljava/io/File;", "(Ljava/lang/String;)V", javabridge.get_env().new_string_utf(str(dfile)))
-        javabridge.call(self.jobject, "setFile", "(Ljava/io/File;)V", dfile)
-        javabridge.call(self.jobject, "setInstances", "(Lweka/core/Instances;)V", data.jobject)
-        javabridge.call(self.jobject, "writeBatch", "()V")
+        File = JClass("java.io.File")
+        if not isinstance(dfile, File):
+            dfile = File(str(dfile))
+        self.jobject.setFile(dfile)
+        self.jobject.setInstances(data.jobject)
+        self.jobject.writeBatch()
 
 
 def loader_for_file(filename):
@@ -253,9 +251,7 @@ def loader_for_file(filename):
     :return: the assoicated loader instance or None if none found
     :rtype: Loader
     """
-    loader = javabridge.static_call(
-        "weka/core/converters/ConverterUtils", "getLoaderForFile",
-        "(Ljava/lang/String;)Lweka/core/converters/AbstractFileLoader;", filename)
+    loader = JClass("weka.core.converters.ConverterUtils").getLoaderForFile(filename)
     if loader is None:
         return None
     else:
@@ -289,9 +285,7 @@ def saver_for_file(filename):
     :return: the associated saver instance or None if none found
     :rtype: Saver
     """
-    saver = javabridge.static_call(
-        "weka/core/converters/ConverterUtils", "getSaverForFile",
-        "(Ljava/lang/String;)Lweka/core/converters/AbstractFileSaver;", filename)
+    saver = JClass("weka.core.converters.ConverterUtils").getSaverForFile(filename)
     if saver is None:
         return None
     else:
