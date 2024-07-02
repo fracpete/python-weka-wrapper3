@@ -12,14 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classifiers.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
 import weka.plot as plot
 if plot.matplotlib_available:
     import matplotlib.pyplot as plt
-from weka.core.classes import JavaObject, join_options
+from jpype import JClass
+from weka.core.classes import join_options
 from weka.core.dataset import Instances
 from weka.classifiers import Classifier, Evaluation, NumericPrediction, NominalPrediction
 
@@ -126,10 +126,9 @@ def generate_thresholdcurve_data(evaluation, class_index):
     :return: the generated threshold curve data
     :rtype: Instances
     """
-    jtc = JavaObject.new_instance("weka.classifiers.evaluation.ThresholdCurve")
-    pred = javabridge.call(evaluation.jobject, "predictions", "()Ljava/util/ArrayList;")
-    result = Instances(
-        javabridge.call(jtc, "getCurve", "(Ljava/util/ArrayList;I)Lweka/core/Instances;", pred, class_index))
+    jtc = JClass("weka.classifiers.evaluation.ThresholdCurve")()
+    pred = evaluation.jobject.predictions()
+    result = Instances(jtc.getCurve(pred, class_index))
     return result
 
 
@@ -167,8 +166,7 @@ def get_auc(data):
     :return: the area
     :rtype: float
     """
-    return javabridge.static_call(
-        "weka/classifiers/evaluation/ThresholdCurve", "getROCArea", "(Lweka/core/Instances;)D", data.jobject)
+    return JClass("weka.classifiers.evaluation.ThresholdCurve").getROCArea(data.jobject)
 
 
 def get_prc(data):
@@ -180,8 +178,7 @@ def get_prc(data):
     :return: the area
     :rtype: float
     """
-    return javabridge.static_call(
-        "weka/classifiers/evaluation/ThresholdCurve", "getPRCArea", "(Lweka/core/Instances;)D", data.jobject)
+    return JClass("weka.classifiers.evaluation.ThresholdCurve").getPRCArea(data.jobject)
 
 
 def plot_roc(evaluation, class_index=None, title=None, key_loc="lower right", outfile=None, wait=True):
