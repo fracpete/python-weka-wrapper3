@@ -12,9 +12,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # jvm.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
+import jpype
+from jpype import JClass
 import os
 import glob
 import logging
@@ -47,9 +48,12 @@ def lib_dir():
     return rootdir + os.sep + "lib"
 
 
-def add_bundled_jars():
+def add_bundled_jars(cp):
     """
     Adds the bundled jars to the JVM's classpath.
+
+    :param cp: the list to append the classpath to
+    :type cp: list
     """
     # determine lib directory with jars
     libdir = lib_dir()
@@ -57,17 +61,22 @@ def add_bundled_jars():
     # add jars from lib directory
     for l in glob.glob(libdir + os.sep + "*.jar"):
         if l.lower().find("-src.") == -1:
-            javabridge.JARS.append(str(l))
+            cp.append(str(l))
 
 
-def add_system_classpath():
+def add_system_classpath(cp):
     """
     Adds the system's classpath to the JVM's classpath.
+
+    :param cp: the list to append the classpath to
+    :type cp: list
     """
     if 'CLASSPATH' in os.environ:
         parts = os.environ['CLASSPATH'].split(os.pathsep)
         for part in parts:
-            javabridge.JARS.append(part)
+            cp.append(part)
+    else:
+        logger.warning("Cannot add system's classpath, as environment variable CLASSPATH not set.")
 
 
 def start(class_path=None, bundled=True, packages=False, system_cp=False, max_heap_size=None, system_info=False,
@@ -103,21 +112,23 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
         logger.info("JVM already running, call jvm.stop() first")
         return
 
+    full_cp = []
+
     # add user-defined jars first
     if class_path is not None:
         for cp in class_path:
             logger.debug("Adding user-supplied classpath=" + cp)
-            javabridge.JARS.append(cp)
+            full_cp.append(cp)
 
     if bundled:
         logger.debug("Adding bundled jars")
-        add_bundled_jars()
+        add_bundled_jars(full_cp)
 
     if system_cp:
         logger.debug("Adding system classpath")
-        add_system_classpath()
+        add_system_classpath(full_cp)
 
-    logger.debug("Classpath=" + str(javabridge.JARS))
+    logger.debug("Classpath=" + str(full_cp))
     logger.debug("MaxHeapSize=" + ("default" if (max_heap_size is None) else max_heap_size))
 
     args = []
@@ -142,8 +153,10 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
         logger.debug("Automatically installing missing Weka packages (based on suggestions).")
         automatically_install_packages = True
 
-    javabridge.start_vm(args=args, run_headless=True, max_heap_size=max_heap_size)
-    javabridge.attach()
+    # headless mode
+    args.append("-Djava.awt.headless=true")
+
+    jpype.startJVM(*args, classpath=full_cp, convertStrings=True)
     started = True
 
     if weka_home is not None:
@@ -153,17 +166,12 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
         env.add_variable("WEKA_HOME", weka_home)
 
     # initialize package manager
-    javabridge.static_call(
-        "Lweka/core/WekaPackageManager;", "loadPackages",
-        "(Z)V",
-        False)
+    JClass("weka.core.WekaPackageManager").loadPackages(False)
 
     # output system info
     if system_info:
         logger.debug("System info:")
-        jobj = javabridge.make_instance("weka/core/SystemInfo", "()V")
-        hashtable = javabridge.call(jobj, "getSystemInfo", "()Ljava/util/Hashtable;")
-        info = javabridge.jdictionary_to_string_dictionary(hashtable)
+        info = JClass("weka.core.SystemInfo")().getSystemInfo()
         for k in info.keys():
             logger.debug(k + "=" + info[k])
 
@@ -175,4 +183,4 @@ def stop():
     global started
     if started is not None:
         started = None
-        javabridge.kill_vm()
+        jpype.shutdownJVM()
