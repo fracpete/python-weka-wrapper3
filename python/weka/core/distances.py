@@ -12,9 +12,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # distances.py
-# Copyright (C) 2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2021-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 from weka.core.classes import OptionHandler
 from weka.core.dataset import Instances, Instance
 
@@ -46,8 +45,7 @@ class DistanceFunction(OptionHandler):
         Members must start with "_mc_"
         """
         super(DistanceFunction, self)._make_calls()
-        self._distance = javabridge.make_call(self.jobject, "distance", "(Lweka/core/Instance;Lweka/core/Instance;)D")
-        self._distance_cutoff = javabridge.make_call(self.jobject, "distance", "(Lweka/core/Instance;Lweka/core/Instance;D)D")
+        self._distance = self.jobject.distance
 
     @property
     def instances(self):
@@ -57,7 +55,7 @@ class DistanceFunction(OptionHandler):
         :return: the dataset
         :rtype: Instances
         """
-        inst = javabridge.call(self.jobject, "getInstances", "()Lweka/core/Instances;")
+        inst = self.jobject.getInstances()
         if inst is None:
             return None
         else:
@@ -71,7 +69,7 @@ class DistanceFunction(OptionHandler):
         :param instances: the dataset to use
         :type instances: Instances
         """
-        javabridge.call(self.jobject, "setInstances", "(Lweka/core/Instances;)V", instances.jobject)
+        self.jobject.setInstances(instances.jobject)
 
     @property
     def attribute_indices(self):
@@ -81,7 +79,7 @@ class DistanceFunction(OptionHandler):
         :return: the attribute indices
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getAttributeIndices", "()Ljava/lang/String;")
+        return self.jobject.getAttributeIndices()
 
     @attribute_indices.setter
     def attribute_indices(self, indices):
@@ -91,7 +89,7 @@ class DistanceFunction(OptionHandler):
         :param indices: the indices to use
         :type indices: str
         """
-        javabridge.call(self.jobject, "setAttributeIndices", "(Ljava/lang/String;)V", indices)
+        self.jobject.setAttributeIndices(indices)
     
     def distance(self, first, second, cutoff=None):
         """
