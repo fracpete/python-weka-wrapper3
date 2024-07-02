@@ -12,13 +12,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # packages.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import argparse
-import javabridge
 import json
 import sys
 import traceback
+from jpype import JClass
 import weka.core.jvm as jvm
 from weka.core.classes import JavaObject
 import weka.core.classes as classes
@@ -52,7 +52,7 @@ class Package(JavaObject):
         :return: the name
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getName", "()Ljava/lang/String;")
+        return self.jobject.getName()
 
     @property
     def version(self):
@@ -72,7 +72,7 @@ class Package(JavaObject):
         :return: the url
         :rtype: str
         """
-        return str(JavaObject(javabridge.call(self.jobject, "getPackageURL", "()Ljava/net/URL;")))
+        return str(self.jobject.getPackageURL())
 
     @property
     def dependencies(self):
@@ -83,9 +83,7 @@ class Package(JavaObject):
         :rtype: list of Dependency
         """
         result = []
-        dependencies = javabridge.get_collection_wrapper(
-            javabridge.call(self.jobject, "getDependencies", "()Ljava/util/List;"))
-        for dependency in dependencies:
+        for dependency in self.jobject.getDependencies():
             result.append(Dependency(dependency))
         return result
 
@@ -98,10 +96,10 @@ class Package(JavaObject):
         :rtype: dict
         """
         if self._metadata is None:
-            map = javabridge.get_map_wrapper(javabridge.call(self.jobject, "getPackageMetaData", "()Ljava/util/Map;"))
+            map = self.jobject.getPackageMetaData()
             self._metadata = dict()
             for k in map:
-                self._metadata[javabridge.get_env().get_string(k)] = map[javabridge.get_env().get_string(k)]
+                self._metadata[k] = map[k]
         return self._metadata
 
     @property
@@ -112,13 +110,13 @@ class Package(JavaObject):
         :return: whether installed
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isInstalled", "()Z")
+        return self.jobject.isInstalled()
 
     def install(self):
         """
         Installs the package.
         """
-        return javabridge.call(self.jobject, "install", "()V")
+        return self.jobject.install()
 
     def as_dict(self):
         """
@@ -168,7 +166,7 @@ class PackageConstraint(JavaObject):
         :param pkge: the package
         :type pkge: Package
         """
-        javabridge.call(self.jobject, "setPackage", "(Lweka/core/packageManagement/Package;)V", pkge.jobject)
+        self.jobject.setPackage(pkge.jobject)
 
     def get_package(self):
         """
@@ -177,7 +175,7 @@ class PackageConstraint(JavaObject):
         :return: the package
         :rtype: Package
         """
-        return Package(javabridge.call(self.jobject, "getPackage", "()Lweka/core/packageManagement/Package;"))
+        return Package(self.jobject.getPackage())
 
     def check_constraint(self, pkge=None, constr=None):
         """
@@ -188,12 +186,10 @@ class PackageConstraint(JavaObject):
         :param constr: the package constraint to check
         :type constr: PackageConstraint
         """
-        if not pkge is None:
-            return javabridge.call(
-                self.jobject, "checkConstraint", "(Lweka/core/packageManagement/Package;)Z", pkge.jobject)
-        if not constr is None:
-            return javabridge.call(
-                self.jobject, "checkConstraint", "(Lweka/core/packageManagement/PackageConstraint;)Z", pkge.jobject)
+        if pkge is not None:
+            return self.jobject.checkConstraint(pkge.jobject)
+        if constr is not None:
+            return self.jobject.checkConstraint(constr.jobject)
         raise Exception("Either package or package constraing must be provided!")
 
 
@@ -220,8 +216,7 @@ class Dependency(JavaObject):
         :return: the package
         :rtype: Package
         """
-        return Package(
-            javabridge.call(self.jobject, "getSource", "()Lweka/core/packageManagement/Package;"))
+        return Package(self.jobject.getSource())
 
     @source.setter
     def source(self, pkge):
@@ -231,8 +226,7 @@ class Dependency(JavaObject):
         :param pkge: the package
         :type pkge: Package
         """
-        javabridge.call(
-            self.jobject, "setSource", "(Lweka/core/packageManagement/Package;)V", pkge.jobject)
+        self.jobject.setSource(pkge.jobject)
 
     @property
     def target(self):
@@ -242,8 +236,7 @@ class Dependency(JavaObject):
         :return: the package constraint
         :rtype: PackageConstraint
         """
-        return PackageConstraint(
-            javabridge.call(self.jobject, "getTarget", "()Lweka/core/packageManagement/PackageConstraint;"))
+        return PackageConstraint(self.jobject.getTarget())
 
     @target.setter
     def target(self, constr):
@@ -253,16 +246,14 @@ class Dependency(JavaObject):
         :param constr: the package constraint
         :type constr: Package
         """
-        javabridge.call(
-            self.jobject, "setTarget", "(Lweka/core/packageManagement/PackageConstraint;)V", constr.jobject)
+        self.jobject.setTarget(constr.jobject)
 
 
 def establish_cache():
     """
     Establishes the package cache if necessary.
     """
-    javabridge.static_call(
-        "weka/core/WekaPackageManager", "establishCacheIfNeeded", "([Ljava/io/PrintStream;)Ljava/lang/Exception;", [])
+    JClass("weka.core.WekaPackageManager").establishCacheIfNeeded()
 
 
 def refresh_cache():
@@ -270,8 +261,7 @@ def refresh_cache():
     Refreshes the cache.
     """
     establish_cache()
-    javabridge.static_call(
-        "weka/core/WekaPackageManager", "refreshCache", "([Ljava/io/PrintStream;)Ljava/lang/Exception;", [])
+    JClass("weka.core.WekaPackageManager").refreshCache()
 
 
 def all_packages():
@@ -283,10 +273,7 @@ def all_packages():
     """
     establish_cache()
     result = []
-    pkgs = javabridge.get_collection_wrapper(
-        javabridge.static_call(
-            "weka/core/WekaPackageManager", "getAllPackages", "()Ljava/util/List;"))
-    for pkge in pkgs:
+    for pkge in JClass("weka.core.WekaPackageManager").getAllPackages():
         result.append(Package(pkge))
     return result
 
@@ -316,10 +303,7 @@ def available_packages():
     """
     establish_cache()
     result = []
-    pkgs = javabridge.get_collection_wrapper(
-        javabridge.static_call(
-            "weka/core/WekaPackageManager", "getAvailablePackages", "()Ljava/util/List;"))
-    for pkge in pkgs:
+    for pkge in JClass("weka.core.WekaPackageManager").getAvailablePackages():
         result.append(Package(pkge))
     return result
 
@@ -349,10 +333,7 @@ def installed_packages():
     """
     establish_cache()
     result = []
-    pkgs = javabridge.get_collection_wrapper(
-        javabridge.static_call(
-            "weka/core/WekaPackageManager", "getInstalledPackages", "()Ljava/util/List;"))
-    for pkge in pkgs:
+    for pkge in JClass("weka.core.WekaPackageManager").getInstalledPackages():
         result.append(Package(pkge))
     return result
 
@@ -433,26 +414,19 @@ def install_packages(pkges, fail_fast=True, details=False):
         success = True
         if pkge.startswith("http://") or pkge.startswith("https://"):
             try:
-                url = javabridge.make_instance(
-                    "java/net/URL", "(Ljava/lang/String;)V", javabridge.get_env().new_string_utf(pkge))
-                install_msg = javabridge.static_call(
-                    "weka/core/WekaPackageManager", "installPackageFromURL",
-                    "(Ljava/net/URL;[Ljava/io/PrintStream;)Ljava/lang/String;", url, [])
+                url = JClass("java.net.URL")(pkge)
+                install_msg = JClass("weka.core.WekaPackageManager").installPackageFromURL(url)
             except:
                 msg = traceback.format_exc()
         elif pkge.lower().endswith(".zip"):
             try:
-                install_msg = javabridge.static_call(
-                    "weka/core/WekaPackageManager", "installPackageFromArchive",
-                    "(Ljava/lang/String;[Ljava/io/PrintStream;)Ljava/lang/String;", pkge, [])
+                install_msg = JClass("weka.core.WekaPackageManager").installPackageFromArchive(pkge)
             except:
                 msg = traceback.format_exc()
         else:
             from_repo = True
             try:
-                javabridge.static_call(
-                    "weka/core/WekaPackageManager", "installPackageFromRepository",
-                    "(Ljava/lang/String;Ljava/lang/String;[Ljava/io/PrintStream;)Z", pkge, version, [])
+                JClass("weka.core.WekaPackageManager").installPackageFromRepository(pkge, version)
             except:
                 msg = traceback.format_exc()
 
@@ -596,9 +570,7 @@ def uninstall_packages(names):
     """
     establish_cache()
     for name in names:
-        javabridge.static_call(
-            "weka/core/WekaPackageManager", "uninstallPackage",
-            "(Ljava/lang/String;Z[Ljava/io/PrintStream;)V", name, True, [])
+        JClass("weka.core.WekaPackageManager").uninstallPackage(name, True)
 
 
 def is_installed(name, version=None):
