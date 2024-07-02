@@ -12,9 +12,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # capabilities.py
-# Copyright (C) 2014-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
+from jpype import JClass
 from weka.core.classes import JavaObject, Enum
 from weka.core.dataset import Attribute, Instances
 
@@ -44,7 +44,7 @@ class Capability(Enum):
         :return: whether it is an attribute
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isAttribute", "()Z")
+        return self.jobject.isAttribute()
 
     @property
     def is_attribute_capability(self):
@@ -54,7 +54,7 @@ class Capability(Enum):
         :return: whether it is an attribute capability
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isAttributeCapability", "()Z")
+        return self.jobject.isAttributeCapability()
 
     @property
     def is_class(self):
@@ -64,7 +64,7 @@ class Capability(Enum):
         :return: whether it is a class
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isClass", "()Z")
+        return self.jobject.isClass()
 
     @property
     def is_class_capability(self):
@@ -74,7 +74,7 @@ class Capability(Enum):
         :return: whether it is a class capability
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isClassCapability", "()Z")
+        return self.jobject.isClassCapability()
 
     @property
     def is_other_capability(self):
@@ -84,7 +84,7 @@ class Capability(Enum):
         :return: whether it is an other capability
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isOtherCapability", "()Z")
+        return self.jobject.isOtherCapability()
 
 
 class Capabilities(JavaObject):
@@ -104,8 +104,7 @@ class Capabilities(JavaObject):
         if jobject is None:
             if isinstance(owner, JavaObject):
                 owner = owner.jobject
-            jobject = javabridge.make_instance(
-                "weka/core/Capabilities", "(Lweka/core/CapabilitiesHandler;)V", owner)
+            jobject = JClass("weka.core.Capabilities")(owner)
         Capabilities.enforce_type(jobject, "weka.core.Capabilities")
         super(Capabilities, self).__init__(jobject)
 
@@ -117,7 +116,7 @@ class Capabilities(JavaObject):
         :return: the owner, can be None
         :rtype: JavaObject
         """
-        obj = javabridge.call(self.jobject, "getOwner", "()Lweka/core/CapabilitiesHandler;")
+        obj = self.jobject.getOwner()
         if obj is None:
             return None
         else:
@@ -133,7 +132,7 @@ class Capabilities(JavaObject):
         """
         if isinstance(obj, JavaObject):
             obj = obj.jobject
-        javabridge.call(self.jobject, "setOwner", "(Lweka/core/CapabilitiesHandler;)V", obj)
+        self.jobject.setOwner(obj)
 
     def capabilities(self):
         """
@@ -143,8 +142,7 @@ class Capabilities(JavaObject):
         :rtype: list
         """
         result = []
-        iterator = javabridge.iterate_java(javabridge.call(self.jobject, "capabilities", "()Ljava/util/Iterator;"))
-        for c in iterator:
+        for c in self.jobject.capabilities():
             result.append(Capability(c))
         return result
 
@@ -156,7 +154,7 @@ class Capabilities(JavaObject):
         :rtype: Capabilities
         """
         return Capabilities(
-            javabridge.call(self.jobject, "getAttributeCapabilities", "()Lweka/core/Capabilities;"))
+            self.jobject.getAttributeCapabilities())
 
     def class_capabilities(self):
         """
@@ -166,7 +164,7 @@ class Capabilities(JavaObject):
         :rtype: Capabilities
         """
         return Capabilities(
-            javabridge.call(self.jobject, "getClassCapabilities", "()Lweka/core/Capabilities;"))
+            self.jobject.getClassCapabilities())
 
     def other_capabilities(self):
         """
@@ -176,7 +174,7 @@ class Capabilities(JavaObject):
         :rtype: Capabilities
         """
         return Capabilities(
-            javabridge.call(self.jobject, "getOtherCapabilities", "()Lweka/core/Capabilities;"))
+            self.jobject.getOtherCapabilities())
 
     def dependencies(self):
         """
@@ -186,8 +184,7 @@ class Capabilities(JavaObject):
         :rtype: list
         """
         result = []
-        iterator = javabridge.iterate_java(javabridge.call(self.jobject, "dependencies", "()Ljava/util/Iterator;"))
-        for c in iterator:
+        for c in self.jobject.dependencies():
             result.append(Capability(c))
         return result
 
@@ -200,26 +197,25 @@ class Capabilities(JavaObject):
         :return: whether the capability is set
         :rtype: bool
         """
-        return javabridge.call(
-            self.jobject, "handles", "(Lweka/core/Capabilities$Capability;)Z", capability.jobject)
+        return self.jobject.handles(capability.jobject)
 
     def enable_all(self):
         """
         enables all capabilities.
         """
-        javabridge.call(self.jobject, "enableAll", "()V")
+        self.jobject.enableAll()
 
     def enable_all_attributes(self):
         """
         enables all attributes.
         """
-        javabridge.call(self.jobject, "enableAllAttributes", "()V")
+        self.jobject.enableAllAttributes()
 
     def enable_all_classes(self):
         """
         enables all classes.
         """
-        javabridge.call(self.jobject, "enableAllClasses", "()V")
+        self.jobject.enableAllClasses()
 
     def enable(self, capability):
         """
@@ -228,19 +224,19 @@ class Capabilities(JavaObject):
         :param capability: the capability to enable
         :type capability: Capability
         """
-        javabridge.call(self.jobject, "enable", "(Lweka/core/Capabilities$Capability;)V", capability.jobject)
+        self.jobject.enable(capability.jobject)
 
     def enable_all_attribute_dependencies(self):
         """
         enables all attribute dependencies.
         """
-        javabridge.call(self.jobject, "enableAllAttributeDependencies", "()V")
+        self.jobject.enableAllAttributeDependencies()
 
     def enable_all_class_dependencies(self):
         """
         enables all class dependencies.
         """
-        javabridge.call(self.jobject, "enableAllClassDependencies", "()V")
+        self.jobject.enableAllClassDependencies()
 
     def enable_dependency(self, capability):
         """
@@ -250,26 +246,25 @@ class Capabilities(JavaObject):
         :param capability: the dependency to enable
         :type capability: Capability
         """
-        javabridge.call(
-            self.jobject, "enableDependency", "(Lweka/core/Capabilities$Capability;)V", capability.jobject)
+        self.jobject.enableDependency(capability.jobject)
 
     def disable_all(self):
         """
         Disables all capabilities.
         """
-        javabridge.call(self.jobject, "disableAll", "()V")
+        self.jobject.disableAll()
 
     def disable_all_attributes(self):
         """
         Disables all attributes.
         """
-        javabridge.call(self.jobject, "disableAllAttributes", "()V")
+        self.jobject.disableAllAttributes()
 
     def disable_all_classes(self):
         """
         Disables all classes.
         """
-        javabridge.call(self.jobject, "disableAllClasses", "()V")
+        self.jobject.disableAllClasses()
 
     def disable(self, capability):
         """
@@ -278,19 +273,19 @@ class Capabilities(JavaObject):
         :param capability: the capability to disable
         :type capability: Capability
         """
-        javabridge.call(self.jobject, "disable", "(Lweka/core/Capabilities$Capability;)V", capability.jobject)
+        self.jobject.disable(capability.jobject)
 
     def disable_all_attribute_dependencies(self):
         """
         Disables all attribute dependencies.
         """
-        javabridge.call(self.jobject, "disableAllAttributeDependencies", "()V")
+        self.jobject.disableAllAttributeDependencies()
 
     def disable_all_class_dependencies(self):
         """
         Disables all class dependencies.
         """
-        javabridge.call(self.jobject, "disableAllClassDependencies", "()V")
+        self.jobject.disableAllClassDependencies()
 
     def disable_dependency(self, capability):
         """
@@ -300,8 +295,7 @@ class Capabilities(JavaObject):
         :param capability: the dependency to disable
         :type capability: Capability
         """
-        javabridge.call(
-            self.jobject, "disableDependency", "(Lweka/core/Capabilities$Capability;)V", capability.jobject)
+        self.jobject.disableDependency(capability.jobject)
 
     def has_dependencies(self):
         """
@@ -310,7 +304,7 @@ class Capabilities(JavaObject):
         :return: whether any dependecies are set
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "hasDependencies", "()Z")
+        return self.jobject.hasDependencies()
 
     def has_dependency(self, capability):
         """
@@ -321,8 +315,7 @@ class Capabilities(JavaObject):
         :return: whether the dependency is set
         :rtype: bool
         """
-        return javabridge.call(
-            self.jobject, "hasDependency", "(Lweka/core/Capabilities$Capability;)Z", capability.jobject)
+        self.jobject.hasDependency(capability.jobject)
 
     def supports(self, capabilities):
         """
@@ -334,7 +327,7 @@ class Capabilities(JavaObject):
         :return: whether the current capabilities support at least the specified ones
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "supports", "(Lweka/core/Capabilities;)Z", capabilities.jobject)
+        return self.jobject.supports(capabilities.jobject)
 
     def supports_maybe(self, capabilities):
         """
@@ -346,7 +339,7 @@ class Capabilities(JavaObject):
         :return: whether the current capabilities (potentially) support the specified ones
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "supportsMaybe", "(Lweka/core/Capabilities;)Z", capabilities.jobject)
+        return self.jobject.supportsMaybe(capabilities.jobject)
 
     @property
     def min_instances(self):
@@ -356,7 +349,7 @@ class Capabilities(JavaObject):
         :return: the minimum number
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getMinimumNumberInstances", "()I")
+        return self.jobject.getMinimumNumberInstances()
 
     @min_instances.setter
     def min_instances(self, minimum):
@@ -366,7 +359,7 @@ class Capabilities(JavaObject):
         :param minimum: the minimum number
         :type minimum: int
         """
-        javabridge.call(self.jobject, "setMinimumNumberInstances", "(I)V", minimum)
+        self.jobject.setMinimumNumberInstances(minimum)
 
     def test_attribute(self, att, is_class=None, fail=False):
         """
@@ -383,18 +376,14 @@ class Capabilities(JavaObject):
         """
         if fail:
             if is_class is None:
-                return javabridge.call(
-                    self.jobject, "test", "(Lweka/core/Attribute;)Z", att.jobject)
+                return self.jobject.test(att.jobject)
             else:
-                return javabridge.call(
-                    self.jobject, "test", "(Lweka/core/Attribute;Z)Z", att.jobject, is_class)
+                return self.jobject.test(att.jobject, is_class)
         else:
             if is_class is None:
-                return javabridge.call(
-                    self.jobject, "testWithFail", "(Lweka/core/Attribute;)Z", att.jobject)
+                return self.jobject.testWithFail(att.jobject)
             else:
-                return javabridge.call(
-                    self.jobject, "testWithFail", "(Lweka/core/Attribute;Z)Z", att.jobject, is_class)
+                return self.jobject.testWithFail(att.jobject, is_class)
 
     def test_instances(self, data, from_index=None, to_index=None, fail=False):
         """
@@ -411,18 +400,14 @@ class Capabilities(JavaObject):
         """
         if fail:
             if (from_index is None) or (to_index is None):
-                return javabridge.call(
-                    self.jobject, "test", "(Lweka/core/Instances;)Z", data.jobject)
+                return self.jobject.test(data.jobject)
             else:
-                return javabridge.call(
-                    self.jobject, "test", "(Lweka/core/Instances;II)Z", data.jobject, from_index, to_index)
+                return self.jobject.test(data.jobject, from_index, to_index)
         else:
             if (from_index is None) or (to_index is None):
-                return javabridge.call(
-                    self.jobject, "testWithFail", "(Lweka/core/Instances;)Z", data.jobject)
+                return self.jobject.testWithFail(data.jobject)
             else:
-                return javabridge.call(
-                    self.jobject, "testWithFail", "(Lweka/core/Instances;II)Z", data.jobject, from_index, to_index)
+                return self.jobject.testWithFail(data.jobject, from_index, to_index)
 
     @classmethod
     def for_instances(cls, data, multi=None):
@@ -438,10 +423,6 @@ class Capabilities(JavaObject):
         :rtype: Capabilities
         """
         if multi is None:
-            return Capabilities(javabridge.static_call(
-                "weka/core/Capabilities", "forInstances",
-                "(Lweka/core/Instances;)Lweka/core/Capabilities;", data.jobject))
+            return JClass("weka.core.Capabilities").forInstances(data.jobject)
         else:
-            return Capabilities(javabridge.static_call(
-                "weka/core/Capabilities", "forInstances",
-                "(Lweka/core/Instances;Z)Lweka/core/Capabilities;", data.jobject, multi))
+            return JClass("weka.core.Capabilities").forInstances(data.jobject, multi)
