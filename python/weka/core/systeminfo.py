@@ -12,10 +12,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # systeminfo.py
-# Copyright (C) 2020 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2020-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-from weka.core.classes import JavaObject
-import javabridge
+from jpype import JClass
 
 
 def system_info():
@@ -25,6 +24,8 @@ def system_info():
     :return: the system info as dictionary
     :rtype: dict
     """
-    jobj = JavaObject.new_instance("weka.core.SystemInfo")
-    info = javabridge.call(jobj, "getSystemInfo", "()Ljava/util/Hashtable;")
-    return javabridge.jdictionary_to_string_dictionary(info)
+    result = dict()
+    info = JClass("weka.core.SystemInfo")().getSystemInfo()
+    for k in info.keys():
+        result[k] = info[k]
+    return result
