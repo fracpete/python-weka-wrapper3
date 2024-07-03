@@ -127,7 +127,7 @@ def to_byte_array(jobjects):
     :return: the numpy array
     :rtype: ndarray
     """
-    array = JClass("java.lang.reflect.Array").newInstance(get_jclass(classname="java.lang.Object"), len(jobjects))
+    array = new_array("java.lang.Object", len(jobjects))
     for i in range(len(jobjects)):
         obj = jobjects[i]
         if isinstance(obj, JavaObject):
@@ -290,7 +290,7 @@ def list_property_names(obj):
 def new_instance(classname):
     """
     Instantiates an object of the specified class. Does not raise an Exception
-    if it fails to do so (opposed to JavaObject.new_instance).
+    if it fails to do so (opposed to JavaObject.new_array).
 
     :param classname: the name of the class to instantiate
     :type classname: str
@@ -779,7 +779,7 @@ class JavaArray(JavaObject):
         return self.jobject.getClass().getComponentType().getName()
 
     @classmethod
-    def new_instance(cls, classname, length):
+    def new_array(cls, classname, length):
         """
         Creates a new array with the given classname and length; initial values are null.
 
@@ -790,7 +790,7 @@ class JavaArray(JavaObject):
         :return: the Java array
         :rtype: JB_Object
         """
-        return JClass("java.lang.reflect.Array").newInstance(get_jclass(classname=classname), length)
+        return new_array(classname, length)
 
 
 class Enum(JavaObject):
@@ -1342,7 +1342,7 @@ class Tags(JavaObject):
         :type tags: list
         """
         if tags is not None:
-            jarray = JavaArray(JavaArray.new_instance("weka.core.Tag", len(tags)))
+            jarray = JavaArray(JavaArray.new_array("weka.core.Tag", len(tags)))
             for i in range(len(tags)):
                 jarray[i] = tags[i]
             jobject = jarray.jobject
@@ -1952,7 +1952,7 @@ class SetupGenerator(OptionHandler):
         :param params: list of AbstractSearchParameter objects
         :type params: list
         """
-        array = JavaArray(jobject=JavaArray.new_instance("weka.core.setupgenerator.AbstractParameter", len(params)))
+        array = JavaArray(jobject=JavaArray.new_array("weka.core.setupgenerator.AbstractParameter", len(params)))
         for idx, obj in enumerate(params):
             array[idx] = obj.jobject
         self.jobject.setParameters(array.jobject)
@@ -2104,6 +2104,19 @@ def call_non_public_method(jobject, method, arg_types=None, arg_values=None):
     return JClass("weka.core.ClassHelper").callNonPublicMethod(jobject, method, arg_types, arg_values)
 
 
+def new_array(classname, length):
+    """
+    Creates a new array of the specified class and length.
+
+    :param classname: the type of the array
+    :type classname: str
+    :param length: the length of the array
+    :type length: int
+    :return: the generated array
+    """
+    return JClass("java.lang.reflect.Array").newInstance(get_jclass(classname=classname), length)
+
+
 def main():
     """
     Runs a classifier from the command-line. Calls JVM start/stop automatically.
@@ -2148,7 +2161,7 @@ def main():
                 output += "    \"" + backquote(opt) + "\""
             output += "]\n"
             if cname is not None:
-                output += 'handler = OptionHandler(JavaObject.new_instance("' + cname + '"))\n'
+                output += 'handler = OptionHandler(JavaObject.new_array("' + cname + '"))\n'
                 output += 'handler.options = options\n'
         else:
             raise Exception("Unsupported action: " + parsed.action)
