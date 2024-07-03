@@ -12,7 +12,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2023 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import os
 import inspect
@@ -21,10 +21,8 @@ import logging
 import csv
 import sys
 import weka.core.typeconv as typeconv
-import javabridge
-from javabridge import JWrapper, JClassWrapper
-from javabridge.jutil import JavaException
-from confobj import Configurable, JSONObject, has_dict_handler, get_dict_handler, register_dict_handler, deregister_dict_handler, get_class
+from jpype import JClass, JObject, JException
+from confobj import Configurable, JSONObject, has_dict_handler, register_dict_handler, get_class
 import weka.core.jvm as jvm
 
 # logging setup
@@ -50,12 +48,12 @@ def deepcopy(obj):
         wrapped = False
         jobject = obj
     try:
-        serialized = javabridge.make_instance("weka/core/SerializedObject", "(Ljava/lang/Object;)V", jobject)
-        jcopy = javabridge.call(serialized, "getObject", "()Ljava/lang/Object;")
+        serialized = JClass("weka.core.SerializedObject")(jobject)
+        jcopy = serialized.getObject()
         if wrapped:
             jcopy = obj.__class__(jobject=jcopy)
         return jcopy
-    except JavaException as e:
+    except JException as e:
         print("Failed to create copy of " + get_classname(obj) + ": " + str(e))
         return None
 
@@ -69,10 +67,7 @@ def serialization_read(filename):
     :return: the JB_Object
     :rtype: JB_Object
     """
-    return javabridge.static_call(
-        "Lweka/core/SerializationHelper;", "read",
-        "(Ljava/lang/String;)Ljava/lang/Object;",
-        filename)
+    return JClass("weka.core.SerializationHelper").read(filename)
 
 
 def serialization_read_all(filename):
@@ -84,14 +79,11 @@ def serialization_read_all(filename):
     :return: the list of JB_OBjects
     :rtype: list
     """
-    array = javabridge.static_call(
-        "Lweka/core/SerializationHelper;", "readAll",
-        "(Ljava/lang/String;)[Ljava/lang/Object;",
-        filename)
+    array = JClass("weka.core.SerializationHelper").readAll(filename)
     if array is None:
         return None
     else:
-        return javabridge.get_env().get_object_array_elements(array)
+        return typeconv.from_jobject_array(array)
 
 
 def serialization_write(filename, jobject):
@@ -105,10 +97,7 @@ def serialization_write(filename, jobject):
     """
     if isinstance(jobject, JavaObject):
         jobject = jobject.jobject
-    javabridge.static_call(
-        "Lweka/core/SerializationHelper;", "write",
-        "(Ljava/lang/String;Ljava/lang/Object;)V",
-        filename, jobject)
+    JClass("weka.core.SerializationHelper").write(filename, jobject)
 
 
 def serialization_write_all(filename, jobjects):
@@ -120,16 +109,13 @@ def serialization_write_all(filename, jobjects):
     :param jobjects: the list of objects to serialize
     :type jobjects: list
     """
-    array = javabridge.get_env().make_object_array(len(jobjects), javabridge.get_env().find_class("java/lang/Object"))
+    array = JObject[len(jobjects)]
     for i in range(len(jobjects)):
         obj = jobjects[i]
         if isinstance(obj, JavaObject):
             obj = obj.jobject
-        javabridge.get_env().set_object_array_element(array, i, obj)
-    javabridge.static_call(
-        "Lweka/core/SerializationHelper;", "writeAll",
-        "(Ljava/lang/String;[Ljava/lang/Object;)V",
-        filename, array)
+        array[i] = obj
+    JClass("weka.core.SerializationHelper").writeAll(filename, array)
 
 
 def to_byte_array(jobjects):
@@ -141,16 +127,13 @@ def to_byte_array(jobjects):
     :return: the numpy array
     :rtype: ndarray
     """
-    array = javabridge.get_env().make_object_array(len(jobjects), javabridge.get_env().find_class("java/lang/Object"))
+    array = JClass("java.lang.reflect.Array").newInstance(get_jclass(classname="java.lang.Object"), len(jobjects))
     for i in range(len(jobjects)):
         obj = jobjects[i]
         if isinstance(obj, JavaObject):
             obj = obj.jobject
-        javabridge.get_env().set_object_array_element(array, i, obj)
-    return javabridge.static_call(
-        "Lweka/core/PickleHelper;", "toByteArray",
-        "([Ljava/lang/Object;)[B",
-        array)
+        array[i] = obj
+    return JClass("weka.core.PickleHelper").toByteArray(array)
 
 
 def from_byte_array(array):
@@ -162,12 +145,8 @@ def from_byte_array(array):
     :return: the list of deserialized JB_Object instances
     :rtype: list
     """
-    byte_array = javabridge.get_env().make_byte_array(array)
-    obj_array = javabridge.static_call(
-        "Lweka/core/PickleHelper;", "fromByteArray",
-        "([B)[Ljava/lang/Object;",
-        byte_array)
-    return javabridge.get_env().get_object_array_elements(obj_array)
+    obj_array = JClass("weka.core.PickleHelper").fromByteArray(array)
+    return typeconv.from_jobject_array(obj_array)
 
 
 def get_jclass(classname):
@@ -201,17 +180,11 @@ def get_jclass(classname):
 
     if jvm.with_package_support:
         try:
-            return javabridge.static_call(
-                "Lweka/core/ClassHelper;", "forName",
-                "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Class;",
-                javabridge.class_for_name("java.lang.Object"), classname)
+            return JClass("weka.core.ClassHelper").forName(JClass("java.lang.Object"), classname)
         except:
-            return javabridge.static_call(
-                "Lweka/core/ClassHelper;", "newInstance",
-                "(Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
-                classname, None, None)
+            return JClass("weka.core.ClassHelper").newInstance(classname, None, None)
     else:
-        return javabridge.class_for_name(classname)
+        return JClass(classname)
 
 
 def get_enum(classname, enm):
@@ -225,10 +198,7 @@ def get_enum(classname, enm):
     :return: the enum instance
     :rtype: JB_Object
     """
-    return javabridge.static_call(
-        "Lweka/core/ClassHelper;", "getEnum",
-        "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
-        classname, enm)
+    return JClass("weka.core.ClassHelper").getEnum(classname, enm)
 
 
 def get_static_field(classname, fieldname, signature):
@@ -243,13 +213,10 @@ def get_static_field(classname, fieldname, signature):
     :rtype: JB_Object
     """
     if jvm.with_package_support:
-        return javabridge.static_call(
-            "Lweka/core/ClassHelper;", "getStaticField",
-            "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;",
-            classname, fieldname)
+        return JClass("weka.core.ClassHelper").getStaticField(classname, fieldname)
     else:
-        classname = classname.replace(".", "/")
-        return javabridge.get_static_field(classname, fieldname, signature)
+        C = JClass(classname)
+        return getattr(C, fieldname)
 
 
 def get_classname(obj):
@@ -261,9 +228,8 @@ def get_classname(obj):
     :return: the classname
     :rtype: str
     """
-    if isinstance(obj, javabridge.JB_Object):
-        cls = javabridge.call(obj, "getClass", "()Ljava/lang/Class;")
-        return javabridge.call(cls, "getName", "()Ljava/lang/String;")
+    if isinstance(obj, JObject):
+        return obj.getClass().getName()
     elif inspect.isclass(obj):
         return obj.__module__ + "." + obj.__name__
     else:
@@ -287,16 +253,11 @@ def is_instance_of(obj, class_or_intf_name):
     if is_array(obj):
         jarray = JavaArray(jobject=obj)
         classname = jarray.component_type()
-    result = javabridge.static_call(
-        "Lweka/core/InheritanceUtils;", "isSubclass",
-        "(Ljava/lang/String;Ljava/lang/String;)Z",
-        class_or_intf_name, classname)
+    InheritanceUtils = JClass("weka.core.InheritanceUtils")
+    result = InheritanceUtils.isSubclass(class_or_intf_name, classname)
     if result:
         return True
-    return javabridge.static_call(
-        "Lweka/core/InheritanceUtils;", "hasInterface",
-        "(Ljava/lang/String;Ljava/lang/String;)Z",
-        class_or_intf_name, classname)
+    return InheritanceUtils.hasInterface(class_or_intf_name, classname)
 
 
 def is_array(obj):
@@ -308,8 +269,7 @@ def is_array(obj):
     :return: whether the object is an array
     :rtype: bool
     """
-    cls = javabridge.call(obj, "getClass", "()Ljava/lang/Class;")
-    return javabridge.call(cls, "isArray", "()Z")
+    return obj.getClass().isArray()
 
 
 def list_property_names(obj):
@@ -324,11 +284,7 @@ def list_property_names(obj):
     if isinstance(obj, JavaObject):
         obj = obj.jobject
 
-    return typeconv.jstring_array_to_list(
-        javabridge.static_call(
-            "Lweka/core/ClassHelper;", "listPropertyNames",
-            "(Ljava/lang/Object;)[Ljava/lang/String;",
-            obj))
+    return typeconv.jstring_array_to_list(JClass("weka.core.ClassHelper").listPropertyNames(obj))
 
 
 def new_instance(classname):
@@ -341,10 +297,7 @@ def new_instance(classname):
     :return: the object, None if failed to instantiate
     :rtype: JB_Object
     """
-    return javabridge.static_call(
-        "Lweka/core/ClassHelper;", "newInstance",
-        "(Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
-        classname, None, None)
+    return JClass("weka.core.ClassHelper").newInstance(classname, None, None)
 
 
 class Stoppable(object):
@@ -386,6 +339,7 @@ class JavaObject(JSONObject):
         if not has_dict_handler("JavaObject"):
             register_dict_handler("JavaObject", JavaObject.from_dict)
         self._make_calls()
+        self._property_path = None
 
     def __str__(self):
         """
@@ -393,7 +347,7 @@ class JavaObject(JSONObject):
 
         :rtype: str
         """
-        return javabridge.to_string(self.jobject)
+        return str(self.jobject)
 
     def __repr__(self):
         """
@@ -401,7 +355,7 @@ class JavaObject(JSONObject):
 
         :rtype: str
         """
-        return javabridge.to_string(self.jobject)
+        return str(self.jobject)
 
     def __unicode__(self):
         """
@@ -409,7 +363,7 @@ class JavaObject(JSONObject):
 
         :rtype: str
         """
-        return javabridge.to_string(self.jobject)
+        return str(self.jobject)
 
     def __getstate__(self):
         state = self.__dict__.copy()
@@ -461,8 +415,12 @@ class JavaObject(JSONObject):
         :return: the Java classname
         :rtype: str
         """
-        cls = javabridge.call(self.jobject, "getClass", "()Ljava/lang/Class;")
-        return javabridge.call(cls, "getName", "()Ljava/lang/String;")
+        return self.jobject.getClass().getName()
+
+    def _get_property_path(self):
+        if self._property_path is None:
+            self._property_path = JClass("weka.core.PropertyPath")
+        return self._property_path
 
     def set_property(self, path, jobject):
         """
@@ -476,11 +434,7 @@ class JavaObject(JSONObject):
         # unwrap?
         if isinstance(jobject, JavaObject):
             jobject = jobject.jobject
-
-        javabridge.static_call(
-            "Lweka/core/PropertyPath;", "setValue",
-            "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V",
-            self.jobject, path, jobject)
+        self._get_property_path().setValue(self.jobject, path, jobject)
 
     def get_property(self, path):
         """
@@ -491,10 +445,7 @@ class JavaObject(JSONObject):
         :return: the wrapped Java object
         :rtype: JavaObject
         """
-        return JavaObject(javabridge.static_call(
-            "Lweka/core/PropertyPath;", "getValue",
-            "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
-            self.jobject, path))
+        return JavaObject(self._get_property_path().getValue(self.jobject, path))
 
     @property
     def jclass(self):
@@ -502,9 +453,9 @@ class JavaObject(JSONObject):
         Returns the Java class object of the underlying Java object.
 
         :return: the Java class
-        :rtype: JB_Object
+        :rtype: JClass
         """
-        return javabridge.call(self.jobject, "getClass", "()Ljava/lang/Class;")
+        return self.jobject.getClass()
 
     @property
     def jwrapper(self):
@@ -512,25 +463,9 @@ class JavaObject(JSONObject):
         Returns a JWrapper instance of the encapsulated Java object, giving access to methods
         using dot notation.
 
-        http://pythonhosted.org//javabridge/highlevel.html#wrapping-java-objects-using-reflection
-
         :return: the wrapper
-        :rtype: JWrapper
         """
-        return JWrapper(self.jobject)
-
-    @property
-    def jclasswrapper(self):
-        """
-        Returns a JClassWrapper instance of the class for the encapsulated Java object, giving
-        access to the class methods using dot notation.
-
-        http://pythonhosted.org//javabridge/highlevel.html#wrapping-java-objects-using-reflection
-
-        :return: the wrapper
-        :rtype: JClassWrapper
-        """
-        return JClassWrapper(javabridge.call(self.jobject, "getClass", "()Ljava/lang/Class;"))
+        return self.jobject
 
     @property
     def is_serializable(self):
@@ -608,11 +543,8 @@ class JavaObject(JSONObject):
         try:
             if options is None:
                 options = []
-            return javabridge.static_call(
-                "Lweka/core/Utils;", "forName",
-                "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;",
-                javabridge.class_for_name("java.lang.Object"), classname, options)
-        except JavaException as e:
+            return JClass("weka.core.Utils").forName(JClass("java.lang.Object"), classname, options)
+        except JException as e:
             print("Failed to instantiate " + classname + ": " + str(e))
             suggestions = suggest_package(classname, exact=True)
             if len(suggestions) > 0:
@@ -650,7 +582,7 @@ class Environment(JavaObject):
         :type jobject: JB_Object
         """
         if jobject is None:
-            jobject = javabridge.make_instance("Lweka/core/Environment;", "()V")
+            jobject = JClass("weka.core.Environment")()
         else:
             Environment.enforce_type(jobject, "weka.core.Environment")
         super(Environment, self).__init__(jobject)
@@ -667,9 +599,9 @@ class Environment(JavaObject):
         :type system_wide: bool
         """
         if system_wide:
-            javabridge.call(self.jobject, "addVariableSystemWide", "(Ljava/lang/String;Ljava/lang/String;)V", key, value)
+            self.jobject.addVariableSystemWide(key, value)
         else:
-            javabridge.call(self.jobject, "addVariable", "(Ljava/lang/String;Ljava/lang/String;)V", key, value)
+            self.jobject.addVariable(key, value)
 
     def remove_variable(self, key):
         """
@@ -678,7 +610,7 @@ class Environment(JavaObject):
         :param key: the name of the variable
         :type key: str
         """
-        javabridge.call(self.jobject, "removeVariable", "(Ljava/lang/String;)V", key)
+        self.jobject.removeVariable(key)
 
     def variable_value(self, key):
         """
@@ -689,7 +621,7 @@ class Environment(JavaObject):
         :return: the variable value
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getVariableValue", "(Ljava/lang/String;)Ljava/lang/String;", key)
+        return self.jobject.getVariableValue(key)
 
     def variable_names(self):
         """
@@ -699,9 +631,9 @@ class Environment(JavaObject):
         :rtype: list
         """
         result = []
-        names = javabridge.call(self.jobject, "getVariableNames", "()Ljava/util/Set;")
-        for name in javabridge.iterate_collection(names):
-            result.append(javabridge.to_string(name))
+        names = self.jobject.getVariableNames()
+        for name in names:
+            result.append(str(name))
         return result
 
     @classmethod
@@ -712,8 +644,7 @@ class Environment(JavaObject):
         ;return: the environment
         :rtype: Environment
         """
-        return Environment(jobject=javabridge.static_call(
-            "Lweka/core/Environment;", "getSystemWide", "()Lweka/core/Environment;"))
+        return Environment(jobject=JClass("weka.core.Environment").getSystemWide())
 
 
 class JavaArrayIterator(object):
@@ -762,7 +693,7 @@ class JavaArray(JavaObject):
         :return: the array length
         :rtype: int
         """
-        return javabridge.get_env().get_array_length(self.jobject)
+        return len(self.jobject)
 
     def __init__(self, jobject):
         """
@@ -773,7 +704,7 @@ class JavaArray(JavaObject):
         """
         super(JavaArray, self).__init__(jobject)
         c = self.jclass
-        if not javabridge.call(c, "isArray", "()Z"):
+        if not c.isArray():
             raise Exception("Not an array!")
 
     def __getitem__(self, key):
@@ -787,9 +718,7 @@ class JavaArray(JavaObject):
         """
         if not isinstance(key, int):
             raise Exception("Key must be an integer!")
-        element = javabridge.static_call(
-            "Ljava/lang/reflect/Array;", "get", "(Ljava/lang/Object;I)Ljava/lang/Object;",
-            self.jobject, key)
+        element = self.jobject[key]
         if element is None:
             return None
         return JavaObject(element)
@@ -808,9 +737,7 @@ class JavaArray(JavaObject):
             obj = value
         if not isinstance(key, int):
             raise Exception("Key must be an integer!")
-        javabridge.static_call(
-            "Ljava/lang/reflect/Array;", "set", "(Ljava/lang/Object;ILjava/lang/Object;)V",
-            self.jobject, key, obj)
+        self.jobject[key] = obj
 
     def __delitem__(self, key):
         """
@@ -849,9 +776,7 @@ class JavaArray(JavaObject):
         :return: the class of the elements
         :rtype: str
         """
-        cls = javabridge.call(self.jobject, "getClass", "()Ljava/lang/Class;")
-        comptype = javabridge.call(cls, "getComponentType", "()Ljava/lang/Class;")
-        return javabridge.call(comptype, "getName", "()Ljava/lang/String;")
+        return self.jobject.getClass().getComponentType().getName()
 
     @classmethod
     def new_instance(cls, classname, length):
@@ -865,11 +790,7 @@ class JavaArray(JavaObject):
         :return: the Java array
         :rtype: JB_Object
         """
-        return javabridge.static_call(
-            "Ljava/lang/reflect/Array;",
-            "newInstance",
-            "(Ljava/lang/Class;I)Ljava/lang/Object;",
-            get_jclass(classname=classname), length)
+        return JClass("java.lang.reflect.Array").newInstance(get_jclass(classname=classname), length)
 
 
 class Enum(JavaObject):
@@ -902,7 +823,7 @@ class Enum(JavaObject):
         :return: the name
         :rtype: str
         """
-        return javabridge.call(self.jobject, "name", "()Ljava/lang/String;")
+        return self.jobject.name()
 
     @property
     def ordinal(self):
@@ -912,7 +833,7 @@ class Enum(JavaObject):
         :return: the ordinal
         :rtype: int
         """
-        return javabridge.call(self.jobject, "ordinal", "()I")
+        return self.jobject.ordinal()
 
     @property
     def values(self):
@@ -922,10 +843,8 @@ class Enum(JavaObject):
         :return: all enum members
         :rtype: list
         """
-        cls = javabridge.call(self.jobject, "getClass", "()Ljava/lang/Class;")
-        clsname = javabridge.call(cls, "getName", "()Ljava/lang/String;")
-        l = javabridge.static_call(clsname.replace(".", "/"), "values", "()[L" + clsname.replace(".", "/") + ";")
-        l = javabridge.get_env().get_object_array_elements(l)
+        classname = self.jobject.getClass().getName()
+        l = typeconv.from_jobject_array(JClass(classname).values())
         result = []
         for item in l:
             result.append(Enum(jobject=item))
@@ -944,7 +863,7 @@ class Random(JavaObject):
         :param seed: the seed value
         :type seed: int
         """
-        super(Random, self).__init__(javabridge.make_instance("Ljava/util/Random;", "(J)V", seed))
+        super(Random, self).__init__(JClass("java.util.Random")(seed))
 
     def next_int(self, n=None):
         """
@@ -956,9 +875,9 @@ class Random(JavaObject):
         :rtype: int
         """
         if n is None:
-            return javabridge.call(self.jobject, "nextInt", "()I")
+            return self.jobject.nextInt()
         else:
-            return javabridge.call(self.jobject, "nextInt", "(I)I", n)
+            return self.jobject.nextInt(n)
 
     def next_double(self):
         """
@@ -967,7 +886,7 @@ class Random(JavaObject):
         :return: the next random double
         :rtype: double
         """
-        return javabridge.call(self.jobject, "nextDouble", "()D")
+        return self.jobject.nextDouble()
 
 
 class Option(JavaObject):
@@ -993,7 +912,7 @@ class Option(JavaObject):
         :return: the name
         :rtype: str
         """
-        return javabridge.call(self.jobject, "name", "()Ljava/lang/String;")
+        return self.jobject.name()
 
     @property
     def description(self):
@@ -1003,7 +922,7 @@ class Option(JavaObject):
         :return: the description
         :rtype: str
         """
-        return javabridge.call(self.jobject, "description", "()Ljava/lang/String;")
+        return self.jobject.description()
 
     @property
     def synopsis(self):
@@ -1013,7 +932,7 @@ class Option(JavaObject):
         :return: the synopsis
         :rtype: str
         """
-        return javabridge.call(self.jobject, "synopsis", "()Ljava/lang/String;")
+        return self.jobject.synopsis()
 
     @property
     def num_arguments(self):
@@ -1023,7 +942,7 @@ class Option(JavaObject):
         :return: the synopsis
         :rtype: str
         """
-        return javabridge.call(self.jobject, "numArguments", "()I")
+        return self.jobject.numArguments()
 
 
 class OptionHandler(JavaObject, Configurable):
@@ -1060,8 +979,8 @@ class OptionHandler(JavaObject, Configurable):
         :rtypes: str
         """
         try:
-            return javabridge.call(self.jobject, "globalInfo", "()Ljava/lang/String;")
-        except JavaException:
+            return self.jobject.globalInfo()
+        except JException:
             return None
 
     def description(self):
@@ -1082,7 +1001,7 @@ class OptionHandler(JavaObject, Configurable):
         :rtype: list
         """
         if self.is_optionhandler:
-            return typeconv.jstring_array_to_list(javabridge.call(self.jobject, "getOptions", "()[Ljava/lang/String;"))
+            return typeconv.jstring_array_to_list(self.jobject.getOptions())
         else:
             return []
 
@@ -1095,7 +1014,7 @@ class OptionHandler(JavaObject, Configurable):
         :type options: list
         """
         if self.is_optionhandler:
-            javabridge.call(self.jobject, "setOptions", "([Ljava/lang/String;)V", typeconv.string_list_to_jarray(options))
+            self.jobject.setOptions(typeconv.string_list_to_jarray(options))
 
     def to_commandline(self):
         """
@@ -1104,10 +1023,7 @@ class OptionHandler(JavaObject, Configurable):
         :return: the commandline string
         :rtype: str
         """
-        return javabridge.static_call(
-            "Lweka/core/Utils;", "toCommandLine",
-            "(Ljava/lang/Object;)Ljava/lang/String;",
-            self.jobject)
+        return JClass("weka.core.Utils").toCommandLine(self.jobject)
 
     def to_help(self, title=True, description=True, options=True, use_headers=True, separator=""):
         """
@@ -1141,10 +1057,8 @@ class OptionHandler(JavaObject, Configurable):
             if use_headers:
                 result.append("OPTIONS")
                 result.append("")
-            options = javabridge.call(self.jobject, "listOptions", "()Ljava/util/Enumeration;")
-            enum = javabridge.get_enumeration_wrapper(options)
-            while enum.hasMoreElements():
-                opt = Option(enum.nextElement())
+            for o in self.jobject.listOptions():
+                opt = Option(o)
                 result.append(opt.synopsis)
                 result.append(opt.description)
                 result.append("")
@@ -1157,7 +1071,7 @@ class OptionHandler(JavaObject, Configurable):
         :return: the result of the toString() method
         :rtype: str
         """
-        return javabridge.to_string(self.jobject)
+        return str(self.jobject)
 
     def to_dict(self):
         """
@@ -1202,9 +1116,9 @@ class SingleIndex(JavaObject):
         """
         if jobject is None:
             if index is None:
-                jobject = javabridge.make_instance("weka/core/SingleIndex", "()V")
+                jobject = JClass("weka.core.SingleIndex")()
             else:
-                jobject = javabridge.make_instance("weka/core/SingleIndex", "(Ljava/lang/String;)V", index)
+                jobject = JClass("weka.core.SingleIndex")(index)
         else:
             self.enforce_type(jobject, "weka.core.SingleIndex")
         super(SingleIndex, self).__init__(jobject)
@@ -1216,7 +1130,7 @@ class SingleIndex(JavaObject):
         :param upper: the upper limit
         :type upper: int
         """
-        javabridge.call(self.jobject, "setUpper", "(I)V", upper)
+        self.jobject.setUpper(upper)
 
     def index(self):
         """
@@ -1225,7 +1139,7 @@ class SingleIndex(JavaObject):
         :return: the 0-based integer index
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getIndex", "()I")
+        return self.jobject.getIndex()
 
     @property
     def single_index(self):
@@ -1235,7 +1149,7 @@ class SingleIndex(JavaObject):
         :return: the 1-based string index
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getSingleIndex", "()Ljava/lang/String;")
+        return self.jobject.getSingleIndex()
 
     @single_index.setter
     def single_index(self, index):
@@ -1245,7 +1159,7 @@ class SingleIndex(JavaObject):
         :param index: the 1-based string index
         ::type index: str
         """
-        javabridge.call(self.jobject, "setSingleIndex", "(Ljava/lang/String;)V", index)
+        self.jobject.setSingleIndex(index)
 
 
 class Range(JavaObject):
@@ -1264,9 +1178,9 @@ class Range(JavaObject):
         """
         if jobject is None:
             if ranges is None:
-                jobject = javabridge.make_instance("weka/core/Range", "()V")
+                jobject = JClass("weka.core.Range")()
             else:
-                jobject = javabridge.make_instance("weka/core/Range", "(Ljava/lang/String;)V", ranges)
+                jobject = JClass("weka.core.Range")(ranges)
         else:
             self.enforce_type(jobject, "weka.core.Range")
         super(Range, self).__init__(jobject)
@@ -1278,7 +1192,7 @@ class Range(JavaObject):
         :param upper: the upper limit
         :type upper: int
         """
-        javabridge.call(self.jobject, "setUpper", "(I)V", upper)
+        self.jobject.setUpper(upper)
 
     def selection(self):
         """
@@ -1287,7 +1201,7 @@ class Range(JavaObject):
         :return: the list of 0-based integer indices
         :rtype: list
         """
-        return javabridge.get_env().get_int_array_elements(javabridge.call(self.jobject, "getSelection", "()[I"))
+        return list(typeconv.jint_array_to_ndarray(self.jobject.getSelection()))
 
     @property
     def ranges(self):
@@ -1297,7 +1211,7 @@ class Range(JavaObject):
         :return: the string range of 1-based indices
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getRanges", "()Ljava/lang/String;")
+        return self.jobject.getRanges()
 
     @ranges.setter
     def ranges(self, rng):
@@ -1307,7 +1221,7 @@ class Range(JavaObject):
         :param rng: the range to set
         :type rng: str
         """
-        javabridge.call(self.jobject, "setRanges", "(Ljava/lang/String;)V", rng)
+        self.jobject.setRanges(rng)
 
     @property
     def invert(self):
@@ -1317,7 +1231,7 @@ class Range(JavaObject):
         :return: true if inverted
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getInvert", "()Z")
+        return self.jobject.getInvert()
 
     @invert.setter
     def invert(self, invert):
@@ -1327,7 +1241,7 @@ class Range(JavaObject):
         :param invert: whether to invert or not
         :type invert: bool
         """
-        javabridge.call(self.jobject, "setInvert", "(Z)V", invert)
+        self.jobject.setInvert(invert)
 
 
 class Tag(JavaObject):
@@ -1349,9 +1263,7 @@ class Tag(JavaObject):
         :type uppercase: bool
         """
         if jobject is None:
-            jobject = javabridge.make_instance(
-                "weka/core/Tag", "(ILjava/lang/String;Ljava/lang/String;Z)V",
-                ident, ident_str, readable, uppercase)
+            jobject = JClass("weka.core.Tag")(ident, ident_str, readable, uppercase)
         else:
             self.enforce_type(jobject, "weka.core.Tag")
         super(Tag, self).__init__(jobject)
@@ -1364,7 +1276,7 @@ class Tag(JavaObject):
         :return: the integer ID
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getID", "()I")
+        return self.jobject.getID()
 
     @ident.setter
     def ident(self, value):
@@ -1374,7 +1286,7 @@ class Tag(JavaObject):
         :param value: the new ID
         :type value: int
         """
-        javabridge.call(self.jobject, "setID", "(I)V", value)
+        self.jobject.setID(value)
 
     @property
     def identstr(self):
@@ -1384,7 +1296,7 @@ class Tag(JavaObject):
         :return: the ID string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getIDStr", "()Ljava/lang/String;")
+        return self.jobject.getIDStr()
 
     @identstr.setter
     def identstr(self, value):
@@ -1394,7 +1306,7 @@ class Tag(JavaObject):
         :param value: the new ID string
         :type value: str
         """
-        javabridge.call(self.jobject, "setIDStr", "(Ljava/lang/String;)V", value)
+        self.jobject.setIDStr(value)
 
     @property
     def readable(self):
@@ -1404,7 +1316,7 @@ class Tag(JavaObject):
         :return: the readable string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getReadable", "()Ljava/lang/String;")
+        return self.jobject.getReadable()
 
     @readable.setter
     def readable(self, value):
@@ -1414,7 +1326,7 @@ class Tag(JavaObject):
         :param value: the new readable string
         :type value: str
         """
-        javabridge.call(self.jobject, "setReadable", "(Ljava/lang/String;)V", value)
+        self.jobject.setReadable(value)
 
 
 class Tags(JavaObject):
@@ -1532,7 +1444,8 @@ class Tags(JavaObject):
         :return: the Tags objects
         :rtype: Tags
         """
-        return Tags(jobject=javabridge.call(javaobject.jobject, methodname, "()[Lweka/core/Tag;"))
+        func = getattr(javaobject.jobject, methodname)
+        return Tags(jobject=func())
 
 
 class SelectedTag(JavaObject):
@@ -1561,11 +1474,9 @@ class SelectedTag(JavaObject):
 
         if jobject is None:
             if tag_id is None:
-                jobject = javabridge.make_instance(
-                    "weka/core/SelectedTag", "(Ljava/lang/String;[Lweka/core/Tag;)V", tag_text, tobj)
+                jobject = JClass("weka.core.SelectedTag")(tag_text, tobj)
             else:
-                jobject = javabridge.make_instance(
-                    "weka/core/SelectedTag", "(I[Lweka/core/Tag;)V", tag_id, tobj)
+                jobject = JClass("weka.core.SelectedTag")(tag_id, tobj)
         else:
             self.enforce_type(jobject, "weka.core.SelectedTag")
         super(SelectedTag, self).__init__(jobject)
@@ -1578,7 +1489,7 @@ class SelectedTag(JavaObject):
         :return: the tag
         :rtype: Tag
         """
-        return Tag(javabridge.call(self.jobject, "getSelectedTag", "()Lweka/core/Tag;"))
+        return Tag(self.jobject.getSelectedTag())
 
     @property
     def tags(self):
@@ -1589,11 +1500,9 @@ class SelectedTag(JavaObject):
         :rtype: list
         """
         result = []
-        a = javabridge.call(self.jobject, "getTags", "()Lweka/core/Tag;]")
-        length = javabridge.get_env().get_array_length(a)
-        wrapped = javabridge.get_env().get_object_array_elements(a)
-        for i in range(length):
-            result.append(Tag(javabridge.get_env().get_string(wrapped[i])))
+        a = self.jobject.getTags()
+        for i in range(len(a)):
+            result.append(Tag(str(a[i])))
         return result
 
 
@@ -1606,10 +1515,7 @@ def join_options(options):
     :return: the combined options
     :rtype: str
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "joinOptions",
-        "([Ljava/lang/String;)Ljava/lang/String;",
-        options)
+    return JClass("weka.core.Utils").joinOptions(typeconv.string_list_to_jarray(options))
 
 
 def split_options(cmdline):
@@ -1621,11 +1527,7 @@ def split_options(cmdline):
     :return: the split list of commandline options
     :rtype: list
     """
-    return typeconv.jstring_array_to_list(
-        javabridge.static_call(
-            "Lweka/core/Utils;", "splitOptions",
-            "(Ljava/lang/String;)[Ljava/lang/String;",
-            cmdline))
+    return typeconv.jstring_array_to_list(JClass("weka.core.Utils").splitOptions(cmdline))
 
 
 def split_commandline(cmdline):
@@ -1652,8 +1554,7 @@ def backquote(s):
     :return: the backquoted string
     :rtype: str
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "backQuoteChars", "(Ljava/lang/String;)Ljava/lang/String;", s)
+    return JClass("weka.core.Utils").backQuoteChars(s)
 
 
 def unbackquote(s):
@@ -1665,8 +1566,7 @@ def unbackquote(s):
     :return: the un-backquoted string
     :rtype: str
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "unbackQuoteChars", "(Ljava/lang/String;)Ljava/lang/String;", s)
+    return JClass("weka.core.Utils").unbackQuoteChars(s)
 
 
 def quote(s):
@@ -1678,8 +1578,7 @@ def quote(s):
     :return: the quoted string
     :rtype: str
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "quote", "(Ljava/lang/String;)Ljava/lang/String;", s)
+    return JClass("weka.core.Utils").quote(s)
 
 
 def unquote(s):
@@ -1691,8 +1590,7 @@ def unquote(s):
     :return: the un-quoted string
     :rtype: str
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "unquote", "(Ljava/lang/String;)Ljava/lang/String;", s)
+    return JClass("weka.core.Utils").unquote(s)
 
 
 def to_commandline(optionhandler):
@@ -1704,10 +1602,7 @@ def to_commandline(optionhandler):
     :return: the commandline string
     :rtype: str
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "toCommandLine",
-        "(Ljava/lang/Object;)Ljava/lang/String;",
-        optionhandler.jobject)
+    return JClass("weka.core.Utils").toCommandLine(optionhandler.jobject)
 
 
 def from_commandline(cmdline, classname=None):
@@ -1722,10 +1617,7 @@ def from_commandline(cmdline, classname=None):
     :rtype: object
     """
     cls, params = split_commandline(cmdline)
-    handler = OptionHandler(javabridge.static_call(
-        "Lweka/core/Utils;", "forName",
-        "(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;",
-        javabridge.class_for_name("java.lang.Object"), cls, params))
+    handler = OptionHandler(JClass("weka.core.Utils").forName(JClass("java.lang.Object"), cls, params))
     if classname is None:
         return handler
     else:
@@ -1744,11 +1636,7 @@ def complete_classname(classname):
     :rtype: str
     """
 
-    result = javabridge.get_collection_wrapper(
-        javabridge.static_call(
-            "Lweka/Run;", "findSchemeMatch",
-            "(Ljava/lang/String;Z)Ljava/util/List;",
-            classname, True))
+    result = JClass("weka.Run").findSchemeMatch(classname, True)
     if len(result) == 1:
         return str(result[0])
     elif len(result) == 0:
@@ -1820,7 +1708,7 @@ class AbstractParameter(OptionHandler):
         :return: the property
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getProperty", "()Ljava/lang/String;")
+        return self.jobject.getProperty()
 
     @prop.setter
     def prop(self, s):
@@ -1830,7 +1718,7 @@ class AbstractParameter(OptionHandler):
         :param s: the property
         :type s: str
         """
-        javabridge.call(self.jobject, "setProperty", "(Ljava/lang/String;)V", s)
+        self.jobject.setProperty(s)
 
 
 class ListParameter(AbstractParameter):
@@ -1861,7 +1749,7 @@ class ListParameter(AbstractParameter):
         :return: the list of values (strings)
         :rtype: list
         """
-        return split_options(javabridge.call(self.jobject, "getList", "()Ljava/lang/String;"))
+        return split_options(self.jobject.getList())
 
     @values.setter
     def values(self, l):
@@ -1871,7 +1759,7 @@ class ListParameter(AbstractParameter):
         :param l: the list of values (strings)
         :type l: list
         """
-        javabridge.call(self.jobject, "setList", "(Ljava/lang/String;)V", join_options(l))
+        self.jobject.setList(join_options(l))
 
 
 class MathParameter(AbstractParameter):
@@ -1902,7 +1790,7 @@ class MathParameter(AbstractParameter):
         :return: the minimum
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getMin", "()D")
+        return self.jobject.getMin()
 
     @minimum.setter
     def minimum(self, m):
@@ -1912,7 +1800,7 @@ class MathParameter(AbstractParameter):
         :param m: the minimum
         :type m: float
         """
-        javabridge.call(self.jobject, "setMin", "(D)V", m)
+        self.jobject.setMin(m)
 
     @property
     def maximum(self):
@@ -1922,7 +1810,7 @@ class MathParameter(AbstractParameter):
         :return: the maximum
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getMax", "()D")
+        return self.jobject.getMax()
 
     @maximum.setter
     def maximum(self, m):
@@ -1932,7 +1820,7 @@ class MathParameter(AbstractParameter):
         :param m: the maximum
         :type m: float
         """
-        javabridge.call(self.jobject, "setMax", "(D)V", m)
+        self.jobject.setMax(m)
 
     @property
     def step(self):
@@ -1942,7 +1830,7 @@ class MathParameter(AbstractParameter):
         :return: the step
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getStep", "()D")
+        return self.jobject.getStep()
 
     @step.setter
     def step(self, s):
@@ -1952,7 +1840,7 @@ class MathParameter(AbstractParameter):
         :param s: the step
         :type s: float
         """
-        javabridge.call(self.jobject, "setStep", "(D)V", s)
+        self.jobject.setStep(s)
 
     @property
     def base(self):
@@ -1962,7 +1850,7 @@ class MathParameter(AbstractParameter):
         :return: the base
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getBase", "()D")
+        return self.jobject.getBase()
 
     @base.setter
     def base(self, b):
@@ -1972,7 +1860,7 @@ class MathParameter(AbstractParameter):
         :param b: the base
         :type b: float
         """
-        javabridge.call(self.jobject, "setBase", "(D)V", b)
+        self.jobject.setBase(b)
 
     @property
     def expression(self):
@@ -1982,7 +1870,7 @@ class MathParameter(AbstractParameter):
         :return: the expression
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getExpression", "()Ljava/lang/String;")
+        return self.jobject.getExpression()
 
     @expression.setter
     def expression(self, e):
@@ -1992,7 +1880,7 @@ class MathParameter(AbstractParameter):
         :param e: the expression
         :type e: str
         """
-        javabridge.call(self.jobject, "setExpression", "(Ljava/lang/String;)V", e)
+        self.jobject.setExpression(e)
 
 
 class SetupGenerator(OptionHandler):
@@ -2024,7 +1912,7 @@ class SetupGenerator(OptionHandler):
         :return: the base object
         :rtype: JavaObject or OptionHandler
         """
-        jobj = javabridge.call(self.jobject, "getBaseObject", "()Ljava/io/Serializable;")
+        jobj = self.jobject.getBaseObject()
         if OptionHandler.check_type(jobj, "weka.core.OptionHandler"):
             return OptionHandler(jobj)
         else:
@@ -2040,7 +1928,7 @@ class SetupGenerator(OptionHandler):
         """
         if not obj.is_serializable:
             raise Exception("Base object must be serializable: " + obj.classname)
-        javabridge.call(self.jobject, "setBaseObject", "(Ljava/io/Serializable;)V", obj.jobject)
+        self.jobject.setBaseObject(obj.jobject)
 
     @property
     def parameters(self):
@@ -2050,7 +1938,7 @@ class SetupGenerator(OptionHandler):
         :return: the list of AbstractSearchParameter objects
         :rtype: list
         """
-        array = JavaArray(javabridge.call(self.jobject, "getParameters", "()[Lweka/core/setupgenerator/AbstractParameter;"))
+        array = JavaArray(self.jobject.getParameters())
         result = []
         for item in array:
             result.append(AbstractParameter(jobject=item.jobject))
@@ -2067,7 +1955,7 @@ class SetupGenerator(OptionHandler):
         array = JavaArray(jobject=JavaArray.new_instance("weka.core.setupgenerator.AbstractParameter", len(params)))
         for idx, obj in enumerate(params):
             array[idx] = obj.jobject
-        javabridge.call(self.jobject, "setParameters", "([Lweka/core/setupgenerator/AbstractParameter;)V", array.jobject)
+        self.jobject.setParameters(array.jobject)
 
     def setups(self):
         """
@@ -2078,12 +1966,11 @@ class SetupGenerator(OptionHandler):
         """
         result = []
         has_options = self.base_object.is_optionhandler
-        enm = javabridge.get_enumeration_wrapper(javabridge.call(self.jobject, "setups", "()Ljava/util/Enumeration;"))
-        while enm.hasMoreElements():
+        for item in self.jobject.setups():
             if has_options:
-                result.append(OptionHandler(enm.nextElement()))
+                result.append(OptionHandler(item))
             else:
-                result.append(JavaObject(enm.nextElement()))
+                result.append(JavaObject(item))
         return result
 
 
@@ -2103,9 +1990,9 @@ class Date(JavaObject):
         """
         if jobject is None:
             if msecs is None:
-                jobject = javabridge.make_instance("java/util/Date", "()V")
+                jobject = JClass("java.util.Date")()
             else:
-                jobject = javabridge.make_instance("java/util/Date", "(J)V", msecs)
+                jobject = JClass("java.util.Date")(msecs)
         else:
             self.enforce_type(jobject, "java.util.Date")
         super(Date, self).__init__(jobject=jobject)
@@ -2118,7 +2005,7 @@ class Date(JavaObject):
         :return: the milli-seconds
         :rtype: long
         """
-        return javabridge.call(self.jobject, "getTime", "()J")
+        return self.jobject.getTime()
 
     @time.setter
     def time(self, msecs):
@@ -2128,7 +2015,7 @@ class Date(JavaObject):
         :param msecs: the milli-seconds to use
         :return:
         """
-        javabridge.call(self.jobject, "setTime", "(J)V", msecs)
+        self.jobject.setTime(msecs)
 
 
 def load_suggestions():
@@ -2191,10 +2078,7 @@ def get_non_public_field(jobject, field):
     :type field: str
     :return: the value
     """
-    return javabridge.static_call(
-        "Lweka/core/ClassHelper;", "getNonPublicField",
-        "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
-        jobject, field)
+    return JClass("weka.core.ClassHelper").getNonPublicField(jobject, field)
 
 
 def call_non_public_method(jobject, method, arg_types=None, arg_values=None):
@@ -2217,10 +2101,7 @@ def call_non_public_method(jobject, method, arg_types=None, arg_values=None):
             if isinstance(arg_types[i], str):
                 arg_types[i] = get_jclass(arg_types[i])
 
-    return javabridge.static_call(
-        "Lweka/core/ClassHelper;", "callNonPublicMethod",
-        "(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;",
-        jobject, method, arg_types, arg_values)
+    return JClass("weka.core.ClassHelper").callNonPublicMethod(jobject, method, arg_types, arg_values)
 
 
 def main():
