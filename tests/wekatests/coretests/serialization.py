@@ -12,15 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # serialization.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
-import tempfile
-import javabridge
 import os
 import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
 import wekatests.tests.weka_test as weka_test
+from jpype import JClass
 from weka.core.classes import serialization_read, serialization_write, serialization_read_all, serialization_write_all
 
 
@@ -34,16 +33,15 @@ class TestSerialization(weka_test.WekaTest):
         self.delfile(fname)
 
         lin = ["A", "B", "C", "D"]
-        vin = javabridge.make_instance("java/util/Vector", "()V")
+        vin = JClass("java.util.Vector")()
         for element in lin:
-            javabridge.call(vin, "add", "(Ljava/lang/Object;)Z", element)
+            vin.add(element)
         serialization_write(fname, vin)
         self.assertTrue(os.path.exists(fname), msg="Failed to write to " + fname + "?")
 
         vout = serialization_read(fname)
         self.assertIsNotNone(vout, msg="Failed to read from " + fname + "?")
-        enm = javabridge.call(vin, "elements", "()Ljava/util/Enumeration;")
-        lout = typeconv.jenumeration_to_list(enm)
+        lout = typeconv.jenumeration_to_list(vin.elements())
         self.delfile(fname)
         self.assertEqual(lin, lout, msg="Input/output differ")
 
@@ -56,7 +54,7 @@ class TestSerialization(weka_test.WekaTest):
 
         lin = []
         for i in range(4):
-            lin.append(javabridge.make_instance("java/lang/Integer", "(I)V", i))
+            lin.append(JClass("java.lang.Integer")(i))
         serialization_write_all(fname, lin)
         self.assertTrue(os.path.exists(fname), msg="Failed to write to " + fname + "?")
 
@@ -65,8 +63,8 @@ class TestSerialization(weka_test.WekaTest):
         self.delfile(fname)
         self.assertEqual(len(lin), len(lout), msg="Number of elements differ")
         for i in range(len(lin)):
-            iin = javabridge.call(lin[i], "intValue", "()I")
-            iout = javabridge.call(lout[i], "intValue", "()I")
+            iin = lin[i].intValue()
+            iout = lout[i].intValue()
             self.assertEqual(iin, iout, msg="Input/output differ at #" + str(i))
 
 
