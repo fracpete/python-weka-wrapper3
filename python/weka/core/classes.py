@@ -299,27 +299,6 @@ def new_instance(classname):
     return JClass("weka.core.ClassHelper").newInstance(classname, None, None)
 
 
-class Stoppable(object):
-    """
-    Classes that can be stopped.
-    """
-
-    def is_stopped(self):
-        """
-        Returns whether the object has been stopped.
-
-        :return: whether stopped
-        :rtype: bool
-        """
-        raise Exception("Not implemented!")
-
-    def stop_execution(self):
-        """
-        Triggers the stopping of the object.
-        """
-        raise Exception("Not implemented!")
-
-
 class JavaObject(JSONObject):
     """
     Basic Java object.
