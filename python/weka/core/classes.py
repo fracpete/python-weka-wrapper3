@@ -162,21 +162,21 @@ def get_jclass(classname):
     # primitive?
     if "." not in classname:
         if classname == "boolean":
-            return get_static_field("java.lang.Boolean", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Boolean", "TYPE")
         elif classname == "byte":
-            return get_static_field("java.lang.Byte", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Byte", "TYPE")
         elif classname == "short":
-            return get_static_field("java.lang.Short", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Short", "TYPE")
         elif classname == "int":
-            return get_static_field("java.lang.Integer", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Integer", "TYPE")
         elif classname == "long":
-            return get_static_field("java.lang.Long", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Long", "TYPE")
         elif classname == "float":
-            return get_static_field("java.lang.Float", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Float", "TYPE")
         elif classname == "double":
-            return get_static_field("java.lang.Double", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Double", "TYPE")
         elif classname == "char":
-            return get_static_field("java.lang.Character", "TYPE", "Ljava/lang/Class;")
+            return get_static_field("java.lang.Character", "TYPE")
 
     if jvm.with_package_support:
         try:
@@ -201,7 +201,7 @@ def get_enum(classname, enm):
     return JClass("weka.core.ClassHelper").getEnum(classname, enm)
 
 
-def get_static_field(classname, fieldname, signature):
+def get_static_field(classname, fieldname):
     """
     Returns the Java object associated with the static field of the specified class.
 
@@ -215,8 +215,7 @@ def get_static_field(classname, fieldname, signature):
     if jvm.with_package_support:
         return JClass("weka.core.ClassHelper").getStaticField(classname, fieldname)
     else:
-        C = JClass(classname)
-        return getattr(C, fieldname)
+        return getattr(JClass(classname), fieldname)
 
 
 def get_classname(obj):
@@ -1426,7 +1425,7 @@ class Tags(JavaObject):
         :return: the Tags objects
         :rtype: Tags
         """
-        return Tags(jobject=get_static_field(classname, field, "[Lweka/core/Tag;"))
+        return Tags(jobject=get_static_field(classname, field))
 
     @classmethod
     def get_object_tags(cls, javaobject, methodname):
