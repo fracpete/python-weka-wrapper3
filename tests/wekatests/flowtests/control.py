@@ -12,16 +12,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # control.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
-import os
 import weka.core.jvm as jvm
 import weka.classifiers as classifiers
-import weka.flow.control as control
-import weka.flow.source as source
-import weka.flow.transformer as transformer
-import weka.flow.sink as sink
+import simflow.control as scontrol
+import simflow.source as ssource
+import simflow.sink as ssink
+import weka.flow.transformer as wtransformer
 import wekatests.tests.weka_test as weka_test
 
 
@@ -31,14 +30,14 @@ class TestControl(weka_test.WekaTest):
         """
         Tests instantiating of control actors.
         """
-        actor = control.Flow()
+        actor = scontrol.Flow()
         self.assertIsNotNone(actor, msg="Actor should not be None")
 
     def test_shallow_copy(self):
         """
         Tests the shallow_copy method.
         """
-        actor = control.Flow()
+        actor = scontrol.Flow()
         actor.name = "blah"
         actor.config["annotation"] = "Some annotation text"
         actor2 = actor.shallow_copy()
@@ -49,27 +48,27 @@ class TestControl(weka_test.WekaTest):
         """
         Tests the json methods.
         """
-        actor = control.Flow()
+        actor = scontrol.Flow()
         actor.name = "blah"
         actor.config["annotation"] = "Some annotation text"
-        actor.actors.append(source.Start())
-        tee = control.Tee()
+        actor.actors.append(ssource.Start())
+        tee = scontrol.Tee()
         actor.actors.append(tee)
-        tee.actors.append(sink.Console())
-        trigger = control.Trigger()
+        tee.actors.append(ssink.Console())
+        trigger = scontrol.Trigger()
         actor.actors.append(trigger)
-        files = source.FileSupplier()
+        files = ssource.FileSupplier()
         files.config["files"] = ["file1.arff", "file2.arff"]
         trigger.actors.append(files)
-        loader = transformer.LoadDataset()
+        loader = wtransformer.LoadDataset()
         trigger.actors.append(loader)
-        select = transformer.ClassSelector()
+        select = wtransformer.ClassSelector()
         trigger.actors.append(select)
-        train = transformer.Train()
+        train = wtransformer.Train()
         train.config["setup"] = classifiers.Classifier(classname="weka.classifiers.trees.J48", options=["-C", "0.3"])
         trigger.actors.append(train)
         json = actor.to_json()
-        flow2 = control.Flow.from_json(json)
+        flow2 = scontrol.Flow.from_json(json)
         json2 = flow2.to_json()
         self.assertEqual(json, json2, msg="JSON representations differ")
 
