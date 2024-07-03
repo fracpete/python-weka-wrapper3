@@ -623,19 +623,19 @@ class Associator(OptionHandler):
     @classmethod
     def make_copy(cls, associator):
         """
-        Creates a copy of the clusterer.
+        Creates a copy of the associator.
 
         :param associator: the associator to copy
         :type associator: Associator
         :return: the copy of the associator
         :rtype: Associator
         """
-        return JClass("weka.associations.AbstractAssociator").makeCopy(associator.jobject)
+        return Associator(jobject=JClass("weka.associations.AbstractAssociator").makeCopy(associator.jobject))
 
 
 def main(args=None):
     """
-    Runs a associator from the command-line. Calls JVM start/stop automatically.
+    Runs an associator from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
 
     :param args: the command-line arguments to use, uses sys.argv if None
