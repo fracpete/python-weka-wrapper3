@@ -2119,7 +2119,7 @@ class PredictionOutput(OptionHandler):
         :param data: the test data
         :type data: Instances
         """
-        self.jobject.print(cls.jobject, data.jobject)
+        self.jobject.print_(cls.jobject, data.jobject)
 
     def print_classifications(self, cls, data):
         """
