@@ -33,8 +33,7 @@ class Capability(Enum):
         :param member: the capability string to parse
         :type member: str
         """
-        super(Capability, self).__init__(\
-            jobject=jobject, enum="weka.core.Capabilities$Capability", member=member)
+        super(Capability, self).__init__(jobject=jobject, enum="weka.core.Capabilities$Capability", member=member)
 
     @property
     def is_attribute(self):
@@ -423,6 +422,6 @@ class Capabilities(JavaObject):
         :rtype: Capabilities
         """
         if multi is None:
-            return JClass("weka.core.Capabilities").forInstances(data.jobject)
+            return Capabilities(JClass("weka.core.Capabilities").forInstances(data.jobject))
         else:
-            return JClass("weka.core.Capabilities").forInstances(data.jobject, multi)
+            return Capabilities(JClass("weka.core.Capabilities").forInstances(data.jobject, multi))
