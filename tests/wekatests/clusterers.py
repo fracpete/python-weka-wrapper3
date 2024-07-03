@@ -161,7 +161,7 @@ class TestClusterers(weka_test.WekaTest):
         self.assertGreater(len(evl.cluster_results), 0, msg="No evaluation string!")
         self.assertEqual(0.0, evl.log_likelihood, msg="log_likelihood differs")
         self.assertEqual(2, evl.num_clusters, msg="num_clusters differs")
-        self.assertEquals(
+        self.assertEqual(
             [1., 0., 0., 1., 1., 1., 0., 0., 0., 0.], evl.cluster_assignments.tolist(),
             msg="cluster_assignments differs")
 
