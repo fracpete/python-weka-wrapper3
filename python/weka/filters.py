@@ -12,15 +12,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # filters.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
 import os
 import sys
 import argparse
 import traceback
 import weka.core.jvm as jvm
+from jpype import JClass
 from weka.core.classes import serialization_write, serialization_read_all
 from weka.core.classes import OptionHandler, join_options
 from weka.core.capabilities import Capabilities
@@ -64,10 +64,10 @@ class Filter(OptionHandler):
         Members must start with "_mc_"
         """
         super(Filter, self)._make_calls()
-        self._mc_input = javabridge.make_call(self.jobject, "input", "(Lweka/core/Instance;)Z")
-        self._mc_batchfinished = javabridge.make_call(self.jobject, "batchFinished", "()Z")
-        self._mc_output = javabridge.make_call(self.jobject, "output", "()Lweka/core/Instance;")
-        self._mc_outputformat = javabridge.make_call(self.jobject, "getOutputFormat", "()Lweka/core/Instances;")
+        self._mc_input = self.jobject.input
+        self._mc_batchfinished = self.jobject.batchFinished
+        self._mc_output = self.jobject.output
+        self._mc_outputformat = self.jobject.getOutputFormat
 
     def capabilities(self):
         """
@@ -76,7 +76,7 @@ class Filter(OptionHandler):
         :return: the capabilities
         :rtype: Capabilities
         """
-        return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
+        return Capabilities(self.jobject.getCapabilities())
 
     def inputformat(self, data):
         """
@@ -85,7 +85,7 @@ class Filter(OptionHandler):
         :param data: the data to use as input
         :type data: Instances
         """
-        return javabridge.call(self.jobject, "setInputFormat", "(Lweka/core/Instances;)Z", data.jobject)
+        return self.jobject.setInputFormat(data.jobject)
 
     def input(self, inst):
         """
@@ -142,19 +142,14 @@ class Filter(OptionHandler):
         :return: the filtered Instances object(s)
         :rtype: Instances or list of Instances
         """
+        CFilter = JClass("weka.filters.Filter")
         if isinstance(data, list):
             result = []
             for d in data:
-                result.append(Instances(javabridge.static_call(
-                    "Lweka/filters/Filter;", "useFilter",
-                    "(Lweka/core/Instances;Lweka/filters/Filter;)Lweka/core/Instances;",
-                    d.jobject, self.jobject)))
+                result.append(Instances(CFilter.useFilter(d.jobject, self.jobject)))
             return result
         else:
-            return Instances(javabridge.static_call(
-                "Lweka/filters/Filter;", "useFilter",
-                "(Lweka/core/Instances;Lweka/filters/Filter;)Lweka/core/Instances;",
-                data.jobject, self.jobject))
+            return Instances(CFilter.useFilter(data.jobject, self.jobject))
 
     def to_source(self, classname, data):
         """
@@ -169,7 +164,7 @@ class Filter(OptionHandler):
         """
         if not self.check_type(self.jobject, "weka.filters.Sourcable"):
             return None
-        return javabridge.call(self.jobject, "toSource", "(Ljava/lang/String;Lweka/core/Instances;)Ljava/lang/String;", classname, data.jobject)
+        return self.jobject.toSource(classname, data.jobject)
 
     @classmethod
     def make_copy(cls, flter):
@@ -181,10 +176,7 @@ class Filter(OptionHandler):
         :return: the copy of the filter
         :rtype: Filter
         """
-        return Filter(
-            jobject=javabridge.static_call(
-                "weka/filters/Filter", "makeCopy",
-                "(Lweka/filters/Filter;)Lweka/filters/Filter;", flter.jobject))
+        return Filter(jobject=JClass("weka.filters.Filter").makeCopy(flter.jobject))
 
     @classmethod
     def deserialize(cls, ser_file):
@@ -243,10 +235,8 @@ class MultiFilter(Filter):
         :return: the filter list
         :rtype: list
         """
-        objects = javabridge.get_env().get_object_array_elements(
-            javabridge.call(self.jobject, "getFilters", "()[Lweka/filters/Filter;"))
         result = []
-        for obj in objects:
+        for obj in self.jobject.getFilters():
             result.append(Filter(jobject=obj))
         return result
 
@@ -261,7 +251,7 @@ class MultiFilter(Filter):
         obj = []
         for fltr in filters:
             obj.append(fltr.jobject)
-        javabridge.call(self.jobject, "setFilters", "([Lweka/filters/Filter;)V", obj)
+        self.jobject.setFilters(obj)
 
     def clear(self):
         """
@@ -309,8 +299,7 @@ class StringToWordVector(Filter):
         :return: the stemmer
         :rtype: Stemmer
         """
-        return Stemmer(
-            jobject=javabridge.call(self.jobject, "getStemmer", "()Lweka/core/stemmers/Stemmer;"))
+        return Stemmer(jobject=self.jobject.getStemmer())
 
     @stemmer.setter
     def stemmer(self, stemmer):
@@ -320,8 +309,7 @@ class StringToWordVector(Filter):
         :param stemmer: the stemmer to use
         :type stemmer: Stemmer
         """
-        javabridge.call(
-            self.jobject, "setStemmer", "(Lweka/core/stemmers/Stemmer;)V", stemmer.jobject)
+        self.jobject.setStemmer(stemmer.jobject)
 
     @property
     def stopwords(self):
@@ -331,8 +319,7 @@ class StringToWordVector(Filter):
         :return: the stopwords handler
         :rtype: Stopwords
         """
-        return Stopwords(
-            jobject=javabridge.call(self.jobject, "getStopwordsHandler", "()Lweka/core/stopwords/StopwordsHandler;"))
+        return Stopwords(jobject=self.jobject.getStopwordsHandler())
 
     @stopwords.setter
     def stopwords(self, stopwords):
@@ -342,8 +329,7 @@ class StringToWordVector(Filter):
         :param stopwords: the stopwords handler to use
         :type stopwords: Stopwords
         """
-        javabridge.call(
-            self.jobject, "setStopwordsHandler", "(Lweka/core/stopwords/StopwordsHandler;)V", stopwords.jobject)
+        self.jobject.setStopwordsHandler(stopwords.jobject)
 
     @property
     def tokenizer(self):
@@ -353,8 +339,7 @@ class StringToWordVector(Filter):
         :return: the tokenizer
         :rtype: Tokenizer
         """
-        return Tokenizer(
-            jobject=javabridge.call(self.jobject, "getTokenizer", "()Lweka/core/tokenizers/Tokenizer;"))
+        return Tokenizer(jobject=self.jobject.getTokenizer())
 
     @tokenizer.setter
     def tokenizer(self, tokenizer):
@@ -364,8 +349,7 @@ class StringToWordVector(Filter):
         :param tokenizer: the tokenizer to use
         :type tokenizer: Tokenizer
         """
-        javabridge.call(
-            self.jobject, "setTokenizer", "(Lweka/core/tokenizers/Tokenizer;)V", tokenizer.jobject)
+        self.jobject.setTokenizer(tokenizer.jobject)
 
 
 class AttributeSelection(Filter):
@@ -396,7 +380,7 @@ class AttributeSelection(Filter):
         :return: the evaluator in use
         :rtype: ASEvaluation
         """
-        return ASEvaluation(jobject=javabridge.call(self.jobject, "getEvaluator", "()Lweka/attributeSelection/ASEvaluation;"))
+        return ASEvaluation(jobject=self.jobject.getEvaluator())
 
     @evaluator.setter
     def evaluator(self, evl):
@@ -406,7 +390,7 @@ class AttributeSelection(Filter):
         :param evl: the evaluator to use
         :type evl: ASEvaluation
         """
-        javabridge.call(self.jobject, "setEvaluator", "(Lweka/attributeSelection/ASEvaluation;)V", evl.jobject)
+        self.jobject.setEvaluator(evl.jobject)
 
     @property
     def search(self):
@@ -416,7 +400,7 @@ class AttributeSelection(Filter):
         :return: the search in use
         :rtype: ASSearch
         """
-        return ASSearch(jobject=javabridge.call(self.jobject, "getSearch", "()Lweka/attributeSelection/ASSearch;"))
+        return ASSearch(jobject=self.jobject.getSearch())
 
     @search.setter
     def search(self, search):
@@ -426,7 +410,7 @@ class AttributeSelection(Filter):
         :param search: the search to use
         :type search: ASSearch
         """
-        javabridge.call(self.jobject, "setSearch", "(Lweka/attributeSelection/ASSearch;)V", search.jobject)
+        self.jobject.setSearch(search.jobject)
 
 
 def main(args=None):
