@@ -971,7 +971,7 @@ class Instance(JavaObject):
         for (i, v) in values:
             indices.append(i)
             vals.append(float(v))
-        return Instance(JClass(classname)(weight, typeconv.to_jdouble_array(values), typeconv.to_jint_array(indices), max_values))
+        return Instance(JClass(classname)(weight, typeconv.to_jdouble_array(vals), typeconv.to_jint_array(indices), max_values))
 
     @classmethod
     def missing_value(cls):
