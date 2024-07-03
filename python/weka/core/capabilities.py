@@ -314,7 +314,7 @@ class Capabilities(JavaObject):
         :return: whether the dependency is set
         :rtype: bool
         """
-        self.jobject.hasDependency(capability.jobject)
+        return self.jobject.hasDependency(capability.jobject)
 
     def supports(self, capabilities):
         """
