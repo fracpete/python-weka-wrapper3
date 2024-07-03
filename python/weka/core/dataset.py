@@ -496,9 +496,9 @@ class Instances(JavaObject):
         :return: the dataset
         :rtype: Instances
         """
-        attributes = []
+        attributes = JClass("java.util.ArrayList")()
         for att in atts:
-            attributes.append(att.jobject)
+            attributes.add(att.jobject)
         return Instances(JClass("weka.core.Instances")(name, attributes, capacity))
 
     @classmethod
