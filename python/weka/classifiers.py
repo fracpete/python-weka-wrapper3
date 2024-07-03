@@ -678,7 +678,7 @@ class MultiSearch(SingleClassifierEnhancer):
         :param params: list of AbstractSearchParameter objects
         :type params: list
         """
-        array = JavaArray(JavaArray.new_instance("weka.core.setupgenerator.AbstractParameter", len(params)))
+        array = JavaArray(JavaArray.new_array("weka.core.setupgenerator.AbstractParameter", len(params)))
         for idx, obj in enumerate(params):
             array[idx] = obj.jobject
         self.jobject.setSearchParameters(array.jobject)
