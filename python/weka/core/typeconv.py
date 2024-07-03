@@ -14,7 +14,7 @@
 # typeconv.py
 # Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-from jpype import JFloat, JString, JClass, JDouble, JInt
+from jpype import JFloat, JString, JClass, JDouble, JInt, JObject
 import logging
 import numpy
 
@@ -216,4 +216,30 @@ def to_jint_array(values):
     result = JInt[len(values)]
     for i in range(len(values)):
         result[i] = values[i]
+    return result
+
+
+def to_jobject_array(values):
+    """
+    Converts the list of objects into a Java object array.
+
+    :param values: the list of objects to convert
+    :return: the java array
+    """
+    result = JObject[len(values)]
+    for i in range(len(values)):
+        result[i] = values[i]
+    return result
+
+
+def from_jobject_array(a):
+    """
+    Converts the java object array into a list.
+
+    :param a: the java array to convert
+    :return: the generated list
+    """
+    result = []
+    for i in range(len(a)):
+        result.append(a[i])
     return result
