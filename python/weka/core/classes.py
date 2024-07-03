@@ -20,8 +20,12 @@ import argparse
 import logging
 import csv
 import sys
+import traceback
+
+import numpy
+
 import weka.core.typeconv as typeconv
-from jpype import JClass, JObject, JException
+from jpype import JClass, JObject, JException, JArray
 from confobj import Configurable, JSONObject, has_dict_handler, register_dict_handler, get_class
 import weka.core.jvm as jvm
 
@@ -133,7 +137,8 @@ def to_byte_array(jobjects):
         if isinstance(obj, JavaObject):
             obj = obj.jobject
         array[i] = obj
-    return JClass("weka.core.PickleHelper").toByteArray(array)
+    byte_array = JClass("weka.core.PickleHelper").toByteArray(array)
+    return numpy.asarray(byte_array)
 
 
 def from_byte_array(array):
@@ -145,7 +150,7 @@ def from_byte_array(array):
     :return: the list of deserialized JB_Object instances
     :rtype: list
     """
-    obj_array = JClass("weka.core.PickleHelper").fromByteArray(array)
+    obj_array = JClass("weka.core.PickleHelper").fromByteArray(JArray.of(array))
     return typeconv.from_jobject_array(obj_array)
 
 
@@ -360,6 +365,7 @@ class JavaObject(JSONObject):
             try:
                 state["jobject_bytes"] = to_byte_array([self.jobject])
             except:
+                traceback.print_exc()
                 raise Exception("Java object is not serializable: " + get_classname(self.jobject))
         return state
 
