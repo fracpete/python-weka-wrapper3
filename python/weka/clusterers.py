@@ -12,16 +12,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # clusterers.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
 import os
 import sys
 import argparse
 import traceback
 import weka.core.jvm as jvm
+import weka.core.typeconv as typeconv
 import weka.core.classes as classes
+from jpype import JClass
 from weka.core.classes import serialization_write, serialization_read_all, serialization_write_all
 from weka.core.classes import JavaObject, join_options
 from weka.core.classes import OptionHandler
@@ -65,8 +66,8 @@ class Clusterer(OptionHandler):
         Members must start with "_mc_"
         """
         super(Clusterer, self)._make_calls()
-        self._mc_cluster = javabridge.make_call(self.jobject, "clusterInstance", "(Lweka/core/Instance;)I")
-        self._mc_distribution = javabridge.make_call(self.jobject, "distributionForInstance", "(Lweka/core/Instance;)[D")
+        self._mc_cluster = self.jobject.clusterInstance
+        self._mc_distribution = self.jobject.distributionForInstance
 
     @property
     def capabilities(self):
@@ -76,7 +77,7 @@ class Clusterer(OptionHandler):
         :return: the capabilities
         :rtype: Capabilities
         """
-        return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
+        return Capabilities(self.jobject.getCapabilities())
 
     @property
     def header(self):
@@ -96,7 +97,7 @@ class Clusterer(OptionHandler):
         :type data: Instances
         """
         self._header = data.copy_structure()
-        javabridge.call(self.jobject, "buildClusterer", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.buildClusterer(data.jobject)
 
     def update_clusterer(self, inst):
         """
@@ -106,7 +107,7 @@ class Clusterer(OptionHandler):
         :type inst: Instance
         """
         if self.is_updateable:
-            javabridge.call(self.jobject, "updateClusterer", "(Lweka/core/Instance;)V", inst.jobject)
+            self.jobject.updateClusterer(inst.jobject)
         else:
             logger.critical(classes.get_classname(self.jobject) + " is not updateable!")
 
@@ -115,7 +116,7 @@ class Clusterer(OptionHandler):
         Signals the clusterer that updating with new data has finished.
         """
         if self.is_updateable:
-            javabridge.call(self.jobject, "updateFinished", "()V")
+            self.jobject.updateFinished()
         else:
             logger.critical(classes.get_classname(self.jobject) + " is not updateable!")
 
@@ -137,10 +138,9 @@ class Clusterer(OptionHandler):
         :param inst: the Instance to get the cluster distribution for
         :type inst: Instance
         :return: the cluster distribution
-        :rtype: float[]
+        :rtype: np.ndarray
         """
-        pred = self._mc_distribution(inst.jobject)
-        return javabridge.get_env().get_double_array_elements(pred)
+        return typeconv.jdouble_array_to_ndarray(self._mc_distribution(inst.jobject))
 
     @property
     def number_of_clusters(self):
@@ -150,7 +150,7 @@ class Clusterer(OptionHandler):
         :return: the number fo clusters
         :rtype: int
         """
-        return javabridge.call(self.jobject, "numberOfClusters", "()I")
+        return self.jobject.numberOfClusters()
 
     @property
     def graph_type(self):
@@ -161,7 +161,7 @@ class Clusterer(OptionHandler):
         :rtype: int
         """
         if self.is_drawable:
-            return javabridge.call(self.jobject, "graphType", "()I")
+            return self.jobject.graphType()
         else:
             return -1
 
@@ -174,7 +174,7 @@ class Clusterer(OptionHandler):
         :rtype: str
         """
         if self.is_drawable:
-            return javabridge.call(self.jobject, "graph", "()Ljava/lang/String;")
+            return self.jobject.graph()
         else:
             return None
 
@@ -188,10 +188,7 @@ class Clusterer(OptionHandler):
         :return: the copy of the clusterer
         :rtype: Clusterer
         """
-        return Clusterer(
-            jobject=javabridge.static_call(
-                "weka/clusterers/AbstractClusterer", "makeCopy",
-                "(Lweka/clusterers/Clusterer;)Lweka/clusterers/Clusterer;", clusterer.jobject))
+        return Clusterer(JClass("weka.clusterers.AbstractClusterer").makeCopy(clusterer.jobject))
 
     @classmethod
     def deserialize(cls, ser_file):
@@ -261,7 +258,7 @@ class SingleClustererEnhancer(Clusterer):
         :return: the clusterer
         :rtype: Clusterer
         """
-        return Clusterer(jobject=javabridge.call(self.jobject, "getClusterer", "()Lweka/clusterers/Clusterer;"))
+        return Clusterer(jobject=self.jobject.getClusterer())
 
     @clusterer.setter
     def clusterer(self, clusterer):
@@ -271,7 +268,7 @@ class SingleClustererEnhancer(Clusterer):
         :param clusterer: the base clusterer to use
         :type clusterer: Clusterer
         """
-        javabridge.call(self.jobject, "setClusterer", "(Lweka/clusterers/Clusterer;)V", clusterer.jobject)
+        self.jobject.setClusterer(clusterer.jobject)
 
 
 class FilteredClusterer(SingleClustererEnhancer):
@@ -302,7 +299,7 @@ class FilteredClusterer(SingleClustererEnhancer):
         :return: the filter
         :rtype: Filter
         """
-        return Filter(jobject=javabridge.call(self.jobject, "getFilter", "()Lweka/filters/Filter;"))
+        return Filter(jobject=self.jobject.getFilter())
 
     @filter.setter
     def filter(self, filtr):
@@ -312,7 +309,7 @@ class FilteredClusterer(SingleClustererEnhancer):
         :param filtr: the filter to use
         :type filtr: Filter
         """
-        javabridge.call(self.jobject, "setFilter", "(Lweka/filters/Filter;)V", filtr.jobject)
+        self.jobject.setFilter(filtr.jobject)
 
 
 class ClusterEvaluation(JavaObject):
@@ -333,7 +330,7 @@ class ClusterEvaluation(JavaObject):
         :param clusterer: the clusterer to evaluate
         :type clusterer: Clusterer
         """
-        javabridge.call(self.jobject, "setClusterer", "(Lweka/clusterers/Clusterer;)V", clusterer.jobject)
+        self.jobject.setClusterer(clusterer.jobject)
 
     def test_model(self, test):
         """
@@ -342,7 +339,7 @@ class ClusterEvaluation(JavaObject):
         :param test: the test set to use for evaluating
         :type test: Instances
         """
-        javabridge.call(self.jobject, "evaluateClusterer", "(Lweka/core/Instances;)V", test.jobject)
+        self.jobject.evaluateClusterer(test.jobject)
 
     @property
     def cluster_results(self):
@@ -352,7 +349,7 @@ class ClusterEvaluation(JavaObject):
         :return: the results string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "clusterResultsToString", "()Ljava/lang/String;")
+        return self.jobject.clusterResultsToString()
 
     @property
     def cluster_assignments(self):
@@ -362,11 +359,11 @@ class ClusterEvaluation(JavaObject):
         :return: the cluster assignments
         :rtype: ndarray
         """
-        array = javabridge.call(self.jobject, "getClusterAssignments", "()[D")
+        array = self.jobject.getClusterAssignments()
         if array is None:
             return None
         else:
-            return javabridge.get_env().get_double_array_elements(array)
+            return typeconv.jdouble_array_to_ndarray(array)
 
     @property
     def num_clusters(self):
@@ -376,7 +373,7 @@ class ClusterEvaluation(JavaObject):
         :return: the number of clusters
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getNumClusters", "()I")
+        return self.jobject.getNumClusters()
 
     @property
     def log_likelihood(self):
@@ -386,7 +383,7 @@ class ClusterEvaluation(JavaObject):
         :return: the log likelihood
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getLogLikelihood", "()D")
+        return self.jobject.getLogLikelihood()
 
     @property
     def classes_to_clusters(self):
@@ -396,11 +393,11 @@ class ClusterEvaluation(JavaObject):
         :return: the mappings
         :rtype: ndarray
         """
-        array = javabridge.call(self.jobject, "getClassesToClusters", "()[I")
+        array = self.jobject.getClassesToClusters()
         if array is None:
             return None
         else:
-            return javabridge.get_env().get_int_array_elements(array)
+            return typeconv.jint_array_to_ndarray(array)
 
     @classmethod
     def evaluate_clusterer(cls, clusterer, args):
@@ -414,10 +411,7 @@ class ClusterEvaluation(JavaObject):
         :return: the evaluation result
         :rtype: str
         """
-        return javabridge.static_call(
-            "Lweka/clusterers/ClusterEvaluation;", "evaluateClusterer",
-            "(Lweka/clusterers/Clusterer;[Ljava/lang/String;)Ljava/lang/String;",
-            clusterer.jobject, args)
+        return JClass("weka.clusterers.ClusterEvaluation").evaluateClusterer(clusterer.jobject, args)
 
     @classmethod
     def crossvalidate_model(cls, clusterer, data, num_folds, rnd):
@@ -435,9 +429,7 @@ class ClusterEvaluation(JavaObject):
         :return: the cross-validated loglikelihood
         :rtype: float
         """
-        return javabridge.static_call(
-            "Lweka/clusterers/ClusterEvaluation;", "crossValidateModel",
-            "(Lweka/clusterers/DensityBasedClusterer;Lweka/core/Instances;ILjava/util/Random;)D",
+        return JClass("weka.clusterers.ClusterEvaluation").crossValidateModel(
             clusterer.jobject, data.jobject, num_folds, rnd.jobject)
 
 
