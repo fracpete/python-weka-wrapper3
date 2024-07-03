@@ -188,7 +188,7 @@ class Clusterer(OptionHandler):
         :return: the copy of the clusterer
         :rtype: Clusterer
         """
-        return Clusterer(JClass("weka.clusterers.AbstractClusterer").makeCopy(clusterer.jobject))
+        return Clusterer(jobject=JClass("weka.clusterers.AbstractClusterer").makeCopy(clusterer.jobject))
 
     @classmethod
     def deserialize(cls, ser_file):
