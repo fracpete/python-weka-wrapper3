@@ -25,12 +25,12 @@ class DistanceFunction(OptionHandler):
 
     def __init__(self, classname="weka.core.EuclideanDistance", jobject=None, options=None):
         """
-        Initializes the specified distance function using either the classname or the supplied JB_Object.
+        Initializes the specified distance function using either the classname or the supplied JPype object.
 
         :param classname: the classname of the distance function
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """

@@ -41,11 +41,11 @@ class Item(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the Item object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
 
         if jobject is None:
-            raise Exception("No Item JB_Object provided!")
+            raise Exception("No Item JPype object provided!")
         self.enforce_type(jobject, "weka.associations.Item")
         super(Item, self).__init__(jobject)
 
@@ -199,10 +199,10 @@ class AssociationRule(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the AssociationRule object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         if jobject is None:
-            raise Exception("No AssociationRule JB_Object provided!")
+            raise Exception("No AssociationRule JPype object provided!")
         self.enforce_type(jobject, "weka.associations.AssociationRule")
         super(AssociationRule, self).__init__(jobject)
 
@@ -456,10 +456,10 @@ class AssociationRules(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the AssociationRules object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         if jobject is None:
-            raise Exception("No AssociationRules JB_Object provided!")
+            raise Exception("No AssociationRules JPype object provided!")
         self.enforce_type(jobject, "weka.associations.AssociationRules")
         super(AssociationRules, self).__init__(jobject)
 
@@ -541,12 +541,12 @@ class Associator(OptionHandler):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified associator using either the classname or the supplied JB_Object.
+        Initializes the specified associator using either the classname or the supplied JPype object.
 
         :param classname: the classname of the associator
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """

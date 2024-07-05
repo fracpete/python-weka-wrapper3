@@ -39,7 +39,7 @@ class Instances(JavaObject):
         Initializes the weka.core.Instances wrapper.
 
         :param jobject: the weka.core.Instances object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.Instances")
         super(Instances, self).__init__(jobject)
@@ -720,7 +720,7 @@ class Instance(JavaObject):
         Initializes the weka.core.Instance wrapper.
 
         :param jobject: the weka.core.Instance object to initialize with
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.Instance")
         super(Instance, self).__init__(jobject)
@@ -1031,8 +1031,8 @@ class Attribute(JavaObject):
     def __init__(self, jobject):
         """
         Initializes the weka.core.Attribute wrapper.
-        :param jobject: the JB_Object
-        :type jobject: JB_Object
+        :param jobject: the JPype object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.Attribute")
         super(Attribute, self).__init__(jobject)
@@ -1393,7 +1393,7 @@ class AttributeStats(JavaObject):
         Initializes the container.
 
         :param jobject: The Java object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.AttributeStats")
         super(AttributeStats, self).__init__(jobject)
@@ -1489,7 +1489,7 @@ class Stats(JavaObject):
         Initializes the container.
 
         :param jobject: The Java object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.experiment.Stats")
         super(Stats, self).__init__(jobject)

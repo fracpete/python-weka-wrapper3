@@ -26,10 +26,10 @@ class DatabaseUtils(OptionHandler):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes a DatabaseUtils object from scratch or uses the provided JB_Object.
+        Initializes a DatabaseUtils object from scratch or uses the provided JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -106,10 +106,10 @@ class InstanceQuery(DatabaseUtils):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes an InstanceQuery object from scratch or uses the provided JB_Object.
+        Initializes an InstanceQuery object from scratch or uses the provided JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """

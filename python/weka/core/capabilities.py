@@ -29,7 +29,7 @@ class Capability(Enum):
         Initializes the wrapper with the specified Capability object.
 
         :param jobject: the Capability object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         :param member: the capability string to parse
         :type member: str
         """
@@ -96,9 +96,9 @@ class Capabilities(JavaObject):
         Initializes the wrapper with the specified Capabilities object.
 
         :param jobject: the Capabilities object to wrap, instantiates a new one if None
-        :type jobject: JB_Object
+        :type jobject: JPype object
         :param owner: the weka.core.CapabilitiesHandler object to use as owner, can be None
-        :type owner: JB_Object or JavaObject
+        :type owner: JPype object or JavaObject
         """
         if jobject is None:
             if isinstance(owner, JavaObject):
@@ -127,7 +127,7 @@ class Capabilities(JavaObject):
         Sets the new owner.
 
         :param obj: the new owner
-        :type obj: JavaObject or JB_Object
+        :type obj: JavaObject or JPype object
         """
         if isinstance(obj, JavaObject):
             obj = obj.jobject

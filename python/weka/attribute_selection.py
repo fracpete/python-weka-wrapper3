@@ -38,12 +38,12 @@ class ASSearch(OptionHandler):
 
     def __init__(self, classname="weka.attributeSelection.BestFirst", jobject=None, options=None):
         """
-        Initializes the specified search algorithm using either the classname or the supplied JB_Object.
+        Initializes the specified search algorithm using either the classname or the supplied JPype object.
 
         :param classname: the classname of the search algorithms
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the commandline options to use
         :type options: list
         """
@@ -89,12 +89,12 @@ class ASEvaluation(OptionHandler):
 
     def __init__(self, classname="weka.attributeSelection.CfsSubsetEval", jobject=None, options=None):
         """
-        Initializes the specified search algorithm using either the classname or the supplied JB_Object.
+        Initializes the specified search algorithm using either the classname or the supplied JPype object.
 
         :param classname: the classname of the search algorithms
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """

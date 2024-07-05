@@ -30,12 +30,12 @@ class Loader(OptionHandler):
     
     def __init__(self, classname="weka.core.converters.ArffLoader", jobject=None, options=None):
         """
-        Initializes the specified loader either using the classname or the JB_Object.
+        Initializes the specified loader either using the classname or the JPype object.
 
         :param classname: the classname of the loader
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -170,10 +170,10 @@ class TextDirectoryLoader(OptionHandler):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the text directory loader either using a new instance or the JB_Object.
+        Initializes the text directory loader either using a new instance or the JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -201,12 +201,12 @@ class Saver(OptionHandler):
     
     def __init__(self, classname="weka.core.converters.ArffSaver", jobject=None, options=None):
         """
-        Initializes the specified saver either using the classname or the provided JB_Object.
+        Initializes the specified saver either using the classname or the provided JPype object.
 
         :param classname: the classname of the saver
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """

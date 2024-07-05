@@ -24,12 +24,12 @@ class Stemmer(OptionHandler):
 
     def __init__(self, classname="weka.core.stemmers.NullStemmer", jobject=None, options=None):
         """
-        Initializes the specified stemmer using either the classname or the supplied JB_Object.
+        Initializes the specified stemmer using either the classname or the supplied JPype object.
 
         :param classname: the classname of the stemmer
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """

@@ -27,7 +27,7 @@ def jstring_array_to_list(a):
     Turns the Java string array into Python unicode string list.
 
     :param a: the string array to convert
-    :type a: JB_Object
+    :type a: JPype object
     :return: the string list
     :rtype: list
     """
@@ -41,7 +41,7 @@ def string_list_to_jarray(l):
     :param l: the string list
     :type: list
     :rtype: java string array
-    :return: JB_Object
+    :return: JPype object
     """
     result = JString[len(l)]
     for i in range(len(l)):
@@ -65,7 +65,7 @@ def jstring_list_to_string_list(l, return_empty_if_none=True):
     Converts a Java java.util.List containing strings into a Python list.
 
     :param l: the list to convert
-    :type l: JB_Object
+    :type l: JPype object
     :param return_empty_if_none: whether to return an empty list or None when list object is None
     :type return_empty_if_none: bool
     :return: the list with UTF strings
@@ -84,7 +84,7 @@ def jdouble_matrix_to_ndarray(m):
     Turns the Java matrix (2-dim array) of doubles into a numpy 2-dim array.
 
     :param m: the double matrix
-    :type: JB_Object
+    :type: JPype object
     :return: Numpy array
     :rtype: numpy.darray
     """
@@ -102,7 +102,7 @@ def jdouble_array_to_ndarray(a):
     Turns the Java array of doubles into a numpy 2-dim array.
 
     :param a: the double array
-    :type: JB_Object
+    :type: JPype object
     :return: Numpy array
     :rtype: numpy.darray
     """
@@ -117,7 +117,7 @@ def jint_array_to_ndarray(a):
     Turns the Java array of ints into a numpy 2-dim array.
 
     :param a: the double array
-    :type: JB_Object
+    :type: JPype object
     :return: Numpy array
     :rtype: numpy.darray
     """
@@ -132,7 +132,7 @@ def jenumeration_to_list(enm):
     Turns the java.util.Enumeration into a list.
 
     :param enm: the enumeration to convert
-    :type enm: JB_Object
+    :type enm: JPype object
     :return: the list
     :rtype: list
     """
@@ -146,7 +146,7 @@ def float_to_jfloat(d):
     :param d: the Python float
     :type d: float
     :return: the Float object
-    :rtype: JB_Object
+    :rtype: JPype object
     """
     return JFloat(d)
 
@@ -156,7 +156,7 @@ def jdouble_to_float(d):
     Turns the Java java.lang.Double object into Python float object.
 
     :param d: the java.lang.Double
-    :type d: JB_Object
+    :type d: JPype object
     :return: the Float object
     :rtype: float
     """

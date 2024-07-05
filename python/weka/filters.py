@@ -44,12 +44,12 @@ class Filter(OptionHandler):
 
     def __init__(self, classname="weka.filters.AllFilter", jobject=None, options=None):
         """
-        Initializes the specified filter using either the classname or the supplied JB_Object.
+        Initializes the specified filter using either the classname or the supplied JPype object.
 
         :param classname: the classname of the filter
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -214,10 +214,10 @@ class MultiFilter(Filter):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the MultiFilter instance using either creating new instance or using the supplied JB_Object.
+        Initializes the MultiFilter instance using either creating new instance or using the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: list of commandline options
         :type options: list
         """
@@ -278,10 +278,10 @@ class StringToWordVector(Filter):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the StringToWordVector instance using either creating new instance or using the supplied JB_Object.
+        Initializes the StringToWordVector instance using either creating new instance or using the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: list of commandline options
         :type options: list
         """
@@ -359,10 +359,10 @@ class AttributeSelection(Filter):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the AttributeSelection instance using either creating new instance or using the supplied JB_Object.
+        Initializes the AttributeSelection instance using either creating new instance or using the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: list of commandline options
         :type options: list
         """

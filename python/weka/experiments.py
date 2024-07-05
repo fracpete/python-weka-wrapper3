@@ -31,12 +31,12 @@ class Experiment(OptionHandler):
 
     def __init__(self, classname="weka.experiment.Experiment", jobject=None, options=None):
         """
-        Initializes the specified experiment using either the classname or the supplied JB_Object.
+        Initializes the specified experiment using either the classname or the supplied JPype object.
 
         :param classname: the classname of the experiment
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -63,7 +63,7 @@ class SimpleExperiment(OptionHandler):
         :param classifiers: the Classifier objects or commandline strings to use in the experiment
         :type classifiers: list
         :param jobject: the Java Object to use
-        :type jobject: JB_Object
+        :type jobject: JPype object
         :param classification: whether to perform classification or regression
         :type classification:bool
         :param runs: the number of runs to perform
@@ -367,12 +367,12 @@ class ResultMatrix(OptionHandler):
 
     def __init__(self, classname="weka.experiment.ResultMatrixPlainText", jobject=None, options=None):
         """
-        Initializes the specified ResultMatrix using either the classname or the supplied JB_Object.
+        Initializes the specified ResultMatrix using either the classname or the supplied JPype object.
 
         :param classname: the classname of the ResultMatrix
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -619,12 +619,12 @@ class Tester(OptionHandler):
 
     def __init__(self, classname="weka.experiment.PairedCorrectedTTester", jobject=None, options=None, swap_rows_and_cols=False):
         """
-        Initializes the specified tester using either the classname or the supplied JB_Object.
+        Initializes the specified tester using either the classname or the supplied JPype object.
 
         :param classname: the classname of the tester
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         :param swap_rows_and_cols: whether to swap rows/columns, to compare datasets rather than classifiers

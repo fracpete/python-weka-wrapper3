@@ -43,12 +43,12 @@ class Clusterer(OptionHandler):
 
     def __init__(self, classname="weka.clusterers.SimpleKMeans", jobject=None, options=None):
         """
-        Initializes the specified clusterer using either the classname or the supplied JB_Object.
+        Initializes the specified clusterer using either the classname or the supplied JPype object.
 
         :param classname: the classname of the clusterer
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -236,12 +236,12 @@ class SingleClustererEnhancer(Clusterer):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified clusterer using either the classname or the supplied JB_Object.
+        Initializes the specified clusterer using either the classname or the supplied JPype object.
 
         :param classname: the classname of the clusterer
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -278,10 +278,10 @@ class FilteredClusterer(SingleClustererEnhancer):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the specified clusterer using either the classname or the supplied JB_Object.
+        Initializes the specified clusterer using either the classname or the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """

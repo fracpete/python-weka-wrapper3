@@ -37,8 +37,8 @@ class TestPart(JavaObject):
         """
         Initializes the TestPart object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.CustomPeriodicTest.TestPart")
         super(TestPart, self).__init__(jobject=jobject)
@@ -216,8 +216,8 @@ class CustomPeriodicTest(JavaObject):
         """
         Initializes the CustomPeriodicTest object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param test: the test string to use
         :type test: str
         """
@@ -299,8 +299,8 @@ class Periodicity(Enum):
         """
         Initializes the Periodicity object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param periodicity: the string representation of the enum
         :type periodicity: str
         """
@@ -326,8 +326,8 @@ class PeriodicityHandler(JavaObject):
         """
         Initializes the CustomPeriodicTest object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.filters.supervised.attribute.TSLagMaker.PeriodicityHandler")
         super(PeriodicityHandler, self).__init__(jobject=jobject)
@@ -391,7 +391,7 @@ class TSLagMaker(Filter):
         Initializes the TSLagMaker filter.
 
         :param jobject: the javaobject to use
-        :type jobject: JB_Object
+        :type jobject: JPype object
         :param options: the list of options to use
         :type options: list
         """
@@ -1037,12 +1037,12 @@ class TSForecaster(OptionHandler):
 
     def __init__(self, classname="weka.classifiers.timeseries.WekaForecaster", jobject=None, options=None):
         """
-        Initializes the specified timeseries forecaster using either the classname or the supplied JB_Object.
+        Initializes the specified timeseries forecaster using either the classname or the supplied JPype object.
 
         :param classname: the classname of the timeseries forecaster
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -1104,7 +1104,7 @@ class TSForecaster(OptionHandler):
         """
         Returns the previous state.
 
-        :return: the state as list of JB_Object objects
+        :return: the state as list of JPype object objects
         :rtype: list
         """
         return list(self.jobject.getPreviousState())
@@ -1242,8 +1242,8 @@ class TSLagUser(JavaObject):
         """
         Wraps the TSLagUser object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.TSLagUser")
         super(TSLagUser, self).__init__(jobject=jobject)
@@ -1278,8 +1278,8 @@ class ConfidenceIntervalForecaster(JavaObject):
         """
         Wraps a ConfidenceIntervalForecaster object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.ConfidenceIntervalForecaster")
         super(ConfidenceIntervalForecaster, self).__init__(jobject=jobject)
@@ -1346,8 +1346,8 @@ class OverlayForecaster(JavaObject):
         """
         Wraps a OverlayForecaster object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.OverlayForecaster")
         super(OverlayForecaster, self).__init__(jobject=jobject)
@@ -1432,8 +1432,8 @@ class IncrementallyPrimeable(JavaObject):
         """
         Wraps a IncrementallyPrimeable object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.IncrementallyPrimeable")
         super(IncrementallyPrimeable, self).__init__(jobject=jobject)
@@ -1457,8 +1457,8 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         """
         Initializes a Weka timeseries forecaster.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -1512,7 +1512,7 @@ class TSEvalModule(JavaObject):
         Initializes the evaluation module.
 
         :param jobject: the object to initialize with
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         super(TSEvalModule, self).__init__(jobject)
 
@@ -1633,7 +1633,7 @@ class ErrorModule(TSEvalModule):
         Initializes the error module.
 
         :param jobject: the object to initialize with
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         super(ErrorModule, self).__init__(jobject)
 

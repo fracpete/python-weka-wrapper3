@@ -44,12 +44,12 @@ class Classifier(OptionHandler):
 
     def __init__(self, classname="weka.classifiers.rules.ZeroR", jobject=None, options=None):
         """
-        Initializes the specified classifier using either the classname or the supplied JB_Object.
+        Initializes the specified classifier using either the classname or the supplied JPype object.
 
         :param classname: the classname of the classifier
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -316,12 +316,12 @@ class SingleClassifierEnhancer(Classifier):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified classifier using either the classname or the supplied JB_Object.
+        Initializes the specified classifier using either the classname or the supplied JPype object.
 
         :param classname: the classname of the classifier
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -358,10 +358,10 @@ class FilteredClassifier(SingleClassifierEnhancer):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the specified classifier using its classname or the supplied JB_Object.
+        Initializes the specified classifier using its classname or the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -409,10 +409,10 @@ class AttributeSelectedClassifier(SingleClassifierEnhancer):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the specified classifier using its classname or the supplied JB_Object.
+        Initializes the specified classifier using its classname or the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -471,10 +471,10 @@ class GridSearch(SingleClassifierEnhancer):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the specified classifier using its classname or the supplied JB_Object.
+        Initializes the specified classifier using its classname or the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -617,10 +617,10 @@ class MultiSearch(SingleClassifierEnhancer):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes the specified classifier using its classname or the supplied JB_Object.
+        Initializes the specified classifier using its classname or the supplied JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -701,12 +701,12 @@ class MultipleClassifiersCombiner(Classifier):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified classifier using either the classname or the supplied JB_Object.
+        Initializes the specified classifier using either the classname or the supplied JPype object.
 
         :param classname: the classname of the classifier
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: list of commandline options
         :type options: list
         """
@@ -766,12 +766,12 @@ class Kernel(OptionHandler):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified kernel using either the classname or the supplied JB_Object.
+        Initializes the specified kernel using either the classname or the supplied JPype object.
 
         :param classname: the classname of the kernel
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -861,12 +861,12 @@ class KernelClassifier(Classifier):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified classifier using either the classname or the supplied JB_Object.
+        Initializes the specified classifier using either the classname or the supplied JPype object.
 
         :param classname: the classname of the classifier
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: list of commandline options
         :type options: list
         """
@@ -914,7 +914,7 @@ class Prediction(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the prediction to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.evaluation.Prediction")
         super(Prediction, self).__init__(jobject)
@@ -960,7 +960,7 @@ class NominalPrediction(Prediction):
         Initializes the wrapper.
 
         :param jobject: the prediction to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.evaluation.NominalPrediction")
         super(NominalPrediction, self).__init__(jobject)
@@ -996,7 +996,7 @@ class NumericPrediction(Prediction):
         Initializes the wrapper.
 
         :param jobject: the prediction to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.evaluation.NumericPrediction")
         super(NumericPrediction, self).__init__(jobject)
@@ -1035,7 +1035,7 @@ class CostMatrix(JavaObject):
         Initializes the matrix object.
 
         :param matrx: the matrix to copy
-        :type matrx: CostMatrix or ndarray or JB_Object
+        :type matrx: CostMatrix or ndarray or JPype object
         :param num_classes: the number of classes
         :type num_classes: int
         """
@@ -1097,20 +1097,20 @@ class CostMatrix(JavaObject):
 
     def get_cell(self, row, col):
         """
-        Returns the JB_Object at the specified location.
+        Returns the JPype object at the specified location.
 
         :param row: the 0-based index of the row
         :type row: int
         :param col: the 0-based index of the column
         :type col: int
         :return: the object in that cell
-        :rtype: JB_Object
+        :rtype: JPype object
         """
         return self.jobject.getCell(row, col)
 
     def set_cell(self, row, col, obj):
         """
-        Sets the JB_Object at the specified location. Automatically unwraps JavaObject.
+        Sets the JPype object at the specified location. Automatically unwraps JavaObject.
 
         :param row: the 0-based index of the row
         :type row: int
@@ -2063,12 +2063,12 @@ class PredictionOutput(OptionHandler):
 
     def __init__(self, classname="weka.classifiers.evaluation.output.prediction.PlainText", jobject=None, options=None):
         """
-        Initializes the specified output generator using either the classname or the supplied JB_Object.
+        Initializes the specified output generator using either the classname or the supplied JPype object.
 
         :param classname: the classname of the generator
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """

@@ -36,12 +36,12 @@ class DataGenerator(OptionHandler):
 
     def __init__(self, classname="weka.datagenerators.classifiers.classification.Agrawal", jobject=None, options=None):
         """
-        Initializes the specified datagenerator using either the classname or the supplied JB_Object.
+        Initializes the specified datagenerator using either the classname or the supplied JPype object.
 
         :param classname: the classname of the datagenerator
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         if jobject is None:
             jobject = DataGenerator.new_instance(classname)

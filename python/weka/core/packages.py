@@ -38,7 +38,7 @@ class Package(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the java Package instance to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.packageManagement.Package")
         super(Package, self).__init__(jobject)
@@ -154,7 +154,7 @@ class PackageConstraint(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the java PackageConstraint instance to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.packageManagement.PackageConstraint")
         super(PackageConstraint, self).__init__(jobject)
@@ -203,7 +203,7 @@ class Dependency(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the java Dependency instance to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.core.packageManagement.Dependency")
         super(Dependency, self).__init__(jobject)
