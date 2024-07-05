@@ -25,6 +25,7 @@ import traceback
 import numpy
 
 import weka.core.typeconv as typeconv
+import jpype.imports
 from jpype import JClass, JObject, JException, JArray
 from confobj import Configurable, JSONObject, has_dict_handler, register_dict_handler, get_class
 import weka.core.jvm as jvm
@@ -2051,42 +2052,6 @@ def suggest_package(name, exact=False):
                 result.append(pkg)
 
     return result
-
-
-def get_non_public_field(jobject, field):
-    """
-    Returns the specified non-public field from the Java object.
-
-    :param jobject: the Java object to get the field from
-    :type jobject: JBObject
-    :param field: the name of the field to retrieve
-    :type field: str
-    :return: the value
-    """
-    return JClass("weka.core.ClassHelper").getNonPublicField(jobject, field)
-
-
-def call_non_public_method(jobject, method, arg_types=None, arg_values=None):
-    """
-    For calling a non-public method of the provided Java object.
-
-    :param jobject: the Java object to call the method on
-    :type jobject: JBObject
-    :param method: the name of the method to call
-    :type method: str
-    :param arg_types: the method argument types, either Java objects or classname strings (eg "java.lang.Integer" or "int")
-    :type arg_types: list
-    :param arg_values: the method argument values
-    :type arg_values: list
-    :return: the result of the method call
-    """
-    # convert string classnames into Java class objects
-    if arg_types is not None:
-        for i in range(len(arg_types)):
-            if isinstance(arg_types[i], str):
-                arg_types[i] = get_jclass(arg_types[i])
-
-    return JClass("weka.core.ClassHelper").callNonPublicMethod(jobject, method, arg_types, arg_values)
 
 
 def new_array(classname, length):
