@@ -444,10 +444,11 @@ class JavaObject(JSONObject):
     @property
     def jwrapper(self):
         """
-        Returns a JWrapper instance of the encapsulated Java object, giving access to methods
-        using dot notation.
+        DEPRECATED: use self.jobject directly, as it is already wrapped.
 
-        :return: the wrapper
+        Returns the encapsulated Java object, giving access to methods using dot notation.
+
+        :return: the JPype object
         """
         return self.jobject
 
