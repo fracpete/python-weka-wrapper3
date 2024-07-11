@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.0 (????-??-??)
+0.3.0 (2024-07-12)
 ------------------
 
 - added `is_additional_measure_producer` variable, `additional_measures` property and
