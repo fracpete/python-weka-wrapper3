@@ -378,7 +378,7 @@ class FilteredClassifier(SingleClassifierEnhancer):
         Returns the filter.
 
         :return: the filter in use
-        :rtype: Filter
+        :rtype: weka.filters.Filter
         """
         return Filter(jobject=self.jobject.getFilter())
 
@@ -388,7 +388,7 @@ class FilteredClassifier(SingleClassifierEnhancer):
         Sets the filter.
 
         :param filtr: the filter to use
-        :type filtr: Filter
+        :type filtr: weka.filters.Filter
         """
         self.jobject.setFilter(filtr.jobject)
 
