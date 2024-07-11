@@ -67,7 +67,7 @@ Steps:
 
 # Docker
 
-Create new CPU docker imagefor this release and push it to docker hub.
+Create new CPU docker image for this release and push it to docker hub.
 
 
 # Google Group
