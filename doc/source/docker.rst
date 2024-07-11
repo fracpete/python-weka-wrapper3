@@ -195,7 +195,7 @@ The output will be something like this:
 ::
 
    DEBUG:weka.core.jvm:Adding bundled jars
-   DEBUG:weka.core.jvm:Classpath=['/usr/local/lib/python3.10/dist-packages/weka/lib/core.jar', '/usr/local/lib/python3.10/dist-packages/weka/lib/python-weka-wrapper.jar', '/usr/local/lib/python3.10/dist-packages/weka/lib/arpack_combined.jar', '/usr/local/lib/python3.10/dist-packages/weka/lib/weka.jar', '/usr/local/lib/python3.10/dist-packages/weka/lib/mtj.jar']
+   DEBUG:weka.core.jvm:Classpath=...
    DEBUG:weka.core.jvm:MaxHeapSize=default
    DEBUG:weka.core.jvm:Package support enabled
    SelfOrganizingMap/1.0.3
