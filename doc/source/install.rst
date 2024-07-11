@@ -25,6 +25,13 @@ version. However, Oracle's JDK 8 is no longer available for public download and 
 recommended Java version to use. Personally, I recommend the **long-term support version 11 of OpenJDK**.
 
 
+Optional features
+-----------------
+
+Support for plots and graphs are optional features. If you do not want or need these, you can
+omit the suffix ``[plots,graphs]`` when installing python-weka-wrapper3.
+
+
 Ubuntu
 ------
 
@@ -257,6 +264,7 @@ For *graphviz* support you also need the Windows binary installed:
 * add the path to its installed binaries to your ``PATH`` environment variable.
 
 
+
 Windows
 -------
 
@@ -270,7 +278,9 @@ Perform the following steps:
 * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
   select the **Desktop development with C++** option in the installer
 * install `Python <http://www.python.org/downloads>`__, make sure you check *Add python.exe to path* during the installation
-* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python312\\Scripts``
+* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python\\Python312\\Scripts``
+* install `GraphViz <https://graphviz.org/download/>`__ into ``C:\Program Files\Graphviz`` and add its binaries to
+  the ``PATH`` environment variable
 * open a command-prompt and create a virtual environment
 * create a virtual environment using the *venv* module:
 
@@ -284,12 +294,8 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
    pww3\Scripts\activate
    pip install setuptools wheel
+   pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-IC:\\Program Files\\Graphviz\\include" --config-settings="--global-option=-LC:\\Program Files\\Graphviz\\lib" pygraphviz
    pip install python-weka-wrapper3[plots,graphs]
-
-For *graphviz* support you also need the Windows binary installed:
-
-* download `graphviz <https://graphviz.org/download/#windows>`__
-* add the path to its installed binaries to your ``PATH`` environment variable.
 
 
 From source
