@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction &#8212; python-weka-wrapper3 0.2.16 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <title>Introduction &#8212; python-weka-wrapper3 0.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c02300dd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="install.html" />
@@ -33,7 +31,7 @@
           <div class="body" role="main">
             
   <section id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
 <p><em>python-weka-wrapper3</em> allows you to use <a class="reference external" href="http://www.cs.waikato.ac.nz/~ml/weka/">Weka</a> from within Python3.</p>
 <p>The library uses the <a class="reference external" href="https://pypi.python.org/pypi/javabridge">javabridge</a> library for starting up,
 communicating with and shutting down the Java Virtual Machine in which the Weka processes get executed.</p>
@@ -52,14 +50,14 @@ Additional jars can be added as well.</p>
 </ul>
 </section>
 <section id="requirements">
-<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading">¶</a></h1>
 <p>The library has the following requirements:</p>
 <ul class="simple">
 <li><p>Python 3 (does not work with Python 2)</p></li>
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li><p>python-javabridge (&gt;=4.0.0, required)</p></li>
+<li><p>jpype (required)</p></li>
 <li><p>pygraphviz (optional)</p></li>
 <li><p>PIL (optional)</p></li>
 <li><p>matplotlib (optional)</p></li>
@@ -75,11 +73,12 @@ Additional jars can be added as well.</p>
 </ul>
 </section>
 <section id="contents">
-<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#prerequisites-for-all-platforms">Prerequisites for all platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#optional-features">Optional features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#ubuntu">Ubuntu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#debian">Debian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#fedora-centos-redhat">Fedora/CentOS/Redhat</a></li>
@@ -102,7 +101,6 @@ Additional jars can be added as well.</p>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#debian">Debian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#ubuntu">Ubuntu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#linux">Linux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#mac-osx-intel">Mac OSX (Intel)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#windows">Windows</a></li>
 </ul>
 </li>
@@ -149,8 +147,6 @@ Additional jars can be added as well.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="development.html#jni-signatures">JNI Signatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="development.html#javap">javap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development.html#calling-methods">Calling methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development.html#type-conversions">Type conversions</a></li>
 </ul>
@@ -171,7 +167,7 @@ Additional jars can be added as well.</p>
 </div>
 </section>
 <section id="api">
-<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<h1>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="weka.html">weka package</a><ul>
@@ -215,14 +211,594 @@ Additional jars can be added as well.</p>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.associations">weka.associations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.attribute_selection">weka.attribute_selection module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.classifiers">weka.classifiers module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.clusterers">weka.clusterers module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.datagenerators">weka.datagenerators module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.experiments">weka.experiments module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.filters">weka.filters module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.timeseries">weka.timeseries module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.associations">weka.associations module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.AssociationRule"><code class="docutils literal notranslate"><span class="pre">AssociationRule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.consequence"><code class="docutils literal notranslate"><span class="pre">AssociationRule.consequence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.consequence_support"><code class="docutils literal notranslate"><span class="pre">AssociationRule.consequence_support</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.metric_names"><code class="docutils literal notranslate"><span class="pre">AssociationRule.metric_names</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.metric_value"><code class="docutils literal notranslate"><span class="pre">AssociationRule.metric_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.metric_values"><code class="docutils literal notranslate"><span class="pre">AssociationRule.metric_values</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.premise"><code class="docutils literal notranslate"><span class="pre">AssociationRule.premise</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.premise_support"><code class="docutils literal notranslate"><span class="pre">AssociationRule.premise_support</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.primary_metric_name"><code class="docutils literal notranslate"><span class="pre">AssociationRule.primary_metric_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.primary_metric_value"><code class="docutils literal notranslate"><span class="pre">AssociationRule.primary_metric_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.to_dict"><code class="docutils literal notranslate"><span class="pre">AssociationRule.to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.total_support"><code class="docutils literal notranslate"><span class="pre">AssociationRule.total_support</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRule.total_transactions"><code class="docutils literal notranslate"><span class="pre">AssociationRule.total_transactions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.AssociationRules"><code class="docutils literal notranslate"><span class="pre">AssociationRules</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRules.producer"><code class="docutils literal notranslate"><span class="pre">AssociationRules.producer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.AssociationRules.to_dict"><code class="docutils literal notranslate"><span class="pre">AssociationRules.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.AssociationRulesIterator"><code class="docutils literal notranslate"><span class="pre">AssociationRulesIterator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.Associator"><code class="docutils literal notranslate"><span class="pre">Associator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.association_rules"><code class="docutils literal notranslate"><span class="pre">Associator.association_rules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.build_associations"><code class="docutils literal notranslate"><span class="pre">Associator.build_associations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.can_produce_rules"><code class="docutils literal notranslate"><span class="pre">Associator.can_produce_rules()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.capabilities"><code class="docutils literal notranslate"><span class="pre">Associator.capabilities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.header"><code class="docutils literal notranslate"><span class="pre">Associator.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.make_copy"><code class="docutils literal notranslate"><span class="pre">Associator.make_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Associator.rule_metric_names"><code class="docutils literal notranslate"><span class="pre">Associator.rule_metric_names</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.Item"><code class="docutils literal notranslate"><span class="pre">Item</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Item.attribute"><code class="docutils literal notranslate"><span class="pre">Item.attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Item.comparison"><code class="docutils literal notranslate"><span class="pre">Item.comparison</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Item.decrease_frequency"><code class="docutils literal notranslate"><span class="pre">Item.decrease_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Item.frequency"><code class="docutils literal notranslate"><span class="pre">Item.frequency</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Item.increase_frequency"><code class="docutils literal notranslate"><span class="pre">Item.increase_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.associations.Item.item_value"><code class="docutils literal notranslate"><span class="pre">Item.item_value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.associations.sys_main"><code class="docutils literal notranslate"><span class="pre">sys_main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.attribute_selection">weka.attribute_selection module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation"><code class="docutils literal notranslate"><span class="pre">ASEvaluation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.build_evaluator"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.build_evaluator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.capabilities"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.capabilities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.convert_instance"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.convert_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.header"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.post_process"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.post_process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.transformed_data"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.transformed_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASEvaluation.transformed_header"><code class="docutils literal notranslate"><span class="pre">ASEvaluation.transformed_header()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.attribute_selection.ASSearch"><code class="docutils literal notranslate"><span class="pre">ASSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASSearch.header"><code class="docutils literal notranslate"><span class="pre">ASSearch.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.ASSearch.search"><code class="docutils literal notranslate"><span class="pre">ASSearch.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection"><code class="docutils literal notranslate"><span class="pre">AttributeSelection</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.attribute_selection"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.attribute_selection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.crossvalidation"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.crossvalidation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.cv_results"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.cv_results</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.evaluator"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.evaluator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.folds"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.folds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.number_attributes_selected"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.number_attributes_selected</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.rank_results"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.rank_results</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.ranked_attributes"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.ranked_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.ranking"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.ranking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.reduce_dimensionality"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.reduce_dimensionality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.results_string"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.results_string</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.search"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.search()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.seed"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.select_attributes"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.select_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.select_attributes_cv_split"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.select_attributes_cv_split()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.selected_attributes"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.selected_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.attribute_selection.AttributeSelection.subset_results"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.subset_results</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.attribute_selection.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.attribute_selection.sys_main"><code class="docutils literal notranslate"><span class="pre">sys_main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.classifiers">weka.classifiers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.AttributeSelectedClassifier"><code class="docutils literal notranslate"><span class="pre">AttributeSelectedClassifier</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.AttributeSelectedClassifier.evaluator"><code class="docutils literal notranslate"><span class="pre">AttributeSelectedClassifier.evaluator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.AttributeSelectedClassifier.search"><code class="docutils literal notranslate"><span class="pre">AttributeSelectedClassifier.search</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.Classifier"><code class="docutils literal notranslate"><span class="pre">Classifier</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.additional_measure"><code class="docutils literal notranslate"><span class="pre">Classifier.additional_measure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.additional_measures"><code class="docutils literal notranslate"><span class="pre">Classifier.additional_measures</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.batch_size"><code class="docutils literal notranslate"><span class="pre">Classifier.batch_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.build_classifier"><code class="docutils literal notranslate"><span class="pre">Classifier.build_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.capabilities"><code class="docutils literal notranslate"><span class="pre">Classifier.capabilities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.classify_instance"><code class="docutils literal notranslate"><span class="pre">Classifier.classify_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.deserialize"><code class="docutils literal notranslate"><span class="pre">Classifier.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.distribution_for_instance"><code class="docutils literal notranslate"><span class="pre">Classifier.distribution_for_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.distributions_for_instances"><code class="docutils literal notranslate"><span class="pre">Classifier.distributions_for_instances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.graph"><code class="docutils literal notranslate"><span class="pre">Classifier.graph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.graph_type"><code class="docutils literal notranslate"><span class="pre">Classifier.graph_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.has_efficient_batch_prediction"><code class="docutils literal notranslate"><span class="pre">Classifier.has_efficient_batch_prediction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.header"><code class="docutils literal notranslate"><span class="pre">Classifier.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.make_copy"><code class="docutils literal notranslate"><span class="pre">Classifier.make_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.serialize"><code class="docutils literal notranslate"><span class="pre">Classifier.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.to_source"><code class="docutils literal notranslate"><span class="pre">Classifier.to_source()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Classifier.update_classifier"><code class="docutils literal notranslate"><span class="pre">Classifier.update_classifier()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix"><code class="docutils literal notranslate"><span class="pre">CostMatrix</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.apply_cost_matrix"><code class="docutils literal notranslate"><span class="pre">CostMatrix.apply_cost_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.expected_costs"><code class="docutils literal notranslate"><span class="pre">CostMatrix.expected_costs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.get_cell"><code class="docutils literal notranslate"><span class="pre">CostMatrix.get_cell()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.get_element"><code class="docutils literal notranslate"><span class="pre">CostMatrix.get_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.get_max_cost"><code class="docutils literal notranslate"><span class="pre">CostMatrix.get_max_cost()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.initialize"><code class="docutils literal notranslate"><span class="pre">CostMatrix.initialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.normalize"><code class="docutils literal notranslate"><span class="pre">CostMatrix.normalize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.num_columns"><code class="docutils literal notranslate"><span class="pre">CostMatrix.num_columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.num_rows"><code class="docutils literal notranslate"><span class="pre">CostMatrix.num_rows</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.parse_matlab"><code class="docutils literal notranslate"><span class="pre">CostMatrix.parse_matlab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.set_cell"><code class="docutils literal notranslate"><span class="pre">CostMatrix.set_cell()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.set_element"><code class="docutils literal notranslate"><span class="pre">CostMatrix.set_element()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.size"><code class="docutils literal notranslate"><span class="pre">CostMatrix.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.CostMatrix.to_matlab"><code class="docutils literal notranslate"><span class="pre">CostMatrix.to_matlab()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation"><code class="docutils literal notranslate"><span class="pre">Evaluation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.area_under_prc"><code class="docutils literal notranslate"><span class="pre">Evaluation.area_under_prc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.area_under_roc"><code class="docutils literal notranslate"><span class="pre">Evaluation.area_under_roc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.avg_cost"><code class="docutils literal notranslate"><span class="pre">Evaluation.avg_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.class_details"><code class="docutils literal notranslate"><span class="pre">Evaluation.class_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.class_priors"><code class="docutils literal notranslate"><span class="pre">Evaluation.class_priors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.confusion_matrix"><code class="docutils literal notranslate"><span class="pre">Evaluation.confusion_matrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.correct"><code class="docutils literal notranslate"><span class="pre">Evaluation.correct</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.correlation_coefficient"><code class="docutils literal notranslate"><span class="pre">Evaluation.correlation_coefficient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.coverage_of_test_cases_by_predicted_regions"><code class="docutils literal notranslate"><span class="pre">Evaluation.coverage_of_test_cases_by_predicted_regions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.crossvalidate_model"><code class="docutils literal notranslate"><span class="pre">Evaluation.crossvalidate_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.cumulative_margin_distribution"><code class="docutils literal notranslate"><span class="pre">Evaluation.cumulative_margin_distribution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.discard_predictions"><code class="docutils literal notranslate"><span class="pre">Evaluation.discard_predictions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.error_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.error_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.evaluate_model"><code class="docutils literal notranslate"><span class="pre">Evaluation.evaluate_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.evaluate_train_test_split"><code class="docutils literal notranslate"><span class="pre">Evaluation.evaluate_train_test_split()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.f_measure"><code class="docutils literal notranslate"><span class="pre">Evaluation.f_measure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.false_negative_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.false_negative_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.false_positive_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.false_positive_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.header"><code class="docutils literal notranslate"><span class="pre">Evaluation.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.incorrect"><code class="docutils literal notranslate"><span class="pre">Evaluation.incorrect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.kappa"><code class="docutils literal notranslate"><span class="pre">Evaluation.kappa</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.kb_information"><code class="docutils literal notranslate"><span class="pre">Evaluation.kb_information</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.kb_mean_information"><code class="docutils literal notranslate"><span class="pre">Evaluation.kb_mean_information</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.kb_relative_information"><code class="docutils literal notranslate"><span class="pre">Evaluation.kb_relative_information</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.matrix"><code class="docutils literal notranslate"><span class="pre">Evaluation.matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.matthews_correlation_coefficient"><code class="docutils literal notranslate"><span class="pre">Evaluation.matthews_correlation_coefficient()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.mean_absolute_error"><code class="docutils literal notranslate"><span class="pre">Evaluation.mean_absolute_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.mean_prior_absolute_error"><code class="docutils literal notranslate"><span class="pre">Evaluation.mean_prior_absolute_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.num_false_negatives"><code class="docutils literal notranslate"><span class="pre">Evaluation.num_false_negatives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.num_false_positives"><code class="docutils literal notranslate"><span class="pre">Evaluation.num_false_positives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.num_instances"><code class="docutils literal notranslate"><span class="pre">Evaluation.num_instances</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.num_true_negatives"><code class="docutils literal notranslate"><span class="pre">Evaluation.num_true_negatives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.num_true_positives"><code class="docutils literal notranslate"><span class="pre">Evaluation.num_true_positives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.percent_correct"><code class="docutils literal notranslate"><span class="pre">Evaluation.percent_correct</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.percent_incorrect"><code class="docutils literal notranslate"><span class="pre">Evaluation.percent_incorrect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.percent_unclassified"><code class="docutils literal notranslate"><span class="pre">Evaluation.percent_unclassified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.precision"><code class="docutils literal notranslate"><span class="pre">Evaluation.precision()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.predictions"><code class="docutils literal notranslate"><span class="pre">Evaluation.predictions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.recall"><code class="docutils literal notranslate"><span class="pre">Evaluation.recall()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.relative_absolute_error"><code class="docutils literal notranslate"><span class="pre">Evaluation.relative_absolute_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.root_mean_prior_squared_error"><code class="docutils literal notranslate"><span class="pre">Evaluation.root_mean_prior_squared_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.root_mean_squared_error"><code class="docutils literal notranslate"><span class="pre">Evaluation.root_mean_squared_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.root_relative_squared_error"><code class="docutils literal notranslate"><span class="pre">Evaluation.root_relative_squared_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.sf_entropy_gain"><code class="docutils literal notranslate"><span class="pre">Evaluation.sf_entropy_gain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.sf_mean_entropy_gain"><code class="docutils literal notranslate"><span class="pre">Evaluation.sf_mean_entropy_gain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.sf_mean_prior_entropy"><code class="docutils literal notranslate"><span class="pre">Evaluation.sf_mean_prior_entropy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.sf_mean_scheme_entropy"><code class="docutils literal notranslate"><span class="pre">Evaluation.sf_mean_scheme_entropy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.sf_prior_entropy"><code class="docutils literal notranslate"><span class="pre">Evaluation.sf_prior_entropy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.sf_scheme_entropy"><code class="docutils literal notranslate"><span class="pre">Evaluation.sf_scheme_entropy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.size_of_predicted_regions"><code class="docutils literal notranslate"><span class="pre">Evaluation.size_of_predicted_regions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.summary"><code class="docutils literal notranslate"><span class="pre">Evaluation.summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.test_model"><code class="docutils literal notranslate"><span class="pre">Evaluation.test_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.test_model_once"><code class="docutils literal notranslate"><span class="pre">Evaluation.test_model_once()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.total_cost"><code class="docutils literal notranslate"><span class="pre">Evaluation.total_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.true_negative_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.true_negative_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.true_positive_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.true_positive_rate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.unclassified"><code class="docutils literal notranslate"><span class="pre">Evaluation.unclassified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.unweighted_macro_f_measure"><code class="docutils literal notranslate"><span class="pre">Evaluation.unweighted_macro_f_measure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.unweighted_micro_f_measure"><code class="docutils literal notranslate"><span class="pre">Evaluation.unweighted_micro_f_measure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_area_under_prc"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_area_under_prc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_area_under_roc"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_area_under_roc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_f_measure"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_f_measure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_false_negative_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_false_negative_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_false_positive_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_false_positive_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_matthews_correlation"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_matthews_correlation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_precision"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_precision</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_recall"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_recall</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_true_negative_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_true_negative_rate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Evaluation.weighted_true_positive_rate"><code class="docutils literal notranslate"><span class="pre">Evaluation.weighted_true_positive_rate</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.FilteredClassifier"><code class="docutils literal notranslate"><span class="pre">FilteredClassifier</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.FilteredClassifier.check_for_modified_class_attribute"><code class="docutils literal notranslate"><span class="pre">FilteredClassifier.check_for_modified_class_attribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.FilteredClassifier.filter"><code class="docutils literal notranslate"><span class="pre">FilteredClassifier.filter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.GridSearch"><code class="docutils literal notranslate"><span class="pre">GridSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.GridSearch.best"><code class="docutils literal notranslate"><span class="pre">GridSearch.best</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.GridSearch.evaluation"><code class="docutils literal notranslate"><span class="pre">GridSearch.evaluation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.GridSearch.x"><code class="docutils literal notranslate"><span class="pre">GridSearch.x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.GridSearch.y"><code class="docutils literal notranslate"><span class="pre">GridSearch.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.Kernel"><code class="docutils literal notranslate"><span class="pre">Kernel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Kernel.build_kernel"><code class="docutils literal notranslate"><span class="pre">Kernel.build_kernel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Kernel.capabilities"><code class="docutils literal notranslate"><span class="pre">Kernel.capabilities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Kernel.checks_turned_off"><code class="docutils literal notranslate"><span class="pre">Kernel.checks_turned_off</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Kernel.clean"><code class="docutils literal notranslate"><span class="pre">Kernel.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Kernel.eval"><code class="docutils literal notranslate"><span class="pre">Kernel.eval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Kernel.make_copy"><code class="docutils literal notranslate"><span class="pre">Kernel.make_copy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.KernelClassifier"><code class="docutils literal notranslate"><span class="pre">KernelClassifier</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.KernelClassifier.kernel"><code class="docutils literal notranslate"><span class="pre">KernelClassifier.kernel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.MultiSearch"><code class="docutils literal notranslate"><span class="pre">MultiSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.MultiSearch.best"><code class="docutils literal notranslate"><span class="pre">MultiSearch.best</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.MultiSearch.evaluation"><code class="docutils literal notranslate"><span class="pre">MultiSearch.evaluation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.MultiSearch.parameters"><code class="docutils literal notranslate"><span class="pre">MultiSearch.parameters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.MultipleClassifiersCombiner"><code class="docutils literal notranslate"><span class="pre">MultipleClassifiersCombiner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.MultipleClassifiersCombiner.append"><code class="docutils literal notranslate"><span class="pre">MultipleClassifiersCombiner.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.MultipleClassifiersCombiner.classifiers"><code class="docutils literal notranslate"><span class="pre">MultipleClassifiersCombiner.classifiers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.MultipleClassifiersCombiner.clear"><code class="docutils literal notranslate"><span class="pre">MultipleClassifiersCombiner.clear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.NominalPrediction"><code class="docutils literal notranslate"><span class="pre">NominalPrediction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.NominalPrediction.distribution"><code class="docutils literal notranslate"><span class="pre">NominalPrediction.distribution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.NominalPrediction.margin"><code class="docutils literal notranslate"><span class="pre">NominalPrediction.margin</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.NumericPrediction"><code class="docutils literal notranslate"><span class="pre">NumericPrediction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.NumericPrediction.error"><code class="docutils literal notranslate"><span class="pre">NumericPrediction.error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.NumericPrediction.prediction_intervals"><code class="docutils literal notranslate"><span class="pre">NumericPrediction.prediction_intervals</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.Prediction"><code class="docutils literal notranslate"><span class="pre">Prediction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Prediction.actual"><code class="docutils literal notranslate"><span class="pre">Prediction.actual</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Prediction.predicted"><code class="docutils literal notranslate"><span class="pre">Prediction.predicted</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.Prediction.weight"><code class="docutils literal notranslate"><span class="pre">Prediction.weight</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput"><code class="docutils literal notranslate"><span class="pre">PredictionOutput</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.buffer_content"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.buffer_content()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.header"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.print_all"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.print_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.print_classification"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.print_classification()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.print_classifications"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.print_classifications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.print_footer"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.print_footer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.PredictionOutput.print_header"><code class="docutils literal notranslate"><span class="pre">PredictionOutput.print_header()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.SingleClassifierEnhancer"><code class="docutils literal notranslate"><span class="pre">SingleClassifierEnhancer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.classifiers.SingleClassifierEnhancer.classifier"><code class="docutils literal notranslate"><span class="pre">SingleClassifierEnhancer.classifier</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.predictions_to_instances"><code class="docutils literal notranslate"><span class="pre">predictions_to_instances()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.classifiers.sys_main"><code class="docutils literal notranslate"><span class="pre">sys_main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.clusterers">weka.clusterers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.classes_to_clusters"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.classes_to_clusters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.cluster_assignments"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.cluster_assignments</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.cluster_results"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.cluster_results</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.crossvalidate_model"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.crossvalidate_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.evaluate_clusterer"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.evaluate_clusterer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.log_likelihood"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.log_likelihood</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.num_clusters"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.num_clusters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.set_model"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.set_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation.test_model"><code class="docutils literal notranslate"><span class="pre">ClusterEvaluation.test_model()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer"><code class="docutils literal notranslate"><span class="pre">Clusterer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.build_clusterer"><code class="docutils literal notranslate"><span class="pre">Clusterer.build_clusterer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.capabilities"><code class="docutils literal notranslate"><span class="pre">Clusterer.capabilities</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.cluster_instance"><code class="docutils literal notranslate"><span class="pre">Clusterer.cluster_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.deserialize"><code class="docutils literal notranslate"><span class="pre">Clusterer.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.distribution_for_instance"><code class="docutils literal notranslate"><span class="pre">Clusterer.distribution_for_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.graph"><code class="docutils literal notranslate"><span class="pre">Clusterer.graph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.graph_type"><code class="docutils literal notranslate"><span class="pre">Clusterer.graph_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.header"><code class="docutils literal notranslate"><span class="pre">Clusterer.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.make_copy"><code class="docutils literal notranslate"><span class="pre">Clusterer.make_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.number_of_clusters"><code class="docutils literal notranslate"><span class="pre">Clusterer.number_of_clusters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.serialize"><code class="docutils literal notranslate"><span class="pre">Clusterer.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.update_clusterer"><code class="docutils literal notranslate"><span class="pre">Clusterer.update_clusterer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.Clusterer.update_finished"><code class="docutils literal notranslate"><span class="pre">Clusterer.update_finished()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.FilteredClusterer"><code class="docutils literal notranslate"><span class="pre">FilteredClusterer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.FilteredClusterer.filter"><code class="docutils literal notranslate"><span class="pre">FilteredClusterer.filter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.SingleClustererEnhancer"><code class="docutils literal notranslate"><span class="pre">SingleClustererEnhancer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.clusterers.SingleClustererEnhancer.clusterer"><code class="docutils literal notranslate"><span class="pre">SingleClustererEnhancer.clusterer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.avg_silhouette_coefficient"><code class="docutils literal notranslate"><span class="pre">avg_silhouette_coefficient()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.clusterers.sys_main"><code class="docutils literal notranslate"><span class="pre">sys_main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.datagenerators">weka.datagenerators module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator"><code class="docutils literal notranslate"><span class="pre">DataGenerator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.dataset_format"><code class="docutils literal notranslate"><span class="pre">DataGenerator.dataset_format</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.define_data_format"><code class="docutils literal notranslate"><span class="pre">DataGenerator.define_data_format()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.generate_example"><code class="docutils literal notranslate"><span class="pre">DataGenerator.generate_example()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.generate_examples"><code class="docutils literal notranslate"><span class="pre">DataGenerator.generate_examples()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.generate_finish"><code class="docutils literal notranslate"><span class="pre">DataGenerator.generate_finish()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.generate_start"><code class="docutils literal notranslate"><span class="pre">DataGenerator.generate_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.make_copy"><code class="docutils literal notranslate"><span class="pre">DataGenerator.make_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.make_data"><code class="docutils literal notranslate"><span class="pre">DataGenerator.make_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.num_examples_act"><code class="docutils literal notranslate"><span class="pre">DataGenerator.num_examples_act</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.datagenerators.DataGenerator.single_mode_flag"><code class="docutils literal notranslate"><span class="pre">DataGenerator.single_mode_flag</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.datagenerators.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.datagenerators.sys_main"><code class="docutils literal notranslate"><span class="pre">sys_main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.experiments">weka.experiments module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.experiments.Experiment"><code class="docutils literal notranslate"><span class="pre">Experiment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix"><code class="docutils literal notranslate"><span class="pre">ResultMatrix</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.average"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.average()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.columns"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.get_col_name"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.get_col_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.get_mean"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.get_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.get_row_name"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.get_row_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.get_stdev"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.get_stdev()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.hide_col"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.hide_col()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.hide_row"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.hide_row()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.is_col_hidden"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.is_col_hidden()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.is_row_hidden"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.is_row_hidden()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.rows"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.rows</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.set_col_name"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.set_col_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.set_mean"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.set_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.set_row_name"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.set_row_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.set_stdev"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.set_stdev()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.show_col"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.show_col()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.show_row"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.show_row()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.to_string_header"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.to_string_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.to_string_key"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.to_string_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.to_string_matrix"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.to_string_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.to_string_ranking"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.to_string_ranking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.ResultMatrix.to_string_summary"><code class="docutils literal notranslate"><span class="pre">ResultMatrix.to_string_summary()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.experiments.SimpleCrossValidationExperiment"><code class="docutils literal notranslate"><span class="pre">SimpleCrossValidationExperiment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleCrossValidationExperiment.configure_resultproducer"><code class="docutils literal notranslate"><span class="pre">SimpleCrossValidationExperiment.configure_resultproducer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.configure_resultproducer"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.configure_resultproducer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.configure_splitevaluator"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.configure_splitevaluator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.experiment"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.experiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.load"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.run"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.save"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleExperiment.setup"><code class="docutils literal notranslate"><span class="pre">SimpleExperiment.setup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.experiments.SimpleRandomSplitExperiment"><code class="docutils literal notranslate"><span class="pre">SimpleRandomSplitExperiment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.SimpleRandomSplitExperiment.configure_resultproducer"><code class="docutils literal notranslate"><span class="pre">SimpleRandomSplitExperiment.configure_resultproducer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.experiments.Tester"><code class="docutils literal notranslate"><span class="pre">Tester</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.dataset_columns"><code class="docutils literal notranslate"><span class="pre">Tester.dataset_columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.fold_column"><code class="docutils literal notranslate"><span class="pre">Tester.fold_column</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.header"><code class="docutils literal notranslate"><span class="pre">Tester.header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.init_columns"><code class="docutils literal notranslate"><span class="pre">Tester.init_columns()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.instances"><code class="docutils literal notranslate"><span class="pre">Tester.instances</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.multi_resultset_full"><code class="docutils literal notranslate"><span class="pre">Tester.multi_resultset_full()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.multi_resultset_ranking"><code class="docutils literal notranslate"><span class="pre">Tester.multi_resultset_ranking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.multi_resultset_summary"><code class="docutils literal notranslate"><span class="pre">Tester.multi_resultset_summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.result_columns"><code class="docutils literal notranslate"><span class="pre">Tester.result_columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.resultmatrix"><code class="docutils literal notranslate"><span class="pre">Tester.resultmatrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.run_column"><code class="docutils literal notranslate"><span class="pre">Tester.run_column</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.experiments.Tester.swap_rows_and_cols"><code class="docutils literal notranslate"><span class="pre">Tester.swap_rows_and_cols</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.filters">weka.filters module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.filters.AttributeSelection"><code class="docutils literal notranslate"><span class="pre">AttributeSelection</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.AttributeSelection.evaluator"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.evaluator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.AttributeSelection.search"><code class="docutils literal notranslate"><span class="pre">AttributeSelection.search</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.filters.Filter"><code class="docutils literal notranslate"><span class="pre">Filter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.batch_finished"><code class="docutils literal notranslate"><span class="pre">Filter.batch_finished()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.capabilities"><code class="docutils literal notranslate"><span class="pre">Filter.capabilities()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.deserialize"><code class="docutils literal notranslate"><span class="pre">Filter.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.filter"><code class="docutils literal notranslate"><span class="pre">Filter.filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.input"><code class="docutils literal notranslate"><span class="pre">Filter.input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.inputformat"><code class="docutils literal notranslate"><span class="pre">Filter.inputformat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.make_copy"><code class="docutils literal notranslate"><span class="pre">Filter.make_copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.output"><code class="docutils literal notranslate"><span class="pre">Filter.output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.outputformat"><code class="docutils literal notranslate"><span class="pre">Filter.outputformat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.serialize"><code class="docutils literal notranslate"><span class="pre">Filter.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.Filter.to_source"><code class="docutils literal notranslate"><span class="pre">Filter.to_source()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.filters.MultiFilter"><code class="docutils literal notranslate"><span class="pre">MultiFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.MultiFilter.append"><code class="docutils literal notranslate"><span class="pre">MultiFilter.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.MultiFilter.clear"><code class="docutils literal notranslate"><span class="pre">MultiFilter.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.MultiFilter.filters"><code class="docutils literal notranslate"><span class="pre">MultiFilter.filters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.filters.StringToWordVector"><code class="docutils literal notranslate"><span class="pre">StringToWordVector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.StringToWordVector.stemmer"><code class="docutils literal notranslate"><span class="pre">StringToWordVector.stemmer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.StringToWordVector.stopwords"><code class="docutils literal notranslate"><span class="pre">StringToWordVector.stopwords</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.filters.StringToWordVector.tokenizer"><code class="docutils literal notranslate"><span class="pre">StringToWordVector.tokenizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.filters.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.filters.sys_main"><code class="docutils literal notranslate"><span class="pre">sys_main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weka.html#module-weka.timeseries">weka.timeseries module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.ConfidenceIntervalForecaster"><code class="docutils literal notranslate"><span class="pre">ConfidenceIntervalForecaster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ConfidenceIntervalForecaster.calculate_conf_intervals_for_forecasts"><code class="docutils literal notranslate"><span class="pre">ConfidenceIntervalForecaster.calculate_conf_intervals_for_forecasts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ConfidenceIntervalForecaster.confidence_level"><code class="docutils literal notranslate"><span class="pre">ConfidenceIntervalForecaster.confidence_level</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ConfidenceIntervalForecaster.is_producing_confidence_intervals"><code class="docutils literal notranslate"><span class="pre">ConfidenceIntervalForecaster.is_producing_confidence_intervals</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.CustomPeriodicTest"><code class="docutils literal notranslate"><span class="pre">CustomPeriodicTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.CustomPeriodicTest.evaluate"><code class="docutils literal notranslate"><span class="pre">CustomPeriodicTest.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.CustomPeriodicTest.label"><code class="docutils literal notranslate"><span class="pre">CustomPeriodicTest.label</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.CustomPeriodicTest.lower_test"><code class="docutils literal notranslate"><span class="pre">CustomPeriodicTest.lower_test()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.CustomPeriodicTest.test"><code class="docutils literal notranslate"><span class="pre">CustomPeriodicTest.test()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.CustomPeriodicTest.upper_test"><code class="docutils literal notranslate"><span class="pre">CustomPeriodicTest.upper_test()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.ErrorModule"><code class="docutils literal notranslate"><span class="pre">ErrorModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ErrorModule.counts_for_targets"><code class="docutils literal notranslate"><span class="pre">ErrorModule.counts_for_targets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ErrorModule.errors_for_target"><code class="docutils literal notranslate"><span class="pre">ErrorModule.errors_for_target()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ErrorModule.predictions_for_all_targets"><code class="docutils literal notranslate"><span class="pre">ErrorModule.predictions_for_all_targets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.ErrorModule.predictions_for_target"><code class="docutils literal notranslate"><span class="pre">ErrorModule.predictions_for_target()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.IncrementallyPrimeable"><code class="docutils literal notranslate"><span class="pre">IncrementallyPrimeable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.IncrementallyPrimeable.prime_forecaster_incremental"><code class="docutils literal notranslate"><span class="pre">IncrementallyPrimeable.prime_forecaster_incremental()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.OverlayForecaster"><code class="docutils literal notranslate"><span class="pre">OverlayForecaster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.OverlayForecaster.forecast_with_overlays"><code class="docutils literal notranslate"><span class="pre">OverlayForecaster.forecast_with_overlays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.OverlayForecaster.is_using_overlay_data"><code class="docutils literal notranslate"><span class="pre">OverlayForecaster.is_using_overlay_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.OverlayForecaster.overlay_fields"><code class="docutils literal notranslate"><span class="pre">OverlayForecaster.overlay_fields</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.Periodicity"><code class="docutils literal notranslate"><span class="pre">Periodicity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.PeriodicityHandler"><code class="docutils literal notranslate"><span class="pre">PeriodicityHandler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.PeriodicityHandler.delta_time"><code class="docutils literal notranslate"><span class="pre">PeriodicityHandler.delta_time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule"><code class="docutils literal notranslate"><span class="pre">TSEvalModule</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.calculate_measure"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.calculate_measure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.definition"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.definition</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.description"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.eval_name"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.eval_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.evaluate_for_instance"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.evaluate_for_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.module"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.module()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.module_list"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.module_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.reset"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.summary"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.summary</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvalModule.target_fields"><code class="docutils literal notranslate"><span class="pre">TSEvalModule.target_fields</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation"><code class="docutils literal notranslate"><span class="pre">TSEvaluation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.evaluate"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.evaluate_forecaster"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.evaluate_forecaster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.evaluate_on_test_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.evaluate_on_test_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.evaluate_on_training_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.evaluate_on_training_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.evaluation_modules"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.evaluation_modules</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.forecast_future"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.forecast_future</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.horizon"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.horizon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.predictions_for_test_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.predictions_for_test_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.predictions_for_training_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.predictions_for_training_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.prime_for_test_data_with_test_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.prime_for_test_data_with_test_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.prime_window_size"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.prime_window_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.print_future_forecast_on_test_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.print_future_forecast_on_test_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.print_future_forecast_on_training_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.print_future_forecast_on_training_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.print_predictions_for_test_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.print_predictions_for_test_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.print_predictions_for_training_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.print_predictions_for_training_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.rebuild_model_after_each_test_forecast_step"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.rebuild_model_after_each_test_forecast_step</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.summary"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.test_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.test_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSEvaluation.training_data"><code class="docutils literal notranslate"><span class="pre">TSEvaluation.training_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster"><code class="docutils literal notranslate"><span class="pre">TSForecaster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.algorithm_name"><code class="docutils literal notranslate"><span class="pre">TSForecaster.algorithm_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.base_model_has_serializer"><code class="docutils literal notranslate"><span class="pre">TSForecaster.base_model_has_serializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.build_forecaster"><code class="docutils literal notranslate"><span class="pre">TSForecaster.build_forecaster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.clear_previous_state"><code class="docutils literal notranslate"><span class="pre">TSForecaster.clear_previous_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.fields_to_forecast"><code class="docutils literal notranslate"><span class="pre">TSForecaster.fields_to_forecast</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.forecast"><code class="docutils literal notranslate"><span class="pre">TSForecaster.forecast()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.header"><code class="docutils literal notranslate"><span class="pre">TSForecaster.header</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.load_base_model"><code class="docutils literal notranslate"><span class="pre">TSForecaster.load_base_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.load_serialized_state"><code class="docutils literal notranslate"><span class="pre">TSForecaster.load_serialized_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.previous_state"><code class="docutils literal notranslate"><span class="pre">TSForecaster.previous_state</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.prime_forecaster"><code class="docutils literal notranslate"><span class="pre">TSForecaster.prime_forecaster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.reset"><code class="docutils literal notranslate"><span class="pre">TSForecaster.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.run_forecaster"><code class="docutils literal notranslate"><span class="pre">TSForecaster.run_forecaster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.save_base_model"><code class="docutils literal notranslate"><span class="pre">TSForecaster.save_base_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.serialize_state"><code class="docutils literal notranslate"><span class="pre">TSForecaster.serialize_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSForecaster.uses_state"><code class="docutils literal notranslate"><span class="pre">TSForecaster.uses_state</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker"><code class="docutils literal notranslate"><span class="pre">TSLagMaker</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_am_indicator"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_am_indicator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_custom_periodic"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_custom_periodic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_day_of_month"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_day_of_month</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_day_of_week"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_day_of_week</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_month_of_year"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_month_of_year</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_num_days_in_month"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_num_days_in_month</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_quarter_of_year"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_quarter_of_year</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.add_weekend_indicator"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.add_weekend_indicator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.adjust_for_trends"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.adjust_for_trends</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.adjust_for_variance"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.adjust_for_variance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.artificial_time_start_value"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.artificial_time_start_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.average_consecutive_long_lags"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.average_consecutive_long_lags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.average_lags_after"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.average_lags_after</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.clear_custom_periodics"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.clear_custom_periodics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.clear_lag_histories"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.clear_lag_histories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.create_time_lag_cross_products"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.create_time_lag_cross_products()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.current_timestamp_value"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.current_timestamp_value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.delta_time"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.delta_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.fields_to_lag"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.fields_to_lag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.fields_to_lag_as_string"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.fields_to_lag_as_string</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.include_powers_of_time"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.include_powers_of_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.include_timelag_products"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.include_timelag_products</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.increment_artificial_time_value"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.increment_artificial_time_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.is_using_artificial_time_index"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.is_using_artificial_time_index</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.lag_range"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.lag_range</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.max_lag"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.max_lag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.min_lag"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.min_lag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.num_consecutive_long_lags_to_average"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.num_consecutive_long_lags_to_average</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.overlay_fields"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.overlay_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.periodicity"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.periodicity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.primary_periodic_field_name"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.primary_periodic_field_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.remove_leading_instances_with_unknown_lag_values"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.remove_leading_instances_with_unknown_lag_values</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.skip_entries"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.skip_entries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.timestamp_field"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.timestamp_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagMaker.transformed_data"><code class="docutils literal notranslate"><span class="pre">TSLagMaker.transformed_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.TSLagUser"><code class="docutils literal notranslate"><span class="pre">TSLagUser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TSLagUser.tslag_maker"><code class="docutils literal notranslate"><span class="pre">TSLagUser.tslag_maker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.TestPart"><code class="docutils literal notranslate"><span class="pre">TestPart</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.day"><code class="docutils literal notranslate"><span class="pre">TestPart.day()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.day_of_month"><code class="docutils literal notranslate"><span class="pre">TestPart.day_of_month()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.day_of_week"><code class="docutils literal notranslate"><span class="pre">TestPart.day_of_week()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.day_of_year"><code class="docutils literal notranslate"><span class="pre">TestPart.day_of_year()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.eval"><code class="docutils literal notranslate"><span class="pre">TestPart.eval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.hour_of_day"><code class="docutils literal notranslate"><span class="pre">TestPart.hour_of_day()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.is_upper"><code class="docutils literal notranslate"><span class="pre">TestPart.is_upper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.minute_of_hour"><code class="docutils literal notranslate"><span class="pre">TestPart.minute_of_hour()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.month"><code class="docutils literal notranslate"><span class="pre">TestPart.month</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.operator"><code class="docutils literal notranslate"><span class="pre">TestPart.operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.second"><code class="docutils literal notranslate"><span class="pre">TestPart.second()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.week_of_month"><code class="docutils literal notranslate"><span class="pre">TestPart.week_of_month()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.week_of_year"><code class="docutils literal notranslate"><span class="pre">TestPart.week_of_year()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.TestPart.year"><code class="docutils literal notranslate"><span class="pre">TestPart.year()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weka.html#weka.timeseries.WekaForecaster"><code class="docutils literal notranslate"><span class="pre">WekaForecaster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.WekaForecaster.add_custom_periodic"><code class="docutils literal notranslate"><span class="pre">WekaForecaster.add_custom_periodic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.WekaForecaster.base_forecaster"><code class="docutils literal notranslate"><span class="pre">WekaForecaster.base_forecaster</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="weka.html#weka.timeseries.WekaForecaster.clear_custom_periodics"><code class="docutils literal notranslate"><span class="pre">WekaForecaster.clear_custom_periodics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -279,7 +855,7 @@ Additional jars can be added as well.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -296,8 +872,8 @@ Additional jars can be added as well.</p>
       &copy;2014-2024, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/index.rst.txt"

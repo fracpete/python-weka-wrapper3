@@ -4,31 +4,16 @@ Troubleshooting
 General
 -------
 
-* **Q:** How do I install `.whl` files?
-
-  **A:** `.whl` are *Python Wheels* archives, which you can install using pip (>= 1.4). See also `this website <http://pythonwheels.com/>`__.
-
-* **Q:** Why does python-javabridge not compile?
-
-  **A:** Ensure that you have an actual JDK installed (test it by issuing the ``javac`` command), as 
-  javabridge requires header files to present that won't be present if you only have a runtime 
-  environment (JRE). You also may have to set the ``JAVA_HOME`` environment variable pointing 
-  to your JDK installation (above the ``bin`` directory).
-
 * **Q:** I cannot start the JVM once stopped - why?
 
-  **A:** That's unfortunately one of the limitations of the underlying python-javabridge library:
-  https://github.com/LeeKamentsky/python-javabridge/issues/88
+  **A:** That's unfortunately one of the limitations of the underlying jpype library:
+  https://jpype.readthedocs.io/en/latest/api.html#jpype.shutdownJVM
 
-  However, a potential workaround was suggested in that same thread (not tested):
-  https://github.com/LeeKamentsky/python-javabridge/issues/88#issuecomment-817875968
+* **Q:** I'm getting ``ImportError: cannot import name 'find_namespace_packages' from 'setuptools'`` when trying
+  to install jpype. How can I fix this?
 
-* **Q:** When installing python-javabridge, I get `fatal error: longintrepr.h: No such file or directory` - how to resolve?
-
-  **A:** Starting with Python 3.11, the `longintrepr.h` file got moved to a sub-directory and the
-  pre-built wheel files of python-javabridge fail to include that sub-directory during the
-  build process. The easiest workaround is to install the `setuptools` and `wheel` packages
-  and then install python-javabridge directly from github using `pip install "git+https://github.com/CellProfiler/python-javabridge.git"`
+  **A:** You seem to be using an old Python version. Try upgrading the ``setuptools`` library in your virtual
+  environment using ``pip install -U setuptools``.
 
 
 Debian
@@ -99,83 +84,8 @@ Linux
   * png
 
 
-Mac OSX (Intel)
----------------
-
-* **Q:** Why does javabridge fail with compiler error `clang: error: unknown argument: '-mno-fused-madd'`?
-
-  **A:** XCode 5.1 changed how unknown arguments are handled and now treats them  as error (`source <http://bruteforce.gr/bypassing-clang-error-unknown-argument.html>`__). You can precede the `pip install javabridge` command with the following environment variable:
-
-  .. code-block:: bash
-
-     ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future" pip install javabridge
-
-* **Q:** Compiling javabridge fails with missing `jni.h` header file - what now?
-
-  **A:** You will need an Oracle JDK installed for this. `Download <http://www.oracle.com/technetwork/java/javase/downloads/>`__ and install one. Below is a command-line that uses the `jni.h` header file that comes with `1.7.0_45`:
-
-  .. code-block:: bash
-
-     ARCHFLAGS="-I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/ -I/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/darwin" pip install --user javabridge
-
-  *PS:* You may need to combine the `ARCHFLAGS` setting with the one from the previous Q&A.
-
-* **Q:** When I use `import javabridge` in my Python shell, a
-  dialog pops up, telling me that I don't have Java installed. However, I have
-  an Oracle JDK installed. What's wrong?
-
-  **A:** Java environments that are not from Apple don't seem to get picked up
-  by Python correctly. Simply install the Java 1.6 that Apple supplies on your
-  system as well.
-
-* **Q:** Installing `pygraphviz` fails, because it cannot find the library or
-  its includes. What now?
-
-  **A:** Here is what to do:
-    * Make sure that you have the `GraphViz <http://graphviz.org/Download_macos.php>`__ 
-      package installed.
-
-    * If the installer is still not finding the libraries, download the 
-      `pygraphviz <https://pypi.python.org/pypi/pygraphviz>`__ sources from PyPi and 
-      extract them.
-
-    * Open the `setup.py` file in a text editor and set the `library_path` and
-      `include_path` variables to the correct paths on your machine, e.g.,
-      `library_path=/usr/local/lib/graphviz` and
-      `include_path=/usr/local/include/graphviz` and save the file.
-
-    * Open a terminal and navigate to the directory where the `setup.py` file
-      is located that you just edited.
-
-    * Install the package using `python setup.py install --user`
-
-
-* **Q:** Installing `pygraphviz` fails with error message 
-  `ld: library not found for -lcgraph`. What is wrong?
-
-  **A:** Apparently, the XCode command-line are not installed. You can install
-  them by opening a terminal and running the following command: 
-  `xcode-select --install`
-
-* **Q:** Installing `javabridge` fails with the error message `Exception: JVM not found`,
-  but I have Java installed?
-
-  **A:** Set the `JAVA_HOME` environment variable, by pointing it to your JDK installation
-  (should be the directory above the `bin` directory containing the `java` executable).
-
-
-
-
 Windows
 -------
-
-* **Q:** The Windows SDK 7.1 installer fails (eg when behind a proxy). What now?
-
-  **A:** You can download an ISO image of the SDK from
-  `here <http://www.microsoft.com/en-us/download/details.aspx?id=8442>`_
-  (`GRMSDK_EN_DVD.iso` is the 32-bit version and `GRMSDKX_EN_DVD.iso` is the 64-bit version).
-  See `this HOWTO <http://www.howtogeek.com/howto/windows-vista/mount-an-iso-image-in-windows-vista/>`_
-  for mounting the ISO image once downloaded.
 
 * **Q:** I cannot display graphs, e.g., generated by J48, as I keep getting the error message `ValueError: Program dot not found in path.` - what can I do?
 

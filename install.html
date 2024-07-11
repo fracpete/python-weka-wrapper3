@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Installation &#8212; python-weka-wrapper3 0.2.16 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <title>Installation &#8212; python-weka-wrapper3 0.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c02300dd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Docker" href="docker.html" />
@@ -34,18 +32,15 @@
           <div class="body" role="main">
             
   <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
 <p>The following sections should help you install the library on your machine. Instead of installing the
 library system-wide, the instructions show how to install it within in a virtual environment. This avoids
 interfering with your operating system or other libraries, when you should upgrade some libraries.</p>
-<p>Some of the instructions are based on the <em>CellProfiler</em>
-<a class="reference external" href="https://github.com/CellProfiler/python-javabridge/blob/master/docs/installation.rst">instructions</a>, the guys
-behind the <em>javabridge</em> library.</p>
 <p>However, if you should encounter problems or if you would like to submit improvements
 on the instructions below, please use the following mailing list:</p>
 <p><a class="reference external" href="https://groups.google.com/forum/#!forum/python-weka-wrapper">https://groups.google.com/forum/#!forum/python-weka-wrapper</a></p>
 <section id="prerequisites-for-all-platforms">
-<h2>Prerequisites for all platforms<a class="headerlink" href="#prerequisites-for-all-platforms" title="Permalink to this headline">¶</a></h2>
+<h2>Prerequisites for all platforms<a class="headerlink" href="#prerequisites-for-all-platforms" title="Permalink to this heading">¶</a></h2>
 <p>You need a Java Development Kit (JDK) 8 or later (e.g., <a class="reference external" href="https://adoptium.net//">OpenJDK</a>) installed and
 the <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> <a class="reference external" href="http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html">environment variable</a>
 pointing to the installation directory in order to use <em>python-weka-wrapper3</em>
@@ -54,76 +49,78 @@ library.</p>
 version. However, Oracle’s JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
 recommended Java version to use. Personally, I recommend the <strong>long-term support version 11 of OpenJDK</strong>.</p>
 </section>
+<section id="optional-features">
+<h2>Optional features<a class="headerlink" href="#optional-features" title="Permalink to this heading">¶</a></h2>
+<p>Support for plots and graphs are optional features. If you do not want or need these, you can
+omit the suffix <code class="docutils literal notranslate"><span class="pre">[plots,graphs]</span></code> when installing python-weka-wrapper3.</p>
+</section>
 <section id="ubuntu">
-<h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h2>
+<h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this heading">¶</a></h2>
 <p>First, you need to be able to compile C/C++ code and Python modules:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install build-essential python3-dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
 </pre></div>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>python-weka-wrapper3</em>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python3-pip python3-numpy python3-venv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-venv
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
 graphical output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python3-pil python3-matplotlib python3-pygraphviz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-matplotlib<span class="w"> </span>python3-pygraphviz
 </pre></div>
 </div>
-<p>Install OpenJDK as well, in order to get all the header files that <em>javabridge</em>
-compiles against (but don’t use it for starting up JVMs):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install default-jdk
+<p>Install OpenJDK as well, in order to get all the header files for compilation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>default-jdk
 </pre></div>
 </div>
 <p>Create a virtual environment using the <em>venv</em> module that :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv pww3
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
 </pre></div>
 </div>
 <p>Finally, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
 available in the Ubuntu repositories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
-./pww3/bin/pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
-./pww3/bin/pip install python-weka-wrapper3
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
+pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="debian">
-<h2>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h2>
+<h2>Debian<a class="headerlink" href="#debian" title="Permalink to this heading">¶</a></h2>
 <p>First, become the superuser:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>su
 </pre></div>
 </div>
 <p>You need to be able to compile C/C++ code and Python modules:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get install build-essential python3-dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
 </pre></div>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>`python-weka-wrapper3</em>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get install python3-pip python3-numpy python3-venv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-venv
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
 graphical output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get install python3-pil python3-matplotlib python3-pygraphviz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-matplotlib<span class="w"> </span>python3-pygraphviz
 </pre></div>
 </div>
 <p>Older Debian versions used <cite>python3-imaging</cite> instead of <cite>python3-pil</cite>.</p>
-<p>Download a JDK and un-tar it in <code class="docutils literal notranslate"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">/opt/jdk-11.0.7+10/</span></code>).</p>
+<p>Download a JDK and un-tar it in <code class="docutils literal notranslate"><span class="pre">/opt</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">/opt/jdk-11.0.23+9/</span></code>).</p>
 <p>Exit superuser mode and become a regular user again.</p>
-<p>Export the Java home directory as follows, which is required for the <em>javabridge</em>
-installation/compilation (you might want to add this command to your <code class="docutils literal notranslate"><span class="pre">.profile</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk-11.0.7+10/
+<p>Export the Java home directory as follows (you might want to add this command to your <code class="docutils literal notranslate"><span class="pre">.profile</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk-11.0.23+9/
 </pre></div>
 </div>
 <p>Create a virtual environment using the <em>venv</em> module that :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv pww3
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
 </pre></div>
 </div>
-<p>Finally, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
-available in the Debian repositories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
-./pww3/bin/pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
-./pww3/bin/pip install python-weka-wrapper3
+<p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
+pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 <p>Please note, when using <em>python-weka-wrapper3</em> as a <em>normal</em> user, don’t forget
@@ -131,7 +128,7 @@ to export the <code class="docutils literal notranslate"><span class="pre">JAVA_
 to your <code class="docutils literal notranslate"><span class="pre">.profile</span></code>).</p>
 </section>
 <section id="fedora-centos-redhat">
-<h2>Fedora/CentOS/Redhat<a class="headerlink" href="#fedora-centos-redhat" title="Permalink to this headline">¶</a></h2>
+<h2>Fedora/CentOS/Redhat<a class="headerlink" href="#fedora-centos-redhat" title="Permalink to this heading">¶</a></h2>
 <p>Here are some rough instructions (as superuser):</p>
 <ul class="simple">
 <li><p>install openjdk (+ -devel) package</p></li>
@@ -142,20 +139,25 @@ to your <code class="docutils literal notranslate"><span class="pre">.profile</s
 <li><p>install numpy package</p></li>
 <li><p>install python-imaging package (shouldn’t be necessary)</p></li>
 </ul>
-<p>As regular user:</p>
-<ul class="simple">
-<li><p>create a virtual environment (see Ubuntu/Debian sections above)</p></li>
-<li><p>install javabridge using <code class="docutils literal notranslate"><span class="pre">./venv/bin/pip</span> <span class="pre">javabridge</span></code></p></li>
-<li><p>install python-weka-wrapper3 using <code class="docutils literal notranslate"><span class="pre">./venv/bin/pip</span> <span class="pre">python-weka-wrapper3</span></code></p></li>
-</ul>
+<p>Switch back to being a regular user.</p>
+<p>Create a virtual environment using the <em>venv</em> module that :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
+</pre></div>
+</div>
+<p>Finally, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python packages that are not
+available in the Ubuntu repositories:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
+pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+</pre></div>
+</div>
 </section>
 <section id="other-linux-distributions">
-<h2>Other Linux distributions<a class="headerlink" href="#other-linux-distributions" title="Permalink to this headline">¶</a></h2>
+<h2>Other Linux distributions<a class="headerlink" href="#other-linux-distributions" title="Permalink to this heading">¶</a></h2>
 <p>See <a class="reference external" href="http://docs.python-guide.org/en/latest/starting/install/linux/">these</a>
 general instructions for installing Python on Linux. You need to be able to
 compile C/C++ code and Python modules (i.e., Python header files are required).
-By installing OpenJDK, you should be able to compile <em>javabridge</em> against its
-header files (for JNI access).</p>
+By installing OpenJDK, you should be able to compile against its header files.</p>
 <p>Then you need to install the following Python packages, preferably through your
 package manager (e.g., <code class="docutils literal notranslate"><span class="pre">yum</span></code>).  Please note that on a <em>headless</em> machine, you
 can omit the packages marked as <em>optional</em>, as they are only required for
@@ -168,159 +170,110 @@ graphical output and plots:</p>
 <li><p>pygraphviz (optional)</p></li>
 </ul>
 <p>Create a virtual environment using the <em>venv</em> module that :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv pww3
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
 </pre></div>
 </div>
-<p>Once these libraries are installed, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> from the virtual environment to install the Python
-packages that are not available in the distro repositories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./pww3/bin/pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
-./pww3/bin/pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
-./pww3/bin/pip install python-weka-wrapper3
+<p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
+pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="colab">
-<h2>COLAB<a class="headerlink" href="#colab" title="Permalink to this headline">¶</a></h2>
-<p>In a Python 3 COLAB environment, you need to install at least these modules to get python-weka-wrapper3 working:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install setuptools wheel &quot;cython&gt;=0.29.25,&lt;3.0.0&quot; &quot;numpy&gt;=1.20.1&quot;
-!pip install &quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;
-!pip install python-weka-wrapper3
+<h2>COLAB<a class="headerlink" href="#colab" title="Permalink to this heading">¶</a></h2>
+<p>In a Python 3 COLAB environment, you need to run the following steps for full functionality:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install dependencies</span>
+!apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
+!apt-get<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-pygraphviz
+!apt<span class="w"> </span>install<span class="w"> </span>openjdk-11-jdk
+<span class="c1"># install pww3</span>
+!pip<span class="w"> </span>install<span class="w"> </span>wheel
+!pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Notes:</strong></p>
 <ul class="simple">
-<li><p>Once the JVM has been stopped, you might have to restart the COLAB runtime</p></li>
-<li><p>After installing packages, you need to restart the COLAB runtime, otherwise the packages won’t be available to the JV</p></li>
+<li><p>Once the JVM has been stopped, you will have to restart the COLAB runtime</p></li>
+<li><p>After installing packages, you need to restart the COLAB runtime, otherwise the packages won’t be available to the JVM</p></li>
 </ul>
 </section>
 <section id="mac-osx">
-<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a></h2>
+<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this heading">¶</a></h2>
 <p>Please follow <a class="reference external" href="http://docs.python-guide.org/en/latest/starting/install/osx/">these</a>
 general instructions for installing Python.</p>
-<p>In order to compile C/C++ code, you need to install <em>Xcode</em> through Apple’s App
-Store. Once installed you can install the <em>XCode command-line tools</em> by issuing
-the command <code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code> in a terminal.</p>
-<p>Also, install <em>graphviz</em> using homebrew (<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">pkg-config</span></code> and
-<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">graphviz</span></code>) for visualizing trees and graphs.</p>
-<p>You need to install the following Python packages:</p>
-<ul class="simple">
-<li><p>numpy</p></li>
-<li><p>pillow</p></li>
-<li><p>matplotlib</p></li>
-<li><p>pygraphviz</p></li>
-<li><p>lxml</p></li>
-<li><p>python-javabridge</p></li>
-</ul>
-<p>Once these libraries are installed, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the remaining
-Python packages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install python-weka-wrapper3
+<p>Create a virtual environment using the <em>venv</em> module:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
+</pre></div>
+</div>
+<p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>wheel
+brew<span class="w"> </span>install<span class="w"> </span>graphviz
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>graphviz
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>--no-cache-dir<span class="w"> </span>--config-settings<span class="o">=</span><span class="s2">&quot;--global-option=build_ext&quot;</span><span class="w"> </span>--config-settings<span class="o">=</span><span class="s2">&quot;--global-option=-I</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>graphviz<span class="k">)</span><span class="s2">/include/&quot;</span><span class="w"> </span>--config-settings<span class="o">=</span><span class="s2">&quot;--global-option=-L</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>graphviz<span class="k">)</span><span class="s2">/lib/&quot;</span><span class="w"> </span>pygraphviz
+pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="windows-using-anaconda">
-<h2>Windows using Anaconda<a class="headerlink" href="#windows-using-anaconda" title="Permalink to this headline">¶</a></h2>
+<h2>Windows using Anaconda<a class="headerlink" href="#windows-using-anaconda" title="Permalink to this heading">¶</a></h2>
 <p><strong>Please note:</strong> You need to make sure that the <em>bitness</em> of your environment
 is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
 install a 32-bit JDK (or all of them are 64-bit).</p>
 <ul>
 <li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
-<li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
-select the <strong>Desktop development with C++</strong> option in the installer</p></li>
-<li><p>the following configures an environment with Python 3.10</p>
-<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">conda create --name pww3 python=3.10</span>
+<li><p>the following configures an environment with Python 3.12</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">conda create --name pww3 python=3.12</span>
 <span class="go">conda activate pww3</span>
-<span class="gp">conda install -c conda-forge setuptools wheel &quot;numpy&gt;</span>=1.20.1<span class="s2">&quot; pillow &quot;</span>cython<span class="p">&gt;</span>=0.29.25,<span class="p">&lt;</span>3.0.0<span class="s2">&quot;</span>
-<span class="go">pip install &quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
-<span class="go">pip install python-weka-wrapper3</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p>If you want plotting support, then install also <em>graphviz</em> and <em>matplotlib</em>:</p>
-<ul>
-<li><p>download <a class="reference external" href="https://graphviz.org/download/#windows">graphviz</a>
-and add the path to its installed binaries to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.</p></li>
-<li><p>install pygraphviz and matplotlib:</p>
-<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">conda install -c conda-forge pygraphviz</span>
-<span class="go">conda install -c conda-forge matplotlib</span>
+<span class="go">conda install -c conda-forge setuptools wheel pillow matplotlib lxml pygraphviz</span>
+<span class="go">pip install python-weka-wrapper3[plots,graphs]</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </section>
 <section id="windows">
-<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">¶</a></h2>
 <p><strong>Please note:</strong> You need to make sure that the <em>bitness</em> of your environment
 is consistent.  I.e., if you install a 32-bit version of Python, you need to
-install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).</p>
+install a 32-bit JDK (or all of them are 64-bit).</p>
 <p>Perform the following steps:</p>
 <ul class="simple">
 <li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
 <li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
 select the <strong>Desktop development with C++</strong> option in the installer</p></li>
 <li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a>, make sure you check <em>Add python.exe to path</em> during the installation</p></li>
-<li><p>add the Python scripts directory to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal notranslate"><span class="pre">C:\\Python310\\Scripts</span></code></p></li>
-<li><p>install <code class="docutils literal notranslate"><span class="pre">pip</span></code> with these steps:</p></li>
+<li><p>add the Python scripts directory to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal notranslate"><span class="pre">C:\\Python\\Python312\\Scripts</span></code></p></li>
+<li><p>install <a class="reference external" href="https://graphviz.org/download/">GraphViz</a> into <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Graphviz</span></code> and add its binaries to
+the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable</p></li>
+<li><p>open a command-prompt and create a virtual environment</p></li>
+<li><p>create a virtual environment using the <em>venv</em> module:</p></li>
 </ul>
-<blockquote>
-<div><ul class="simple">
-<li><p>download from <a class="reference external" href="https://bootstrap.pypa.io/get-pip.py">here</a></p></li>
-<li><p>install using <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">get-pip.py</span></code></p></li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><p>install pww3:</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install setuptools wheel <span class="s2">&quot;cython&gt;=0.29.25,&lt;3.0.0&quot;</span> <span class="s2">&quot;numpy&gt;=1.20.1&quot;</span>
-pip install <span class="s2">&quot;git+https://github.com/CellProfiler/python-javabridge.git&quot;</span>
-pip install python-weka-wrapper3
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">python -m venv pww3</span>
 </pre></div>
 </div>
-<p>If you want to use the plotting functionality, you need to install <em>graphviz</em> and <em>matplotlib</em> as well:</p>
-<ul class="simple">
-<li><p>download <a class="reference external" href="https://graphviz.org/download/#windows">graphviz</a>
-and add the path to its installed binaries to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install matplotlib pygraphviz pillow lxml
+<p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pww3\Scripts\activate</span>
+<span class="go">pip install setuptools wheel</span>
+<span class="go">pip install -U --no-cache-dir --config-settings=&quot;--global-option=build_ext&quot; --config-settings=&quot;--global-option=-IC:\\Program Files\\Graphviz\\include&quot; --config-settings=&quot;--global-option=-LC:\\Program Files\\Graphviz\\lib&quot; pygraphviz</span>
+<span class="go">pip install python-weka-wrapper3[plots,graphs]</span>
 </pre></div>
 </div>
 </section>
 <section id="from-source">
-<h2>From source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h2>
-<p>You have two options for installing the library from source, either through a release
-archive or using the <em>bleeding edge</em> source code that is available through the
-Github repository.</p>
-<section id="release-archive">
-<h3>Release archive<a class="headerlink" href="#release-archive" title="Permalink to this headline">¶</a></h3>
-<p>Go to the <a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3/releases">releases</a>
-page on Github and download the <em>Source code</em> archive (zip or tar.gz) of the
-release that you want to install. After the download finishes, decompress the
-archive. Open a terminal/command prompt and execute the following command
-from within the directory with the <cite>setup.py</cite> file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./venv/bin/python setup.py install
-</pre></div>
-</div>
-<p>Check out the section on <em>virtualenv</em> as well, if you would rather install it
-in a <em>disposable</em> location.</p>
-</section>
-<section id="github">
-<h3>Github<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
+<h2>From source<a class="headerlink" href="#from-source" title="Permalink to this heading">¶</a></h2>
 <p>You can install python-weka-wrapper3 directly from its Github repository with <cite>pip</cite>
 as follows (e.g., to get the latest fixes/features):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./venv/bin/pip install git+https://github.com/fracpete/python-weka-wrapper3.git
+<p>First, create a virtual environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
 </pre></div>
 </div>
-<p>Alternatively, you can clone the repository separately and install it from there.</p>
-<p>First, clone the Github repository as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/fracpete/python-weka-wrapper3.git
+<p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;python-weka-wrapper3[plots,graphs] @ git+https://github.com/fracpete/python-weka-wrapper3.git&quot;</span>
 </pre></div>
 </div>
-<p>Second, change into the newly created directory and install the library using the
-following command (adjusting the path to your virtual environment):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./venv/bin/python setup.py install
-</pre></div>
-</div>
-</section>
 </section>
 </section>
 
@@ -347,6 +300,7 @@ following command (adjusting the path to your virtual environment):</p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites-for-all-platforms">Prerequisites for all platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-features">Optional features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#debian">Debian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fedora-centos-redhat">Fedora/CentOS/Redhat</a></li>
@@ -387,7 +341,7 @@ following command (adjusting the path to your virtual environment):</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -404,8 +358,8 @@ following command (adjusting the path to your virtual environment):</p>
       &copy;2014-2024, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/install.rst.txt"

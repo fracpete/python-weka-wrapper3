@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>weka.plot package &#8212; python-weka-wrapper3 0.2.16 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <title>weka.plot package &#8212; python-weka-wrapper3 0.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c02300dd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="weka.flow package" href="weka.flow.html" />
@@ -33,24 +31,24 @@
           <div class="body" role="main">
             
   <section id="weka-plot-package">
-<h1>weka.plot package<a class="headerlink" href="#weka-plot-package" title="Permalink to this headline">¶</a></h1>
+<h1>weka.plot package<a class="headerlink" href="#weka-plot-package" title="Permalink to this heading">¶</a></h1>
 <section id="module-weka.plot.classifiers">
-<span id="weka-plot-classifiers-module"></span><h2>weka.plot.classifiers module<a class="headerlink" href="#module-weka.plot.classifiers" title="Permalink to this headline">¶</a></h2>
+<span id="weka-plot-classifiers-module"></span><h2>weka.plot.classifiers module<a class="headerlink" href="#module-weka.plot.classifiers" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.plot.classifiers.generate_thresholdcurve_data">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.classifiers.</span></span><span class="sig-name descname"><span class="pre">generate_thresholdcurve_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evaluation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.generate_thresholdcurve_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the threshold curve data from the evaluation object’s predictions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evaluation</strong> (<a class="reference internal" href="weka.html#weka.classifiers.Evaluation" title="weka.classifiers.Evaluation"><em>Evaluation</em></a>) – the evaluation to obtain the predictions from</p></li>
 <li><p><strong>class_index</strong> (<em>int</em>) – the 0-based index of the class-label to create the plot for</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the generated threshold curve data</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances">Instances</a></p>
 </dd>
 </dl>
@@ -61,13 +59,13 @@
 <span class="sig-prename descclassname"><span class="pre">weka.plot.classifiers.</span></span><span class="sig-name descname"><span class="pre">get_auc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.get_auc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the area under the ROC curve (AUC).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the threshold curve data</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the area</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -78,13 +76,13 @@
 <span class="sig-prename descclassname"><span class="pre">weka.plot.classifiers.</span></span><span class="sig-name descname"><span class="pre">get_prc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.get_prc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the area under the precision recall curve (PRC).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the threshold curve data</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the area</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -96,17 +94,17 @@
 <dd><p>Retrieves x and y columns from  of the data generated by the weka.classifiers.evaluation.ThresholdCurve
 class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the threshold curve data</p></li>
 <li><p><strong>xname</strong> (<em>str</em>) – the name of the X column</p></li>
 <li><p><strong>yname</strong> (<em>str</em>) – the name of the Y column</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>tuple of x and y arrays</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
@@ -118,7 +116,7 @@ class.</p>
 <dd><p>Plots the classifers for the given list of predictions.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>predictions</strong> (<em>list</em><em> or </em><em>dict</em>) – the predictions to plot, use a dict to plot predictions of multiple classifiers
 (keys are used as prefixes for plots)</p></li>
@@ -139,9 +137,9 @@ class.</p>
 <span class="sig-prename descclassname"><span class="pre">weka.plot.classifiers.</span></span><span class="sig-name descname"><span class="pre">plot_learning_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifiers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">increments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'percent_correct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Learning</span> <span class="pre">curve'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'[#]</span> <span class="pre">&#64;</span> <span class="pre">$'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lower</span> <span class="pre">right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.classifiers.plot_learning_curve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots a learning curve.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>classifiers</strong> (<em>list of Classifier</em>) – list of Classifier template objects</p></li>
+<li><p><strong>classifiers</strong> (<em>list</em><em> of </em><a class="reference internal" href="weka.html#weka.classifiers.Classifier" title="weka.classifiers.Classifier"><em>Classifier</em></a>) – list of Classifier template objects</p></li>
 <li><p><strong>train</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – dataset to use for the building the classifier, used for evaluating it test set None</p></li>
 <li><p><strong>test</strong> (<em>list</em><em> or </em><a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – optional dataset (or list of datasets) to use for the testing the built classifiers</p></li>
 <li><p><strong>increments</strong> (<em>float</em>) – the increments (&gt;= 1: # of instances, &lt;1: percentage of dataset)</p></li>
@@ -164,7 +162,7 @@ $: options, *: 1-based index of test set)</p></li>
 <dd><p>Plots the PRC (precision recall) curve for the given predictions.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evaluation</strong> (<a class="reference internal" href="weka.html#weka.classifiers.Evaluation" title="weka.classifiers.Evaluation"><em>Evaluation</em></a>) – the evaluation to obtain the predictions from</p></li>
 <li><p><strong>class_index</strong> (<em>list</em>) – the list of 0-based indices of the class-labels to create the plot for</p></li>
@@ -184,7 +182,7 @@ $: options, *: 1-based index of test set)</p></li>
 on the same dataset.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evaluations</strong> (<em>dict</em>) – the dictionary of Evaluation objects to obtain the predictions from, the key is used
 in the plot key as prefix</p></li>
@@ -204,7 +202,7 @@ in the plot key as prefix</p></li>
 <dd><p>Plots the ROC (receiver operator characteristics) curve for the given predictions.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evaluation</strong> (<a class="reference internal" href="weka.html#weka.classifiers.Evaluation" title="weka.classifiers.Evaluation"><em>Evaluation</em></a>) – the evaluation to obtain the predictions from</p></li>
 <li><p><strong>class_index</strong> (<em>list</em>) – the list of 0-based indices of the class-labels to create the plot for</p></li>
@@ -224,7 +222,7 @@ in the plot key as prefix</p></li>
 on the same dataset.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evaluations</strong> (<em>dict</em>) – the dictionary of Evaluation objects to obtain the predictions from, the key is used
 in the plot key as prefix</p></li>
@@ -240,14 +238,14 @@ in the plot key as prefix</p></li>
 
 </section>
 <section id="module-weka.plot.clusterers">
-<span id="weka-plot-clusterers-module"></span><h2>weka.plot.clusterers module<a class="headerlink" href="#module-weka.plot.clusterers" title="Permalink to this headline">¶</a></h2>
+<span id="weka-plot-clusterers-module"></span><h2>weka.plot.clusterers module<a class="headerlink" href="#module-weka.plot.clusterers" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.plot.clusterers.plot_cluster_assignments">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.clusterers.</span></span><span class="sig-name descname"><span class="pre">plot_cluster_assignments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">evl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inst_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.clusterers.plot_cluster_assignments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the cluster assignments against the specified attributes.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>evl</strong> (<a class="reference internal" href="weka.html#weka.clusterers.ClusterEvaluation" title="weka.clusterers.ClusterEvaluation"><em>ClusterEvaluation</em></a>) – the cluster evaluation to obtain the cluster assignments from</p></li>
 <li><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the dataset the clusterer was evaluated against</p></li>
@@ -264,13 +262,13 @@ in the plot key as prefix</p></li>
 
 </section>
 <section id="module-weka.plot.dataset">
-<span id="weka-plot-dataset-module"></span><h2>weka.plot.dataset module<a class="headerlink" href="#module-weka.plot.dataset" title="Permalink to this headline">¶</a></h2>
+<span id="weka-plot-dataset-module"></span><h2>weka.plot.dataset module<a class="headerlink" href="#module-weka.plot.dataset" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.plot.dataset.line_plot">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.dataset.</span></span><span class="sig-name descname"><span class="pre">line_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.dataset.line_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the internal format to plot the dataset, one line per instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the dataset</p></li>
 <li><p><strong>atts</strong> (<em>list</em>) – the list of 0-based attribute indices of attributes to plot</p></li>
@@ -290,7 +288,7 @@ in the plot key as prefix</p></li>
 <dd><p>Plots all attributes against each other.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the dataset</p></li>
 <li><p><strong>percent</strong> (<em>float</em>) – the percentage of the dataset to use for plotting</p></li>
@@ -310,7 +308,7 @@ in the plot key as prefix</p></li>
 <dd><p>Plots two attributes against each other.</p>
 <p>TODO: click events <a class="reference external" href="http://matplotlib.org/examples/event_handling/data_browser.html">http://matplotlib.org/examples/event_handling/data_browser.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="weka.core.html#weka.core.dataset.Instances" title="weka.core.dataset.Instances"><em>Instances</em></a>) – the dataset</p></li>
 <li><p><strong>index_x</strong> (<em>int</em>) – the 0-based index of the attribute on the x axis</p></li>
@@ -328,13 +326,13 @@ in the plot key as prefix</p></li>
 
 </section>
 <section id="module-weka.plot.experiments">
-<span id="weka-plot-experiments-module"></span><h2>weka.plot.experiments module<a class="headerlink" href="#module-weka.plot.experiments" title="Permalink to this headline">¶</a></h2>
+<span id="weka-plot-experiments-module"></span><h2>weka.plot.experiments module<a class="headerlink" href="#module-weka.plot.experiments" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.plot.experiments.plot_experiment">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.experiments.</span></span><span class="sig-name descname"><span class="pre">plot_experiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes_swapped</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Statistic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_stdev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lower</span> <span class="pre">right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_to_anchor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.experiments.plot_experiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the results from an experiment.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mat</strong> (<a class="reference internal" href="weka.html#weka.experiments.ResultMatrix" title="weka.experiments.ResultMatrix"><em>ResultMatrix</em></a>) – the result matrix to plot</p></li>
 <li><p><strong>title</strong> (<em>str</em>) – the title for the experiment</p></li>
@@ -354,14 +352,14 @@ in the plot key as prefix</p></li>
 
 </section>
 <section id="module-weka.plot.graph">
-<span id="weka-plot-graph-module"></span><h2>weka.plot.graph module<a class="headerlink" href="#module-weka.plot.graph" title="Permalink to this headline">¶</a></h2>
+<span id="weka-plot-graph-module"></span><h2>weka.plot.graph module<a class="headerlink" href="#module-weka.plot.graph" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.plot.graph.plot_dot_graph">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.graph.</span></span><span class="sig-name descname"><span class="pre">plot_dot_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.graph.plot_dot_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots a graph in graphviz dot notation.</p>
 <p><a class="reference external" href="http://graphviz.org/doc/info/lang.html">http://graphviz.org/doc/info/lang.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> (<em>str</em>) – the dot notation graph</p></li>
 <li><p><strong>filename</strong> (<em>str</em>) – the (optional) file to save the generated plot to. The extension determines the file format.</p></li>
@@ -377,7 +375,7 @@ in the plot key as prefix</p></li>
 <p><a class="reference external" href="http://graphviz.org/doc/info/lang.html">http://graphviz.org/doc/info/lang.html</a>
 <a class="reference external" href="http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html">http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> (<em>str</em>) – the dot/XML BIF notation graph</p></li>
 <li><p><strong>filename</strong> (<em>str</em>) – the (optional) file to save the generated plot to. The extension determines the file format.</p></li>
@@ -392,7 +390,7 @@ in the plot key as prefix</p></li>
 <dd><p>Plots a graph in XML BIF notation. Only plots the structure, not the tables.</p>
 <p><a class="reference external" href="http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html">http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>graph</strong> (<em>str</em>) – the XML BIF notation graph</p></li>
 <li><p><strong>filename</strong> (<em>str</em>) – the (optional) file to save the generated plot to. The extension determines the file format.</p></li>
@@ -407,13 +405,13 @@ in the plot key as prefix</p></li>
 <dd><p>Converts the graph in XML BIF notation into a dot graph.</p>
 <p><a class="reference external" href="http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html">http://sites.poli.usp.br/p/fabio.cozman/Research/InterchangeFormat/index.html</a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>graph</strong> (<em>str</em>) – the graph to convert</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the graph in dot notation</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -421,7 +419,7 @@ in the plot key as prefix</p></li>
 
 </section>
 <section id="module-weka.plot">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weka.plot" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weka.plot" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="weka.plot.create_subsample">
 <span class="sig-prename descclassname"><span class="pre">weka.plot.</span></span><span class="sig-name descname"><span class="pre">create_subsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.create_subsample" title="Permalink to this definition">¶</a></dt>
@@ -439,7 +437,7 @@ in the plot key as prefix</p></li>
 <span class="sig-prename descclassname"><span class="pre">weka.plot.</span></span><span class="sig-name descname"><span class="pre">set_window_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weka.plot.set_window_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the window title of the figure (if matplotlib is available).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fig</strong> – the figure to update</p></li>
 <li><p><strong>title</strong> (<em>str</em>) – the title to set</p></li>
@@ -527,7 +525,7 @@ in the plot key as prefix</p></li>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -544,8 +542,8 @@ in the plot key as prefix</p></li>
       &copy;2014-2024, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/weka.plot.rst.txt"
