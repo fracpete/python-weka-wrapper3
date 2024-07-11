@@ -32,7 +32,7 @@ The library has the following requirements:
 
 * Python 3 (does not work with Python 2)
 
- * python-javabridge (>=4.0.0, required)
+ * jpype (required)
  * pygraphviz (optional)
  * PIL (optional)
  * matplotlib (optional)

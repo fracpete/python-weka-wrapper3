@@ -5,10 +5,6 @@ The following sections should help you install the library on your machine. Inst
 library system-wide, the instructions show how to install it within in a virtual environment. This avoids
 interfering with your operating system or other libraries, when you should upgrade some libraries.
 
-Some of the instructions are based on the *CellProfiler*
-`instructions <https://github.com/CellProfiler/python-javabridge/blob/master/docs/installation.rst>`__, the guys
-behind the *javabridge* library.
-
 However, if you should encounter problems or if you would like to submit improvements
 on the instructions below, please use the following mailing list:
 
@@ -52,8 +48,7 @@ graphical output:
 
    sudo apt-get install python3-pil python3-matplotlib python3-pygraphviz
 
-Install OpenJDK as well, in order to get all the header files that *javabridge*
-compiles against (but don't use it for starting up JVMs):
+Install OpenJDK as well, in order to get all the header files for compilation:
 
 .. code-block:: bash
 
@@ -71,9 +66,9 @@ available in the Ubuntu repositories:
 
 .. code-block:: bash
 
-   ./pww3/bin/pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
-   ./pww3/bin/pip install "git+https://github.com/CellProfiler/python-javabridge.git"
-   ./pww3/bin/pip install python-weka-wrapper3
+   . ./pww3/bin/activate
+   pip install setuptools wheel
+   pip install python-weka-wrapper3[plots,graphs]
 
 
 Debian
@@ -107,16 +102,15 @@ graphical output:
 
 Older Debian versions used `python3-imaging` instead of `python3-pil`.
 
-Download a JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk-11.0.7+10/``).
+Download a JDK and un-tar it in ``/opt`` (e.g., ``/opt/jdk-11.0.23+9/``).
 
 Exit superuser mode and become a regular user again.
 
-Export the Java home directory as follows, which is required for the *javabridge*
-installation/compilation (you might want to add this command to your ``.profile``):
+Export the Java home directory as follows (you might want to add this command to your ``.profile``):
 
 .. code-block:: bash
 
-   export JAVA_HOME=/opt/jdk-11.0.7+10/
+   export JAVA_HOME=/opt/jdk-11.0.23+9/
 
 Create a virtual environment using the *venv* module that :
 
@@ -124,14 +118,13 @@ Create a virtual environment using the *venv* module that :
 
    python3 -m venv pww3
 
-Finally, you can use ``pip`` from the virtual environment to install the Python packages that are not
-available in the Debian repositories:
+Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   ./pww3/bin/pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
-   ./pww3/bin/pip install "git+https://github.com/CellProfiler/python-javabridge.git"
-   ./pww3/bin/pip install python-weka-wrapper3
+   . ./pww3/bin/activate
+   pip install setuptools wheel
+   pip install python-weka-wrapper3[plots,graphs]
 
 Please note, when using *python-weka-wrapper3* as a *normal* user, don't forget
 to export the ``JAVA_HOME`` environment variable as described above (e.g., add it
@@ -154,8 +147,9 @@ Here are some rough instructions (as superuser):
 As regular user:
 
 * create a virtual environment (see Ubuntu/Debian sections above)
-* install javabridge using ``./venv/bin/pip javabridge``
-* install python-weka-wrapper3 using ``./venv/bin/pip python-weka-wrapper3``
+* activate the virtual environment using ``. ./venv/bin/activate``
+* install wheel using ``pip wheel``
+* install python-weka-wrapper3 using ``pip python-weka-wrapper3[plots,graphs]``
 
 
 Other Linux distributions
@@ -164,8 +158,7 @@ Other Linux distributions
 See `these <http://docs.python-guide.org/en/latest/starting/install/linux/>`__
 general instructions for installing Python on Linux. You need to be able to
 compile C/C++ code and Python modules (i.e., Python header files are required).
-By installing OpenJDK, you should be able to compile *javabridge* against its
-header files (for JNI access).
+By installing OpenJDK, you should be able to compile against its header files.
 
 Then you need to install the following Python packages, preferably through your
 package manager (e.g., ``yum``).  Please note that on a *headless* machine, you
@@ -184,14 +177,13 @@ Create a virtual environment using the *venv* module that :
 
    python3 -m venv pww3
 
-Once these libraries are installed, you can use ``pip`` from the virtual environment to install the Python
-packages that are not available in the distro repositories:
+Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   ./pww3/bin/pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
-   ./pww3/bin/pip install "git+https://github.com/CellProfiler/python-javabridge.git"
-   ./pww3/bin/pip install python-weka-wrapper3
+   . ./pww3/bin/activate
+   pip install setuptools wheel
+   pip install python-weka-wrapper3[plots,graphs]
 
 
 COLAB
@@ -201,14 +193,13 @@ In a Python 3 COLAB environment, you need to install at least these modules to g
 
 ::
 
-   !pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
-   !pip install "git+https://github.com/CellProfiler/python-javabridge.git"
+   !pip install setuptools wheel
    !pip install python-weka-wrapper3
 
 **Notes:**
 
 * Once the JVM has been stopped, you might have to restart the COLAB runtime
-* After installing packages, you need to restart the COLAB runtime, otherwise the packages won't be available to the JV
+* After installing packages, you need to restart the COLAB runtime, otherwise the packages won't be available to the JVM
 
 
 Mac OSX
@@ -217,28 +208,22 @@ Mac OSX
 Please follow `these <http://docs.python-guide.org/en/latest/starting/install/osx/>`__
 general instructions for installing Python.
 
-In order to compile C/C++ code, you need to install *Xcode* through Apple's App
-Store. Once installed you can install the *XCode command-line tools* by issuing
-the command ``xcode-select --install`` in a terminal.
-
-Also, install *graphviz* using homebrew (``brew install pkg-config`` and 
-``brew install graphviz``) for visualizing trees and graphs.
-
-You need to install the following Python packages:
-
-* numpy
-* pillow
-* matplotlib
-* pygraphviz
-* lxml
-* python-javabridge
-
-Once these libraries are installed, you can use ``pip`` to install the remaining
-Python packages:
+Create a virtual environment using the *venv* module:
 
 .. code-block:: bash
 
-   pip3 install python-weka-wrapper3
+   python3 -m venv pww3
+
+Once the environment is set up, activate it and install *python-weka-wrapper3*:
+
+.. code-block:: bash
+
+   . ./pww3/bin/activate
+   pip install wheel
+   brew install graphviz
+   python3 -m pip install graphviz
+   python3 -m pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-I$(brew --prefix graphviz)/include/" --config-settings="--global-option=-L$(brew --prefix graphviz)/lib/" pygraphviz
+   pip install python-weka-wrapper3[plots,graphs]
 
 
 Windows using Anaconda
@@ -251,26 +236,19 @@ install a 32-bit JDK (or all of them are 64-bit).
 * set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
 * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
   select the **Desktop development with C++** option in the installer
-* the following configures an environment with Python 3.10
+* the following configures an environment with Python 3.12
 
   .. code-block:: doscon
 
-     conda create --name pww3 python=3.10
+     conda create --name pww3 python=3.12
      conda activate pww3
-     conda install -c conda-forge setuptools wheel "numpy>=1.20.1" pillow "cython>=0.29.25,<3.0.0"
-     pip install "git+https://github.com/CellProfiler/python-javabridge.git"
-     pip install python-weka-wrapper3
+     conda install -c conda-forge setuptools wheel pillow matplotlib lxml pygraphviz
+     pip install python-weka-wrapper3[plots,graphs]
 
-If you want plotting support, then install also *graphviz* and *matplotlib*:
+For *graphviz* support you also need the Windows binary installed:
 
 * download `graphviz <https://graphviz.org/download/#windows>`__
-  and add the path to its installed binaries to your ``PATH`` environment variable.
-* install pygraphviz and matplotlib:
-
-  .. code-block:: doscon
-
-     conda install -c conda-forge pygraphviz
-     conda install -c conda-forge matplotlib
+* add the path to its installed binaries to your ``PATH`` environment variable.
 
 
 Windows
@@ -278,7 +256,7 @@ Windows
 
 **Please note:** You need to make sure that the *bitness* of your environment
 is consistent.  I.e., if you install a 32-bit version of Python, you need to
-install a 32-bit JDK and 32-bit numpy (or all of them are 64-bit).
+install a 32-bit JDK (or all of them are 64-bit).
 
 Perform the following steps:
 
@@ -286,77 +264,44 @@ Perform the following steps:
 * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
   select the **Desktop development with C++** option in the installer
 * install `Python <http://www.python.org/downloads>`__, make sure you check *Add python.exe to path* during the installation
-* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python310\\Scripts``
-* install ``pip`` with these steps:
+* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python312\\Scripts``
+* open a command-prompt and create a virtual environment
+* create a virtual environment using the *venv* module:
 
- * download from `here <https://bootstrap.pypa.io/get-pip.py>`__
- * install using ``python get-pip.py``
+.. code-block:: doscon
 
-* install pww3:
+   python -m venv pww3
 
-.. code-block:: bash
+Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
-   pip install setuptools wheel "cython>=0.29.25,<3.0.0" "numpy>=1.20.1"
-   pip install "git+https://github.com/CellProfiler/python-javabridge.git"
-   pip install python-weka-wrapper3
+.. code-block:: doscon
 
-If you want to use the plotting functionality, you need to install *graphviz* and *matplotlib* as well:
+   pww3\Scripts\activate
+   pip install setuptools wheel
+   pip install python-weka-wrapper3[plots,graphs]
+
+For *graphviz* support you also need the Windows binary installed:
 
 * download `graphviz <https://graphviz.org/download/#windows>`__
-  and add the path to its installed binaries to your ``PATH`` environment variable.
-
-.. code-block:: bash
-
-   pip install matplotlib pygraphviz pillow lxml
+* add the path to its installed binaries to your ``PATH`` environment variable.
 
 
 From source
 -----------
 
-You have two options for installing the library from source, either through a release
-archive or using the *bleeding edge* source code that is available through the 
-Github repository.
-
-
-Release archive
-+++++++++++++++
-
-Go to the `releases <https://github.com/fracpete/python-weka-wrapper3/releases>`__ 
-page on Github and download the *Source code* archive (zip or tar.gz) of the 
-release that you want to install. After the download finishes, decompress the
-archive. Open a terminal/command prompt and execute the following command
-from within the directory with the `setup.py` file:
-
-.. code-block:: bash
-
-   ./venv/bin/python setup.py install
-
-Check out the section on *virtualenv* as well, if you would rather install it
-in a *disposable* location.
-
-
-Github
-++++++
-
 You can install python-weka-wrapper3 directly from its Github repository with `pip`
 as follows (e.g., to get the latest fixes/features):
 
-.. code-block:: bash
 
-   ./venv/bin/pip install git+https://github.com/fracpete/python-weka-wrapper3.git
-
-
-Alternatively, you can clone the repository separately and install it from there.
-
-First, clone the Github repository as follows:
+First, create a virtual environment:
 
 .. code-block:: bash
 
-   git clone https://github.com/fracpete/python-weka-wrapper3.git
+   python3 -m venv pww3
 
-Second, change into the newly created directory and install the library using the
-following command (adjusting the path to your virtual environment):
+Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   ./venv/bin/python setup.py install
+   . ./pww3/bin/activate
+   pip install "python-weka-wrapper3[plots,graphs] @ git+https://github.com/fracpete/python-weka-wrapper3.git"
