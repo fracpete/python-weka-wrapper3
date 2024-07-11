@@ -15,7 +15,7 @@
 # Copyright (C) 2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 from jpype import JClass
-import typeconv
+import weka.core.typeconv as typeconv
 import logging
 
 # logging setup
