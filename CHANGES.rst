@@ -1,12 +1,19 @@
 Changelog
 =========
 
-0.2.17 (????-??-??)
--------------------
+0.3.0 (????-??-??)
+------------------
 
 - added `is_additional_measure_producer` variable, `additional_measures` property and
   `additional_measure(str)` method to the `weka.classifiers.Classifier` class,
   giving convenient access to classes implementing `weka.core.AdditionalMeasureProducer`
+- replaced javabridge with jpype behind the scenes, simplifying native API calls
+- removed property `JavaObject.jclasswrapper`
+- property `JavaObject.jwrapper` is now deprecated and `JavaObject.jobject` should be used instead
+- renamed `JavaArray.new_instance` to `JavaArray.new_array`
+- now works on M1/M2 Macs
+- updated doc strings
+- updated documentation, especially around installation
 
 
 0.2.16 (2024-05-10)
