@@ -189,16 +189,22 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 COLAB
 -----
 
-In a Python 3 COLAB environment, you need to install at least these modules to get python-weka-wrapper3 working:
+In a Python 3 COLAB environment, you need to run the following steps for full functionality:
 
-::
+.. code-block:: bash
 
-   !pip install setuptools wheel
-   !pip install python-weka-wrapper3
+   # install dependencies
+   !apt-get install build-essential python3-dev
+   !apt-get install python3-pil python3-pygraphviz
+   !apt install openjdk-11-jdk
+   # install pww3
+   !pip install wheel
+   !pip install python-weka-wrapper3[plots,graphs]
+
 
 **Notes:**
 
-* Once the JVM has been stopped, you might have to restart the COLAB runtime
+* Once the JVM has been stopped, you will have to restart the COLAB runtime
 * After installing packages, you need to restart the COLAB runtime, otherwise the packages won't be available to the JVM
 
 
