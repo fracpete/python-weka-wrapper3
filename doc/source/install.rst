@@ -67,7 +67,6 @@ Create a virtual environment using the *venv* module that :
 
    python3 -m venv pww3
 
-
 Finally, you can use ``pip`` from the virtual environment to install the Python packages that are not
 available in the Ubuntu repositories:
 
@@ -151,12 +150,22 @@ Here are some rough instructions (as superuser):
 * install numpy package
 * install python-imaging package (shouldn't be necessary)
 
-As regular user:
+Switch back to being a regular user.
 
-* create a virtual environment (see Ubuntu/Debian sections above)
-* activate the virtual environment using ``. ./venv/bin/activate``
-* install wheel using ``pip wheel``
-* install python-weka-wrapper3 using ``pip python-weka-wrapper3[plots,graphs]``
+Create a virtual environment using the *venv* module that :
+
+.. code-block:: bash
+
+   python3 -m venv pww3
+
+Finally, you can use ``pip`` from the virtual environment to install the Python packages that are not
+available in the Ubuntu repositories:
+
+.. code-block:: bash
+
+   . ./pww3/bin/activate
+   pip install setuptools wheel
+   pip install python-weka-wrapper3[plots,graphs]
 
 
 Other Linux distributions
