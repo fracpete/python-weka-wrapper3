@@ -23,7 +23,7 @@ For using the CPU image interactively, you can run the following command:
 .. code-block:: bash
 
    docker run -u $(id -u):$(id -g) \
-       -it fracpete/pww3:0.2.16_cpu
+       -it fracpete/pww3:0.3.0_cpu
 
 Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:
@@ -32,7 +32,7 @@ you can map your local Weka packages into the container as follows:
 
    docker run -u $(id -u):$(id -g) \
        -v $HOME/wekafiles/:/workspace/wekafiles \
-       -it fracpete/pww3:0.2.16_cpu
+       -it fracpete/pww3:0.3.0_cpu
 
 
 GPU
@@ -74,7 +74,7 @@ is in our current directory (`pwd`), then we can do something like this:
    docker run --rm -u $(id -u):$(id -g) \
        -v $HOME/wekafiles:/workspace/wekafiles \
        -v `pwd`:/workspace/data \
-       -t fracpete/pww3:0.2.16_cpu \
+       -t fracpete/pww3:0.3.0_cpu \
        pww-classifier \
        -t /workspace/data/anneal.arff \
        weka.classifiers.trees.J48
@@ -112,7 +112,7 @@ This script is then executed as follows:
    docker run --rm -u $(id -u):$(id -g) \
        -v $HOME/wekafiles:/workspace/wekafiles \
        -v `pwd`:/workspace/data \
-       -t fracpete/pww3:0.2.16_cpu \
+       -t fracpete/pww3:0.3.0_cpu \
        python3 /workspace/data/j48.py
 
 
@@ -143,7 +143,7 @@ like this (using pww3 0.2.14 for CPU):
 
 ::
 
-   FROM fracpete/pww3:0.2.16_cpu
+   FROM fracpete/pww3:0.3.0_cpu
    COPY install_packages.py /workspace/install_packages.py
    RUN python3 /workspace/install_packages.py
 
