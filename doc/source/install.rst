@@ -247,8 +247,6 @@ is consistent.  I.e., if you install a 32-bit version of Anaconda, you need to
 install a 32-bit JDK (or all of them are 64-bit).
 
 * set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
-* download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
-  select the **Desktop development with C++** option in the installer
 * the following configures an environment with Python 3.12
 
   .. code-block:: doscon
@@ -257,11 +255,6 @@ install a 32-bit JDK (or all of them are 64-bit).
      conda activate pww3
      conda install -c conda-forge setuptools wheel pillow matplotlib lxml pygraphviz
      pip install python-weka-wrapper3[plots,graphs]
-
-For *graphviz* support you also need the Windows binary installed:
-
-* download `graphviz <https://graphviz.org/download/#windows>`__
-* add the path to its installed binaries to your ``PATH`` environment variable.
 
 
 
