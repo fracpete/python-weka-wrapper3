@@ -12,10 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # timeseries.py
-# Copyright (C) 2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2021-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
+from jpype import JClass
+import weka.core.typeconv as typeconv
 from weka.core.classes import JavaObject, OptionHandler, Date, Enum, new_instance
 from weka.core.dataset import Instances, Instance
 from weka.core.typeconv import jstring_list_to_string_list, jdouble_to_float
@@ -36,8 +37,8 @@ class TestPart(JavaObject):
         """
         Initializes the TestPart object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.CustomPeriodicTest.TestPart")
         super(TestPart, self).__init__(jobject=jobject)
@@ -50,7 +51,7 @@ class TestPart(JavaObject):
         :return: true if upper bound
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isUpper", "()Z")
+        return self.jobject.isUpper()
 
     @is_upper.setter
     def is_upper(self, upper):
@@ -60,7 +61,7 @@ class TestPart(JavaObject):
         :param upper: true if upper bound
         :type upper: bool
         """
-        javabridge.call(self.jobject, "setIsUpper", "(Z)V")
+        self.jobject.setIsUpper()
 
     def eval(self, date, other):
         """
@@ -75,7 +76,7 @@ class TestPart(JavaObject):
         :return: true if the supplied date is within this bound
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "eval", "(Ljava/util/Date;Lweka/classifiers/timeseries/core/CustomPeriodicTest$TestPart;)Z", date.jobject, other.jobject)
+        return self.jobject.eval(date.jobject, other.jobject)
 
     def operator(self, s):
         """
@@ -84,7 +85,7 @@ class TestPart(JavaObject):
         :param s: the operator to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setOperator", "(Ljava/lang/String;)V", s)
+        self.jobject.setOperator(s)
 
     def year(self, s):
         """
@@ -93,7 +94,7 @@ class TestPart(JavaObject):
         :param s: the year to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setYear", "(Ljava/lang/String;)V", s)
+        self.jobject.setYear(s)
 
     def week_of_year(self, s):
         """
@@ -102,7 +103,7 @@ class TestPart(JavaObject):
         :param s: the woy to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setWeekOfYear", "(Ljava/lang/String;)V", s)
+        self.jobject.setWeekOfYear(s)
 
     def week_of_month(self, s):
         """
@@ -111,7 +112,7 @@ class TestPart(JavaObject):
         :param s: the wom to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setWeekOfMonth", "(Ljava/lang/String;)V", s)
+        self.jobject.setWeekOfMonth(s)
 
     def day_of_year(self, s):
         """
@@ -120,7 +121,7 @@ class TestPart(JavaObject):
         :param s: the doy to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setDayOfYear", "(Ljava/lang/String;)V", s)
+        self.jobject.setDayOfYear(s)
 
     def day_of_month(self, s):
         """
@@ -129,7 +130,7 @@ class TestPart(JavaObject):
         :param s: the dom to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setDayOfMonth", "(Ljava/lang/String;)V", s)
+        self.jobject.setDayOfMonth(s)
 
     @property
     def month(self):
@@ -139,7 +140,7 @@ class TestPart(JavaObject):
         :return: the month string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getMonthString", "()Ljava/lang/String;")
+        return self.jobject.getMonthString()
 
     @month.setter
     def month(self, s):
@@ -149,7 +150,7 @@ class TestPart(JavaObject):
         :param s: the month to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setMonth", "(Ljava/lang/String;)V", s)
+        self.jobject.setMonth(s)
 
     def day_of_week(self, s):
         """
@@ -158,7 +159,7 @@ class TestPart(JavaObject):
         :param s: the dow to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setDayOfWeek", "(Ljava/lang/String;)V", s)
+        self.jobject.setDayOfWeek(s)
 
     def hour_of_day(self, s):
         """
@@ -167,7 +168,7 @@ class TestPart(JavaObject):
         :param s: the hod to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setHourOfDay", "(Ljava/lang/String;)V", s)
+        self.jobject.setHourOfDay(s)
 
     def minute_of_hour(self, s):
         """
@@ -176,7 +177,7 @@ class TestPart(JavaObject):
         :param s: the moh to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setMinuteOfHour", "(Ljava/lang/String;)V", s)
+        self.jobject.setMinuteOfHour(s)
 
     def second(self, s):
         """
@@ -185,7 +186,7 @@ class TestPart(JavaObject):
         :param s: the second to use
         :type s: str
         """
-        javabridge.call(self.jobject, "setSecond", "(Ljava/lang/String;)V", s)
+        self.jobject.setSecond(s)
 
     def day(self):
         """
@@ -194,7 +195,7 @@ class TestPart(JavaObject):
         :return: the day string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getDayString", "()Ljava/lang/String;")
+        return self.jobject.getDayString()
 
 
 class CustomPeriodicTest(JavaObject):
@@ -215,8 +216,8 @@ class CustomPeriodicTest(JavaObject):
         """
         Initializes the CustomPeriodicTest object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param test: the test string to use
         :type test: str
         """
@@ -224,7 +225,7 @@ class CustomPeriodicTest(JavaObject):
             if test is None:
                 raise Exception("Either jobject or test string must be provided!")
             else:
-                jobject = javabridge.make_instance("weka.classifiers.timeseries.core.CustomPeriodicTest", "(Ljava/lang/String;)V", test)
+                jobject = JClass("weka.classifiers.timeseries.core.CustomPeriodicTest")(test)
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.CustomPeriodicTest")
         super(CustomPeriodicTest, self).__init__(jobject=jobject)
 
@@ -235,7 +236,7 @@ class CustomPeriodicTest(JavaObject):
         :return: the test
         :rtype: TestPart
         """
-        obj = javabridge.call(self.jobject, "getLowerTest", "()Lweka/classifiers/timeseries/core/CustomPeriodicTest$TestPart;")
+        obj = self.jobject.getLowerTest()
         return TestPart(jobject=obj)
 
     def upper_test(self):
@@ -245,7 +246,7 @@ class CustomPeriodicTest(JavaObject):
         :return: the test
         :rtype: TestPart
         """
-        obj = javabridge.call(self.jobject, "getUpperTest", "()Lweka/classifiers/timeseries/core/CustomPeriodicTest$TestPart;")
+        obj = self.jobject.getUpperTest()
         return TestPart(jobject=obj)
 
     @property
@@ -256,7 +257,7 @@ class CustomPeriodicTest(JavaObject):
         :return: the label
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getLabel", "()Ljava/lang/String;")
+        return self.jobject.getLabel()
 
     @label.setter
     def label(self, l):
@@ -266,7 +267,7 @@ class CustomPeriodicTest(JavaObject):
         :param l: the label to use
         :type l: str
         """
-        javabridge.call(self.jobject, "setLabel", "(Ljava/lang/String;)V", l)
+        self.jobject.setLabel(l)
 
     def test(self, test):
         """
@@ -275,7 +276,7 @@ class CustomPeriodicTest(JavaObject):
         :param test: the test to use
         :type test: str
         """
-        javabridge.call(self.jobject, "setTest", "(Ljava/lang/String;)V", test)
+        self.jobject.setTest(test)
 
     def evaluate(self, date):
         """
@@ -286,7 +287,7 @@ class CustomPeriodicTest(JavaObject):
         :return: true if the date lies within the interval.
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "evaluate", "(Ljava/util/Date;)Z", date.jobject)
+        return self.jobject.evaluate(date.jobject)
 
 
 class Periodicity(Enum):
@@ -298,8 +299,8 @@ class Periodicity(Enum):
         """
         Initializes the Periodicity object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param periodicity: the string representation of the enum
         :type periodicity: str
         """
@@ -325,8 +326,8 @@ class PeriodicityHandler(JavaObject):
         """
         Initializes the CustomPeriodicTest object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.filters.supervised.attribute.TSLagMaker.PeriodicityHandler")
         super(PeriodicityHandler, self).__init__(jobject=jobject)
@@ -339,7 +340,7 @@ class PeriodicityHandler(JavaObject):
         :return: the delta time
         :rtype: float
         """
-        return javabridge.call(self.jobject, "deltaTime", "()D")
+        return self.jobject.deltaTime()
 
     @delta_time.setter
     def delta_time(self, value):
@@ -349,7 +350,7 @@ class PeriodicityHandler(JavaObject):
         :param value: the delta time
         :type value: float
         """
-        javabridge.call(self.jobject, "setDeltaTime", "(D)V")
+        self.jobject.setDeltaTime(value)
 
 
 class TSLagMaker(Filter):
@@ -390,7 +391,7 @@ class TSLagMaker(Filter):
         Initializes the TSLagMaker filter.
 
         :param jobject: the javaobject to use
-        :type jobject: JB_Object
+        :type jobject: JPype object
         :param options: the list of options to use
         :type options: list
         """
@@ -400,7 +401,7 @@ class TSLagMaker(Filter):
         """
         Clears the custom periodics.
         """
-        javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
+        self.jobject.clearCustomPeriodics()
 
     def add_custom_periodic(self, periodic):
         """
@@ -409,7 +410,7 @@ class TSLagMaker(Filter):
         :param periodic: the periodic to add
         :type periodic: str
         """
-        javabridge.call(self.jobject, "addCustomPeriodic", "(Ljava/lang/String;)V", periodic)
+        self.jobject.addCustomPeriodic(periodic)
 
     @property
     def fields_to_lag(self):
@@ -419,7 +420,7 @@ class TSLagMaker(Filter):
         :return: the fields to lag
         :rtype: list
         """
-        return jstring_list_to_string_list(javabridge.call(self.jobject, "getFieldsToLag", "()Ljava/util/List;"))
+        return jstring_list_to_string_list(self.jobject.getFieldsToLag())
 
     @fields_to_lag.setter
     def fields_to_lag(self, fields):
@@ -429,7 +430,7 @@ class TSLagMaker(Filter):
         :param fields: the list of fields to lag
         :type fields: list
         """
-        javabridge.call(self.jobject, "setFieldsToLag", "(Ljava/util/List;)V", fields)
+        self.jobject.setFieldsToLag(fields)
 
     @property
     def fields_to_lag_as_string(self):
@@ -439,7 +440,7 @@ class TSLagMaker(Filter):
         :return: the fields to lag
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getFieldsToLagAsString", "()Ljava/lang/String;")
+        return self.jobject.getFieldsToLagAsString()
 
     @fields_to_lag_as_string.setter
     def fields_to_lag_as_string(self, fields):
@@ -449,7 +450,7 @@ class TSLagMaker(Filter):
         :param fields: the fields to lag
         :type fields: str
         """
-        javabridge.call(self.jobject, "setFieldsToLagAsString", "(Ljava/lang/String;)V", fields)
+        self.jobject.setFieldsToLagAsString(fields)
 
     @property
     def overlay_fields(self):
@@ -459,7 +460,7 @@ class TSLagMaker(Filter):
         :return: the overlay fields
         :rtype: list
         """
-        return jstring_list_to_string_list(javabridge.call(self.jobject, "getOverlayFields", "()Ljava/util/List;"))
+        return jstring_list_to_string_list(self.jobject.getOverlayFields())
 
     @overlay_fields.setter
     def overlay_fields(self, fields):
@@ -469,7 +470,7 @@ class TSLagMaker(Filter):
         :param fields: the list of overlay fields
         :type fields: list
         """
-        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/util/List;)V", fields)
+        self.jobject.setOverlayFields(fields)
 
     @property
     def timestamp_field(self):
@@ -479,7 +480,7 @@ class TSLagMaker(Filter):
         :return: the overlay fields
         :rtype: list
         """
-        return javabridge.call(self.jobject, "getTimeStampField", "()Ljava/lang/String;")
+        return self.jobject.getTimeStampField()
 
     @timestamp_field.setter
     def timestamp_field(self, field):
@@ -489,7 +490,7 @@ class TSLagMaker(Filter):
         :param field: the field with the timestamp
         :type field: str
         """
-        javabridge.call(self.jobject, "setTimeStampField", "(Ljava/lang/String;)V", field)
+        self.jobject.setTimeStampField(field)
 
     @property
     def remove_leading_instances_with_unknown_lag_values(self):
@@ -499,7 +500,7 @@ class TSLagMaker(Filter):
         :return: true if to remove
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getRemoveLeadingInstancesWithUnknownLagValues", "()Z")
+        return self.jobject.getRemoveLeadingInstancesWithUnknownLagValues()
 
     @remove_leading_instances_with_unknown_lag_values.setter
     def remove_leading_instances_with_unknown_lag_values(self, remove):
@@ -509,7 +510,7 @@ class TSLagMaker(Filter):
         :param remove: true if to remove
         :type remove: str
         """
-        javabridge.call(self.jobject, "setRemoveLeadingInstancesWithUnknownLagValues", "(Z)V", remove)
+        self.jobject.setRemoveLeadingInstancesWithUnknownLagValues(remove)
 
     @property
     def adjust_for_trends(self):
@@ -519,7 +520,7 @@ class TSLagMaker(Filter):
         :return: true if to adjust
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAdjustForTrends", "()Z")
+        return self.jobject.getAdjustForTrends()
 
     @adjust_for_trends.setter
     def adjust_for_trends(self, adjust):
@@ -529,7 +530,7 @@ class TSLagMaker(Filter):
         :param adjust: true if to adjust
         :type adjust: str
         """
-        javabridge.call(self.jobject, "setAdjustForTrends", "(Z)V", adjust)
+        self.jobject.setAdjustForTrends(adjust)
 
     @property
     def include_timelag_products(self):
@@ -539,7 +540,7 @@ class TSLagMaker(Filter):
         :return: true if to include
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getIncludeTimeLagProducts", "()Z")
+        return self.jobject.getIncludeTimeLagProducts()
 
     @include_timelag_products.setter
     def include_timelag_products(self, include):
@@ -549,7 +550,7 @@ class TSLagMaker(Filter):
         :param include: true if to include
         :type include: str
         """
-        javabridge.call(self.jobject, "setIncludeTimeLagProducts", "(Z)V", include)
+        self.jobject.setIncludeTimeLagProducts(include)
 
     @property
     def include_powers_of_time(self):
@@ -559,7 +560,7 @@ class TSLagMaker(Filter):
         :return: true if to include
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getIncludePowersOfTime", "()Z")
+        return self.jobject.getIncludePowersOfTime()
 
     @include_powers_of_time.setter
     def include_powers_of_time(self, include):
@@ -569,7 +570,7 @@ class TSLagMaker(Filter):
         :param include: true if to include
         :type include: str
         """
-        javabridge.call(self.jobject, "setIncludePowersOfTime", "(Z)V", include)
+        self.jobject.setIncludePowersOfTime(include)
 
     @property
     def adjust_for_variance(self):
@@ -579,7 +580,7 @@ class TSLagMaker(Filter):
         :return: true if to adjust
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAdjustForVariance", "()Z")
+        return self.jobject.getAdjustForVariance()
 
     @adjust_for_variance.setter
     def adjust_for_variance(self, adjust):
@@ -589,7 +590,7 @@ class TSLagMaker(Filter):
         :param adjust: true if to adjust
         :type adjust: str
         """
-        javabridge.call(self.jobject, "setAdjustForVariance", "(Z)V", adjust)
+        self.jobject.setAdjustForVariance(adjust)
 
     @property
     def min_lag(self):
@@ -599,7 +600,7 @@ class TSLagMaker(Filter):
         :return: the lag
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getMinLag", "()I")
+        return self.jobject.getMinLag()
 
     @min_lag.setter
     def min_lag(self, lag):
@@ -609,7 +610,7 @@ class TSLagMaker(Filter):
         :param lag: the lag
         :type lag: int
         """
-        javabridge.call(self.jobject, "setMinLag", "(I)V", lag)
+        self.jobject.setMinLag(lag)
 
     @property
     def max_lag(self):
@@ -619,7 +620,7 @@ class TSLagMaker(Filter):
         :return: the lag
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getMaxLag", "()I")
+        return self.jobject.getMaxLag()
 
     @max_lag.setter
     def max_lag(self, lag):
@@ -629,7 +630,7 @@ class TSLagMaker(Filter):
         :param lag: the lag
         :type lag: int
         """
-        javabridge.call(self.jobject, "setMaxLag", "(I)V", lag)
+        self.jobject.setMaxLag(lag)
 
     @property
     def lag_range(self):
@@ -639,7 +640,7 @@ class TSLagMaker(Filter):
         :return: the lag range
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getLagRange", "()Ljava/lang/String;")
+        return self.jobject.getLagRange()
 
     @lag_range.setter
     def lag_range(self, lag):
@@ -649,7 +650,7 @@ class TSLagMaker(Filter):
         :param lag: the lag range
         :type lag: str
         """
-        javabridge.call(self.jobject, "setLagRange", "(Ljava/lang/String;)V", lag)
+        self.jobject.setLagRange(lag)
 
     @property
     def average_consecutive_long_lags(self):
@@ -659,7 +660,7 @@ class TSLagMaker(Filter):
         :return: true if to average
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAverageConsecutiveLongLags", "()Z")
+        return self.jobject.getAverageConsecutiveLongLags()
 
     @average_consecutive_long_lags.setter
     def average_consecutive_long_lags(self, average):
@@ -671,7 +672,7 @@ class TSLagMaker(Filter):
         :param average: true if to average
         :type average: str
         """
-        javabridge.call(self.jobject, "setAverageConsecutiveLongLags", "(Z)V", average)
+        self.jobject.setAverageConsecutiveLongLags(average)
 
     @property
     def average_lags_after(self):
@@ -681,7 +682,7 @@ class TSLagMaker(Filter):
         :return: the lag
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getAverageLagsAfter", "()I")
+        return self.jobject.getAverageLagsAfter()
 
     @average_lags_after.setter
     def average_lags_after(self, lag):
@@ -691,7 +692,7 @@ class TSLagMaker(Filter):
         :param lag: the lag
         :type lag: int
         """
-        javabridge.call(self.jobject, "setAverageLagsAfter", "(I)V", lag)
+        self.jobject.setAverageLagsAfter(lag)
 
     @property
     def num_consecutive_long_lags_to_average(self):
@@ -701,7 +702,7 @@ class TSLagMaker(Filter):
         :return: the lag
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getNumConsecutiveLongLagsToAverage", "()I")
+        return self.jobject.getNumConsecutiveLongLagsToAverage()
 
     @num_consecutive_long_lags_to_average.setter
     def num_consecutive_long_lags_to_average(self, num):
@@ -711,7 +712,7 @@ class TSLagMaker(Filter):
         :param num: the lag
         :type num: int
         """
-        javabridge.call(self.jobject, "setNumConsecutiveLongLagsToAverage", "(I)V", num)
+        self.jobject.setNumConsecutiveLongLagsToAverage(num)
 
     @property
     def primary_periodic_field_name(self):
@@ -721,7 +722,7 @@ class TSLagMaker(Filter):
         :return: the name
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getPrimaryPeriodicFieldName", "()Ljava/lang/String;")
+        return self.jobject.getPrimaryPeriodicFieldName()
 
     @primary_periodic_field_name.setter
     def primary_periodic_field_name(self, lag):
@@ -731,7 +732,7 @@ class TSLagMaker(Filter):
         :param lag: the name
         :type lag: str
         """
-        javabridge.call(self.jobject, "setPrimaryPeriodicFieldName", "(Ljava/lang/String;)V", lag)
+        self.jobject.setPrimaryPeriodicFieldName(lag)
 
     @property
     def add_am_indicator(self):
@@ -741,7 +742,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddAMIndicator", "()Z")
+        return self.jobject.getAddAMIndicator()
 
     @add_am_indicator.setter
     def add_am_indicator(self, add):
@@ -751,7 +752,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddAMIndicator", "(Z)V", add)
+        self.jobject.setAddAMIndicator(add)
 
     @property
     def add_day_of_week(self):
@@ -761,7 +762,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddDayOfWeek", "()Z")
+        return self.jobject.getAddDayOfWeek()
 
     @add_day_of_week.setter
     def add_day_of_week(self, add):
@@ -771,7 +772,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddDayOfWeek", "(Z)V", add)
+        self.jobject.setAddDayOfWeek(add)
 
     @property
     def add_day_of_month(self):
@@ -781,7 +782,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddDayOfMonth", "()Z")
+        return self.jobject.getAddDayOfMonth()
 
     @add_day_of_month.setter
     def add_day_of_month(self, add):
@@ -791,7 +792,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddDayOfMonth", "(Z)V", add)
+        self.jobject.setAddDayOfMonth(add)
 
     @property
     def add_num_days_in_month(self):
@@ -801,7 +802,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddNumDaysInMonth", "()Z")
+        return self.jobject.getAddNumDaysInMonth()
 
     @add_num_days_in_month.setter
     def add_num_days_in_month(self, add):
@@ -811,7 +812,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddNumDaysInMonth", "(Z)V", add)
+        self.jobject.setAddNumDaysInMonth(add)
 
     @property
     def add_weekend_indicator(self):
@@ -821,7 +822,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddWeekendIndicator", "()Z")
+        return self.jobject.getAddWeekendIndicator()
 
     @add_weekend_indicator.setter
     def add_weekend_indicator(self, add):
@@ -831,7 +832,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddWeekendIndicator", "(Z)V", add)
+        self.jobject.setAddWeekendIndicator(add)
 
     @property
     def add_month_of_year(self):
@@ -841,7 +842,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddMonthOfYear", "()Z")
+        return self.jobject.getAddMonthOfYear()
 
     @add_month_of_year.setter
     def add_month_of_year(self, add):
@@ -851,7 +852,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddMonthOfYear", "(Z)V", add)
+        self.jobject.setAddMonthOfYear(add)
 
     @property
     def add_quarter_of_year(self):
@@ -861,7 +862,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getAddQuarterOfYear", "()Z")
+        return self.jobject.getAddQuarterOfYear()
 
     @add_quarter_of_year.setter
     def add_quarter_of_year(self, add):
@@ -871,7 +872,7 @@ class TSLagMaker(Filter):
         :param add: true if to add
         :type add: bool
         """
-        javabridge.call(self.jobject, "setAddQuarterOfYear", "(Z)V", add)
+        self.jobject.setAddQuarterOfYear(add)
 
     @property
     def is_using_artificial_time_index(self):
@@ -881,7 +882,7 @@ class TSLagMaker(Filter):
         :return: true if to add
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isUsingAnArtificialTimeIndex", "()Z")
+        return self.jobject.isUsingAnArtificialTimeIndex()
 
     @property
     def artificial_time_start_value(self):
@@ -893,7 +894,7 @@ class TSLagMaker(Filter):
         :return: the start
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getArtificialTimeStartValue", "()D")
+        return self.jobject.getArtificialTimeStartValue()
 
     @artificial_time_start_value.setter
     def artificial_time_start_value(self, start):
@@ -903,7 +904,7 @@ class TSLagMaker(Filter):
         :param start: the start
         :type start: float
         """
-        javabridge.call(self.jobject, "setArtificialTimeStartValue", "(D)V", start)
+        self.jobject.setArtificialTimeStartValue(start)
 
     @property
     def current_timestamp_value(self):
@@ -916,7 +917,7 @@ class TSLagMaker(Filter):
         :return: the timestamp value
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getCurrentTimeStampValue", "()D")
+        return self.jobject.getCurrentTimeStampValue()
 
     def increment_artificial_time_value(self, increment):
         """
@@ -925,7 +926,7 @@ class TSLagMaker(Filter):
         :param increment: the increment
         :type increment: int
         """
-        javabridge.call(self.jobject, "incrementArtificialTimeValue", "(I)V", increment)
+        self.jobject.incrementArtificialTimeValue(increment)
 
     @property
     def delta_time(self):
@@ -937,7 +938,7 @@ class TSLagMaker(Filter):
         :return: the delta
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getDeltaTime", "()D")
+        return self.jobject.getDeltaTime()
 
     @property
     def periodicity(self):
@@ -949,7 +950,7 @@ class TSLagMaker(Filter):
         :return: the periodicity
         :rtype: Periodicity
         """
-        return Periodicity(jobject=javabridge.call(self.jobject, "getPeriodicity", "()Lweka/filters/supervised/attribute/TSLagMaker$Periodicity;"))
+        return Periodicity(jobject=self.jobject.getPeriodicity())
 
     @periodicity.setter
     def periodicity(self, periodicity):
@@ -962,7 +963,7 @@ class TSLagMaker(Filter):
         :param periodicity: the periodicity
         :type periodicity: Periodicity
         """
-        javabridge.call(self.jobject, "setPeriodicity", "(Lweka/filters/supervised/attribute/TSLagMaker$Periodicity;)V", periodicity.jobject)
+        self.jobject.setPeriodicity(periodicity.jobject)
 
     @property
     def skip_entries(self):
@@ -980,7 +981,7 @@ class TSLagMaker(Filter):
         :return: the lag range
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getSkipEntries", "()Ljava/lang/String;")
+        return self.jobject.getSkipEntries()
 
     @skip_entries.setter
     def skip_entries(self, lag):
@@ -998,7 +999,7 @@ class TSLagMaker(Filter):
         :param lag: the lag range
         :type lag: str
         """
-        javabridge.call(self.jobject, "setSkipEntries", "(Ljava/lang/String;)V", lag)
+        self.jobject.setSkipEntries(lag)
 
     def create_time_lag_cross_products(self, data):
         """
@@ -1009,7 +1010,7 @@ class TSLagMaker(Filter):
         :return: the cross-products
         :rtype: Instances
         """
-        return Instances(javabridge.call(self.jobject, "createTimeLagCrossProducts", "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+        return Instances(self.jobject.createTimeLagCrossProducts(data.jobject))
 
     def transformed_data(self, data):
         """
@@ -1020,13 +1021,13 @@ class TSLagMaker(Filter):
         :return: the transformed data
         :rtype: Instances
         """
-        return Instances(javabridge.call(self.jobject, "getTransformedData", "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+        return Instances(self.jobject.getTransformedData(data.jobject))
 
     def clear_lag_histories(self):
         """
         Clears any history accumulated in the lag creating filters.
         """
-        return javabridge.call(self.jobject, "clearLagHistories", "()V")
+        return self.jobject.clearLagHistories()
 
 
 class TSForecaster(OptionHandler):
@@ -1036,12 +1037,12 @@ class TSForecaster(OptionHandler):
 
     def __init__(self, classname="weka.classifiers.timeseries.WekaForecaster", jobject=None, options=None):
         """
-        Initializes the specified timeseries forecaster using either the classname or the supplied JB_Object.
+        Initializes the specified timeseries forecaster using either the classname or the supplied JPype object.
 
         :param classname: the classname of the timeseries forecaster
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -1062,7 +1063,7 @@ class TSForecaster(OptionHandler):
         :return: True if base learner requires special serialization, false otherwise
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "baseModelHasSerializer", "()Z")
+        return self.jobject.baseModelHasSerializer()
 
     def save_base_model(self, fname):
         """
@@ -1071,7 +1072,7 @@ class TSForecaster(OptionHandler):
         :param fname: the file to save the base model under
         :type fname: str
         """
-        javabridge.call(self.jobject, "saveBaseModel", "(Ljava/lang/String;)V", fname)
+        self.jobject.saveBaseModel(fname)
 
     def load_base_model(self, fname):
         """
@@ -1080,7 +1081,7 @@ class TSForecaster(OptionHandler):
         :param fname: the file to load the base model from
         :type fname: str
         """
-        javabridge.call(self.jobject, "loadBaseModel", "(Ljava/lang/String;)V", fname)
+        self.jobject.loadBaseModel(fname)
 
     @property
     def uses_state(self):
@@ -1090,23 +1091,23 @@ class TSForecaster(OptionHandler):
         :return: True if base learner uses state-based predictions, false otherwise
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "usesState", "()Z")
+        return self.jobject.usesState()
 
     def clear_previous_state(self):
         """
         Reset model state.
         """
-        javabridge.call(self.jobject, "clearPreviousState", "()V")
+        self.jobject.clearPreviousState()
 
     @property
     def previous_state(self):
         """
         Returns the previous state.
 
-        :return: the state as list of JB_Object objects
+        :return: the state as list of JPype object objects
         :rtype: list
         """
-        return list(javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getPreviousState", "()Ljava/util/List;")))
+        return list(self.jobject.getPreviousState())
 
     @previous_state.setter
     def previous_state(self, state):
@@ -1116,10 +1117,10 @@ class TSForecaster(OptionHandler):
         :param state: the state to set
         :type state: list
         """
-        l = javabridge.JClassWrapper('java.util.ArrayList')()
+        l = JClass('java.util.ArrayList')()
         for obj in state:
             l.add(obj)
-        javabridge.call(self.jobject, "setPreviousState", "(Ljava/util/List;)V")
+        self.jobject.setPreviousState(l)
 
     def serialize_state(self, fname):
         """
@@ -1128,7 +1129,7 @@ class TSForecaster(OptionHandler):
         :param fname: the file to serialize the state under
         :type fname: str
         """
-        javabridge.call(self.jobject, "serializeState", "(Ljava/lang/String;)V", fname)
+        self.jobject.serializeState(fname)
 
     def load_serialized_state(self, fname):
         """
@@ -1137,7 +1138,7 @@ class TSForecaster(OptionHandler):
         :param fname: the file to deserialize the state from
         :type fname: str
         """
-        javabridge.call(self.jobject, "loadSerializedState", "(Ljava/lang/String;)V", fname)
+        self.jobject.loadSerializedState(fname)
 
     @property
     def algorithm_name(self):
@@ -1147,13 +1148,13 @@ class TSForecaster(OptionHandler):
         :return: the name
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getAlgorithmName", "()Ljava/lang/String;")
+        return self.jobject.getAlgorithmName()
 
     def reset(self):
         """
         Resets the algorithm.
         """
-        javabridge.call(self.jobject, "reset", "()V")
+        self.jobject.reset()
 
     @property
     def fields_to_forecast(self):
@@ -1163,7 +1164,7 @@ class TSForecaster(OptionHandler):
         :return: the fields
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getFieldsToForecast", "()Ljava/lang/String;")
+        return self.jobject.getFieldsToForecast()
 
     @fields_to_forecast.setter
     def fields_to_forecast(self, fields):
@@ -1175,7 +1176,7 @@ class TSForecaster(OptionHandler):
         """
         if isinstance(fields, list):
             fields = ",".join(fields)
-        javabridge.call(self.jobject, "setFieldsToForecast", "(Ljava/lang/String;)V", fields)
+        self.jobject.setFieldsToForecast(fields)
 
     @property
     def header(self):
@@ -1195,7 +1196,7 @@ class TSForecaster(OptionHandler):
         :type data: Instances
         """
         self._header = data.copy_structure()
-        javabridge.call(self.jobject, "buildForecaster", "(Lweka/core/Instances;[Ljava/io/PrintStream;)V", data.jobject, [])
+        self.jobject.buildForecaster(data.jobject)
 
     def prime_forecaster(self, data):
         """
@@ -1204,7 +1205,7 @@ class TSForecaster(OptionHandler):
         :param data: the data to prime with
         :type data: Instances
         """
-        javabridge.call(self.jobject, "primeForecaster", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.primeForecaster(data.jobject)
 
     def forecast(self, steps):
         """
@@ -1216,12 +1217,11 @@ class TSForecaster(OptionHandler):
         :return: a List of Lists (one for each step) of forecasted values for each target (NumericPrediction objects)
         :rtype: list
         """
-        objs1 = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "forecast", "(I[Ljava/io/PrintStream;)Ljava/util/List;", steps, []))
+        objs1 = self.jobject.forecast(steps)
         list1 = []
         for obj1 in objs1:
             list2 = []
-            objs2 = javabridge.get_collection_wrapper(obj1)
-            for obj2 in objs2:
+            for obj2 in obj1:
                 list2.append(NumericPrediction(obj2))
             list1.append(list2)
         return list1
@@ -1230,7 +1230,7 @@ class TSForecaster(OptionHandler):
         """
         Builds the forecaster using the provided data.
         """
-        javabridge.call(self.jobject, "runForecaster", "(Lweka/classifiers/timeseries/TSForecaster;[Ljava/lang/String;)V", forecaster.jobject, options)
+        self.jobject.runForecaster(forecaster.jobject, options)
 
 
 class TSLagUser(JavaObject):
@@ -1242,8 +1242,8 @@ class TSLagUser(JavaObject):
         """
         Wraps the TSLagUser object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.TSLagUser")
         super(TSLagUser, self).__init__(jobject=jobject)
@@ -1256,7 +1256,7 @@ class TSLagUser(JavaObject):
         :return: the base forecaster
         :rtype: Classifier
         """
-        return TSLagMaker(jobject=javabridge.call(self.jobject, "getTSLagMaker", "()Lweka/filters/supervised/attribute/TSLagMaker;"))
+        return TSLagMaker(jobject=self.jobject.getTSLagMaker())
 
     @tslag_maker.setter
     def tslag_maker(self, tslag_maker):
@@ -1266,7 +1266,7 @@ class TSLagUser(JavaObject):
         :param tslag_maker: the lag maker to use
         :type tslag_maker: TSLagMaker
         """
-        javabridge.call(self.jobject, "setTSLagMaker", "(Lweka/filters/supervised/attribute/TSLagMaker;)V", tslag_maker.jobject)
+        self.jobject.setTSLagMaker(tslag_maker.jobject)
 
 
 class ConfidenceIntervalForecaster(JavaObject):
@@ -1278,8 +1278,8 @@ class ConfidenceIntervalForecaster(JavaObject):
         """
         Wraps a ConfidenceIntervalForecaster object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.ConfidenceIntervalForecaster")
         super(ConfidenceIntervalForecaster, self).__init__(jobject=jobject)
@@ -1292,7 +1292,7 @@ class ConfidenceIntervalForecaster(JavaObject):
         :return: the steps
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getCalculateConfIntervalsForForecasts", "()I")
+        return self.jobject.getCalculateConfIntervalsForForecasts()
 
     @calculate_conf_intervals_for_forecasts.setter
     def calculate_conf_intervals_for_forecasts(self, steps):
@@ -1302,7 +1302,7 @@ class ConfidenceIntervalForecaster(JavaObject):
         :param steps: the steps
         :type steps: int
         """
-        javabridge.call(self.jobject, "setCalculateConfIntervalsForForecasts", "(I)V", steps)
+        self.jobject.setCalculateConfIntervalsForForecasts(steps)
 
     @property
     def is_producing_confidence_intervals(self):
@@ -1314,7 +1314,7 @@ class ConfidenceIntervalForecaster(JavaObject):
         :return: true if confidence intervals are produced
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "isProducingConfidenceIntervals", "()I")
+        return self.jobject.isProducingConfidenceIntervals()
 
     @property
     def confidence_level(self):
@@ -1324,7 +1324,7 @@ class ConfidenceIntervalForecaster(JavaObject):
         :return: the level
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getOverlayFields", "()Ljava/lang/String;")
+        return self.jobject.getOverlayFields()
 
     @confidence_level.setter
     def confidence_level(self, level):
@@ -1334,7 +1334,7 @@ class ConfidenceIntervalForecaster(JavaObject):
         :param level: the level
         :type level: float
         """
-        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", level)
+        self.jobject.setOverlayFields(level)
 
 
 class OverlayForecaster(JavaObject):
@@ -1346,8 +1346,8 @@ class OverlayForecaster(JavaObject):
         """
         Wraps a OverlayForecaster object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.OverlayForecaster")
         super(OverlayForecaster, self).__init__(jobject=jobject)
@@ -1360,7 +1360,7 @@ class OverlayForecaster(JavaObject):
         :return: the overlay fields
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getOverlayFields", "()Ljava/lang/String;")
+        return self.jobject.getOverlayFields()
 
     @overlay_fields.setter
     def overlay_fields(self, fields):
@@ -1370,7 +1370,7 @@ class OverlayForecaster(JavaObject):
         :param fields: the overlay fields
         :type fields: str
         """
-        javabridge.call(self.jobject, "setOverlayFields", "(Ljava/lang/String;)V", fields)
+        self.jobject.setOverlayFields(fields)
 
     @property
     def is_using_overlay_data(self):
@@ -1381,7 +1381,7 @@ class OverlayForecaster(JavaObject):
 
         :return:
         """
-        return javabridge.call(self.jobject, "isUsingOverlayData", "()Z")
+        return self.jobject.isUsingOverlayData()
 
     def forecast_with_overlays(self, steps, overlays):
         """
@@ -1413,12 +1413,11 @@ class OverlayForecaster(JavaObject):
         :return: a List of Lists (one for each step) of forecasted values for each target (NumericPrediction objects)
         :rtype: list
         """
-        objs1 = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "forecast", "(Lweka/core/Instances;I[Ljava/io/PrintStream;)Ljava/util/List;", steps, overlays.jobject, []))
+        objs1 = self.jobject.forecast(steps, overlays.jobject)
         list1 = []
         for obj1 in objs1:
             list2 = []
-            objs2 = javabridge.get_collection_wrapper(obj1)
-            for obj2 in objs2:
+            for obj2 in obj1:
                 list2.append(NumericPrediction(obj2))
             list1.append(list2)
         return list1
@@ -1433,8 +1432,8 @@ class IncrementallyPrimeable(JavaObject):
         """
         Wraps a IncrementallyPrimeable object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         self.enforce_type(jobject, "weka.classifiers.timeseries.core.IncrementallyPrimeable")
         super(IncrementallyPrimeable, self).__init__(jobject=jobject)
@@ -1446,7 +1445,7 @@ class IncrementallyPrimeable(JavaObject):
         :param inst: the instance to prime with
         :type inst: Instance
         """
-        javabridge.call(self.jobject, "primeForecasterIncremental", "(Lweka/core/Instance;)V", inst.jobject)
+        self.jobject.primeForecasterIncremental(inst.jobject)
 
 
 class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, OverlayForecaster, IncrementallyPrimeable):
@@ -1458,8 +1457,8 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         """
         Initializes a Weka timeseries forecaster.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -1471,7 +1470,7 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         """
         Clears the custom periodics.
         """
-        javabridge.call(self.jobject, "clearCustomPeriodics", "()V")
+        self.jobject.clearCustomPeriodics()
 
     def add_custom_periodic(self, periodic):
         """
@@ -1480,7 +1479,7 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         :param periodic: the periodic to add
         :type periodic: str
         """
-        javabridge.call(self.jobject, "addCustomPeriodic", "(Ljava/lang/String;)V", periodic)
+        self.jobject.addCustomPeriodic(periodic)
 
     @property
     def base_forecaster(self):
@@ -1490,7 +1489,7 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         :return: the base forecaster
         :rtype: Classifier
         """
-        return Classifier(jobject=javabridge.call(self.jobject, "getBaseForecaster", "()Lweka/classifiers/Classifier;"))
+        return Classifier(jobject=self.jobject.getBaseForecaster())
 
     @base_forecaster.setter
     def base_forecaster(self, base_forecaster):
@@ -1500,7 +1499,7 @@ class WekaForecaster(TSForecaster, TSLagUser, ConfidenceIntervalForecaster, Over
         :param base_forecaster: the base forecaster to use
         :type base_forecaster: Classifier
         """
-        javabridge.call(self.jobject, "setBaseForecaster", "(Lweka/classifiers/Classifier;)V", base_forecaster.jobject)
+        self.jobject.setBaseForecaster(base_forecaster.jobject)
 
 
 class TSEvalModule(JavaObject):
@@ -1513,7 +1512,7 @@ class TSEvalModule(JavaObject):
         Initializes the evaluation module.
 
         :param jobject: the object to initialize with
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         super(TSEvalModule, self).__init__(jobject)
 
@@ -1521,28 +1520,28 @@ class TSEvalModule(JavaObject):
         """
         Resets the module.
         """
-        javabridge.call(self.jobject, "reset", "()V")
+        self.jobject.reset()
 
     @property
     def eval_name(self):
         """
         Returns the name.
         """
-        return javabridge.call(self.jobject, "getEvalName", "()Ljava/lang/String;")
+        return self.jobject.getEvalName()
 
     @property
     def description(self):
         """
         Returns the description.
         """
-        return javabridge.call(self.jobject, "getDescription", "()Ljava/lang/String;")
+        return self.jobject.getDescription()
 
     @property
     def definition(self):
         """
         Returns the description.
         """
-        return javabridge.call(self.jobject, "getDefinition", "()Ljava/lang/String;")
+        return self.jobject.getDefinition()
 
     def evaluate_for_instance(self, pred, inst):
         """
@@ -1553,7 +1552,7 @@ class TSEvalModule(JavaObject):
         :param inst: the instance
         :type inst: Instance
         """
-        javabridge.call(self.jobject, "evaluateForInstance", "(Ljava/util/List;Lweka/core/Instance;)V", pred.jobject, inst.jobject)
+        self.jobject.evaluateForInstance(pred.jobject, inst.jobject)
 
     def calculate_measure(self):
         """
@@ -1562,15 +1561,14 @@ class TSEvalModule(JavaObject):
         :return: the value of the measure for this module for each of the target(s).
         :rtype: ndarray
         """
-        result = javabridge.call(self.jobject, "calculateMeasure", "()[D")
-        return javabridge.get_env().get_double_array_elements(result)
+        return typeconv.jdouble_array_to_ndarray(self.jobject.calculateMeasure())
 
     @property
     def summary(self):
         """
         Returns the description.
         """
-        return javabridge.call(self.jobject, "toSummaryString", "()Ljava/lang/String;")
+        return self.jobject.toSummaryString()
 
     @property
     def target_fields(self):
@@ -1580,7 +1578,7 @@ class TSEvalModule(JavaObject):
         :return: the list of target fields
         :rtype: list
         """
-        return jstring_list_to_string_list(javabridge.call(self.jobject, "getTargetFields", "()Ljava/util/List;"))
+        return jstring_list_to_string_list(self.jobject.getTargetFields())
 
     @target_fields.setter
     def target_fields(self, fields):
@@ -1590,7 +1588,7 @@ class TSEvalModule(JavaObject):
         :param fields: the list of target fields
         :type fields: list
         """
-        javabridge.call(self.jobject, "setTargetFields", "(Ljava/util/List;)V", fields)
+        self.jobject.setTargetFields(fields)
 
     def __str__(self):
         """
@@ -1607,9 +1605,7 @@ class TSEvalModule(JavaObject):
         :rtype: list
         """
         result = []
-        objs = javabridge.get_collection_wrapper(javabridge.static_call(
-            "Lweka/classifiers/timeseries/eval/TSEvalModuleHelper;", "getModuleList",
-            "()Ljava/util/List;"))
+        objs = JClass("weka.classifiers.timeseries.eval.TSEvalModuleHelper").getModuleList()
         for obj in objs:
             result.append(TSEvalModule(obj))
         return result
@@ -1624,9 +1620,7 @@ class TSEvalModule(JavaObject):
         :return: the TSEvalModule object
         :rtype: TSEvalModule
         """
-        return TSEvalModule(javabridge.static_call(
-            "Lweka/classifiers/timeseries/eval/TSEvalModuleHelper;", "getModule",
-            "(Ljava/lang/String;)Ljava/lang/Object;", name))
+        return TSEvalModule(JClass("weka.classifiers.timeseries.eval.TSEvalModuleHelper").getModule(name))
 
 
 class ErrorModule(TSEvalModule):
@@ -1639,7 +1633,7 @@ class ErrorModule(TSEvalModule):
         Initializes the error module.
 
         :param jobject: the object to initialize with
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         super(ErrorModule, self).__init__(jobject)
 
@@ -1652,8 +1646,7 @@ class ErrorModule(TSEvalModule):
         :return: the number of predicted, actual pairs for each target.
         :rtype: ndarray
         """
-        result = javabridge.call(self.jobject, "countsForTargets", "()[D")
-        return javabridge.get_env().get_double_array_elements(result)
+        return typeconv.jdouble_array_to_ndarray(self.jobject.countsForTargets())
 
     def errors_for_target(self, target):
         """
@@ -1665,7 +1658,7 @@ class ErrorModule(TSEvalModule):
         :rtype: list
         """
         result = []
-        objs = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getErrorsForTarget", "(Ljava/lang/String;)Ljava/util/List;", target))
+        objs = self.jobject.getErrorsForTarget(target)
         for obj in objs:
             result.append(jdouble_to_float(obj))
         return result
@@ -1680,7 +1673,7 @@ class ErrorModule(TSEvalModule):
         :rtype: list
         """
         result = []
-        objs = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getPredictionsForTarget", "(Ljava/lang/String;)Ljava/util/List;", target))
+        objs = self.jobject.getPredictionsForTarget(target)
         for obj in objs:
             result.append(NumericPrediction(obj))
         return result
@@ -1693,11 +1686,10 @@ class ErrorModule(TSEvalModule):
         :rtype: list
         """
         result1 = []
-        objs1 = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getPredictionsForAllTargets", "()Ljava/util/List;"))
+        objs1 = self.jobject.getPredictionsForAllTargets()
         for obj1 in objs1:
-            objs2 = javabridge.get_collection_wrapper(obj1)
             result2 = []
-            for obj2 in objs2:
+            for obj2 in obj1:
                 result2.append(NumericPrediction(obj2))
             result1.append(result2)
         return result1
@@ -1720,15 +1712,9 @@ class TSEvaluation(JavaObject):
         :type test: Instances
         """
         if test is None:
-            jobject = javabridge.static_call(
-                "Lweka/classifiers/timeseries/eval/TSEvaluationHelper;", "newInstance",
-                "(Lweka/core/Instances;D)Ljava/lang/Object;",
-                train.jobject, test_split_size)
+            jobject = JClass("weka.classifiers.timeseries.eval.TSEvaluationHelper").newInstance(train.jobject, test_split_size)
         else:
-            jobject = javabridge.static_call(
-                "Lweka/classifiers/timeseries/eval/TSEvaluationHelper;", "newInstance",
-                "(Lweka/core/Instances;Lweka/core/Instances;)Ljava/lang/Object;",
-                train.jobject, test.jobject)
+            jobject = JClass("weka.classifiers.timeseries.eval.TSEvaluationHelper").newInstance(train.jobject, test.jobject)
         super(TSEvaluation, self).__init__(jobject)
 
         # set up variables
@@ -1747,7 +1733,7 @@ class TSEvaluation(JavaObject):
         :return: the training data, None if none available
         :rtype: Instances
         """
-        data = javabridge.call(self.jobject, "getTrainingData", "()Lweka/core/Instances;")
+        data = self.jobject.getTrainingData()
         if data is None:
             return None
         else:
@@ -1761,7 +1747,7 @@ class TSEvaluation(JavaObject):
         :param data: the training data
         :type data: Instances
         """
-        javabridge.call(self.jobject, "setTrainingData", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.setTrainingData(data.jobject)
 
     @property
     def test_data(self):
@@ -1771,7 +1757,7 @@ class TSEvaluation(JavaObject):
         :return: the test data, None if none available
         :rtype: Instances
         """
-        data = javabridge.call(self.jobject, "getTestData", "()Lweka/core/Instances;")
+        data = self.jobject.getTestData()
         if data is None:
             return None
         else:
@@ -1785,7 +1771,7 @@ class TSEvaluation(JavaObject):
         :param data: the test data
         :type data: Instances
         """
-        javabridge.call(self.jobject, "setTestData", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.setTestData(data.jobject)
 
     @property
     def evaluate_on_training_data(self):
@@ -1795,7 +1781,7 @@ class TSEvaluation(JavaObject):
         :return: whether to evaluate
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getEvaluateOnTrainingData", "()Z")
+        return self.jobject.getEvaluateOnTrainingData()
 
     @evaluate_on_training_data.setter
     def evaluate_on_training_data(self, evaluate):
@@ -1805,7 +1791,7 @@ class TSEvaluation(JavaObject):
         :param evaluate: whether to evaluate
         :type evaluate: bool
         """
-        javabridge.call(self.jobject, "setEvaluateOnTrainingData", "(Z)V", evaluate)
+        self.jobject.setEvaluateOnTrainingData(evaluate)
 
     @property
     def evaluate_on_test_data(self):
@@ -1815,17 +1801,17 @@ class TSEvaluation(JavaObject):
         :return: whether to evaluate
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getEvaluateOnTestData", "()Z")
+        return self.jobject.getEvaluateOnTestData()
 
     @evaluate_on_test_data.setter
     def evaluate_on_test_data(self, evaluate):
         """
-        Sets whether whether to evaluate on to test data.
+        Sets whether to evaluate on to test data.
 
         :param evaluate: whether to evaluate
         :type evaluate: bool
         """
-        javabridge.call(self.jobject, "setEvaluateOnTestData", "(Z)V", evaluate)
+        self.jobject.setEvaluateOnTestData(evaluate)
 
     @property
     def horizon(self):
@@ -1845,7 +1831,7 @@ class TSEvaluation(JavaObject):
         :param steps: the number of steps
         :type steps: int
         """
-        javabridge.call(self.jobject, "setHorizon", "(I)V", steps)
+        self.jobject.setHorizon(steps)
         self._horizon = steps
 
     @property
@@ -1856,7 +1842,7 @@ class TSEvaluation(JavaObject):
         :return: the size
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getPrimeWindowSize", "()I")
+        return self.jobject.getPrimeWindowSize()
 
     @prime_window_size.setter
     def prime_window_size(self, size):
@@ -1866,7 +1852,7 @@ class TSEvaluation(JavaObject):
         :param size: the size
         :type size: int
         """
-        javabridge.call(self.jobject, "setPrimeWindowSize", "(I)V", size)
+        self.jobject.setPrimeWindowSize(size)
 
     @property
     def prime_for_test_data_with_test_data(self):
@@ -1881,7 +1867,7 @@ class TSEvaluation(JavaObject):
         :return: whether to prime
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getPrimeForTestDataWithTestData", "()Z")
+        return self.jobject.getPrimeForTestDataWithTestData()
 
     @prime_for_test_data_with_test_data.setter
     def prime_for_test_data_with_test_data(self, prime):
@@ -1896,7 +1882,7 @@ class TSEvaluation(JavaObject):
         :param prime: whether to prime
         :type prime: bool
         """
-        javabridge.call(self.jobject, "setPrimeForTestDataWithTestData", "(Z)V", prime)
+        self.jobject.setPrimeForTestDataWithTestData(prime)
 
     @property
     def rebuild_model_after_each_test_forecast_step(self):
@@ -1920,7 +1906,7 @@ class TSEvaluation(JavaObject):
         :param rebuild: whether to rebuild
         :return: bool
         """
-        javabridge.call(self.jobject, "setRebuildModelAfterEachTestForecastStep", "(Z)V", rebuild)
+        self.jobject.setRebuildModelAfterEachTestForecastStep(rebuild)
         self._rebuild_model_after_each_test_forecast_step = rebuild
 
     @property
@@ -1932,7 +1918,7 @@ class TSEvaluation(JavaObject):
         :return: whether to prime
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getForecastFuture", "()Z")
+        return self.jobject.getForecastFuture()
 
     @forecast_future.setter
     def forecast_future(self, prime):
@@ -1943,7 +1929,7 @@ class TSEvaluation(JavaObject):
         :param prime: whether to prime
         :type prime: bool
         """
-        javabridge.call(self.jobject, "setForecastFuture", "(Z)V", prime)
+        self.jobject.setForecastFuture(prime)
 
     @property
     def evaluation_modules(self):
@@ -1954,7 +1940,7 @@ class TSEvaluation(JavaObject):
         :rtype: list
         """
         result = []
-        objs = javabridge.get_collection_wrapper(javabridge.call(self.jobject, "getEvaluationModules", "()Ljava/util/List;"))
+        objs = self.jobject.getEvaluationModules()
         for obj in objs:
             result.append(TSEvalModule(obj))
         return result
@@ -1971,7 +1957,7 @@ class TSEvaluation(JavaObject):
             modules = [str(module) for module in modules]
             modules.remove("Error")  # requires manual removal
             modules = ",".join(modules)
-        javabridge.call(self.jobject, "setEvaluationModules", "(Ljava/lang/String;)V", modules)
+        self.jobject.setEvaluationModules(modules)
 
     def __str__(self):
         """
@@ -2008,10 +1994,7 @@ class TSEvaluation(JavaObject):
         :param build_model: whether to build the model as well
         :type build_model: bool
         """
-        javabridge.call(
-            self.jobject, "evaluateForecaster",
-            "(Lweka/classifiers/timeseries/TSForecaster;Z[Ljava/io/PrintStream;)V",
-            forecaster.jobject, build_model, [])
+        self.jobject.evaluateForecaster(forecaster.jobject, build_model)
 
     def predictions_for_training_data(self, step_number):
         """
@@ -2020,10 +2003,7 @@ class TSEvaluation(JavaObject):
         :param step_number: number of the step into the future to return predictions for
         :type step_number: int
         """
-        return ErrorModule(javabridge.call(
-            self.jobject, "getPredictionsForTrainingData",
-            "(I)Lweka/classifiers/timeseries/eval/ErrorModule;",
-            step_number))
+        return ErrorModule(self.jobject.getPredictionsForTrainingData(step_number))
 
     def predictions_for_test_data(self, step_number):
         """
@@ -2032,10 +2012,7 @@ class TSEvaluation(JavaObject):
         :param step_number: number of the step into the future to return predictions for
         :type step_number: int
         """
-        return ErrorModule(javabridge.call(
-            self.jobject, "getPredictionsForTestData",
-            "(I)Lweka/classifiers/timeseries/eval/ErrorModule;",
-            step_number))
+        return ErrorModule(self.jobject.getPredictionsForTestData(step_number))
 
     def print_future_forecast_on_training_data(self, forecaster):
         """
@@ -2046,9 +2023,7 @@ class TSEvaluation(JavaObject):
         :return: the forecasted values
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "printFutureTrainingForecast",
-            "(Lweka/classifiers/timeseries/TSForecaster;)Ljava/lang/String;", forecaster.jobject)
+        return self.jobject.printFutureTrainingForecast(forecaster.jobject)
 
     def print_future_forecast_on_test_data(self, forecaster):
         """
@@ -2059,9 +2034,7 @@ class TSEvaluation(JavaObject):
         :return: the forecasted values
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "printFutureTestForecast",
-            "(Lweka/classifiers/timeseries/TSForecaster;)Ljava/lang/String;", forecaster.jobject)
+        return self.jobject.printFutureTestForecast(forecaster.jobject)
 
     def print_predictions_for_training_data(self, title, target_name, step_ahead, instance_number_offset=0):
         """
@@ -2078,9 +2051,7 @@ class TSEvaluation(JavaObject):
         :return: the predicted/actual values
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "printPredictionsForTrainingData",
-            "(Ljava/lang/String;Ljava/lang/String;II)Ljava/lang/String;", title, target_name, step_ahead, instance_number_offset)
+        return self.jobject.printPredictionsForTrainingData(title, target_name, step_ahead, instance_number_offset)
 
     def print_predictions_for_test_data(self, title, target_name, step_ahead, instance_number_offset=0):
         """
@@ -2097,9 +2068,7 @@ class TSEvaluation(JavaObject):
         :return: the predicted/actual values
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "printPredictionsForTestData",
-            "(Ljava/lang/String;Ljava/lang/String;II)Ljava/lang/String;", title, target_name, step_ahead, instance_number_offset)
+        return self.jobject.printPredictionsForTestData(title, target_name, step_ahead, instance_number_offset)
 
     def summary(self):
         """
@@ -2108,8 +2077,7 @@ class TSEvaluation(JavaObject):
         :return: the summary
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "toSummaryString", "()Ljava/lang/String;")
+        return self.jobject.toSummaryString()
 
     @classmethod
     def evaluate_forecaster(cls, forecaster, args):
@@ -2121,7 +2089,4 @@ class TSEvaluation(JavaObject):
         :param args: the command-line arguments to use
         :type args: list
         """
-        javabridge.static_call(
-            "Lweka/classifiers/timeseries/eval/TSEvaluation;", "evaluateForecaster",
-            "(Lweka/classifiers/timeseries/TSForecaster;[Ljava/lang/String;)Ljava/lang/String;",
-            forecaster.jobject, args)
+        JClass("weka.classifiers.timeseries.eval.TSEvaluation").evaluateForecaster(forecaster.jobject, args)

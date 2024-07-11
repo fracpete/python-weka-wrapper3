@@ -12,11 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # experiments.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import logging
-import javabridge
-from weka.core.classes import OptionHandler, Range, from_commandline
+from jpype import JClass
+from weka.core.classes import OptionHandler, Range, from_commandline, new_array
 from weka.core.dataset import Instances
 from weka.classifiers import Classifier
 
@@ -31,12 +31,12 @@ class Experiment(OptionHandler):
 
     def __init__(self, classname="weka.experiment.Experiment", jobject=None, options=None):
         """
-        Initializes the specified experiment using either the classname or the supplied JB_Object.
+        Initializes the specified experiment using either the classname or the supplied JPype object.
 
         :param classname: the classname of the experiment
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -63,7 +63,7 @@ class SimpleExperiment(OptionHandler):
         :param classifiers: the Classifier objects or commandline strings to use in the experiment
         :type classifiers: list
         :param jobject: the Java Object to use
-        :type jobject: JB_Object
+        :type jobject: JPype object
         :param classification: whether to perform classification or regression
         :type classification:bool
         :param runs: the number of runs to perform
@@ -81,7 +81,7 @@ class SimpleExperiment(OptionHandler):
         if not jobject is None:
             self.enforce_type(jobject, "weka.experiment.Experiment")
         if jobject is None:
-            jobject = javabridge.make_instance("weka/experiment/Experiment", "()V")
+            jobject = JClass("weka.experiment.Experiment")()
 
         self.classification = classification
         self.runs = runs
@@ -101,14 +101,14 @@ class SimpleExperiment(OptionHandler):
         :rtype: tuple
         """
         if self.classification:
-            speval = javabridge.make_instance("weka/experiment/ClassifierSplitEvaluator", "()V")
-            javabridge.call(speval, "setClassForIRStatistics", "(I)V", self.class_for_ir_statistics)
-            javabridge.call(speval, "setAttributeID", "(I)V", self.attribute_id)
-            javabridge.call(speval, "setPredTargetColumn", "(Z)V", self.pred_target_column)
+            speval = JClass("weka.experiment.ClassifierSplitEvaluator")()
+            speval.setClassForIRStatistics(self.class_for_ir_statistics)
+            speval.setAttributeID(self.attribute_id)
+            speval.setPredTargetColumn(self.pred_target_column)
         else:
-            speval = javabridge.make_instance("weka/experiment/RegressionSplitEvaluator", "()V")
+            speval = JClass("weka.experiment.RegressionSplitEvaluator")()
 
-        classifier = javabridge.call(speval, "getClassifier", "()Lweka/classifiers/Classifier;")
+        classifier = speval.getClassifier()
         return speval, classifier
 
     def configure_resultproducer(self):
@@ -125,68 +125,51 @@ class SimpleExperiment(OptionHandler):
         Initializes the experiment.
         """
         # basic options
-        javabridge.call(
-            self.jobject, "setPropertyArray", "(Ljava/lang/Object;)V",
-            javabridge.get_env().make_object_array(0, javabridge.get_env().find_class("weka/classifiers/Classifier")))
-        javabridge.call(
-            self.jobject, "setUsePropertyIterator", "(Z)V", True)
-        javabridge.call(
-            self.jobject, "setRunLower", "(I)V", 1)
-        javabridge.call(
-            self.jobject, "setRunUpper", "(I)V", self.runs)
+        self.jobject.setPropertyArray(new_array("weka.classifiers.Classifier", 0))
+        self.jobject.setUsePropertyIterator(True)
+        self.jobject.setRunLower(1)
+        self.jobject.setRunUpper(self.runs)
 
         # setup result producer
         rproducer, prop_path = self.configure_resultproducer()
-        javabridge.call(
-            self.jobject, "setResultProducer", "(Lweka/experiment/ResultProducer;)V", rproducer)
-        javabridge.call(
-            self.jobject, "setPropertyPath", "([Lweka/experiment/PropertyNode;)V", prop_path)
+        self.jobject.setResultProducer(rproducer)
+        self.jobject.setPropertyPath(prop_path)
 
         # classifiers
-        classifiers = javabridge.get_env().make_object_array(
-            len(self.classifiers), javabridge.get_env().find_class("weka/classifiers/Classifier"))
+        classifiers = new_array("weka.classifiers.Classifier", len(self.classifiers))
         for i, classifier in enumerate(self.classifiers):
             if type(classifier) is Classifier:
-                javabridge.get_env().set_object_array_element(
-                    classifiers, i, classifier.jobject)
+                classifiers[i] = classifier.jobject
             else:
-                javabridge.get_env().set_object_array_element(
-                    classifiers, i, from_commandline(classifier).jobject)
-        javabridge.call(
-            self.jobject, "setPropertyArray", "(Ljava/lang/Object;)V",
-            classifiers)
+                classifiers[i] = from_commandline(classifier).jobject
+        self.jobject.setPropertyArray(classifiers)
 
         # datasets
-        datasets = javabridge.make_instance("javax/swing/DefaultListModel", "()V")
+        datasets = JClass("javax.swing.DefaultListModel")()
         for dataset in self.datasets:
-            f = javabridge.make_instance("java/io/File", "(Ljava/lang/String;)V", dataset)
-            javabridge.call(datasets, "addElement", "(Ljava/lang/Object;)V", f)
-        javabridge.call(
-            self.jobject, "setDatasets", "(Ljavax/swing/DefaultListModel;)V", datasets)
+            datasets.addElement(JClass("java.io.File")(dataset))
+        self.jobject.setDatasets(datasets)
 
         # output file
         if str(self.result).lower().endswith(".arff"):
-            rlistener = javabridge.make_instance("weka/experiment/InstancesResultListener", "()V")
+            rlistener = JClass("weka.experiment.InstancesResultListener")()
         elif str(self.result).lower().endswith(".csv"):
-            rlistener = javabridge.make_instance("weka/experiment/CSVResultListener", "()V")
+            rlistener = JClass("weka.experiment.CSVResultListener")()
         else:
             raise Exception("Unhandled output format for results: " + self.result)
-        rfile = javabridge.make_instance("java/io/File", "(Ljava/lang/String;)V", self.result)
-        javabridge.call(
-            rlistener, "setOutputFile", "(Ljava/io/File;)V", rfile)
-        javabridge.call(
-            self.jobject, "setResultListener", "(Lweka/experiment/ResultListener;)V", rlistener)
+        rlistener.setOutputFile(JClass("java.io.File")(self.result))
+        self.jobject.setResultListener(rlistener)
 
     def run(self):
         """
         Executes the experiment.
         """
         logger.info("Initializing...")
-        javabridge.call(self.jobject, "initialize", "()V")
+        self.jobject.initialize()
         logger.info("Running...")
-        javabridge.call(self.jobject, "runExperiment", "()V")
+        self.jobject.runExperiment()
         logger.info("Finished...")
-        javabridge.call(self.jobject, "postProcess", "()V")
+        self.jobject.postProcess()
 
     def experiment(self):
         """
@@ -210,10 +193,7 @@ class SimpleExperiment(OptionHandler):
         :return: the experiment
         :rtype: Experiment
         """
-        jobject = javabridge.static_call(
-            "weka/experiment/Experiment", "read", "(Ljava/lang/String;)Lweka/experiment/Experiment;",
-            filename)
-        return Experiment(jobject=jobject)
+        return Experiment(JClass("weka.experiment.Experiment").read(filename))
 
     @classmethod
     def save(cls, filename, experiment):
@@ -225,9 +205,7 @@ class SimpleExperiment(OptionHandler):
         :param experiment: the Experiment to save
         :type experiment: Experiment
         """
-        javabridge.static_call(
-            "weka/experiment/Experiment", "write", "(Ljava/lang/String;Lweka/experiment/Experiment;)V",
-            filename, experiment.jobject)
+        JClass("weka.experiment.Experiment").write(filename, experiment.jobject)
 
 
 class SimpleCrossValidationExperiment(SimpleExperiment):
@@ -286,26 +264,19 @@ class SimpleCrossValidationExperiment(SimpleExperiment):
         :return: producer and property path
         :rtype: tuple
         """
-        rproducer = javabridge.make_instance("weka/experiment/CrossValidationResultProducer", "()V")
-        javabridge.call(rproducer, "setNumFolds", "(I)V", self.folds)
+        rproducer = JClass("weka.experiment.CrossValidationResultProducer")()
+        rproducer.setNumFolds(self.folds)
         speval, classifier = self.configure_splitevaluator()
-        javabridge.call(rproducer, "setSplitEvaluator", "(Lweka/experiment/SplitEvaluator;)V", speval)
-        prop_path = javabridge.get_env().make_object_array(
-            2, javabridge.get_env().find_class("weka/experiment/PropertyNode"))
-        cls = javabridge.get_env().find_class("weka/experiment/CrossValidationResultProducer")
-        desc = javabridge.make_instance(
-            "java/beans/PropertyDescriptor", "(Ljava/lang/String;Ljava/lang/Class;)V", "splitEvaluator", cls)
-        node = javabridge.make_instance(
-            "weka/experiment/PropertyNode", "(Ljava/lang/Object;Ljava/beans/PropertyDescriptor;Ljava/lang/Class;)V",
-            speval, desc, cls)
-        javabridge.get_env().set_object_array_element(prop_path, 0, node)
-        cls = javabridge.get_env().get_object_class(speval)
-        desc = javabridge.make_instance(
-            "java/beans/PropertyDescriptor", "(Ljava/lang/String;Ljava/lang/Class;)V", "classifier", cls)
-        node = javabridge.make_instance(
-            "weka/experiment/PropertyNode", "(Ljava/lang/Object;Ljava/beans/PropertyDescriptor;Ljava/lang/Class;)V",
-            javabridge.call(speval, "getClass", "()Ljava/lang/Class;"), desc, cls)
-        javabridge.get_env().set_object_array_element(prop_path, 1, node)
+        rproducer.setSplitEvaluator(speval)
+        prop_path = new_array("weka.experiment.PropertyNode", 2)
+        cls = JClass("weka.experiment.CrossValidationResultProducer")
+        desc = JClass("java.beans.PropertyDescriptor")("splitEvaluator", cls)
+        node = JClass("weka.experiment.PropertyNode")(speval, desc, cls)
+        prop_path[0] = node
+        cls = speval.getClass()
+        desc = JClass("java.beans.PropertyDescriptor")("classifier", cls)
+        node = JClass("weka.experiment.PropertyNode")(speval.getClass(), desc, cls)
+        prop_path[1] = node
 
         return rproducer, prop_path
 
@@ -371,27 +342,20 @@ class SimpleRandomSplitExperiment(SimpleExperiment):
         :return: producer and property path
         :rtype: tuple
         """
-        rproducer = javabridge.make_instance("weka/experiment/RandomSplitResultProducer", "()V")
-        javabridge.call(rproducer, "setRandomizeData", "(Z)V", not self.preserve_order)
-        javabridge.call(rproducer, "setTrainPercent", "(D)V", self.percentage)
+        rproducer = JClass("weka.experiment.RandomSplitResultProducer")()
+        rproducer.setRandomizeData(not self.preserve_order)
+        rproducer.setTrainPercent(self.percentage)
         speval, classifier = self.configure_splitevaluator()
-        javabridge.call(rproducer, "setSplitEvaluator", "(Lweka/experiment/SplitEvaluator;)V", speval)
-        prop_path = javabridge.get_env().make_object_array(
-            2, javabridge.get_env().find_class("weka/experiment/PropertyNode"))
-        cls = javabridge.get_env().find_class("weka/experiment/RandomSplitResultProducer")
-        desc = javabridge.make_instance(
-            "java/beans/PropertyDescriptor", "(Ljava/lang/String;Ljava/lang/Class;)V", "splitEvaluator", cls)
-        node = javabridge.make_instance(
-            "weka/experiment/PropertyNode", "(Ljava/lang/Object;Ljava/beans/PropertyDescriptor;Ljava/lang/Class;)V",
-            speval, desc, cls)
-        javabridge.get_env().set_object_array_element(prop_path, 0, node)
-        cls = javabridge.get_env().get_object_class(speval)
-        desc = javabridge.make_instance(
-            "java/beans/PropertyDescriptor", "(Ljava/lang/String;Ljava/lang/Class;)V", "classifier", cls)
-        node = javabridge.make_instance(
-            "weka/experiment/PropertyNode", "(Ljava/lang/Object;Ljava/beans/PropertyDescriptor;Ljava/lang/Class;)V",
-            javabridge.call(speval, "getClass", "()Ljava/lang/Class;"), desc, cls)
-        javabridge.get_env().set_object_array_element(prop_path, 1, node)
+        rproducer.setSplitEvaluator(speval)
+        prop_path = new_array("weka.experiment.PropertyNode", 2)
+        cls = JClass("weka.experiment.RandomSplitResultProducer")
+        desc = JClass("java.beans.PropertyDescriptor")("splitEvaluator", cls)
+        node = JClass("weka.experiment.PropertyNode")(speval, desc, cls)
+        prop_path[0] = node
+        cls = speval.getClass()
+        desc = JClass("java.beans.PropertyDescriptor")("classifier", cls)
+        node = JClass("weka.experiment.PropertyNode")(speval.getClass(), desc, cls)
+        prop_path[1] = node
 
         return rproducer, prop_path
 
@@ -403,12 +367,12 @@ class ResultMatrix(OptionHandler):
 
     def __init__(self, classname="weka.experiment.ResultMatrixPlainText", jobject=None, options=None):
         """
-        Initializes the specified ResultMatrix using either the classname or the supplied JB_Object.
+        Initializes the specified ResultMatrix using either the classname or the supplied JPype object.
 
         :param classname: the classname of the ResultMatrix
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -425,7 +389,7 @@ class ResultMatrix(OptionHandler):
         :return: the count
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getRowCount", "()I")
+        return self.jobject.getRowCount()
 
     @property
     def columns(self):
@@ -435,7 +399,7 @@ class ResultMatrix(OptionHandler):
         :return: the count
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getColCount", "()I")
+        return self.jobject.getColCount()
 
     def is_col_hidden(self, index):
         """
@@ -446,7 +410,7 @@ class ResultMatrix(OptionHandler):
         :return: true if hidden
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getColHidden", "(I)Z", index)
+        return self.jobject.getColHidden(index)
 
     def hide_col(self, index):
         """
@@ -455,7 +419,7 @@ class ResultMatrix(OptionHandler):
         :param index: the 0-based column index
         :type index: int
         """
-        javabridge.call(self.jobject, "setColHidden", "(IZ)V", index, True)
+        self.jobject.setColHidden(index, True)
 
     def show_col(self, index):
         """
@@ -464,7 +428,7 @@ class ResultMatrix(OptionHandler):
         :param index: the 0-based column index
         :type index: int
         """
-        javabridge.call(self.jobject, "setColHidden", "(IZ)V", index, False)
+        self.jobject.setColHidden(index, False)
 
     def is_row_hidden(self, index):
         """
@@ -475,7 +439,7 @@ class ResultMatrix(OptionHandler):
         :return: true if hidden
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getRowHidden", "(I)Z", index)
+        return self.jobject.getRowHidden(index)
 
     def hide_row(self, index):
         """
@@ -484,7 +448,7 @@ class ResultMatrix(OptionHandler):
         :param index: the 0-based row index
         :type index: int
         """
-        javabridge.call(self.jobject, "setRowHidden", "(IZ)V", index, True)
+        self.jobject.setRowHidden(index, True)
 
     def show_row(self, index):
         """
@@ -493,7 +457,7 @@ class ResultMatrix(OptionHandler):
         :param index: the 0-based row index
         :type index: int
         """
-        javabridge.call(self.jobject, "setRowHidden", "(IZ)V", index, False)
+        self.jobject.setRowHidden(index, False)
 
     def get_row_name(self, index):
         """
@@ -504,7 +468,7 @@ class ResultMatrix(OptionHandler):
         :return: the row name, None if invalid index
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getRowName", "(I)Ljava/lang/String;", index)
+        return self.jobject.getRowName(index)
 
     def set_row_name(self, index, name):
         """
@@ -515,7 +479,7 @@ class ResultMatrix(OptionHandler):
         :param name: the name of the row
         :type name: str
         """
-        javabridge.call(self.jobject, "setRowName", "(ILjava/lang/String;)V", index, name)
+        self.jobject.setRowName(index, name)
 
     def get_col_name(self, index):
         """
@@ -526,7 +490,7 @@ class ResultMatrix(OptionHandler):
         :return: the column name, None if invalid index
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getColName", "(I)Ljava/lang/String;", index)
+        return self.jobject.getColName(index)
 
     def set_col_name(self, index, name):
         """
@@ -537,7 +501,7 @@ class ResultMatrix(OptionHandler):
         :param name: the name of the column
         :type name: str
         """
-        javabridge.call(self.jobject, "setColName", "(ILjava/lang/String;)V", index, name)
+        self.jobject.setColName(index, name)
 
     def get_mean(self, col, row):
         """
@@ -550,7 +514,7 @@ class ResultMatrix(OptionHandler):
         :return: the mean
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getMean", "(II)D", col, row)
+        return self.jobject.getMean(col, row)
 
     def set_mean(self, col, row, mean):
         """
@@ -563,7 +527,7 @@ class ResultMatrix(OptionHandler):
         :param mean: the mean to set
         :type mean: float
         """
-        javabridge.call(self.jobject, "setMean", "(IID)V", col, row, mean)
+        self.jobject.setMean(col, row, mean)
 
     def get_stdev(self, col, row):
         """
@@ -576,7 +540,7 @@ class ResultMatrix(OptionHandler):
         :return: the standard deviation
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getStdDev", "(II)D", col, row)
+        return self.jobject.getStdDev(col, row)
 
     def set_stdev(self, col, row, stdev):
         """
@@ -589,7 +553,7 @@ class ResultMatrix(OptionHandler):
         :param stdev: the standard deviation to set
         :type stdev: float
         """
-        javabridge.call(self.jobject, "setStdDev", "(IID)V", col, row, stdev)
+        self.jobject.setStdDev(col, row, stdev)
 
     def average(self, col):
         """
@@ -600,7 +564,7 @@ class ResultMatrix(OptionHandler):
         :return: the mean
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getAverage", "(I)D", col)
+        return self.jobject.getAverage(col)
 
     def to_string_matrix(self):
         """
@@ -609,7 +573,7 @@ class ResultMatrix(OptionHandler):
         :return: the generated output
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toStringMatrix", "()V")
+        return self.jobject.toStringMatrix()
 
     def to_string_key(self):
         """
@@ -618,7 +582,7 @@ class ResultMatrix(OptionHandler):
         :return: the key
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toStringKey", "()V")
+        return self.jobject.toStringKey()
 
     def to_string_header(self):
         """
@@ -627,7 +591,7 @@ class ResultMatrix(OptionHandler):
         :return: the header
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toStringHeader", "()V")
+        return self.jobject.toStringHeader()
 
     def to_string_summary(self):
         """
@@ -636,7 +600,7 @@ class ResultMatrix(OptionHandler):
         :return: the summary
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toStringSummary", "()V")
+        return self.jobject.toStringSummary()
 
     def to_string_ranking(self):
         """
@@ -645,7 +609,7 @@ class ResultMatrix(OptionHandler):
         :return: the ranking
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toStringRanking", "()V")
+        return self.jobject.toStringRanking()
 
 
 class Tester(OptionHandler):
@@ -655,12 +619,12 @@ class Tester(OptionHandler):
 
     def __init__(self, classname="weka.experiment.PairedCorrectedTTester", jobject=None, options=None, swap_rows_and_cols=False):
         """
-        Initializes the specified tester using either the classname or the supplied JB_Object.
+        Initializes the specified tester using either the classname or the supplied JPype object.
 
         :param classname: the classname of the tester
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         :param swap_rows_and_cols: whether to swap rows/columns, to compare datasets rather than classifiers
@@ -706,8 +670,7 @@ class Tester(OptionHandler):
         :return: the matrix in use
         :rtype: ResultMatrix
         """
-        return ResultMatrix(
-            jobject=javabridge.call(self.jobject, "getResultMatrix", "()Lweka/experiment/ResultMatrix;"))
+        return ResultMatrix(jobject=self.jobject.getResultMatrix())
 
     @resultmatrix.setter
     def resultmatrix(self, matrix):
@@ -717,7 +680,7 @@ class Tester(OptionHandler):
         :param matrix: the ResultMatrix instance to use
         :type matrix: ResultMatrix
         """
-        javabridge.call(self.jobject, "setResultMatrix", "(Lweka/experiment/ResultMatrix;)V", matrix.jobject)
+        self.jobject.setResultMatrix(matrix.jobject)
 
     @property
     def instances(self):
@@ -727,7 +690,7 @@ class Tester(OptionHandler):
         :return: the data in use
         :rtype: Instances
         """
-        inst = javabridge.call(self.jobject, "getInstances", "()Lweka/core/Instances;")
+        inst = self.jobject.getInstances()
         if inst is None:
             return None
         else:
@@ -741,7 +704,7 @@ class Tester(OptionHandler):
         :param data: the Instances to analyze
         :type data: Instances
         """
-        javabridge.call(self.jobject, "setInstances", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.setInstances(data.jobject)
         self.columns_determined = False
 
     @property
@@ -853,8 +816,7 @@ class Tester(OptionHandler):
             if len(cols) > 0:
                 cols += ","
             cols += str(att.index + 1)
-        javabridge.call(
-            self.jobject, "setDatasetKeyColumns", "(Lweka/core/Range;)V", Range(ranges=cols).jobject)
+        self.jobject.setDatasetKeyColumns(Range(ranges=cols).jobject)
 
         # run
         if self.run_column is None:
@@ -862,8 +824,7 @@ class Tester(OptionHandler):
         att = data.attribute_by_name(self.run_column)
         if att is None:
             raise Exception("Run column not found: " + self.run_column)
-        javabridge.call(
-            self.jobject, "setRunColumn", "(I)V", att.index)
+        self.jobject.setRunColumn(att.index)
 
         # fold
         if not self.fold_column is None:
@@ -872,8 +833,7 @@ class Tester(OptionHandler):
                 index = -1
             else:
                 index = att.index
-            javabridge.call(
-                self.jobject, "setFoldColumn", "(I)V", index)
+            self.jobject.setFoldColumn(index)
 
         # result
         if result_columns is None:
@@ -886,8 +846,7 @@ class Tester(OptionHandler):
             if len(cols) > 0:
                 cols += ","
             cols += str(att.index + 1)
-        javabridge.call(
-            self.jobject, "setResultsetKeyColumns", "(Lweka/core/Range;)V", Range(ranges=cols).jobject)
+        self.jobject.setResultsetKeyColumns(Range(ranges=cols).jobject)
 
         self.columns_determined = True
 
@@ -901,8 +860,7 @@ class Tester(OptionHandler):
         :rtype: str
         """
         self.init_columns()
-        return javabridge.call(
-            self.jobject, "header", "(I)Ljava/lang/String;", comparison_column)
+        return self.jobject.header(comparison_column)
 
     def multi_resultset_full(self, base_resultset, comparison_column):
         """
@@ -915,8 +873,7 @@ class Tester(OptionHandler):
         :return: the comparison
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "multiResultsetFull", "(II)Ljava/lang/String;", base_resultset, comparison_column)
+        return self.jobject.multiResultsetFull(base_resultset, comparison_column)
 
     def multi_resultset_ranking(self, comparison_column):
         """
@@ -927,8 +884,7 @@ class Tester(OptionHandler):
         :return: the ranking
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "multiResultsetRanking", "(I)Ljava/lang/String;", comparison_column)
+        return self.jobject.multiResultsetRanking(comparison_column)
 
     def multi_resultset_summary(self, comparison_column):
         """
@@ -940,5 +896,4 @@ class Tester(OptionHandler):
         :return: the summary
         :rtype: str
         """
-        return javabridge.call(
-            self.jobject, "multiResultsetSummary", "(I)Ljava/lang/String;", comparison_column)
+        return self.jobject.multiResultsetSummary(comparison_column)

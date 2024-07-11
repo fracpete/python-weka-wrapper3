@@ -29,9 +29,9 @@ class TestAssociations(weka_test.WekaTest):
         """
         cname = "weka.associations.Apriori"
         options = None
-        cls = associations.Associator(classname=cname, options=options)
-        self.assertIsNotNone(cls, msg="Failed to instantiate: " + cname + "/" + str(options))
-        self.assertEqual(cname, cls.classname, "Classnames differ!")
+        assoc = associations.Associator(classname=cname, options=options)
+        self.assertIsNotNone(assoc, msg="Failed to instantiate: " + cname + "/" + str(options))
+        self.assertEqual(cname, assoc.classname, "Classnames differ!")
 
     def test_make_copy(self):
         """
@@ -39,12 +39,12 @@ class TestAssociations(weka_test.WekaTest):
         """
         cname = "weka.associations.Apriori"
         options = None
-        cls = associations.Associator(classname=cname, options=options)
-        self.assertIsNotNone(cls, msg="Failed to instantiate: " + cname + "/" + str(options))
-        self.assertEqual(cname, cls.classname, "Classnames differ!")
-        cls2 = associations.Associator.make_copy(cls)
-        self.assertIsNotNone(cls2, msg="Failed to instantiate: " + cname + "/" + str(options))
-        self.assertEqual(cname, cls2.classname, "Classnames differ!")
+        assoc = associations.Associator(classname=cname, options=options)
+        self.assertIsNotNone(assoc, msg="Failed to instantiate: " + cname + "/" + str(options))
+        self.assertEqual(cname, assoc.classname, "Classnames differ!")
+        assoc2 = associations.Associator.make_copy(assoc)
+        self.assertIsNotNone(assoc2, msg="Failed to instantiate: " + cname + "/" + str(options))
+        self.assertEqual(cname, assoc2.classname, "Classnames differ!")
 
     def test_capabilities(self):
         """
@@ -52,11 +52,11 @@ class TestAssociations(weka_test.WekaTest):
         """
         cname = "weka.associations.Apriori"
         options = None
-        cls = associations.Associator(classname=cname, options=options)
-        self.assertIsNotNone(cls, msg="Failed to instantiate: " + cname + "/" + str(options))
-        self.assertEqual(cname, cls.classname, "Classnames differ!")
+        assoc = associations.Associator(classname=cname, options=options)
+        self.assertIsNotNone(assoc, msg="Failed to instantiate: " + cname + "/" + str(options))
+        self.assertEqual(cname, assoc.classname, "Classnames differ!")
 
-        caps = cls.capabilities
+        caps = assoc.capabilities
         self.assertIsNotNone(caps, msg="Capabilities are None!")
 
     def test_build_associator(self):
@@ -70,10 +70,10 @@ class TestAssociations(weka_test.WekaTest):
 
         cname = "weka.associations.Apriori"
         options = None
-        cls = associations.Associator(classname=cname, options=options)
-        self.assertIsNotNone(cls, msg="Failed to instantiate: " + cname + "/" + str(options))
+        assoc = associations.Associator(classname=cname, options=options)
+        self.assertIsNotNone(assoc, msg="Failed to instantiate: " + cname + "/" + str(options))
 
-        cls.build_associations(data)
+        assoc.build_associations(data)
 
 
 def suite():

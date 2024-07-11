@@ -1,7 +1,7 @@
 Command-line
 ============
 
-From command-line, *python-weka-wrapper* behaves similar to Weka itself, i.e., the command-line.
+From command-line, *python-weka-wrapper3* behaves similar to Weka itself, i.e., the command-line.
 Most of the general options are available, as well as the following:
 
 * `-j` for adding additional jars, in the same format as the classpath for the platform.

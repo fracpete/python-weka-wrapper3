@@ -14,7 +14,7 @@
 # typeconv.py
 # Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
+from jpype import JFloat, JString, JClass, JDouble, JInt, JObject
 import logging
 import numpy
 
@@ -27,16 +27,11 @@ def jstring_array_to_list(a):
     Turns the Java string array into Python unicode string list.
 
     :param a: the string array to convert
-    :type a: JB_Object
+    :type a: JPype object
     :return: the string list
     :rtype: list
     """
-    result = []
-    length = javabridge.get_env().get_array_length(a)
-    wrapped = javabridge.get_env().get_object_array_elements(a)
-    for i in range(length):
-        result.append(javabridge.get_env().get_string(wrapped[i]))
-    return result
+    return [x for x in a]
 
 
 def string_list_to_jarray(l):
@@ -46,12 +41,23 @@ def string_list_to_jarray(l):
     :param l: the string list
     :type: list
     :rtype: java string array
-    :return: JB_Object
+    :return: JPype object
     """
-    result = javabridge.get_env().make_object_array(len(l), javabridge.get_env().find_class("java/lang/String"))
+    result = JString[len(l)]
     for i in range(len(l)):
-        javabridge.get_env().set_object_array_element(result, i, javabridge.get_env().new_string_utf(l[i]))
+        result[i] = l[i]
     return result
+
+
+def string_list_to_jlist(l):
+    """
+    Turns a Python unicode string list into a Java List.
+
+    :param l: the string list
+    :type: list
+    :rtype: java list
+    """
+    return JClass("java.util.ArrayList")(l)
 
 
 def jstring_list_to_string_list(l, return_empty_if_none=True):
@@ -59,22 +65,18 @@ def jstring_list_to_string_list(l, return_empty_if_none=True):
     Converts a Java java.util.List containing strings into a Python list.
 
     :param l: the list to convert
-    :type l: JB_Object
+    :type l: JPype object
     :param return_empty_if_none: whether to return an empty list or None when list object is None
     :type return_empty_if_none: bool
     :return: the list with UTF strings
     :rtype: list
     """
-    result = []
     if l is None:
         if return_empty_if_none:
             return []
         else:
             return None
-    objs = javabridge.get_collection_wrapper(l)
-    for obj in objs:
-        result.append(javabridge.get_env().get_string_utf(obj))
-    return result
+    return [x for x in l]
 
 
 def jdouble_matrix_to_ndarray(m):
@@ -82,22 +84,46 @@ def jdouble_matrix_to_ndarray(m):
     Turns the Java matrix (2-dim array) of doubles into a numpy 2-dim array.
 
     :param m: the double matrix
-    :type: JB_Object
+    :type: JPype object
     :return: Numpy array
     :rtype: numpy.darray
     """
-    rows = javabridge.get_env().get_object_array_elements(m)
-    num_rows = len(rows)
-    num_cols = javabridge.get_env().get_array_length(rows[0])
+    num_rows = len(m)
+    num_cols = len(m[0])
     result = numpy.zeros(num_rows * num_cols).reshape((num_rows, num_cols))
-    i = 0
-    for row in rows:
-        elements = javabridge.get_env().get_double_array_elements(row)
-        n = 0
-        for element in elements:
-            result[i][n] = element
-            n += 1
-        i += 1
+    for row in range(num_rows):
+        for col in range(num_cols):
+            result[row][col] = m[row][col]
+    return result
+
+
+def jdouble_array_to_ndarray(a):
+    """
+    Turns the Java array of doubles into a numpy 2-dim array.
+
+    :param a: the double array
+    :type: JPype object
+    :return: Numpy array
+    :rtype: numpy.darray
+    """
+    result = numpy.zeros(len(a))
+    for i in range(len(a)):
+        result[i] = a[i]
+    return result
+
+
+def jint_array_to_ndarray(a):
+    """
+    Turns the Java array of ints into a numpy 2-dim array.
+
+    :param a: the double array
+    :type: JPype object
+    :return: Numpy array
+    :rtype: numpy.darray
+    """
+    result = numpy.zeros(len(a))
+    for i in range(len(a)):
+        result[i] = a[i]
     return result
 
 
@@ -106,14 +132,11 @@ def jenumeration_to_list(enm):
     Turns the java.util.Enumeration into a list.
 
     :param enm: the enumeration to convert
-    :type enm: JB_Object
+    :type enm: JPype object
     :return: the list
     :rtype: list
     """
-    result = []
-    while javabridge.call(enm, "hasMoreElements", "()Z"):
-        result.append(javabridge.call(enm, "nextElement", "()Ljava/lang/Object;"))
-    return result
+    return [x for x in enm]
 
 
 def float_to_jfloat(d):
@@ -123,9 +146,9 @@ def float_to_jfloat(d):
     :param d: the Python float
     :type d: float
     :return: the Float object
-    :rtype: JB_Object
+    :rtype: JPype object
     """
-    return javabridge.make_instance("java/lang/Float", "(D)V", d)
+    return JFloat(d)
 
 
 def jdouble_to_float(d):
@@ -133,11 +156,11 @@ def jdouble_to_float(d):
     Turns the Java java.lang.Double object into Python float object.
 
     :param d: the java.lang.Double
-    :type d: JB_Object
+    :type d: JPype object
     :return: the Float object
     :rtype: float
     """
-    return javabridge.call(d, "doubleValue", "()D", d)
+    return float(d)
 
 
 def to_string(o):
@@ -159,4 +182,64 @@ def to_string(o):
         except:
             pass
 
+    return result
+
+
+def to_jdouble_array(values, none_as_nan: bool = False):
+    """
+    Converts the list of floats or the numpy array into a Java array.
+
+    :param values: the values to convert
+    :param none_as_nan: whether to convert None values to NaN
+    :type none_as_nan: bool
+    :return: the java array
+    """
+    result = JDouble[len(values)]
+    nan = float("nan")
+    for i in range(len(values)):
+        if none_as_nan and (values[i] is None):
+            result[i] = nan
+        elif values[i] == numpy.nan:
+            result[i] = nan
+        else:
+            result[i] = values[i]
+    return result
+
+
+def to_jint_array(values):
+    """
+    Converts the list of ints into a Java array.
+
+    :param values: the values to convert
+    :return: the java array
+    """
+    result = JInt[len(values)]
+    for i in range(len(values)):
+        result[i] = values[i]
+    return result
+
+
+def to_jobject_array(values):
+    """
+    Converts the list of objects into a Java object array.
+
+    :param values: the list of objects to convert
+    :return: the java array
+    """
+    result = JObject[len(values)]
+    for i in range(len(values)):
+        result[i] = values[i]
+    return result
+
+
+def from_jobject_array(a):
+    """
+    Converts the java object array into a list.
+
+    :param a: the java array to convert
+    :return: the generated list
+    """
+    result = []
+    for i in range(len(a)):
+        result.append(a[i])
     return result

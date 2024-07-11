@@ -14,10 +14,9 @@
 # utils.py
 # Copyright (C) 2024 Fracpete (pythonwekawrapper at gmail dot com)
 
+from jpype import JClass
+import weka.core.typeconv as typeconv
 import logging
-
-import javabridge
-import numpy as np
 
 # logging setup
 logger = logging.getLogger("weka.core.utils")
@@ -36,10 +35,10 @@ def correlation(values1, values2):
     """
     if len(values1) != len(values2):
         raise Exception("Lists differ in length: %d != %d" % (len(values1), len(values2)))
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "correlation",
-        "([D[DI)D",
-        values1, values2, len(values1))
+    return JClass("weka.core.Utils").correlation(
+        typeconv.to_jdouble_array(values1, none_as_nan=True),
+        typeconv.to_jdouble_array(values2, none_as_nan=True),
+        len(values1))
 
 
 def variance(values):
@@ -51,8 +50,7 @@ def variance(values):
     :return: the variance
     :rtype: float
     """
-    return javabridge.static_call(
-        "Lweka/core/Utils;", "variance", "([D)D", values)
+    return JClass("weka.core.Utils").variance(typeconv.to_jdouble_array(values, none_as_nan=True))
 
 
 def normalize(values, sum_=None):
@@ -66,11 +64,9 @@ def normalize(values, sum_=None):
     :return: the normalized float values
     :rtype: list
     """
-    jvalues = javabridge.get_env().make_double_array(np.array(values))
+    jvalues = typeconv.to_jdouble_array(values, none_as_nan=True)
     if sum_ is None:
-        javabridge.static_call(
-            "Lweka/core/Utils;", "normalize", "([D)V", jvalues)
+        JClass("weka.core.Utils").normalize(jvalues)
     else:
-        javabridge.static_call(
-            "Lweka/core/Utils;", "normalize", "([DD)V", jvalues)
-    return [float(x) for x in javabridge.get_env().get_double_array_elements(jvalues)]
+        JClass("weka.core.Utils").normalize(jvalues, sum_)
+    return [float(x) for x in jvalues]

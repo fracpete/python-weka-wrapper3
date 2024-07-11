@@ -59,8 +59,7 @@ setup(
     author='Peter "fracpete" Reutemann',
     author_email='pythonwekawrapper@gmail.com',
     install_requires=[
-        "python-javabridge",
-        "cython>=0.29.25,<3.0.0",
+        "jpype1",
         "numpy>=1.20.1",
         "packaging",
         "configurable-objects",

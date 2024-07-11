@@ -12,14 +12,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # classes.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
-import javabridge
 import weka.core.jvm as jvm
 import weka.classifiers
 import weka.core.classes as classes
 import wekatests.tests.weka_test as weka_test
+from jpype import JClass
 
 
 class TestClasses(weka_test.WekaTest):
@@ -89,7 +89,7 @@ class TestClasses(weka_test.WekaTest):
         """
         Tests the JavaArray class.
         """
-        jarray = classes.JavaArray(classes.JavaArray.new_instance("weka.core.Tag", 3))
+        jarray = classes.JavaArray(classes.JavaArray.new_array("weka.core.Tag", 3))
         self.assertIsNotNone(jarray)
         self.assertEqual(3, len(jarray), msg="Array length differs!")
         self.assertIsNone(jarray[0], msg="Initial value must be none")
@@ -159,7 +159,7 @@ class TestClasses(weka_test.WekaTest):
         tags = classes.Tags(tags=[tag1, tag2, tag3])
         self.assertEqual(3, len(tags), "Number of tags differs!")
         self.assertEqual("TAG1|TAG2|TAG3", str(tags), msg="String differs")
-        tags = classes.Tags(jobject=javabridge.get_static_field("Lweka/classifiers/functions/SMO;", "TAGS_FILTER", "[Lweka/core/Tag;"))
+        tags = classes.Tags(jobject=JClass("weka.classifiers.functions.SMO").TAGS_FILTER)
         self.assertEqual(3, len(tags), "Number of tags differs!")
         self.assertEqual("0|1|2", str(tags), msg="String differs")
         tags = classes.Tags.get_tags("weka.classifiers.functions.SMO", "TAGS_FILTER")
@@ -172,7 +172,7 @@ class TestClasses(weka_test.WekaTest):
         """
         Tests the SelectedTag class.
         """
-        tags = classes.Tags(jobject=javabridge.get_static_field("Lweka/classifiers/functions/SMO;", "TAGS_FILTER", "[Lweka/core/Tag;"))
+        tags = classes.Tags(jobject=JClass("weka.classifiers.functions.SMO").TAGS_FILTER)
         stag = classes.SelectedTag(tag_id=1, tags=tags)
         self.assertEqual(1, stag.selected.ident, "ID differs")
         stag = classes.SelectedTag(tag_text="2", tags=tags)
@@ -283,9 +283,9 @@ class TestClasses(weka_test.WekaTest):
         Tests the Date wrapper.
         """
         wrapper = classes.Date(msecs=1)
-        self.assertEquals(wrapper.time, 1, msg="Should have been 1 msec")
+        self.assertEqual(wrapper.time, 1, msg="Should have been 1 msec")
         wrapper.time = 2
-        self.assertEquals(wrapper.time, 2, msg="Should have been 2 msec")
+        self.assertEqual(wrapper.time, 2, msg="Should have been 2 msec")
 
 
 def suite():

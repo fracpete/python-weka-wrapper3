@@ -12,9 +12,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # database.py
-# Copyright (C) 2015-2016 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2015-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
+from jpype import JClass
 from weka.core.classes import OptionHandler
 from weka.core.dataset import Instances
 
@@ -26,10 +26,10 @@ class DatabaseUtils(OptionHandler):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes a DatabaseUtils object from scratch or uses the provided JB_Object.
+        Initializes a DatabaseUtils object from scratch or uses the provided JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -46,7 +46,7 @@ class DatabaseUtils(OptionHandler):
         :return: the database URL
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getDatabaseURL", "()Ljava/lang/String;")
+        return self.jobject.getDatabaseURL()
 
     @db_url.setter
     def db_url(self, url):
@@ -56,7 +56,7 @@ class DatabaseUtils(OptionHandler):
         :param url: the database URL
         :type url: str
         """
-        javabridge.call(self.jobject, "setDatabaseURL", "(Ljava/lang/String;)V", url)
+        self.jobject.setDatabaseURL(url)
 
     @property
     def user(self):
@@ -66,7 +66,7 @@ class DatabaseUtils(OptionHandler):
         :return: the database user
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getUsername", "()Ljava/lang/String;")
+        return self.jobject.getUsername()
 
     @user.setter
     def user(self, user):
@@ -76,7 +76,7 @@ class DatabaseUtils(OptionHandler):
         :param user: the database user
         :type user: str
         """
-        javabridge.call(self.jobject, "setUsername", "(Ljava/lang/String;)V", user)
+        self.jobject.setUsername(user)
 
     @property
     def password(self):
@@ -86,7 +86,7 @@ class DatabaseUtils(OptionHandler):
         :return: the database password
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getPassword", "()Ljava/lang/String;")
+        return self.jobject.getPassword()
 
     @password.setter
     def password(self, password):
@@ -96,7 +96,7 @@ class DatabaseUtils(OptionHandler):
         :param password: the database password
         :type password: str
         """
-        javabridge.call(self.jobject, "setPassword", "(Ljava/lang/String;)V", password)
+        self.jobject.setPassword(password)
 
 
 class InstanceQuery(DatabaseUtils):
@@ -106,10 +106,10 @@ class InstanceQuery(DatabaseUtils):
 
     def __init__(self, jobject=None, options=None):
         """
-        Initializes an InstanceQuery object from scratch or uses the provided JB_Object.
+        Initializes an InstanceQuery object from scratch or uses the provided JPype object.
 
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to use
         :type options: list
         """
@@ -126,7 +126,7 @@ class InstanceQuery(DatabaseUtils):
         :return: the custom properties file
         :rtype: str
         """
-        return javabridge.to_string(javabridge.call(self.jobject, "getCustomPropsFile", "()Ljava/io/File;"))
+        return str(self.jobject.getCustomPropsFile())
 
     @custom_properties.setter
     def custom_properties(self, props):
@@ -136,8 +136,8 @@ class InstanceQuery(DatabaseUtils):
         :param props: the props file
         :type props: str
         """
-        fprops = javabridge.make_instance("java/io/File", "(Ljava/lang/String;)V", props)
-        javabridge.call(self.jobject, "setCustomPropsFile", "(Ljava/io/File;)V", fprops)
+        fprops = JClass("java.io.File")(props)
+        self.jobject.setCustomPropsFile(fprops)
 
     @property
     def sparse_data(self):
@@ -147,7 +147,7 @@ class InstanceQuery(DatabaseUtils):
         :return: whether sparse data is generated
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getSparseData", "()Z")
+        return self.jobject.getSparseData()
 
     @sparse_data.setter
     def sparse_data(self, sparse):
@@ -157,7 +157,7 @@ class InstanceQuery(DatabaseUtils):
         :param sparse: whether to generated sparse data
         :type sparse: bool
         """
-        javabridge.call(self.jobject, "setSparseData", "(Z)V", sparse)
+        self.jobject.setSparseData(sparse)
 
     @property
     def query(self):
@@ -167,7 +167,7 @@ class InstanceQuery(DatabaseUtils):
         :return: the SQL query
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getQuery", "()Ljava/lang/String;")
+        return self.jobject.getQuery()
 
     @query.setter
     def query(self, query):
@@ -177,7 +177,7 @@ class InstanceQuery(DatabaseUtils):
         :param query: the SQL query
         :type query: str
         """
-        javabridge.call(self.jobject, "setQuery", "(Ljava/lang/String;)V", query)
+        self.jobject.setQuery(query)
 
     def retrieve_instances(self, query=None):
         """
@@ -185,12 +185,12 @@ class InstanceQuery(DatabaseUtils):
 
         :param query: query to execute if not the currently set one
         :type query: str
-        :return: the generated dataq
+        :return: the generated data
         :rtype: Instances
         """
         if query is None:
-            data = javabridge.call(self.jobject, "retrieveInstances", "()Lweka/core/Instances;")
+            data = self.jobject.retrieveInstances()
         else:
-            data = javabridge.call(self.jobject, "retrieveInstances", "(Ljava/lang/String;)Lweka/core/Instances;")
+            data = self.jobject.retrieveInstances(query)
         return Instances(data)
 

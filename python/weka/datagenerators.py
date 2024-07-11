@@ -12,9 +12,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # datagenerators.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
 import os
 import sys
@@ -22,6 +21,7 @@ import argparse
 import traceback
 import weka.core.jvm as jvm
 import weka.core.classes as classes
+from jpype import JClass
 from weka.core.classes import OptionHandler, join_options, to_commandline, from_commandline
 from weka.core.dataset import Instances, Instance
 
@@ -36,12 +36,12 @@ class DataGenerator(OptionHandler):
 
     def __init__(self, classname="weka.datagenerators.classifiers.classification.Agrawal", jobject=None, options=None):
         """
-        Initializes the specified datagenerator using either the classname or the supplied JB_Object.
+        Initializes the specified datagenerator using either the classname or the supplied JPype object.
 
         :param classname: the classname of the datagenerator
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         """
         if jobject is None:
             jobject = DataGenerator.new_instance(classname)
@@ -55,7 +55,7 @@ class DataGenerator(OptionHandler):
         :return: the data format
         :rtype: Instances
         """
-        data = javabridge.call(self.jobject, "defineDataFormat", "()Lweka/core/Instances;")
+        data = self.jobject.defineDataFormat()
         if data is None:
             return None
         else:
@@ -69,7 +69,7 @@ class DataGenerator(OptionHandler):
         :return: whether incremental
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "getSingleModeFlag", "()Z")
+        return self.jobject.getSingleModeFlag()
 
     @property
     def dataset_format(self):
@@ -79,7 +79,7 @@ class DataGenerator(OptionHandler):
         :return: the format
         :rtype: Instances
         """
-        data = javabridge.call(self.jobject, "getDatasetFormat", "()Lweka/core/Instances;")
+        data = self.jobject.getDatasetFormat()
         if data is None:
             return None
         else:
@@ -93,7 +93,7 @@ class DataGenerator(OptionHandler):
         :param inst: the Instances to use as dataset format
         :type inst: Instances
         """
-        javabridge.call(self.jobject, "setDatasetFormat", "(Lweka/core/Instances;)V", inst.jobject)
+        self.jobject.setDatasetFormat(inst.jobject)
 
     def generate_start(self):
         """
@@ -102,7 +102,7 @@ class DataGenerator(OptionHandler):
         :return: the start comment
         :rtype: str
         """
-        return javabridge.call(self.jobject, "generateStart", "()Ljava/lang/String;")
+        return self.jobject.generateStart()
 
     @property
     def num_examples_act(self):
@@ -112,7 +112,7 @@ class DataGenerator(OptionHandler):
         :return: the number of examples
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getNumExamplesAct", "()I")
+        return self.jobject.getNumExamplesAct()
 
     def generate_example(self):
         """
@@ -121,7 +121,7 @@ class DataGenerator(OptionHandler):
         :return: the next example
         :rtype: Instance
         """
-        data = javabridge.call(self.jobject, "generateExample", "()Lweka/core/Instance;")
+        data = self.jobject.generateExample()
         if data is None:
             return None
         else:
@@ -134,7 +134,7 @@ class DataGenerator(OptionHandler):
         :return: the generated dataset
         :rtype: Instances
         """
-        data = javabridge.call(self.jobject, "generateExamples", "()Lweka/core/Instances;")
+        data = self.jobject.generateExamples()
         if data is None:
             return None
         else:
@@ -147,7 +147,7 @@ class DataGenerator(OptionHandler):
         :return: a finish comment
         :rtype: str
         """
-        return javabridge.call(self.jobject, "generateFinish", "()Ljava/lang/String;")
+        return self.jobject.generateFinish()
 
     @classmethod
     def make_data(cls, generator, args):
@@ -159,10 +159,7 @@ class DataGenerator(OptionHandler):
         :param args: the command-line arguments
         :type args: list
         """
-        javabridge.static_call(
-            "Lweka/datagenerators/DataGenerator;", "makeData",
-            "(Lweka/datagenerators/DataGenerator;[Ljava/lang/String;)V",
-            generator.jobject, args)
+        JClass("weka.datagenerators.DataGenerator").makeData(generator.jobject, args)
 
     @classmethod
     def make_copy(cls, generator):

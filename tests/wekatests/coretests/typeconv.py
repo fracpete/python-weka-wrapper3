@@ -12,13 +12,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # typeconv.py
-# Copyright (C) 2014-2021 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
 import unittest
-import javabridge
 import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
 import wekatests.tests.weka_test as weka_test
+from jpype import JClass
 
 
 class TestTypes(weka_test.WekaTest):
@@ -37,11 +37,10 @@ class TestTypes(weka_test.WekaTest):
         Tests method enumeration_to_list.
         """
         lin = ["A", "B", "C", "D"]
-        v = javabridge.make_instance("java/util/Vector", "()V")
+        v = JClass("java.util.Vector")()
         for element in lin:
-            javabridge.call(v, "add", "(Ljava/lang/Object;)Z", element)
-        enm = javabridge.call(v, "elements", "()Ljava/util/Enumeration;")
-        lout = typeconv.jenumeration_to_list(enm)
+            v.add(element)
+        lout = typeconv.jenumeration_to_list(v.elements())
         self.assertEqual(lin, lout, msg="Elements differ")
 
 

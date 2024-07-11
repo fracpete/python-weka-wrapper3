@@ -12,9 +12,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # attribute_selection.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
 import argparse
 import os
@@ -22,6 +21,7 @@ import sys
 import traceback
 import weka.core.jvm as jvm
 import weka.core.typeconv as typeconv
+from jpype import JClass
 from weka.core.classes import JavaObject, join_options
 from weka.core.classes import OptionHandler
 from weka.core.capabilities import Capabilities
@@ -38,12 +38,12 @@ class ASSearch(OptionHandler):
 
     def __init__(self, classname="weka.attributeSelection.BestFirst", jobject=None, options=None):
         """
-        Initializes the specified search algorithm using either the classname or the supplied JB_Object.
+        Initializes the specified search algorithm using either the classname or the supplied JPype object.
 
         :param classname: the classname of the search algorithms
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the commandline options to use
         :type options: list
         """
@@ -74,14 +74,12 @@ class ASSearch(OptionHandler):
         :return: the selected attributes (0-based indices)
         :rtype: ndarray
         """
-        array = javabridge.call(
-            self.jobject, "search", "(Lweka/attributeSelection/ASEvaluation;Lweka/core/Instances;)[I",
-            evaluation.jobject, data.jobject)
+        array = self.jobject.search(evaluation.jobject, data.jobject)
         self._header = data.copy_structure()
         if array is None:
             return None
         else:
-            javabridge.get_env().get_int_array_elements(array)
+            return typeconv.jint_array_to_ndarray(array)
 
 
 class ASEvaluation(OptionHandler):
@@ -91,12 +89,12 @@ class ASEvaluation(OptionHandler):
 
     def __init__(self, classname="weka.attributeSelection.CfsSubsetEval", jobject=None, options=None):
         """
-        Initializes the specified search algorithm using either the classname or the supplied JB_Object.
+        Initializes the specified search algorithm using either the classname or the supplied JPype object.
 
         :param classname: the classname of the search algorithms
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -115,7 +113,7 @@ class ASEvaluation(OptionHandler):
         :return: the capabilities
         :rtype: Capabilities
         """
-        return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
+        return Capabilities(self.jobject.getCapabilities())
 
     @property
     def header(self):
@@ -135,7 +133,7 @@ class ASEvaluation(OptionHandler):
         :type data: Instances
         """
         self._header = data.copy_structure()
-        javabridge.call(self.jobject, "buildEvaluator", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.buildEvaluator(data.jobject)
 
     def post_process(self, indices):
         """
@@ -146,11 +144,11 @@ class ASEvaluation(OptionHandler):
         :return: the processed indices
         :rtype: ndarray
         """
-        array = javabridge.call(self.jobject, "postProcess", "([I)[I", indices)
+        array = self.jobject.postProcess(indices)
         if array is None:
             return None
         else:
-            return javabridge.get_env().get_int_array_elements(array)
+            return typeconv.jint_array_to_ndarray(array)
 
     def transformed_header(self):
         """
@@ -163,7 +161,7 @@ class ASEvaluation(OptionHandler):
         :rtype: Instances
         """
         if self.is_attribute_transformer:
-            return Instances(javabridge.call(self.jobject, "transformedHeader", "()Lweka/core/Instances;"))
+            return Instances(self.jobject.transformedHeader())
         else:
             return None
 
@@ -177,7 +175,7 @@ class ASEvaluation(OptionHandler):
         :rtype: Instances
         """
         if self.is_attribute_transformer:
-            return Instances(javabridge.call(self.jobject, "transformedData", "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+            return Instances(self.jobject.transformedData(data.jobject))
         else:
             return None
 
@@ -191,7 +189,7 @@ class ASEvaluation(OptionHandler):
         :rtype: Instance
         """
         if self.is_attribute_transformer:
-            return Instance(javabridge.call(self.jobject, "convertInstance", "(Lweka/core/Instance;)Lweka/core/Instance;", inst.jobject))
+            return Instance(self.jobject.convertInstance(inst.jobject))
         else:
             return None
 
@@ -216,7 +214,7 @@ class AttributeSelection(JavaObject):
         :param evaluator: the evaluator to use.
         :type evaluator: ASEvaluation
         """
-        javabridge.call(self.jobject, "setEvaluator", "(Lweka/attributeSelection/ASEvaluation;)V", evaluator.jobject)
+        self.jobject.setEvaluator(evaluator.jobject)
 
     def search(self, search):
         """
@@ -225,7 +223,7 @@ class AttributeSelection(JavaObject):
         :param search: the search algorithm
         :type search: ASSearch
         """
-        javabridge.call(self.jobject, "setSearch", "(Lweka/attributeSelection/ASSearch;)V", search.jobject)
+        self.jobject.setSearch(search.jobject)
 
     def folds(self, folds):
         """
@@ -234,7 +232,7 @@ class AttributeSelection(JavaObject):
         :param folds: the number of folds
         :type folds: int
         """
-        javabridge.call(self.jobject, "setFolds", "(I)V", folds)
+        self.jobject.setFolds(folds)
 
     def ranking(self, ranking):
         """
@@ -243,7 +241,7 @@ class AttributeSelection(JavaObject):
         :param ranking: whether to perform a ranking
         :type ranking: bool
         """
-        javabridge.call(self.jobject, "setRanking", "(Z)V", ranking)
+        self.jobject.setRanking(ranking)
 
     def seed(self, seed):
         """
@@ -252,7 +250,7 @@ class AttributeSelection(JavaObject):
         :param seed: the seed value
         :type seed: int
         """
-        javabridge.call(self.jobject, "setSeed", "(I)V", seed)
+        self.jobject.setSeed(seed)
 
     def crossvalidation(self, crossvalidation):
         """
@@ -261,7 +259,7 @@ class AttributeSelection(JavaObject):
         :param crossvalidation: whether to perform cross-validation
         :type crossvalidation: bool
         """
-        javabridge.call(self.jobject, "setXval", "(Z)V", crossvalidation)
+        self.jobject.setXval(crossvalidation)
 
     def select_attributes(self, instances):
         """
@@ -271,7 +269,7 @@ class AttributeSelection(JavaObject):
         :type instances: Instances
         """
         self._cv_results = None
-        javabridge.call(self.jobject, "SelectAttributes", "(Lweka/core/Instances;)V", instances.jobject)
+        self.jobject.SelectAttributes(instances.jobject)
 
     def select_attributes_cv_split(self, instances):
         """
@@ -280,7 +278,7 @@ class AttributeSelection(JavaObject):
         :param instances: the data to process
         :type instances: Instances
         """
-        javabridge.call(self.jobject, "selectAttributesCVSplit", "(Lweka/core/Instances;)V", instances.jobject)
+        self.jobject.selectAttributesCVSplit(instances.jobject)
 
     @property
     def selected_attributes(self):
@@ -290,11 +288,11 @@ class AttributeSelection(JavaObject):
         :return: the Numpy array of 0-based indices
         :rtype: ndarray
         """
-        array = javabridge.call(self.jobject, "selectedAttributes", "()[I")
+        array = self.jobject.selectedAttributes()
         if array is None:
             return None
         else:
-            return javabridge.get_env().get_int_array_elements(array)
+            return typeconv.jint_array_to_ndarray(array)
 
     @property
     def results_string(self):
@@ -304,7 +302,7 @@ class AttributeSelection(JavaObject):
         :return: the results string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toResultsString", "()Ljava/lang/String;")
+        return self.jobject.toResultsString()
 
     @property
     def cv_results(self):
@@ -315,7 +313,7 @@ class AttributeSelection(JavaObject):
         :rtype: str
         """
         if self._cv_results is None:
-            self._cv_results = javabridge.call(self.jobject, "CVResultsString", "()Ljava/lang/String;")
+            self._cv_results = self.jobject.CVResultsString()
         return self._cv_results
 
     @property
@@ -413,7 +411,7 @@ class AttributeSelection(JavaObject):
         :return: the number of attributes
         :rtype: int
         """
-        return javabridge.call(self.jobject, "numberAttributesSelected", "()I")
+        return self.jobject.numberAttributesSelected()
 
     @property
     def ranked_attributes(self):
@@ -423,7 +421,7 @@ class AttributeSelection(JavaObject):
         :return: the Numpy matrix
         :rtype: ndarray
         """
-        matrix = javabridge.call(self.jobject, "rankedAttributes", "()[[D")
+        matrix = self.jobject.rankedAttributes()
         if matrix is None:
             return None
         else:
@@ -439,15 +437,9 @@ class AttributeSelection(JavaObject):
         :rtype: Instances
         """
         if type(data) is Instance:
-            return Instance(
-                javabridge.call(
-                    self.jobject, "reduceDimensionality",
-                    "(Lweka/core/Instance;)Lweka/core/Instance;", data.jobject))
+            return Instance(self.jobject.reduceDimensionality(data.jobject))
         else:
-            return Instances(
-                javabridge.call(
-                    self.jobject, "reduceDimensionality",
-                    "(Lweka/core/Instances;)Lweka/core/Instances;", data.jobject))
+            return Instances(self.jobject.reduceDimensionality(data.jobject))
 
     @classmethod
     def attribute_selection(cls, evaluator, args):
@@ -461,10 +453,7 @@ class AttributeSelection(JavaObject):
         :return: the results string
         :rtype: str
         """
-        return javabridge.static_call(
-            "Lweka/attributeSelection/AttributeSelection;", "SelectAttributes",
-            "(Lweka/attributeSelection/ASEvaluation;[Ljava/lang/String;)Ljava/lang/String;",
-            evaluator.jobject, args)
+        return JClass("weka.attributeSelection.AttributeSelection").SelectAttributes(evaluator.jobject, args)
 
 
 def main(args=None):
@@ -513,7 +502,7 @@ def main(args=None):
         if len(parsed.option) > 0:
             evaluation.options = parsed.option
         print(AttributeSelection.attribute_selection(evaluation, params))
-    except Exception as e:
+    except Exception:
         print(traceback.format_exc())
     finally:
         jvm.stop()

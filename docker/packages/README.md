@@ -49,7 +49,7 @@ The output will be something like this:
 
 ```
 DEBUG:weka.core.jvm:Adding bundled jars
-DEBUG:weka.core.jvm:Classpath=['/usr/local/lib/python3.8/dist-packages/javabridge/jars/rhino-1.7R4.jar', '/usr/local/lib/python3.8/dist-packages/javabridge/jars/runnablequeue.jar', '/usr/local/lib/python3.8/dist-packages/javabridge/jars/cpython.jar', '/usr/local/lib/python3.8/dist-packages/weka/lib/weka.jar', '/usr/local/lib/python3.8/dist-packages/weka/lib/python-weka-wrapper.jar']
+DEBUG:weka.core.jvm:Classpath=...
 DEBUG:weka.core.jvm:MaxHeapSize=default
 DEBUG:weka.core.jvm:Package support enabled
 SelfOrganizingMap/1.0.3

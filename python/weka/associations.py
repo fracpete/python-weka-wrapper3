@@ -12,9 +12,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # associations.py
-# Copyright (C) 2014-2022 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
-import javabridge
 import logging
 import os
 import sys
@@ -22,10 +21,11 @@ import argparse
 import traceback
 import weka.core.jvm as jvm
 import weka.core.converters as converters
+from jpype import JClass
 from weka.core.classes import OptionHandler, JavaObject, join_options
 from weka.core.capabilities import Capabilities
 from weka.core.dataset import Attribute
-from weka.core.typeconv import jstring_array_to_list
+from weka.core.typeconv import jstring_array_to_list, jdouble_array_to_ndarray
 
 # logging setup
 logger = logging.getLogger("weka.associations")
@@ -41,11 +41,11 @@ class Item(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the Item object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
 
         if jobject is None:
-            raise Exception("No Item JB_Object provided!")
+            raise Exception("No Item JPype object provided!")
         self.enforce_type(jobject, "weka.associations.Item")
         super(Item, self).__init__(jobject)
 
@@ -58,7 +58,7 @@ class Item(JavaObject):
         :return: the integer result, <0 is less than, =0 is equal to, >0 is greater than
         :rtype: int
         """
-        return javabridge.call(self.jobject, "compareTo", "(Lweka/associations/Item;)I", other.jobject)
+        return self.jobject.compareTo(other.jobject)
 
     def __lt__(self, other):
         """
@@ -90,9 +90,9 @@ class Item(JavaObject):
         :type frequency: int
         """
         if frequency is None:
-            javabridge.call(self.jobject, "decreaseFrequency", "()V")
+            self.jobject.decreaseFrequency()
         else:
-            javabridge.call(self.jobject, "decreaseFrequency", "(I)V", frequency)
+            self.jobject.decreaseFrequency(frequency)
 
     def increase_frequency(self, frequency=None):
         """
@@ -102,9 +102,9 @@ class Item(JavaObject):
         :type frequency: int
         """
         if frequency is None:
-            javabridge.call(self.jobject, "increaseFrequency", "()V")
+            self.jobject.increaseFrequency()
         else:
-            javabridge.call(self.jobject, "increaseFrequency", "(I)V", frequency)
+            self.jobject.increaseFrequency(frequency)
 
     def __eq__(self, other):
         """
@@ -115,7 +115,7 @@ class Item(JavaObject):
         :return: True if the same
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "equals", "(Ljava/lang/Object;)Z", other.jobject)
+        return self.jobject.equals(other.jobject)
 
     def __ge__(self, other):
         """
@@ -146,7 +146,7 @@ class Item(JavaObject):
         :return: the item as string
         :rtype: str
         """
-        return javabridge.call(self.jobject, "toString", "()Ljava/lang/String;")
+        return str(self.jobject)
 
     @property
     def frequency(self):
@@ -156,7 +156,7 @@ class Item(JavaObject):
         :return: the frequency
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getFrequency", "()I")
+        return self.jobject.getFrequency()
 
     @property
     def attribute(self):
@@ -166,7 +166,7 @@ class Item(JavaObject):
         :return: the attribute
         :rtype: Attribute
         """
-        return Attribute(javabridge.call(self.jobject, "getAttribute", "()Lweka/core/Attribute;"))
+        return Attribute(self.jobject.getAttribute())
 
     @property
     def comparison(self):
@@ -176,7 +176,7 @@ class Item(JavaObject):
         :return: the comparison iterator
         :rtype: str
         """
-        return Attribute(javabridge.call(self.jobject, "getComparisonAsString", "()Ljava/lang/String;"))
+        return self.jobject.getComparisonAsString()
 
     @property
     def item_value(self):
@@ -186,7 +186,7 @@ class Item(JavaObject):
         :return: the item value
         :rtype: str
         """
-        return Attribute(javabridge.call(self.jobject, "getItemValueAsString", "()Ljava/lang/String;"))
+        return self.jobject.getItemValueAsString()
 
 
 class AssociationRule(JavaObject):
@@ -199,10 +199,10 @@ class AssociationRule(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the AssociationRule object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         if jobject is None:
-            raise Exception("No AssociationRule JB_Object provided!")
+            raise Exception("No AssociationRule JPype object provided!")
         self.enforce_type(jobject, "weka.associations.AssociationRule")
         super(AssociationRule, self).__init__(jobject)
 
@@ -215,7 +215,7 @@ class AssociationRule(JavaObject):
         :return: the integer result, <0 is less than, =0 is equal to, >0 is greater than
         :rtype: int
         """
-        return javabridge.call(self.jobject, "compareTo", "(Lweka/associations/AssociationRule;)I", other.jobject)
+        return self.jobject.compareTo(other.jobject)
 
     def __lt__(self, other):
         """
@@ -248,7 +248,7 @@ class AssociationRule(JavaObject):
         :return: True if the same
         :rtype: bool
         """
-        return javabridge.call(self.jobject, "equals", "(Ljava/lang/Object;)Z", other.jobject)
+        return self.jobject.equals(other.jobject)
 
     def __ge__(self, other):
         """
@@ -275,15 +275,13 @@ class AssociationRule(JavaObject):
     @property
     def consequence(self):
         """
-        Get the the consequence.
+        Get the consequence.
 
         :return: the consequence, list of Item objects
         :rtype: list
         """
-        items = javabridge.get_collection_wrapper(
-            javabridge.call(self.jobject, "getConsequence", "()Ljava/util/Collection;"))
         result = []
-        for item in items:
+        for item in self.jobject.getConsequence():
             result.append(Item(item))
         return result
 
@@ -295,20 +293,18 @@ class AssociationRule(JavaObject):
         :return: the support
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getConsequenceSupport", "()I")
+        return self.jobject.getConsequenceSupport()
 
     @property
     def premise(self):
         """
-        Get the the premise.
+        Get the premise.
 
         :return: the premise, list of Item objects
         :rtype: list
         """
-        items = javabridge.get_collection_wrapper(
-            javabridge.call(self.jobject, "getPremise", "()Ljava/util/Collection;"))
         result = []
-        for item in items:
+        for item in self.jobject.getPremise():
             result.append(Item(item))
         return result
 
@@ -320,7 +316,7 @@ class AssociationRule(JavaObject):
         :return: the support
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getPremiseSupport", "()I")
+        return self.jobject.getPremiseSupport()
 
     @property
     def total_support(self):
@@ -330,7 +326,7 @@ class AssociationRule(JavaObject):
         :return: the support
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getTotalSupport", "()I")
+        return self.jobject.getTotalSupport()
 
     @property
     def total_transactions(self):
@@ -340,7 +336,7 @@ class AssociationRule(JavaObject):
         :return: the transactions
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getTotalTransactions", "()I")
+        return self.jobject.getTotalTransactions()
 
     @property
     def metric_names(self):
@@ -350,7 +346,7 @@ class AssociationRule(JavaObject):
         :return: the metric names
         :rtype: list
         """
-        return jstring_array_to_list(javabridge.call(self.jobject, "getMetricNamesForRule", "()[Ljava/lang/String;"))
+        return jstring_array_to_list(self.jobject.getMetricNamesForRule())
 
     @property
     def metric_values(self):
@@ -360,8 +356,7 @@ class AssociationRule(JavaObject):
         :return: the metric values
         :rtype: ndarray
         """
-        return javabridge.get_env().get_double_array_elements(
-            javabridge.call(self.jobject, "getMetricValuesForRule", "()[D"))
+        return jdouble_array_to_ndarray(self.jobject.getMetricValuesForRule())
 
     def metric_value(self, name):
         """
@@ -372,7 +367,7 @@ class AssociationRule(JavaObject):
         :return: the metric value
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getNamedMetricValue", "(Ljava/lang/String;)D", name)
+        return self.jobject.getNamedMetricValue(name)
 
     @property
     def primary_metric_name(self):
@@ -382,7 +377,7 @@ class AssociationRule(JavaObject):
         :return: the metric name
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getPrimaryMetricName", "()Ljava/lang/String;")
+        return self.jobject.getPrimaryMetricName()
 
     @property
     def primary_metric_value(self):
@@ -392,7 +387,7 @@ class AssociationRule(JavaObject):
         :return: the metric value
         :rtype: float
         """
-        return javabridge.call(self.jobject, "getPrimaryMetricValue", "()D")
+        return self.jobject.getPrimaryMetricValue()
     
     def to_dict(self):
         """
@@ -461,10 +456,10 @@ class AssociationRules(JavaObject):
         Initializes the wrapper.
 
         :param jobject: the AssociationRules object to wrap
-        :type jobject: JB_Object
+        :type jobject: JPype object
         """
         if jobject is None:
-            raise Exception("No AssociationRules JB_Object provided!")
+            raise Exception("No AssociationRules JPype object provided!")
         self.enforce_type(jobject, "weka.associations.AssociationRules")
         super(AssociationRules, self).__init__(jobject)
 
@@ -475,7 +470,7 @@ class AssociationRules(JavaObject):
         :return: the number of rules
         :rtype: int
         """
-        return javabridge.call(self.jobject, "getNumRules", "()I")
+        return self.jobject.getNumRules()
 
     def __getitem__(self, item):
         """
@@ -486,9 +481,7 @@ class AssociationRules(JavaObject):
         :return: the AssociationRule
         :rtype: AssociationRule
         """
-        rules = javabridge.get_collection_wrapper(
-            javabridge.call(self.jobject, "getRules", "()Ljava/util/List;"))
-        return AssociationRule(rules[item])
+        return AssociationRule(self.jobject.getRules()[item])
 
     def __str__(self):
         """
@@ -516,7 +509,7 @@ class AssociationRules(JavaObject):
         :return: the producer
         :rtype: str
         """
-        return javabridge.call(self.jobject, "getProducer", "()Ljava/lang/String;")
+        return self.jobject.getProducer()
 
     @producer.setter
     def producer(self, producer):
@@ -526,7 +519,7 @@ class AssociationRules(JavaObject):
         :param producer: the producer
         :type producer: str
         """
-        javabridge.call(self.jobject, "setProducer", "(Ljava/lang/String;)V", producer)
+        self.jobject.setProducer(producer)
     
     def to_dict(self):
         """
@@ -548,12 +541,12 @@ class Associator(OptionHandler):
 
     def __init__(self, classname=None, jobject=None, options=None):
         """
-        Initializes the specified associator using either the classname or the supplied JB_Object.
+        Initializes the specified associator using either the classname or the supplied JPype object.
 
         :param classname: the classname of the associator
         :type classname: str
-        :param jobject: the JB_Object to use
-        :type jobject: JB_Object
+        :param jobject: the JPype object to use
+        :type jobject: JPype object
         :param options: the list of commandline options to set
         :type options: list
         """
@@ -571,7 +564,7 @@ class Associator(OptionHandler):
         :return: the capabilities
         :rtype: Capabilities
         """
-        return Capabilities(javabridge.call(self.jobject, "getCapabilities", "()Lweka/core/Capabilities;"))
+        return Capabilities(self.jobject.getCapabilities())
 
     @property
     def header(self):
@@ -591,7 +584,7 @@ class Associator(OptionHandler):
         :type data: Instances
         """
         self._header = data.copy_structure()
-        javabridge.call(self.jobject, "buildAssociations", "(Lweka/core/Instances;)V", data.jobject)
+        self.jobject.buildAssociations(data.jobject)
 
     def can_produce_rules(self):
         """
@@ -602,7 +595,7 @@ class Associator(OptionHandler):
         """
         if not self.check_type(self.jobject, "weka.associations.AssociationRulesProducer"):
             return False
-        return javabridge.call(self.jobject, "canProduceRules", "()Z")
+        return self.jobject.canProduceRules()
 
     def association_rules(self):
         """
@@ -613,8 +606,7 @@ class Associator(OptionHandler):
         """
         if not self.check_type(self.jobject, "weka.associations.AssociationRulesProducer"):
             return None
-        return AssociationRules(
-            javabridge.call(self.jobject, "getAssociationRules", "()Lweka/associations/AssociationRules;"))
+        return AssociationRules(self.jobject.getAssociationRules())
 
     @property
     def rule_metric_names(self):
@@ -626,28 +618,24 @@ class Associator(OptionHandler):
         """
         if not self.check_type(self.jobject, "weka.associations.AssociationRulesProducer"):
             return None
-        return jstring_array_to_list(
-            javabridge.call(self.jobject, "getRuleMetricNames", "()[Ljava/lang/String;"))
+        return jstring_array_to_list(self.jobject.getRuleMetricNames())
 
     @classmethod
     def make_copy(cls, associator):
         """
-        Creates a copy of the clusterer.
+        Creates a copy of the associator.
 
         :param associator: the associator to copy
         :type associator: Associator
         :return: the copy of the associator
         :rtype: Associator
         """
-        return Associator(
-            jobject=javabridge.static_call(
-                "weka/associations/AbstractAssociator", "makeCopy",
-                "(Lweka/associations/Associator;)Lweka/associations/Associator;", associator.jobject))
+        return Associator(jobject=JClass("weka.associations.AbstractAssociator").makeCopy(associator.jobject))
 
 
 def main(args=None):
     """
-    Runs a associator from the command-line. Calls JVM start/stop automatically.
+    Runs an associator from the command-line. Calls JVM start/stop automatically.
     Use -h to see all options.
 
     :param args: the command-line arguments to use, uses sys.argv if None
