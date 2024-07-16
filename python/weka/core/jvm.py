@@ -82,7 +82,7 @@ def add_system_classpath(cp):
 def start(class_path=None, bundled=True, packages=False, system_cp=False, max_heap_size=None, system_info=False,
           auto_install=False, logging_level=logging.DEBUG):
     """
-    Initializes the javabridge connection (starts up the JVM).
+    Initializes the jpype connection (starts up the JVM).
 
     :param class_path: the additional classpath elements to add
     :type class_path: list

@@ -33,7 +33,7 @@ class TokenIterator(object):
 
     def _make_calls(self):
         """
-        Method for generating instances using javabridge.make_call.
+        Method for obtaining method instances for faster access.
         Members must start with "_mc_"
         """
         self._mc_has_more = self.tokenizer.jobject.hasMoreElements

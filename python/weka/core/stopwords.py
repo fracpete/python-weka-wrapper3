@@ -40,7 +40,7 @@ class Stopwords(OptionHandler):
 
     def _make_calls(self):
         """
-        Method for generating instances using javabridge.make_call.
+        Method for obtaining method instances for faster access.
         Members must start with "_mc_"
         """
         super(Stopwords, self)._make_calls()

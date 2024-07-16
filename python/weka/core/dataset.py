@@ -46,7 +46,7 @@ class Instances(JavaObject):
 
     def _make_calls(self):
         """
-        Method for generating instances using javabridge.make_call.
+        Method for obtaining method instances for faster access.
         Members must start with "_mc_"
         """
         super(Instances, self)._make_calls()
@@ -727,7 +727,7 @@ class Instance(JavaObject):
 
     def _make_calls(self):
         """
-        Method for generating instances using javabridge.make_call.
+        Method for obtaining method instances for faster access.
         Members must start with "_mc_"
         """
         super(Instance, self)._make_calls()

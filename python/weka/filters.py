@@ -60,7 +60,7 @@ class Filter(OptionHandler):
 
     def _make_calls(self):
         """
-        Method for generating instances using javabridge.make_call.
+        Method for obtaining method instances for faster access.
         Members must start with "_mc_"
         """
         super(Filter, self)._make_calls()
