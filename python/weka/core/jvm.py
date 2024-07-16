@@ -129,9 +129,16 @@ def start(class_path=None, bundled=True, packages=False, system_cp=False, max_he
         add_system_classpath(full_cp)
 
     logger.debug("Classpath=" + str(full_cp))
-    logger.debug("MaxHeapSize=" + ("default" if (max_heap_size is None) else max_heap_size))
 
     args = []
+
+    # heap size
+    if max_heap_size is not None:
+        logger.debug("MaxHeapSize=%s" % max_heap_size)
+        args.append("-Xmx%s" % max_heap_size)
+    else:
+        logger.debug("MaxHeapSize=default")
+
     weka_home = None
     if packages is not None:
         if isinstance(packages, bool):

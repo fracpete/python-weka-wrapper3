@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.3.1 (????-??-??)
+------------------
+
+- the `max_heap_size` parameter of the `start` method from the `weka.core.jvm` module now has an effect
+
+
 0.3.0 (2024-07-12)
 ------------------
 
