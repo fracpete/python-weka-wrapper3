@@ -30,9 +30,9 @@ Commands for releasing on pypi.org (requires twine >= 1.8.0):
 ```
 find -name "*~" -delete
 rm dist/*
-./venv/bin/python setup.py clean
-./venv/bin/python setup.py sdist
-./venv/bin/twine upload dist/*
+python3 setup.py clean
+python3 setup.py sdist
+twine upload dist/*
 ```
 
 Commands for updating github pages (requires sphinx in venv and Java 8!):
