@@ -53,7 +53,7 @@ graphical output:
 
 .. code-block:: bash
 
-   sudo apt-get install python3-pil python3-matplotlib python3-pygraphviz
+   sudo apt-get install python3-pil python3-matplotlib python3-pygraphviz libgraphviz-dev
 
 Install OpenJDK as well, in order to get all the header files for compilation:
 
@@ -104,7 +104,7 @@ graphical output:
 
 .. code-block:: bash
 
-   apt-get install python3-pil python3-matplotlib python3-pygraphviz
+   apt-get install python3-pil python3-matplotlib python3-pygraphviz libgraphviz-dev
 
 Older Debian versions used `python3-imaging` instead of `python3-pil`.
 
@@ -185,7 +185,7 @@ graphical output and plots:
 * numpy
 * PIL (optional)
 * matplotlib (optional)
-* pygraphviz (optional)
+* pygraphviz (optional; requires graphviz headers)
 
 Create a virtual environment using the *venv* module that :
 
@@ -211,7 +211,7 @@ In a Python 3 COLAB environment, you need to run the following steps for full fu
 
    # install dependencies
    !apt-get install build-essential python3-dev
-   !apt-get install python3-pil python3-pygraphviz
+   !apt-get install python3-pil python3-pygraphviz libgraphviz-dev
    !apt install openjdk-11-jdk
    # install pww3
    !pip install wheel
