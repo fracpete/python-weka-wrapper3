@@ -39,27 +39,27 @@ First, you need to be able to compile C/C++ code and Python modules:
 
 .. code-block:: bash
 
-   sudo apt-get install build-essential python3-dev
+   sudo apt install build-essential python3-dev
 
 Now, you can install the various packages that we require for installing
 *python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   sudo apt-get install python3-pip python3-numpy python3-venv
+   sudo apt install python3-pip python3-numpy python3-venv
 
 The following packages are optional, but necessary if you also want some
 graphical output:
 
 .. code-block:: bash
 
-   sudo apt-get install python3-pil python3-matplotlib python3-pygraphviz
+   sudo apt install python3-pil python3-matplotlib python3-pygraphviz libgraphviz-dev
 
 Install OpenJDK as well, in order to get all the header files for compilation:
 
 .. code-block:: bash
 
-   sudo apt-get install default-jdk
+   sudo apt install default-jdk
 
 Create a virtual environment using the *venv* module that :
 
@@ -90,21 +90,21 @@ You need to be able to compile C/C++ code and Python modules:
 
 .. code-block:: bash
 
-   apt-get install build-essential python3-dev
+   apt install build-essential python3-dev
 
 Now, you can install the various packages that we require for installing
 *`python-weka-wrapper3*:
 
 .. code-block:: bash
 
-   apt-get install python3-pip python3-numpy python3-venv
+   apt install python3-pip python3-numpy python3-venv
 
 The following packages are optional, but necessary if you also want some
 graphical output:
 
 .. code-block:: bash
 
-   apt-get install python3-pil python3-matplotlib python3-pygraphviz
+   apt install python3-pil python3-matplotlib python3-pygraphviz libgraphviz-dev
 
 Older Debian versions used `python3-imaging` instead of `python3-pil`.
 
@@ -185,7 +185,7 @@ graphical output and plots:
 * numpy
 * PIL (optional)
 * matplotlib (optional)
-* pygraphviz (optional)
+* pygraphviz (optional; requires graphviz headers)
 
 Create a virtual environment using the *venv* module that :
 
@@ -210,8 +210,8 @@ In a Python 3 COLAB environment, you need to run the following steps for full fu
 .. code-block:: bash
 
    # install dependencies
-   !apt-get install build-essential python3-dev
-   !apt-get install python3-pil python3-pygraphviz
+   !apt install build-essential python3-dev
+   !apt install python3-pil python3-pygraphviz libgraphviz-dev
    !apt install openjdk-11-jdk
    # install pww3
    !pip install wheel

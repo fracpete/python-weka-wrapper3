@@ -57,21 +57,21 @@ omit the suffix <code class="docutils literal notranslate"><span class="pre">[pl
 <section id="ubuntu">
 <h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this heading">¶</a></h2>
 <p>First, you need to be able to compile C/C++ code and Python modules:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
 </pre></div>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>python-weka-wrapper3</em>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-venv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-venv
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
 graphical output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-matplotlib<span class="w"> </span>python3-pygraphviz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-matplotlib<span class="w"> </span>python3-pygraphviz<span class="w"> </span>libgraphviz-dev
 </pre></div>
 </div>
 <p>Install OpenJDK as well, in order to get all the header files for compilation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>default-jdk
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>default-jdk
 </pre></div>
 </div>
 <p>Create a virtual environment using the <em>venv</em> module that :</p>
@@ -93,17 +93,17 @@ pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<s
 </pre></div>
 </div>
 <p>You need to be able to compile C/C++ code and Python modules:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
 </pre></div>
 </div>
 <p>Now, you can install the various packages that we require for installing
 <em>`python-weka-wrapper3</em>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-venv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-numpy<span class="w"> </span>python3-venv
 </pre></div>
 </div>
 <p>The following packages are optional, but necessary if you also want some
 graphical output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-matplotlib<span class="w"> </span>python3-pygraphviz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-matplotlib<span class="w"> </span>python3-pygraphviz<span class="w"> </span>libgraphviz-dev
 </pre></div>
 </div>
 <p>Older Debian versions used <cite>python3-imaging</cite> instead of <cite>python3-pil</cite>.</p>
@@ -167,7 +167,7 @@ graphical output and plots:</p>
 <li><p>numpy</p></li>
 <li><p>PIL (optional)</p></li>
 <li><p>matplotlib (optional)</p></li>
-<li><p>pygraphviz (optional)</p></li>
+<li><p>pygraphviz (optional; requires graphviz headers)</p></li>
 </ul>
 <p>Create a virtual environment using the <em>venv</em> module that :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>pww3
@@ -184,8 +184,8 @@ pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<s
 <h2>COLAB<a class="headerlink" href="#colab" title="Permalink to this heading">¶</a></h2>
 <p>In a Python 3 COLAB environment, you need to run the following steps for full functionality:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install dependencies</span>
-!apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
-!apt-get<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-pygraphviz
+!apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
+!apt<span class="w"> </span>install<span class="w"> </span>python3-pil<span class="w"> </span>python3-pygraphviz<span class="w"> </span>libgraphviz-dev
 !apt<span class="w"> </span>install<span class="w"> </span>openjdk-11-jdk
 <span class="c1"># install pww3</span>
 !pip<span class="w"> </span>install<span class="w"> </span>wheel
