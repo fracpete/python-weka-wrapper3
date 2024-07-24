@@ -8,7 +8,7 @@ Introduction
 
 *python-weka-wrapper3* allows you to use `Weka <http://www.cs.waikato.ac.nz/~ml/weka/>`__ from within Python3.
 
-The library uses the `javabridge <https://pypi.python.org/pypi/javabridge>`__ library for starting up,
+The library uses the `jpype <https://github.com/jpype-project/jpype>`__ library for starting up,
 communicating with and shutting down the Java Virtual Machine in which the Weka processes get executed.
 
 *python-weka-wrapper3* provides a thin wrapper around the basic (non-GUI) functionality of Weka (some plots are
