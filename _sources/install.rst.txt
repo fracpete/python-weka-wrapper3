@@ -276,12 +276,19 @@ install a 32-bit JDK (or all of them are 64-bit).
 Perform the following steps:
 
 * set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
-* download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
-  select the **Desktop development with C++** option in the installer
+* if you want to be able to *display graphs in dot format* (very large installation):
+
+  * download and install the `.Net framework 4.6 or later <https://dotnet.microsoft.com/en-us/download/dotnet-framework/>`__ (required for Visual C++ Build Tools)
+  * download and install the `Visual C++ Build Tools <https://visualstudio.microsoft.com/visual-cpp-build-tools/>`__,
+    select the **Desktop development with C++** option in the installer
+  * install `GraphViz <https://graphviz.org/download/>`__ into ``C:\Program Files\Graphviz`` and add its binaries to
+    the ``PATH`` environment variable
+
+* if you do not need *dot format support*:
+
+  * install `MS VC++ redistributable <https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version>`__
+
 * install `Python <http://www.python.org/downloads>`__, make sure you check *Add python.exe to path* during the installation
-* add the Python scripts directory to your ``PATH`` environment variable, e.g., ``C:\\Python\\Python312\\Scripts``
-* install `GraphViz <https://graphviz.org/download/>`__ into ``C:\Program Files\Graphviz`` and add its binaries to
-  the ``PATH`` environment variable
 * open a command-prompt and create a virtual environment
 * create a virtual environment using the *venv* module:
 
@@ -295,8 +302,19 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
    pww3\Scripts\activate
    pip install setuptools wheel
+
+If you installed *Visual C++ Build Tools* and *Graphviz*:
+
+.. code-block:: doscon
+
    pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-IC:\\Program Files\\Graphviz\\include" --config-settings="--global-option=-LC:\\Program Files\\Graphviz\\lib" pygraphviz
    pip install python-weka-wrapper3[plots,graphs]
+
+If you only installed *MS VC++ redistributable*:
+
+.. code-block:: doscon
+
+   pip install python-weka-wrapper3[plots]
 
 
 From source

@@ -241,12 +241,21 @@ install a 32-bit JDK (or all of them are 64-bit).</p>
 <p>Perform the following steps:</p>
 <ul class="simple">
 <li><p>set the <cite>JDK_HOME</cite> environment variable to point at the same directory as <cite>JAVA_HOME</cite></p></li>
+<li><p>if you want to be able to <em>display graphs in dot format</em> (very large installation):</p>
+<ul>
+<li><p>download and install the <a class="reference external" href="https://dotnet.microsoft.com/en-us/download/dotnet-framework/">.Net framework 4.6 or later</a> (required for Visual C++ Build Tools)</p></li>
 <li><p>download and install the <a class="reference external" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual C++ Build Tools</a>,
 select the <strong>Desktop development with C++</strong> option in the installer</p></li>
-<li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a>, make sure you check <em>Add python.exe to path</em> during the installation</p></li>
-<li><p>add the Python scripts directory to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, e.g., <code class="docutils literal notranslate"><span class="pre">C:\\Python\\Python312\\Scripts</span></code></p></li>
 <li><p>install <a class="reference external" href="https://graphviz.org/download/">GraphViz</a> into <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Graphviz</span></code> and add its binaries to
 the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable</p></li>
+</ul>
+</li>
+<li><p>if you do not need <em>dot format support</em>:</p>
+<ul>
+<li><p>install <a class="reference external" href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version">MS VC++ redistributable</a></p></li>
+</ul>
+</li>
+<li><p>install <a class="reference external" href="http://www.python.org/downloads">Python</a>, make sure you check <em>Add python.exe to path</em> during the installation</p></li>
 <li><p>open a command-prompt and create a virtual environment</p></li>
 <li><p>create a virtual environment using the <em>venv</em> module:</p></li>
 </ul>
@@ -256,8 +265,15 @@ the <code class="docutils literal notranslate"><span class="pre">PATH</span></co
 <p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pww3\Scripts\activate</span>
 <span class="go">pip install setuptools wheel</span>
-<span class="go">pip install -U --no-cache-dir --config-settings=&quot;--global-option=build_ext&quot; --config-settings=&quot;--global-option=-IC:\\Program Files\\Graphviz\\include&quot; --config-settings=&quot;--global-option=-LC:\\Program Files\\Graphviz\\lib&quot; pygraphviz</span>
+</pre></div>
+</div>
+<p>If you installed <em>Visual C++ Build Tools</em> and <em>Graphviz</em>:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -U --no-cache-dir --config-settings=&quot;--global-option=build_ext&quot; --config-settings=&quot;--global-option=-IC:\\Program Files\\Graphviz\\include&quot; --config-settings=&quot;--global-option=-LC:\\Program Files\\Graphviz\\lib&quot; pygraphviz</span>
 <span class="go">pip install python-weka-wrapper3[plots,graphs]</span>
+</pre></div>
+</div>
+<p>If you only installed <em>MS VC++ redistributable</em>:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pip install python-weka-wrapper3[plots]</span>
 </pre></div>
 </div>
 </section>
