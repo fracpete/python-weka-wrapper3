@@ -18,7 +18,7 @@ In the past, it was not recommended to use OpenJDK, as Weka was developed with a
 version. However, Oracle's JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
 recommended Java version to use. Personally, I recommend the **long-term support version 11 of OpenJDK**.
 
-If operating system does not offer automatic installations of JDKs, you can download OpenJDK releases for
+If your operating system does not offer automatic installations of JDKs, you can download OpenJDK releases for
 various platforms from `here <https://adoptium.net//>`__. When manually installing an OpenJDK, you will need
 to set the ``JAVA_HOME`` `environment variable <https://docs.oracle.com/cd/E21454_01/html/821-2531/inst_jdk_javahome_t.html>`__,
 pointing to the installation directory.
@@ -58,7 +58,7 @@ Install OpenJDK as well, in order to get all the header files for compilation:
 
 .. code-block:: bash
 
-   sudo apt install default-jdk
+   sudo apt install openjdk-11-jdk
 
 Create a virtual environment using the *venv* module that :
 
