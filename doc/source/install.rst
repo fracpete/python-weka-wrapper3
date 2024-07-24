@@ -302,12 +302,12 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
    pww3\Scripts\activate
    pip install setuptools wheel
-   pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-IC:\\Program Files\\Graphviz\\include" --config-settings="--global-option=-LC:\\Program Files\\Graphviz\\lib" pygraphviz
 
 If you installed *Visual C++ Build Tools* and *Graphviz*:
 
 .. code-block:: doscon
 
+   pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-IC:\\Program Files\\Graphviz\\include" --config-settings="--global-option=-LC:\\Program Files\\Graphviz\\lib" pygraphviz
    pip install python-weka-wrapper3[plots,graphs]
 
 If you only installed *MS VC++ redistributable*:
