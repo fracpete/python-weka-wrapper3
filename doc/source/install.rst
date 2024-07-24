@@ -250,7 +250,6 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 Windows using Anaconda
 ----------------------
 
-* set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
 * download and install `Anaconda <https://www.anaconda.com/download/>`__ if you haven't done so already
 * the following configures an environment with Python 3.12
 
@@ -272,7 +271,6 @@ install a 32-bit JDK (or all of them are 64-bit).
 
 Perform the following steps:
 
-* set the `JDK_HOME` environment variable to point at the same directory as `JAVA_HOME`
 * if you want to be able to *display graphs in dot format* (very large installation):
 
   * download and install the `.Net framework 4.6 or later <https://dotnet.microsoft.com/en-us/download/dotnet-framework/>`__ (required for Visual C++ Build Tools)
