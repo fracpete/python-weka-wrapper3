@@ -44,7 +44,7 @@ on the instructions below, please use the following mailing list:</p>
 <p>In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle’s
 version. However, Oracle’s JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
 recommended Java version to use. Personally, I recommend the <strong>long-term support version 11 of OpenJDK</strong>.</p>
-<p>If operating system does not offer automatic installations of JDKs, you can download OpenJDK releases for
+<p>If your operating system does not offer automatic installations of JDKs, you can download OpenJDK releases for
 various platforms from <a class="reference external" href="https://adoptium.net//">here</a>. When manually installing an OpenJDK, you will need
 to set the <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> <a class="reference external" href="https://docs.oracle.com/cd/E21454_01/html/821-2531/inst_jdk_javahome_t.html">environment variable</a>,
 pointing to the installation directory.</p>
@@ -71,7 +71,7 @@ graphical output:</p>
 </pre></div>
 </div>
 <p>Install OpenJDK as well, in order to get all the header files for compilation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>default-jdk
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>openjdk-11-jdk
 </pre></div>
 </div>
 <p>Create a virtual environment using the <em>venv</em> module that :</p>
