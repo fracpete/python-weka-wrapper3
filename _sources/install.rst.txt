@@ -14,15 +14,14 @@ https://groups.google.com/forum/#!forum/python-weka-wrapper
 Prerequisites for all platforms
 -------------------------------
 
-You need a Java Development Kit (JDK) 8 or later (e.g., `OpenJDK <https://adoptium.net//>`__) installed and
-the ``JAVA_HOME`` `environment variable
-<http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`__
-pointing to the installation directory in order to use *python-weka-wrapper3*
-library.
-
-**Note:** In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle's
+In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle's
 version. However, Oracle's JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
 recommended Java version to use. Personally, I recommend the **long-term support version 11 of OpenJDK**.
+
+If operating system does not offer automatic installations of JDKs, you can download OpenJDK releases for
+various platforms from `here <https://adoptium.net//>`__. When manually installing an OpenJDK, you will need
+to set the ``JAVA_HOME`` `environment variable <https://docs.oracle.com/cd/E21454_01/html/821-2531/inst_jdk_javahome_t.html>`__,
+pointing to the installation directory.
 
 
 Optional features
