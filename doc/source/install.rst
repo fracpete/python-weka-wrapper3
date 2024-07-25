@@ -34,6 +34,9 @@ omit the suffix ``[plots,graphs]`` when installing python-weka-wrapper3.
 Ubuntu
 ------
 
+A video demonstrating the installation on Ubuntu 22.04 is available:
+`https://youtu.be/UIm0rKilABc?si=DUECgNdc16K64CCu <https://youtu.be/UIm0rKilABc?si=DUECgNdc16K64CCu>`__
+
 First, you need to be able to compile C/C++ code and Python modules:
 
 .. code-block:: bash
@@ -250,6 +253,9 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 Windows using Anaconda
 ----------------------
 
+A video demonstrating the installation on Windows 10 is available:
+`https://youtu.be/azr-JqF7jLE?si=JAz9M9NhJ5kVvWY0 <https://youtu.be/azr-JqF7jLE?si=JAz9M9NhJ5kVvWY0>`__
+
 * download and install `Anaconda <https://www.anaconda.com/download/>`__ if you haven't done so already
 * the following configures an environment with Python 3.12
 
@@ -268,6 +274,9 @@ Windows
 **Please note:** You need to make sure that the *bitness* of your environment
 is consistent.  I.e., if you install a 32-bit version of Python, you need to
 install a 32-bit JDK (or all of them are 64-bit).
+
+A video demonstrating the installation on Windows 10 (without graph support) is available:
+`https://youtu.be/t5g9cigltvs?si=-RkcZT1ygSJTjT2E <https://youtu.be/t5g9cigltvs?si=-RkcZT1ygSJTjT2E>`__
 
 Perform the following steps:
 
