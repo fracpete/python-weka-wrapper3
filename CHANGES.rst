@@ -10,6 +10,8 @@ Changelog
   either to stdout or to text file (eg `requirements.txt`)
 - the sub-command `install` of the `pww-packages` command-line tool can process
   a requirements text file now as well
+- added `pww_version()` function to `weka.core.version` to obtain the installed
+  version of python-weka-wrapper3
 
 
 0.3.1 (2024-07-17)

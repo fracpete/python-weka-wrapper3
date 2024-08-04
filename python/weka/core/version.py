@@ -12,8 +12,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # version.py
-# Copyright (C) 2014-2018 Fracpete (pythonwekawrapper at gmail dot com)
+# Copyright (C) 2014-2024 Fracpete (pythonwekawrapper at gmail dot com)
 
+import importlib.metadata
 from weka.core.classes import JavaObject
 
 
@@ -26,3 +27,16 @@ def weka_version():
     """
     jobj = JavaObject(JavaObject.new_instance("weka.core.Version"))
     return str(jobj)
+
+
+def pww_version():
+    """
+    Returns the installed version of python-weka-wrapper3.
+
+    :return: the version, None if failed to obtain
+    :rtype: str
+    """
+    try:
+        return importlib.metadata.version('python-weka-wrapper3')
+    except:
+        return None
