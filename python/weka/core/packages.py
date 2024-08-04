@@ -16,6 +16,7 @@
 
 import argparse
 import json
+import logging
 import sys
 import traceback
 from jpype import JClass
@@ -26,6 +27,10 @@ import weka.core.classes as classes
 
 LATEST = "Latest"
 """ Constant for the latest version of a package """
+
+# logging setup
+logger = logging.getLogger("weka.packages")
+logger.setLevel(logging.INFO)
 
 
 class Package(JavaObject):
@@ -432,13 +437,13 @@ def install_packages(pkges, fail_fast=True, details=False):
 
         if msg is not None:
             if from_repo:
-                print("Failed to install %s/%s:\n%s" % (pkge, version, msg))
+                logger.error("Failed to install %s/%s:\n%s" % (pkge, version, msg))
             else:
-                print("Failed to install %s:\n%s" % (pkge, msg))
+                logger.error("Failed to install %s:\n%s" % (pkge, msg))
             success = False
             result = False
-        elif install_msg is not None:
-            print("Installation message from %s:\n%s" % (pkge, install_msg))
+        elif (install_msg is not None) and (len(install_msg) > 0):
+            logger.info("Installation message from %s:\n%s" % (pkge, install_msg))
 
         result_details[pkge] = {
             "from_repo": from_repo,
@@ -504,15 +509,15 @@ def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
 
         if not is_installed(pkge):
             if not quiet:
-                print("%s/%s not installed, attempting installation..." % (pkge, version))
+                logger.info("%s/%s not installed, attempting installation..." % (pkge, version))
             if install_package(pkge, version=version):
                 inst = installed_package(pkge)
                 exit_required = True
                 if not quiet:
-                    print("%s/%s successfully installed" % (pkge, inst.version))
+                    logger.info("%s/%s successfully installed" % (pkge, inst.version))
             else:
                 result = False
-                print("Failed to install %s/%s" % (pkge, version))
+                logger.error("Failed to install %s/%s" % (pkge, version))
         else:
             inst = installed_package(pkge)
             all = all_package(pkge)
@@ -524,28 +529,28 @@ def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
             if install_required:
                 if not quiet:
                     if version == LATEST:
-                        print("Latest version of %s requested (installed: %s, repository: %s), attempting upgrade" % (pkge, inst.version, all.version))
+                        logger.info("Latest version of %s requested (installed: %s, repository: %s), attempting upgrade" % (pkge, inst.version, all.version))
                     else:
-                        print("Different version of %s requested (installed: %s, requested: %s), attempting installation" % (pkge, inst.version, version))
+                        logger.info("Different version of %s requested (installed: %s, requested: %s), attempting installation" % (pkge, inst.version, version))
                 if install_package(pkge, version=version):
                     inst = installed_package(pkge)
                     exit_required = True
                     if not quiet:
-                        print("%s/%s successfully installed" % (pkge, inst.version))
+                        logger.info("%s/%s successfully installed" % (pkge, inst.version))
                 else:
                     result = False
-                    print("Failed to install %s/%s" % (pkge, version))
+                    logger.error("Failed to install %s/%s" % (pkge, version))
             else:
                 if not quiet:
-                    print("%s/%s already installed, skipping installation" % (pkge, version))
+                    prilogger.infont("%s/%s already installed, skipping installation" % (pkge, version))
 
     if exit_required:
         if not quiet:
-            print("Package(s) installed, JVM needs to be restarted")
+            logger.info("Package(s) installed, JVM needs to be restarted")
         if stop_jvm_and_exit:
-            print("Stopping JVM...")
+            logger.info("Stopping JVM...")
             jvm.stop()
-            print("Exiting...")
+            logger.info("Exiting...")
             sys.exit(0)
 
     return result, exit_required
@@ -595,6 +600,31 @@ def is_installed(name, version=None):
     return False
 
 
+def is_official_package(name, version=None):
+    """
+    Checks whether the package is an official one.
+
+    :param name: the name of the package to check
+    :type name: str
+    :param version: the specific version to check
+    :type version: str
+    :return: whether an official package or not
+    :rtype: bool
+    """
+    result = False
+    pkgs = all_packages()
+    for pkg in pkgs:
+        if pkg.name == name:
+            if version is None:
+                if pkg.version == version:
+                    result = True
+                    break
+            else:
+                result = True
+                break
+    return result
+
+
 def suggest_package(name, exact=False):
     """
     Suggests package(s) for the given name (classname, package name). Matching can be either exact or just a substring.
@@ -626,6 +656,7 @@ def _output_text(content, format_lambda, output):
     if output is None:
         print("\n".join(formatted))
     else:
+        logger.info("Writing to: %s" % output)
         with open(output, "w") as fp:
             fp.write("\n".join(formatted))
 
@@ -647,6 +678,7 @@ def _output_json(content, content_filter, output):
     if output is None:
         print(json.dumps(filtered, indent=2))
     else:
+        logger.info("Writing to: %s" % output)
         with open(output, "w") as fp:
             json.dump(filtered, fp, indent=2)
 
@@ -726,14 +758,43 @@ def _subcmd_info(args):
 def _subcmd_install(args):
     """
     Installs one or more packages. Specific versions are suffixed with "==VERSION".
+    A requirements text file can be supplied as well (PKGNAME[==VERSION[|URL]]).
     """
+    if (args.packages is None) and (args.requirements is None):
+        raise Exception("Packages have to be either listed explicitly or provided via a text file (-r/--requirements)!")
+
+    if args.refresh_cache:
+        refresh_cache()
+
     for pkg in args.packages:
         version = LATEST
         if "==" in pkg:
             pkg, version = pkg.split("==")
-        print("Installing: %s/%s" % (pkg, version))
+        logger.info("Installing: %s/%s" % (pkg, version))
         success = install_package(pkg, version)
-        print("  installed successfully" if success else "  failed to install")
+        logger.info("  installed successfully" if success else "  failed to install")
+
+    if args.requirements is not None:
+        logger.info("Processing: %s" % args.requirements)
+        with open(args.requirements, "r") as fp:
+            lines = fp.readlines()
+        for line in lines:
+            pkg = line.strip()
+            if len(pkg) > 0:
+                version = LATEST
+                url = None
+                if "==" in pkg:
+                    pkg, version = pkg.split("==")
+                    if "|" in version:
+                        version, url = version.split("|")
+                if url is None:
+                    logger.info("Installing: %s/%s" % (pkg, version))
+                    success = install_package(pkg, version)
+                    logger.info("  installed successfully" if success else "  failed to install")
+                else:
+                    logger.info("Installing: %s/%s" % (pkg, url))
+                    success = install_package(url)
+                    logger.info("  installed successfully" if success else "  failed to install")
 
 
 def _subcmd_uninstall(args):
@@ -741,12 +802,31 @@ def _subcmd_uninstall(args):
     Uninstalls one or more packages.
     """
     for pkg in args.packages:
-        print("Uninstalling: %s" % pkg)
+        logger.info("Uninstalling: %s" % pkg)
         if is_installed(pkg):
             uninstall_package(pkg)
-            print("  uninstalled")
+            logger.info("  uninstalled")
         else:
-            print("  not installed, skipping")
+            logger.info("  not installed, skipping")
+
+
+def _subcmd_freeze(args):
+    """
+    Outputs the currently installed packages in requirements.txt file format (PKGNAME==VERSION[|URL], one per line).
+    Either to the specified requirements file or to stdout. The URL is only output for "unofficial" packages unless forced.
+    """
+    pkgs = installed_packages()
+    content = [pkg.as_dict() for pkg in pkgs]
+    for c in content:
+        output_urls = args.force_urls or (args.output_urls and not is_official_package(c["name"], c["version"]))
+        if output_urls:
+            if "url" in c:
+                c["url"] = "|" + c["url"]
+            else:
+                c["url"] = ""
+        else:
+            c["url"] = ""
+    _output_text(content, lambda x: "%s==%s%s" % (x["name"], x["version"], x["url"]), args.requirements)
 
 
 def _subcmd_suggest(args):
@@ -817,13 +897,22 @@ def main(args=None):
 
     # install
     parser = sub_parsers.add_parser("install", help="For installing one or more packages")
-    parser.add_argument("packages", nargs="+", help="the name of the package(s) to install, append '==VERSION' to pin to a specific version")
+    parser.add_argument("packages", nargs="*", help="the name of the package(s) to install, append '==VERSION' to pin to a specific version")
+    parser.add_argument("-r", "--requirements", metavar="FILE", default=None, help="the text file with packages to install (one per line, format: PKGNAME[==VERSION[|URL]])")
+    parser.add_argument("--refresh-cache", dest="refresh_cache", action="store_true", help="whether to refresh the package cache")
     parser.set_defaults(func=_subcmd_install)
 
     # uninstall/remove
     parser = sub_parsers.add_parser("uninstall", aliases=["remove"], help="For uninstalling one or more packages")
     parser.add_argument("packages", nargs="+", help="the name of the package(s) to uninstall")
     parser.set_defaults(func=_subcmd_uninstall)
+
+    # freeze
+    parser = sub_parsers.add_parser("freeze", help="For outputting list of installed packages")
+    parser.add_argument("-r", "--requirements", metavar="FILE", default=None, help="the text file to store the package/version pairs in (one per line, format: PKGNAME[==VERSION])")
+    parser.add_argument("-u", "--output_urls", action="store_true", help="whether to output the download URL for unofficial packages (appends '|URL')")
+    parser.add_argument("-f", "--force_urls", action="store_true", help="forces the output of the URLs for all packages, not just unofficial ones")
+    parser.set_defaults(func=_subcmd_freeze)
 
     # suggest
     parser = sub_parsers.add_parser("suggest", help="For suggesting packages that contain the specified class")

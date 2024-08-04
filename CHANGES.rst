@@ -5,6 +5,11 @@ Changelog
 ------------------
 
 - improved logging output in command-line scripts (eg pww-classifier)
+- added sub-command `freeze` to the `pww-packages` command-line tool to output the
+  currently installed packages in pip-like format (unofficial packages get URL appended)
+  either to stdout or to text file (eg `requirements.txt`)
+- the sub-command `install` of the `pww-packages` command-line tool can process
+  a requirements text file now as well
 
 
 0.3.1 (2024-07-17)

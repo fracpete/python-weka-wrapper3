@@ -275,17 +275,18 @@ command. There are several sub-commands available:
 ::
 
     usage: pww-packages [-h]
-                       {list,info,install,uninstall,remove,suggest,is-installed}
-                       ...
+                        {list,info,install,uninstall,remove,freeze,suggest,is-installed}
+                        ...
 
     Manages Weka packages.
 
     positional arguments:
-      {list,info,install,uninstall,remove,suggest,is-installed}
+      {list,info,install,uninstall,remove,freeze,suggest,is-installed}
         list                For listing all/installed/available packages
         info                Outputs information about packages
         install             For installing one or more packages
         uninstall (remove)  For uninstalling one or more packages
+        freeze              For outputting list of installed packages
         suggest             For suggesting packages that contain the specified
                             class
         is-installed        Checks whether a package is installed, simply outputs
@@ -353,14 +354,19 @@ The `install` sub-command installs one or more packages:
 
 ::
 
-    usage: pww-packages install [-h] packages [packages ...]
+    usage: pww-packages install [-h] [-r FILE] [--refresh-cache]
+                                [packages [packages ...]]
 
     positional arguments:
-      packages    the name of the package(s) to install, append '==VERSION' to pin
-                  to a specific version
+      packages              the name of the package(s) to install, append
+                            '==VERSION' to pin to a specific version
 
     optional arguments:
-      -h, --help  show this help message and exit
+      -h, --help            show this help message and exit
+      -r FILE, --requirements FILE
+                            the text file with packages to install (one per line,
+                            format: PKGNAME[==VERSION[|URL]])
+      --refresh-cache       whether to refresh the package cache
 
 
 The `uninstall` (or `remove`) sub-command removes one or more packages:
@@ -394,6 +400,24 @@ The `is-installed` sub-command outputs whether a package is installed or not:
       -o FILE, --output FILE
                             the file to store the output in, uses stdout if not
                             supplied
+
+
+The `freeze` sub-command outputs all installed packages in the `requirements.txt` format
+(PKGNAME==VERSION[|URL], one per line):
+
+::
+
+    usage: pww-packages freeze [-h] [-r FILE] [-u] [-f]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -r FILE, --requirements FILE
+                            the text file to store the package/version pairs in
+                            (one per line, format: PKGNAME[==VERSION])
+      -u, --output_urls     whether to output the download URL for unofficial
+                            packages (appends '|URL')
+      -f, --force_urls      forces the output of the URLs for all packages, not
+                            just unofficial ones
 
 
 
