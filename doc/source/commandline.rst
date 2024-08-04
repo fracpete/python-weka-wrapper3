@@ -275,13 +275,13 @@ command. There are several sub-commands available:
 ::
 
     usage: pww-packages [-h]
-                        {list,info,install,uninstall,remove,freeze,suggest,is-installed}
+                        {list,info,install,uninstall,remove,freeze,suggest,is-installed,bootstrap}
                         ...
 
     Manages Weka packages.
 
     positional arguments:
-      {list,info,install,uninstall,remove,freeze,suggest,is-installed}
+      {list,info,install,uninstall,remove,freeze,suggest,is-installed,bootstrap}
         list                For listing all/installed/available packages
         info                Outputs information about packages
         install             For installing one or more packages
@@ -291,6 +291,8 @@ command. There are several sub-commands available:
                             class
         is-installed        Checks whether a package is installed, simply outputs
                             true/false
+        bootstrap           Generates Python script for recreating current pww3
+                            environment.
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -444,3 +446,21 @@ sub-command to help with that (this works only for official packages):
                             the file to store the output in, uses stdout if not
                             supplied
 
+
+Bootstrapping
++++++++++++++
+
+If you want to recreate your python-weka-wrapper3 installation in another virtual
+environment or even on another machine, then you can use the `bootstrap` sub-command
+to generate a Python script that performs all the necessary steps:
+
+::
+
+    usage: pww-packages bootstrap [-h] [-f] [-o FILE]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -f, --force_urls      forces the install from URLs, not just unofficial ones
+      -o FILE, --output FILE
+                            the file to store the Python script in, otherwise
+                            outputs it on stdout

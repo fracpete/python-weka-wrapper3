@@ -19,10 +19,12 @@ import json
 import logging
 import sys
 import traceback
+from datetime import datetime
 from jpype import JClass
 import weka.core.jvm as jvm
 from weka.core.classes import JavaObject
 import weka.core.classes as classes
+from weka.core.version import pww_version
 
 
 LATEST = "Latest"
@@ -728,6 +730,31 @@ def _output_pkg_info(pkgs, args):
             raise Exception("Unhandled type: %s" % args.type)
 
 
+def _freeze_info(output_urls=False, force_urls=False):
+    """
+    Compiles the information for the "freeze" sub-command.
+
+    :param output_urls: whether to output the URLs
+    :type output_urls: bool
+    :param force_urls: whether to always output the URLs
+    :type force_urls: bool
+    :return: the list of dictionaries with the package info
+    :rtype: list
+    """
+    pkgs = installed_packages()
+    result = [pkg.as_dict() for pkg in pkgs]
+    for c in result:
+        output = force_urls or (output_urls and not is_official_package(c["name"], c["version"]))
+        if output:
+            if "url" in c:
+                c["url"] = "|" + c["url"]
+            else:
+                c["url"] = ""
+        else:
+            c["url"] = ""
+    return result
+
+
 def _subcmd_list(args):
     """
     Lists packages (name and version).
@@ -815,17 +842,7 @@ def _subcmd_freeze(args):
     Outputs the currently installed packages in requirements.txt file format (PKGNAME==VERSION[|URL], one per line).
     Either to the specified requirements file or to stdout. The URL is only output for "unofficial" packages unless forced.
     """
-    pkgs = installed_packages()
-    content = [pkg.as_dict() for pkg in pkgs]
-    for c in content:
-        output_urls = args.force_urls or (args.output_urls and not is_official_package(c["name"], c["version"]))
-        if output_urls:
-            if "url" in c:
-                c["url"] = "|" + c["url"]
-            else:
-                c["url"] = ""
-        else:
-            c["url"] = ""
+    content = _freeze_info(output_urls=args.output_urls, force_urls=args.force_urls)
     _output_text(content, lambda x: "%s==%s%s" % (x["name"], x["version"], x["url"]), args.requirements)
 
 
@@ -845,6 +862,9 @@ def _subcmd_suggest(args):
 
 
 def _subcmd_is_installed(args):
+    """
+    Checks whether the package(s) are installed.
+    """
     content = []
     for name in args.name:
         version = None
@@ -862,6 +882,69 @@ def _subcmd_is_installed(args):
         _output_text(content, lambda x: "%s/%s: %s" % (x["name"], x["version"], str(x["installed"])), args.output)
     elif args.format == "json":
         _output_json(content, None, args.output)
+
+
+def _subcmd_bootstrap(args):
+    """
+    Generates a python script that bootstraps pww3 and currently installed packages
+    on another computer.
+    """
+    lines = list()
+
+    # general info
+    lines.append("# python-weka-wrapper3 - bootstrap")
+    lines.append("# Generated: %s" % str(datetime.now()))
+    lines.append("")
+
+    # logging
+    lines.append("# 1. configure logging")
+    lines.append("import logging")
+    lines.append("logging.basicConfig()")
+    lines.append('logger = logging.getLogger("pww3.boostrap")')
+    lines.append("logger.setLevel(logging.INFO)")
+    lines.append("")
+
+    # pww3
+    lines.append("# 2. install python-weka-wrapper3")
+    lines.append('logger.info("Installing python-weka-wrapper3...")')
+    lines.append("import subprocess")
+    lines.append("import sys")
+    version = pww_version()
+    lines.append('subprocess.check_call([sys.executable, "-m", "pip", "install", "python-weka-wrapper3==%s"])' % version)
+    lines.append("")
+
+    # packages
+    content = _freeze_info(output_urls=True, force_urls=args.force_urls)
+    if len(content) > 0:
+        lines.append("# 3. install Weka packages")
+        lines.append('logger.info("Installing Weka packages...")')
+        lines.append("import weka.core.jvm as jvm")
+        lines.append("from weka.core.packages import install_package")
+        lines.append("jvm.start(packages=True)")
+        lines.append("")
+        for c in content:
+            lines.append("# %s" % c["name"])
+            if ("url" in c) and (len(c["url"]) > 0):
+                url = c["url"]
+                if "|" in url:
+                    _, url = url.split("|")
+                lines.append('logger.info("%s/%s")' % (c["name"], url))
+                lines.append('install_package("%s")' % url)
+            else:
+                lines.append('logger.info("%s/%s")' % (c["name"], c["version"]))
+                lines.append('install_package("%s", "%s")' % (c["name"], c["version"]))
+        lines.append("")
+        lines.append("jvm.stop()")
+
+    # output
+    script = "\n".join(lines)
+    if args.output is None:
+        print(script)
+    else:
+        logger.info("Writing script to: %s" % args.output)
+        with open(args.output, "w") as fp:
+            fp.write(script)
+
 
 
 def main(args=None):
@@ -928,6 +1011,12 @@ def main(args=None):
     parser.add_argument("-f", "--format", choices=["text", "json"], default="text", help="the output format to use")
     parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the output in, uses stdout if not supplied")
     parser.set_defaults(func=_subcmd_is_installed)
+
+    # bootstrap
+    parser = sub_parsers.add_parser("bootstrap", help="Generates Python script for recreating current pww3 environment.")
+    parser.add_argument("-f", "--force_urls", action="store_true", help="forces the install from URLs, not just unofficial ones")
+    parser.add_argument("-o", "--output", metavar="FILE", default=None, help="the file to store the Python script in, otherwise outputs it on stdout")
+    parser.set_defaults(func=_subcmd_bootstrap)
 
     parsed = main_parser.parse_args(args=args)
     # no action chosen? show help
