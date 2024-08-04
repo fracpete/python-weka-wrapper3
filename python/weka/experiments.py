@@ -22,6 +22,7 @@ from weka.classifiers import Classifier
 
 # logging setup
 logger = logging.getLogger("weka.experiments")
+logger.setLevel(logging.INFO)
 
 
 class Experiment(OptionHandler):

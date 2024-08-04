@@ -29,6 +29,7 @@ from weka.core.typeconv import jstring_array_to_list, jdouble_array_to_ndarray
 
 # logging setup
 logger = logging.getLogger("weka.associations")
+logger.setLevel(logging.INFO)
 
 
 class Item(JavaObject):
@@ -657,7 +658,7 @@ def main(args=None):
 
     jvm.start(jars, max_heap_size=parsed.heap, packages=True)
 
-    logger.debug("Commandline: " + join_options(sys.argv[1:]))
+    logger.info("Commandline: " + join_options(sys.argv[1:]))
 
     try:
         associator = Associator(classname=parsed.associator)

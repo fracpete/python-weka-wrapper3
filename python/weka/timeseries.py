@@ -26,6 +26,7 @@ from weka.filters import Filter
 
 # logging setup
 logger = logging.getLogger("weka.timeseries")
+logger.setLevel(logging.INFO)
 
 
 class TestPart(JavaObject):

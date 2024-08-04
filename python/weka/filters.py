@@ -35,6 +35,7 @@ from weka.attribute_selection import ASEvaluation, ASSearch
 
 # logging setup
 logger = logging.getLogger("weka.filters")
+logger.setLevel(logging.INFO)
 
 
 class Filter(OptionHandler):
@@ -456,7 +457,7 @@ def main(args=None):
 
     jvm.start(jars, max_heap_size=parsed.heap, packages=True)
 
-    logger.debug("Commandline: " + join_options(sys.argv[1:]))
+    logger.info("Commandline: " + join_options(sys.argv[1:]))
 
     try:
         flter = Filter(parsed.filter)
@@ -480,7 +481,7 @@ def main(args=None):
             out2 = flter.filter(in2)
             saver.save_file(out2, parsed.output2)
     except Exception:
-        print(traceback.format_exc())
+        logger.exception("Failed to filter data!")
     finally:
         jvm.stop()
 

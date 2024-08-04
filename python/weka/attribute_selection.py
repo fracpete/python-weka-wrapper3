@@ -29,6 +29,7 @@ from weka.core.dataset import Instances, Instance
 
 # logging setup
 logger = logging.getLogger("weka.attribute_selection")
+logger.setLevel(logging.INFO)
 
 
 class ASSearch(OptionHandler):
@@ -495,7 +496,7 @@ def main(args=None):
 
     jvm.start(jars, max_heap_size=parsed.heap, packages=True)
 
-    logger.debug("Commandline: " + join_options(sys.argv[1:]))
+    logger.info("Commandline: " + join_options(sys.argv[1:]))
 
     try:
         evaluation = ASEvaluation(classname=parsed.evaluator)

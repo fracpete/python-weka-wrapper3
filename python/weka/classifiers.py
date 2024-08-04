@@ -35,6 +35,7 @@ from weka.attribute_selection import ASEvaluation, ASSearch
 
 # logging setup
 logger = logging.getLogger("weka.classifiers")
+logger.setLevel(logging.INFO)
 
 
 class Classifier(OptionHandler):
@@ -2283,7 +2284,7 @@ def main(args=None):
 
     jvm.start(jars, max_heap_size=parsed.heap, packages=True)
 
-    logger.debug("Commandline: " + join_options(sys.argv[1:]))
+    logger.info("Commandline: " + join_options(sys.argv[1:]))
 
     try:
         classifier = Classifier(classname=parsed.classifier)
