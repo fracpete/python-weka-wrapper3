@@ -835,11 +835,6 @@ RPlugin,weka.gui.explorer.ExplorerRConsolePanel
 RPlugin,weka.gui.knowledgeflow.RConsolePerspective
 RPlugin,weka.gui.knowledgeflow.steps.RScriptExecutorStepEditorDialog
 RPlugin,weka.knowledgeflow.steps.RScriptExecutor
-scatterPlot3D,weka.gui.beans.KF3DPerspective
-scatterPlot3D,weka.gui.explorer.Explorer3DPanel
-scatterPlot3D,weka.gui.knowledgeflow.KF3DPerspective
-scatterPlot3D,weka.gui.visualize.Visualize3D
-scatterPlot3D,weka.gui.visualize.VisualizePanel3D
 scriptingClassifiers,weka.classifiers.scripting.GroovyClassifier
 scriptingClassifiers,weka.classifiers.scripting.JythonClassifier
 sequentialInformationalBottleneckClusterer,weka.clusterers.sIB
@@ -939,10 +934,6 @@ timeseriesForecasting,weka.knowledgeflow.steps.TimeSeriesForecasting
 userClassifier,weka.classifiers.trees.UserClassifier
 votingFeatureIntervals,weka.classifiers.misc.VFI
 wavelet,weka.filters.unsupervised.attribute.Wavelet
-WekaExcel,weka.core.converters.ExcelLoader
-WekaExcel,weka.core.converters.ExcelSaver
-WekaODF,weka.core.converters.ODFLoader
-WekaODF,weka.core.converters.ODFSaver
 wekaPython,weka.classifiers.sklearn.ScikitLearnClassifier
 wekaPython,weka.clusterers.ScikitLearnClusterer
 wekaPython,weka.gui.explorer.PythonExplorerPanel
