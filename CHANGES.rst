@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.2 (????-??-??)
+0.3.2 (2024-08-05)
 ------------------
 
 - improved logging output in command-line scripts (eg pww-classifier)
