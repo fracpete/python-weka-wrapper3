@@ -544,7 +544,7 @@ def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
                     logger.error("Failed to install %s/%s" % (pkge, version))
             else:
                 if not quiet:
-                    prilogger.infont("%s/%s already installed, skipping installation" % (pkge, version))
+                    logger.info("%s/%s already installed, skipping installation" % (pkge, version))
 
     if exit_required:
         if not quiet:
