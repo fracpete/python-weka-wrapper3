@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 RUN pip3 --no-cache-dir install setuptools wheel && \
-    pip3 --no-cache-dir install python-weka-wrapper3==0.3.0
+    pip3 --no-cache-dir install python-weka-wrapper3[graphs,plots]==0.3.0
 
 COPY bash.bashrc /etc/bash.bashrc
 
