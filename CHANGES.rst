@@ -12,6 +12,10 @@ Changelog
   a requirements text file now as well
 - added `pww_version()` function to `weka.core.version` to obtain the installed
   version of python-weka-wrapper3
+- added `with_graph_support()` function to `weka.core.version` to see whether
+  python-weka-wrapper3 has support for graphs using pygraphviz
+- added `with_plot_support()` function to `weka.core.version` to see whether
+  python-weka-wrapper3 has plotting support via matplotlib
 - added sub-command `bootstrap` to the `pww-packages` command-line tool to output a
   Python script that can reinstall python-weka-wrapper3 and all the packages in
   another virtual environment or even another machine

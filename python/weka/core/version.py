@@ -40,3 +40,31 @@ def pww_version():
         return importlib.metadata.version('python-weka-wrapper3')
     except:
         return None
+
+
+def with_graph_support():
+    """
+    Checks whether pygraphviz is installed for graph support.
+
+    :return: True if with pygraphviz support
+    :rtype: bool
+    """
+    try:
+        importlib.metadata.version('pygraphviz')
+        return True
+    except:
+        return False
+
+
+def with_plot_support():
+    """
+    Checks whether matplotlib is installed for plot support.
+
+    :return: True if with matplotlib support
+    :rtype: bool
+    """
+    try:
+        importlib.metadata.version('matplotlib')
+        return True
+    except:
+        return False
