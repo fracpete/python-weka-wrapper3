@@ -977,6 +977,8 @@ install the packages as follows:
 
    pww-packages install -r requirements.txt
 
+Any issues with installing packages will be output in the terminal.
+
 
 2. `pww-packages bootstrap`
 
@@ -996,3 +998,5 @@ In your other environment, simply run the generated script:
 .. code-block:: bash
 
    python pww3.py
+
+Any issues with installing packages will be output in the terminal.
