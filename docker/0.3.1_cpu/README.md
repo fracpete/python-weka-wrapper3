@@ -55,7 +55,11 @@ docker run -u $(id -u):$(id -g) \
     -it fracpete/pww3:0.3.1_cpu
 ```
 
-**NB:** Use `-v localdir:containerdir` to map directories from your host into the container.
+**NB:** 
+
+* Use `-v localdir:containerdir` to map directories from your host into the container.
+* Use `--rm` to automatically remove the container when you are exiting it.
+
 
 ### With local packages
 
@@ -68,5 +72,5 @@ docker run -u $(id -u):$(id -g) \
     -it fracpete/pww3:0.3.1_cpu
 ```
 
-**NB:** That way, you can separate various package installations on your host system
+**NB:** With this approach you can separate various package installations on your host system
 in different directories.
