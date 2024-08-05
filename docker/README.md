@@ -5,6 +5,7 @@ In order to make installation reproducible, the following Docker images
 
 jpype-based:
 
+* 0.3.2 ([CPU only](0.3.2_cpu))
 * 0.3.1 ([CPU only](0.3.1_cpu))
 * 0.3.0 ([CPU only](0.3.0_cpu))
 
