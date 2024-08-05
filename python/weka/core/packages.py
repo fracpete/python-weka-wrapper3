@@ -900,7 +900,7 @@ def _subcmd_bootstrap(args):
     lines.append("# 1. configure logging")
     lines.append("import logging")
     lines.append("logging.basicConfig()")
-    lines.append('logger = logging.getLogger("pww3.boostrap")')
+    lines.append('logger = logging.getLogger("bootstrap")')
     lines.append("logger.setLevel(logging.INFO)")
     lines.append("")
 
