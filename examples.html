@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Examples &#8212; python-weka-wrapper3 0.3.1 documentation</title>
+    <title>Examples &#8212; python-weka-wrapper3 0.3.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=645b84c4"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=53a30eae"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -838,6 +838,46 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
 </pre></div>
 </div>
 </section>
+<section id="recreating-environments">
+<h2>Recreating environments<a class="headerlink" href="#recreating-environments" title="Permalink to this heading">¶</a></h2>
+<p>There are two approaches for recreating a python-weka-wrapper3 environment
+in another virtual environment or on another machine:</p>
+<ol class="arabic simple">
+<li><p><cite>pww-packages freeze/install</cite></p></li>
+</ol>
+<p>Using the <cite>pww-packages</cite> command-line tool, you can export the currently installed
+Weka packages to a text file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pww-packages<span class="w"> </span>freeze<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>If you have unofficial packages installed then it is recommended to include the URLs
+from which they could be obtained (according to the information stored in the packgages):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pww-packages<span class="w"> </span>freeze<span class="w"> </span>-u<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>In the other environment, with python-weka-wrapper3 already installed, you can then
+install the packages as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pww-packages<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>Any issues with installing packages will be output in the terminal.</p>
+<ol class="arabic simple" start="2">
+<li><p><cite>pww-packages bootstrap</cite></p></li>
+</ol>
+<p>Using the <em>bootstrap</em> approach, you can generate a Python script that will install
+<em>python-weka-wrapper3</em> and all currently installed Weka packages. Any other Python
+libraries you need to install yourself, which you can easily do by adapting the
+generated script.</p>
+<p>You can generate this install script from the current environment as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pww-packages<span class="w"> </span>bootstrap<span class="w"> </span>-o<span class="w"> </span>pww3.py
+</pre></div>
+</div>
+<p>In your other environment, simply run the generated script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>pww3.py
+</pre></div>
+</div>
+<p>Any issues with installing packages will be output in the terminal.</p>
+</section>
 </section>
 
 
@@ -894,6 +934,7 @@ driver called <cite>mysql-connector-java-X.Y.Z-bin.jar</cite>:</p>
 <li class="toctree-l2"><a class="reference internal" href="#packages">Packages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stop-jvm">Stop JVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#database-access">Database access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recreating-environments">Recreating environments</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="commandline.html">Command-line</a></li>
