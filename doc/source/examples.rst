@@ -946,3 +946,53 @@ We can use the following code to select all the data from table `lotsadata`.
    iquery.password = "verysecret"
    iquery.query = "select * from lotsadata"
    data = iquery.retrieve_instances()
+
+
+Recreating environments
+-----------------------
+
+There are two approaches for recreating a python-weka-wrapper3 environment
+in another virtual environment or on another machine:
+
+1. `pww-packages freeze/install`
+
+Using the `pww-packages` command-line tool, you can export the currently installed
+Weka packages to a text file:
+
+.. code-block:: bash
+
+   pww-packages freeze -r requirements.txt
+
+If you have unofficial packages installed then it is recommended to include the URLs
+from which they could be obtained (according to the information stored in the packgages):
+
+.. code-block:: bash
+
+   pww-packages freeze -u -r requirements.txt
+
+In the other environment, with python-weka-wrapper3 already installed, you can then
+install the packages as follows:
+
+.. code-block:: bash
+
+   pww-packages install -r requirements.txt
+
+
+2. `pww-packages bootstrap`
+
+Using the *bootstrap* approach, you can generate a Python script that will install
+*python-weka-wrapper3* and all currently installed Weka packages. Any other Python
+libraries you need to install yourself, which you can easily do by adapting the
+generated script.
+
+You can generate this install script from the current environment as follows:
+
+.. code-block:: bash
+
+   pww-packages bootstrap -o pww3.py
+
+In your other environment, simply run the generated script:
+
+.. code-block:: bash
+
+   python pww3.py
