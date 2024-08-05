@@ -15,6 +15,8 @@ Changelog
 - added sub-command `bootstrap` to the `pww-packages` command-line tool to output a
   Python script that can reinstall python-weka-wrapper3 and all the packages in
   another virtual environment or even another machine
+- added `is_official_package` function to `weka.core.packages` module to check
+  whether a package is an official one from the Weka package repository or not
 
 
 0.3.1 (2024-07-17)
