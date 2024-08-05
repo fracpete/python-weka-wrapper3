@@ -103,10 +103,10 @@ class Package(JavaObject):
         :rtype: dict
         """
         if self._metadata is None:
-            map = self.jobject.getPackageMetaData()
+            m = self.jobject.getPackageMetaData()
             self._metadata = dict()
-            for k in map:
-                self._metadata[k] = map[k]
+            for k in m:
+                self._metadata[k] = m[k]
         return self._metadata
 
     @property
@@ -522,16 +522,16 @@ def install_missing_packages(pkges, quiet=False, stop_jvm_and_exit=False):
                 logger.error("Failed to install %s/%s" % (pkge, version))
         else:
             inst = installed_package(pkge)
-            all = all_package(pkge)
+            all_pkg = all_package(pkge)
             install_required = False
-            if (version == LATEST) and (all.version != inst.version):
+            if (version == LATEST) and (all_pkg.version != inst.version):
                 install_required = True
             if (version != LATEST) and (version != inst.version):
                 install_required = True
             if install_required:
                 if not quiet:
                     if version == LATEST:
-                        logger.info("Latest version of %s requested (installed: %s, repository: %s), attempting upgrade" % (pkge, inst.version, all.version))
+                        logger.info("Latest version of %s requested (installed: %s, repository: %s), attempting upgrade" % (pkge, inst.version, all_pkg.version))
                     else:
                         logger.info("Different version of %s requested (installed: %s, requested: %s), attempting installation" % (pkge, inst.version, version))
                 if install_package(pkge, version=version):
@@ -572,8 +572,8 @@ def uninstall_packages(names):
     """
     Uninstalls a package.
 
-    :param name: the names of the package
-    :type name: list
+    :param names: the names of the package
+    :type names: list
     """
     establish_cache()
     for name in names:
