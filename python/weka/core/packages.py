@@ -24,7 +24,7 @@ from jpype import JClass
 import weka.core.jvm as jvm
 from weka.core.classes import JavaObject
 import weka.core.classes as classes
-from weka.core.version import pww_version
+from weka.core.version import pww_version, with_graph_support, with_plot_support
 
 
 LATEST = "Latest"
@@ -905,12 +905,24 @@ def _subcmd_bootstrap(args):
     lines.append("")
 
     # pww3
+    additional = list()
+    if with_graph_support():
+        additional.append("graphs")
+    if with_plot_support():
+        additional.append("plots")
+    if len(additional) > 0:
+        additional_modules = "[%s]" % ",".join(additional)
+    else:
+        additional_modules = ""
     lines.append("# 2. install python-weka-wrapper3")
     lines.append('logger.info("Installing python-weka-wrapper3...")')
     lines.append("import subprocess")
     lines.append("import sys")
     version = pww_version()
-    lines.append('subprocess.check_call([sys.executable, "-m", "pip", "install", "python-weka-wrapper3==%s"])' % version)
+    lines.append("pkgs = [")
+    lines.append('    "python-weka-wrapper3%s==%s"' % (additional_modules, version))
+    lines.append("]")
+    lines.append('subprocess.check_call([sys.executable, "-m", "pip", "install", " ".join(pkgs)])')
     lines.append("")
 
     # packages
