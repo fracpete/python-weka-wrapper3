@@ -45,14 +45,14 @@ introduction for Data Scientists:</p>
 <h3>CPU<a class="headerlink" href="#cpu" title="Permalink to this heading">¶</a></h3>
 <p>For using the CPU image interactively, you can run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.1_cpu
+<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.2_cpu
 </pre></div>
 </div>
 <p>Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="nv">$HOME</span>/wekafiles/:/workspace/wekafiles<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.1_cpu
+<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.2_cpu
 </pre></div>
 </div>
 </section>
@@ -84,7 +84,7 @@ is in our current directory (<cite>pwd</cite>), then we can do something like th
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="nv">$HOME</span>/wekafiles:/workspace/wekafiles<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/data<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.1_cpu<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.2_cpu<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>pww-classifier<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-t<span class="w"> </span>/workspace/data/anneal.arff<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>weka.classifiers.trees.J48
@@ -116,7 +116,7 @@ the following Python script (saved in current directory as <cite>j48.py</cite>):
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="nv">$HOME</span>/wekafiles:/workspace/wekafiles<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/data<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.1_cpu<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.2_cpu<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>python3<span class="w"> </span>/workspace/data/j48.py
 </pre></div>
 </div>
@@ -142,7 +142,7 @@ script:</p>
 </div>
 <p>A minimal <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> (in the same directory as <code class="docutils literal notranslate"><span class="pre">install_packages.py</span></code>) then looks
 like this (using pww3 0.2.14 for CPU):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">fracpete</span><span class="o">/</span><span class="n">pww3</span><span class="p">:</span><span class="mf">0.3.1</span><span class="n">_cpu</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">fracpete</span><span class="o">/</span><span class="n">pww3</span><span class="p">:</span><span class="mf">0.3.2</span><span class="n">_cpu</span>
 <span class="n">COPY</span> <span class="n">install_packages</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">install_packages</span><span class="o">.</span><span class="n">py</span>
 <span class="n">RUN</span> <span class="n">python3</span> <span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">install_packages</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
