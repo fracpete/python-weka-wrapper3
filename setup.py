@@ -29,7 +29,7 @@ def _read(f):
 
 
 setup(
-    name="python-weka-wrapper3",
+    name="python_weka_wrapper3",
     description="Python3 wrapper for the Weka Machine Learning Workbench",
     long_description=(
         _read('DESCRIPTION.rst') + b'\n' +
@@ -62,9 +62,9 @@ setup(
         "jpype1",
         "numpy>=1.20.1",
         "packaging",
-        "configurable-objects",
-        "simple-data-flow",
-        "simple-range",
+        "configurable_objects",
+        "simple_data_flow",
+        "simple_range",
     ],
     extras_require={
         'plots': ["matplotlib"],

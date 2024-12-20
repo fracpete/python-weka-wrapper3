@@ -76,7 +76,7 @@ available in the Ubuntu repositories:
 
    . ./pww3/bin/activate
    pip install setuptools wheel
-   pip install python-weka-wrapper3[plots,graphs]
+   pip install python_weka_wrapper3[plots,graphs]
 
 
 Debian
@@ -132,7 +132,7 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
    . ./pww3/bin/activate
    pip install setuptools wheel
-   pip install python-weka-wrapper3[plots,graphs]
+   pip install python_weka_wrapper3[plots,graphs]
 
 Please note, when using *python-weka-wrapper3* as a *normal* user, don't forget
 to export the ``JAVA_HOME`` environment variable as described above (e.g., add it
@@ -167,7 +167,7 @@ available in the Ubuntu repositories:
 
    . ./pww3/bin/activate
    pip install setuptools wheel
-   pip install python-weka-wrapper3[plots,graphs]
+   pip install python_weka_wrapper3[plots,graphs]
 
 
 Other Linux distributions
@@ -201,7 +201,7 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
 
    . ./pww3/bin/activate
    pip install setuptools wheel
-   pip install python-weka-wrapper3[plots,graphs]
+   pip install python_weka_wrapper3[plots,graphs]
 
 
 COLAB
@@ -217,7 +217,7 @@ In a Python 3 COLAB environment, you need to run the following steps for full fu
    !apt install openjdk-11-jdk
    # install pww3
    !pip install wheel
-   !pip install python-weka-wrapper3[plots,graphs]
+   !pip install python_weka_wrapper3[plots,graphs]
 
 
 **Notes:**
@@ -247,7 +247,7 @@ Once the environment is set up, activate it and install *python-weka-wrapper3*:
    brew install graphviz
    python3 -m pip install graphviz
    python3 -m pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-I$(brew --prefix graphviz)/include/" --config-settings="--global-option=-L$(brew --prefix graphviz)/lib/" pygraphviz
-   pip install python-weka-wrapper3[plots,graphs]
+   pip install python_weka_wrapper3[plots,graphs]
 
 
 Windows using Anaconda
@@ -264,7 +264,7 @@ A video demonstrating the installation on Windows 10 is available:
      conda create --name pww3 python=3.12
      conda activate pww3
      conda install -c conda-forge setuptools wheel pillow matplotlib lxml pygraphviz
-     pip install python-weka-wrapper3[plots,graphs]
+     pip install python_weka_wrapper3[plots,graphs]
 
 
 
@@ -312,13 +312,13 @@ If you installed *Visual C++ Build Tools* and *Graphviz*:
 .. code-block:: doscon
 
    pip install -U --no-cache-dir --config-settings="--global-option=build_ext" --config-settings="--global-option=-IC:\\Program Files\\Graphviz\\include" --config-settings="--global-option=-LC:\\Program Files\\Graphviz\\lib" pygraphviz
-   pip install python-weka-wrapper3[plots,graphs]
+   pip install python_weka_wrapper3[plots,graphs]
 
 If you only installed *MS VC++ redistributable*:
 
 .. code-block:: doscon
 
-   pip install python-weka-wrapper3[plots]
+   pip install python_weka_wrapper3[plots]
 
 
 From source
