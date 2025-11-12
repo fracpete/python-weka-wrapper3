@@ -37,7 +37,6 @@ setup(
     url="https://github.com/fracpete/python-weka-wrapper3",
     classifiers=[
         'Development Status :: 4 - Beta',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Programming Language :: Python :: 3',
     ],
