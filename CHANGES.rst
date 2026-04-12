@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 - switched to underscores in project name
-- upgraded Weka to 3.9.7
+- upgraded Weka to 3.9.7 (https://sourceforge.net/p/weka/mailman/message/59317298/)
 
 
 0.3.2 (2024-08-05)
