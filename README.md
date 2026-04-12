@@ -14,7 +14,7 @@ Requirements:
 * OpenJDK 11 (or later)
 
 Uses:
-* Weka (3.9.6)
+* Weka (3.9.7)
 
 
 ## Installation

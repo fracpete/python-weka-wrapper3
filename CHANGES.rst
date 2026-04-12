@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - switched to underscores in project name
+- upgraded Weka to 3.9.7
 
 
 0.3.2 (2024-08-05)
