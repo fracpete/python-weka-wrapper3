@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Docker &#8212; python-weka-wrapper3 0.3.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=53a30eae"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <title>Docker &#8212; python-weka-wrapper3 0.3.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=d5a15cff"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
@@ -18,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -32,7 +34,7 @@
           <div class="body" role="main">
             
   <section id="docker">
-<h1>Docker<a class="headerlink" href="#docker" title="Permalink to this heading">¶</a></h1>
+<h1>Docker<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h1>
 <p>In order to make installation reproducible, <a class="reference external" href="https://www.docker.com/">Docker</a>
 images for various python-weka-wrapper3 versions are available from Docker Hub:</p>
 <p><a class="reference external" href="https://hub.docker.com/r/fracpete/pww3/tags">fracpete/pww3/tags</a></p>
@@ -40,24 +42,24 @@ images for various python-weka-wrapper3 versions are available from Docker Hub:<
 introduction for Data Scientists:</p>
 <p><a class="reference external" href="https://www.data-mining.co.nz/docker-for-data-scientists/">data-mining.co.nz/docker-for-data-scientists/</a></p>
 <section id="images">
-<h2>Images<a class="headerlink" href="#images" title="Permalink to this heading">¶</a></h2>
+<h2>Images<a class="headerlink" href="#images" title="Link to this heading">¶</a></h2>
 <section id="cpu">
-<h3>CPU<a class="headerlink" href="#cpu" title="Permalink to this heading">¶</a></h3>
+<h3>CPU<a class="headerlink" href="#cpu" title="Link to this heading">¶</a></h3>
 <p>For using the CPU image interactively, you can run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.2_cpu
+<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.3_cpu
 </pre></div>
 </div>
 <p>Instead of having to reinstall your packages each time you start up the container,
 you can map your local Weka packages into the container as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="nv">$HOME</span>/wekafiles/:/workspace/wekafiles<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.2_cpu
+<span class="w">    </span>-it<span class="w"> </span>fracpete/pww3:0.3.3_cpu
 </pre></div>
 </div>
 </section>
 <section id="gpu">
-<h3>GPU<a class="headerlink" href="#gpu" title="Permalink to this heading">¶</a></h3>
+<h3>GPU<a class="headerlink" href="#gpu" title="Link to this heading">¶</a></h3>
 <p><strong>DEPRECATED: Starting with version 0.2.15, no more GPU images will be provided as NVIDIA deleted the underlying CUDA 10.2 image.</strong></p>
 <p>For using the GPU image interactively, you can run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="o">=</span>all<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
@@ -74,9 +76,9 @@ you can map your local Weka packages into the container as follows:</p>
 </section>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <section id="executables">
-<h3>Executables<a class="headerlink" href="#executables" title="Permalink to this heading">¶</a></h3>
+<h3>Executables<a class="headerlink" href="#executables" title="Link to this heading">¶</a></h3>
 <p>Since python-weka-wrapper3 installs executables for the main class hierarchies
 of Weka, you can run these directly with a single command.</p>
 <p>E.g., if we want to train a J48 classifier on the dataset <cite>anneal.arff</cite> which
@@ -84,7 +86,7 @@ is in our current directory (<cite>pwd</cite>), then we can do something like th
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="nv">$HOME</span>/wekafiles:/workspace/wekafiles<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/data<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.2_cpu<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.3_cpu<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>pww-classifier<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-t<span class="w"> </span>/workspace/data/anneal.arff<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>weka.classifiers.trees.J48
@@ -92,14 +94,14 @@ is in our current directory (<cite>pwd</cite>), then we can do something like th
 </div>
 </section>
 <section id="scripts">
-<h3>Scripts<a class="headerlink" href="#scripts" title="Permalink to this heading">¶</a></h3>
+<h3>Scripts<a class="headerlink" href="#scripts" title="Link to this heading">¶</a></h3>
 <p>For more flexibility and/or more complex operations, you would normally want to
 fall back on using Python scripts. The above example can be translated into
 the following Python script (saved in current directory as <cite>j48.py</cite>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="k">as</span> <span class="nn">jvm</span>
-<span class="kn">from</span> <span class="nn">weka.core.classes</span> <span class="kn">import</span> <span class="n">Random</span>
-<span class="kn">from</span> <span class="nn">weka.core.converters</span> <span class="kn">import</span> <span class="n">load_any_file</span>
-<span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span><span class="p">,</span> <span class="n">Evaluation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">weka.core.jvm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jvm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.core.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.core.converters</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_any_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.classifiers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Classifier</span><span class="p">,</span> <span class="n">Evaluation</span>
 
 <span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
@@ -116,21 +118,21 @@ the following Python script (saved in current directory as <cite>j48.py</cite>):
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>:<span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="nv">$HOME</span>/wekafiles:/workspace/wekafiles<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace/data<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.2_cpu<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-t<span class="w"> </span>fracpete/pww3:0.3.3_cpu<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>python3<span class="w"> </span>/workspace/data/j48.py
 </pre></div>
 </div>
 </section>
 </section>
 <section id="installing-weka-packages">
-<h2>Installing Weka packages<a class="headerlink" href="#installing-weka-packages" title="Permalink to this heading">¶</a></h2>
+<h2>Installing Weka packages<a class="headerlink" href="#installing-weka-packages" title="Link to this heading">¶</a></h2>
 <p>When building Docker images for your environments, your code will most likely rely
 on additional Weka packages. You can install the packages by creating a little
 Python script that uses python-weka-wrapper3 to install them (just like you would
 normally do in a script). Here is the content of the <code class="docutils literal notranslate"><span class="pre">install_packages.py</span></code>
 script:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="k">as</span> <span class="nn">jvm</span>
-<span class="kn">import</span> <span class="nn">weka.core.packages</span> <span class="k">as</span> <span class="nn">packages</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">weka.core.jvm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jvm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">weka.core.packages</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">packages</span>
 
 <span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -142,7 +144,7 @@ script:</p>
 </div>
 <p>A minimal <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> (in the same directory as <code class="docutils literal notranslate"><span class="pre">install_packages.py</span></code>) then looks
 like this (using pww3 0.2.14 for CPU):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">fracpete</span><span class="o">/</span><span class="n">pww3</span><span class="p">:</span><span class="mf">0.3.2</span><span class="n">_cpu</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FROM</span> <span class="n">fracpete</span><span class="o">/</span><span class="n">pww3</span><span class="p">:</span><span class="mf">0.3.3</span><span class="n">_cpu</span>
 <span class="n">COPY</span> <span class="n">install_packages</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">install_packages</span><span class="o">.</span><span class="n">py</span>
 <span class="n">RUN</span> <span class="n">python3</span> <span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">install_packages</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
@@ -153,9 +155,9 @@ like this (using pww3 0.2.14 for CPU):</p>
 </div>
 <p>For testing, you can create a local script called <code class="docutils literal notranslate"><span class="pre">test_packages.py</span></code> with
 the content similar to this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">weka.core.jvm</span> <span class="k">as</span> <span class="nn">jvm</span>
-<span class="kn">import</span> <span class="nn">weka.core.packages</span> <span class="k">as</span> <span class="nn">packages</span>
-<span class="kn">from</span> <span class="nn">weka.clusterers</span> <span class="kn">import</span> <span class="n">Clusterer</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">weka.core.jvm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jvm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">weka.core.packages</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">packages</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.clusterers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Clusterer</span>
 
 <span class="n">jvm</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -198,10 +200,10 @@ weka.clusterers.SelfOrganizingMap -L 1.0 -O 2000 -C 1000 -H 2 -W 2
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of python-weka-wrapper3"/>
             </a></p>
 <h1 class="logo"><a href="index.html">python-weka-wrapper3</a></h1>
 
@@ -212,7 +214,16 @@ weka.clusterers.SelfOrganizingMap -L 1.0 -O 2000 -C 1000 -H 2 -W 2
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Docker</a><ul>
@@ -240,16 +251,6 @@ weka.clusterers.SelfOrganizingMap -L 1.0 -O 2000 -C 1000 -H 2 -W 2
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -263,11 +264,11 @@ weka.clusterers.SelfOrganizingMap -L 1.0 -O 2000 -C 1000 -H 2 -W 2
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2014-2024, Peter "fracpete" Reutemann.
+      &#169;2014-2026, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/docker.rst.txt"

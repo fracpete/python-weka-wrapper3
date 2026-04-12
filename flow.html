@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Flow &#8212; python-weka-wrapper3 0.3.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=53a30eae"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <title>Flow &#8212; python-weka-wrapper3 0.3.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=d5a15cff"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="weka package" href="weka.html" />
@@ -18,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -32,13 +34,13 @@
           <div class="body" role="main">
             
   <section id="flow">
-<h1>Flow<a class="headerlink" href="#flow" title="Permalink to this heading">¶</a></h1>
+<h1>Flow<a class="headerlink" href="#flow" title="Link to this heading">¶</a></h1>
 <p>The flow components of <em>python-weka-wrapper3</em> are not related to Weka’s KnowledgeFlow. Instead, they were
 inspired by the <a class="reference external" href="https://adams.cms.waikato.ac.nz/">ADAMS workflow engine</a>. It is a very simple workflow,
 aimed at automating tasks and easy to extend as well. Instead of linking operators with explicit
 connections, this flow uses a tree structure for implicitly defining how the data is processed.</p>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>A workflow component is called an <em>actor</em>. All actors are derived from the <cite>Actor</cite> class,
 but there are four different kinds of actors present:</p>
 <ul class="simple">
@@ -63,7 +65,7 @@ use the <cite>tree</cite> method to output the structure: <cite>print(myflow.tre
 set the JSON representation: <cite>json</cite></p>
 </section>
 <section id="life-cycle">
-<h2>Life cycle<a class="headerlink" href="#life-cycle" title="Permalink to this heading">¶</a></h2>
+<h2>Life cycle<a class="headerlink" href="#life-cycle" title="Link to this heading">¶</a></h2>
 <p>The typical life-cycle of a flow (actually any actor) can be described through the following method calls:</p>
 <ol class="arabic simple">
 <li><p><strong>setup()</strong> configures and checks the flow (outputs error message if failed, None otherwise)</p></li>
@@ -73,7 +75,7 @@ set the JSON representation: <cite>json</cite></p>
 </ol>
 </section>
 <section id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this heading">¶</a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading">¶</a></h2>
 <p>The following <em>source</em> actors are available:</p>
 <ul class="simple">
 <li><p><strong>CombineStorage</strong> expands storage items in a format string and forwards the generated string</p></li>
@@ -88,7 +90,7 @@ set the JSON representation: <cite>json</cite></p>
 </ul>
 </section>
 <section id="transformers">
-<h2>Transformers<a class="headerlink" href="#transformers" title="Permalink to this heading">¶</a></h2>
+<h2>Transformers<a class="headerlink" href="#transformers" title="Link to this heading">¶</a></h2>
 <p>The following <em>transformers</em> are available:</p>
 <ul class="simple">
 <li><p><strong>AttributeSelection</strong> performs attribute selection on a dataset and outputs an <cite>AttributeSelectionContainer</cite></p></li>
@@ -116,7 +118,7 @@ incrementing a counter</p></li>
 </ul>
 </section>
 <section id="sinks">
-<h2>Sinks<a class="headerlink" href="#sinks" title="Permalink to this heading">¶</a></h2>
+<h2>Sinks<a class="headerlink" href="#sinks" title="Link to this heading">¶</a></h2>
 <p>The following <em>sinks</em> are available:</p>
 <ul class="simple">
 <li><p><strong>ClassifierErrors</strong> displays the classifier errors obtained from an Evaluation object</p></li>
@@ -132,7 +134,7 @@ incrementing a counter</p></li>
 </ul>
 </section>
 <section id="control-actors">
-<h2>Control actors<a class="headerlink" href="#control-actors" title="Permalink to this heading">¶</a></h2>
+<h2>Control actors<a class="headerlink" href="#control-actors" title="Link to this heading">¶</a></h2>
 <p>The following <em>control</em> actors define how data is getting passed around in a workflow:</p>
 <ul class="simple">
 <li><p><strong>Branch</strong> forwards the same input token to all of its sub-branches</p></li>
@@ -147,7 +149,7 @@ the processing; optional condition available that determines when a token gets t
 </ul>
 </section>
 <section id="conversions">
-<h2>Conversions<a class="headerlink" href="#conversions" title="Permalink to this heading">¶</a></h2>
+<h2>Conversions<a class="headerlink" href="#conversions" title="Link to this heading">¶</a></h2>
 <p>The following <em>conversion</em> schemes can be used in conjunction with the <em>Convert</em> transformer:</p>
 <ul class="simple">
 <li><p><strong>AnyToCommandline</strong> generates a command-line string from an object, e.g., a classifier</p></li>
@@ -156,7 +158,7 @@ the processing; optional condition available that determines when a token gets t
 </ul>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
 <p>Check out the examples available through the <em>python-weka-wrapper3-examples</em> project on Github:</p>
 <blockquote>
 <div><p><a class="reference external" href="https://github.com/fracpete/python-weka-wrapper3-examples">https://github.com/fracpete/python-weka-wrapper3-examples</a></p>
@@ -164,11 +166,11 @@ the processing; optional condition available that determines when a token gets t
 <p>The example scripts are located in the <cite>src/wekaexamples/flow</cite> sub-directory.</p>
 <p>Below is a code snippet for building a flow that cross-validates a classifier on a dataset
 and outputs the evaluation summary and the ROC and PRC curves:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">weka.classifiers</span> <span class="kn">import</span> <span class="n">Classifier</span>
-<span class="kn">from</span> <span class="nn">weka.flow.control</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Branch</span><span class="p">,</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">weka.flow.source</span> <span class="kn">import</span> <span class="n">FileSupplier</span>
-<span class="kn">from</span> <span class="nn">weka.flow.transformer</span> <span class="kn">import</span> <span class="n">LoadDataset</span><span class="p">,</span> <span class="n">ClassSelector</span><span class="p">,</span> <span class="n">CrossValidate</span><span class="p">,</span> <span class="n">EvaluationSummary</span>
-<span class="kn">from</span> <span class="nn">weka.flow.sink</span> <span class="kn">import</span> <span class="n">Console</span><span class="p">,</span> <span class="n">ClassifierErrors</span><span class="p">,</span> <span class="n">ROC</span><span class="p">,</span> <span class="n">PRC</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">weka.classifiers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Classifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.flow.control</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Branch</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.flow.source</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileSupplier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.flow.transformer</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoadDataset</span><span class="p">,</span> <span class="n">ClassSelector</span><span class="p">,</span> <span class="n">CrossValidate</span><span class="p">,</span> <span class="n">EvaluationSummary</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">weka.flow.sink</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span><span class="p">,</span> <span class="n">ClassifierErrors</span><span class="p">,</span> <span class="n">ROC</span><span class="p">,</span> <span class="n">PRC</span>
 
 <span class="n">flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;cross-validate classifier&quot;</span><span class="p">)</span>
 
@@ -265,7 +267,7 @@ and outputs the evaluation summary and the ROC and PRC curves:</p>
 </div>
 </section>
 <section id="extending">
-<h2>Extending<a class="headerlink" href="#extending" title="Permalink to this heading">¶</a></h2>
+<h2>Extending<a class="headerlink" href="#extending" title="Link to this heading">¶</a></h2>
 <p>Adding additional flow components is quite easy:</p>
 <ul class="simple">
 <li><p>Choose the superclass, based on how the actor is supposed to behave:</p></li>
@@ -300,10 +302,10 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of python-weka-wrapper3"/>
             </a></p>
 <h1 class="logo"><a href="index.html">python-weka-wrapper3</a></h1>
 
@@ -314,7 +316,16 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
@@ -348,16 +359,6 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -371,11 +372,11 @@ can append the generated data (wrapped in Token objects) to the <cite>self._outp
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2014-2024, Peter "fracpete" Reutemann.
+      &#169;2014-2026, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/flow.rst.txt"

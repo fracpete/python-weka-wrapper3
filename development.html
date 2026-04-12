@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Development &#8212; python-weka-wrapper3 0.3.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=53a30eae"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <title>Development &#8212; python-weka-wrapper3 0.3.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=d5a15cff"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Flow" href="flow.html" />
@@ -18,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -32,7 +34,7 @@
           <div class="body" role="main">
             
   <section id="development">
-<h1>Development<a class="headerlink" href="#development" title="Permalink to this heading">¶</a></h1>
+<h1>Development<a class="headerlink" href="#development" title="Link to this heading">¶</a></h1>
 <p>Originally, the Python code of the <em>python-weka-wrapper3</em> library shielded the user from the
 complicated Java Native Interface (JNI) calls that are required to communicate
 with objects in the Java Virtual Machine (JVM). After migrating from python-javabridge to
@@ -41,9 +43,9 @@ without affecting any code written by the user, as long as no low-level access w
 as using the <cite>jwrapper</cite> or <cite>jclass</cite> properties. Also, the wrapper methods made the code look
 more pythonic rather than Java-like.</p>
 <section id="calling-methods">
-<h2>Calling methods<a class="headerlink" href="#calling-methods" title="Permalink to this heading">¶</a></h2>
+<h2>Calling methods<a class="headerlink" href="#calling-methods" title="Link to this heading">¶</a></h2>
 <section id="non-static-methods">
-<h3>Non-static methods<a class="headerlink" href="#non-static-methods" title="Permalink to this heading">¶</a></h3>
+<h3>Non-static methods<a class="headerlink" href="#non-static-methods" title="Link to this heading">¶</a></h3>
 <p>For calling a <strong>non-static method</strong>, you can simply use the <cite>jobject</cite> property, since jpype
 will have added the Java methods.</p>
 <p>Here is a code snippet that calls the <cite>buildClassifier</cite> method of a <cite>weka.classifiers.Classifier</cite>
@@ -59,12 +61,12 @@ object:</p>
 </ul>
 </section>
 <section id="static-methods">
-<h3>Static methods<a class="headerlink" href="#static-methods" title="Permalink to this heading">¶</a></h3>
+<h3>Static methods<a class="headerlink" href="#static-methods" title="Link to this heading">¶</a></h3>
 <p>For calling a <strong>static method</strong>, you can surround a class in a <cite>jpype.JClass</cite> wrapper, which will
 automatically add access to static methods.
 Below is an example for calling the <cite>makeCopy</cite> method of the <cite>weka.classifiers.AbstractClassifier</cite>
 class to make a copy of a classifier object:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jpype</span> <span class="kn">import</span> <span class="n">JClass</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jpype</span><span class="w"> </span><span class="kn">import</span> <span class="n">JClass</span>
 
 <span class="n">jobject</span> <span class="o">=</span> <span class="n">JClass</span><span class="p">(</span><span class="s2">&quot;weka.classifiers.AbstractClassifier&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">makeCopy</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">jobject</span><span class="p">)</span>
 </pre></div>
@@ -79,7 +81,7 @@ class to make a copy of a classifier object:</p>
 </section>
 </section>
 <section id="type-conversions">
-<h2>Type conversions<a class="headerlink" href="#type-conversions" title="Permalink to this heading">¶</a></h2>
+<h2>Type conversions<a class="headerlink" href="#type-conversions" title="Link to this heading">¶</a></h2>
 <p>The <cite>weka.core.typeconv</cite> module contains a number of helper functions for converting
 between Java and Python objects.</p>
 </section>
@@ -90,10 +92,10 @@ between Java and Python objects.</p>
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of python-weka-wrapper3"/>
             </a></p>
 <h1 class="logo"><a href="index.html">python-weka-wrapper3</a></h1>
 
@@ -104,7 +106,16 @@ between Java and Python objects.</p>
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
@@ -131,16 +142,6 @@ between Java and Python objects.</p>
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -154,11 +155,11 @@ between Java and Python objects.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2014-2024, Peter "fracpete" Reutemann.
+      &#169;2014-2026, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/development.rst.txt"

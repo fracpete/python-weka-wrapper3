@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Installation &#8212; python-weka-wrapper3 0.3.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=53a30eae"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <title>Installation &#8212; python-weka-wrapper3 0.3.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=d5a15cff"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Docker" href="docker.html" />
@@ -18,8 +19,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -32,7 +34,7 @@
           <div class="body" role="main">
             
   <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
 <p>The following sections should help you install the library on your machine. Instead of installing the
 library system-wide, the instructions show how to install it within in a virtual environment. This avoids
 interfering with your operating system or other libraries, when you should upgrade some libraries.</p>
@@ -40,7 +42,7 @@ interfering with your operating system or other libraries, when you should upgra
 on the instructions below, please use the following mailing list:</p>
 <p><a class="reference external" href="https://groups.google.com/forum/#!forum/python-weka-wrapper">https://groups.google.com/forum/#!forum/python-weka-wrapper</a></p>
 <section id="prerequisites-for-all-platforms">
-<h2>Prerequisites for all platforms<a class="headerlink" href="#prerequisites-for-all-platforms" title="Permalink to this heading">¶</a></h2>
+<h2>Prerequisites for all platforms<a class="headerlink" href="#prerequisites-for-all-platforms" title="Link to this heading">¶</a></h2>
 <p>In the past, it was not recommended to use OpenJDK, as Weka was developed with and tested against Oracle’s
 version. However, Oracle’s JDK 8 is no longer available for public download and OpenJDK matured enough that it is now the
 recommended Java version to use. Personally, I recommend the <strong>long-term support version 11 of OpenJDK</strong>.</p>
@@ -50,12 +52,12 @@ to set the <code class="docutils literal notranslate"><span class="pre">JAVA_HOM
 pointing to the installation directory.</p>
 </section>
 <section id="optional-features">
-<h2>Optional features<a class="headerlink" href="#optional-features" title="Permalink to this heading">¶</a></h2>
+<h2>Optional features<a class="headerlink" href="#optional-features" title="Link to this heading">¶</a></h2>
 <p>Support for plots and graphs are optional features. If you do not want or need these, you can
 omit the suffix <code class="docutils literal notranslate"><span class="pre">[plots,graphs]</span></code> when installing python-weka-wrapper3.</p>
 </section>
 <section id="ubuntu">
-<h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this heading">¶</a></h2>
+<h2>Ubuntu<a class="headerlink" href="#ubuntu" title="Link to this heading">¶</a></h2>
 <p>A video demonstrating the installation on Ubuntu 22.04 is available:
 <a class="reference external" href="https://youtu.be/UIm0rKilABc?si=DUECgNdc16K64CCu">https://youtu.be/UIm0rKilABc?si=DUECgNdc16K64CCu</a></p>
 <p>First, you need to be able to compile C/C++ code and Python modules:</p>
@@ -84,12 +86,12 @@ graphical output:</p>
 available in the Ubuntu repositories:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
 pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
-pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+pip<span class="w"> </span>install<span class="w"> </span>python_weka_wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="debian">
-<h2>Debian<a class="headerlink" href="#debian" title="Permalink to this heading">¶</a></h2>
+<h2>Debian<a class="headerlink" href="#debian" title="Link to this heading">¶</a></h2>
 <p>First, become the superuser:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>su
 </pre></div>
@@ -122,7 +124,7 @@ graphical output:</p>
 <p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
 pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
-pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+pip<span class="w"> </span>install<span class="w"> </span>python_weka_wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 <p>Please note, when using <em>python-weka-wrapper3</em> as a <em>normal</em> user, don’t forget
@@ -130,7 +132,7 @@ to export the <code class="docutils literal notranslate"><span class="pre">JAVA_
 to your <code class="docutils literal notranslate"><span class="pre">.profile</span></code>).</p>
 </section>
 <section id="fedora-centos-redhat">
-<h2>Fedora/CentOS/Redhat<a class="headerlink" href="#fedora-centos-redhat" title="Permalink to this heading">¶</a></h2>
+<h2>Fedora/CentOS/Redhat<a class="headerlink" href="#fedora-centos-redhat" title="Link to this heading">¶</a></h2>
 <p>Here are some rough instructions (as superuser):</p>
 <ul class="simple">
 <li><p>install openjdk (+ -devel) package</p></li>
@@ -150,12 +152,12 @@ to your <code class="docutils literal notranslate"><span class="pre">.profile</s
 available in the Ubuntu repositories:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
 pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
-pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+pip<span class="w"> </span>install<span class="w"> </span>python_weka_wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="other-linux-distributions">
-<h2>Other Linux distributions<a class="headerlink" href="#other-linux-distributions" title="Permalink to this heading">¶</a></h2>
+<h2>Other Linux distributions<a class="headerlink" href="#other-linux-distributions" title="Link to this heading">¶</a></h2>
 <p>See <a class="reference external" href="http://docs.python-guide.org/en/latest/starting/install/linux/">these</a>
 general instructions for installing Python on Linux. You need to be able to
 compile C/C++ code and Python modules (i.e., Python header files are required).
@@ -178,12 +180,12 @@ graphical output and plots:</p>
 <p>Once the environment is set up, activate it and install <em>python-weka-wrapper3</em>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>./pww3/bin/activate
 pip<span class="w"> </span>install<span class="w"> </span>setuptools<span class="w"> </span>wheel
-pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+pip<span class="w"> </span>install<span class="w"> </span>python_weka_wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="colab">
-<h2>COLAB<a class="headerlink" href="#colab" title="Permalink to this heading">¶</a></h2>
+<h2>COLAB<a class="headerlink" href="#colab" title="Link to this heading">¶</a></h2>
 <p>In a Python 3 COLAB environment, you need to run the following steps for full functionality:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install dependencies</span>
 !apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>python3-dev
@@ -191,7 +193,7 @@ pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<s
 !apt<span class="w"> </span>install<span class="w"> </span>openjdk-11-jdk
 <span class="c1"># install pww3</span>
 !pip<span class="w"> </span>install<span class="w"> </span>wheel
-!pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+!pip<span class="w"> </span>install<span class="w"> </span>python_weka_wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Notes:</strong></p>
@@ -201,7 +203,7 @@ pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<s
 </ul>
 </section>
 <section id="mac-osx">
-<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this heading">¶</a></h2>
+<h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Link to this heading">¶</a></h2>
 <p>Please follow <a class="reference external" href="http://docs.python-guide.org/en/latest/starting/install/osx/">these</a>
 general instructions for installing Python.</p>
 <p>Create a virtual environment using the <em>venv</em> module:</p>
@@ -214,12 +216,12 @@ pip<span class="w"> </span>install<span class="w"> </span>wheel
 brew<span class="w"> </span>install<span class="w"> </span>graphviz
 python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>graphviz
 python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>--no-cache-dir<span class="w"> </span>--config-settings<span class="o">=</span><span class="s2">&quot;--global-option=build_ext&quot;</span><span class="w"> </span>--config-settings<span class="o">=</span><span class="s2">&quot;--global-option=-I</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>graphviz<span class="k">)</span><span class="s2">/include/&quot;</span><span class="w"> </span>--config-settings<span class="o">=</span><span class="s2">&quot;--global-option=-L</span><span class="k">$(</span>brew<span class="w"> </span>--prefix<span class="w"> </span>graphviz<span class="k">)</span><span class="s2">/lib/&quot;</span><span class="w"> </span>pygraphviz
-pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
+pip<span class="w"> </span>install<span class="w"> </span>python_weka_wrapper3<span class="o">[</span>plots,graphs<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="windows-using-anaconda">
-<h2>Windows using Anaconda<a class="headerlink" href="#windows-using-anaconda" title="Permalink to this heading">¶</a></h2>
+<h2>Windows using Anaconda<a class="headerlink" href="#windows-using-anaconda" title="Link to this heading">¶</a></h2>
 <p>A video demonstrating the installation on Windows 10 is available:
 <a class="reference external" href="https://youtu.be/azr-JqF7jLE?si=JAz9M9NhJ5kVvWY0">https://youtu.be/azr-JqF7jLE?si=JAz9M9NhJ5kVvWY0</a></p>
 <ul>
@@ -228,14 +230,14 @@ pip<span class="w"> </span>install<span class="w"> </span>python-weka-wrapper3<s
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">conda create --name pww3 python=3.12</span>
 <span class="go">conda activate pww3</span>
 <span class="go">conda install -c conda-forge setuptools wheel pillow matplotlib lxml pygraphviz</span>
-<span class="go">pip install python-weka-wrapper3[plots,graphs]</span>
+<span class="go">pip install python_weka_wrapper3[plots,graphs]</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </section>
 <section id="windows">
-<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">¶</a></h2>
+<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h2>
 <p><strong>Please note:</strong> You need to make sure that the <em>bitness</em> of your environment
 is consistent.  I.e., if you install a 32-bit version of Python, you need to
 install a 32-bit JDK (or all of them are 64-bit).</p>
@@ -271,16 +273,16 @@ the <code class="docutils literal notranslate"><span class="pre">PATH</span></co
 </div>
 <p>If you installed <em>Visual C++ Build Tools</em> and <em>Graphviz</em>:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -U --no-cache-dir --config-settings=&quot;--global-option=build_ext&quot; --config-settings=&quot;--global-option=-IC:\\Program Files\\Graphviz\\include&quot; --config-settings=&quot;--global-option=-LC:\\Program Files\\Graphviz\\lib&quot; pygraphviz</span>
-<span class="go">pip install python-weka-wrapper3[plots,graphs]</span>
+<span class="go">pip install python_weka_wrapper3[plots,graphs]</span>
 </pre></div>
 </div>
 <p>If you only installed <em>MS VC++ redistributable</em>:</p>
-<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pip install python-weka-wrapper3[plots]</span>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="go">pip install python_weka_wrapper3[plots]</span>
 </pre></div>
 </div>
 </section>
 <section id="from-source">
-<h2>From source<a class="headerlink" href="#from-source" title="Permalink to this heading">¶</a></h2>
+<h2>From source<a class="headerlink" href="#from-source" title="Link to this heading">¶</a></h2>
 <p>You can install python-weka-wrapper3 directly from its Github repository with <cite>pip</cite>
 as follows (e.g., to get the latest fixes/features):</p>
 <p>First, create a virtual environment:</p>
@@ -300,10 +302,10 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/logo.jpg" alt="Logo"/>
+              <img class="logo" src="_static/logo.jpg" alt="Logo of python-weka-wrapper3"/>
             </a></p>
 <h1 class="logo"><a href="index.html">python-weka-wrapper3</a></h1>
 
@@ -314,7 +316,16 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot
 
 
 
-<h3>Navigation</h3>
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites-for-all-platforms">Prerequisites for all platforms</a></li>
@@ -350,16 +361,6 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -373,11 +374,11 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2014-2024, Peter "fracpete" Reutemann.
+      &#169;2014-2026, Peter "fracpete" Reutemann.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/install.rst.txt"
