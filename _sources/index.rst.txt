@@ -42,7 +42,7 @@ The library has the following requirements:
 
 Uses:
 
-* Weka (3.9.6)
+* Weka (3.9.7)
 
 Contents
 ========
